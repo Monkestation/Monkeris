@@ -13,6 +13,8 @@ var/list/admin_datums = list()
 	var/datum/feed_channel/admincaster_feed_channel = new /datum/feed_channel
 	var/admincaster_signature	//What you'll sign the newsfeeds as
 
+	var/given_profiling = FALSE
+
 /datum/admins/proc/marked_datum()
 	if(marked_datum_weak)
 		return marked_datum_weak.resolve()
@@ -33,6 +35,8 @@ var/list/admin_datums = list()
 		owner.holder = src
 		owner.add_admin_verbs()	//TODO
 		admins |= C
+		try_give_profiling()
+		try_give_devtools()
 
 /datum/admins/proc/disassociate()
 	if(owner)
@@ -95,3 +99,18 @@ NOTE: It checks usr by default. Supply the "�" argument if you wish to check f
 					return 1	//we have all the rights they have and more
 		to_chat(usr, "<font color='red'>Error: Cannot proceed. They have more or equal rights to us.</font>")
 	return 0
+
+/datum/admins/proc/try_give_devtools()
+	if(!check_rights(R_DEBUG) || owner.byond_version < 516)
+		return
+	winset(owner, null, "browser-options=byondstorage,find,refresh,devtools")
+
+/datum/admins/proc/try_give_profiling()
+	if (given_profiling)
+		return
+
+	if (!check_rights(R_DEBUG))
+		return
+
+	given_profiling = TRUE
+	world.SetConfig("APP/admin", owner.ckey, "role=admin")
