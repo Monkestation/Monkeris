@@ -57,7 +57,7 @@ var/next_station_date_change = 1 DAYS
 
 
 /* Returns 1 if it is the selected month and day */
-proc/isDay(var/month, var/day)
+/proc/isDay(var/month, var/day)
 	if(isnum(month) && isnum(day))
 		var/MM = text2num(time2text(world.timeofday, "MM")) // get the current month
 		var/DD = text2num(time2text(world.timeofday, "DD")) // get the current day
@@ -136,7 +136,6 @@ var/global/rollovercheck_last_timeofday = 0
 //Increases delay as the server gets more overloaded,
 //as sleeps aren't cheap and sleeping only to wake up and sleep again is wasteful
 #define DELTA_CALC max(((max(world.tick_usage, world.cpu) / 100) * max(Master.sleep_delta,1)), 1)
-#define UNTIL(X) while(!X) stoplag()
 
 /proc/stoplag()
 	if (!Master || !(Master.current_runlevel & RUNLEVELS_DEFAULT))
