@@ -27,4 +27,4 @@
 	)
 
 	// Loot related variables
-	mineral_name = ORE_IRON
+	ore = /obj/item/ore/iron
