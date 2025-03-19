@@ -16,7 +16,6 @@
 	// IWOUND_PROGRESS_DEATH - Allows the wound to progress after organ death
 	// IWOUND_SPREAD - Allows the wound to spread to another organ
 	// IWOUND_HALLUCINATE - Causes hallucinations
-	// IWOUND_AGGRAVATION - inheritance increases severity gradually if progress IW flag is not present
 	var/characteristic_flag = IWOUND_CAN_DAMAGE|IWOUND_PROGRESS
 
 	var/severity = 0					// How much the wound contributes to internal organ damage
@@ -137,7 +136,7 @@
 			current_hallucination_tick = 0
 
 /datum/component/internal_wound/proc/progress()
-	if(!((characteristic_flag & IWOUND_PROGRESS) || (characteristic_flag & IWOUND_AGGRAVATION)))
+	if(!(characteristic_flag & IWOUND_PROGRESS))
 		return
 
 	if(severity < severity_max)

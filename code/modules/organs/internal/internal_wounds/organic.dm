@@ -140,7 +140,11 @@
 	severity = 0
 	severity_max = 4
 	hal_damage = IWOUND_LIGHT_DAMAGE
-	characteristic_flag = IWOUND_CAN_DAMAGE|IWOUND_AGGRAVATION
+
+/// Cheap hack, but prevents unbalanced toxins from killing someone immediately
+/datum/component/internal_wound/organic/poisoning/InheritComponent()
+	if(prob(5))
+		progress()
 
 /datum/component/internal_wound/organic/poisoning/pustule
 	name = "pustule"
@@ -171,7 +175,6 @@
 	blood_req_multiplier = 0.50
 	nutriment_req_multiplier = 0.50
 	oxygen_req_multiplier = 0.50
-	characteristic_flag = IWOUND_CAN_DAMAGE|IWOUND_AGGRAVATION
 
 /datum/component/internal_wound/organic/heavy_poisoning/toxin
 	name = "toxin accumulation"

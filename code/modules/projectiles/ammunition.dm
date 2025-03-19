@@ -161,9 +161,6 @@
 		for(var/mattertype in .)
 			.[mattertype] *= amount // multiply matter appropriately
 
-/obj/item/ammo_casing/get_fall_damage()
-	return (amount >= min(maxamount, 10))
-
 //An item that holds casings and can be used to put them inside guns
 /obj/item/ammo_magazine
 	name = "magazine"
@@ -369,25 +366,10 @@
 		to_chat(usr, SPAN_NOTICE("[src] is already empty!"))
 		return
 	to_chat(usr, SPAN_NOTICE("You take out ammo from [src]."))
-
-	while(LAZYLEN(stored_ammo))
-
-		var/obj/item/ammo_casing/stack = removeCasing()
-		stack.forceMove(target)
-		stack.set_dir(pick(cardinal))
-
-		if(LAZYLEN(stored_ammo))
-			// We end on -1 since we already removed one
-			for(var/i = 1, i <= stack.maxamount - 1, i++)
-				if(!LAZYLEN(stored_ammo))
-					stack.update_icon()
-					break
-				var/obj/item/ammo_casing/AC = removeCasing()
-				if(!stack.mergeCasing(AC, null, null, TRUE, TRUE))
-					insertCasing(AC)
-					stack.update_icon()
-					break
-
+	for(var/i=1 to stored_ammo.len)
+		var/obj/item/ammo_casing/C = removeCasing()
+		C.forceMove(target)
+		C.set_dir(pick(cardinal))
 	update_icon()
 
 /obj/item/ammo_magazine/proc/get_label(value)
