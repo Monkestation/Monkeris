@@ -97,9 +97,12 @@
 	var/fire_verb //what does it do when it shoots?
 	var/kept_distance //how far away will it be before it stops moving closer
 	var/retreat_on_too_close = FALSE // if this is enabled avoid using very high kept_distance values, byond's pathfinding can get very upset if it can't get far enough away
+	var/retreat_on_too_close = FALSE // if this is enabled avoid using very high kept_distance values, byond's pathfinding can get very upset if it can't get far enough away
 
 	var/grabbed_by_friend = FALSE //is this superior_animal being wrangled?
 	var/ticks_processed = 0
+
+	var/mob/living/grabbing // the currently grabbed mob
 
 	var/mob/living/grabbing // the currently grabbed mob
 
@@ -231,6 +234,8 @@
 	else
 		canmove = TRUE
 		set_density(initial(density))
+	if(!lying && grabbing)
+		canmove = FALSE // don't move if we're grabbing someone
 	if(!lying && grabbing)
 		canmove = FALSE // don't move if we're grabbing someone
 
