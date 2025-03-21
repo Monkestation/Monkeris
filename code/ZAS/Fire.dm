@@ -16,7 +16,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	return null
 
 
-turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
+/turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 
 /turf/hotspot_expose(exposed_temperature, exposed_volume, soh)

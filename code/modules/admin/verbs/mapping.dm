@@ -147,7 +147,7 @@ var/intercom_range_display_status = 0
 	for(var/turf/T in Z.contents)
 		images += image(yellow, T, "zasdebug", LIGHTING_LAYER)
 		testZAScolors_turfs += T
-	for(var/connection_edge/zone/edge in Z.edges)
+	for(var/datum/connection_edge/zone/edge in Z.edges)
 		var/datum/zone/connected = edge.get_connected_zone(Z)
 		if(connected in testZAScolors_zones)
 			continue
@@ -183,13 +183,13 @@ var/intercom_range_display_status = 0
 	for(var/turf/T in location.zone.contents)
 		images += image(green, T, "zasdebug", LIGHTING_LAYER)
 		testZAScolors_turfs += T
-	for(var/connection_edge/zone/edge in location.zone.edges)
+	for(var/datum/connection_edge/zone/edge in location.zone.edges)
 		var/datum/zone/Z = edge.get_connected_zone(location.zone)
 		testZAScolors_zones += Z
 		for(var/turf/T in Z.contents)
 			images += image(blue, T, "zasdebug", LIGHTING_LAYER)
 			testZAScolors_turfs += T
-		for(var/connection_edge/zone/z_edge in Z.edges)
+		for(var/datum/connection_edge/zone/z_edge in Z.edges)
 			var/datum/zone/connected = z_edge.get_connected_zone(Z)
 			if(connected in testZAScolors_zones)
 				continue
