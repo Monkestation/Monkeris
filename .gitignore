@@ -218,6 +218,7 @@ aux*.dll
 libaux*.so
 !librust_g.so
 !libprof.so
+!libmariadb.so
 aux*.pdb
 
 # JavaScript tools
