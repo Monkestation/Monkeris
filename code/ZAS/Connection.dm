@@ -51,8 +51,8 @@ Class Procs:
 
 /connection/var/turf/A
 /connection/var/turf/B
-/connection/var/zone/zoneA
-/connection/var/zone/zoneB
+/connection/var/datum/zone/zoneA
+/connection/var/datum/zone/zoneB
 
 /connection/var/connection_edge/edge
 

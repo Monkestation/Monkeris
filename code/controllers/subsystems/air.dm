@@ -251,7 +251,7 @@ SUBSYSTEM_DEF(air)
 	// Cache for sanic speed (lists are references anyways)
 	var/list/currentrun = src.currentrun
 	while (currentrun.len)
-		var/zone/Z = currentrun[currentrun.len]
+		var/datum/zone/Z = currentrun[currentrun.len]
 		currentrun.len--
 		Z.process_fire()
 		if (MC_TICK_CHECK)
@@ -271,7 +271,7 @@ SUBSYSTEM_DEF(air)
 
 /datum/controller/subsystem/air/proc/process_zones(resumed = 0)
 	while (zones_to_update.len)
-		var/zone/Z = zones_to_update[zones_to_update.len]
+		var/datum/zone/Z = zones_to_update[zones_to_update.len]
 		zones_to_update.len--
 		Z.tick()
 		Z.needs_update = FALSE
@@ -316,12 +316,12 @@ SUBSYSTEM_DEF(air)
 
 /*********** Procs, which doesn't get involved in processing directly ***********/
 
-/datum/controller/subsystem/air/proc/add_zone(zone/z)
+/datum/controller/subsystem/air/proc/add_zone(datum/zone/z)
 	zones += z
 	z.name = "Zone [next_id++]"
 	mark_zone_update(z)
 
-/datum/controller/subsystem/air/proc/remove_zone(zone/z)
+/datum/controller/subsystem/air/proc/remove_zone(datum/zone/z)
 	zones -= z
 	zones_to_update.Remove(z)
 
@@ -345,7 +345,7 @@ SUBSYSTEM_DEF(air)
 
 	return istype(T) && T.zone && !T.zone.invalid
 
-/datum/controller/subsystem/air/proc/merge(zone/A, zone/B)
+/datum/controller/subsystem/air/proc/merge(datum/zone/A, datum/zone/B)
 	#ifdef ZASDBG
 	ASSERT(istype(A))
 	ASSERT(istype(B))
@@ -438,7 +438,7 @@ SUBSYSTEM_DEF(air)
 
 	queued_for_update.Cut()
 
-/datum/controller/subsystem/air/proc/mark_zone_update(zone/Z)
+/datum/controller/subsystem/air/proc/mark_zone_update(datum/zone/Z)
 	#ifdef ZASDBG
 	ASSERT(istype(Z))
 	#endif
@@ -479,10 +479,10 @@ SUBSYSTEM_DEF(air)
 		log_debug("ZASDBG: Active edge! Area: [get_area(pick(E.A.contents))]")
 	#endif
 
-/datum/controller/subsystem/air/proc/equivalent_pressure(zone/A, zone/B)
+/datum/controller/subsystem/air/proc/equivalent_pressure(datum/zone/A, datum/zone/B)
 	return A.air.compare(B.air)
 
-/datum/controller/subsystem/air/proc/get_edge(zone/A, zone/B)
+/datum/controller/subsystem/air/proc/get_edge(datum/zone/A, datum/zone/B)
 
 	if(istype(B))
 		for(var/connection_edge/zone/edge in A.edges)

@@ -32,7 +32,7 @@
 		visible_message("<span class='danger'>SPLAT!</span>")
 		M.splat()
 	else
-		var/zone = "chest"
+		var/datum/zone = "chest"
 		if(ishuman(target) && target.mob_size)
 			var/mob/living/carbon/human/H = target
 			switch(type)

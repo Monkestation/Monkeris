@@ -37,7 +37,7 @@ Class Procs:
 		Removes a connection from this edge. This works even if c is not in the edge, so be careful.
 		If the coefficient reaches zero as a result, the edge is erased.
 
-	contains_zone(zone/Z)
+	contains_zone(datum/zone/Z)
 		Returns true if either A or B is equal to Z. Unsimulated connections return true only on A.
 
 	erase()
@@ -51,14 +51,14 @@ Class Procs:
 		If repelled is true, the objects move away from any turf in connecting_turfs, otherwise they approach.
 		A check against vsc.lightest_airflow_pressure should generally be performed before calling this.
 
-	get_connected_zone(zone/from)
+	get_connected_zone(datum/zone/from)
 		Helper proc that allows getting the other zone of an edge given one of them.
 		Only on /connection_edge/zone, otherwise use A.
 
 */
 
 
-/connection_edge/var/zone/A
+/connection_edge/var/datum/zone/A
 
 /connection_edge/var/list/connecting_turfs = list()
 /connection_edge/var/direct = 0
@@ -81,7 +81,7 @@ Class Procs:
 		erase()
 	if(c.direct()) direct--
 
-/connection_edge/proc/contains_zone(zone/Z)
+/connection_edge/proc/contains_zone(datum/zone/Z)
 
 /connection_edge/proc/erase()
 	SSair.remove_edge(src)
@@ -119,9 +119,9 @@ Class Procs:
 
 
 
-/connection_edge/zone/var/zone/B
+/connection_edge/zone/var/datum/zone/B
 
-/connection_edge/zone/New(zone/A, zone/B)
+/connection_edge/zone/New(datum/zone/A, datum/zone/B)
 
 	src.A = A
 	src.B = B
@@ -138,7 +138,7 @@ Class Procs:
 	connecting_turfs.Remove(c.A)
 	. = ..()
 
-/connection_edge/zone/contains_zone(zone/Z)
+/connection_edge/zone/contains_zone(datum/zone/Z)
 	return A == Z || B == Z
 
 /connection_edge/zone/erase()
@@ -184,14 +184,14 @@ Class Procs:
 		SSair.mark_edge_active(src)
 
 //Helper proc to get connections for a zone.
-/connection_edge/zone/proc/get_connected_zone(zone/from)
+/connection_edge/zone/proc/get_connected_zone(datum/zone/from)
 	if(A == from) return B
 	else return A
 
 /connection_edge/unsimulated/var/turf/B
 /connection_edge/unsimulated/var/datum/gas_mixture/air
 
-/connection_edge/unsimulated/New(zone/A, turf/B)
+/connection_edge/unsimulated/New(datum/zone/A, turf/B)
 	src.A = A
 	src.B = B
 	A.edges.Add(src)
@@ -213,7 +213,7 @@ Class Procs:
 	A.edges.Remove(src)
 	. = ..()
 
-/connection_edge/unsimulated/contains_zone(zone/Z)
+/connection_edge/unsimulated/contains_zone(datum/zone/Z)
 	return A == Z
 
 /connection_edge/unsimulated/tick()
