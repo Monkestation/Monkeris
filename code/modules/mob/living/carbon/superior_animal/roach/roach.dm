@@ -47,6 +47,8 @@
 	var/busy_time // how long it will take to eat/lay egg
 	var/busy_start_time // when it started eating/laying egg
 
+	var/datum/overmind/roachmind/overseer
+
 	// Armor related variables
 	armor = list(
 		melee = 0,
