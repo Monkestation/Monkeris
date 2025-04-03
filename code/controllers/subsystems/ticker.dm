@@ -84,7 +84,7 @@ SUBSYSTEM_DEF(ticker)
 		if(GAME_STATE_STARTUP)
 			if(first_start_trying)
 				pregame_timeleft = initial(pregame_timeleft)
-				to_chat(world, "<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>")
+				to_chat(world, span_bold(span_blue("Welcome to the pre-game lobby!")))
 			else
 				pregame_timeleft = 40
 
@@ -146,10 +146,10 @@ SUBSYSTEM_DEF(ticker)
 
 					if(universe_has_ended)
 						if(!delay_end)
-							to_chat(world, SPAN_NOTICE("<b>Rebooting due to destruction of ship in [restart_timeout/10] seconds</b>"))
+							to_chat(world, span_notice("<b>Rebooting due to destruction of ship in [restart_timeout/10] seconds</b>"))
 					else
 						if(!delay_end)
-							to_chat(world, SPAN_NOTICE("<b>Restarting in [restart_timeout/10] seconds</b>"))
+							to_chat(world, span_notice("<b>Restarting in [restart_timeout/10] seconds</b>"))
 
 
 					if(!delay_end)
@@ -158,9 +158,9 @@ SUBSYSTEM_DEF(ticker)
 							world.flush_byond_tracy()
 							world.Reboot()
 						else
-							to_chat(world, SPAN_NOTICE("<b>An admin has delayed the round end</b>"))
+							to_chat(world, span_notice("<b>An admin has delayed the round end</b>"))
 					else
-						to_chat(world, SPAN_NOTICE("<b>An admin has delayed the round end</b>"))
+						to_chat(world, span_notice("<b>An admin has delayed the round end</b>"))
 
 // This proc will scan for player and if the game is in progress and...
 // there is no player for certain minutes (see config.empty_server_restart_time) it will restart the server and return FALSE
@@ -203,7 +203,7 @@ SUBSYSTEM_DEF(ticker)
 	return TRUE
 
 /datum/controller/subsystem/ticker/proc/setup()
-	to_chat(world, "<span class='boldannounce'>Starting game...</span>")
+	to_chat(world, span_boldannounce("Starting game..."))
 	var/init_start = world.timeofday
 	//Create and announce mode
 
@@ -211,7 +211,7 @@ SUBSYSTEM_DEF(ticker)
 		set_storyteller(announce = FALSE)
 
 	if(!GLOB.storyteller)
-		to_chat(world, "<span class='danger'>Serious error storyteller system!</span> Reverting to pre-game lobby.")
+		to_chat(world, "[span_danger("Serious error storyteller system!")] Reverting to pre-game lobby.")
 		return FALSE
 
 	SSjob.ResetOccupations()
@@ -380,7 +380,7 @@ SUBSYSTEM_DEF(ticker)
 	if(quotes.len)
 		message = pick(quotes)
 	if(message)
-		to_chat(world, SPAN_NOTICE("<font color='purple'><b>Quote of the round: </b>[html_encode(message)]</font>"))
+		to_chat(world, span_notice("<font color='purple'><b>Quote of the round: </b>[html_encode(message)]</font>"))
 
 /datum/controller/subsystem/ticker/proc/create_characters()
 	for(var/mob/new_player/player in GLOB.player_list)
