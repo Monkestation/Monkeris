@@ -5,22 +5,58 @@ SUBSYSTEM_DEF(statpanels)
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 	var/list/currentrun = list()
 	var/encoded_global_data
+	var/encoded_private_global_data
 	var/mc_data_encoded
 	var/list/cached_images = list()
 
 /datum/controller/subsystem/statpanels/fire(resumed = FALSE)
 	if(!resumed)
+		var/list/private_global_data = list(
+			list("-------------------")
+		)
 		var/list/global_data = list(
 			list("Storyteller: [master_storyteller ? master_storyteller : "being democratically elected"]"),
 			list("Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")]"),
-			list("Round Time: [roundduration2text()]"),
+			list("Round Time: [gameTimestamp()]"),
 			list("Ship Time: [stationtime2text()]"),
+			list("Time Dilation: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)"),
 		)
+
+		global_data += list(list("Players: [LAZYLEN(clients)]"))
+		if (!SSticker.HasRoundStarted())
+			global_data += list(list("Players Ready: [SSticker.totalPlayersReady]"))
+			private_global_data += list(list("Admins Ready: [SSticker.total_admins_ready] / [length(admins)]"))
+			var/separator = FALSE
+			for(var/mob/new_player/player in GLOB.player_list)
+				if(player.ready)
+					if (!separator)
+						global_data += list(list("-------------------"))
+						separator = TRUE
+					var/job_of_choice = "Unknown"
+					// Player chose to be a vagabond, that takes priority over all other settings,
+					// and is in a low priority job list for some reason
+					if(ASSISTANT_TITLE in player.client.prefs.job_low)
+						job_of_choice = ASSISTANT_TITLE
+					// Only take top priority job into account, no use divining what lower priority job player could get
+					else if(player.client.prefs.job_high)
+						job_of_choice = player.client.prefs.job_high
+					global_data += list(list("[player.client.prefs.real_name] : [job_of_choice]"))
+
+
 		var/eta_status = evacuation_controller.get_status_panel_eta()
 		if(eta_status)
 			global_data += list(list(eta_status))
 
+		if(SSticker.reboot_timer)
+			var/reboot_time = timeleft(SSticker.reboot_timer)
+			if(reboot_time)
+				global_data += list(list("Reboot: [DisplayTimeText(reboot_time, 1)]"))
+		// admin must have delayed round end
+		else if(SSticker.ready_for_reboot)
+			global_data += list(list("Reboot: DELAYED"))
+
 		encoded_global_data = url_encode(json_encode(global_data))
+		encoded_private_global_data = url_encode(json_encode(private_global_data))
 
 		var/list/mc_data = list(
 			list("CPU:", world.cpu),
@@ -28,7 +64,7 @@ SUBSYSTEM_DEF(statpanels)
 			list("World Time:", "[world.time]"),
 			list("Globals:", "Edit", "\ref[GLOB]"),
 			list("Config:", "Edit", "\ref[config]"),
-			list("Byond:", "(FPS:[world.fps]) (TickCount:[world.time/world.tick_lag]) (TickDrift:[round(Master.tickdrift,1)]([round((Master.tickdrift/(world.time/world.tick_lag))*100,0.1)]%))"),
+			list("Byond:", "(FPS:[world.fps]) (TickCount:[world.time/world.tick_lag]) (TickDrift:[round(Master.tickdrift,1)]([round((Master.tickdrift/(world.time/world.tick_lag))*100,0.1)]%)) (Internal Tick Usage: [round(MAPTICK_LAST_INTERNAL_TICK_USAGE,0.1)]%)"),
 			list("Master Controller:", Master ? "(TickRate:[Master.processing]) (Iteration:[Master.iteration])" : "ERROR", "\ref[Master]"),
 			list("Failsafe Controller:", Failsafe ? "Defcon: [Failsafe.defcon_pretty()] (Interval: [Failsafe.processing_interval] | Iteration: [Failsafe.master_iteration])" : "ERROR", "\ref[Failsafe]"),
 			list("","")
@@ -62,7 +98,7 @@ SUBSYSTEM_DEF(statpanels)
 		var/list/personal_data = list(list("Ping: [round(target.lastping, 1)]ms (Average: [round(target.avgping, 1)]ms)"))
 		personal_data += target.mob.get_status_tab_items()
 		var/encoded_personal_data = url_encode(json_encode(personal_data))
-		target << output("[encoded_global_data];[encoded_personal_data]", "statbrowser:update")
+		target << output("[encoded_global_data];[target.holder ? "[encoded_private_global_data];" : ""][encoded_personal_data]", "statbrowser:update")
 
 		if(!target.holder)
 			target << output("", "statbrowser:remove_admin_tabs")
