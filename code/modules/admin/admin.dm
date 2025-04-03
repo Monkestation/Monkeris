@@ -722,7 +722,7 @@ var/global/floorIsLava = 0
 /datum/admins/proc/delay()
 	set category = "Server"
 	set desc="Delay the game start/end"
-	set name="Delay pre-game"
+	set name="Delay Pre-game"
 
 	if(!check_rights(R_SERVER))
 		return

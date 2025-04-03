@@ -21,9 +21,8 @@
 			user = client.mob
 		else
 			return
-	/// Client does NOT have tgui_input on: Returns regular input
-	// if(!user.client.prefs.read_preference(/datum/preference/toggle/tgui_input))
-	// 	return input(user, message, title, default) as null|anything in items
+	if(!user.client.get_preference_value(/datum/client_preference/tgui_fancy) == GLOB.PREF_YES)
+		return input(user, message, title, default) as null|anything in items
 	var/datum/tgui_list_input/input = new(user, message, title, items, default, timeout)
 	input.ui_interact(user)
 	input.wait()
