@@ -574,6 +574,7 @@ var/global/floorIsLava = 0
 		message = replacetext(message, "\n", "<br>") // required since we're putting it in a <p> tag
 		to_chat(world, "<span class=notice><b>[usr.client.holder.fakekey ? "Administrator" : usr.key] Announces:</b><p style='text-indent: 50px'>[message]</p></span>")
 		log_admin("Announce: [key_name(usr)] : [message]")
+		SEND_SOUND(world, sound('sound/misc/notice2.ogg'))
 
 /datum/admins/proc/set_respawn_timer()
 	set name = "Set Respawn Timer"
@@ -587,6 +588,24 @@ var/global/floorIsLava = 0
 		delay = CLAMP(delay, 0, INFINITY)
 		config.respawn_delay = delay
 		log_and_message_admins("changed respawn delay to [delay] minutes.")
+
+/datum/admins/proc/end_round()
+	set category = "Server"
+	set name = "End Round"
+	set desc = "Attempts to produce a round end report and then restart the server organically."
+
+	if (!check_rights(R_ADMIN))
+		return
+	if(SSticker.current_state == GAME_STATE_FINISHED)
+		return to_chat(usr, span_adminnotice("The round has already ended!"))
+	if(SSticker.current_state <= GAME_STATE_SETTING_UP)
+		return to_chat(usr, span_adminnotice("The game hasnt started yet!"))
+
+	var/confirm = tgui_alert(usr, "End the round forcibly?", "End Round", list("Yes", "Cancel"))
+	if(confirm == "Cancel")
+		return
+	if(confirm == "Yes")
+		SSticker.force_ending = ADMIN_FORCE_END_ROUND
 
 //toggles ooc on/off for everyone
 /datum/admins/proc/toggleooc()
@@ -664,7 +683,6 @@ var/global/floorIsLava = 0
 			if(SSticker.current_state == GAME_STATE_STARTUP)
 				msg = " (The server is still setting up, but the round will be started as soon as possible.)"
 			message_admins(span_blue("[usr.key] has started the game.[msg]"))
-			// SSblackbox.record_feedback("tally", "admin_verb", 1, "Start Now") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 			return TRUE
 		SSticker.start_immediately = FALSE
 		SSticker.SetTimeLeft(1800)
@@ -675,6 +693,7 @@ var/global/floorIsLava = 0
 	else
 		to_chat(usr, span_warning(span_red("Error: Start Now: Game has already started.")))
 	return FALSE
+
 //toggles whether people can join the current game
 /datum/admins/proc/toggleenter()
 	set category = "Server"
@@ -765,8 +784,7 @@ var/global/floorIsLava = 0
 
 	SSticker.delay_end = TRUE
 	SSticker.admin_delay_notice = delay_reason
-	if(SSticker.reboot_timer)
-		SSticker.cancel_reboot(usr)
+	SSticker.cancel_reboot(usr)
 
 	log_admin("[key_name(usr)] delayed the round end for reason: [SSticker.admin_delay_notice]")
 	message_admins("[key_name_admin(usr)] delayed the round end for reason: [SSticker.admin_delay_notice]")

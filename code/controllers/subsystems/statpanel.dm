@@ -5,15 +5,19 @@ SUBSYSTEM_DEF(statpanels)
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 	var/list/currentrun = list()
 	var/encoded_global_data
-	var/encoded_private_global_data
+	var/encoded_ready_data
+	var/encoded_private_ready_data
 	var/mc_data_encoded
 	var/list/cached_images = list()
 
+/datum/controller/subsystem/statpanels/Initialize()
+	. = ..()
+	fire()
+
 /datum/controller/subsystem/statpanels/fire(resumed = FALSE)
 	if(!resumed)
-		var/list/private_global_data = list(
-			list("-------------------")
-		)
+		var/list/private_ready_data = list()
+		var/list/global_ready_data = list()
 		var/list/global_data = list(
 			list("Storyteller: [master_storyteller ? master_storyteller : "being democratically elected"]"),
 			list("Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")]"),
@@ -24,13 +28,17 @@ SUBSYSTEM_DEF(statpanels)
 
 		global_data += list(list("Players: [LAZYLEN(clients)]"))
 		if (!SSticker.HasRoundStarted())
-			global_data += list(list("Players Ready: [SSticker.totalPlayersReady]"))
-			private_global_data += list(list("Admins Ready: [SSticker.total_admins_ready] / [length(admins)]"))
+			global_ready_data += list(list("Players Ready: [SSticker.totalPlayersReady]"))
+			global_ready_data += list(list("Time To Start: [DisplayTimeText(SSticker.GetTimeLeft())][round_progressing ? "" : " (DELAYED)"]"))
+			private_ready_data += list(
+				list("-------------------"),
+				list("Admins Ready: [SSticker.total_admins_ready] / [length(admins)]"),
+			)
 			var/separator = FALSE
 			for(var/mob/new_player/player in GLOB.player_list)
 				if(player.ready)
 					if (!separator)
-						global_data += list(list("-------------------"))
+						global_ready_data += list(list("-------------------"))
 						separator = TRUE
 					var/job_of_choice = "Unknown"
 					// Player chose to be a vagabond, that takes priority over all other settings,
@@ -40,8 +48,7 @@ SUBSYSTEM_DEF(statpanels)
 					// Only take top priority job into account, no use divining what lower priority job player could get
 					else if(player.client.prefs.job_high)
 						job_of_choice = player.client.prefs.job_high
-					global_data += list(list("[player.client.prefs.real_name] : [job_of_choice]"))
-
+					global_ready_data += list(list("[player.client.prefs.real_name] : [job_of_choice]"))
 
 		var/eta_status = evacuation_controller.get_status_panel_eta()
 		if(eta_status)
@@ -56,7 +63,8 @@ SUBSYSTEM_DEF(statpanels)
 			global_data += list(list("Reboot: DELAYED"))
 
 		encoded_global_data = url_encode(json_encode(global_data))
-		encoded_private_global_data = url_encode(json_encode(private_global_data))
+		encoded_ready_data = url_encode(json_encode(global_ready_data))
+		encoded_private_ready_data = url_encode(json_encode(private_ready_data))
 
 		var/list/mc_data = list(
 			list("CPU:", world.cpu),
@@ -95,10 +103,15 @@ SUBSYSTEM_DEF(statpanels)
 	while(LAZYLEN(currentrun))
 		var/client/target = currentrun[LAZYLEN(currentrun)]
 		currentrun.len--
-		var/list/personal_data = list(list("Ping: [round(target.lastping, 1)]ms (Average: [round(target.avgping, 1)]ms)"))
-		personal_data += target.mob.get_status_tab_items()
+
+		var/list/ping_data = list(list("Ping: [round(target.lastping, 1)]ms (Average: [round(target.avgping, 1)]ms)"))
+		ping_data += target.mob.get_status_tab_items()
+		var/encoded_ping_data = url_encode(json_encode(ping_data))
+
+		var/list/personal_data = target.mob.get_status_tab_items()
 		var/encoded_personal_data = url_encode(json_encode(personal_data))
-		target << output("[encoded_global_data];[target.holder ? "[encoded_private_global_data];" : ""][encoded_personal_data]", "statbrowser:update")
+
+		target << output("[encoded_ping_data];[encoded_global_data];[encoded_ready_data];[target.holder ? "[encoded_private_ready_data];" : ""][encoded_personal_data]", "statbrowser:update")
 
 		if(!target.holder)
 			target << output("", "statbrowser:remove_admin_tabs")

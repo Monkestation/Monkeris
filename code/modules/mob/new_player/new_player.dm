@@ -73,11 +73,7 @@
 
 /mob/new_player/get_status_tab_items()
 	. = ..()
-	if(SSticker.HasRoundStarted())
-		return
-	var/time_remaining = SSticker.GetTimeLeft()
-	if(time_remaining > 0)
-		. += list(list("Time To Start: [round(time_remaining/10)]s"))
+	// Leaving here for future use.
 
 /mob/new_player/Topic(href, href_list[])
 	if(src != usr || !client)

@@ -7,6 +7,9 @@ SUBSYSTEM_DEF(ticker)
 
 	var/const/restart_timeout = 600
 	var/current_state = GAME_STATE_STARTUP
+	/// Boolean to track if round should be forcibly ended next ticker tick.
+	/// Set by admin intervention ([ADMIN_FORCE_END_ROUND])
+	var/force_ending = END_ROUND_AS_NORMAL
 	// If true, there is no lobby phase, the game starts immediately.
 	var/start_immediately = FALSE
 
@@ -96,89 +99,6 @@ SUBSYSTEM_DEF(ticker)
 		global_hud.science,
 		global_hud.holomap)
 
-// /datum/controller/subsystem/ticker/fire()
-// 	switch(current_state)
-// 		if(GAME_STATE_STARTUP)
-// 			if(first_start_trying)
-// 				pregame_timeleft = initial(pregame_timeleft)
-// 				to_chat(world, "<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>")
-// 			else
-// 				pregame_timeleft = 40
-
-// 			if(!start_immediately)
-// 				to_chat(world, "Please, setup your character and select ready. Game will start in [DisplayTimeText(pregame_timeleft)].")
-// 			current_state = GAME_STATE_PREGAME
-// 			fire()
-
-// 		if(GAME_STATE_PREGAME)
-// 			if(start_immediately)
-// 				SSvote.stop_vote()
-// 				pregame_timeleft = 0
-
-// 			if(!process_empty_server())
-// 				return
-
-// 			if(round_progressing)
-// 				pregame_timeleft--
-
-// 			if(!quoted)
-// 				send_quote_of_the_round()
-// 				quoted = TRUE
-
-// 			if(!story_vote_ended && (pregame_timeleft == config.vote_autogamemode_timeleft || !first_start_trying))
-// 				if(!SSvote.active_vote)
-// 					SSvote.autostoryteller()	//Quit calling this over and over and over and over.
-
-// 			if(pregame_timeleft <= 0)
-// 				current_state = GAME_STATE_SETTING_UP
-// 				Master.SetRunLevel(RUNLEVEL_SETUP)
-// 				if(start_immediately)
-// 					fire()
-// 			first_start_trying = FALSE
-
-// 		if(GAME_STATE_SETTING_UP)
-// 			if(!setup())
-// 				//setup failed
-// 				current_state = GAME_STATE_STARTUP
-// 				Master.SetRunLevel(RUNLEVEL_LOBBY)
-
-// 		if(GAME_STATE_PLAYING)
-// 			GLOB.storyteller.Process()
-// 			GLOB.storyteller.process_events()
-
-// 			if(!process_empty_server())
-// 				return
-
-// 			var/game_finished = (evacuation_controller.round_over() || ship_was_nuked || universe_has_ended || excelsior_hijacking == 2)
-
-// 			if(!nuke_in_progress && game_finished)
-// 				current_state = GAME_STATE_FINISHED
-// 				Master.SetRunLevel(RUNLEVEL_POSTGAME)
-// 				for(var/client_key in SSinactivity_and_job_tracking.current_playtimes)
-// 					SSjob.SavePlaytimes(client_key)
-// 				declare_completion()
-
-// 				spawn(50)
-// 					callHook("roundend")
-
-// 					if(universe_has_ended)
-// 						if(!delay_end)
-// 							to_chat(world, SPAN_NOTICE("<b>Rebooting due to destruction of ship in [restart_timeout/10] seconds</b>"))
-// 					else
-// 						if(!delay_end)
-// 							to_chat(world, SPAN_NOTICE("<b>Restarting in [restart_timeout/10] seconds</b>"))
-
-
-// 					if(!delay_end)
-// 						sleep(restart_timeout)
-// 						if(!delay_end)
-// 							world.flush_byond_tracy()
-// 							world.Reboot()
-// 						else
-// 							to_chat(world, SPAN_NOTICE("<b>An admin has delayed the round end</b>"))
-// 					else
-// 						to_chat(world, SPAN_NOTICE("<b>An admin has delayed the round end</b>"))
-
 /datum/controller/subsystem/ticker/fire()
 	switch(current_state)
 		if(GAME_STATE_STARTUP)
@@ -188,7 +108,7 @@ SUBSYSTEM_DEF(ticker)
 			for(var/client/C in clients)
 				window_flash(C) //let them know lobby has opened up.
 			if(!start_immediately)
-				to_chat(world, "Please, setup your character and select ready. Game will start in [DisplayTimeText(SSticker.GetTimeLeft())] seconds.")
+				to_chat(world, "Please, setup your character and select ready. Game will start in [DisplayTimeText(SSticker.GetTimeLeft())].")
 			current_state = GAME_STATE_PREGAME
 			SEND_SIGNAL(src, COMSIG_TICKER_ENTER_PREGAME)
 			fire()
@@ -249,7 +169,7 @@ SUBSYSTEM_DEF(ticker)
 			if(!process_empty_server())
 				return
 
-			var/game_finished = (evacuation_controller.round_over() || ship_was_nuked || universe_has_ended || excelsior_hijacking == 2)
+			var/game_finished = (evacuation_controller.round_over() || ship_was_nuked || universe_has_ended || excelsior_hijacking == 2 || force_ending)
 
 			if(!nuke_in_progress && game_finished)
 				current_state = GAME_STATE_FINISHED
@@ -658,9 +578,6 @@ SUBSYSTEM_DEF(ticker)
 				total_antagonists.Add(temprole)
 			total_antagonists[temprole] += ", [antag.owner.name]([antag.owner.key])"
 
-
-
-
 	//Now print them all into the log!
 	log_game("Antagonists at round end were...")
 	for(var/i in total_antagonists)
@@ -701,9 +618,8 @@ SUBSYSTEM_DEF(ticker)
 	to_chat(world, span_boldannounce("Rebooting World in [DisplayTimeText(delay)]. [reason]"))
 
 	var/start_wait = world.time
-	UNTIL((world.time - start_wait) > (delay * 2)) //don't wait forever
-	reboot_timer = addtimer(CALLBACK(src, PROC_REF(reboot_callback), reason, end_string), delay - (world.time - start_wait), TIMER_STOPPABLE)
-
+	// UNTIL((world.time - start_wait) > (delay * 2)) //don't wait forever
+	reboot_timer = addtimer(CALLBACK(src, PROC_REF(reboot_callback), reason, end_string), delay, TIMER_STOPPABLE)
 
 /datum/controller/subsystem/ticker/proc/reboot_callback(reason, end_string)
 	// if(end_string)

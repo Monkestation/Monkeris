@@ -31,6 +31,7 @@ GLOBAL_LIST_INIT(admin_verbs_server, list(
 	/client/proc/toggle_log_hrefs,
 	/datum/admins/proc/restart,
 	/datum/admins/proc/startnow,
+	/datum/admins/proc/end_round,
 	/datum/admins/proc/toggleRespawn,
 	/datum/admins/proc/delay,
 	/datum/admins/proc/delay_round_end,
