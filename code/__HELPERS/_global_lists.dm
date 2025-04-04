@@ -101,7 +101,7 @@ GLOBAL_LIST_EMPTY_TYPED(world_uplinks, /obj/item/device/uplink)
 GLOBAL_LIST_EMPTY_TYPED(krabin_linked, /mob/living/carbon/human)
 
 // Announcer intercom, because too much stuff creates an intercom for one message then hard del()s it.
-GLOBAL_DATUM_INIT(announcer, /obj/item/device/radio/intercom, new(null))
+GLOBAL_DATUM(announcer, /obj/item/device/radio/intercom)
 
 GLOBAL_LIST_EMPTY(lastsignalers) // Keeps last 100 signals here in format: "[src] used \ref[src] @ location [src.loc]: [freq]/[code]"
 GLOBAL_LIST_EMPTY(lawchanges) // Stores who uploaded laws to which silicon-based lifeform, and what the law was.
