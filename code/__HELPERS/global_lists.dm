@@ -1,12 +1,24 @@
-var/list/clients = list()							//list of all clients
-var/list/admins = list()							//list of all clients whom are admins
-var/list/directory = list()							//list of all ckeys with associated client
+GLOBAL_LIST_EMPTY(clients)	//list of all clients
+GLOBAL_LIST_EMPTY(admins)	//list of all clients whom are admins
+GLOBAL_LIST_EMPTY(directory)	//list of all ckeys with associated client
 
 //Since it didn't really belong in any other category, I'm putting this here
 //This is for procs to replace all the goddamn 'in world's that are chilling around the code
 
 GLOBAL_LIST_EMPTY(ships) // List of ships in the game.
+GLOBAL_LIST_EMPTY(all_areas)
+GLOBAL_LIST_EMPTY(ship_areas)
 
+GLOBAL_LIST_EMPTY(global_map)
+
+//GLOBAL_LIST_EMPTY(machines)			//Removed
+//GLOBAL_LIST_EMPTY(processing_objects)			//Removed
+//GLOBAL_LIST_EMPTY(processing_power_items)			//Removed
+GLOBAL_LIST_EMPTY(active_diseases)
+GLOBAL_LIST_EMPTY(med_hud_users)	 // List of all entities using a medical HUD.
+GLOBAL_LIST_EMPTY(sec_hud_users)	 // List of all entities using a security HUD.
+GLOBAL_LIST_EMPTY(excel_hud_users)	 // List of all entities using an excelsior HUD.
+GLOBAL_LIST_EMPTY(hud_icon_reference)
 
 GLOBAL_LIST_EMPTY(mob_list)					//EVERY single mob, dead or alive
 GLOBAL_LIST_EMPTY(player_list)				//List of all mobs **with clients attached**. Excludes /mob/new_player
@@ -78,6 +90,16 @@ GLOBAL_LIST_EMPTY(poster_designs_asters)
 // Uplinks
 var/list/obj/item/device/uplink/world_uplinks = list()
 
+GLOBAL_LIST_EMPTY_TYPED(world_uplinks, /obj/item/device/uplink)
+
+GLOBAL_LIST_EMPTY_TYPED(krabin_linked, /mob/living/carbon/human)
+
+// Announcer intercom, because too much stuff creates an intercom for one message then hard del()s it.
+GLOBAL_DATUM_INIT(announcer, /obj/item/device/radio/intercom, new(null))
+
+GLOBAL_LIST_EMPTY(lastsignalers) // Keeps last 100 signals here in format: "[src] used \ref[src] @ location [src.loc]: [freq]/[code]"
+GLOBAL_LIST_EMPTY(lawchanges) // Stores who uploaded laws to which silicon-based lifeform, and what the law was.
+
 // Loot stash datums
 GLOBAL_LIST_EMPTY(stash_categories) //An associative list in the format category_type = weight
 
@@ -140,7 +162,7 @@ var/global/list/organ_structure = list(
 	BP_L_LEG = list(name= "Left leg",  parent=BP_GROIN, children=list()),
 	)
 
-var/global/list/organ_tag_to_name = list(
+GLOBAL_LIST_INIT(organ_tag_to_name, list(
 	head  = "head", r_arm = "right arm",
 	chest = "body", r_leg = "right leg",
 	eyes  = "eyes", l_arm = "left arm",
@@ -150,19 +172,44 @@ var/global/list/organ_tag_to_name = list(
 	"left kidney" = "left kidney",
 	"right kidney" = "right kidney",
 	stomach = "stomach", brain = "brain"
-	)
+	))
 
 // Visual nets
-var/list/datum/visualnet/visual_nets = list()
-var/datum/visualnet/camera/cameranet = new()
+GLOBAL_LIST_EMPTY_TYPED(visual_nets, /datum/visualnet)
 
-var/global/list/syndicate_access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
+GLOBAL_DATUM_INIT(cameranet, /datum/visualnet/camera, new)
+
+GLOBAL_LIST_INIT(syndicate_access, list(access_maint_tunnels, access_syndicate, access_external_airlocks))
 
 //A list of slots where an item doesn't count as "worn" if it's in one of them
-var/global/list/unworn_slots = list(slot_l_hand,slot_r_hand, slot_l_store, slot_r_store,slot_robot_equip_1,slot_robot_equip_2,slot_robot_equip_3)
+GLOBAL_LIST_INIT(unworn_slots, list(slot_l_hand,slot_r_hand, slot_l_store, slot_r_store,slot_robot_equip_1,slot_robot_equip_2,slot_robot_equip_3))
+
+// Added for Xenoarchaeology, might be useful for other stuff.
+GLOBAL_LIST_INIT(alphabet_uppercase, list("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"))
 
 //Names that shouldn't trigger notifications about low health
 GLOBAL_LIST_EMPTY(ignore_health_alerts_from)
+
+// Some scary sounds.
+GLOBAL_LIST_INIT(scary_sounds, list(
+	'sound/weapons/thudswoosh.ogg',
+	'sound/weapons/Taser.ogg',
+	'sound/weapons/armbomb.ogg',
+	'sound/voice/hiss1.ogg',
+	'sound/voice/hiss2.ogg',
+	'sound/voice/hiss3.ogg',
+	'sound/voice/hiss4.ogg',
+	'sound/voice/hiss5.ogg',
+	'sound/voice/hiss6.ogg',
+	'sound/effects/Glassbr1.ogg',
+	'sound/effects/Glassbr2.ogg',
+	'sound/effects/Glassbr3.ogg',
+	'sound/items/Welder.ogg',
+	'sound/items/Welder2.ogg',
+	'sound/machines/airlock.ogg',
+	'sound/effects/clownstep1.ogg',
+	'sound/effects/clownstep2.ogg'
+))
 
 //////////////////////////
 /////Initial Building/////

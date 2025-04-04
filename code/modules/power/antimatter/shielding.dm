@@ -1,7 +1,7 @@
 //like orange but only checks north/south/east/west for one step
 /proc/cardinalrange(center)
 	var/list/things = list()
-	for(var/direction in cardinal)
+	for(var/direction in GLOB.cardinal)
 		var/turf/T = get_step(center, direction)
 		if(!T) continue
 		things += T.contents
@@ -49,7 +49,7 @@
 			break
 
 	if(!control_unit)//No other guys nearby look for a control unit
-		for(var/direction in cardinal)
+		for(var/direction in GLOB.cardinal)
 		for(var/obj/machinery/power/am_control_unit/AMC in cardinalrange(src))
 			if(AMC.add_shielding(src))
 				break

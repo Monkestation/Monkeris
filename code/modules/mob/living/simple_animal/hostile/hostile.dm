@@ -257,7 +257,7 @@ var/list/mydirs = list(NORTH, SOUTH, EAST, WEST, SOUTHWEST, NORTHWEST, NORTHEAST
 				qdel(obstacle)
 
 	if(prob(break_stuff_probability))
-		for(var/dir in cardinal) // North, South, East, West
+		for(var/dir in GLOB.cardinal) // North, South, East, West
 			for(var/obj/machinery/obstacle in get_step(src, dir))
 				if((obstacle.dir == reverse_dir[dir])) // So that windows get smashed in the right order
 					obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)

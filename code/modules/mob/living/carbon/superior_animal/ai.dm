@@ -90,7 +90,7 @@
 			obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),pick(attacktext))
 			return
 
-		for (var/dir in cardinal) // North, South, East, West
+		for (var/dir in GLOB.cardinal) // North, South, East, West
 			for (var/obj/structure/window/obstacle in get_step(src, dir))
 				if ((obstacle.is_full_window()) || (obstacle.dir == reverse_dir[dir])) // So that directional windows get smashed in the right order
 					obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),pick(attacktext))

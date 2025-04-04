@@ -406,7 +406,7 @@
 
 		var/Tx = T.x  // We do that for cleanup because T is going to be replaced during chunk load
 		var/Ty = T.y
-		var/ori = pick(cardinal)
+		var/ori = pick(GLOB.cardinal)
 
 		if(preloaded_25_25[affinity_ID][i_chunk] == 0)
 			ori = SOUTH
@@ -496,7 +496,7 @@
 
 		var/Tx = T.x  // We do that for cleanup because T is going to be replaced during chunk load
 		var/Ty = T.y
-		var/ori = pick(cardinal)
+		var/ori = pick(GLOB.cardinal)
 
 		if(preloaded_5_5[i_chunk] == 0)
 			ori = SOUTH

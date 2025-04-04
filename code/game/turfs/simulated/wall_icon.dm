@@ -76,7 +76,7 @@
 	if(!appearance_cache)
 		appearance_cache = list()
 
-	for(var/overlay_direction in cardinal)
+	for(var/overlay_direction in GLOB.cardinal)
 		var/connection_type = get_overlay_connection_type(overlay_direction, any_wall_connections)
 
 		// Fancy walls and low wall overlays use a different icon in some cases

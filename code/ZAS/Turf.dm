@@ -195,7 +195,7 @@
 /turf/proc/get_zone_neighbours(turf/T)
 	. = 0
 	if(istype(T) && T.zone)
-		for(var/dir in cardinal)
+		for(var/dir in GLOB.cardinal)
 			var/turf/other = get_step(T, dir)
 			if(istype(other) && other.zone == T.zone && !(other.c_airblock(T) & AIR_BLOCKED) && get_dist(src, other) <= 1)
 				. |= dir

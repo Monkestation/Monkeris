@@ -110,12 +110,12 @@
 	if(active)
 		if(!state)
 			active = FALSE
-			for(var/fdir in cardinal)
+			for(var/fdir in GLOB.cardinal)
 				cleanup(fdir)
 			return
 
 		if(!stunmode)
-			for(var/fdir in cardinal)
+			for(var/fdir in GLOB.cardinal)
 				setup_field(fdir)
 		else
 			stun()
@@ -125,7 +125,7 @@
 			visible_message("\red The [src.name] shuts down due to lack of power!", \
 				"You hear heavy droning fade out")
 			active = FALSE
-			for(var/fdir in cardinal)
+			for(var/fdir in GLOB.cardinal)
 				cleanup(fdir)
 
 			update_icon()
