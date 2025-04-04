@@ -87,7 +87,7 @@
 			open_directions |= d
 
 			if(neighbour_turf.is_simulated)
-				neighbour_turf.open_directions |= reverse_dir[d]
+				neighbour_turf.open_directions |= GLOB.reverse_dir[d]
 				if(TURF_HAS_VALID_ZONE(neighbour_turf))
 					//Might have assigned a zone, since this happens for each direction.
 					if(!zone)
@@ -304,9 +304,9 @@
 /turf/proc/GetAtmosAdjacentTurfs(alldir = FALSE)
 	var/check_dirs
 	if(alldir)
-		check_dirs = alldirs
+		check_dirs = GLOB.alldirs
 	else
-		check_dirs = cardinal
+		check_dirs = GLOB.cardinal
 
 	var/list/adjacent_turfs = list()
 

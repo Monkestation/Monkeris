@@ -36,7 +36,7 @@
 /turf/wall/proc/update_connections()
 	if(is_using_flat_icon)
 		return
-	for(var/direction in alldirs)
+	for(var/direction in GLOB.alldirs)
 		var/turf/wall/wall = get_step(src, direction)
 		if(istype(wall))
 			any_wall_connections[direction] = TRUE
@@ -55,7 +55,7 @@
 /turf/wall/proc/remove_neighbour_connections()
 	if(is_using_flat_icon)
 		return
-	for(var/direction in alldirs)
+	for(var/direction in GLOB.alldirs)
 		if(any_wall_connections[direction])
 			var/turf/wall/wall = get_step(src, direction)
 			wall.any_wall_connections[turn(direction, 180)] = FALSE

@@ -129,7 +129,7 @@
 	return modifications_data[organ]
 
 /datum/preferences/proc/check_child_modifications(var/organ = BP_CHEST)
-	var/list/organ_data = organ_structure[organ]
+	var/list/organ_data = GLOB.organ_structure[organ]
 	if(!organ_data)
 		return
 	var/datum/body_modification/mod = get_modification(organ)

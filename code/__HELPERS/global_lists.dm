@@ -64,32 +64,38 @@ GLOBAL_LIST_EMPTY(hearing_objects)			//list of all objects, that can hear mob sa
 //Jobs and economy
 GLOBAL_LIST_EMPTY(joblist)					//list of all jobstypes, minus borg and AI
 GLOBAL_LIST_EMPTY(all_departments)			//List of all department datums
-var/global/list/department_IDs = list(DEPARTMENT_COMMAND, DEPARTMENT_MEDICAL, DEPARTMENT_ENGINEERING,
- DEPARTMENT_SCIENCE, DEPARTMENT_SECURITY, DEPARTMENT_GUILD, DEPARTMENT_CHURCH, DEPARTMENT_CIVILIAN, DEPARTMENT_OFFSHIP)
+GLOBAL_LIST_INIT(department_IDs, list(
+	DEPARTMENT_COMMAND,		DEPARTMENT_MEDICAL,
+	DEPARTMENT_ENGINEERING,	DEPARTMENT_SCIENCE,
+	DEPARTMENT_SECURITY,	DEPARTMENT_GUILD,
+	DEPARTMENT_CHURCH,		DEPARTMENT_CIVILIAN,
+	DEPARTMENT_OFFSHIP
+	))
 
 
 GLOBAL_LIST_EMPTY(HUDdatums)
 
-#define all_genders_define_list list(MALE, FEMALE, PLURAL, NEUTER)
+// #define all_genders_define_list list(MALE, FEMALE, PLURAL, NEUTER)
 
-var/global/list/turfs = list()						//list of all turfs
+GLOBAL_LIST_EMPTY(turfs)			//list of all turfs
 
-var/list/mannequins_
+GLOBAL_LIST_EMPTY(mannequins_)
 
 //Languages/species/whitelist.
 var/global/list/all_species[0]
 var/global/list/all_languages[0]
 var/global/list/language_keys[0]					// Table of say codes for all languages
-var/global/list/whitelisted_species = list(SPECIES_HUMAN) // Species that require a whitelist check.
-var/global/list/playable_species = list(SPECIES_HUMAN)    // A list of ALL playable species, whitelisted, latejoin or otherwise.
+GLOBAL_LIST_INIT(whitelisted_species, list(SPECIES_HUMAN)) // Species that require a whitelist check.
+GLOBAL_LIST_INIT(playable_species, list(SPECIES_HUMAN))    // A list of ALL playable species, whitelisted, latejoin or otherwise.
+
+// Noises made when hit while typing.
+GLOBAL_LIST_INIT(hit_appends, list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF"))
 
 // Posters
 GLOBAL_LIST_EMPTY(poster_designs)
 GLOBAL_LIST_EMPTY(poster_designs_asters)
 
 // Uplinks
-var/list/obj/item/device/uplink/world_uplinks = list()
-
 GLOBAL_LIST_EMPTY_TYPED(world_uplinks, /obj/item/device/uplink)
 
 GLOBAL_LIST_EMPTY_TYPED(krabin_linked, /mob/living/carbon/human)
@@ -150,9 +156,9 @@ GLOBAL_LIST_EMPTY(cwj_step_dictionary_ordered)
 
 GLOBAL_DATUM_INIT(underwear, /datum/category_collection/underwear, new())
 
-var/global/list/exclude_jobs = list(/datum/job/ai,/datum/job/cyborg)
+GLOBAL_LIST_INIT(exclude_jobs, list(/datum/job/ai,/datum/job/cyborg))
 
-var/global/list/organ_structure = list(
+GLOBAL_LIST_INIT(organ_structure, list(
 	BP_CHEST = list(name= "Chest", children=list(BP_GROIN, BP_HEAD, BP_L_ARM, BP_R_ARM, OP_HEART, OP_LUNGS, OP_STOMACH)),
 	BP_GROIN = list(name= "Groin",     parent=BP_CHEST, children=list(BP_R_LEG, BP_L_LEG, OP_KIDNEY_LEFT, OP_KIDNEY_RIGHT, OP_LIVER)),
 	BP_HEAD  = list(name= "Head",      parent=BP_CHEST, children=list(BP_BRAIN, BP_EYES)),
@@ -160,7 +166,7 @@ var/global/list/organ_structure = list(
 	BP_L_ARM = list(name= "Left arm",  parent=BP_CHEST, children=list()),
 	BP_R_LEG = list(name= "Right leg", parent=BP_GROIN, children=list()),
 	BP_L_LEG = list(name= "Left leg",  parent=BP_GROIN, children=list()),
-	)
+	))
 
 GLOBAL_LIST_INIT(organ_tag_to_name, list(
 	head  = "head", r_arm = "right arm",
@@ -258,7 +264,7 @@ GLOBAL_LIST_INIT(scary_sounds, list(
 
 	//List of job datums
 	paths = subtypesof(/datum/job)
-	paths -= exclude_jobs
+	paths -= GLOB.exclude_jobs
 	for(var/T in paths)
 		var/datum/job/J = new T
 		GLOB.joblist[J.title] = J
@@ -306,9 +312,9 @@ GLOBAL_LIST_INIT(scary_sounds, list(
 		all_species[S.name] = S
 
 		if(!(S.spawn_flags & IS_RESTRICTED))
-			playable_species += S.name
+			GLOB.playable_species += S.name
 		if(S.spawn_flags & IS_WHITELISTED)
-			whitelisted_species += S.name
+			GLOB.whitelisted_species += S.name
 
 	//Posters
 	paths = subtypesof(/datum/poster) - /datum/poster/wanted - /datum/poster/asters
@@ -350,12 +356,12 @@ var/global/list/admin_permissions = list(
 	)
 
 /proc/get_mannequin(var/ckey)
-	if(!mannequins_)
-		mannequins_ = new()
-	. = mannequins_[ckey]
+	if(!GLOB.mannequins_)
+		GLOB.mannequins_ = new()
+	. = GLOB.mannequins_[ckey]
 	if(!.)
 		. = new/mob/living/carbon/human/dummy/mannequin()
-		mannequins_[ckey] = .
+		GLOB.mannequins_[ckey] = .
 
 var/global/list/severity_to_string = list("[EVENT_LEVEL_MUNDANE]" = "Mundane", "[EVENT_LEVEL_MODERATE]" = "Moderate", "[EVENT_LEVEL_MAJOR]" = "Major", "[EVENT_LEVEL_ROLESET]" = "Roleset","[EVENT_LEVEL_ECONOMY]" = "Economy")
 

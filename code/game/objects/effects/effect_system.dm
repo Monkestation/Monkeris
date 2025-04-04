@@ -94,7 +94,7 @@ steam.start() -- spawns the effect
 			if(src.cardinals)
 				direction = pick(GLOB.cardinal)
 			else
-				direction = pick(alldirs)
+				direction = pick(GLOB.alldirs)
 			for(var/j=0, j<pick(1,2,3), j++)
 				sleep(5)
 				step(steam,direction)
@@ -173,7 +173,7 @@ steam.start() -- spawns the effect
 		if(src.cardinals)
 			direction = pick(GLOB.cardinal)
 		else
-			direction = pick(alldirs)
+			direction = pick(GLOB.alldirs)
 		for(var/j=0, j<pick(1,2,3), j++)
 			addtimer(CALLBACK(src, PROC_REF(do_spark_movement), sparks, direction), rand(1,5) SECONDS)
 			//sleep(rand(1,5))
@@ -413,7 +413,7 @@ steam.start() -- spawns the effect
 		if(cardinals)
 			direction = pick(GLOB.cardinal)
 		else
-			direction = pick(alldirs)
+			direction = pick(GLOB.alldirs)
 		var/added_time = 1 SECOND
 		for(var/j=0, j<pick(0,1,1,1,2,2,2,3), j++)
 			addtimer(CALLBACK(src, PROC_REF(move_smoke), smoke, direction), added_time)

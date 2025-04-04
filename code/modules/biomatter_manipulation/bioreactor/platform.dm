@@ -244,7 +244,7 @@
 			toxin_attack(user, 5*contamination_level)
 			apply_dirt(-contamination_level)
 			if(contamination_level >= 4)
-				spill_biomass(user.loc, cardinal)
+				spill_biomass(user.loc, GLOB.cardinal)
 		else
 			to_chat(user, span_warning("You need to stand still to clean it properly."))
 	else

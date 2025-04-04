@@ -119,7 +119,7 @@
 	if (placement_dir in GLOB.cardinal)
 		new_loc = user.loc
 	else
-		placement_dir = reverse_dir[placement_dir]
+		placement_dir = GLOB.reverse_dir[placement_dir]
 		for(var/t_dir in GLOB.cardinal)
 			if(!(t_dir & placement_dir)) continue
 			if(iswall(get_step(W, t_dir)))

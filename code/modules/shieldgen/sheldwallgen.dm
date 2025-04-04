@@ -152,7 +152,7 @@
 		T = get_step(T, f_dir)
 
 		var/obj/machinery/shieldwall/F = locate(/obj/machinery/shieldwall) in T
-		if(F && (F.dir == f_dir || F.dir == reverse_dir[f_dir]))
+		if(F && (F.dir == f_dir || F.dir == GLOB.reverse_dir[f_dir]))
 			field_found++
 
 		G = (locate(/obj/machinery/shieldwallgen) in T)
@@ -187,7 +187,7 @@
 		T = get_step(T, c_dir)
 
 		var/obj/machinery/shieldwall/F = locate(/obj/machinery/shieldwall) in T
-		if(F && (F.dir == c_dir || F.dir == reverse_dir[c_dir]))
+		if(F && (F.dir == c_dir || F.dir == GLOB.reverse_dir[c_dir]))
 			qdel(F)
 
 		var/obj/machinery/shieldwallgen/G = (locate(/obj/machinery/shieldwallgen) in T)

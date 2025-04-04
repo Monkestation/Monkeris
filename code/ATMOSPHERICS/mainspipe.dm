@@ -419,7 +419,7 @@
 	nodes.len = 1
 	..()
 	initialize_mains_directions = dir
-	initialize_directions = cardinal & ~dir // actually have a normal connection too
+	initialize_directions = GLOB.cardinal & ~dir // actually have a normal connection too
 
 /obj/machinery/atmospherics/mains_pipe/split3/atmos_init()
 	var/node1_dir

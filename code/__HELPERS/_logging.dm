@@ -214,7 +214,7 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 	else if(istext(whom))
 		key = whom
 		ckey = ckey(whom)
-		// C = GLOB.GLOB.directory[ckey]
+		// C = GLOB.directory[ckey]
 		// if(C)
 		// 	M = C.mob
 	else if(istype(whom, /datum/mind))

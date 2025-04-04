@@ -19,7 +19,7 @@ SUBSYSTEM_DEF(statpanels)
 		var/list/private_ready_data = list()
 		var/list/global_ready_data = list()
 		var/list/global_data = list(
-			list("Storyteller: [master_storyteller ? master_storyteller : "being democratically elected"]"),
+			list("Storyteller: [master_storyteller ? master_storyteller : "Being democratically elected"]"),
 			list("Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")]"),
 			list("Round Time: [gameTimestamp()]"),
 			list("Ship Time: [stationtime2text()]"),
@@ -29,7 +29,7 @@ SUBSYSTEM_DEF(statpanels)
 		global_data += list(list("Players: [LAZYLEN(GLOB.clients)]"))
 		if (!SSticker.HasRoundStarted())
 			global_ready_data += list(list("Players Ready: [SSticker.totalPlayersReady]"))
-			global_ready_data += list(list("Time To Start: [DisplayTimeText(SSticker.GetTimeLeft())][round_progressing ? "" : " (DELAYED)"]"))
+			global_ready_data += list(list("Time To Start: [DisplayTimeText(SSticker.GetTimeLeft())]"))
 			private_ready_data += list(
 				list("-------------------"),
 				list("Admins Ready: [SSticker.total_admins_ready] / [length(GLOB.admins)]"),

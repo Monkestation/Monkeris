@@ -443,7 +443,7 @@
 			else if(intypes(O))  // Fix obj directions
 				if(ori == NORTH)
 					if(O.dir == NORTH || O.dir == SOUTH)
-						O.dir = reverse_dir[O.dir]
+						O.dir = GLOB.reverse_dir[O.dir]
 				else if(ori == EAST)
 					if(O.dir == EAST || O.dir == WEST)
 						O.dir = GLOB.ccw_dir[O.dir]

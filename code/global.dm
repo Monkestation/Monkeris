@@ -4,10 +4,6 @@ var/global/datum/DB_search/db_search = new()
 
 var/global/datum/universal_state/universe = new
 
-// Noises made when hit while typing.
-var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
-
-
 var/runtime_diary
 var/diary
 var/world_qdel_log
@@ -23,7 +19,6 @@ var/game_version        = "Discordia"
 var/changelog_hash      = ""
 var/game_year           = (text2num(time2text(world.realtime, "YYYY")) + 319)
 
-var/round_progressing = 1
 var/master_storyteller       = "shitgenerator"
 
 var/host	//only here until check @ code\modules\ghosttrap\trap.dm:112 is fixed
