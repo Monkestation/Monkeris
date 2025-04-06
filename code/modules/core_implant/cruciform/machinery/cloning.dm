@@ -93,7 +93,6 @@
 	anim1.pixel_z = 32
 
 	update_icon()
-	// previous comment applies here
 	spawn(20)
 		qdel(anim0)
 		qdel(anim1)
