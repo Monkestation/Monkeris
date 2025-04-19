@@ -1,13 +1,15 @@
-import { BooleanLike } from 'tgui-core/react';
-import { useBackend, sendAct, useLocalState } from 'tgui/backend';
+import { useState } from 'react';
+import { sendAct, useBackend } from 'tgui/backend';
 import {
-  Button,
   Box,
-  LabeledList,
+  Button,
   Divider,
   Dropdown,
+  LabeledList,
   NumberInput,
 } from 'tgui-core/components';
+import { BooleanLike } from 'tgui-core/react';
+
 import { GameIcon } from '../components/GameIcon';
 import { Window } from '../layouts';
 
@@ -29,11 +31,7 @@ interface FrontNodeInterface {
 const recycling = (props, context) => {
   const act = sendAct;
   const { budget, dosh, siloactive, itemnames, icons, itemprices } = props;
-  const [selection, setSelection] = useLocalState(
-    context,
-    'recyclingSelection',
-    -1,
-  );
+  const [selection, setSelection] = useState<number>(-1);
   return (
     <>
       {siloactive ? (
@@ -49,17 +47,18 @@ const recycling = (props, context) => {
           <Dropdown
             options={itemnames}
             onSelected={(value) => setSelection(itemnames.indexOf(value))}
+            selected={selection !== -1 ? itemnames[selection] : ''}
           />
         )}
         {itemnames[0] && (
-          <Button content="Eject Items" onClick={() => act('eject_item')} />
+          <Button onClick={() => act('eject_item')}>Eject Items</Button>
         )}
         {itemnames[0] && siloactive && (
-          <Button content="Sell Items" onClick={() => act('sell_item')} />
+          <Button onClick={() => act('sell_item')}>Sell Items</Button>
         )}
 
         {itemnames[0] && siloactive && (
-          <Button content="Recycle Items" onClick={() => act('recycle_item')} />
+          <Button onClick={() => act('recycle_item')}>Recycle Items</Button>
         )}
         {siloactive &&
           icons.map((mapped, count: number) => {
@@ -128,12 +127,8 @@ const displaythreestats = (name, value, icon, context) => {
 
 const exchange = (props, context) => {
   const { matnames, matnums, matvalues, dosh, maticons, siloactive } = props;
-  const [selection, setSelection] = useLocalState(
-    context,
-    'exchangeSelection',
-    -1,
-  );
-  const [amt, setAmt] = useLocalState(context, 'exchangeAmt', 0);
+  const [selection, setSelection] = useState<number>(-1);
+  const [amt, setAmt] = useState(0);
   const act = sendAct;
   return (
     <>
@@ -156,11 +151,14 @@ const exchange = (props, context) => {
       <Dropdown
         options={matnames}
         onSelected={(value) => setSelection(matnames.indexOf(value))}
+        selected={selection !== -1 ? matnames[selection] : ''}
       />
       <NumberInput
         value={amt}
         maxValue={selection !== -1 ? matnums[matnames.indexOf(selection)] : 0}
-        onChange={(e, value) => setAmt(value)}
+        onChange={(value: number) => setAmt(value)}
+        minValue={0}
+        step={0}
       />
       {selection !== -1 && 'price of selection:'}
       {selection !== -1 && amt * matvalues[selection] * 1.2}
@@ -220,7 +218,7 @@ const administration = (props, context) => {
 };
 
 export const FrontNode = (props, context) => {
-  const { act, data } = useBackend<FrontNodeInterface>(context);
+  const { act, data } = useBackend<FrontNodeInterface>();
   const {
     dosh,
     budget,
@@ -235,32 +233,33 @@ export const FrontNode = (props, context) => {
     icons,
     itemprices,
   } = data;
-  const [menu, setMenu] = useLocalState(
-    context,
-    'FrontNodeMenu',
+  const [menu, setMenu] = useState(
     itemnames[0] ? 'recycling' : 'materialexchange',
   );
   return (
-    <Window resizable>
+    <Window>
       <Window.Content scrollable>
         <Button
-          content="Administration"
           disabled={authorization ? false : true}
           selected={menu === 'administration'}
           onClick={() => setMenu('administration')}
-        />
+        >
+          Administration
+        </Button>
         <Button
-          content="Recycling"
           disabled={salesactive ? false : true}
           selected={menu === 'recycling'}
           onClick={() => setMenu('recycling')}
-        />
+        >
+          Recycling
+        </Button>
         <Button
-          content="Exchange"
           disabled={siloactive ? false : true}
           selected={menu === 'materialexchange'}
           onClick={() => setMenu('materialexchange')}
-        />
+        >
+          Exchange
+        </Button>
         <Divider />
         {menu === 'administration' &&
           authorization &&

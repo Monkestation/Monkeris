@@ -1,14 +1,17 @@
-import { BooleanLike } from 'tgui-core/react';
-import { useBackend, sendAct, useLocalState } from 'tgui/backend';
+import { useState } from 'react';
+import { sendAct, useBackend } from 'tgui/backend';
 import {
-  Button,
   Box,
-  LabeledList,
+  Button,
+  Collapsible,
   Divider,
   Dropdown,
+  Input,
+  LabeledList,
   NumberInput,
-  Collapsible,
 } from 'tgui-core/components';
+import { BooleanLike } from 'tgui-core/react';
+
 import { GameIcon } from '../components/GameIcon';
 import { Window } from '../layouts';
 
@@ -33,14 +36,10 @@ interface StorageNodeInterface {
   otherprimeloc: string;
 }
 
-const exchange = (props, context) => {
+const exchange = (props) => {
   const { matnames, matnums, matvalues, dosh, maticons } = props;
-  const [selection, setSelection] = useLocalState(
-    context,
-    'storageexchangeSelection',
-    -1,
-  );
-  const [amt, setAmt] = useLocalState(context, 'storageexchangeAmt', 0);
+  const [selection, setSelection] = useState(-1);
+  const [amt, setAmt] = useState<number>(0);
   const act = sendAct;
   return (
     <>
@@ -50,29 +49,32 @@ const exchange = (props, context) => {
           matnums[count],
           matvalues[count],
           maticons[count],
-          false,
         );
       })}
       <Dropdown
         options={matnames}
         onSelected={(value) => setSelection(matnames.indexOf(value))}
+        selected={selection !== -1 ? matnames[selection] : ''}
       />
       <NumberInput
         value={amt}
         maxValue={selection !== -1 ? matnums[matnames.indexOf(selection)] : 0}
-        onChange={(e, value) => setAmt(value)}
+        onChange={(value: number) => setAmt(value)}
+        minValue={0}
+        step={1}
       />
       {selection !== -1 && 'price of selection:'}
       {selection !== -1 && amt * matvalues[selection]}
       {selection !== -1 && (
         <Button
-          content="Buy Selected"
           onClick={() => {
             setAmt(0);
             setSelection(-1);
             act('buymat', { matselected: selection + 1, amount: amt });
           }}
-        />
+        >
+          Buy Selected
+        </Button>
       )}
       <Divider hidden />
       {dosh && 'Card:'}
@@ -84,7 +86,7 @@ const exchange = (props, context) => {
   );
 };
 
-const sale = (props, context) => {
+const sale = (props) => {
   const act = sendAct;
   const {
     budget,
@@ -94,7 +96,7 @@ const sale = (props, context) => {
     portmaticons,
     portmatvalues,
   } = props;
-  const [selection, setSelection] = useLocalState(context, 'saleSelection', -1);
+  const [selection, setSelection] = useState<number>(-1);
   return (
     <>
       <LabeledList.Item label="Budget">{budget}</LabeledList.Item>
@@ -104,25 +106,28 @@ const sale = (props, context) => {
             <Dropdown
               options={portmatnames}
               onSelected={(value) => setSelection(portmatnames.indexOf(value))}
+              selected={selection !== -1 ? portmatnames[selection] : ''}
             />
           )}
           {portmatnames !== null && (
             <Button
-              content="Eject Mats"
               onClick={() => {
                 setSelection(-1);
                 act('eject');
               }}
-            />
+            >
+              Eject Mats
+            </Button>
           )}
           {portmatnames !== null && (
             <Button
-              content="Sell Mats"
               onClick={() => {
                 setSelection(-1);
                 act('sellmat');
               }}
-            />
+            >
+              Sell Mats
+            </Button>
           )}
 
           {portmaticons &&
@@ -132,28 +137,29 @@ const sale = (props, context) => {
                 portmatamounts[count],
                 portmatvalues[count],
                 portmaticons[count],
-                true,
               );
             })}
 
           {selection !== -1 && (
             <Button
-              content="Eject Selected"
               onClick={() => {
                 setSelection(-1);
                 act('eject', { selected: selection + 1 });
               }}
-            />
+            >
+              Eject Selected
+            </Button>
           )}
 
           {selection !== -1 && (
             <Button
-              content="Sell Selected"
               onClick={() => {
                 setSelection(-1);
                 act('sellmat', { selected: selection + 1 });
               }}
-            />
+            >
+              Sell Selected
+            </Button>
           )}
         </LabeledList.Item>
       </LabeledList>
@@ -168,7 +174,7 @@ const sale = (props, context) => {
   );
 };
 
-const displayfourstats = (name, _number, value, icon, context) => {
+const displayfourstats = (name, _number, value, icon) => {
   return (
     <Box inline>
       {icon && <GameIcon html={icon} className="game-icon" />}
@@ -178,12 +184,14 @@ const displayfourstats = (name, _number, value, icon, context) => {
       {_number}
       <Divider hidden />
       {'price per unit '}
-      {context === true ? value * 0.9 : value * 1.1}
+      {/* context doesn't exist anymore so i dont know what to do with this - Chen */}
+      {/* {context ? value * 0.9 : value * 1.1} */}
+      {value}
     </Box>
   );
 };
 
-const administration = (props, context) => {
+const administration = (props) => {
   const {
     budget,
     authorization,
@@ -195,17 +203,9 @@ const administration = (props, context) => {
     IDcodereq,
   } = props;
   const act = sendAct;
-  const [newbudget, setBudget] = useLocalState(context, 'amebudget', budget);
-  const [newthreshold, setThreshold] = useLocalState(
-    context,
-    'amethreshold',
-    sellthreshold,
-  );
-  const [newaccount, setAccount] = useLocalState(
-    context,
-    'ameaccount',
-    accountnum,
-  );
+  const [newbudget, setBudget] = useState<number>(budget);
+  const [newthreshold, setThreshold] = useState<number>(sellthreshold);
+  const [newaccount, setAccount] = useState<number>(accountnum);
   return (
     <>
       <LabeledList.Item label="Current Budget">{budget}</LabeledList.Item>
@@ -213,7 +213,10 @@ const administration = (props, context) => {
         <LabeledList.Item label="Maximum Budget">
           <NumberInput
             value={newbudget}
-            onChange={(e, value) => setBudget(value)}
+            onChange={(value: number) => setBudget(value)}
+            minValue={0}
+            maxValue={10000}
+            step={10}
           />
           {authorization && (
             <Button
@@ -232,28 +235,35 @@ const administration = (props, context) => {
         <LabeledList.Item label="Maximum Sale Threshold">
           <NumberInput
             value={newthreshold}
-            onChange={(e, value) => setThreshold(value)}
+            onChange={(value: number) => setThreshold(value)}
+            minValue={0}
+            maxValue={10000}
+            step={10}
           />
         </LabeledList.Item>
       )}
       {authorization && (
         <Button
-          content="Set Sale Threshold"
           onClick={() => act('setthreshold', { newthreshold: newthreshold })}
-        />
+        >
+          Set Maximum Sale Threshold
+        </Button>
       )}
       {<LabeledList.Item label="Account">{accountname}</LabeledList.Item>}
       {authorization && (
-        <NumberInput
+        <Input
           value={newaccount}
-          onChange={(e, value) => setAccount(value)}
+          onInput={(e, value: string) => {
+            if (Number.isInteger(Number(value))) {
+              setAccount(Number(value));
+            }
+          }}
         />
       )}
       {authorization && (
-        <Button
-          content="Set Account ID"
-          onClick={() => act('setaccount', { newID: newaccount })}
-        />
+        <Button onClick={() => act('setaccount', { newID: newaccount })}>
+          Set Account ID
+        </Button>
       )}
       {authorization && (
         <Collapsible title="Set Required Access Code">
@@ -271,8 +281,8 @@ const administration = (props, context) => {
   );
 };
 
-export const StorageNode = (props, context) => {
-  const { act, data } = useBackend<StorageNodeInterface>(context);
+export const StorageNode = (props) => {
+  const { act, data } = useBackend<StorageNodeInterface>();
   const {
     dosh,
     budget,
@@ -293,9 +303,7 @@ export const StorageNode = (props, context) => {
     IDcodereq,
     otherprimeloc,
   } = data;
-  const [menu, setMenu] = useLocalState(
-    context,
-    'StoragetNodeMenu',
+  const [menu, setMenu] = useState<string>(
     portmatnames !== null
       ? 'sale'
       : authorization
@@ -303,69 +311,59 @@ export const StorageNode = (props, context) => {
         : 'materialexchange',
   );
   return (
-    <Window resizable>
+    <Window>
       <Window.Content scrollable>
         {(otherprimeloc && (
           <>
             {'Location of Prime Silo:'}
             {otherprimeloc}
             <Divider hidden />
-            <Button
-              content="Reset Prime status"
-              onClick={() => act('resetprime')}
-            />
+            <Button onClick={() => act('resetprime')}>
+              Reset Prime status
+            </Button>
           </>
         )) || (
           <>
             <Button
-              content="Administration"
               disabled={authorization ? false : true}
               selected={menu === 'administration'}
               onClick={() => setMenu('administration')}
-            />
+            >
+              Administration
+            </Button>
+            <Button selected={menu === 'sale'} onClick={() => setMenu('sale')}>
+              Input
+            </Button>
             <Button
-              content="Input"
-              selected={menu === 'sale'}
-              onClick={() => setMenu('sale')}
-            />
-            <Button
-              content="Exchange"
               selected={menu === 'materialexchange'}
               onClick={() => setMenu('materialexchange')}
-            />
+            >
+              Exchange
+            </Button>
             <Divider />
             {menu === 'administration' &&
               authorization &&
-              administration(
-                {
-                  budget,
-                  authorization,
-                  sellthreshold,
-                  accountname,
-                  accountnum,
-                  idnums,
-                  iddescs,
-                  IDcodereq,
-                },
-                context,
-              )}
+              administration({
+                budget,
+                authorization,
+                sellthreshold,
+                accountname,
+                accountnum,
+                idnums,
+                iddescs,
+                IDcodereq,
+              })}
             {menu === 'sale' &&
-              sale(
-                {
-                  budget,
-                  dosh,
-                  portmatnames,
-                  portmatamounts,
-                  portmaticons,
-                  portmatvalues,
-                },
-                context,
-              )}
+              sale({
+                budget,
+                dosh,
+                portmatnames,
+                portmatamounts,
+                portmaticons,
+                portmatvalues,
+              })}
             {menu === 'materialexchange' &&
-              exchange(
-                { matnames, matnums, matvalues, dosh, maticons },
-                context,
-              )}
+              exchange({ matnames, matnums, matvalues, dosh, maticons })}
           </>
         )}
       </Window.Content>
