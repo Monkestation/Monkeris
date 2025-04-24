@@ -639,7 +639,7 @@ default behaviour is:
 		if(H)
 			var/obj/item/organ/external/groin = H.get_organ(BP_GROIN)
 			if(groin.limb_efficiency <= 0)
-				to_chat(src, SPAN_WARNING("You are too damaged to be able to get up."))
+				to_chat(src, span_warning("You are too damaged to be able to get up."))
 				return FALSE
 			groinmult =  100 / groin.limb_efficiency // smaller mult the bigger the efficiency
 
