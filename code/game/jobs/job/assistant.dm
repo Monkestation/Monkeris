@@ -4,7 +4,7 @@
 	department = DEPARTMENT_CIVILIAN
 	department_flag = CIVILIAN
 	faction = "CEV Eris"
-	total_positions = -1
+	total_positions = 0
 	spawn_positions = -1
 	supervisors = "anyone who pays you"
 	selection_color = "#dddddd"
