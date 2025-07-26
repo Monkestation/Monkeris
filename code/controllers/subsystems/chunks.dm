@@ -221,7 +221,7 @@ SUBSYSTEM_DEF(chunks)
 /obj/proc/chunkHearerClearSelf(datum/source)
 	var/atom/container = getContainingAtom()
 	UnregisterSignal(container, COMSIG_MOVABLE_MOVED)
-	UnregisterSignal(src, list(COMSIG_ATOM_CONTAINERED, COMSIG_PARENT_QDELETING))
+	UnregisterSignal(src, list(COMSIG_ATOM_CONTAINERED, COMSIG_QDELETING))
 	// in this case we never registered
 	if(container.z != 0)
 		var/datum/chunk/chunk_reference = SSchunks.chunk_list_by_zlevel[container.z][CHUNKID(container.x, container.y)]
@@ -240,7 +240,7 @@ SUBSYSTEM_DEF(chunks)
 	var/atom/highestContainer = getContainingAtom()
 	RegisterSignal(highestContainer, COMSIG_MOVABLE_MOVED, PROC_REF(chunkOnMove))
 	RegisterSignal(src, COMSIG_ATOM_CONTAINERED, PROC_REF(chunkOnContainerization))
-	RegisterSignal(src, COMSIG_PARENT_QDELETING, PROC_REF(chunkClearSelf))
+	RegisterSignal(src, COMSIG_QDELETING, PROC_REF(chunkClearSelf))
 	if(highestContainer.z != 0)
 		var/datum/chunk/chunk_reference = SSchunks.chunk_list_by_zlevel[highestContainer.z][CHUNKID(highestContainer.x, highestContainer.y)]
 		chunk_reference.mobs += src
@@ -249,7 +249,7 @@ SUBSYSTEM_DEF(chunks)
 	var/atom/highestContainer = getContainingAtom()
 	RegisterSignal(highestContainer, COMSIG_MOVABLE_MOVED, PROC_REF(chunkHearerOnMove))
 	RegisterSignal(src, COMSIG_ATOM_CONTAINERED, PROC_REF(chunkHearerOnContainerization))
-	RegisterSignal(src, COMSIG_PARENT_QDELETING, PROC_REF(chunkHearerClearSelf))
+	RegisterSignal(src, COMSIG_QDELETING, PROC_REF(chunkHearerClearSelf))
 	if(highestContainer.z != 0)
 		var/datum/chunk/chunk_reference = SSchunks.chunk_list_by_zlevel[highestContainer.z][CHUNKID(highestContainer.x, highestContainer.y)]
 		chunk_reference.hearers += src

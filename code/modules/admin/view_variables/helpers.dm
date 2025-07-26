@@ -35,7 +35,7 @@
 	return ..() + {"
 		<option value='byond://?_src_=vars;[HrefToken()];mob_player_panel=\ref[src];'>Show player panel</option>
 		<option>---</option>
-		<option value='byond://?_src_=vars;[HrefToken()];give_spell=\ref[src];'>Give Spell</option>
+		<!-- <option value='byond://?_src_=vars;[HrefToken()];give_spell=\ref[src];'>Give Spell</option> -->
 		<option value='byond://?_src_=vars;[HrefToken()];give_disease2=\ref[src];'>Give Disease</option>
 		<option value='byond://?_src_=vars;[HrefToken()];give_disease=\ref[src];'>Give TG-style Disease</option>
 		<option value='byond://?_src_=vars;[HrefToken()];godmode=\ref[src];'>Toggle Godmode</option>

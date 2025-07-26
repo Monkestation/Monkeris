@@ -34,10 +34,10 @@ GLOBAL_VAR(world_)
 /datum/controller/global_vars/VV_hidden()//Part of bay var viewer improvements
 	return ..() + gvars_datum_protected_varlist
 
-// /datum/controller/global_vars/vv_edit_var(var_name, var_value)
-// 	if(gvars_datum_protected_varlist[var_name])
-// 		return FALSE
-// 	return ..()
+/datum/controller/global_vars/vv_edit_var(var_name, var_value)
+	if(gvars_datum_protected_varlist[var_name])
+		return FALSE
+	return ..()
 
 /datum/controller/global_vars/Initialize()
 	gvars_datum_init_order = list()

@@ -1,14 +1,21 @@
 
 /client/proc/view_var_Topic(href, href_list, hsrc)
-	//This should all be moved over to datum/admins/Topic() or something ~Carn
-	if( (usr.client != src) || !src.holder )
+	if( (usr.client != src) || !src.holder || !holder.CheckAdminHref(href, href_list))
 		return
-	if (!holder.CheckAdminHref(href, href_list))
-		return
-
+	var/target = GET_VV_TARGET
+	vv_do_basic(target, href_list, href)
+	if(isdatum(target))
+		var/datum/D = target
+		D.vv_do_topic(href_list)
+	else if(islist(target))
+		vv_do_list(target, href_list)
 	if(href_list["Vars"])
-		debug_variables(locate(href_list["Vars"]))
+		var/datum/vars_target = locate(href_list["Vars"])
+		if(href_list["special_varname"]) // Some special vars can't be located even if you have their ref, you have to use this instead
+			vars_target = vars_target.vars[href_list["special_varname"]]
+		debug_variables(vars_target)
 
+	/*
 	//~CARN: for renaming mobs (updates their name, real_name, mind.name, their ID/PDA and datacore records).
 	else if(href_list["rename"])
 		if(!check_rights(R_ADMIN))
@@ -59,7 +66,6 @@
 			return
 
 		cmd_mass_modify_object_variables(A, href_list["varnamemass"])
-
 	else if(href_list["mob_player_panel"])
 		if(!check_rights(0))
 			return
@@ -209,7 +215,7 @@
 			to_chat(usr, "This can only be done to instances of type /datum")
 			return
 
-		src.holder.marked_datum_weak = WEAKREF(D)
+		src.holder.marked_datum = D
 		href_list["datumrefresh"] = href_list["mark_object"]
 
 	else if(href_list["rotatedatum"])
@@ -503,44 +509,9 @@
 			return
 
 		usr.forceMove(get_turf(A))
-
+	*/
+	//Finally, refresh if something modified the list.
 	if(href_list["datumrefresh"])
 		var/datum/DAT = locate(href_list["datumrefresh"])
-		if(isdatum(DAT) || isclient(DAT))
+		if(isdatum(DAT) || istype(DAT, /client) || islist(DAT))
 			debug_variables(DAT)
-
-	if(href_list["addreagent"])
-		if(!check_rights(NONE))
-			return
-
-		var/atom/A = locate(href_list["addreagent"])
-
-		if(!A.reagents)
-			var/amount = input(usr, "Specify the reagent size of [A]", "Set Reagent Size", 50) as num
-			if(amount)
-				A.create_reagents(amount)
-
-		if(A.reagents)
-			var/chosen_id
-			switch(alert(usr, "Choose a method.", "Add Reagents", "Enter ID", "Choose ID"))
-				if("Enter ID")
-					var/valid_id
-					while(!valid_id)
-						chosen_id = stripped_input(usr, "Enter the ID of the reagent you want to add.")
-						if(!chosen_id) //Get me out of here!
-							break
-						for(var/ID in GLOB.chemical_reagents_list)
-							if(ID == chosen_id)
-								valid_id = 1
-						if(!valid_id)
-							to_chat(usr, span_warning("A reagent with that ID doesn't exist!"))
-				if("Choose ID")
-					chosen_id = input(usr, "Choose a reagent to add.", "Choose a reagent.") as null|anything in GLOB.chemical_reagents_list
-			if(chosen_id)
-				var/amount = input(usr, "Choose the amount to add.", "Choose the amount.", A.reagents.get_free_space()) as num
-				if(amount)
-					A.reagents.add_reagent(chosen_id, amount)
-					log_admin("[key_name(usr)] has added [amount] units of [chosen_id] to \the [A]")
-					message_admins(span_notice("[key_name(usr)] has added [amount] units of [chosen_id] to \the [A]"))
-
-	return

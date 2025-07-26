@@ -193,6 +193,8 @@
 		return department_radio_keys[channel_prefix]
 	return null
 
+
+
 //parses the language code (e.g. :j) from text, such as that supplied to say.
 //returns the language object only if the code corresponds to a language that src can speak, otherwise null.
 /mob/proc/parse_language(message)
@@ -206,6 +208,17 @@
 		var/datum/language/L = GLOB.language_keys[language_prefix]
 		if(can_speak(L))
 			return L
+
+	return null
+
+// Similar to parse_language on mobs but globally, and only supports : or ,
+/proc/parse_language(message)
+	var/prefix = copytext(message, 1, 2)
+
+	if(length(message) >= 2 && (prefix == ":" || prefix == ","))
+		var/language_prefix = copytext(message, 2, 3)
+		var/datum/language/L = GLOB.language_keys[language_prefix]
+		return L
 
 	return null
 
