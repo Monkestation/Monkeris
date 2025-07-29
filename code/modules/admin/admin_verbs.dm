@@ -73,7 +73,6 @@ GLOBAL_LIST_INIT(admin_verbs_debug, list(
 	/client/proc/view_runtimes,
 	/client/proc/spawn_disciple,
 	/client/proc/delete_npcs,
-	/client/proc/getruntimelog,
 	/client/proc/map_template_load,
 	/client/proc/map_template_load_on_new_z,
 	/client/proc/map_template_upload,
@@ -92,6 +91,8 @@ GLOBAL_LIST_INIT(admin_verbs_debug, list(
 	/client/proc/enable_debug_verbs,
 	/client/proc/tracy_next_round,
 	/client/proc/start_tracy,
+	/client/proc/getserverlogs_debug,
+	/client/proc/getcurrentlogs_debug,
 	/client/proc/server_memory_stats))
 
 GLOBAL_LIST_INIT(admin_verbs_debug_extra, list(
@@ -216,10 +217,6 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 	/client/proc/ip_reputation,
 	/client/proc/toggle_vpn_white,
 	/client/proc/cmd_admin_change_custom_event,
-	/client/proc/giveruntimelog,
-	/client/proc/getserverlog,
-	/datum/admins/proc/view_txt_log,
-	/datum/admins/proc/view_atk_log,
 	/client/proc/stop_sounds,
 	/client/proc/stop_sounds_admin,
 	/client/proc/cmd_admin_subtle_message,
@@ -236,6 +233,8 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 	/client/proc/admin_cancel_shuttle,
 	/client/proc/debug_variables,
 	/client/proc/view_chemical_reaction_logs,
+	/client/proc/getserverlogs,
+	/client/proc/getcurrentlogs,
 	/client/proc/discord_msg))
 
 /datum/verbs/menu/Admin/Generate_list(client/C)

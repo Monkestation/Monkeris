@@ -387,5 +387,4 @@ GLOBAL_PROTECT(VVpixelmovement)
 	log_admin(log_msg)
 	var/msg = "[key_name_admin(src)] modified [original_name]'s [variable] from [var_value] to [var_new]"
 	message_admins(msg)
-	// MONKESTATION EDIT END
 	return TRUE

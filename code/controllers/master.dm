@@ -114,7 +114,6 @@ GLOBAL_REAL(Master, /datum/controller/master)
 	if(!GLOB)
 		new /datum/controller/global_vars
 
-	// new /datum/global_init
 
 /datum/controller/master/Destroy()
 	..()

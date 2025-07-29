@@ -38,7 +38,7 @@
  */
 /datum/config_entry/proc/set_default()
 	if ((protection & CONFIG_ENTRY_LOCKED) && IsAdminAdvancedProcCall())
-		log_admin("[key_name(usr)] attempted to reset locked config entry [type] to its default")
+		log_admin_private("[key_name(usr)] attempted to reset locked config entry [type] to its default")
 		return
 	if (islist(default))
 		var/list/L = default
@@ -73,7 +73,7 @@
 /datum/config_entry/proc/VASProcCallGuard(str_val)
 	. = !((protection & CONFIG_ENTRY_LOCKED) && IsAdminAdvancedProcCall())
 	if(!.)
-		log_admin("[key_name(usr)] attempted to set locked config entry [type] to '[str_val]'")
+		log_admin_private("[key_name(usr)] attempted to set locked config entry [type] to '[str_val]'")
 
 /datum/config_entry/proc/ValidateAndSet(str_val)
 	VASProcCallGuard(str_val)

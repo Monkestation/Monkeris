@@ -1216,17 +1216,6 @@ var/list/FLOORITEMS = list(
 				return "\[[url_encode(thing.tag)]\]"
 	return "\ref[input]"
 
-// Makes a call in the context of a different usr
-// Use sparingly
-/world/proc/PushUsr(mob/M, datum/callback/CB, ...)
-	var/temp = usr
-	usr = M
-	if (length(args) > 2)
-		. = CB.Invoke(arglist(args.Copy(3)))
-	else
-		. = CB.Invoke()
-	usr = temp
-
 /proc/generate_single_gun_number()
 	return pick(1,2,3,4,5,6,7,8,9,0)
 

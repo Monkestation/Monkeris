@@ -425,13 +425,13 @@
 /mob/living/carbon/proc/need_breathe()
 	return TRUE
 
-/mob/living/carbon/human/vv_get_dropdown()
+/mob/living/carbon/vv_get_dropdown()
 	. = ..()
 	VV_DROPDOWN_OPTION("", VV_HK_SPACER)
-	VV_DROPDOWN_OPTION("Make Robot", VV_HK_MAKE_ROBOT)
-	VV_DROPDOWN_OPTION("Modify Oranges", VV_HK_MODIFY_ORGANS)
+	VV_DROPDOWN_OPTION(VV_HK_MAKE_ROBOT, "Make Robot")
+	VV_DROPDOWN_OPTION(VV_HK_MODIFY_ORGANS, "Modify Oranges")
 
-/mob/living/carbon/human/vv_do_topic(list/href_list)
+/mob/living/carbon/vv_do_topic(list/href_list)
 	. = ..()
 	if(href_list[VV_HK_MODIFY_ORGANS] && check_rights(R_FUN))
 		var/organoption = input(usr, "What do you want to do?", "Modify Organs", null) as null|anything in list("Add Organ", "Remove Organ")
