@@ -193,8 +193,6 @@
 		return department_radio_keys[channel_prefix]
 	return null
 
-
-
 //parses the language code (e.g. :j) from text, such as that supplied to say.
 //returns the language object only if the code corresponds to a language that src can speak, otherwise null.
 /mob/proc/parse_language(message)

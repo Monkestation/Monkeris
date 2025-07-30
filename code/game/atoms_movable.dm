@@ -424,32 +424,3 @@
 	SHOULD_CALL_PARENT(TRUE)
 	. = list()
 	SEND_SIGNAL_OLD(src, COMSIG_ATOM_UPDATE_OVERLAYS, .)
-
-// /atom/movable/vv_get_dropdown()
-// 	. = ..()
-// 	VV_DROPDOWN_OPTION(VV_HK_EDIT_PARTICLES, "Edit Particles")
-// 	VV_DROPDOWN_OPTION(VV_HK_EDIT_DISPLACEMENT_LARGE, "Edit Large Displacement")
-
-// /atom/movable/vv_do_topic(list/href_list)
-// 	. = ..()
-
-// 	if(!.)
-// 		return
-
-// 	if(href_list[VV_HK_EDIT_PARTICLES] && check_rights(R_VAREDIT))
-// 		var/client/C = usr.client
-// 		C?.open_particle_editor(src)
-
-// 	if(href_list[VV_HK_EDIT_DISPLACEMENT_LARGE])
-// 		if(!check_rights(R_VAREDIT))
-// 			return
-// 		switch(alert("Should this be a pre-filled displacement (Note: If you choose a blank one directional displacement may prove more difficult)?",,"Yes","No","Cancel"))
-// 			if("Yes")
-// 				var/choice = input(usr, "Choose a displacement to add", "Choose a Displacement") as null|anything in subtypesof(/obj/effect/distortion/large)
-// 				if(!choice)
-// 					return
-// 				apply_displacement_icon(choice)
-// 			if("No")
-// 				apply_displacement_icon(/obj/effect/distortion/large)
-// 			else
-// 				return

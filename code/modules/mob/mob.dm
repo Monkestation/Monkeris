@@ -1308,9 +1308,6 @@ All Canmove setting in this proc is temporary. This var should not be set from h
 	. = ..()
 	VV_DROPDOWN_OPTION("", VV_HK_SPACER)
 	VV_DROPDOWN_OPTION(VV_HK_GIB, "Gib")
-	// VV_DROPDOWN_OPTION(VV_HK_GIVE_SPELL, "Give Spell")
-	// VV_DROPDOWN_OPTION(VV_HK_REMOVE_SPELL, "Remove Spell")
-	// VV_DROPDOWN_OPTION(VV_HK_GIVE_DISEASE, "Give Disease")
 	VV_DROPDOWN_OPTION(VV_HK_GODMODE, "Toggle Godmode")
 	VV_DROPDOWN_OPTION(VV_HK_DROP_ALL, "Drop Everything")
 	VV_DROPDOWN_OPTION(VV_HK_REGEN_ICONS, "Regenerate Icons")
@@ -1320,7 +1317,6 @@ All Canmove setting in this proc is temporary. This var should not be set from h
 	VV_DROPDOWN_OPTION(VV_HK_GIVE_DIRECT_CONTROL, "Give Direct Control")
 	VV_DROPDOWN_OPTION(VV_HK_MODIFY_LANGUAGES, "Modify Languages")
 	// VV_DROPDOWN_OPTION(VV_HK_OFFER_GHOSTS, "Offer Control to Ghosts")
-	// VV_DROPDOWN_OPTION(VV_HK_VIEW_PLANES, "View/Edit Planes")
 
 /mob/vv_do_topic(list/href_list)
 	. = ..()

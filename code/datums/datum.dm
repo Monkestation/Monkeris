@@ -84,7 +84,7 @@
  * Returns [QDEL_HINT_QUEUE]
  */
 /datum/proc/Destroy(force=FALSE)
-	// TODO: Apparently this is a good thing to have but our codebase currently has like 200~ instances of things not calling the parent destroy proc.
+	// TODO: Apparently this is a good thing to have but our codebase currently has like 200~ instances of things not calling the parent destroy proc. ~Chen
 	// SHOULD_CALL_PARENT(TRUE)
 	// SHOULD_NOT_SLEEP(TRUE)
 	tag = null
@@ -258,7 +258,6 @@
 	VV_DROPDOWN_OPTION(VV_HK_ADDCOMPONENT, "Add Component/Element")
 	VV_DROPDOWN_OPTION(VV_HK_REMOVECOMPONENT, "Remove Component/Element")
 	VV_DROPDOWN_OPTION(VV_HK_MASS_REMOVECOMPONENT, "Mass Remove Component/Element")
-	// VV_DROPDOWN_OPTION(VV_HK_MODIFY_TRAITS, "Modify Traits")
 
 /**
  * This proc is only called if everything topic-wise is verified. The only verifications that should happen here is things like permission checks!

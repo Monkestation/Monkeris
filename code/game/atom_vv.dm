@@ -12,37 +12,6 @@
  */
 /atom/vv_edit_var(var_name, var_value)
 	switch(var_name)
-		// if(NAMEOF(src, light_inner_range))
-		// 	if(light_system == COMPLEX_LIGHT)
-		// 		set_light(l_inner_range = var_value)
-		// 		. = TRUE
-		// if(NAMEOF(src, light_outer_range))
-		// 	if(light_system == COMPLEX_LIGHT)
-		// 		set_light(l_outer_range = var_value)
-		// 	else
-		// 		set_light_range(var_value)
-		// 	. = TRUE
-		// if(NAMEOF(src, light_power))
-		// 	if(light_system == COMPLEX_LIGHT)
-		// 		set_light(l_power = var_value)
-		// 	else
-		// 		set_light_power(var_value)
-		// 	. = TRUE
-		// if(NAMEOF(src, light_color))
-		// 	if(light_system == COMPLEX_LIGHT)
-		// 		set_light(l_color = var_value)
-		// 	else
-		// 		set_light_color(var_value)
-		// 	. = TRUE
-		// if(NAMEOF(src, light_on))
-		// 	set_light_on(var_value)
-		// 	. = TRUE
-		// if(NAMEOF(src, light_flags))
-		// 	set_light_flags(var_value)
-		// 	. = TRUE
-		// if(NAMEOF(src, smoothing_junction))
-		// 	set_smoothed_icon_state(var_value)
-		// 	. = TRUE
 		if(NAMEOF(src, opacity))
 			set_opacity(var_value)
 			. = TRUE
@@ -56,9 +25,6 @@
 	if(!isnull(.))
 		datum_flags |= DF_VAR_EDITED
 		return
-
-	// if(!GLOB.Debug2)
-	// 	flags_1 |= ADMIN_SPAWNED_1
 
 	. = ..()
 
@@ -94,8 +60,6 @@
 	VV_DROPDOWN_OPTION(VV_HK_TRIGGER_EXPLOSION, "Explosion")
 	VV_DROPDOWN_OPTION(VV_HK_EDIT_COLOR_MATRIX, "Edit Color as Matrix")
 	VV_DROPDOWN_OPTION(VV_HK_TEST_MATRIXES, "Test Matrices")
-	// VV_DROPDOWN_OPTION(VV_HK_ADD_AI, "Add AI controller")
-	// VV_DROPDOWN_OPTION(VV_HK_ARMOR_MOD, "Modify Armor")
 	VV_DROPDOWN_OPTION(VV_HK_ADJUST_ANIMATIONS, "Adjust Animations")
 
 
@@ -144,37 +108,7 @@
 	if(href_list[VV_HK_SHOW_HIDDENPRINTS] && check_rights(R_ADMIN))
 		usr.client.cmd_show_hiddenprints(src)
 
-	// if(href_list[VV_HK_ARMOR_MOD])
-	// 	var/list/pickerlist = list()
-	// 	var/list/armorlist = get_armor().get_rating_list()
-
-	// 	for (var/i in armorlist)
-	// 		pickerlist += list(list("value" = armorlist[i], "name" = i))
-
-	// 	var/list/result = presentpicker(usr, "Modify armor", "Modify armor: [src]", Button1="Save", Button2 = "Cancel", Timeout=FALSE, inputtype = "text", values = pickerlist)
-	// 	var/list/armor_all = ARMOR_LIST_ALL()
-
-	// 	if (islist(result))
-	// 		if (result["button"] != 2) // If the user pressed the cancel button
-	// 			// text2num conveniently returns a null on invalid values
-	// 			var/list/converted = list()
-	// 			for(var/armor_key in armor_all)
-	// 				converted[armor_key] = text2num(result["values"][armor_key])
-	// 			set_armor(get_armor().generate_new_with_specific(converted))
-	// 			var/message = "[key_name(usr)] modified the armor on [src] ([type]) to: "
-	// 			for(var/armor_key in armor_all)
-	// 				message += "[armor_key]=[get_armor_rating(armor_key)],"
-	// 			message = copytext(message, 1, -1)
-	// 			log_admin(span_notice(message))
-	// 			message_admins(span_notice(message))
-
-	// if(href_list[VV_HK_ADD_AI])
-	// 	if(!check_rights(R_VAREDIT))
-	// 		return
-	// 	var/result = input(usr, "Choose the AI controller to apply to this atom WARNING: Not all AI works on all atoms.", "AI controller") as null|anything in subtypesof(/datum/ai_controller)
-	// 	if(!result)
-	// 		return
-	// 	ai_controller = new result(src)
+	// If we support armor in the future, add VV options to modify armor here
 
 	if(href_list[VV_HK_MODIFY_TRANSFORM] && check_rights(R_VAREDIT))
 		var/result = input(usr, "Choose the transformation to apply","Transform Mod") as null|anything in list("Scale","Translate","Rotate","Shear")

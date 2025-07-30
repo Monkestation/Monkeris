@@ -11,7 +11,7 @@
 	return FALSE;\
 }\
 ##Path/Read(savefile/savefile){\
-	del(src);\
+	qdel(src);\
 }\
 ##Path/Write(savefile/savefile){\
 	return;\

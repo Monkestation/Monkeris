@@ -98,10 +98,9 @@ GLOBAL_VAR(restart_counter)
  * All atoms in both compiled and uncompiled maps are initialized()
  */
 /world/New()
+	log_world("Genesis over, loading world...")
 	//logs
 	href_logfile = file("[GLOB.log_directory]/hrefs.htm")
-	// diary = file("data/logs/[date_string].log")
-	// diary << "[log_end]\n[log_end]\nStarting up. (ID: [GLOB.round_id]) [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]"
 
 	// DO NOT MOVE config.Load() HERE BY ANY MEANS! Turfs require on configurations which is loaded in the Master controller that loads global_vars
 	InitTgs()

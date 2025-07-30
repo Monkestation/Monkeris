@@ -1,4 +1,6 @@
 GLOBAL_LIST_INIT(admin_verbs_default, list(
+	/client/proc/mark_datum_mapview,
+	/client/proc/tag_datum_mapview,
 	/datum/admins/proc/show_player_panel,
 	/client/proc/deadmin_self,
 	/client/proc/hide_verbs))
