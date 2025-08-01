@@ -347,7 +347,7 @@
 /obj/item/stack/thrown/nt/verutum
 	name = "NT Verutum"
 	desc = "A short, saintly-looking javelin for throwing or use with a shield. They are small enough to allow holding multiple in one hand."
-	icon_state = "nt_verutum"
+	// icon_state = "nt_verutum" // wysi
 	item_state = "nt_verutum"
 	singular_name = "NT Verutum"
 	plural_name = "NT Veruta"

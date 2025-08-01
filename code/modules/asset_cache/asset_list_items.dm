@@ -368,7 +368,7 @@
 
 		#ifdef UNIT_TESTS
 		if(isnull(ui_icon_data))
-			stack_trace("design [D] does not return a valid UI icon for itself")
+			stack_trace("design [D.type] does not return a valid UI icon for itself")
 			continue
 		#endif
 
