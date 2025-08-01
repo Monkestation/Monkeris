@@ -9,6 +9,8 @@ mkdir -p ci_test/data
 cp tools/ci/ci_config.txt ci_test/config/config.txt
 #copy over ranks
 cp config/example/admin_ranks.txt ci_test/config/admin_ranks.txt
+#this just needs to exist
+touch ci_test/config/admins.txt
 
 cd ci_test
 DreamDaemon cev_eris.dmb -close -trusted -verbose -params "log-directory=ci"
