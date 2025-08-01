@@ -13,6 +13,7 @@ mkdir -p \
     $1/maps \
     $1/strings \
 	$1/config \
+    $1/data/spritesheets \
     $1/icons \
     $1/tgui/public \
     $1/tgui/packages/tgfont/dist
