@@ -7,10 +7,9 @@ mkdir -p ci_test/data
 
 #test config
 cp tools/ci/ci_config.txt ci_test/config/config.txt
-#copy over ranks
+#add some admin shims in the absence of adding this to the CI DB every run
 cp config/example/admin_ranks.txt ci_test/config/admin_ranks.txt
-#this just needs to exist
-touch ci_test/config/admins.txt
+cat "__CI_USER__ = Admin" >> ci_test/config/admins.txt
 
 cd ci_test
 DreamDaemon cev_eris.dmb -close -trusted -verbose -params "log-directory=ci"
