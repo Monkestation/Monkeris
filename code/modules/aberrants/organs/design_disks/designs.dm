@@ -14,16 +14,16 @@
 
 /datum/design/organ/aberrant_organ/scrub_toxin_blood
 	build_path = /obj/item/organ/internal/scaffold/aberrant/scrub_toxin/blood
-	
+
 /datum/design/organ/aberrant_organ/scrub_toxin_ingest
 	build_path = /obj/item/organ/internal/scaffold/aberrant/scrub_toxin/ingest
-	
+
 /datum/design/organ/aberrant_organ/scrub_toxin_touch
 	build_path = /obj/item/organ/internal/scaffold/aberrant/scrub_toxin/touch
-	
+
 /datum/design/organ/aberrant_organ/gastric
 	build_path = /obj/item/organ/internal/scaffold/aberrant/gastric
-	
+
 /datum/design/organ/aberrant_organ/damage_response
 	build_path = /obj/item/organ/internal/scaffold/aberrant/damage_response
 
@@ -67,6 +67,19 @@
 	category = "Teratoma"
 	starts_unlocked = FALSE
 
+/datum/design/organ/teratoma/ui_icon()
+	. = ..()
+	if(!.)
+		var/obj/item/organ/internal/scaffold/aberrant/teratoma/result = build_path
+		var/icon_file = result::icon
+		var/icon_state = result::icon_state
+		if(result::use_generated_icon)
+			if(result::organ_type)
+				icon_state = "[icon_state]-[result::organ_type]"
+			else if(result::num_variants)
+				icon_state = "[icon_state]-1"
+
+		return icon(icon_file, icon_state, SOUTH)
 
 /datum/design/organ/teratoma/input
 	category = "Inputs"

@@ -364,23 +364,15 @@
 		var/datum/design/design = D
 
 		var/filename = SANITIZE_FILENAME("design_[design.build_path].png")
-
-		var/atom/item = design.build_path
-		var/icon_file = initial(item.icon)
-		var/icon_state = initial(item.icon_state)
-
-		// eugh
-		if (!icon_file)
-			icon_file = ""
+		var/ui_icon_data = design.ui_icon()
 
 		#ifdef UNIT_TESTS
-		if(!(icon_state in icon_states(icon_file)))
-			// stack_trace("design [D] with icon '[icon_file]' missing state '[icon_state]'")
+		if(isnull(ui_icon_data))
+			stack_trace("design [D] does not return a valid UI icon for itself")
 			continue
 		#endif
-		var/icon/I = icon(icon_file, icon_state, SOUTH)
 
-		assets[filename] = I
+		assets[filename] = ui_icon_data
 	..()
 
 	for(var/D in SSresearch.all_designs)
