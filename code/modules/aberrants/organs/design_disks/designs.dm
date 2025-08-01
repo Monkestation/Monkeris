@@ -61,6 +61,12 @@
 	category = "Modifications"
 	starts_unlocked = TRUE
 
+/datum/design/organ/organ_mod/ui_icon()
+	. = ..()
+	if(!.)
+		var/obj/organ_type = build_path
+		return icon(organ_type::icon, "[organ_type::icon_state]-1")
+
 /datum/design/organ/organ_mod/capillaries
 	build_path = /obj/item/modification/organ/internal/stromal/requirements
 
