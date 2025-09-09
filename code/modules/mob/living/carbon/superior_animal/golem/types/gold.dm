@@ -1,6 +1,6 @@
-#define GOLD_SPIKE_COOLDOWN 5 SECONDS // 5 seconds
+#define GOLD_SPIKE_COOLDOWN 5 SECONDS
 #define GOLD_SPIKE_WINDUP 2 SECONDS
-#define GOLD_SPIKE_DAMAGE 25 //equivalent to GOLEM_DMG_HIGH
+#define GOLD_SPIKE_DAMAGE 25
 
 /mob/living/carbon/superior_animal/golem/gold
 	name = "gold golem"
