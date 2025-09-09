@@ -131,7 +131,7 @@
 		src.pixel_x = 0
 		src.pixel_y = 0
 
-	for(var/icon_amount = 1; icon_amount < src.amount, icon_amount++)
+	for(var/icon_amount = 1, icon_amount < src.amount, icon_amount++)
 		var/image/temp_image = image(src.icon, src.icon_state)
 		var/coef = round(14 * icon_amount/src.maxamount)
 
@@ -149,7 +149,7 @@
 	..(user, extra_description)
 
 /obj/item/ammo_casing/get_item_cost(export)
-	. = round(..() * amount)
+	. = round(..() * amount, 0.1)
 	if(BB)
 		. *= 2 // being loaded increases the value by 100%
 
@@ -276,7 +276,7 @@
 		if(stack)
 			if(stored_ammo.len)
 				// We end on -1 since we already removed one
-				for(var/i = 1, i <= stack.maxamount - 1, i++)
+				for(var/i = 1; i <= stack.maxamount - 1; i++)
 					if(!stored_ammo.len)
 						break
 					var/obj/item/ammo_casing/AC = removeCasing()
@@ -378,7 +378,7 @@
 
 		if(LAZYLEN(stored_ammo))
 			// We end on -1 since we already removed one
-			for(var/i = 1, i <= stack.maxamount - 1, i++)
+			for(var/i = 1; i <= stack.maxamount - 1; i++)
 				if(!LAZYLEN(stored_ammo))
 					stack.update_icon()
 					break

@@ -328,14 +328,12 @@
 
 	++.
 
-// TODO: REENABLE WHEN NEW VV IS IMPLEMENTED
+/datum/controller/configuration/can_vv_get(var_name)
+	return (var_name != NAMEOF(src, entries_by_type) || !hiding_entries_by_type) && ..()
 
-// /datum/controller/configuration/can_vv_get(var_name)
-// 	return (var_name != NAMEOF(src, entries_by_type) || !hiding_entries_by_type) && ..()
-
-// /datum/controller/configuration/vv_edit_var(var_name, var_value)
-// 	var/list/banned_edits = list(NAMEOF(src, entries_by_type), NAMEOF(src, entries), NAMEOF(src, directory))
-// 	return !(var_name in banned_edits) && ..()
+/datum/controller/configuration/vv_edit_var(var_name, var_value)
+	var/list/banned_edits = list(NAMEOF(src, entries_by_type), NAMEOF(src, entries), NAMEOF(src, directory))
+	return !(var_name in banned_edits) && ..()
 
 /datum/controller/configuration/stat_entry(msg)
 	msg = "Edit"
@@ -500,7 +498,7 @@
 
 // 	if(!fexists(file(config_toml)))
 // 		SSjob.legacy_mode = TRUE
-// 		message += "jobconfig.toml not found, falling back to legacy mode (using jobs.txt). To surpress this warning, generate a jobconfig.toml by running the verb 'Generate Job Configuration' in the Server tab.\n\
+// 		message += "jobconfig.toml not found, falling back to legacy mode (using jobs.txt). To surpress this warning, generate a jobconfig.toml by running the verb 'Generate Job Configuration' in the Server tab.\n // put backslash here if and when you uncomment this (to shut up linters)
 // 			From there, you can then add it to the /config folder of your server to have it take effect for future rounds."
 
 // 		if(!fexists(file(config_txt)))

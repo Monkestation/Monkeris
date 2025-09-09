@@ -626,7 +626,7 @@
 	update_icon()
 
 /obj/screen/nutrition/update_icon()
-	set src in usr.client.screen
+	// set src in usr.client.screen // whatever this is doing makes OD mad and there's almost certainly a better way
 	var/mob/living/carbon/human/H = parentmob
 	cut_overlays()
 	switch(H.nutrition)
@@ -905,7 +905,7 @@
 							nicename |= "hardsuit"
 							tankcheck |= rig.air_supply
 
-					for(var/i=1, i<tankcheck.len+1, ++i)
+					for(var/i = 1; i < tankcheck.len + 1; ++i)
 						if(istype(tankcheck[i], /obj/item/tank))
 							var/obj/item/tank/t = tankcheck[i]
 							if (!isnull(t.manipulated_by) && t.manipulated_by != C.real_name && findtext(t.desc, breathes))
@@ -944,7 +944,7 @@
 
 					var/best = 0
 					var/bestcontents = 0
-					for(var/i=1, i <  contents.len + 1 , ++i)
+					for(var/i = 1; i <  contents.len + 1; ++i)
 						if(!contents[i])
 							continue
 						if(contents[i] > bestcontents)

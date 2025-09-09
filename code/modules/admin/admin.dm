@@ -57,11 +57,6 @@ var/global/floorIsLava = 0
 		if(check_rights(rights, 0, M))
 			to_chat(M, message)
 
-// Not happening.
-/datum/admins/SDQL_update(const/var_name, new_value)
-	return FALSE
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
 
 /datum/admins/proc/view_log_panel(mob/M)
@@ -149,6 +144,7 @@ var/global/floorIsLava = 0
 	else
 		body += "<A href='byond://?_src_=holder;[HrefToken()];newbankey=[M.key]'>Ban</A> | "
 
+	body += "<A href='byond://?_src_=holder;[HrefToken()];showmessageckey=[M.ckey]'>Notes | Messages | Watchlist</A> | "
 	if(M.client)
 		body += "\ <A href='byond://?_src_=holder;[HrefToken()];sendbacktolobby=\ref[M]'>Send back to Lobby</A> | "
 		var/muted = M.client.prefs.muted

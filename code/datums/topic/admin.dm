@@ -202,7 +202,7 @@
 		if(!D)
 			return
 		var/list/permissionlist = list()
-		for(var/i = R_FUN, i <= R_ADMIN, i = (i<<1)) // Here 'i' matches one of admin permissions on each cycle, from R_FUN(1<<0) to R_ADMIN(1<<6)
+		for(var/i = R_FUN; i <= R_ADMIN; i = (i<<1)) // Here 'i' matches one of admin permissions on each cycle, from R_FUN(1<<0) to R_ADMIN(1<<6)
 			permissionlist[rights2text(i)] = i
 		var/new_permission = input("Select a permission to turn on/off", "Permission toggle", null, null) as null|anything in permissionlist
 		if(!new_permission)
@@ -691,7 +691,7 @@
 		var/data = ""
 		var/obj/item/paper_bundle/B = fax
 
-		for (var/page = 1, page <= B.pages.len, page++)
+		for(var/page = 1; page <= B.pages.len; page++)
 			var/obj/pageobj = B.pages[page]
 			data += "<A href='byond://?src=\ref[source];AdminFaxViewPage=[page];paper_bundle=\ref[B]'>Page [page] - [pageobj.name]</A><BR>"
 
@@ -893,14 +893,14 @@
 				if ("relative")
 					target = locate(loc.x + X,loc.y + Y,loc.z + Z)
 		if("inmarked")
-			if(!source.marked_datum())
+			if(!source.marked_datum)
 				to_chat(usr, "You don't have any object marked. Abandoning spawn.")
 				return
-			else if(!istype(source.marked_datum(),  /atom))
+			else if(!istype(source.marked_datum,  /atom))
 				to_chat(usr, "The object you have marked cannot be used as a target. Target must be of type /atom. Abandoning spawn.")
 				return
 			else
-				target = source.marked_datum()
+				target = source.marked_datum
 
 	if(target)
 		for (var/path in paths)
@@ -1178,22 +1178,3 @@
 			source.admincaster_screen = 1
 			source.access_news_network()
 
-
-//Player Notes
-/datum/admin_topic/notes
-	keyword = "notes"
-
-/datum/admin_topic/notes/Run(list/input)
-	var/ckey = input["ckey"]
-	if(!ckey)
-		var/mob/M = locate(input["mob"])
-		if(ismob(M))
-			ckey = M.ckey
-
-	switch(input[keyword])
-		if("add")
-			notes_add(ckey, input["text"])
-		if("remove")
-			notes_remove(ckey, text2num(input["from"]), text2num(input["to"]))
-
-	source.notes_show(ckey)

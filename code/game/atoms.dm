@@ -316,7 +316,7 @@ its easier to just keep the beam vertical.
 		var/DY=(32*BeamTarget.y+BeamTarget.pixel_y)-(32*y+pixel_y)
 		var/N=0
 		var/length=round(sqrt((DX)**2+(DY)**2))
-		for(N, N<length, N+=32)
+		for(N; N<length; N+=32)
 			var/obj/effect/overlay/beam/X=new(loc)
 			X.BeamSource=src
 			if(N+32>length)
@@ -330,19 +330,19 @@ its easier to just keep the beam vertical.
 			if(DX==0) Pixel_x=0
 			if(DY==0) Pixel_y=0
 			if(Pixel_x>32)
-				for(var/a=0, a<=Pixel_x, a+=32)
+				for(var/a=0; a<=Pixel_x; a+=32)
 					X.x++
 					Pixel_x-=32
 			if(Pixel_x<-32)
-				for(var/a=0, a>=Pixel_x, a-=32)
+				for(var/a=0; a>=Pixel_x; a-=32)
 					X.x--
 					Pixel_x+=32
 			if(Pixel_y>32)
-				for(var/a=0, a<=Pixel_y, a+=32)
+				for(var/a=0; a<=Pixel_y; a+=32)
 					X.y++
 					Pixel_y-=32
 			if(Pixel_y<-32)
-				for(var/a=0, a>=Pixel_y, a-=32)
+				for(var/a=0; a>=Pixel_y; a-=32)
 					X.y--
 					Pixel_y+=32
 			X.pixel_x=Pixel_x
@@ -388,8 +388,10 @@ its easier to just keep the beam vertical.
 						output += span_notice("\n[R.volume] units of [R.name]")
 				else
 					output += span_notice("\nIt contains [reagents.total_volume] units of various reagents.")
-			else
+			else if(length(reagents.reagent_list))
 				output += span_notice("\nIt contains [reagents.total_volume] units of [user.can_see_reagents() ? reagents.reagent_list[1].name : "something"]")
+			else
+				output += span_notice("\nIt's dry.")
 		else if(reagent_flags & AMOUNT_VISIBLE)
 			output += span_notice("[reagents.total_volume ? "\nIt has [reagents.total_volume] units left." : "\nIt's empty."]")
 
@@ -647,7 +649,7 @@ its easier to just keep the beam vertical.
 	var/cur_x
 	var/cur_y
 	var/list/y_arr
-	for(cur_x=1, cur_x<=GLOB.global_map.len, cur_x++)
+	for(cur_x=1; cur_x <= GLOB.global_map.len; cur_x++)
 		y_arr = GLOB.global_map[cur_x]
 		cur_y = y_arr.Find(src.z)
 		if(cur_y)

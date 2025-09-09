@@ -250,7 +250,7 @@
 		update_icon()
 	usr.update_action_buttons()
 
-/obj/item/clothing/head/armor/bulletproof/ironhammer_nvg/dropped(usr)
+/obj/item/clothing/head/armor/bulletproof/ironhammer_nvg/dropped(mob/user)
 	..()
 	if(hud.loc != src)
 		if(ismob(hud.loc))
@@ -447,7 +447,7 @@
 		update_icon()
 	usr.update_action_buttons()
 
-/obj/item/clothing/head/armor/riot_hud/dropped(usr)
+/obj/item/clothing/head/armor/riot_hud/dropped(mob/user)
 	..()
 	if(hud.loc != src)
 		if(ismob(hud.loc))
@@ -742,7 +742,7 @@
 		crewmembers += crew_repository.health_data(z_level)
 
 	if(crewmembers.len)
-		for(var/i = 1, i <= crewmembers.len, i++)
+		for(var/i = 1; i <= crewmembers.len; i++)
 			var/list/entry = crewmembers[i]
 			if(entry["alert"] && !entry["muted"])
 				if(entry["name"] in crewmembers_recently_reported)

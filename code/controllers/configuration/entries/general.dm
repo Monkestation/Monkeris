@@ -7,6 +7,15 @@
 
 /datum/config_entry/string/hostedby
 
+/// if the game appears on the hub or not
+/datum/config_entry/flag/hub
+
+/// Pop requirement for the server to be removed from the hub
+/datum/config_entry/number/max_hub_pop
+	default = 0 //0 means disabled
+	integer = TRUE
+	min_val = 0
+
 // Time in minutes before empty server will restart
 /datum/config_entry/number/empty_server_restart_time
 
@@ -92,6 +101,8 @@
 
 /datum/config_entry/flag/aggressive_changelog
 
+/datum/config_entry/flag/autoconvert_notes //if all connecting player's notes should attempt to be converted to the database
+	protection = CONFIG_ENTRY_LOCKED
 
 /******************/
 /* Job/Role Prefs */
@@ -358,6 +369,17 @@
 
 /datum/config_entry/flag/forbid_admin_profiling
 
+/datum/config_entry/flag/see_own_notes //Can players see their own admin notes
+
+/datum/config_entry/number/note_fresh_days
+	default = null
+	min_val = 0
+	integer = FALSE
+
+/datum/config_entry/number/note_stale_days
+	default = null
+	min_val = 0
+	integer = FALSE
 
 /*****************/
 /*     GAME      */

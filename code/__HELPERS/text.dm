@@ -8,6 +8,12 @@
  *			Misc
  */
 
+GLOBAL_LIST_INIT(hex_characters, list("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"))
+GLOBAL_LIST_INIT(alphabet, list("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"))
+GLOBAL_LIST_INIT(alphabet_upper, list("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"))
+GLOBAL_LIST_INIT(numerals, list("1","2","3","4","5","6","7","8","9","0"))
+GLOBAL_LIST_INIT(space, list(" "))
+GLOBAL_LIST_INIT(binary, list("0","1"))
 
 
 /*
@@ -65,7 +71,7 @@
 	var/last_char_group			= 0
 	var/output = ""
 
-	for(var/i=1, i<=length(input), i++)
+	for(var/i=1; i<=length(input); i++)
 		var/ascii_char = text2ascii(input, i)
 		switch(ascii_char)
 			// A  .. Z
@@ -126,7 +132,7 @@
 	var/non_whitespace = FALSE
 	var/lenbytes = length(text)
 	var/char = ""
-	for(var/i = 1, i <= lenbytes, i += length(char))
+	for(var/i = 1; i <= lenbytes; i += length(char))
 		char = text[i]
 		char_count++
 		if(char_count > max_length)
@@ -240,7 +246,7 @@
 
 //Returns a string with reserved characters and spaces after the last letter removed
 /proc/trim_right(text)
-	for (var/i = length(text), i > 0, i--)
+	for(var/i = length(text); i > 0; i--)
 		if (text2ascii(text, i) > 32)
 			return copytext(text, 1, i + 1)
 	return ""
@@ -345,7 +351,7 @@
 	var/count = 0
 	var/lentext = length(text)
 	var/a = ""
-	for(var/i = 1, i <= lentext, i += length(a))
+	for(var/i = 1; i <= lentext; i += length(a))
 		a = text[i]
 		if(a == character)
 			count++
@@ -355,7 +361,7 @@
 	var/new_text = ""
 	var/lentext = length(text)
 	var/letter = ""
-	for(var/i = 1, i <= lentext, i += length(letter))
+	for(var/i = 1; i <= lentext; i += length(letter))
 		letter = text[i]
 		new_text = letter + new_text
 	return new_text
@@ -385,7 +391,7 @@ var/icon/text_tag_icons = new('./icons/chattags.dmi')
 	return icon2html(icon(text_tag_icons, tagname), world)
 
 /proc/contains_az09(input)
-	for(var/i=1, i<=length(input), i++)
+	for(var/i=1; i<=length(input); i++)
 		var/ascii_char = text2ascii(input, i)
 		switch(ascii_char)
 			// A  .. Z
@@ -511,7 +517,7 @@ var/icon/text_tag_icons = new('./icons/chattags.dmi')
 	var/newKey
 	newKey += pick("the", "if", "of", "as", "in", "a", "you", "from", "to", "an", "too", "little", "snow", "dead", "drunk", "rosebud", "duck", "al", "le")
 	newKey += pick("diamond", "beer", "mushroom", "assistant", "clown", "captain", "twinkie", "security", "nuke", "small", "big", "escape", "yellow", "gloves", "monkey", "engine", "nuclear", "ai")
-	newKey += pick("1", "2", "3", "4", "5", "6", "7", "8", "9", "0")
+	newKey += pick(GLOB.numerals)
 	return newKey
 
 //Used to strip text of everything but letters and numbers, make letters lowercase, and turn spaces into .'s.
@@ -520,7 +526,7 @@ var/icon/text_tag_icons = new('./icons/chattags.dmi')
 	if(!text) return ""
 	var/list/dat = list()
 	var/last_was_space = 1
-	for(var/i=1, i<=length(text), i++)
+	for(var/i = 1; i <= length(text); i++)
 		var/ascii_char = text2ascii(text,i)
 		switch(ascii_char)
 			if(65 to 90)	//A-Z, make them lowercase
@@ -611,7 +617,7 @@ var/icon/text_tag_icons = new('./icons/chattags.dmi')
 
 /proc/repeat_string(times, string="")
 	. = ""
-	for(var/i=1, i<=times, i++)
+	for(var/i = 1; i <= times; i++)
 		. += string
 
 //json decode that will return null on parse error instead of runtiming.

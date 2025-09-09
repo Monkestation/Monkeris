@@ -4,11 +4,13 @@
 	log_admin("[key_name(usr)] checked the player panel.")
 	var/dat = "<html><head><meta http-equiv='X-UA-Compatible' content='IE=edge' charset='UTF-8'/><title>Player Panel</title></head>"
 
+	var/ui_scale = owner.get_preference_value(/datum/client_preference/ui_scale)
 
 	//javascript, the part that does most of the work~
 	dat += {"
 
 		<head>
+			[!ui_scale && owner.window_scaling ? "<style>body {zoom: [100 / owner.window_scaling]%;}</style>" : ""]
 			<script type='text/javascript'>
 
 				var locked_tabs = new Array();
@@ -82,7 +84,7 @@
 					body += "</td><td align='center'>";
 
 					body += "<a href='byond://?_src_=holder;[HrefToken()];adminplayeropts="+ref+"'>PP</a> - "
-					body += "<a href='byond://?_src_=holder;[HrefToken()];notes=show;mob="+ref+"'>N</a> - "
+					body += "<a href='byond://?_src_=holder;[HrefToken()];showmessageckey="+ckey+"'>N</a> - "
 					body += "<a href='byond://?_src_=vars;[HrefToken()];Vars="+ref+"'>VV</a> - "
 					body += "<a href='byond://?_src_=holder;[HrefToken()];contractor="+ref+"'>TP</a> - "
 					body += "<a href='byond://?priv_msg="+ckey+"'>PM</a> - "
@@ -334,8 +336,11 @@
 	</body></html>
 	"}
 
-	usr << browse(dat, "window=players;size=600x480")
+	var/window_size = "size=600x480"
+	if(owner.window_scaling && ui_scale)
+		window_size = "size=[600 * owner.window_scaling]x[400 * owner.window_scaling]"
 
+	usr << browse(dat, "window=players;[window_size]")
 
 /datum/admins/proc/storyteller_panel()
 	var/datum/storyteller/ST = get_storyteller()

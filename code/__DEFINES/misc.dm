@@ -24,6 +24,7 @@
 
 #define SEE_INVISIBLE_MINIMUM 5
 #define INVISIBILITY_MAXIMUM 100
+#define INVISIBILITY_ABSTRACT 101 //only used for abstract objects (e.g. spacevine_controller), things that are not really there.
 
 // Some arbitrary defines to be used by self-pruning global lists.
 #define PROCESS_KILL 26 // Used to trigger removal from a processing list.
@@ -106,10 +107,10 @@
 #define COIN_GOLD "Gold coin"
 #define COIN_SILVER "Silver coin"
 #define COIN_DIAMOND "Diamond coin"
-#define COIN_IRON "Iron coin"
+#define COIN_PLASTEEL "Plasteel coin"
 #define COIN_PLASMA "Solid plasma coin"
 #define COIN_URANIUM "Uranium coin"
-#define COIN_PLATINUM "Platunum coin"
+#define COIN_PLATINUM "Platinum coin"
 
 #define SHARD_SHARD "shard"
 #define SHARD_SHRAPNEL "shrapnel"
@@ -238,6 +239,10 @@
 #define JOINTEXT(X) jointext(X, null)
 
 //lazy text span classes defines.
+#define SPAN_NOTICE(text)  "<span class='notice'>[text]</span>"
+#define SPAN_WARNING(text) "<span class='warning'>[text]</span>"
+#define SPAN_DANGER(text)  "<span class='danger'>[text]</span>"
+#define SPAN_EXCEL_NOTIF(text) "<span class='revolution_alert'>[text]</span>"
 #define span(class, text) ("<span class='[class]'>[text]</span>")
 
 #define FONT_COLORED(color, text) "<font color='[color]'>[text]</font>"

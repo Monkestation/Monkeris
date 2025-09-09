@@ -164,7 +164,6 @@ CREATE TABLE `death` (
   `oxyloss` smallint(5) unsigned NOT NULL,
   `toxloss` smallint(5) unsigned NOT NULL,
   `cloneloss` smallint(5) unsigned NOT NULL,
-  `staminaloss` smallint(5) unsigned NOT NULL,
   `last_words` varchar(255) DEFAULT NULL,
   `suicide` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
@@ -217,6 +216,40 @@ CREATE TABLE `library` (
   PRIMARY KEY (`id`),
   KEY `index_library_on_author_id` (`author_id`),
   CONSTRAINT `fk_rails_53d51ce16a` FOREIGN KEY (`author_id`) REFERENCES `player` (`ckey`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+--
+-- Table structure for table `messages`
+--
+
+DROP TABLE IF EXISTS `messages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` enum('memo','message','message sent','note','watchlist entry') NOT NULL,
+  `targetckey` varchar(32) NOT NULL,
+  `adminckey` varchar(32) NOT NULL,
+  `text` varchar(2048) NOT NULL,
+  `timestamp` datetime NOT NULL,
+  `server` varchar(32) DEFAULT NULL,
+  `server_ip` int(10) unsigned NOT NULL,
+  `server_port` smallint(5) unsigned NOT NULL,
+  `round_id` int(11) unsigned NULL,
+  `secret` tinyint(1) unsigned NOT NULL,
+  `expire_timestamp` datetime DEFAULT NULL,
+  `severity` enum('high','medium','minor','none') DEFAULT NULL,
+  `playtime` int(11) unsigned NULL DEFAULT NULL,
+  `lasteditor` varchar(32) DEFAULT NULL,
+  `edits` text,
+  `deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `deleted_ckey` VARCHAR(32) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_msg_ckey_time` (`targetckey`,`timestamp`, `deleted`),
+  KEY `idx_msg_type_ckeys_time` (`type`,`targetckey`,`adminckey`,`timestamp`, `deleted`),
+  KEY `idx_msg_type_ckey_time_odr` (`type`,`targetckey`,`timestamp`, `deleted`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

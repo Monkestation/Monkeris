@@ -112,7 +112,7 @@
 			if((index < limit) && (lastJob != null))
 				//If the cells were broken up by a job in the splitJob list then it will fill in the rest of the cells with
 				//the last job's selection color. Creating a rather nice effect.
-				for(var/i = 0, i < (limit - index), i += 1)
+				for(var/i = 0; i < (limit - index); i += 1)
 					. += "<tr bgcolor='[lastJob.selection_color]'><td width='40%' align='right'><a>&nbsp</a></td><td><a>&nbsp</a></td></tr>"
 			. += "</table></td><td width='20%'><table width='100%' cellpadding='1' cellspacing='0'>"
 			index = 0
@@ -127,9 +127,9 @@
 			bad_message = "<b> \[UNAVAILABLE]</b>"
 		else if(jobban_isbanned(user.ckey, rank))
 			bad_message = "<b> \[BANNED]</b>"
-		else if(IsGuestKey(user.client.ckey) && SSjob.job_to_playtime_requirement[job.title])
-			bad_message = "<b> \[ACCOUNT REQUIRED </b>"
-		else if(!SSjob.ckey_to_job_to_can_play[user.client.ckey][job.title])
+		else if(IsGuestKey(user.key) && SSjob.job_to_playtime_requirement[job.title])
+			bad_message = "<b> \[ACCOUNT REQUIRED] </b>"
+		else if(SSjob.ckey_to_job_to_can_play[user.client.ckey] && !SSjob.ckey_to_job_to_can_play[user.client.ckey][job.title])
 			bad_message = "\[PLAYTIME REQUIRED : [SSjob.job_to_playtime_requirement[job.title]] Minutes as [job.department]]"
 		/*else if(!job.player_old_enough(user.client))
 			var/available_in_days = job.available_in_days(user.client)
