@@ -23,7 +23,8 @@
 
 /obj/landmark/LateInitialize(mapload)
 	. = ..()
-	qdel(src)
+	if(delete_me)
+		qdel(src)
 
 /obj/landmark/Destroy()
 	GLOB.landmarks_list -= src
