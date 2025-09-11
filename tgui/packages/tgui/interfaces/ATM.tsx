@@ -387,7 +387,6 @@ export const ATM = () => {
                   <LabeledList.Item label="PIN">
                     <Input
                       placeholder="Enter PIN"
-                      password
                       value={accountPin}
                       onChange={(e, value) => setAccountPin(value)}
                     />
