@@ -1,13 +1,14 @@
-import { useBackend } from '../backend';
 import {
   Box,
   Button,
-  Section,
+  Flex,
   LabeledList,
   NoticeBox,
+  Section,
   Stack,
-  Flex,
 } from 'tgui-core/components';
+
+import { useBackend } from '../backend';
 import { Window } from '../layouts';
 
 interface PhotocopierData {
@@ -17,8 +18,8 @@ interface PhotocopierData {
   isSilicon: boolean;
 }
 
-export const Photocopier = (props, context) => {
-  const { act, data } = useBackend<PhotocopierData>(context);
+export const Photocopier = () => {
+  const { act, data } = useBackend<PhotocopierData>();
   const { hasCopyitem, toner, copies, isSilicon } = data;
 
   return (

@@ -1,12 +1,6 @@
+import { Box, Button, NoticeBox, Section, Table } from 'tgui-core/components';
+
 import { useBackend } from '../backend';
-import {
-  Box,
-  Button,
-  Section,
-  Table,
-  LabeledList,
-  NoticeBox,
-} from 'tgui-core/components';
 import { Window } from '../layouts';
 
 interface SeedData {
@@ -32,15 +26,14 @@ interface SeedStorageData {
   seeds: SeedData[];
 }
 
-export const SeedStorage = (props, context) => {
-  const { act, data } = useBackend<SeedStorageData>(context);
+export const SeedStorage = () => {
+  const { act, data } = useBackend<SeedStorageData>();
   const { scanner, seeds } = data;
 
   const hasStats = scanner.includes('stats');
   const hasTemperature = scanner.includes('temperature');
   const hasLight = scanner.includes('light');
   const hasSoil = scanner.includes('soil');
-  const hasPressure = scanner.includes('pressure');
 
   return (
     <Window width={1000} height={600}>

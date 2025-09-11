@@ -1,12 +1,13 @@
-import { useBackend } from '../backend';
 import {
   Box,
   Button,
-  Section,
   LabeledList,
-  Stack,
   ProgressBar,
+  Section,
+  Stack,
 } from 'tgui-core/components';
+
+import { useBackend } from '../backend';
 import { Window } from '../layouts';
 
 interface GravityGeneratorData {
@@ -18,8 +19,8 @@ interface GravityGeneratorData {
   statusText: string;
 }
 
-export const GravityGenerator = (props, context) => {
-  const { act, data } = useBackend<GravityGeneratorData>(context);
+export const GravityGenerator = () => {
+  const { act, data } = useBackend<GravityGeneratorData>();
   const { breaker, on, charging_state, charge_count, status, statusText } =
     data;
 

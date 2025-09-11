@@ -1,12 +1,13 @@
-import { useBackend } from '../backend';
 import {
   Box,
   Button,
-  Section,
   LabeledList,
-  Stack,
   NoticeBox,
+  Section,
+  Stack,
 } from 'tgui-core/components';
+
+import { useBackend } from '../backend';
 import { Window } from '../layouts';
 
 interface LawData {
@@ -24,8 +25,8 @@ interface AIFixerData {
   laws?: LawData[];
 }
 
-export const AIFixer = (props, context) => {
-  const { act, data } = useBackend<AIFixerData>(context);
+export const AIFixer = () => {
+  const { act, data } = useBackend<AIFixerData>();
   const {
     hasOccupant,
     active,

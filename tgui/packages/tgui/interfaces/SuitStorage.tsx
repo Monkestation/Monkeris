@@ -1,13 +1,14 @@
-import { useBackend } from '../backend';
 import {
   Box,
   Button,
-  Section,
+  Divider,
   LabeledList,
   NoticeBox,
+  Section,
   Stack,
-  Divider,
 } from 'tgui-core/components';
+
+import { useBackend } from '../backend';
 import { Window } from '../layouts';
 
 interface SuitStorageData {
@@ -23,8 +24,8 @@ interface SuitStorageData {
   mask: string | null;
 }
 
-export const SuitStorage = (props, context) => {
-  const { act, data } = useBackend<SuitStorageData>(context);
+export const SuitStorage = () => {
+  const { act, data } = useBackend<SuitStorageData>();
   const {
     panelOpen,
     isUV,
@@ -46,8 +47,8 @@ export const SuitStorage = (props, context) => {
             <Stack vertical>
               <Stack.Item>
                 <Box mb={2}>
-                  A small dial with a small lambda symbol on it. It's pointing
-                  towards a gauge that reads{' '}
+                  A small dial with a small lambda symbol on it. It&apos;s
+                  pointing towards a gauge that reads{' '}
                   <Box as="span" bold>
                     {issuperUV ? '15nm' : '185nm'}
                   </Box>
@@ -151,7 +152,7 @@ export const SuitStorage = (props, context) => {
                 <Divider />
                 <NoticeBox color="red">
                   <Box bold>
-                    WARNING: Biological entity detected inside the Unit's
+                    WARNING: Biological entity detected inside the Unit&apos;s
                     storage. Please remove.
                   </Box>
                 </NoticeBox>

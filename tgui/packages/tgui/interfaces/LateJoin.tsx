@@ -1,5 +1,6 @@
-import { useBackend } from '../backend';
 import { Box, Button, Section, Stack } from 'tgui-core/components';
+
+import { useBackend } from '../backend';
 import { Window } from '../layouts';
 
 interface LateJoinData {
@@ -15,8 +16,8 @@ interface LateJoinData {
   }>;
 }
 
-export const LateJoin = (props, context) => {
-  const { act, data } = useBackend<LateJoinData>(context);
+export const LateJoin = () => {
+  const { act, data } = useBackend<LateJoinData>();
   const {
     name,
     roundDuration,
@@ -30,14 +31,12 @@ export const LateJoin = (props, context) => {
     <Window width={400} height={640}>
       <Window.Content>
         <Section>
-          <Box mb={1}>
-            Welcome, <strong>{name}</strong>.
-          </Box>
+          <Box mb={1}>Welcome, {name}.</Box>
           <Box mb={2}>Round Duration: {roundDuration}</Box>
 
           {!!evacuated && (
             <Box color="red" mb={2}>
-              <strong>The vessel has been evacuated.</strong>
+              The vessel has been evacuated.
             </Box>
           )}
           {!!evacuating && (

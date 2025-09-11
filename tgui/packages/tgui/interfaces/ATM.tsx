@@ -1,17 +1,16 @@
-import { useBackend } from '../backend';
 import { useState } from 'react';
 import {
   Box,
   Button,
+  Input,
   LabeledList,
+  NoticeBox,
   Section,
   Stack,
   Table,
-  Input,
-  TextArea,
-  NoticeBox,
-  Grid,
 } from 'tgui-core/components';
+
+import { useBackend } from '../backend';
 import { Window } from '../layouts';
 
 interface ATMData {
@@ -38,8 +37,8 @@ interface ATMData {
   default_account_number?: string;
 }
 
-export const ATM = (props, context) => {
-  const { act, data } = useBackend<ATMData>(context);
+export const ATM = () => {
+  const { act, data } = useBackend<ATMData>();
   const [accountNum, setAccountNum] = useState(
     data.default_account_number || '',
   );
@@ -48,15 +47,8 @@ export const ATM = (props, context) => {
   const [transferAmount, setTransferAmount] = useState('');
   const [transferTarget, setTransferTarget] = useState('');
   const [transferPurpose, setTransferPurpose] = useState('Funds transfer');
-  const {
-    machine_id,
-    held_card,
-    emagged,
-    authenticated,
-    screen,
-    account,
-    locked_down,
-  } = data;
+  const { machine_id, held_card, authenticated, screen, account, locked_down } =
+    data;
 
   // Render different screens based on view_screen
   const renderScreen = () => {

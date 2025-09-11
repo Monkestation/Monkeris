@@ -1,13 +1,14 @@
-import { useBackend } from '../backend';
 import {
   Box,
   Button,
-  Section,
-  Table,
-  NoticeBox,
-  Stack,
   Divider,
+  NoticeBox,
+  Section,
+  Stack,
+  Table,
 } from 'tgui-core/components';
+
+import { useBackend } from '../backend';
 import { Window } from '../layouts';
 
 interface LogEntry {
@@ -33,8 +34,8 @@ interface MessageMonitorData {
   logs?: LogEntry[];
 }
 
-export const MessageMonitor = (props, context) => {
-  const { act, data } = useBackend<MessageMonitorData>(context);
+export const MessageMonitor = () => {
+  const { act, data } = useBackend<MessageMonitorData>();
   const {
     message,
     auth,

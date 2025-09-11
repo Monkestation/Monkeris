@@ -1,16 +1,14 @@
-import { useBackend } from '../backend';
 import { useState } from 'react';
 import {
   Box,
   Button,
-  Section,
-  LabeledList,
-  Input,
-  NoticeBox,
-  Stack,
   Flex,
-  Divider,
+  NoticeBox,
+  Section,
+  Stack,
 } from 'tgui-core/components';
+
+import { useBackend } from '../backend';
 import { Window } from '../layouts';
 
 interface Reagent {
@@ -39,8 +37,13 @@ interface ChemMasterData {
   bufferReagents: Reagent[];
 }
 
-export const ChemMaster = (props, context) => {
-  const { act, data } = useBackend<ChemMasterData>(context);
+interface ReagentControlsProps {
+  reagent: Reagent;
+  isBeaker: boolean;
+}
+
+export const ChemMaster = () => {
+  const { act, data } = useBackend<ChemMasterData>();
   const [customAmount, setCustomAmount] = useState('30');
 
   const {
@@ -57,7 +60,7 @@ export const ChemMaster = (props, context) => {
 
   const title = condi ? 'CondiMaster 3000' : 'ChemMaster 3000';
 
-  const ReagentControls = ({ reagent, isBeaker }) => (
+  const ReagentControls = ({ reagent, isBeaker }: ReagentControlsProps) => (
     <Flex align="center" mb={1}>
       <Flex.Item grow>
         <Box>
@@ -165,14 +168,12 @@ export const ChemMaster = (props, context) => {
                     <Box>Beaker is empty.</Box>
                   ) : (
                     <>
-                      <Box mb={2}>
-                        <strong>Add to buffer:</strong>
-                      </Box>
+                      <Box mb={2}>Add to buffer:</Box>
                       {beakerReagents.map((reagent, index) => (
                         <ReagentControls
                           key={index}
                           reagent={reagent}
-                          isBeaker={true}
+                          isBeaker
                         />
                       ))}
                       {bufferFreeSpace < 1 && (
