@@ -197,25 +197,53 @@ var/const/GRAV_NEEDS_WRENCH = 3
 /obj/machinery/gravity_generator/main/interact(mob/user as mob)
 	if(stat & BROKEN)
 		return
-	var/dat = "Gravity Generator Breaker: "
-	if(breaker)
-		dat += "[span_linkOn("ON")] <A href='byond://?src=\ref[src];gentoggle=1'>OFF</A>"
-	else
-		dat += "<A href='byond://?src=\ref[src];gentoggle=1'>ON</A> [span_linkOn("OFF")] "
+	ui_interact(user)
 
-	dat += "<br>Generator Status:<br><div class='statusDisplay'>"
+/obj/machinery/gravity_generator/main/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "GravityGenerator", name)
+		ui.open()
+
+/obj/machinery/gravity_generator/main/ui_state(mob/user)
+	return GLOB.default_state
+
+/obj/machinery/gravity_generator/main/ui_data(mob/user)
+	var/list/data = list()
+
+	data["breaker"] = breaker
+	data["on"] = on
+	data["charging_state"] = charging_state
+	data["charge_count"] = charge_count
+
+	// Status text
 	if(charging_state != POWER_IDLE)
-		dat += "<font class='bad'>WARNING</font> Radiation Detected. <br>[charging_state == POWER_UP ? "Charging..." : "Discharging..."]"
+		data["status"] = "warning"
+		data["statusText"] = charging_state == POWER_UP ? "Charging..." : "Discharging..."
 	else if(on)
-		dat += "Powered."
+		data["status"] = "powered"
+		data["statusText"] = "Powered."
 	else
-		dat += "Unpowered."
+		data["status"] = "unpowered"
+		data["statusText"] = "Unpowered."
 
-	dat += "<br>Gravity Charge: [charge_count]%</div>"
+	return data
 
-	var/datum/browser/popup = new(user, "gravgen", name)
-	popup.set_content(dat)
-	popup.open()
+/obj/machinery/gravity_generator/main/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+	. = ..()
+	if(.)
+		return TRUE
+
+	// Map TGUI actions to existing Topic parameters
+	var/list/href_list = list()
+
+	switch(action)
+		if("gentoggle")
+			href_list["gentoggle"] = "1"
+
+	// Call existing Topic method
+	Topic("", href_list)
+	return TRUE
 
 
 /obj/machinery/gravity_generator/main/Topic(href, href_list)

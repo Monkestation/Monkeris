@@ -1,0 +1,60 @@
+@use 'sass:color';
+@use '../colors.scss' as *;
+
+// Base colors
+$primary: #000000 !default;
+$good: #00ff00 !default;
+$average: #f0d862 !default;
+$bad: #ff0000 !default;
+$label: #24ace1 !default;
+
+// Background colors
+$background: rgba(0, 20, 40, 0.99) !default;
+$window-background: #131820 !default;
+$button-background: rgba(12, 24, 32, 0.5) !default;
+
+// Border colors
+$border-color: rgba(36, 172, 225) !default;
+$border-radius: 2px !default;
+
+// Text colors
+$text-color: rgba(255, 255, 255, 0.87) !default;
+$text-muted: rgba(255, 255, 255, 0.5) !default;
+
+// Custom Eris-specific elements
+.Layout__content {
+  // Background image setup
+  background-image: url('../../assets/bg-eris.png');
+  background-size: 70%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+// Button styling
+.Button {
+  color: $text-color;
+  background-color: $button-background;
+  border: 1px solid $border-color;
+
+  // Custom button styles
+  &:hover {
+    background-color: color.scale($button-background, $lightness: 20%);
+  }
+}
+
+// Window styling
+.Window {
+  background-color: $window-background;
+}
+
+// Section styling
+.Section {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: $text-color;
+
+  &__title {
+    color: $label;
+  }
+}
+
+// Add any additional custom components below

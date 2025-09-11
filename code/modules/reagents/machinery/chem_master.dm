@@ -245,63 +245,108 @@
 /obj/machinery/chem_master/attack_hand(mob/user)
 	if(inoperable())
 		return
-	user.set_machine(src)
-	if(!(user.client in has_sprites))
-		spawn()
-			has_sprites += user.client
-			for(var/i = 1 to MAX_PILL_SPRITE)
-				usr << browse_rsc(icon('icons/obj/chemical.dmi', "pill" + num2text(i)), "pill[i].png")
-			for(var/sprite in BOTTLE_SPRITES)
-				usr << browse_rsc(icon('icons/obj/chemical.dmi', sprite), "[sprite].png")
-	var/dat = ""
-	if(!beaker)
-		dat = "Please insert beaker.<BR>"
-		dat += "<A href='byond://?src=\ref[src];close=1'>Close</A>"
-	else
-		var/datum/reagents/R = beaker:reagents
-		dat += "<A href='byond://?src=\ref[src];eject=1'>Eject beaker and Clear Buffer</A><BR>"
-		if(!R.total_volume)
-			dat += "Beaker is empty."
-		else
-			var/free_space = reagents.get_free_space()
-			dat += "Add to buffer:<BR>"
-			for(var/datum/reagent/G in R.reagent_list)
-				dat += "[G.name] , [G.volume] Units - "
-				dat += "<A href='byond://?src=\ref[src];analyze=1;desc=[G.description];name=[G.name]'>(Analyze)</A> "
-				for(var/volume in list(1, 5, 10))
-					if(free_space >= volume)
-						dat += "<A href='byond://?src=\ref[src];add=[G.id];amount=[volume]'>([volume])</A> "
-					else
-						dat += "([volume]) "
-				dat += "<A href='byond://?src=\ref[src];add=[G.id];amount=[G.volume]'>(All)</A> "
-				dat += "<A href='byond://?src=\ref[src];addcustom=[G.id]'>(Custom)</A><BR>"
-			if(free_space < 1)
-				dat += "The [name] is full!"
+	ui_interact(user)
 
-		dat += "<HR>Transfer to <A href='byond://?src=\ref[src];toggle=1'>[(!mode ? "disposal" : "beaker")]:</A><BR>"
-		if(reagents.total_volume)
-			for(var/datum/reagent/N in reagents.reagent_list)
-				dat += "[N.name] , [N.volume] Units - "
-				dat += "<A href='byond://?src=\ref[src];analyze=1;desc=[N.description];name=[N.name]'>(Analyze)</A> "
-				dat += "<A href='byond://?src=\ref[src];remove=[N.id];amount=1'>(1)</A> "
-				dat += "<A href='byond://?src=\ref[src];remove=[N.id];amount=5'>(5)</A> "
-				dat += "<A href='byond://?src=\ref[src];remove=[N.id];amount=10'>(10)</A> "
-				dat += "<A href='byond://?src=\ref[src];remove=[N.id];amount=[N.volume]'>(All)</A> "
-				dat += "<A href='byond://?src=\ref[src];removecustom=[N.id]'>(Custom)</A><BR>"
-		else
-			dat += "Empty<BR>"
-		if(!condi)
-			dat += "<HR><BR><A href='byond://?src=\ref[src];createpill=1'>Create pill ([max_pill_count] units max)</A><a href=\"?src=\ref[src]&change_pill=1\"><img src=\"pill[pillsprite].png\" /></a><BR>"
-			dat += "<A href='byond://?src=\ref[src];createpill_multiple=1'>Create multiple pills</A><BR>"
-			dat += "<A href='byond://?src=\ref[src];createbottle=1'>Create bottle (60 units max)<a href=\"?src=\ref[src]&change_bottle=1\"><img src=\"[bottlesprite].png\" /></A>"
-		else
-			dat += "<A href='byond://?src=\ref[src];createbottle=1'>Create bottle (50 units max)</A>"
-	if(!condi)
-		user << browse(HTML_SKELETON_TITLE("Chemmaster 3000", "Chemmaster menu:<BR><BR>[dat]"), "window=chem_master;size=575x400")
-	else
-		user << browse(HTML_SKELETON_TITLE("Condimaster 3000", "Condimaster menu:<BR><BR>[dat]"), "window=chem_master;size=575x400")
-	onclose(user, "chem_master")
-	return
+/obj/machinery/chem_master/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "ChemMaster", condi ? "CondiMaster 3000" : "ChemMaster 3000")
+		ui.open()
+
+/obj/machinery/chem_master/ui_data(mob/user)
+	var/list/data = list()
+
+	data["condi"] = condi
+	data["mode"] = mode
+	data["hasBeaker"] = !!beaker
+	data["useramount"] = useramount
+	data["pillamount"] = pillamount
+	data["pillsprite"] = pillsprite
+	data["bottlesprite"] = bottlesprite
+	data["maxPillCount"] = max_pill_count
+	data["maxPillVol"] = max_pill_vol
+
+	// Beaker contents
+	if(beaker)
+		var/datum/reagents/R = beaker.reagents
+		data["beakerVolume"] = R.total_volume
+		data["beakerMaxVolume"] = R.maximum_volume
+
+		var/list/beaker_reagents = list()
+		for(var/datum/reagent/G in R.reagent_list)
+			beaker_reagents += list(list(
+				"name" = G.name,
+				"id" = G.id,
+				"volume" = G.volume,
+				"description" = G.description
+			))
+		data["beakerReagents"] = beaker_reagents
+
+	// Buffer contents
+	data["bufferVolume"] = reagents.total_volume
+	data["bufferMaxVolume"] = reagents.maximum_volume
+	data["bufferFreeSpace"] = reagents.get_free_space()
+
+	var/list/buffer_reagents = list()
+	for(var/datum/reagent/N in reagents.reagent_list)
+		buffer_reagents += list(list(
+			"name" = N.name,
+			"id" = N.id,
+			"volume" = N.volume,
+			"description" = N.description
+		))
+	data["bufferReagents"] = buffer_reagents
+
+	return data
+
+/obj/machinery/chem_master/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+	. = ..()
+	if(.)
+		return TRUE
+
+	// Map TGUI actions to existing Topic parameters and call Topic
+	var/list/href_list = list()
+
+	switch(action)
+		if("eject")
+			href_list["eject"] = "1"
+		if("toggle")
+			href_list["toggle"] = "1"
+		if("analyze")
+			href_list["analyze"] = "1"
+			href_list["name"] = params["name"]
+			href_list["desc"] = params["desc"]
+		if("add")
+			href_list["add"] = params["id"]
+			href_list["amount"] = params["amount"]
+		if("addcustom")
+			href_list["addcustom"] = params["id"]
+		if("remove")
+			href_list["remove"] = params["id"]
+			href_list["amount"] = params["amount"]
+		if("removecustom")
+			href_list["removecustom"] = params["id"]
+		if("createpill")
+			href_list["createpill"] = "1"
+		if("createpill_multiple")
+			href_list["createpill_multiple"] = "1"
+		if("createbottle")
+			href_list["createbottle"] = "1"
+		if("change_pill")
+			href_list["change_pill"] = "1"
+		if("change_bottle")
+			href_list["change_bottle"] = "1"
+		if("pill_sprite")
+			href_list["pill_sprite"] = params["sprite"]
+		if("bottle_sprite")
+			href_list["bottle_sprite"] = params["sprite"]
+
+	// Call existing Topic method with mapped parameters (I'm really really lazy okay)
+	Topic("", href_list)
+	return TRUE
+
+/obj/machinery/chem_master/ui_state(mob/user)
+	return GLOB.machinery_state
 
 /obj/machinery/chem_master/condimaster
 	name = "CondiMaster 3000"

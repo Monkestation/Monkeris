@@ -59,35 +59,58 @@
 	..()
 	return
 
+// AI Fixer Computer TGUI Backend - Keep existing Topic logic, add TGUI frontend
 /obj/machinery/computer/aifixer/attack_hand(mob/user as mob)
 	if(..())
 		return
+	ui_interact(user)
 
-	user.set_machine(src)
-	var/dat = "<h3>AI System Integrity Restorer</h3><br><br>"
+/obj/machinery/computer/aifixer/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "AIFixer", "AI System Integrity Restorer")
+		ui.open()
 
-	if (src.occupant)
-		var/laws
-		dat += "Stored AI: [src.occupant.name]<br>System integrity: [src.occupant.hardware_integrity()]%<br>Backup Capacitor: [src.occupant.backup_capacitor()]%<br>"
+/obj/machinery/computer/aifixer/ui_state(mob/user)
+	return GLOB.default_state
 
-		for (var/datum/ai_law/law in occupant.laws.all_laws())
-			laws += "[law.get_index()]: [law.law]<BR>"
+/obj/machinery/computer/aifixer/ui_data(mob/user)
+	var/list/data = list()
 
-		dat += "Laws:<br>[laws]<br>"
+	data["hasOccupant"] = !!occupant
+	data["active"] = active
 
-		if (src.occupant.stat == 2)
-			dat += "<b>AI nonfunctional</b>"
-		else
-			dat += "<b>AI functional</b>"
-		if (!src.active)
-			dat += {"<br><br><A href='byond://?src=\ref[src];fix=1'>Begin Reconstruction</A>"}
-		else
-			dat += "<br><br>Reconstruction in process, please wait.<br>"
-	dat += {" <A href='byond://?src=\ref[user];mach_close=computer'>Close</A>"}
+	if(occupant)
+		data["aiName"] = occupant.name
+		data["hardwareIntegrity"] = occupant.hardware_integrity()
+		data["backupCapacitor"] = occupant.backup_capacitor()
+		data["aiDead"] = occupant.stat == 2
 
-	user << browse(HTML_SKELETON_TITLE("AI System Integrity Restorer", dat), "window=computer;size=400x500")
-	onclose(user, "computer")
-	return
+		var/list/laws_list = list()
+		for(var/datum/ai_law/law in occupant.laws.all_laws())
+			laws_list += list(list(
+				"index" = law.get_index(),
+				"law" = law.law
+			))
+		data["laws"] = laws_list
+
+	return data
+
+/obj/machinery/computer/aifixer/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+	. = ..()
+	if(.)
+		return TRUE
+
+	// Map TGUI actions to existing Topic parameters
+	var/list/href_list = list()
+
+	switch(action)
+		if("fix")
+			href_list["fix"] = "1"
+
+	// Call existing Topic method
+	Topic("", href_list)
+	return TRUE
 
 /obj/machinery/computer/aifixer/Process()
 	if(..())
