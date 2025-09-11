@@ -163,7 +163,7 @@ export const MessageMonitor = () => {
             wordBreak: 'break-all',
           }}
         >
-          <Stack vertical spacing={0}>
+          <Stack vertical>
             <Stack.Item>
               01000010011100100111010101110100011001010010110
             </Stack.Item>
