@@ -119,4 +119,7 @@ var/datum/announcement/priority/command/command_announcement = new(do_log = 0, d
 		if(issilicon(character))
 			GLOB.announcer.autosay("A new [rank] [join_message].", ANNOUNCER_NAME, use_text_to_speech = TRUE)
 		else
-			GLOB.announcer.autosay("[character.real_name], [rank], [join_message].", ANNOUNCER_NAME, use_text_to_speech = TRUE)
+			if(istype(character))
+				GLOB.announcer.autosay("[character.real_name], [rank], [join_message].", ANNOUNCER_NAME, use_text_to_speech = TRUE)
+			else if(istext(character))
+				GLOB.announcer.autosay("[character], [rank], [join_message].", ANNOUNCER_NAME, use_text_to_speech = TRUE) // send the text

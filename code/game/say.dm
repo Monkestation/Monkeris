@@ -40,7 +40,8 @@ INITIALIZE_IMMEDIATE(/atom/movable/virtualspeaker)
 	if(ishuman(M))
 		// Humans use their job as seen on the crew manifest. This is so the AI
 		// can know their job even if they don't carry an ID.
-		var/record_rank = find_record(name, "rank")
+		#warn fix this this wont work!
+		var/record_rank = get_crewmember_record(name)
 		if(record_rank)
 			job = record_rank
 		else
