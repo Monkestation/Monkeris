@@ -22,8 +22,4 @@ SUBSYSTEM_DEF(character_setup)
 			error("Prefs failed to setup (SS): [prefs.client_ckey]")
 			prefs.setup()
 
-	// Start playing music for clients
-	for(var/client/C in GLOB.clients)
-		GLOB.lobbyScreen.play_music(C)
-
 	. = ..()

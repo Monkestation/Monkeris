@@ -1,6 +1,5 @@
-import { Box, Button, Icon, LabeledList } from 'tgui-core/components';
-
 import { useBackend } from 'tgui/backend';
+import { Box, Button, Icon, LabeledList } from 'tgui-core/components';
 
 export const ReagentLookup = (props) => {
   const { reagent } = props;

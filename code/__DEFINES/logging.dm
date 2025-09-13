@@ -114,6 +114,7 @@
 #define LOG_CATEGORY_DEBUG "debug"
 #define LOG_CATEGORY_DEBUG_ASSET "debug-asset"
 #define LOG_CATEGORY_DEBUG_HREF "debug-href"
+#define LOG_CATEGORY_DEBUG_JOB "debug-job"
 // #ifndef DISABLE_DREAMLUAU
 // #define LOG_CATEGORY_DEBUG_LUA "debug-lua"
 // #endif

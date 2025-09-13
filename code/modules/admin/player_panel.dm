@@ -292,7 +292,12 @@
 			M_key = replacetext(M_key, "\\", "")
 
 			var/M_rname_as_key = html_encode(ckey(M.real_name)) // so you can ignore punctuation
-			var/previous_names = "Not Supported"
+			var/previous_names = ""
+
+			if(M_key)
+				var/datum/persistent_client/P = GLOB.persistent_clients_by_ckey[ckey(M_key)]
+				if(P)
+					previous_names = P.get_played_names()
 
 			//output for each mob
 			dat += {"

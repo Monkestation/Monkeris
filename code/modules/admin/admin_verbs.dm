@@ -159,8 +159,8 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 	/client/proc/cmd_debug_del_all,
 	/client/proc/cmd_display_del_log,
 	/client/proc/cmd_admin_delete,
-	/client/verb/whitelistPlayerForJobs,
-	/client/verb/unwhitelistPlayerForJobs,
+	// /client/verb/whitelistPlayerForJobs,
+	// /client/verb/unwhitelistPlayerForJobs,
 	/client/proc/empty_ai_core_toggle_latejoin,
 	/client/proc/investigate_show,
 	/client/proc/admin_memo,
@@ -345,7 +345,7 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 
 	if(usr.client.holder)
 		usr.client.holder.player_panel_new()
-		// SSblackbox.record_feedback("tally", "admin_verb", 1, "Player Panel New") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		SSblackbox.record_feedback("tally", "admin_verb", 1, "Player Panel New") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/storyteller_panel()
 	set name = "Storyteller Panel"
@@ -359,7 +359,7 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 	if(!check_rights(R_BAN))
 		return
 	holder.ban_panel()
-	// SSblackbox.record_feedback("tally", "admin_verb", 1, "Banning Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Banning Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/unban_panel()
 	set name = "Unbanning Panel"
@@ -367,7 +367,7 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 	if(!check_rights(R_BAN))
 		return
 	holder.unban_panel()
-	// SSblackbox.record_feedback("tally", "admin_verb", 1, "Unbanning Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Unbanning Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 //game panel, allows to change game-mode etc
 /client/proc/game_panel()
@@ -375,12 +375,17 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 	set category = "Admin"
 	if(holder)
 		holder.Game()
+		SSblackbox.record_feedback("tally", "admin_verb", 1, "Game Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 
 /client/proc/secrets()
 	set name = "Secrets"
 	set category = "Admin"
 	if (holder)
 		holder.Secrets()
+		SSblackbox.record_feedback("tally", "admin_verb", 1, "Unbanning Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+
 
 /client/proc/fix_air()
 	set name = "Fix air (lags)"
@@ -412,6 +417,8 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 				zone.add(turf)
 
 	log_and_message_admins("[src] fixed the air.")
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Fix air") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 
 
 //allows us to set a custom colour for everythign we say in ooc
