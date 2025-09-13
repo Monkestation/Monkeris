@@ -43,9 +43,14 @@
 #define R_ADMIN         (1<<6)
 #define R_BAN           (1<<7)
 #define R_SPAWN			(1<<8)
-#define R_VAREDIT		(1<<9)
+#define R_POSSESS		(1<<9)
+#define R_VAREDIT		(1<<10)
+#define R_AUTOADMIN 	(1<<11)
+#define R_DBRANKS		(1<<12)
 
-#define R_EVERYTHING (1<<10)-1 //the sum of all other rank permissions, used for +EVERYTHING
+#define R_DEFAULT R_AUTOADMIN
+
+#define R_EVERYTHING (1<<13)-1 //the sum of all other rank permissions, used for +EVERYTHING
 
 
 #define ADMIN_QUE(user) "(<a href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];adminmoreinfo=[REF(user)]'>?</a>)"
@@ -89,3 +94,6 @@
 
 /turf/Safe_COORD_Location()
 	return src
+
+/// A value for /datum/admins/cached_feedback_link to indicate empty, rather than unobtained
+#define NO_FEEDBACK_LINK "no_feedback_link"
