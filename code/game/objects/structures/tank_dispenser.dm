@@ -45,12 +45,42 @@
 
 /obj/structure/dispenser/attack_hand(mob/user)
 	user.set_machine(src)
-	var/dat = "[src]<br><br>"
-	dat += "Oxygen tanks: [oxygentanks] - [oxygentanks ? "<A href='byond://?src=\ref[src];oxygen=1'>Dispense</A>" : "empty"]<br>"
-	dat += "Plasma tanks: [plasmatanks] - [plasmatanks ? "<A href='byond://?src=\ref[src];plasma=1'>Dispense</A>" : "empty"]"
-	user << browse(HTML_SKELETON_TITLE("Tank storage", dat), "window=dispenser")
-	onclose(user, "dispenser")
+	ui_interact(user)
 
+/obj/structure/dispenser/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "TankDispenser", "Tank Storage")
+		ui.open()
+
+/obj/structure/dispenser/ui_data(mob/user)
+	var/list/data = list()
+	data["name"] = name
+	data["oxygentanks"] = oxygentanks
+	data["plasmatanks"] = plasmatanks
+
+	return data
+
+/obj/structure/dispenser/ui_state(mob/user)
+	return GLOB.default_state
+
+/obj/structure/dispenser/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+	. = ..()
+	if(.)
+		return TRUE
+
+	// Map TGUI actions to existing Topic parameters
+	var/list/href_list = list()
+
+	switch(action)
+		if("oxygen")
+			href_list["oxygen"] = "1"
+		if("plasma")
+			href_list["plasma"] = "1"
+
+	// Call existing Topic method
+	Topic("", href_list)
+	return TRUE
 
 /obj/structure/dispenser/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/tank/oxygen) || istype(I, /obj/item/tank/air) || istype(I, /obj/item/tank/anesthetic))
