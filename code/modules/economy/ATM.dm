@@ -139,105 +139,7 @@ log transactions
 	if (..())
 		return
 	if(get_dist(src,user) <= 1)
-
-		//js replicated from obj/machinery/computer/card
-		var/dat = "<h1>Automatic Teller Machine</h1>"
-		dat += "For all your monetary needs!<br>"
-		dat += "<i>This terminal is</i> [machine_id]. <i>Report this code when contacting IT Support</i><br/>"
-
-		if(emagged > 0)
-			dat += "Card: <span style='color: red;'>LOCKED</span><br><br><span style='color: red;'>Unauthorized terminal access detected! This ATM has been locked. Please contact IT Support.</span>"
-		else
-			dat += "Card: <a href='byond://?src=\ref[src];choice=insert_card'>[held_card ? held_card.name : "------"]</a><br><br>"
-
-			if(ticks_left_locked_down > 0)
-				dat += span_alert("Maximum number of pin attempts exceeded! Access to this ATM has been temporarily disabled.")
-			else if(authenticated_account)
-				if(authenticated_account.suspended)
-					dat += span_red(span_bold("Access to this account has been suspended, and the funds within frozen."))
-				else
-					switch(view_screen)
-						if(CHANGE_SECURITY_LEVEL)
-							dat += "Select a new security level for this account:<br><hr>"
-							var/text = "Zero - Either the account number and pin, or card and pin are required to access this account. "
-							text += "Vending machine transactions will only require a card. EFTPOS transactions will require a card and ask for a pin, but not verify the pin is correct."
-
-							if(authenticated_account.security_level != 0)
-								text = "<A href='byond://?src=\ref[src];choice=change_security_level;new_security_level=0'>[text]</a>"
-							dat += "[text]<hr>"
-							text = "One - An account number and pin must be manually entered to access this account and process transactions. Vending machine transactions will require card and pin."
-							if(authenticated_account.security_level != 1)
-								text = "<A href='byond://?src=\ref[src];choice=change_security_level;new_security_level=1'>[text]</a>"
-							dat += "[text]<hr>"
-							text = "Two - In addition to account number and pin, a card is required to access this account and process transactions."
-							if(authenticated_account.security_level != 2)
-								text = "<A href='byond://?src=\ref[src];choice=change_security_level;new_security_level=2'>[text]</a>"
-							dat += "[text]<hr><br>"
-							dat += "<A href='byond://?src=\ref[src];choice=view_screen;view_screen=0'>Back</a>"
-						if(VIEW_TRANSACTION_LOGS)
-							dat += "<b>Transaction logs</b><br>"
-							dat += "<A href='byond://?src=\ref[src];choice=view_screen;view_screen=0'>Back</a>"
-							dat += "<table border=1 style='width:100%'>"
-							dat += "<tr>"
-							dat += "<td><b>Date</b></td>"
-							dat += "<td><b>Time</b></td>"
-							dat += "<td><b>Target</b></td>"
-							dat += "<td><b>Purpose</b></td>"
-							dat += "<td><b>Value</b></td>"
-							dat += "<td><b>Source terminal ID</b></td>"
-							dat += "</tr>"
-							for(var/datum/transaction/T in authenticated_account.transaction_log)
-								dat += "<tr>"
-								dat += "<td>[T.date]</td>"
-								dat += "<td>[T.time]</td>"
-								dat += "<td>[T.target_name]</td>"
-								dat += "<td>[T.purpose]</td>"
-								dat += "<td>[num2text(T.amount,12)][CREDS]</td>"
-								dat += "<td>[T.source_terminal]</td>"
-								dat += "</tr>"
-							dat += "</table>"
-							dat += "<A href='byond://?src=\ref[src];choice=print_transaction'>Print</a><br>"
-						if(TRANSFER_FUNDS)
-							dat += "<b>Account balance:</b> [num2text(authenticated_account.money,12)][CREDS]<br>"
-							dat += "<A href='byond://?src=\ref[src];choice=view_screen;view_screen=0'>Back</a><br><br>"
-							dat += "<form name='transfer' action='?src=\ref[src]' method='get'>"
-							dat += "<input type='hidden' name='src' value='\ref[src]'>"
-							dat += "<input type='hidden' name='choice' value='transfer'>"
-							dat += "Target account number: <input type='text' name='target_acc_number' value='' style='width:200px; background-color:white;'><br>"
-							dat += "Funds to transfer: <input type='text' name='funds_amount' value='' style='width:200px; background-color:white;'><br>"
-							dat += "Transaction purpose: <input type='text' name='purpose' value='Funds transfer' style='width:200px; background-color:white;'><br>"
-							dat += "<input type='submit' value='Transfer funds'><br>"
-							dat += "</form>"
-						else
-							dat += "Welcome, <b>[authenticated_account.owner_name].</b><br/>"
-							dat += "<b>Account balance:</b> [num2text(authenticated_account.money, 12)][CREDS]"
-							dat += "<form name='withdrawal' action='?src=\ref[src]' method='get'>"
-							dat += "<input type='hidden' name='src' value='\ref[src]'>"
-							dat += "<input type='radio' name='choice' value='withdrawal' checked> Cash  <input type='radio' name='choice' value='e_withdrawal'> Chargecard<br>"
-							dat += "<input type='text' name='funds_amount' value='' style='width:200px; background-color:white;'><input type='submit' value='Withdraw'>"
-							dat += "</form>"
-							dat += "<A href='byond://?src=\ref[src];choice=view_screen;view_screen=1'>Change account security level</a><br>"
-							dat += "<A href='byond://?src=\ref[src];choice=view_screen;view_screen=2'>Make transfer</a><br>"
-							dat += "<A href='byond://?src=\ref[src];choice=view_screen;view_screen=3'>View transaction log</a><br>"
-							dat += "<A href='byond://?src=\ref[src];choice=balance_statement'>Print balance statement</a><br>"
-							dat += "<A href='byond://?src=\ref[src];choice=logout'>Logout</a><br>"
-			else
-				dat += "<form name='atm_auth' action='?src=\ref[src]' method='get'>"
-				dat += "<input type='hidden' name='src' value='\ref[src]'>"
-				dat += "<input type='hidden' name='choice' value='attempt_auth'>"
-				dat += "<b>Account:</b> "
-
-
-				if(held_card && held_card.associated_account_number)
-					dat += "<input type='text' id='account_num' name='account_num' style='width:250px; background-color:white;' readonly=1 value='[held_card.associated_account_number]'>"
-				else
-					dat += "<input type='text' id='account_num' name='account_num' style='width:250px; background-color:white;'>"
-
-				dat += "<br><b>PIN:</b> <input type='text' id='account_pin' name='account_pin' style='width:250px; background-color:white;'><br>"
-				dat += "<input type='submit' value='Submit'><br>"
-				dat += "</form>"
-
-		user << browse(HTML_SKELETON_TITLE("ATM", dat),"window=atm;size=600x650")
+		ui_interact(user)
 	else
 		user << browse(null,"window=atm")
 
@@ -443,3 +345,56 @@ log transactions
 		human_user.put_in_hands(E)
 	E.worth = sum
 	E.owner_name = authenticated_account.owner_name
+
+/obj/machinery/atm/ui_interact(mob/user, datum/tgui/ui)
+    if(issilicon(user))
+        to_chat(user, span_red("[icon2html(src, user)] Artificial units do not currently receive monetary compensation, as per system banking regulation #1005."))
+        return
+
+    ui = SStgui.try_update_ui(user, src, ui)
+    if(!ui)
+        ui = new(user, src, "ATM", name)
+        ui.open()
+
+/obj/machinery/atm/ui_data(mob/user)
+    var/list/data = list()
+
+    data["machine_id"] = machine_id
+    data["held_card"] = held_card ? held_card.name : null
+    data["emagged"] = emagged
+    data["locked_down"] = ticks_left_locked_down > 0
+    data["authenticated"] = !!authenticated_account
+    data["screen"] = view_screen
+
+    if(authenticated_account)
+        data["account"] = list(
+            "owner_name" = authenticated_account.owner_name,
+            "money" = authenticated_account.money,
+            "security_level" = authenticated_account.security_level,
+            "suspended" = authenticated_account.suspended
+        )
+
+        var/list/transactions = list()
+        for(var/datum/transaction/T in authenticated_account.transaction_log)
+            transactions += list(list(
+                "date" = T.date,
+                "time" = T.time,
+                "target_name" = T.target_name,
+                "purpose" = T.purpose,
+                "amount" = T.amount,
+                "source_terminal" = T.source_terminal
+            ))
+        data["transactions"] = transactions
+
+    if(held_card)
+        data["default_account_number"] = held_card.associated_account_number
+
+    return data
+
+/obj/machinery/atm/ui_act(action, params)
+    . = ..()
+    if(.)
+        return
+
+    Topic(null, params)
+    return TRUE
