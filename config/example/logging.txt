@@ -52,6 +52,9 @@ LOG_ATTACK
 ## log economy actions
 LOG_ECON
 
+## log roundstart divide occupations debug information
+LOG_JOB_DEBUG
+
 ## log pda messages
 LOG_PDA
 

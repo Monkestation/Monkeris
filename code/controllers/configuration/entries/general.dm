@@ -150,6 +150,31 @@
 // Does nothing, used nowhere
 /datum/config_entry/flag/guest_jobban
 
+/datum/config_entry/flag/use_exp_tracking
+
+/// Enables head jobs time restrictions.
+/datum/config_entry/flag/use_exp_restrictions_heads
+
+/datum/config_entry/number/use_exp_restrictions_heads_hours
+	default = 0
+	integer = FALSE
+	min_val = 0
+
+/datum/config_entry/flag/use_exp_restrictions_heads_department
+
+/// Enables non-head jobs time restrictions.
+/datum/config_entry/flag/use_exp_restrictions_other
+
+/datum/config_entry/flag/use_exp_restrictions_admin_bypass
+
+/datum/config_entry/flag/use_low_living_hour_intern
+
+/datum/config_entry/number/use_low_living_hour_intern_hours
+	default = 0
+	integer = FALSE
+	min_val = 0
+
+
 /*****************/
 /*   Mob Prefs   */
 /*****************/
@@ -226,6 +251,9 @@
 
 /// log crew manifest to separate file
 /datum/config_entry/flag/log_manifest
+
+/// log roundstart divide occupations debug information to a file
+/datum/config_entry/flag/log_job_debug
 
 /// log assets
 /datum/config_entry/flag/log_asset
@@ -319,9 +347,6 @@
 /*****************/
 /*     ADMIN     */
 /*****************/
-
-
-/datum/config_entry/flag/mentors
 
 /// allows admins with relevant permissions to have their own ooc colour
 /datum/config_entry/flag/allow_admin_ooccolor

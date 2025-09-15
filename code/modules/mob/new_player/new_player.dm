@@ -67,7 +67,7 @@
 			else
 				output += "<p>\[<a href='byond://?src=[REF(src)];showpoll=1'>Show Player Polls</A>\]</p>"
 
-	if (src.client.holder)
+	if (src.client?.holder)
 		output += "<hr>"
 		output += "<div align='center'>[span_bold("Admin Quick Verbs")]"
 		if (SSticker.state <= GAME_STATE_PREGAME)
@@ -148,6 +148,7 @@
 				to_chat(src, span_danger("Could not locate an observer spawn point. Use the Teleport verb to jump to the station map."))
 			observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 
+
 			announce_ghost_joinleave(src)
 			observer.icon = client.prefs.update_preview_icon()
 			observer.alpha = 127
@@ -159,9 +160,14 @@
 			if(!client.holder && !CONFIG_GET(flag/antag_hud_allowed)) // For new ghosts we remove the verb from even showing up if it's not allowed.
 				remove_verb(observer, /mob/observer/ghost/verb/toggle_antagHUD)
 			//observer.key = key
-			observer.ckey = ckey
+			observer.PossessByPlayer(ckey)
 			observer.client.init_verbs()
 			observer.initialise_postkey()
+			#warn Potential shit might happen here, if nothing happens, then yippee! but TEST THIS YOU BITCH
+			observer.client = client
+
+			if (observer.client)
+				observer.persistent_client.time_of_death = world.time
 
 			observer.client.create_UI(observer.type)
 			qdel(src)
@@ -275,9 +281,9 @@
 		return FALSE
 	if(!job.is_position_available())
 		return FALSE
-	if(IsGuestKey(ckey) && SSjob.job_to_playtime_requirement[job.title])
+	if(IsGuestKey(ckey) && job.exp_requirements)
 		return FALSE
-	if(!SSjob.ckey_to_job_to_can_play[client.ckey][job.title])
+	if(SSjob.check_job_eligibility(src, job))
 		return FALSE
 	if(jobban_isbanned(src.ckey,rank))
 		return FALSE
@@ -359,7 +365,6 @@
 			dat += "<font color='red'>The vessel is currently undergoing crew transfer procedures.</font><br>"
 
 	dat += "Choose from the following open/valid positions:<br>"
-	SSjob.UpdatePlayableJobs(client.ckey)
 	for(var/datum/job/job in SSjob.occupations)
 		if(job && IsJobAvailable(job.title))
 			if(job.is_restricted(client.prefs))
@@ -391,6 +396,8 @@
 
 	if(!new_character)
 		new_character = new(NULLSPACE)
+
+	LAZYADD(persistent_client.joined_as_slots, "[client.prefs.default_slot]")
 
 	new_character.lastarea = get_area(NULLSPACE)
 
@@ -435,7 +442,7 @@
 	new_character.force_update_limbs()
 	new_character.update_eyes()
 	new_character.regenerate_icons()
-	new_character.key = key//Manually transfer the key to log them in
+	new_character.PossessByPlayer(key)//Manually transfer the key to log them in
 	new_character.client.init_verbs()
 
 	return new_character
@@ -472,3 +479,24 @@
 
 /mob/new_player/MayRespawn()
 	return 1
+
+/proc/get_job_unavailable_error_message(retval, jobtitle)
+	switch(retval)
+		if(JOB_AVAILABLE)
+			return "[jobtitle] is available."
+		if(JOB_UNAVAILABLE_GENERIC)
+			return "[jobtitle] is unavailable."
+		if(JOB_UNAVAILABLE_BANNED)
+			return "You are currently banned from [jobtitle]."
+		if(JOB_UNAVAILABLE_PLAYTIME)
+			return "You do not have enough relevant playtime for [jobtitle]."
+		if(JOB_UNAVAILABLE_ACCOUNTAGE)
+			return "Your account is not old enough for [jobtitle]."
+		if(JOB_UNAVAILABLE_SLOTFULL)
+			return "[jobtitle] is already filled to capacity."
+		if(JOB_UNAVAILABLE_ANTAG_INCOMPAT)
+			return "[jobtitle] is not compatible with some antagonist role assigned to you."
+		if(JOB_UNAVAILABLE_CONDITIONS_UNMET)
+			return "Conditions for [jobtitle] unmet."
+
+	return GENERIC_JOB_UNAVAILABLE_ERROR

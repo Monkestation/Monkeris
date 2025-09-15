@@ -28,6 +28,11 @@
 	category = LOG_CATEGORY_DEBUG_MAPPING
 	master_category = /datum/log_category/debug
 
+/datum/log_category/debug_job
+	category = LOG_CATEGORY_DEBUG_JOB
+	config_flag = /datum/config_entry/flag/log_job_debug
+	master_category = /datum/log_category/debug
+
 /datum/log_category/debug_mobtag
 	category = LOG_CATEGORY_DEBUG_MOBTAG
 	master_category = /datum/log_category/debug

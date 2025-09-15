@@ -274,6 +274,10 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	name = newname
 	if(mind)
 		mind.name = newname
+		if(mind.key)
+			log_played_names(ckey(mind.key) ,newname) //Just in case the mind is unsynced at the moment.
+
+	log_played_names(ckey, newname)
 
 	if(oldname)
 		//update the datacore records! This is goig to be a bit costly.

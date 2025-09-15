@@ -445,6 +445,9 @@ Proc for attack log creation, because really why not
 /proc/get_mob_by_ckey(key)
 	if(!key)
 		return
+	var/mob/persistent_mob = GLOB.persistent_clients_by_ckey[key]?.mob
+	if(persistent_mob)
+		return persistent_mob
 	for(var/mob/mob in GLOB.mob_list)
 		if(mob.ckey == key)
 			return mob
