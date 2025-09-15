@@ -25,7 +25,7 @@
 	if(!msg)
 		return
 
-	var/rank_name = holder.rank
+	var/rank_name = holder.rank_names()
 	var/admin_name = key
 
 	var/name_and_rank = "[span_tooltip(rank_name, "STAFF")] ([admin_name])"
