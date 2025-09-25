@@ -1,4 +1,5 @@
 /mob/var/lastattacker = null
+/mob/var/lastattackerckey = null
 /mob/var/lastattacked = null
 /mob/var/attack_log = list()
 

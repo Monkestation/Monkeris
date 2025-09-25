@@ -5,11 +5,13 @@
  */
 
 import { createRoot } from 'react-dom/client';
+import { globalStore } from 'tgui/backend';
 import { createLogger } from 'tgui/logging';
 import { Tooltip } from 'tgui-core/components';
 import { EventEmitter } from 'tgui-core/events';
 import { classes } from 'tgui-core/react';
 
+import { selectSettings } from '../settings/selectors';
 import {
   COMBINE_MAX_MESSAGES,
   COMBINE_MAX_TIME_WINDOW,
@@ -143,7 +145,8 @@ class ChatRenderer {
       const height = node.scrollHeight;
       const bottom = node.scrollTop + node.offsetHeight;
       const scrollTracking =
-        Math.abs(height - bottom) < SCROLL_TRACKING_TOLERANCE ||
+        Math.abs(height - bottom) <
+          selectSettings(globalStore.getState()).scrollTrackingTolerance ||
         this.lastScrollHeight === 0;
       if (scrollTracking !== this.scrollTracking) {
         this.scrollTracking = scrollTracking;

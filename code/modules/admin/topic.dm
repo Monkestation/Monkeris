@@ -38,6 +38,15 @@
 	if (!CheckAdminHref(href, href_list))
 		return
 
+	if(href_list["getplaytimewindow"])
+		if(!check_rights(R_ADMIN))
+			return
+		var/mob/M = locate(href_list["getplaytimewindow"]) in GLOB.mob_list
+		if(!M)
+			to_chat(usr, span_danger("ERROR: Mob not found."), confidential = TRUE)
+			return
+		cmd_show_exp_panel(M.client)
+
 	if(href_list["openticket"])
 		var/ticketID = text2num(href_list["openticket"])
 		if(!href_list["is_mhelp"])
