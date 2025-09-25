@@ -479,7 +479,7 @@
 	set category = "OOC"
 	var/is_admin = 0
 
-	if(client.holder && (client.holder.rights & R_ADMIN))
+	if(client.holder && (client.holder.rank_flags() & R_ADMIN))
 		is_admin = 1
 	else if(stat != DEAD || isnewplayer(src))
 		to_chat(usr, span_blue("You must be observing to use this!"))
