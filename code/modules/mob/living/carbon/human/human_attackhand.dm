@@ -213,8 +213,9 @@
 			real_damage *= damage_multiplier
 			real_damage = max(1, real_damage)
 
-			//Try to reduce damage by blocking
-			if(blocking)
+			//Try to reduce damage by blocking. Only effects non-shield blocking items.
+			//Shield items instead defer to shield behavior in \objects\items\shields.dm
+			if(blocking && !istype(blocking_item, /obj/item/shield))
 				if(istype(get_active_held_item(), /obj/item/grab))//we are blocking with a human shield! We redirect the attack. You know, because grab doesn't exist as an item.
 					var/obj/item/grab/G = get_active_held_item()
 					grab_redirect_attack(M, G)
