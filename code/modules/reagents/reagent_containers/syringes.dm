@@ -110,7 +110,7 @@
 						on_reagent_change()
 						reagents.handle_reactions()
 					to_chat(user, span_notice("You take a blood sample from [target]."))
-					user.visible_message(span_notice("[user] takes a blood sample from [target]."), range = 4)
+					user.visible_message(span_notice("[user] takes a blood sample from [target]."), vision_distance = 4)
 
 			else //if not mob
 				if(!target.reagents.total_volume)
