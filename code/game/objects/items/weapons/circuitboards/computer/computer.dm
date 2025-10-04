@@ -123,6 +123,10 @@
 	name = T_BOARD("navigation console")
 	build_path = /obj/machinery/computer/navigation
 
+/obj/item/electronics/circuitboard/libraryconsole
+	name = T_BOARD("library computer")
+	build_path = /obj/machinery/computer/libraryconsole
+
 /obj/item/electronics/circuitboard/shuttle
 	spawn_blacklisted = TRUE
 	bad_type = /obj/item/electronics/circuitboard/shuttle

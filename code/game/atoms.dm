@@ -19,6 +19,7 @@
 	var/used_now = FALSE
 	var/auto_init = TRUE
 	var/initialized = FALSE
+	/// If this has a positive value, it will drain that value of sanity from those in view of this atom.
 	var/sanity_damage = 0
 
 	/// Last name used to calculate a color for the chatmessage overlays

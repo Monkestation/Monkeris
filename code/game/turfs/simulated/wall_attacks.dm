@@ -30,6 +30,9 @@
 		if(!(ismech(user.loc) && istype(I, /obj/item/tool/mech_kit)))
 			return
 
+	if (try_wallmount(I, user))
+		return
+
 	// In case player wants to just drop a sheet of glass on a low wall, or smack it with an RCD
 	if(user.a_intent == I_HURT)
 		attackby_harm(I, user)
@@ -200,6 +203,21 @@
 	else
 		attack_hand(user)
 
+
+/turf/wall/proc/try_wallmount(obj/item/W, mob/user)
+	//check for wall mounted frames
+	// if(istype(W, /obj/item/wallframe))
+	// 	var/obj/item/wallframe/F = W
+	// 	if(F.try_build(src, user))
+	// 		F.attach(src, user)
+	// 		return TRUE
+	// 	return FALSE
+	// else
+	//Poster stuff
+	if(istype(W, /obj/item/poster) && Adjacent(user)) //no tk memes.
+		return place_poster(W,user)
+
+	return FALSE
 
 /turf/wall/attack_hand(mob/user)
 	if(!is_simulated)

@@ -235,7 +235,7 @@
 	icon_state = "doorid0"
 
 /obj/machinery/button/remote/blast_door/id_card/attackby(obj/item/W, mob/user as mob)
-	if(istype(W, /obj/item/card/id))
+	if(isidcard(W))
 		var/obj/item/card/id/id_card = W
 		if(has_access(req_access, list(), id_card.access))
 			use_power(5)

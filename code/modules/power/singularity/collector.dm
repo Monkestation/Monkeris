@@ -101,7 +101,7 @@ GLOBAL_LIST_EMPTY(rad_collectors)
 		update_icons()
 		return
 
-	else if(istype(I, /obj/item/card/id)||istype(I, /obj/item/modular_computer))
+	else if(isidcard(I)||istype(I, /obj/item/modular_computer))
 		if(allowed(user))
 			if(active)
 				locked = !locked

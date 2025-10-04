@@ -197,7 +197,7 @@
 		if(ABORT_CHECK)
 			return
 
-	if(istype(I, /obj/item/card/id) || istype(I, /obj/item/modular_computer))
+	if(isidcard(I) || istype(I, /obj/item/modular_computer))
 		if(emagged)
 			to_chat(user, span_warning("The lock seems to be broken!"))
 			return

@@ -58,8 +58,8 @@
 // Admin deleting the object will not call this, hence producing no girder or shards
 /turf/wall/proc/dismantle_wall(mob/user)
 	for(var/obj/O in contents) //Eject contents!
-		if(istype(O,/obj/item/contraband/poster))
-			var/obj/item/contraband/poster/P = O
+		if(istype(O,/obj/structure/sign/poster))
+			var/obj/structure/sign/poster/P = O
 			P.roll_and_drop(src)
 		else
 			O.loc = src

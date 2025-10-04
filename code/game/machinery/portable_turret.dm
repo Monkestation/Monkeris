@@ -349,7 +349,7 @@ var/list/turret_icons
 			wrenching = 0
 			return 1 //No whacking the turret with tools on help intent
 
-		else if(istype(I, /obj/item/card/id)||istype(I, /obj/item/modular_computer))
+		else if(isidcard(I)||istype(I, /obj/item/modular_computer))
 			if(allowed(user))
 				locked = !locked
 				to_chat(user, span_notice("Controls are now [locked ? "locked" : "unlocked"]."))

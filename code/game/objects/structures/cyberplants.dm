@@ -68,7 +68,7 @@
 	set_light(l_color = color)
 
 /obj/structure/cyberplant/attackby(obj/item/I, mob/user )
-	if(istype(I, /obj/item/card/id))
+	if(isidcard(I))
 		if(!emagged)
 			if(prob(10))
 				to_chat(user, "You hear soft whisper, <i>Welcome back, honey...</i>")

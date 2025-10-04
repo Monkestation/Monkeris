@@ -36,7 +36,7 @@
 	return
 
 /obj/machinery/computer/med_data/attackby(obj/item/O, mob/user)
-	if(istype(O, /obj/item/card/id) && !scan && user.unEquip(O))
+	if(isidcard(O) && !scan && user.unEquip(O))
 		O.loc = src
 		scan = O
 		to_chat(user, "You insert \the [O].")
@@ -163,7 +163,7 @@
 
 			else
 				var/obj/item/I = usr.get_active_held_item()
-				if (istype(I, /obj/item/card/id))
+				if (isidcard(I))
 					usr.drop_item()
 					I.loc = src
 					src.scan = I
@@ -191,7 +191,7 @@
 				src.rank = "[R.modtype] [R.braintype]"
 				src.screen = 1
 
-			else if (istype(src.scan, /obj/item/card/id))
+			else if (isidcard(src.scan))
 				src.active1 = null
 				src.active2 = null
 

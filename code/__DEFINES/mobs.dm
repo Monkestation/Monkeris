@@ -147,6 +147,10 @@
 
 #define MOB_BASE_MAX_HUNGER 400
 
+//MINOR TWEAKS/MISC
+#define AGE_MIN 18 //youngest a character can be
+#define AGE_MAX 110 //oldest a character can be
+
 //Time of Death constants
 //Used with a list in preference datums to track times of death
 #define	CREW 	"crew"//Used for crewmembers, AI, cyborgs, nymphs, antags
@@ -223,7 +227,9 @@
 
 #define NECROZTIME 	(15 MINUTES)
 
-
+/// Checking flags for [/mob/proc/can_read()]
+#define READING_CHECK_LITERACY (1<<0)
+#define READING_CHECK_LIGHT (1<<1)
 
 //Surgery operation defines
 #define CAN_OPERATE_ALL 1 //All possible surgery types are available

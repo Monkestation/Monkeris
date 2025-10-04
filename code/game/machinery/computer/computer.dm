@@ -108,7 +108,7 @@
 				to_chat(user, span_notice("You disconnect the monitor."))
 				A.state = 4
 				A.icon_state = "4"
-			circuit.deconstruct(src)
+			circuit._deconstruct(src)
 			qdel(src)
 
 	else if(istype(I, /obj/item/device/spy_bug))

@@ -11,7 +11,7 @@
 /obj/machinery/computer/shuttle/attackby(obj/item/card/W as obj, mob/user as mob)
 	if(stat & (BROKEN|NOPOWER))	return
 	if ((!( istype(W, /obj/item/card) ) || !( ticker ) || emergency_shuttle.location() || !( user )))	return
-	if (istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
+	if (isidcard(W)||istype(W, /obj/item/modular_computer))
 		if (istype(W, /obj/item/modular_computer))
 			var/obj/item/device/pda/pda = W
 			W = pda.id
