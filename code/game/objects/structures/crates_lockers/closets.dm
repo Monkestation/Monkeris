@@ -271,7 +271,7 @@
 	else
 		playsound(src.loc, lock_off_sound, 60, 1, -3)
 	if(user)
-		user.visible_message(span_notice("The [ctype] has been [locked ? null : "un"]locked by [user]."), range = 3)
+		user.visible_message(span_notice("The [ctype] has been [locked ? null : "un"]locked by [user]."), vision_distance = 3)
 	update_icon()
 
 //Cham Projector Exception

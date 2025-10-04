@@ -230,7 +230,7 @@
 
 	var/image/I
 
-	if(antag in faction_icons && faction_icons[antag])
+	if((antag in faction_icons) && faction_icons[antag])
 		I = faction_icons[antag]
 	else
 		I = get_indicator(antag)

@@ -38,3 +38,54 @@
   - bugfix: Water tank explosion runtime
   flleeppyy:
   - tweak: Better death message
+2025-09-11:
+  VmpOS2NHSkhkejA9:
+  - bugfix: ore processors and unloaders not setting their input/output directions
+  - bugfix: deep drill caves spawning the wrong number of golems
+  - bugfix: platinum golems no longer delete ore boxes
+  - balance: silver, platinum and gold golems are weaker and less now
+  - balance: adjusted spawn weights for golems
+2025-09-12:
+  flleeppyy:
+  - rscdel: revert new announcer voices
+2025-09-14:
+  Chickenish:
+  - bugfix: dismantling walls no longer results in GC errors.
+  - code_imp: Qdel hints are now better
+  - bugfix: fixed a mistake with vague attack logic
+  - bugfix: Rigged flashlights no longer runtime during Process()
+  - rscadd: Eating another carrion's core with your maw gives you the other carrion's
+      disguises
+  - balance: carrion over-hunger is now punished by making your human form hungry
+  - tweak: carrion maw now works with holders.
+  - tweak: carrions now drop as an inert item if the core is killed.
+  - bugfix: eating with carrion maw provides proper chem value
+  - bugfix: nutriment made via roach chem decay is now fully drinkable.
+  - bugfix: Flat Dough and derivatives are now more edible.
+  - tweak: 'balance: Prying damaged flooring now produces scrap metal instead of deleting
+      the floor with no returns.'
+  - rscadd: Added modular bolt-gun config
+  - tweak: tweaked Riose cost
+  - bugfix: fixed clrifle bolt action ammo choice discrepancy
+  - imageadd: added modular boltgun parts
+  flleeppyy:
+  - tweak: Ship announcements and alerts have been converted to fancier boxes!
+  - admin: New "Create Command Report" UI, ported from Monke
+2025-09-15:
+  flleeppyy:
+  - rscdel: Removed IRC functionality, it was barely used.
+2025-09-23:
+  Sun-Soaked:
+  - bugfix: removes an unessecary else statement that was preventing visible_message()
+      from displaying to user properly
+2025-09-26:
+  Deal5:
+  - rscadd: Added a reward for killing OS Boss (Type - 0315)
+  - balance: Rebalanced One Star Stalkers.
+  - bugfix: Fixed One Star boss' attack patterns to be less clunky.
+  - soundadd: Added some sounds to One Star mobs
+  - balance: Changed several One Star drones bevaiors or characteristics
+  - bugfix: Simple mobs now update health properly and don't die with a delay if hit.
+2025-09-30:
+  blackwolf602:
+  - bugfix: the errors in

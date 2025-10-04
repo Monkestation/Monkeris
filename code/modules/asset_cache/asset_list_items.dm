@@ -380,10 +380,10 @@
 		design.nano_ui_data["icon"] = SSassets.transport.get_asset_url(SANITIZE_FILENAME("design_[design.build_path].png"))
 
 /datum/asset/simple/materials/register()
-	for(var/type in subtypesof(/obj/item/stack/material) - typesof(/obj/item/stack/material/cyborg))
+	for(var/obj/item/stack/material/type as anything in subtypesof(/obj/item/stack/material) - typesof(/obj/item/stack/material/cyborg))
 		var/filename = SANITIZE_FILENAME("[type].png")
 
-		var/atom/item = initial(type)
+		var/atom/item = type
 		var/icon_file = initial(item.icon)
 		var/icon_state = initial(item.icon_state)
 		var/icon/I = icon(icon_file, icon_state, SOUTH)
@@ -441,16 +441,15 @@
 		CS.make_desc() // redo it
 
 /datum/asset/simple/tool_upgrades/register()
-	for(var/type in subtypesof(/obj/item/tool_upgrade))
+	for(var/obj/item/tool_upgrade/type as anything in subtypesof(/obj/item/tool_upgrade))
 		var/filename = SANITIZE_FILENAME("tool_upgrade_[type].png")
 
-		var/obj/item/item = initial(type)
 		// no.
-		if (initial(item.bad_type) == type)
+		if (initial(type.bad_type) == type)
 			continue
 
-		var/icon_file = initial(item.icon)
-		var/icon_state = initial(item.icon_state)
+		var/icon_file = initial(type.icon)
+		var/icon_state = initial(type.icon_state)
 
 		#ifdef UNIT_TESTS
 		if(!(icon_state in icon_states(icon_file)))
@@ -463,12 +462,11 @@
 	..()
 
 /datum/asset/simple/perks/register()
-	for(var/type in subtypesof(/datum/perk))
+	for(var/datum/perk/type as anything in subtypesof(/datum/perk))
 		var/filename = SANITIZE_FILENAME("[type].png")
 
-		var/datum/perk/item = initial(type)
-		var/icon_file = initial(item.icon)
-		var/icon_state = initial(item.icon_state)
+		var/icon_file = initial(type.icon)
+		var/icon_state = initial(type.icon_state)
 		#ifdef UNIT_TESTS
 		if(!(icon_state in icon_states(icon_file)))
 			//stack_trace("perks [type] with icon '[icon_file]' missing state '[icon_state]'")

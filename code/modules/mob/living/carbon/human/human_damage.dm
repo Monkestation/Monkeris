@@ -320,7 +320,7 @@ This function restores all organs.
 		organs_by_name[BP_L_ARM],
 	)
 
-/mob/living/carbon/human/apply_damage(damage = 0, damagetype = BRUTE, def_zone, armor_divisor = 1, wounding_multiplier = 1, sharp = FALSE, edge = FALSE, obj/used_weapon, armor_divisor)
+/mob/living/carbon/human/apply_damage(damage = 0, damagetype = BRUTE, def_zone, armor_divisor = 1, wounding_multiplier = 1, sharp = FALSE, edge = FALSE, obj/used_weapon)
 	//visible_message("Hit debug. [damage] | [damagetype] | [def_zone] | [blocked] | [sharp] | [used_weapon]")
 
 	//Handle other types of damage
@@ -352,7 +352,7 @@ This function restores all organs.
 		organ = def_zone
 	else
 		if(!def_zone)
-			if(!damagetype == TOX) // global application
+			if(!(damagetype == TOX)) // global application
 				def_zone = ran_zone(def_zone)
 		organ = get_organ(check_zone(def_zone))
 

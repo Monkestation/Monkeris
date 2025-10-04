@@ -10,7 +10,7 @@ var/global/list/empty_playable_ai_cores = list()
 
 /mob/living/silicon/ai/verb/wipe_core()
 	set name = "Wipe Core"
-	set category = "OOC"
+	set category = "Silicon Commands"
 	set desc = "Wipe your core. This is functionally equivalent to cryo or robotic storage, freeing up your job slot."
 
 /*	if(ticker && ticker.mode && ticker.mode.name == MODE_MALF)

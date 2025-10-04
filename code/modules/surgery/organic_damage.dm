@@ -167,7 +167,7 @@
 	to_chat(user, span_warning("You need an advanced trauma kit to complete this step."))
 
 /datum/surgery_step/fix_brute/proc/get_tool_name(obj/item/stack/tool)
-	var/tool_name = "\the regenerative membrane"
+	var/tool_name = "regenerative membrane"
 	return tool_name
 
 /datum/surgery_step/fix_brute/can_use(mob/living/user, obj/item/organ/external/organ, obj/item/tool)
@@ -213,7 +213,7 @@
 	to_chat(user, span_warning("You need an advanced burn kit to complete this step."))
 
 /datum/surgery_step/fix_burn/proc/get_tool_name(obj/item/stack/tool)
-	var/tool_name = "\the regenerative membrane"
+	var/tool_name = "regenerative membrane"
 	return tool_name
 
 /datum/surgery_step/fix_burn/can_use(mob/living/user, obj/item/organ/external/organ, obj/item/tool)

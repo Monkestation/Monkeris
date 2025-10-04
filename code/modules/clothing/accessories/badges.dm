@@ -75,7 +75,7 @@
 	if(!id_card)
 		return
 
-	if(access_security in id_card.access || emagged)
+	if((access_security in id_card.access) || emagged)
 		to_chat(user, "You imprint your ID details onto the badge.")
 		set_name(user.real_name)
 	else

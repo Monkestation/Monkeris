@@ -57,7 +57,7 @@
 				owner.visible_message(span_notice("\The [owner] begins loading \the [O]."))
 				playsound(src, 'sound/mechs/hydraulic.ogg', 50, 1)
 				if(do_after(owner, 20, O, 0, 1))
-					if(O in carrying || O.buckled_mob || O.anchored || (locate(/mob/living) in O)) //Repeat checks
+					if((O in carrying) || O.buckled_mob || O.anchored || (locate(/mob/living) in O)) //Repeat checks
 						return
 					if(length(carrying) >= carrying_capacity)
 						to_chat(user, span_warning("\The [src] is fully loaded!"))

@@ -233,7 +233,7 @@
 
 	var/dir_mult = get_dir_mult(hit_dir, comp)
 	/// aiming for soemthing the mech doesnt have
-	if(!def_zone)
+	if(!def_zone || !comp)
 		return PROJECTILE_FORCE_MISS
 	var/armor_def = comp.armor.getRating(P.check_armour) * dir_mult
 	var/deflect_chance = ((comp.shielding + armor_def)*0.5) - (armor_divisor*5)

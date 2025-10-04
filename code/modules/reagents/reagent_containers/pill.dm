@@ -48,7 +48,7 @@
 
 		reagents.trans_to(target, reagents.total_volume)
 		if(!user.stats.getPerk(PERK_FAST_FINGERS))
-			user.visible_message(span_warning("[user] puts something in \the [target]."), range = 2)
+			user.visible_message(span_warning("[user] puts something in \the [target]."), vision_distance = 2)
 
 		qdel(src)
 

@@ -56,7 +56,7 @@
 	UnregisterSignal(src, COMSIG_IORGAN_ADD_WOUND)
 	UnregisterSignal(src, COMSIG_IORGAN_REMOVE_WOUND)
 	UnregisterSignal(src, COMSIG_IORGAN_REFRESH_SELF)
-	..()
+	. = ..()
 
 /obj/item/organ/internal/removed()
 	UnregisterSignal(parent, COMSIG_IORGAN_WOUND_COUNT)
@@ -147,7 +147,7 @@
 			if(!LAZYLEN(possible_wounds))
 				break
 	else
-	
+
 		return TRUE
 	return FALSE
 
@@ -201,7 +201,7 @@
 		return
 	if(!blood_req)
 		return
-	if(OP_BLOOD_VESSEL in organ_efficiency && !(owner.status_flags & BLEEDOUT))
+	if((OP_BLOOD_VESSEL in organ_efficiency) && !(owner.status_flags & BLEEDOUT))
 		current_blood = min(current_blood + 5, max_blood_storage)	//Blood vessels get an extra flat 5 blood regen
 
 	if(owner.status_flags & BLEEDOUT)

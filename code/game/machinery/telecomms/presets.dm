@@ -25,6 +25,9 @@
 	autolinkers = list("r_relay")
 
 /obj/machinery/telecomms/relay/preset/pulsar
+	name = "teleroachication relay"
+	icon_state = "roach_relay"
+	desc = "Utilizing the power of a bluespace roach to send massive amounts of data far away."
 	id = "Pulsar Relay"
 	produces_heat = 0
 	autolinkers = list("p_relay")
