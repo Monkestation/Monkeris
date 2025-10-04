@@ -2,39 +2,74 @@
 
 	//The name of the job
 	var/title = "NOPE"
-	var/list/access = list()				// Useful for servers which either have fewer players, so each person needs to fill more than one role, or servers which like to give more access, so players can't hide forever in their super secure departments (I'm looking at you, chemistry!)
-	var/list/cruciform_access = list()		// Assign this access into cruciform if target has it
-	var/security_clearance = CLEARANCE_NONE	// Cruciform-specific access type, used by Neotheology doors
-	var/list/software_on_spawn = list()		// Defines the software files that spawn on tablets and labtops
-	var/list/core_upgrades = list()			// Defines the upgrades that would be installed into core implant on spawn, if any.
-	var/flag = NONE							// Bitflags for the job
+	/// Useful for servers which either have fewer players, so each person needs to fill more than one role, or servers which like to give more access, so players can't hide forever in their super secure departments (I'm looking at you, chemistry!)
+	var/list/access = list()
+	/// Assign this access into cruciform if target has it
+	var/list/cruciform_access = list()
+	/// Cruciform-specific access type, used by Neotheology doors
+	var/security_clearance = CLEARANCE_NONE
+	/// Defines the software files that spawn on tablets and labtops
+	var/list/software_on_spawn = list()
+	/// Defines the upgrades that would be installed into core implant on spawn, if any.
+	var/list/core_upgrades = list()
+	/// Bitflags for the job
+	var/flag = NONE
+
 	var/department_flag = NONE
-	var/faction = "None"					// Players will be allowed to spawn in as jobs that are set to "Station"
-	var/total_positions = 0					// How many players can be this job
-	var/spawn_positions = 0					// How many players can spawn in as this job
-	var/current_positions = 0				// How many players have this job
-	var/supervisors							// Supervisors, who this person answers to directly
-	var/selection_color = "#ffffff"			// Selection screen color
+	/// Minutes of experience-time required to play in this job. The type is determined by [exp_required_type] and [exp_required_type_department] depending on configs.
+	var/exp_requirements = 0
+	/// Experience required to play this job, if the config is enabled, and `exp_required_type_department` is not enabled with the proper config.
+	var/exp_required_type = ""
+	/// Department experience required to play this job, if the config is enabled.
+	var/exp_required_type_department = ""
+	/// Experience type granted by playing in this job.
+	var/exp_granted_type = ""
+	/// If you have the use_age_restriction_for_jobs config option enabled and the database set up, this option will add a requirement for players to be at least minimal_player_age days old. (meaning they first signed in at least that many days before.)
+	var/minimal_player_age = 0
+	/// Players will be allowed to spawn in as jobs that are set to "Station"
+	var/faction = "None"
+	/// How many players can be this job
+	var/total_positions = 0
+	/// How many players can spawn in as this job
+	var/spawn_positions = 0
+	/// How many players have this job
+	var/current_positions = 0
+	/// Supervisors, who this person answers to directly
+	var/supervisors
+	/// Selection screen color
+	var/selection_color = "#ffffff"
 	var/list/alt_titles
 	var/list/datum/job_flavor/random_flavors = list(null)
 
-	var/req_admin_notify					// If this is set to 1, a text is printed to the player when jobs are assigned, telling him that he should let admins know that he has to disconnect.
-	var/department							// Does this position have a department tag?
-	var/head_position = FALSE				// Is this position Command?
-	var/aster_guild_member = FALSE			// If this person's account authorized to register new accounts
-	var/department_account_access = FALSE	// Can this position access the department acount, even if they're not a head?
+	/// If this is set to 1, a text is printed to the player when jobs are assigned, telling him that he should let admins know that he has to disconnect.
+	var/req_admin_notify
+	/// Does this position have a department tag?
+	var/department
+	/// Is this position Command?
+	var/head_position = FALSE
+	/// If this person's account authorized to register new accounts
+	var/aster_guild_member = FALSE
+	/// Can this position access the department acount, even if they're not a head?
+	var/department_account_access = FALSE
 	var/minimum_character_age = 0
 	var/ideal_character_age = 30
-	var/create_record = 1					// Do we announce/make records for people who spawn on this job?
-	var/list/also_known_languages = list()	// additional chance based languages to all jobs.
+	/// Do we announce/make records for people who spawn on this job?
+	var/create_record = 1
+	/// Additional chance based languages to all jobs.
+	var/list/also_known_languages = list()
 
-	var/account_allowed = 1					// Does this job type come with a station account?
-	var/wage = WAGE_LABOUR					// How much base wage does this job recieve per payday
-	var/initial_balance	=	-1				// If set to a value other than -1, overrides the wage based initial balance calculation
+	/// Does this job type come with a station account?
+	var/account_allowed = 1
+	/// How much base wage does this job recieve per payday
+	var/wage = WAGE_LABOUR
+	/// If set to a value other than -1, overrides the wage based initial balance calculation
+	var/initial_balance	=	-1
 
-	var/outfit_type							// The outfit the employee will be dressed in, if any
+	/// The outfit the employee will be dressed in, if any
+	var/outfit_type
 
-	var/loadout_allowed = TRUE				// Does this job allows loadout ?
+	/// Does this job allows loadout ?
+	var/loadout_allowed = TRUE
 	var/description = ""
 	var/duties = ""
 	var/loyalties = ""
@@ -136,16 +171,16 @@
 	for(var/obj/item/item in target.contents)
 		apply_fingerprints_to_item(target, item)
 	return 1
-/*
+
 //If the configuration option is set to require players to be logged as old enough to play certain jobs, then this proc checks that they are, otherwise it just returns 1
 /datum/job/proc/player_old_enough(client/C)
 	return (available_in_days(C) == 0) //Available in 0 days = available right now = player is old enough to play.
 
 /datum/job/proc/available_in_days(client/C)
-	if(C && config.use_age_restriction_for_jobs && isnull(C.holder) && isnum(C.player_age) && isnum(minimal_player_age))
+	if(C && CONFIG_GET(flag/use_age_restriction_for_jobs) && isnull(C.holder) && isnum(C.player_age) && isnum(minimal_player_age))
 		return max(0, minimal_player_age - C.player_age)
 	return 0
-*/
+
 /datum/job/proc/apply_fingerprints_to_item(mob/living/carbon/human/holder, obj/item/item)
 	item.add_fingerprint(holder,1)
 	if(item.contents.len)
@@ -173,6 +208,7 @@
 		if(!option)
 			continue
 		if(type in option.restricted_jobs)
+			log_job_debug("[usr.ckey] restricted from job [type] as it is in [category]'s option '[option.name]'s restricted jobs. ", option.restricted_jobs)
 			return TRUE
 		if(type in option.allowed_jobs)
 			. = FALSE
@@ -214,3 +250,7 @@
 /datum/job/proc/dress_mannequin(mob/living/carbon/human/dummy/mannequin/mannequin)
 	mannequin.delete_inventory(TRUE)
 	equip_preview(mannequin, additional_skips = OUTFIT_ADJUSTMENT_SKIP_BACKPACK|OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR)
+
+//Checks if certain conditions are met making the job eligible.
+/datum/job/proc/conditions_met()
+	return TRUE

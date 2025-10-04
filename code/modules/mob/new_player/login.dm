@@ -5,6 +5,14 @@
 	if(!client)
 		return
 
+	if(CONFIG_GET(flag/use_exp_tracking))
+		client?.set_exp_from_db()
+		client?.set_db_player_flags()
+		if(!client)
+			// client disconnected during one of the db queries
+			return FALSE
+
+
 	update_Login_details()	//handles setting lastKnownIP and computer_id for use by the ban systems as well as checking for multikeying
 
 	if(!mind)
@@ -12,9 +20,9 @@
 		mind.active = TRUE
 		mind.current = src
 
-	// . = ..()
-	// if(!. || !client)
-	// 	return FALSE
+	. = ..()
+	if(!. || !client)
+		return FALSE
 
 	if(join_motd)
 		to_chat(src, "<div class='motd'>[join_motd]</div>")
@@ -27,5 +35,7 @@
 
 	new_player_panel()
 
-	GLOB.lobbyScreen.play_music(client)
+	if (SSticker.current_state == GAME_STATE_PREGAME)
+		GLOB.lobbyScreen.play_music(client)
+
 	GLOB.lobbyScreen.show_titlescreen(client)

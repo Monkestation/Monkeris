@@ -11,4 +11,6 @@
 
 	..()
 
+	become_uncliented()
+
 	return TRUE

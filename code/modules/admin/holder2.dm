@@ -154,7 +154,7 @@ generally it would be used like so:
 
 NOTE: It checks usr by default. Supply the "C" argument if you wish to check for a specific client/mob.
 */
-/proc/check_rights(rights_required, show_msg=1, client/C = usr)
+/proc/check_rights(rights_required, show_msg = TRUE, client/C = usr)
 	if(ismob(C))
 		var/mob/M = C
 		C = M.client

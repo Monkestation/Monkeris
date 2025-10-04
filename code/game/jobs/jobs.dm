@@ -92,5 +92,21 @@ var/list/armory_positions = list(JOBS_ARMORY)
 
 var/list/nonhuman_positions = list(JOBS_NONHUMAN)
 
+// list of jobs that can be an intern
+var/list/intern_possible_jobs = list(
+	"Moebius Scientist",
+	"Moebius Roboticist",
+	"Moebius Paramedic",
+	"Moebius Psychiatrist",
+	"Ironhammer Operative",
+	"Technomancer",
+	"Club Worker",
+	"Club Artist",
+	"Guild Technician",
+	"Guild Miner",
+	"NeoTheology Custodian",
+	ASSISTANT_TITLE,
+)
+
 /proc/guest_jobbans(var/job)
 	return ((job in command_positions) || (job in nonhuman_positions) || (job in armory_positions))

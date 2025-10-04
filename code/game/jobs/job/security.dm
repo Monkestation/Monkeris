@@ -4,6 +4,9 @@
 	head_position = 1
 	department = DEPARTMENT_SECURITY
 	department_flag = IRONHAMMER | COMMAND
+	exp_requirements = 1500
+	exp_required_type_department = DEPARTMENT_SECURITY
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 1
 	spawn_positions = 1
@@ -65,6 +68,9 @@
 	flag = GUNSERG
 	department = DEPARTMENT_SECURITY
 	department_flag = IRONHAMMER
+	exp_requirements = 600
+	exp_required_type_department = DEPARTMENT_SECURITY
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 1
 	spawn_positions = 1
@@ -119,6 +125,9 @@
 	flag = INSPECTOR
 	department = DEPARTMENT_SECURITY
 	department_flag = IRONHAMMER
+	exp_requirements = 300
+	exp_required_type = EXP_TYPE_CREW
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 2
 	spawn_positions = 2
@@ -177,6 +186,9 @@
 	flag = MEDSPEC
 	department = DEPARTMENT_SECURITY
 	department_flag = IRONHAMMER
+	exp_requirements = 200
+	exp_required_type_department = DEPARTMENT_MEDICAL
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 2
 	spawn_positions = 2
@@ -230,6 +242,9 @@
 	flag = IHOPER
 	department = DEPARTMENT_SECURITY
 	department_flag = IRONHAMMER
+	exp_requirements = 600
+	exp_required_type = EXP_TYPE_CREW
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 6
 	spawn_positions = 6
