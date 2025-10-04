@@ -105,9 +105,6 @@
 	/// Extra overlays from equipped items
 	var/list/equipment_overlays = list()
 
-	var/med_record = ""
-	var/sec_record = ""
-	var/gen_record = ""
 	var/exploit_record = ""
 
 	/// Whether this mob's ability to stand has been affected
