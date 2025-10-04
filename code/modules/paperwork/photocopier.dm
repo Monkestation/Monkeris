@@ -15,26 +15,50 @@
 	var/maxcopies = 10	//how many copies can be copied at once- idea shamelessly stolen from bs12's copier!
 
 /obj/machinery/photocopier/attack_hand(mob/user as mob)
-	user.set_machine(src)
+	ui_interact(user)
 
-	var/dat = "Photocopier<BR><BR>"
-	if(copyitem)
-		dat += "<a href='byond://?src=\ref[src];remove=1'>Remove Item</a><BR>"
-		if(toner)
-			dat += "<a href='byond://?src=\ref[src];copy=1'>Copy</a><BR>"
-			dat += "Printing: [copies] copies."
-			dat += "<a href='byond://?src=\ref[src];min=1'>-</a> "
-			dat += "<a href='byond://?src=\ref[src];add=1'>+</a><BR><BR>"
-	else if(toner)
-		dat += "Please insert something to copy.<BR><BR>"
-	if(issilicon(user))
-		dat += "<a href='byond://?src=\ref[src];aipic=1'>Print photo from database</a><BR><BR>"
-	dat += "Current toner level: [toner]"
-	if(!toner)
-		dat +="<BR>Please insert a new toner cartridge!"
-	user << browse(HTML_SKELETON_TITLE("Photocopier", dat), "window=copier")
-	onclose(user, "copier")
-	return
+/obj/machinery/photocopier/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "Photocopier", "Photocopier")
+		ui.open()
+
+/obj/machinery/photocopier/ui_state(mob/user)
+	return GLOB.default_state
+
+/obj/machinery/photocopier/ui_data(mob/user)
+	var/list/data = list()
+
+	data["hasCopyitem"] = !!copyitem
+	data["toner"] = toner
+	data["copies"] = copies
+	data["isSilicon"] = issilicon(user)
+
+	return data
+
+/obj/machinery/photocopier/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+	. = ..()
+	if(.)
+		return TRUE
+
+	// Map TGUI actions to existing Topic parameters
+	var/list/href_list = list()
+
+	switch(action)
+		if("remove")
+			href_list["remove"] = "1"
+		if("copy")
+			href_list["copy"] = "1"
+		if("min")
+			href_list["min"] = "1"
+		if("add")
+			href_list["add"] = "1"
+		if("aipic")
+			href_list["aipic"] = "1"
+
+	// Call existing Topic method
+	Topic("", href_list)
+	return TRUE
 
 /obj/machinery/photocopier/Topic(href, href_list)
 	if(href_list["copy"])
