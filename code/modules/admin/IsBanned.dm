@@ -34,7 +34,7 @@
 	//magic voodo to check for a key in a list while also adding that key to the list without having to do two associated lookups
 	var/message = !checkedckeys[ckey]++
 
-	if (GLOB.admin_datums[ckey] || GLOB.deadmins[ckey] || C?.deadmin_holder)
+	if (GLOB.admin_datums[ckey] || GLOB.deadmins[ckey] || (ckey in GLOB.protected_admins))
 		admin = TRUE
 
 	if (is_mentor(C))

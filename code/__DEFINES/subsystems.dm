@@ -7,7 +7,7 @@
  *
  * make sure you add an update to the schema_version stable in the db changelog
  */
-#define DB_MAJOR_VERSION 2
+#define DB_MAJOR_VERSION 3
 
 /**
  * DB minor schema version

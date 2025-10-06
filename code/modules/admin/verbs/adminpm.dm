@@ -72,7 +72,7 @@
 			if(!C.holder && holder && holder.fakekey)
 				recieve_pm_type = "Admin"
 			else
-				recieve_pm_type = holder.rank
+				recieve_pm_type = holder.rank_names()
 
 	else if(!C.holder)
 		to_chat(src, "<font color='red'>Error: Admin-PM: Non-admin to non-admin PM communication is forbidden.</font>")
@@ -117,7 +117,7 @@
 		//check client/X is an admin and isn't the sender or recipient
 		if(X == C || X == src)
 			continue
-		if(X.key != key && X.key != C.key && (X.holder.rights & R_ADMIN|R_MENTOR))
+		if(X.key != key && X.key != C.key && (X.holder.rank_flags() & R_ADMIN|R_MENTOR))
 			to_chat(X, "[span_pm("<span class='other'>" + create_text_tag("pm_other", "PM:", X) + " <span class='name'>[key_name(src, X, 0)]")] to [span_name("[key_name(C, X, 0)]")]: <span class='message linkify'>[msg]</span></span></span>")
 
 	//Check if the mob being PM'd has any open admin tickets.
@@ -169,5 +169,5 @@
 	for(var/client/X in GLOB.admins)
 		if(X == src)
 			continue
-		if(X.holder.rights & R_ADMIN)
+		if(X.holder.rank_flags() & R_ADMIN)
 			to_chat(X, "[span_pm("<span class='other'>" + create_text_tag("pm_other", "PM:", X) + " <span class='name'>[key_name(src, X, 0)]")] to [span_name("IRC-[sender]")]: [span_message("[msg]")]</span></span>")

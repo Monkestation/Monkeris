@@ -720,7 +720,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		related_accounts_cid += "[query_get_related_cid.item[1]], "
 	qdel(query_get_related_cid)
 
-	var/admin_rank = holder?.rank || "Player"
+	var/admin_rank = holder?.rank_names() || "Player"
 	var/new_player
 	var/datum/db_query/query_client_in_db = SSdbcore.NewQuery(
 		"SELECT 1 FROM [format_table_name("player")] WHERE ckey = :ckey",

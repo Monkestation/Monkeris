@@ -4,3 +4,7 @@
 2025-10-04:
   blackwolf602:
   - rscadd: Roach telecoms sprite to pulsar sat
+2025-10-05:
+  flleeppyy:
+  - admin: new admin rank system
+  - bugfix: game panel create obj/mob/turf works now
