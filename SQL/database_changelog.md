@@ -2,15 +2,24 @@ Any time you make a change to the schema files, remember to increment the databa
 
 Make sure to also update `DB_MAJOR_VERSION` and `DB_MINOR_VERSION`, which can be found in `code/__DEFINES/subsystem.dm`.
 
-The latest database version is 3.0; The query to update the schema revision table is:
+The latest database version is 3.1; The query to update the schema revision table is:
 
 ```sql
-INSERT INTO `schema_revision` (`major`, `minor`) VALUES (3, 0);
+INSERT INTO `schema_revision` (`major`, `minor`) VALUES (3, 1);
 ```
 
 
 In any query remember to add a prefix to the table names if you use one.
+-----------------------------------------------------
+Version 3.1 7 October 2025, by Flleeppyy
+Remove `stickyban` and its related tables.
 
+```sql
+DROP TABLE IF EXISTS `stickyban`;
+DROP TABLE IF EXISTS `stickyban_matched_ckey`;
+DROP TABLE IF EXISTS `stickyban_matched_ip`;
+DROP TABLE IF EXISTS `stickyban_matched_cid`;
+```
 -----------------------------------------------------
 Version 3.0 3 October 2025, by Flleeppyy
 Add `admin_log`, `admin_ranks` table

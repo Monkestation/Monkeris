@@ -21,8 +21,6 @@
 /// used to locate stuff to unban.
 #define BANTYPE_ANY_FULLBAN 5
 
-#define STICKYBAN_DB_CACHE_TIME (10 SECONDS)
-#define STICKYBAN_ROGUE_CHECK_TIME 5
 
 #define ROUNDSTART_LOGOUT_REPORT_TIME 6000 // Amount of time (in deciseconds) after the rounds starts, that the player disconnect report is issued.
 
