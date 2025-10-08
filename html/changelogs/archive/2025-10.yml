@@ -8,3 +8,6 @@
   flleeppyy:
   - admin: new admin rank system
   - bugfix: game panel create obj/mob/turf works now
+2025-10-08:
+  flleeppyy:
+  - rscdel: Remove Stickybans
