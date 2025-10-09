@@ -308,7 +308,7 @@
 
 /obj/item/gun/projectile/MouseDrop(over_object, src_location, over_location)
 	..()
-	if(src.loc == usr && istype(over_object, /obj/screen/inventory/hand))
+	if(src.loc == usr && istype(over_object, /atom/movable/screen/inventory/hand))
 		unload_ammo(usr, allow_dump=0)
 
 /obj/item/gun/projectile/afterattack(atom/A, mob/living/user)

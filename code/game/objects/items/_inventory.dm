@@ -153,8 +153,8 @@
 /obj/item/proc/try_transfer(target, mob/living/user)
 	if(loc == user && ishuman(user))
 		var/mob/living/carbon/human/H = user
-		if(istype(target, /obj/screen/inventory))
-			var/obj/screen/inventory/screen_thing = target
+		if(istype(target, /atom/movable/screen/inventory))
+			var/atom/movable/screen/inventory/screen_thing = target
 			target = screen_thing.slot_id
 		//makes sure that the storage is equipped, so that we can't drag it into our hand from miles away.
 		//there's got to be a better way of doing this.

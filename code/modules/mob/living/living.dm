@@ -770,13 +770,13 @@ default behaviour is:
 /mob/living/throw_mode_off()
 	src.in_throw_mode = 0
 	if (HUDneed.Find("throw"))
-		var/obj/screen/HUDthrow/HUD = HUDneed["throw"]
+		var/atom/movable/screen/HUDthrow/HUD = HUDneed["throw"]
 		HUD.update_icon()
 
 /mob/living/throw_mode_on()
 	src.in_throw_mode = 1
 	if (HUDneed.Find("throw"))
-		var/obj/screen/HUDthrow/HUD = HUDneed["throw"]
+		var/atom/movable/screen/HUDthrow/HUD = HUDneed["throw"]
 		HUD.update_icon()
 
 /mob/living/start_pulling(atom/movable/AM)
@@ -836,7 +836,7 @@ default behaviour is:
 	AM.pulledby = src
 
 	if (HUDneed.Find("pull"))
-		var/obj/screen/HUDthrow/HUD = HUDneed["pull"]
+		var/atom/movable/screen/HUDthrow/HUD = HUDneed["pull"]
 		HUD.update_icon()
 
 	if(ishuman(AM))

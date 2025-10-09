@@ -1,0 +1,5 @@
+author: flleeppyy
+delete-after: true
+changes:
+  - code_imp: Renamed `HUD_elemnet` and `/obj/screen` to be types of 
+      `/atom/movable`

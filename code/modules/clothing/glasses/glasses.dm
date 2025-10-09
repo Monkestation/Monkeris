@@ -9,7 +9,7 @@
 	var/off_state = "black_goggles"
 	var/active = TRUE
 	var/activation_sound = 'sound/items/goggles_charge.ogg'
-	var/obj/screen/overlay
+	var/atom/movable/screen/overlay
 	var/obj/item/clothing/glasses/hud/hud	// Hud glasses, if any
 
 /obj/item/clothing/glasses/attack_self(mob/user)

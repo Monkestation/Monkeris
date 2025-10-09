@@ -205,7 +205,7 @@ GLOBAL_VAR_INIT(GLOBAL_INSIGHT_MOD, 1)
 				pick_desires()
 			owner.playsound_local(get_turf(owner), 'sound/sanity/psychochimes.ogg', 100)
 
-	var/obj/screen/sanity/hud = owner.HUDneed["sanity"]
+	var/atom/movable/screen/sanity/hud = owner.HUDneed["sanity"]
 	hud?.update_icon()
 
 /datum/sanity/proc/handle_level()
@@ -450,7 +450,7 @@ GLOBAL_VAR_INIT(GLOBAL_INSIGHT_MOD, 1)
 	level = new_level
 	if(level == 0 && world.time >= breakdown_time)
 		breakdown()
-	var/obj/screen/sanity/hud = owner.HUDneed["sanity"]
+	var/atom/movable/screen/sanity/hud = owner.HUDneed["sanity"]
 	hud?.update_icon()
 
 /datum/sanity/proc/breakdown(positive_breakdown = FALSE)

@@ -18,8 +18,8 @@
 
 	for(var/HUDname in HUDdatum.HUDneed)
 		if(HUDdatum.HUDneed)
-			var/obj/screen/movable/exosuit/HUDtype = HUDdatum.HUDneed[HUDname]["type"]
-			var/obj/screen/movable/exosuit/HUD = new HUDtype(src)
+			var/atom/movable/screen/movable/exosuit/HUDtype = HUDdatum.HUDneed[HUDname]["type"]
+			var/atom/movable/screen/movable/exosuit/HUD = new HUDtype(src)
 			NEWorINITIAL(HUD.name, HUDname)
 			if(istype(HUD)) NEWorINITIAL(HUD.owner, src)
 			NEWorINITIAL(HUD.icon, HUDdatum.HUDneed[HUDname]["icon"])
@@ -31,7 +31,7 @@
 			if(HUD.process_flag) HUDprocess += HUD
 	var/i = 0
 	for(var/hardpoint in hardpoints)
-		var/obj/screen/movable/exosuit/hardpoint/H = new(src, hardpoint)
+		var/atom/movable/screen/movable/exosuit/hardpoint/H = new(src, hardpoint)
 		H.screen_loc = "WEST:4,CENTER+[6-i]"
 		HUDneed[hardpoint] = H
 		i++
@@ -49,7 +49,7 @@
 	. = ..()
 	for(var/mob/living/L in pilots) update_mech_hud_4(L)
 	for(var/i in HUDneed)
-		var/obj/screen/movable/exosuit/E = HUDneed[i]
+		var/atom/movable/screen/movable/exosuit/E = HUDneed[i]
 		if(E && istype(E)) E.on_handle_hud(src)
 
 /mob/living/exosuit/proc/update_mech_hud_4(mob/living/M)
@@ -58,7 +58,7 @@
 			for(var/i in HUDneed)
 				if(HUDneed[i])
 					M.client.screen |= HUDneed[i]
-					var/obj/screen/movable/exosuit/thing = HUDneed[i]
+					var/atom/movable/screen/movable/exosuit/thing = HUDneed[i]
 					thing.update_icon()
 			M.reset_view(src)
 		else

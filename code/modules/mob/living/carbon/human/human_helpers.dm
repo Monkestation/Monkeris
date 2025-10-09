@@ -85,7 +85,7 @@
 		equipment_darkness_modifier += 7
 		equipment_overlays |= global_hud.nvg
 		if(HUDtech.Find("glassesoverlay"))
-			var/obj/screen/glasses_overlay/GO = HUDtech["glassesoverlay"]
+			var/atom/movable/screen/glasses_overlay/GO = HUDtech["glassesoverlay"]
 			GO.update_icon()
 		equipment_see_invis = SEE_INVISIBLE_NOLIGHTING
 
@@ -98,7 +98,7 @@
 		if(G.overlay)
 			equipment_overlays |= G.overlay
 		if(HUDtech.Find("glassesoverlay"))
-			var/obj/screen/glasses_overlay/GO = HUDtech["glassesoverlay"]
+			var/atom/movable/screen/glasses_overlay/GO = HUDtech["glassesoverlay"]
 			GO.update_icon()
 		if(G.see_invisible >= 0)
 			if(equipment_see_invis)

@@ -1,8 +1,8 @@
 /*
-add(var/HUD_element/newElement) -> /HUD_element/newElement
+add(var/atom/movable/hud_element/newElement) -> /atom/movable/hud_element/newElement
 - adds child element into parent element, element position is relative to parent
 
-remove(var/HUD_element/element) -> /HUD_element/element
+remove(var/atom/movable/hud_element/element) -> /atom/movable/hud_element/element
 - removes child and usets childs parent
 
 getClickProc() -> /proc/clickProc
@@ -75,10 +75,10 @@ getAbsolutePositionX() -> x
 getAbsolutePositionY() -> y
 - gets element position on client view screen map, values are in pixels
 
-getElements() -> /list/HUD_element
+getElements() -> /list/atom/movable/hud_element
 - gets list of child elements
 
-getParent() -> /HUD_element
+getParent() -> /atom/movable/hud_element
 - gets parent element
 
 setName(var/new_name, var/nameAllElements = FALSE)
@@ -116,78 +116,78 @@ updateIcon()
 getIconOverlays() -> _iconOverlays
 - gets icon overlays
 
-getChildElementWithID(var/id) -> /HUD_element || null
+getChildElementWithID(var/id) -> /atom/movable/hud_element || null
 - return child element with identifier id or null if none
 
-moveChildOnTop(var/id) -> /HUD_element || null
+moveChildOnTop(var/id) -> /atom/movable/hud_element || null
 - return moved element with identifier id or null if none
 
-moveChildToBottom(var/id) -> /HUD_element || null
+moveChildToBottom(var/id) -> /atom/movable/hud_element || null
 - return moved element with identifier id or null if none
 
-alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HUD_element || null
+alignElements(var/horizontal, var/vertical, var/list/atom/movable/hud_element/targets) -> /atom/movable/hud_element || null
 - return src if aligned atleast one objects from targets
 
 
 */
 
 
-/HUD_element/proc/add(HUD_element/newElement)
-	RETURN_TYPE(/HUD_element)
+/atom/movable/hud_element/proc/add(atom/movable/hud_element/newElement)
+	RETURN_TYPE(/atom/movable/hud_element)
 	newElement = newElement || new
 	_connectElement(newElement)
 
 	return newElement
 
-/HUD_element/proc/remove(HUD_element/element)
+/atom/movable/hud_element/proc/remove(atom/movable/hud_element/element)
 	if(_disconnectElement(element))
 		return element
 
-/HUD_element/proc/setClickProc(P, holder)
+/atom/movable/hud_element/proc/setClickProc(P, holder)
 	_clickProc = P
 	_holder = holder
 	return src
 
-/HUD_element/proc/getClickProc()
+/atom/movable/hud_element/proc/getClickProc()
 	return _clickProc
 
-/HUD_element/proc/setHideParentOnClick(value)
+/atom/movable/hud_element/proc/setHideParentOnClick(value)
 	_hideParentOnClick = value
 
 	return src
 
-/HUD_element/proc/getHideParentOnClick()
+/atom/movable/hud_element/proc/getHideParentOnClick()
 	return _hideParentOnClick
 
 
-/HUD_element/proc/setDeleteOnHide(value)
+/atom/movable/hud_element/proc/setDeleteOnHide(value)
 	_deleteOnHide = value
 
 	return src
 
-/HUD_element/proc/getDeleteOnHide()
+/atom/movable/hud_element/proc/getDeleteOnHide()
 	return _deleteOnHide
 
 
-/HUD_element/proc/setHideParentOnHide(value)
+/atom/movable/hud_element/proc/setHideParentOnHide(value)
 	_hideParentOnHide = value
 
 	return src
 
-/HUD_element/proc/getHideParentOnHide()
+/atom/movable/hud_element/proc/getHideParentOnHide()
 	return _hideParentOnHide
 
 
-/HUD_element/proc/setPassClickToParent(value)
+/atom/movable/hud_element/proc/setPassClickToParent(value)
 	_passClickToParent = value
 
 	return src
 
-/HUD_element/proc/getPassClickToParent()
+/atom/movable/hud_element/proc/getPassClickToParent()
 	return _passClickToParent
 
 
-/HUD_element/proc/scaleToSize(width, height) //in pixels
+/atom/movable/hud_element/proc/scaleToSize(width, height) //in pixels
 	var/matrix/M = matrix()
 	if (width != null)
 		_scaleWidth = width/_iconWidth
@@ -205,14 +205,14 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 
 	return src
 
-/HUD_element/proc/getRectangle()
+/atom/movable/hud_element/proc/getRectangle()
 	var/result_x1 = 0
 	var/result_y1 = 0
 	var/result_x2 = getWidth()
 	var/result_y2 = getHeight()
 
-	var/list/HUD_element/elements = getElements()
-	for(var/HUD_element/E in elements)
+	var/list/atom/movable/hud_element/elements = getElements()
+	for(var/atom/movable/hud_element/E in elements)
 		var/list/rectangle = E.getRectangle()
 
 		var/x1 = E.getPositionX() + rectangle[1]
@@ -235,7 +235,7 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 
 	return bounds
 
-/HUD_element/proc/setDimensions(width, height)
+/atom/movable/hud_element/proc/setDimensions(width, height)
 	if (width != null)
 		_width = width
 	if (height != null)
@@ -245,35 +245,35 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 
 	return src
 
-/HUD_element/proc/setWidth(width)
+/atom/movable/hud_element/proc/setWidth(width)
 	_width = width
 
 	_updatePosition()
 
 	return src
 
-/HUD_element/proc/setHeight(height)
+/atom/movable/hud_element/proc/setHeight(height)
 	_height = height
 
 	_updatePosition()
 
 	return src
 
-/HUD_element/proc/getWidth()
+/atom/movable/hud_element/proc/getWidth()
 	return max(getIconWidth(), _width)*_scaleWidth
 
-/HUD_element/proc/getHeight()
+/atom/movable/hud_element/proc/getHeight()
 	return max(getIconHeight(), _height)*_scaleHeight
 
 
-/HUD_element/proc/setIcon(icon/I)
+/atom/movable/hud_element/proc/setIcon(icon/I)
 	icon = I
 	updateIconInformation()
 	updateIcon()
 
 	return src
 
-/HUD_element/proc/setIconFromDMI(filename, iconState, iconDir)
+/atom/movable/hud_element/proc/setIconFromDMI(filename, iconState, iconDir)
 	icon = filename
 	icon_state = iconState
 	dir = iconDir
@@ -282,13 +282,13 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 
 	return src
 
-/HUD_element/proc/getIconWidth()
+/atom/movable/hud_element/proc/getIconWidth()
 	return _iconWidth
 
-/HUD_element/proc/getIconHeight()
+/atom/movable/hud_element/proc/getIconHeight()
 	return _iconHeight
 
-/HUD_element/proc/mimicAtomIcon(atom/A)
+/atom/movable/hud_element/proc/mimicAtomIcon(atom/A)
 	icon = A.icon
 	icon_state = A.icon_state
 	dir = A.dir
@@ -302,7 +302,7 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 
 	return src
 
-/HUD_element/proc/updateIconInformation()
+/atom/movable/hud_element/proc/updateIconInformation()
 	if (!icon)
 		_iconWidth = 0
 		_iconHeight = 0
@@ -323,7 +323,7 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 
 	return src
 
-/HUD_element/proc/setAlignment(horizontal, vertical)
+/atom/movable/hud_element/proc/setAlignment(horizontal, vertical)
 	if (horizontal != null)
 		_currentAlignmentHorizontal = horizontal
 
@@ -334,14 +334,14 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 
 	return src
 
-/HUD_element/proc/getAlignmentVertical()
+/atom/movable/hud_element/proc/getAlignmentVertical()
 	return _currentAlignmentVertical
 
-/HUD_element/proc/getAlignmentHorizontal()
+/atom/movable/hud_element/proc/getAlignmentHorizontal()
 	return _currentAlignmentHorizontal
 
 
-/HUD_element/proc/setPosition(x, y) //in pixels
+/atom/movable/hud_element/proc/setPosition(x, y) //in pixels
 	if (x != null)
 		_relativePositionX = round(x)
 
@@ -352,55 +352,55 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 
 	return src
 
-/HUD_element/proc/getPositionX()
+/atom/movable/hud_element/proc/getPositionX()
 	return _relativePositionX
 
-/HUD_element/proc/getPositionY()
+/atom/movable/hud_element/proc/getPositionY()
 	return _relativePositionY
 
-/HUD_element/proc/getPosition()
+/atom/movable/hud_element/proc/getPosition()
 	return list(_relativePositionX,_relativePositionY)
 
-/HUD_element/proc/getAbsolutePositionX()
+/atom/movable/hud_element/proc/getAbsolutePositionX()
 	return _absolutePositionX
 
-/HUD_element/proc/getAbsolutePositionY()
+/atom/movable/hud_element/proc/getAbsolutePositionY()
 	return _absolutePositionY
 
-/HUD_element/proc/getAbsolutePosition()
+/atom/movable/hud_element/proc/getAbsolutePosition()
 	return list(_absolutePositionX,_absolutePositionY)
 
 
-/HUD_element/proc/getElements()
+/atom/movable/hud_element/proc/getElements()
 	return _elements
 
-/HUD_element/proc/getParent()
+/atom/movable/hud_element/proc/getParent()
 	return _parent
 
-/HUD_element/proc/setName(new_name, nameAllElements = FALSE)
+/atom/movable/hud_element/proc/setName(new_name, nameAllElements = FALSE)
 	name = new_name
 	if (nameAllElements)
-		var/list/HUD_element/elements = getElements()
-		for(var/HUD_element/E in elements)
+		var/list/atom/movable/hud_element/elements = getElements()
+		for(var/atom/movable/hud_element/E in elements)
 			E.setName(new_name, TRUE)
 
-/HUD_element/proc/getData(indexString)
+/atom/movable/hud_element/proc/getData(indexString)
 	if (_data)
 		return _data[indexString]
 
-/HUD_element/proc/setData(indexString, value)
+/atom/movable/hud_element/proc/setData(indexString, value)
 	_data = _data || new
 	_data[indexString] = value
 
 	return src
 
-/HUD_element/proc/getIdentifier()
+/atom/movable/hud_element/proc/getIdentifier()
 	return _identifier
 
-/HUD_element/proc/getObserver()
+/atom/movable/hud_element/proc/getObserver()
 	return _observer
 
-/HUD_element/proc/show(client/C)
+/atom/movable/hud_element/proc/show(client/C)
 	var/client/observer = getObserver()
 	if (observer)
 		if (observer != C)
@@ -414,7 +414,7 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 	var/identifier = getIdentifier()
 	if (identifier)
 		var/list/observerHUD = _getObserverHUD()
-		var/HUD_element/currentClientElement = observerHUD[identifier]
+		var/atom/movable/hud_element/currentClientElement = observerHUD[identifier]
 		if (currentClientElement)
 			if (currentClientElement == src)
 				return src
@@ -425,13 +425,13 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 
 	C.screen += src
 
-	var/list/HUD_element/elements = getElements()
-	for(var/HUD_element/E in elements)
+	var/list/atom/movable/hud_element/elements = getElements()
+	for(var/atom/movable/hud_element/E in elements)
 		E.show(C)
 
 	return src
 
-/HUD_element/proc/hide()
+/atom/movable/hud_element/proc/hide()
 	var/client/observer = getObserver()
 	if (!observer)
 		if (QDELETED(src))
@@ -441,7 +441,7 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 	var/identifier = getIdentifier()
 	if (identifier)
 		var/list/observerHUD = _getObserverHUD()
-		var/HUD_element/currentClientElement = observerHUD[identifier]
+		var/atom/movable/hud_element/currentClientElement = observerHUD[identifier]
 		if (currentClientElement)
 			if (currentClientElement == src)
 				observerHUD[identifier] = null
@@ -453,12 +453,12 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 
 	_setObserver()
 
-	var/list/HUD_element/elements = getElements()
-	for(var/HUD_element/E in elements)
+	var/list/atom/movable/hud_element/elements = getElements()
+	for(var/atom/movable/hud_element/E in elements)
 		E.hide()
 
 	if (_hideParentOnHide)
-		var/HUD_element/parent = getParent()
+		var/atom/movable/hud_element/parent = getParent()
 		if (parent)
 			parent = parent.hide()
 			if (!parent) //parent deleted
@@ -470,7 +470,7 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 
 	return src
 
-/HUD_element/proc/setIconAdditionsData(additionType, list/additionsData)
+/atom/movable/hud_element/proc/setIconAdditionsData(additionType, list/additionsData)
 	if(additionType != HUD_ICON_UNDERLAY && additionType != HUD_ICON_OVERLAY)
 		error("Trying to add icon addition data without setting type (HUD_ICON_UNDERLAY/HUD_ICON_OVERLAY).")
 		return
@@ -487,7 +487,7 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 		setIconAddition(additionType, additionName, data["icon"], data["icon_state"], data["dir"], data["color"], data["alpha"], data["is_plain"])
 	return src
 
-/HUD_element/proc/setIconAddition(additionType, additionName, addIcon, addIconState, addDir, color, alpha, isPlain)
+/atom/movable/hud_element/proc/setIconAddition(additionType, additionName, addIcon, addIconState, addDir, color, alpha, isPlain)
 	if(additionType != HUD_ICON_UNDERLAY && additionType != HUD_ICON_OVERLAY)
 		error("Trying to add icon addition without setting type (HUD_ICON_UNDERLAY/HUD_ICON_OVERLAY).")
 		return
@@ -527,7 +527,7 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 
 	return src
 
-/HUD_element/proc/setIconAdditionAlpha(additionType, additionName, alpha, noIconUpdate = FALSE)
+/atom/movable/hud_element/proc/setIconAdditionAlpha(additionType, additionName, alpha, noIconUpdate = FALSE)
 	if(additionType != HUD_ICON_UNDERLAY && additionType != HUD_ICON_OVERLAY)
 		error("Trying to set icon addition alpha without setting type (HUD_ICON_UNDERLAY/HUD_ICON_OVERLAY).")
 		return
@@ -541,7 +541,7 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 		updateIcon()
 	return src
 
-/HUD_element/proc/setIconAdditionColor(additionType, additionName, color, noIconUpdate = FALSE)
+/atom/movable/hud_element/proc/setIconAdditionColor(additionType, additionName, color, noIconUpdate = FALSE)
 	if(additionType != HUD_ICON_UNDERLAY && additionType != HUD_ICON_OVERLAY)
 		error("Trying to set icon addition color without setting type (HUD_ICON_UNDERLAY/HUD_ICON_OVERLAY).")
 		return
@@ -555,7 +555,7 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 		updateIcon()
 	return src
 
-/HUD_element/proc/getIconAdditionData(additionType, additionName)
+/atom/movable/hud_element/proc/getIconAdditionData(additionType, additionName)
 	if(additionType != HUD_ICON_UNDERLAY && additionType != HUD_ICON_OVERLAY)
 		error("Trying to get icon addition data without setting type (HUD_ICON_UNDERLAY/HUD_ICON_OVERLAY).")
 		return
@@ -566,21 +566,21 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 	else if(additionType == HUD_ICON_OVERLAY)
 		return _iconOverlaysData[additionName]
 
-/HUD_element/proc/updateIcon()
+/atom/movable/hud_element/proc/updateIcon()
 	_updateLayers()
 	return src
 
-/HUD_element/proc/getChildElementWithID(id)
-	for(var/HUD_element/element in getElements())
+/atom/movable/hud_element/proc/getChildElementWithID(id)
+	for(var/atom/movable/hud_element/element in getElements())
 		if(element.getIdentifier() == id)
 			return element
 	error("No element found with id \"[id]\".")
 
-/HUD_element/proc/moveChildOnTop(id)
+/atom/movable/hud_element/proc/moveChildOnTop(id)
 	if(!_elements.len)
 		error("Element has no child elements.")
 		return
-	var/HUD_element/E = getChildElementWithID(id)
+	var/atom/movable/hud_element/E = getChildElementWithID(id)
 	if (E)
 		_elements.Remove(E)
 		_elements.Insert(1,E)
@@ -588,11 +588,11 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 	else
 		error("moveChildOnTop(): No element with id \"[id]\" found.")
 
-/HUD_element/proc/moveChildToBottom(id)
+/atom/movable/hud_element/proc/moveChildToBottom(id)
 	if(!_elements.len)
 		error("Element has no child elements.")
 		return
-	var/HUD_element/E = getChildElementWithID(id)
+	var/atom/movable/hud_element/E = getChildElementWithID(id)
 	if (E)
 		_elements.Remove(E)
 		_elements.Add(E)
@@ -600,7 +600,7 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 	else
 		error("moveChildToBottom(): No element with id \"[id]\" found.")
 
-/HUD_element/proc/setClickedInteraction(state, list/iconData , duration = 8)
+/atom/movable/hud_element/proc/setClickedInteraction(state, list/iconData , duration = 8)
 	if(!iconData || duration <= 0)
 		error("incorrect button interaction setup.")
 		_onClickedInteraction = FALSE
@@ -614,7 +614,7 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 		_onClickedState = FALSE
 
 
-/HUD_element/proc/setHoveredInteraction(state, list/iconData)
+/atom/movable/hud_element/proc/setHoveredInteraction(state, list/iconData)
 	if(!iconData)
 		error("incorrect button interaction setup.")
 		_onHoveredInteraction = FALSE
@@ -625,7 +625,7 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 	else
 		_onHoveredState = FALSE
 
-/HUD_element/proc/setToggledInteraction(state, list/iconData)
+/atom/movable/hud_element/proc/setToggledInteraction(state, list/iconData)
 	if(!iconData)
 		error("incorrect button interaction setup.")
 		_onToggledInteraction = FALSE
@@ -636,10 +636,10 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 	else
 		_onToggledState = FALSE
 
-/HUD_element/proc/toggleDebugMode()
+/atom/movable/hud_element/proc/toggleDebugMode()
 	debugMode = !debugMode
 	if(debugMode)
-		var/HUD_element/debugBox = new("\[debug_box\]([type])_[getIdentifier()]")
+		var/atom/movable/hud_element/debugBox = new("\[debug_box\]([type])_[getIdentifier()]")
 		debugBox.setName("\[debug_box\]([type])_[getIdentifier()]")
 		debugBox.setIconFromDMI('icons/mob/screen/misc.dmi',"white_box")
 		debugBox.setPosition(getAbsolutePositionX(), getAbsolutePositionY())
@@ -651,7 +651,7 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 		_connectElement(debugBox)
 		debugBox.show(_observer)
 	else
-		var/HUD_element/debugBox = getChildElementWithID("\[debug_box\]([type])_[getIdentifier()]")
+		var/atom/movable/hud_element/debugBox = getChildElementWithID("\[debug_box\]([type])_[getIdentifier()]")
 		debugBox.hide()
 		_disconnectElement(debugBox)
 		qdel(debugBox)
@@ -663,8 +663,8 @@ alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) -> /HU
 	updateIcon()
 
 // mob clicks overrides
-/HUD_element/move_camera_by_click()
+/atom/movable/hud_element/move_camera_by_click()
 	return
 
-/HUD_element/attack_ghost(mob/observer/ghost/user as mob)
+/atom/movable/hud_element/attack_ghost(mob/observer/ghost/user as mob)
 	return

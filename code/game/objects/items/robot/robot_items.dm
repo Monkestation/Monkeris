@@ -44,7 +44,7 @@
 	icon = 'icons/obj/decals.dmi'
 	icon_state = "securearea"
 	var/sight_mode
-	var/obj/screen/overlay
+	var/atom/movable/screen/overlay
 
 /obj/item/borg/sight/xray
 	name = "\proper x-ray vision"

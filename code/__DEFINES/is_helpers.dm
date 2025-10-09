@@ -91,7 +91,7 @@ GLOBAL_VAR_INIT(refid_filter, TYPEID(filter(type="angular_blur")))
 
 #define isobj(A) istype(A, /obj)
 
-#define isHUDobj(A) istype(A, /obj/screen)
+#define isHUDobj(A) istype(A, /atom/movable/screen)
 
 #define isitem(A) istype(A, /obj/item)
 

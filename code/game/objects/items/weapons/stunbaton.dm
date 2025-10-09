@@ -186,7 +186,7 @@
 	return
 
 /obj/item/melee/baton/MouseDrop(over_object)
-	if((loc == usr) && istype(over_object, /obj/screen/inventory/hand) && eject_item(cell, usr))
+	if((loc == usr) && istype(over_object, /atom/movable/screen/inventory/hand) && eject_item(cell, usr))
 		cell = null
 		set_status(FALSE)
 		update_icon()

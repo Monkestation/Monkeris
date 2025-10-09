@@ -39,7 +39,7 @@
 	..(user, new_state)
 
 /obj/item/clothing/glasses/powered/MouseDrop(over_object)
-	if((src.loc == usr) && istype(over_object, /obj/screen/inventory/hand) && eject_item(cell, usr))
+	if((src.loc == usr) && istype(over_object, /atom/movable/screen/inventory/hand) && eject_item(cell, usr))
 		cell = null
 
 /obj/item/clothing/glasses/powered/attackby(obj/item/C, mob/living/user)

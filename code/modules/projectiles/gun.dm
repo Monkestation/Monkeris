@@ -194,7 +194,7 @@
 	if(!restrict_safety)
 		verbs += /obj/item/gun/proc/toggle_safety_verb  //addint it to all guns
 
-		var/obj/screen/item_action/action = new /obj/screen/item_action/top_bar/gun/safety
+		var/atom/movable/screen/item_action/action = new /atom/movable/screen/item_action/top_bar/gun/safety
 		action.owner = src
 		hud_actions += action
 	verbs += /obj/item/gun/proc/toggle_carry_state_verb
@@ -214,7 +214,7 @@
 	if(!wielded_item_state) // If the gun has no wielded item state then use this generic one.
 		wielded_item_state = "_doble" //Someone mispelled double but they did it so consistently it's staying this way.
 	generate_guntags()
-	var/obj/screen/item_action/action = new /obj/screen/item_action/top_bar/weapon_info
+	var/atom/movable/screen/item_action/action = new /atom/movable/screen/item_action/top_bar/weapon_info
 	action.owner = src
 	hud_actions += action
 
@@ -738,10 +738,10 @@
 
 
 /obj/item/gun/proc/initialize_firemode_actions()
-	var/obj/screen/item_action/action = locate(/obj/screen/item_action/top_bar/gun/fire_mode) in hud_actions
+	var/atom/movable/screen/item_action/action = locate(/atom/movable/screen/item_action/top_bar/gun/fire_mode) in hud_actions
 	if(LAZYLEN(firemodes) > 1)
 		if(!action)
-			action = new /obj/screen/item_action/top_bar/gun/fire_mode
+			action = new /atom/movable/screen/item_action/top_bar/gun/fire_mode
 			action.owner = src
 			hud_actions += action
 	else
@@ -749,10 +749,10 @@
 		hud_actions -= action
 
 /obj/item/gun/proc/initialize_scope()
-	var/obj/screen/item_action/action = locate(/obj/screen/item_action/top_bar/gun/scope) in hud_actions
+	var/atom/movable/screen/item_action/action = locate(/atom/movable/screen/item_action/top_bar/gun/scope) in hud_actions
 	if(LAZYLEN(zoom_factors) >= 1)
 		if(!action)
-			action = new /obj/screen/item_action/top_bar/gun/scope
+			action = new /atom/movable/screen/item_action/top_bar/gun/scope
 			action.owner = src
 			hud_actions += action
 			if(ismob(loc))

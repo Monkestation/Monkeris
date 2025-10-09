@@ -277,7 +277,7 @@
 	if((is_blind(src) || stat) && !isobserver(src))
 		to_chat(src, span_notice("Something is there but you can't see it."))
 		return
-	if(!istype(examinify, /obj/screen))
+	if(!istype(examinify, /atom/movable/screen))
 		face_atom(examinify)
 	var/obj/item/device/lighting/toggleable/flashlight/FL = locate() in src
 	if (FL?.on && stat != DEAD && !incapacitated())
@@ -609,7 +609,7 @@
 		pulling.pulledby = null
 		pulling = null
 		if(HUDneed.Find("pull"))
-			var/obj/screen/HUDthrow/HUD = HUDneed["pull"]
+			var/atom/movable/screen/HUDthrow/HUD = HUDneed["pull"]
 			HUD.update_icon()
 
 
@@ -1182,7 +1182,7 @@ All Canmove setting in this proc is temporary. This var should not be set from h
 	set src = usr
 
 	if(HUDneed["move intent"])
-		var/obj/screen/mov_intent/mov_intent = HUDneed["move intent"]
+		var/atom/movable/screen/mov_intent/mov_intent = HUDneed["move intent"]
 		mov_intent.Click()  // Yep , this is all.
 
 /mob/proc/adjustEarDamage()
@@ -1201,7 +1201,7 @@ All Canmove setting in this proc is temporary. This var should not be set from h
 
 /mob/proc/throw_mode_off()
 	src.in_throw_mode = 0
-	/*for (var/obj/screen/HUDthrow/HUD in src.client.screen.)
+	/*for (var/atom/movable/screen/HUDthrow/HUD in src.client.screen.)
 		if(HUD.name == "throw") //in case we don't have the HUD and we use the hotkey
 			//src.throw_icon.icon_state = "act_throw_off"
 			HUD.toggle_throw_mode()
@@ -1211,7 +1211,7 @@ All Canmove setting in this proc is temporary. This var should not be set from h
 	src.in_throw_mode = 1
 	/*if(src.throw_icon)
 		src.throw_icon.icon_state = "act_throw_on"*/
-	/*for (var/obj/screen/HUDthrow/HUD in src.client.screen.)
+	/*for (var/atom/movable/screen/HUDthrow/HUD in src.client.screen.)
 		if(HUD.name == "throw") //in case we don't have the HUD and we use the hotkey
 			//src.throw_icon.icon_state = "act_throw_off"
 			HUD.toggle_throw_mode()
@@ -1286,7 +1286,7 @@ All Canmove setting in this proc is temporary. This var should not be set from h
 /client/proc/toggle_zone_sel(list/zones)
 	if(!check_has_body_select())
 		return
-	var/obj/screen/zone_sel/selector = mob.HUDneed["damage zone"]
+	var/atom/movable/screen/zone_sel/selector = mob.HUDneed["damage zone"]
 	selector.set_selected_zone(next_list_item(mob.targeted_organ,zones))
 	logger.Log(
 		LOG_CATEGORY_TARGET_ZONE_SWITCH,

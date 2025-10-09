@@ -34,7 +34,7 @@
 		if (!(wear_mask && (wear_mask.item_flags & AIRTIGHT)))
 			internal = null
 		if(HUDneed.Find("internal"))
-			var/obj/screen/HUDelm = HUDneed["internal"]
+			var/atom/movable/screen/HUDelm = HUDneed["internal"]
 			HUDelm.update_icon()
 		if(internal)
 			return internal.remove_air_volume(volume_needed)

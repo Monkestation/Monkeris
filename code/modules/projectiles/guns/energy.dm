@@ -132,7 +132,7 @@
 		to_chat(usr, span_warning("[src] is a disposable, its batteries cannot be removed!"))
 	else if(self_recharge)
 		to_chat(usr, span_warning("[src] is a self-charging gun, its batteries cannot be removed!"))
-	else if((src.loc == usr) && istype(over_object, /obj/screen/inventory/hand) && eject_item(cell, usr))
+	else if((src.loc == usr) && istype(over_object, /atom/movable/screen/inventory/hand) && eject_item(cell, usr))
 		cell = null
 		update_icon()
 

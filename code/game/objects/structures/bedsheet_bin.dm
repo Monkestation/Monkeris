@@ -138,7 +138,7 @@ LINEN BINS
 
 /obj/item/bedsheet/MouseDrop(over_object, src_location, over_location)
 	..()
-	if(over_object == usr || istype(over_object, /obj/screen/inventory/hand))
+	if(over_object == usr || istype(over_object, /atom/movable/screen/inventory/hand))
 		if(!ishuman(over_object))
 			return
 		if(!folded)
