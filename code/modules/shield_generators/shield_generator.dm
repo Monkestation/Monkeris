@@ -667,21 +667,25 @@
 	if (field_integrity() >= max_report_integrity)
 		return
 
-	//Ok now we actually do the report
-	var/prefix = ""
-	var/spanclass = ""
-	if (field_integrity() <= 50)
-		prefix = "Warning! "
-		spanclass = "notice"
-	if (field_integrity() <= 25)
-		prefix = "Danger! "
-		spanclass = "danger"
-	if (field_integrity() <= 15)
-		prefix = "--CRITICAL WARNING!-- "
-		spanclass = "danger"
+	// Determine severity once based on integrity
+	var/integrity = field_integrity()
+	var/prefix
+	var/color
 
-	priority_announce(span(spanclass, "[prefix]Shield integrity at [round(field_integrity())]%"), "Shield Status Report")
+	if (integrity <= 15)
+		prefix = "--CRITICAL WARNING!--"
+		color = "crimson"
+	else if (integrity <= 25)
+		prefix = "Danger!"
+		color = "red"
+	else if (integrity <= 50)
+		prefix = "Warning!"
+		color = "orange"
+	else
+		prefix = null
+		color = "yellow"
 
+	priority_announce("[prefix] Shield integrity at [round(integrity)]%", "Shield Status Report", color_override = color)
 
 
 //This proc keeps an internal log of shield impacts, activations, deactivations, and a vague log of config changes

@@ -2,7 +2,7 @@ GLOBAL_LIST_INIT(admin_verbs_default, list(
 	/client/proc/mark_datum_mapview,
 	/client/proc/tag_datum_mapview,
 	/datum/admins/proc/show_player_panel,
-	/client/proc/deadmin_self,
+	/client/proc/deadmin,
 	/client/proc/hide_verbs))
 
 GLOBAL_LIST_INIT(admin_verbs_fun, list(
@@ -19,8 +19,6 @@ GLOBAL_LIST_INIT(admin_verbs_fun, list(
 	/client/proc/play_sound,
 	/client/proc/play_local_sound,
 	/client/proc/play_server_sound,
-	/proc/possess,
-	/proc/release,
 	/client/proc/respawn_character,
 	/client/proc/cmd_admin_gib_self,
 	/client/proc/everyone_random,
@@ -168,7 +166,6 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 	/client/proc/invisimin,
 	/datum/verbs/menu/Admin/verb/playerpanel, /* It isn't /datum/admin but it fits no less */
 	/client/proc/storyteller_panel,
-	/client/proc/stickybanpanel,
 	/client/proc/ban_panel,
 	/client/proc/unban_panel,
 	/client/proc/game_panel,
@@ -240,27 +237,35 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 	/client/proc/getcurrentlogs,
 	/client/proc/discord_msg))
 
+GLOBAL_LIST_INIT(admin_verbs_possess, list(/proc/possess, /proc/release))
+GLOBAL_PROTECT(admin_verbs_possess)
+
 /datum/verbs/menu/Admin/Generate_list(client/C)
 	if (C.holder)
 		. = ..()
 
 /client/proc/add_admin_verbs()
 	if(holder)
+		control_freak = CONTROL_FREAK_SKIN | CONTROL_FREAK_MACROS
+
+		var/rights = holder.rank_flags()
+		add_verb(src, GLOB.admin_verbs_default)
 
 		add_verb(src, GLOB.admin_verbs_default)
-		if(check_rights(R_ADMIN, FALSE, src)) // Admin includes all moderator verbs
+		if(rights & R_ADMIN) // Admin includes all moderator verbs
 			add_verb(src, GLOB.admin_verbs_admin)
 			add_verb(src, GLOB.admin_verbs_mod)
-		else if(check_rights(R_MENTOR, FALSE, src))
+		else if(rights & R_MENTOR)
 			add_verb(src, GLOB.admin_verbs_mentor)
-
-		if(check_rights(R_FUN, FALSE, src))
+		if(rights & R_POSSESS)
+			add_verb(src, GLOB.admin_verbs_possess)
+		if(rights & R_FUN)
 			add_verb(src, GLOB.admin_verbs_fun)
-		if(check_rights(R_SERVER, FALSE, src))
+		if(rights & R_SERVER)
 			add_verb(src, GLOB.admin_verbs_server)
-		if(check_rights(R_DEBUG, FALSE, src))
+		if(rights & R_DEBUG)
 			add_verb(src, GLOB.admin_verbs_debug)
-		if(check_rights(R_PERMISSIONS, FALSE, src))
+		if(rights & R_PERMISSIONS)
 			add_verb(src, GLOB.admin_verbs_permissions)
 
 		control_freak = 0 // enable profiler
@@ -553,30 +558,45 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 	log_admin("[key_name(usr)] used 'kill air'. [msg]")
 	message_admins(span_blue("[key_name_admin(usr)] used 'kill air'. [msg]"), 1)
 
-/client/proc/readmin_self()
-	set name = "Readmin"
-	set category = "Admin"
-
-	if(deadmin_holder)
-		deadmin_holder.reassociate()
-		log_admin("[src] re-admined themself.")
-		message_admins("[src] re-admined themself.", 1)
-		to_chat(src, span_interface("You now have the keys to control the planet, or atleast a small space station"))
-		remove_verb(src, /client/proc/readmin_self)
-
-//destroys our own admin datum so we can play as a regular player
-/client/proc/deadmin_self()
+/client/proc/deadmin()
 	set name = "Deadmin"
 	set category = "Admin"
+	set desc = "Shed your admin powers."
 
-	if(holder)
-		if(alert("Confirm self-deadmin for the round? You can re-admin yourself at any time.",,"Yes","No") == "Yes")
-			log_admin("[src] deadmined themself.")
-			message_admins("[src] deadmined themself.", 1)
-			if(holder)
-				holder.disassociate()
-			to_chat(src, span_interface("You are now a normal player."))
-			add_verb(src, /client/proc/readmin_self)
+	if(!holder)
+		return
+
+	holder.deactivate()
+
+	to_chat(src, span_interface("You are now a normal player."))
+	log_admin("[src] deadminned themselves.")
+	message_admins("[src] deadminned themselves.")
+	// SSblackbox.record_feedback("tally", "admin_verb", 1, "Deadmin")
+
+/client/proc/readmin()
+	set name = "Readmin"
+	set category = "Admin"
+	set desc = "Regain your admin powers."
+
+	var/datum/admins/A = GLOB.deadmins[ckey]
+
+	if(!A)
+		A = GLOB.admin_datums[ckey]
+		if (!A)
+			var/msg = " is trying to readmin but they have no deadmin entry"
+			message_admins("[key_name_admin(src)][msg]")
+			log_admin_private("[key_name(src)][msg]")
+			return
+
+	A.associate(src)
+
+	if (!holder)
+		return //This can happen if an admin attempts to vv themself into somebody elses's deadmin datum by getting ref via brute force
+
+	to_chat(src, span_interface("You are now an admin."), confidential = TRUE)
+	message_admins("[src] re-adminned themselves.")
+	log_admin("[src] re-adminned themselves.")
+	// SSblackbox.record_feedback("tally", "admin_verb", 1, "Readmin")
 
 /client/proc/toggle_log_hrefs()
 	set name = "Toggle href logging"

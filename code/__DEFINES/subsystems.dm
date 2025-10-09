@@ -7,7 +7,7 @@
  *
  * make sure you add an update to the schema_version stable in the db changelog
  */
-#define DB_MAJOR_VERSION 2
+#define DB_MAJOR_VERSION 3
 
 /**
  * DB minor schema version
@@ -16,7 +16,7 @@
  *
  * make sure you add an update to the schema_version stable in the db changelog
  */
-#define DB_MINOR_VERSION 0
+#define DB_MINOR_VERSION 1
 
 
 //! ## Timing subsystem
@@ -139,7 +139,6 @@
 #define INIT_ORDER_ICON_SMOOTHING -8
 #define INIT_ORDER_OVERLAY -9
 #define INIT_ORDER_XKEYSCORE -10
-#define INIT_ORDER_STICKY_BAN -11
 #define INIT_ORDER_TICKETS -12
 #define INIT_ORDER_LIGHTING -20
 #define INIT_ORDER_SHUTTLE -21

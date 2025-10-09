@@ -511,12 +511,12 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 		// 	toggles = prefs.toggles
 		// 	ignoring = prefs.ignoring
 		if(admin_only)
-			if (!check_rights_for(M, R_ADMIN))
+			if (!check_rights_for(M.client, R_ADMIN))
 				return
 			else
 				message += span_deadsay(" (This is viewable to admins only).")
 		var/override = FALSE
-		if(check_rights_for(M, R_ADMIN) && (M.client?.get_preference_value(/datum/client_preference/show_dsay)))
+		if(check_rights_for(M.client, R_ADMIN) && (M.client?.get_preference_value(/datum/client_preference/show_dsay)))
 			override = TRUE
 		// if(HAS_TRAIT(M, TRAIT_SIXTHSENSE) && message_type == DEADCHAT_REGULAR)
 		// 	override = TRUE

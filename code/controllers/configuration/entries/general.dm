@@ -335,26 +335,31 @@
 /// Forid admins from possessing scringularaitirtiys
 /datum/config_entry/flag/forbid_singulo_possession
 
+/// Gives the !localhost! rank to any client connecting from 127.0.0.1 or ::1
+/datum/config_entry/flag/enable_localhost_rank
+	protection = CONFIG_ENTRY_LOCKED
+
 /// Defines whether the server uses the legacy admin system with admins.txt or the SQL system
 /datum/config_entry/flag/admin_legacy_system
 	protection = CONFIG_ENTRY_LOCKED
 
-/// Gives the !localhost! rank to any client connecting from 127.0.0.1 or ::1
+/datum/config_entry/flag/protect_legacy_admins //Stops any admins loaded by the legacy system from having their rank edited by the permissions panel
+	protection = CONFIG_ENTRY_LOCKED
+
+/// Stops any ranks loaded by the legacy system from having their flags edited by the permissions panel
+/datum/config_entry/flag/protect_legacy_ranks
+	protection = CONFIG_ENTRY_LOCKED
+
+/datum/config_entry/flag/load_legacy_ranks_only //Loads admin ranks only from legacy admin_ranks.txt, while enabled ranks are mirrored to the database
+	protection = CONFIG_ENTRY_LOCKED
+
+//Gives the !localhost! rank to any client connecting from 127.0.0.1 or ::1
 /datum/config_entry/flag/enable_localhost_rank
 	protection = CONFIG_ENTRY_LOCKED
 
 /datum/config_entry/flag/admin_memo_system
 	protection = CONFIG_ENTRY_LOCKED
 
-// /datum/config_entry/flag/protect_legacy_admins //Stops any admins loaded by the legacy system from having their rank edited by the permissions panel
-// 	protection = CONFIG_ENTRY_LOCKED
-
-// /datum/config_entry/flag/protect_legacy_ranks //Stops any ranks loaded by the legacy system from having their flags edited by the permissions panel
-// 	protection = CONFIG_ENTRY_LOCKED
-
-
-// /datum/config_entry/flag/load_legacy_ranks_only //Loads admin ranks only from legacy admin_ranks.txt, while enabled ranks are mirrored to the database
-// 	protection = CONFIG_ENTRY_LOCKED
 
 /datum/config_entry/flag/mods_can_tempban
 

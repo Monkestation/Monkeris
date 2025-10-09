@@ -22,9 +22,9 @@
 
 	if(gravity_is_on)
 		log_admin("[key_name(user)] toggled gravity on.", 1)
-		message_admins("<span class='notice'>[key_name_admin(user)] toggled gravity on.", 1)
-		priority_announce("Gravity generators are again functioning within normal parameters. Sorry for any inconvenience.</span>")
+		message_admins("[key_name_admin(user)] toggled gravity on.", 1)
+		priority_announce("Gravity generators are again functioning within normal parameters. Sorry for any inconvenience.")
 	else
 		log_admin("[key_name(user)] toggled gravity off.", 1)
-		message_admins("<span class='notice'>[key_name_admin(usr)] toggled gravity off.", 1)
-		priority_announce("Feedback surge detected in mass-distributions systems. Artificial gravity has been disabled whilst the system reinitializes. Further failures may result in a gravitational collapse and formation of blackholes. Have a nice day.</span>")
+		message_admins("[key_name_admin(usr)] toggled gravity off.", 1)
+		priority_announce("Feedback surge detected in mass-distributions systems. Artificial gravity has been disabled whilst the system reinitializes. Further failures may result in a gravitational collapse and formation of blackholes. Have a nice day.")

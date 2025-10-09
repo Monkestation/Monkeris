@@ -249,23 +249,23 @@
 				log_text_poll_reply(poll_id, reply_text)
 		return
 
-	if (!src.client.holder)
+	if (!client || !client.holder)
 		return
 
 	if (href_list["startnow"])
-		src.client.holder.startnow()
+		client.holder.startnow()
 		return
 
 	if (href_list["endround"])
-		src.client.holder.end_round()
+		client.holder.end_round()
 		return
 
 	if (href_list["restart"])
-		src.client.holder.restart()
+		client.holder.restart()
 		return
 
 	if (href_list["runtimes"])
-		src.client.view_runtimes()
+		client.view_runtimes()
 		return
 
 

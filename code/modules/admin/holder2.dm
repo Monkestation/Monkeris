@@ -1,34 +1,40 @@
 GLOBAL_LIST_EMPTY(admin_datums)
+GLOBAL_PROTECT(admin_datums)
+GLOBAL_LIST_EMPTY(protected_admins)
+GLOBAL_PROTECT(protected_admins)
 
 GLOBAL_VAR_INIT(href_token, GenerateToken())
 GLOBAL_PROTECT(href_token)
 
 /datum/admins
+	var/list/datum/admin_rank/ranks
+
 	var/target
 	var/name = "nobody's admin datum (no rank)" //Makes for better runtimes
-	var/rank			= "Temporary Admin"
 	var/client/owner	= null
-	var/rights = 0
 	var/fakekey			= null
-
-	var/deadmined
 
 	var/datum/marked_datum
 
-	/// A lazylist of tagged datums, for quick reference with the View Tags verb
-	var/list/tagged_datums
+	var/href_token
+
+	/// Link from the database pointing to the admin's feedback forum
+	var/cached_feedback_link
+
+	var/deadmined
 
 	var/admincaster_screen = 0	//See newscaster.dm under machinery for a full description
 	var/datum/feed_message/admincaster_feed_message = new /datum/feed_message   //These two will act as holders.
 	var/datum/feed_channel/admincaster_feed_channel = new /datum/feed_channel
 	var/admincaster_signature	//What you'll sign the newsfeeds as
 
-	var/href_token
 
+	/// A lazylist of tagged datums, for quick reference with the View Tags verb
+	var/list/tagged_datums
 
 	var/given_profiling = FALSE
 
-/datum/admins/New(initial_rank = "Temporary Admin", initial_rights = 0, ckey)
+/datum/admins/New(list/datum/admin_rank/ranks, ckey, force_active = FALSE, protected)
 	if(IsAdminAdvancedProcCall())
 		var/msg = " has tried to elevate permissions!"
 		message_admins("[key_name_admin(usr)][msg]")
@@ -38,29 +44,67 @@ GLOBAL_PROTECT(href_token)
 			CRASH("Admin proc call creation of admin datum")
 		return
 	if(!ckey)
-		error("Admin datum created without a ckey argument.")
-		qdel(src)
-		return
+		QDEL_IN(src, 0)
+		CRASH("Admin datum created without a ckey")
+	if(!istype(ranks))
+		QDEL_IN(src, 0)
+		CRASH("Admin datum created with invalid ranks: [ranks] ([json_encode(ranks)])")
+	target = ckey
+	name = "[ckey]'s admin datum ([join_admin_ranks(ranks)])"
+	src.ranks = ranks
 	admincaster_signature = "[GLOB.company_name] Officer #[rand(0,9)][rand(0,9)][rand(0,9)]"
 	href_token = GenerateToken()
-	name = "[ckey]'s admin datum ([rank])"
-	target = ckey
-	rank = initial_rank
-	rights = initial_rights
-	try_give_devtools(owner)
-	GLOB.admin_datums[ckey] = src
+	//only admins with +ADMIN start admined
+	if(protected)
+		GLOB.protected_admins[target] = src
+	try_give_profiling()
+	try_give_devtools()
+	if (force_active || (rank_flags() & R_AUTOADMIN))
+		activate()
+	else
+		deactivate()
+
 
 /datum/admins/Destroy()
 	if(IsAdminAdvancedProcCall())
-		var/msg = " has tried to elevate permissions! (destroy)"
+		var/msg = " has tried to elevate permissions!"
 		message_admins("[key_name_admin(usr)][msg]")
 		log_admin("[key_name(usr)][msg]")
 		return QDEL_HINT_LETMELIVE
 	. = ..()
 
+/datum/admins/proc/activate()
+	if(IsAdminAdvancedProcCall())
+		var/msg = " has tried to elevate permissions!"
+		message_admins("[key_name_admin(usr)][msg]")
+		log_admin("[key_name(usr)][msg]")
+		return
+	GLOB.deadmins -= target
+	GLOB.admin_datums[target] = src
+	deadmined = FALSE
+	if (GLOB.directory[target])
+		associate(GLOB.directory[target]) //find the client for a ckey if they are connected and associate them with us
+
+/datum/admins/proc/deactivate()
+	if(IsAdminAdvancedProcCall())
+		var/msg = " has tried to elevate permissions!"
+		message_admins("[key_name_admin(usr)][msg]")
+		log_admin("[key_name(usr)][msg]")
+		return
+	GLOB.deadmins[target] = src
+	GLOB.admin_datums -= target
+
+	deadmined = TRUE
+
+	var/client/client = owner || GLOB.directory[target]
+
+	if (!isnull(client))
+		disassociate()
+		add_verb(client, /client/proc/readmin)
+
 /datum/admins/proc/associate(client/client)
 	if(IsAdminAdvancedProcCall())
-		var/msg = " has tried to elevate permissions! (associate)"
+		var/msg = " has tried to elevate permissions!"
 		message_admins("[key_name_admin(usr)][msg]")
 		log_admin("[key_name(usr)][msg]")
 		return
@@ -68,71 +112,140 @@ GLOBAL_PROTECT(href_token)
 	if(!istype(client))
 		return
 
+	if(client?.ckey != target)
+		var/msg = " has attempted to associate with [target]'s admin datum"
+		message_admins("[key_name_admin(client)][msg]")
+		log_admin("[key_name(client)][msg]")
+		return
+
+	sync_lastadminrank(client.ckey, client.key, src)
+
+
+	if (deadmined)
+		activate()
+
 	owner = client
 	owner.holder = src
-	owner.add_admin_verbs()	//TODO
-	GLOB.deadmins -= target
+	owner.add_admin_verbs()
+	remove_verb(owner, /client/proc/readmin)
+	owner.init_verbs() //re-initialize the verb list
 	GLOB.admins |= client
-	try_give_devtools(client)
-	try_give_profiling(client)
+
+	try_give_profiling()
+	try_give_devtools()
 
 /datum/admins/proc/disassociate()
 	if(IsAdminAdvancedProcCall())
-		var/msg = " has tried to elevate permissions! (dissociate)"
+		var/msg = " has tried to elevate permissions!"
 		message_admins("[key_name_admin(usr)][msg]")
 		log_admin("[key_name(usr)][msg]")
 		return
 	if(owner)
 		GLOB.admins -= owner
-		GLOB.deadmins += target
 		owner.remove_admin_verbs()
-		owner.deadmin_holder = owner.holder
 		owner.holder = null
+		owner = null
 
-/datum/admins/proc/reassociate()
-	if(IsAdminAdvancedProcCall())
-		var/msg = " has tried to elevate permissions! (reassociate)"
-		message_admins("[key_name_admin(usr)][msg]")
-		log_admin("[key_name(usr)][msg]")
-		return
+/// Returns the feedback forum thread for the admin holder's owner, as according to DB.
+/datum/admins/proc/feedback_link()
+	// This intentionally does not follow the 10-second maximum TTL rule,
+	// as this can be reloaded through the Reload-Admins verb.
+	if (cached_feedback_link == NO_FEEDBACK_LINK)
+		return null
 
-	if(owner)
-		GLOB.admins += owner
-		GLOB.deadmins -= target
+	if (!isnull(cached_feedback_link))
+		return cached_feedback_link
 
-		owner.holder = src
-		owner.deadmin_holder = null
-		owner.add_admin_verbs()
+	if (!SSdbcore.IsConnected())
+		return null
 
-/datum/admins/proc/try_give_devtools(client/client = usr)
-	if(!check_rights(R_DEBUG, C = client))
-		return
-	winset(client, null, "browser-options=byondstorage,find,refresh,devtools")
+	var/datum/db_query/feedback_query = SSdbcore.NewQuery(
+		"SELECT feedback FROM [format_table_name("admin")] WHERE ckey = :ckey",
+		list("ckey" = owner.ckey)
+	)
 
-/datum/admins/proc/try_give_profiling(client/client = usr)
-	if (CONFIG_GET(flag/forbid_admin_profiling) || CONFIG_GET(flag/forbid_all_profiling))
-		return
+	if(!feedback_query.Execute())
+		log_sql("Error retrieving feedback link for [src]")
+		qdel(feedback_query)
+		return FALSE
 
-	if (given_profiling)
-		return
+	if(!feedback_query.NextRow())
+		qdel(feedback_query)
+		cached_feedback_link = NO_FEEDBACK_LINK
+		return null // no feedback link exists
 
-	if (!check_rights(R_DEBUG))
-		return
+	cached_feedback_link = feedback_query.item[1] || NO_FEEDBACK_LINK
+	qdel(feedback_query)
 
-	given_profiling = TRUE
-	world.SetConfig("APP/admin", owner?.ckey || target, "role=admin")
+	if (cached_feedback_link == NO_FEEDBACK_LINK) // Because we don't want to send fake clickable links.
+		return null
 
+	return cached_feedback_link
+
+
+/// Will check to see if rank has at least one of the rights required.
+/datum/admins/proc/check_for_rights(rights_required)
+	if(rights_required && !(rights_required & rank_flags()))
+		return FALSE
+	return TRUE
+
+/// Will check to see if rank has exact rights required.
+/datum/admins/proc/check_for_exact_rights(rights_required)
+	if(rights_required && ((rights_required & rank_flags()) != rights_required))
+		return FALSE
+	return TRUE
+
+/datum/admins/proc/check_if_greater_rights_than_holder(datum/admins/other)
+	if(!other)
+		return TRUE //they have no rights
+	if(rank_flags() == R_EVERYTHING)
+		return TRUE //we have all the rights
+	if(src == other)
+		return TRUE //you always have more rights than yourself
+	if(rank_flags() != other.rank_flags())
+		if( (rank_flags() & other.rank_flags()) == other.rank_flags() )
+			return TRUE //we have all the rights they have and more
+	return FALSE
+
+/// Get the rank name of the admin
+/datum/admins/proc/rank_names()
+	return join_admin_ranks(ranks)
+
+/// Get the rank flags of the admin
+/datum/admins/proc/rank_flags()
+	var/combined_flags = NONE
+
+	for (var/datum/admin_rank/rank as anything in ranks)
+		combined_flags |= rank.rights
+
+	return combined_flags
 
 /// Get the permissions this admin is allowed to edit on other ranks
 /datum/admins/proc/can_edit_rights_flags()
 	var/combined_flags = NONE
 
-	// for (var/datum/admin_rank/rank as anything in ranks)
-	// 	combined_flags |= rank.can_edit_rights
-	for (var/rankrights as anything in GLOB.admin_ranks)
-		combined_flags |= rankrights
+	for (var/datum/admin_rank/rank as anything in ranks)
+		combined_flags |= rank.can_edit_rights
 
 	return combined_flags
+
+/datum/admins/proc/try_give_devtools(client/client = usr)
+	if(isnull(owner) || !(rank_flags() & R_DEBUG))
+		return
+	winset(owner, null, list("browser-options" = "+devtools"))
+
+/datum/admins/proc/try_give_profiling()
+	if (CONFIG_GET(flag/forbid_admin_profiling))
+		return
+
+	if (given_profiling)
+		return
+
+	if (!(rank_flags() & R_DEBUG))
+		return
+
+	given_profiling = TRUE
+	world.SetConfig("APP/admin", owner?.ckey || target, "role=admin")
 
 /datum/admins/vv_edit_var(var_name, var_value)
 	return FALSE //nice try trialmin
@@ -149,45 +262,43 @@ if it doesn't return 1 and show_msg=1 it will prints a message explaining why th
 generally it would be used like so:
 
 /proc/admin_proc()
-	if(!check_rights(R_ADMIN)) return
-	to_chat(world, "Hi, I’m Saul Goodman. Did you know that you have rights?")
+	if(!check_rights(R_ADMIN))
+		return
+	to_chat(world, "Hi, I’m Saul Goodman. Did you know that you have rights?", confidential = TRUE)
 
-NOTE: It checks usr by default. Supply the "C" argument if you wish to check for a specific client/mob.
+NOTE: it checks usr! not src! So if you're checking somebody's rank in a proc which they did not call
+you will have to do something like if(client.rights & R_ADMIN) yourself.
 */
-/proc/check_rights(rights_required, show_msg=1, client/C = usr)
-	if(ismob(C))
-		var/mob/M = C
-		C = M.client
-	if(!C)
-		return FALSE
-	if(!(isclient(C))) // If we still didn't find a client, something is wrong.
-		return FALSE
-	if(!C.holder)
-		if(show_msg)
-			C << span_warning("Error: You are not an admin.")
-		return FALSE
-
-	if(rights_required)
-		if(rights_required & C.holder.rights)
+/proc/check_rights(rights_required, show_msg=1)
+	if(usr?.client)
+		if (check_rights_for(usr.client, rights_required))
 			return TRUE
 		else
 			if(show_msg)
-				C << span_warning("Error: You do not have sufficient rights to do that. You require one of the following flags:[rights2text(rights_required," ")].")
-			return FALSE
-	else
-		return TRUE
+				to_chat(usr, "<font color='red'>Error: You do not have sufficient rights to do that. You require one of the following flags:[rights2text(rights_required," ")].</font>", confidential = TRUE)
+	return FALSE
+
 
 //probably a bit iffy - will hopefully figure out a better solution
 /proc/check_if_greater_rights_than(client/other)
-	if(usr && usr.client)
+	if(usr?.client)
 		if(usr.client.holder)
 			if(!other || !other.holder)
-				return 1
-			if(usr.client.holder.rights != other.holder.rights)
-				if( (usr.client.holder.rights & other.holder.rights) == other.holder.rights )
-					return 1	//we have all the rights they have and more
-		to_chat(usr, "<font color='red'>Error: Cannot proceed. They have more or equal rights to us.</font>")
-	return 0
+				return TRUE
+			return usr.client.holder.check_if_greater_rights_than_holder(other.holder)
+	return FALSE
+
+//This proc checks whether subject has at least ONE of the rights specified in rights_required.
+/proc/check_rights_for(client/subject, rights_required)
+	if(subject?.holder)
+		return subject.holder.check_for_rights(rights_required)
+	return FALSE
+
+//This proc checks whether subject has ALL the rights specified in rights_required.
+/proc/check_exact_rights_for(client/subject, rights_required)
+	if(subject?.holder)
+		return subject.holder.check_for_exact_rights(rights_required)
+	return FALSE
 
 
 /proc/GenerateToken()

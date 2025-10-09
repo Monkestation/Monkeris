@@ -56,18 +56,16 @@
 
 	if(input["status"] == "2")
 		var/list/players = list()
-		var/list/admins = list()
 
 		for(var/client/C in GLOB.clients)
-			if(C.holder)
-				if(C.holder.fakekey)
-					continue
-				admins[C.key] = C.holder.rank
 			players += C.key
 
+		var/list/adm = get_admin_counts()
+		var/list/presentmins = adm["present"]
+		var/list/afkmins = adm["afk"]
 		s["players"] = players.len
 		s["playerlist"] = list2params(players)
-		s["admins"] = admins.len
+		s["admins"] = presentmins.len + afkmins.len
 		s["adminlist"] = list2params(GLOB.admins)
 	else
 		var/n = 0
