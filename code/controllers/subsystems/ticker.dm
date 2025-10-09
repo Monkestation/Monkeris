@@ -65,7 +65,7 @@ SUBSYSTEM_DEF(ticker)
 
 	//station_explosion used to be a variable for every mob's hud. Which was a waste!
 	//Now we have a general cinematic centrally held within the gameticker....far more efficient!
-	var/obj/screen/cinematic = null
+	var/atom/movable/screen/cinematic = null
 
 	var/list/round_start_events
 
@@ -108,6 +108,8 @@ SUBSYSTEM_DEF(ticker)
 			pregame_timeleft = initial(pregame_timeleft)
 			for(var/client/C in GLOB.clients)
 				window_flash(C) //let them know lobby has opened up.
+				GLOB.lobbyScreen.play_music(C)
+
 			if(!start_immediately)
 				to_chat(world, span_boldnotice("Please, setup your character and select ready. Game will start in [DisplayTimeText(SSticker.GetTimeLeft())]."))
 			to_chat(world, span_notice("<b>Welcome to [station_name()]!</b>"))

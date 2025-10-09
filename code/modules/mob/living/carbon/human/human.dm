@@ -75,7 +75,7 @@
 			. += list(list("Distribution Pressure: [internal.distribute_pressure]"))
 
 	// RIG/hardsuit territory
-	// TODO: /stat_rig_module/ got no reason to continue existing, delete it
+	// TODO: /atom/movable/stat_rig_module/ got no reason to continue existing, delete it
 	// TODO: Cache some of the stuff below on the RIG side
 	if(back && istype(back,/obj/item/rig))
 		var/obj/item/rig/suit = back
@@ -952,6 +952,18 @@ var/list/rank_prefix = list(\
 
 	species = GLOB.all_species[new_species]
 
+	if (ismannequin(src))
+		holder_type = species?.holder_type
+		maxHealth = species.total_health
+		skin_color = species.base_color || "#000000"
+		icon_state = lowertext(species.name)
+		if (!organs.len)
+			rebuild_organs()
+			src.sync_organ_dna()
+
+		species.handle_post_spawn(src)
+		return !!species
+
 	if(species.language)
 		add_language(species.language)
 
@@ -1004,10 +1016,7 @@ var/list/rank_prefix = list(\
 		hud_used = new /datum/hud(src)
 		update_hud()
 	*/
-	if(species)
-		return 1
-	else
-		return 0
+	return !!species
 
 //Needed for augmentation
 /mob/living/carbon/human/proc/rebuild_organs(from_preference)
@@ -1574,7 +1583,7 @@ var/list/rank_prefix = list(\
 	blocking = TRUE
 	visible_message(span_warning("[src] tenses up, ready to block!"))
 	if(HUDneed.Find("block"))
-		var/obj/screen/block/HUD = HUDneed["block"]
+		var/atom/movable/screen/block/HUD = HUDneed["block"]
 		HUD.update_icon()
 	update_block_overlay()
 	return
@@ -1585,7 +1594,7 @@ var/list/rank_prefix = list(\
 	blocking = FALSE
 	visible_message(span_notice("[src] lowers \his guard."))
 	if(HUDneed.Find("block"))
-		var/obj/screen/block/HUD = HUDneed["block"]
+		var/atom/movable/screen/block/HUD = HUDneed["block"]
 		HUD.update_icon()
 	update_block_overlay()
 	return

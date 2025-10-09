@@ -5,7 +5,7 @@ SUBSYSTEM_DEF(mapping)
 	init_time_threshold = 1 MINUTE
 
 	var/list/map_templates = list()
-	var/dmm_suite/maploader = null
+	var/datum/dmm_suite/maploader = null
 	var/list/teleportlocs = list()
 	var/list/ghostteleportlocs = list()
 	var/cave_ore_count = 0

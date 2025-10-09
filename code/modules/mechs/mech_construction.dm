@@ -46,7 +46,7 @@
 
 	GLOB.destroyed_event.unregister(module_to_forget, src, PROC_REF(forget_module))
 
-	var/obj/screen/movable/exosuit/hardpoint/H = HUDneed[target]
+	var/atom/movable/screen/movable/exosuit/hardpoint/H = HUDneed[target]
 	if(istype(H)) H.holding = null
 	module_to_forget.layer = initial(module_to_forget.layer)
 	module_to_forget.plane = initial(module_to_forget.plane)
@@ -101,7 +101,7 @@
 	system.forceMove(src)
 	hardpoints[system_hardpoint] = system
 
-	var/obj/screen/movable/exosuit/hardpoint/H = HUDneed[system_hardpoint]
+	var/atom/movable/screen/movable/exosuit/hardpoint/H = HUDneed[system_hardpoint]
 
 	if(istype(H)) H.holding = system
 
@@ -141,7 +141,7 @@
 
 	GLOB.destroyed_event.unregister(system, src, PROC_REF(forget_module))
 
-	var/obj/screen/movable/exosuit/hardpoint/H = HUDneed[system_hardpoint]
+	var/atom/movable/screen/movable/exosuit/hardpoint/H = HUDneed[system_hardpoint]
 	if(istype(H)) H.holding = null
 	HUDneed[system.name] = null
 	HUDneed.Remove(system.name)

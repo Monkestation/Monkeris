@@ -1,49 +1,49 @@
 //-----------------------ROBOT stuff---------------------
-/obj/screen/silicon
+/atom/movable/screen/silicon
 	name = "silicon button"
 	icon = 'icons/mob/screen1_robot.dmi'
 
 
-/obj/screen/silicon/radio
+/atom/movable/screen/silicon/radio
 	name = "radio"
 	icon_state = "radio"
 
-/obj/screen/silicon/radio/Click()
+/atom/movable/screen/silicon/radio/Click()
 	usr:radio_menu()
 	return TRUE
 
 
-/obj/screen/silicon/panel
+/atom/movable/screen/silicon/panel
 	name = "panel"
 	icon_state = "panel"
 
-/obj/screen/silicon/panel/Click()
+/atom/movable/screen/silicon/panel/Click()
 	usr:installed_modules()
 	return TRUE
 
-/obj/screen/silicon/store
+/atom/movable/screen/silicon/store
 	name = "store"
 	icon_state = "store"
 
-/obj/screen/silicon/store/Click()
+/atom/movable/screen/silicon/store/Click()
 	var/mob/living/silicon/robot/R = parentmob
 	if(R.module)
 		R.uneq_active()
 		R.update_robot_modules_display()
-		for (var/obj/screen/inv in parentmob.HUDinventory)
+		for (var/atom/movable/screen/inv in parentmob.HUDinventory)
 			inv.update_icon()
 	else
 		to_chat(R, "You haven't selected a module yet.")
 	return TRUE
 
 
-/obj/screen/silicon/module
+/atom/movable/screen/silicon/module
 	name = "moduleNo"
 	icon_state = "inv1"
 	var/module_num
 	var/icon/underlay_icon = new ('icons/mob/screen1_robot.dmi', "inv_active")
 
-/obj/screen/silicon/module/New(_name = "unnamed", _screen_loc = "7,7", _icon , _icon_state, mob/living/_parentmob, _module_num)
+/atom/movable/screen/silicon/module/New(_name = "unnamed", _screen_loc = "7,7", _icon , _icon_state, mob/living/_parentmob, _module_num)
 //	..(_name, _screen_loc, _parentmob)
 	src.parentmob = _parentmob
 	src.name = _name
@@ -55,7 +55,7 @@
 		src.icon = _icon
 	src.update_icon()
 
-/obj/screen/silicon/module/update_icon()
+/atom/movable/screen/silicon/module/update_icon()
 	underlays.Cut()
 	var/mob/living/silicon/robot/R = parentmob
 	if(!R.module_active(module_num)) return
@@ -74,23 +74,23 @@
 				return
 
 
-/obj/screen/silicon/module/Click()
+/atom/movable/screen/silicon/module/Click()
 	if (isrobot(parentmob))
 		var/mob/living/silicon/robot/R = parentmob
 		R.toggle_module(module_num)
 		return TRUE
-	log_debug("[parentmob] have type [parentmob.type], but try use /obj/screen/silicon/module/Click() from [src]")
+	log_debug("[parentmob] have type [parentmob.type], but try use /atom/movable/screen/silicon/module/Click() from [src]")
 	return TRUE
 
-/obj/screen/silicon/cell
+/atom/movable/screen/silicon/cell
 	name = "cell"
 	icon_state = "charge0"
 	process_flag = TRUE
 
-/obj/screen/silicon/cell/Process()
+/atom/movable/screen/silicon/cell/Process()
 	update_icon()
 
-/obj/screen/silicon/cell/update_icon()
+/atom/movable/screen/silicon/cell/update_icon()
 	var/mob/living/silicon/robot/R = parentmob
 	if (R.cell)
 		var/cellcharge = R.cell.charge/R.cell.maxcharge
@@ -108,11 +108,11 @@
 	else
 		icon_state = "charge-empty"
 
-/obj/screen/health/cyborg/Process()
+/atom/movable/screen/health/cyborg/Process()
 	update_icon()
 	return
 
-/obj/screen/health/cyborg/update_icon()
+/atom/movable/screen/health/cyborg/update_icon()
 	if (parentmob.stat != 2)
 		if(isdrone(parentmob))
 			switch(parentmob.health)
@@ -151,11 +151,11 @@
 		icon_state = "health7"
 
 
-/obj/screen/silicon/module_select
+/atom/movable/screen/silicon/module_select
 	name = "module"
 	icon_state = "nomod"
 
-/obj/screen/silicon/module_select/Click()
+/atom/movable/screen/silicon/module_select/Click()
 	if(isrobot(parentmob))
 		var/mob/living/silicon/robot/R = parentmob
 		if(R.module)
@@ -165,15 +165,15 @@
 		update_icon()
 	return TRUE
 
-/obj/screen/silicon/module_select/update_icon()
+/atom/movable/screen/silicon/module_select/update_icon()
 	var/mob/living/silicon/robot/R = parentmob
 	icon_state = lowertext(R.modtype)
 
-/obj/screen/silicon/inventory
+/atom/movable/screen/silicon/inventory
 	name = "inventory"
 	icon_state = "inventory"
 
-/obj/screen/silicon/inventory/Click()
+/atom/movable/screen/silicon/inventory/Click()
 	if(isrobot(parentmob))
 		var/mob/living/silicon/robot/R = parentmob
 		if(R.module)
@@ -186,7 +186,7 @@
 
 
 
-/obj/screen/silicon/glasses_overlay
+/atom/movable/screen/silicon/glasses_overlay
 	icon = null
 	name = "glasses"
 	screen_loc = "1,1"
@@ -195,11 +195,11 @@
 	layer = 17 //The black screen overlay sets layer to 18 to display it, this one has to be just on top.
 
 
-/obj/screen/silicon/glasses_overlay/Process()
+/atom/movable/screen/silicon/glasses_overlay/Process()
 	update_icon()
 	return
 
-/obj/screen/silicon/glasses_overlay/update_icon()
+/atom/movable/screen/silicon/glasses_overlay/update_icon()
 	overlays.Cut()
 	var/mob/living/silicon/robot/R = parentmob
 	for (var/obj/item/borg/sight/S in list(R.module_state_1, R.module_state_2, R.module_state_3))
@@ -207,19 +207,19 @@
 			overlays |= S.overlay
 
 
-/obj/screen/silicon/pull
+/atom/movable/screen/silicon/pull
 	name = "pull"
 	icon_state = "robotpull0"
 
-/obj/screen/silicon/pull/New()
+/atom/movable/screen/silicon/pull/New()
 	..()
 	update_icon()
 
-/obj/screen/silicon/pull/Click()
+/atom/movable/screen/silicon/pull/Click()
 	usr.stop_pulling()
 	update_icon()
 
-/obj/screen/silicon/pull/update_icon()
+/atom/movable/screen/silicon/pull/update_icon()
 	if (parentmob.pulling)
 		icon_state = "robotpull1"
 	else

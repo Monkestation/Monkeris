@@ -30,7 +30,7 @@
 	return (user.Adjacent(T) && user.get_active_held_item() == src && !user.stat && !user.restrained())
 
 /obj/item/rpd/MouseDrop(over_object)
-	if((src.loc == usr) && istype(over_object, /obj/screen/inventory/hand) && eject_item(cell, usr))
+	if((src.loc == usr) && istype(over_object, /atom/movable/screen/inventory/hand) && eject_item(cell, usr))
 		cell = null
 	else
 		return ..()

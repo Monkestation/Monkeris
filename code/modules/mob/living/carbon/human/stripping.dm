@@ -150,5 +150,5 @@
 		internal.add_fingerprint(user)
 
 	if(HUDneed.Find("internal"))
-		var/obj/screen/HUDelm = HUDneed["internal"]
+		var/atom/movable/screen/HUDelm = HUDneed["internal"]
 		HUDelm.update_icon()

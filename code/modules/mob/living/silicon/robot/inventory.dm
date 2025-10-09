@@ -51,7 +51,7 @@
 		module_state_3:loc = module
 		module_state_3 = null
 		//inv3.icon_state = "inv3"
-	for(var/obj/screen/inv as anything in HUDinventory)
+	for(var/atom/movable/screen/inv as anything in HUDinventory)
 		inv.update_icon()
 	update_robot_modules_display()
 	updateicon()
@@ -86,7 +86,7 @@
 		module_state_3:loc = module
 		module_state_3 = null
 		//inv3.icon_state = "inv3"
-	for (var/obj/screen/HUDelement in HUDinventory)
+	for (var/atom/movable/screen/HUDelement in HUDinventory)
 		HUDelement.underlays.Cut()
 	update_robot_modules_display()
 	updateicon()
@@ -197,7 +197,7 @@
 			select_module(module)
 		else
 			deselect_module(get_selected_module()) //If we can't do select anything, at least deselect the current module.
-	for (var/obj/screen/inv in src.HUDinventory)
+	for (var/atom/movable/screen/inv in src.HUDinventory)
 		inv.update_icon()
 	return
 
@@ -225,7 +225,7 @@
 /mob/living/silicon/robot/proc/find_inv_position(invnum)
 	if (!src.HUDinventory.len)
 		return
-	var/obj/screen/silicon/module/inv
+	var/atom/movable/screen/silicon/module/inv
 
 	if(invnum in 1 to 3)
 		inv = src.HUDinventory[invnum]

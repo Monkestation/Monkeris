@@ -7,10 +7,14 @@
 // music files should be in ogg extention
 
 /hook/startup/proc/initLobbyScreen()
-	var/list/variations = subtypesof(/datum/lobbyscreen) - /datum/lobbyscreen/tektober
-	var/datum/lobbyscreen/LS = pick(variations)
-	GLOB.lobbyScreen = new LS()
-	return 1
+    var/list/variations = list()
+    for (var/datum/lobbyscreen/type as anything in subtypesof(/datum/lobbyscreen))
+        if (initial(type.image_file))
+            variations += type
+
+    var/datum/lobbyscreen/LS = pick(variations)
+    GLOB.lobbyScreen = new LS()
+    return 1
 
 /datum/lobbyscreen
 	var/image_file
@@ -34,8 +38,6 @@
 	else
 		musicTrack = pick(possibleMusic)
 
-	if (!image_file)
-		log_runtime("Lobbyscreen [src.type] has no image file.")
 	return ..()
 
 /datum/lobbyscreen/proc/get_info_list()
@@ -48,7 +50,7 @@
 	if(!musicTrack)
 		return
 	if(C.get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_YES)
-		sound_to(C, sound(musicTrack, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))
+		sound_to(C, sound(musicTrack, repeat = 0, wait = 0, volume = 65, channel = GLOB.lobby_sound_channel))
 
 /datum/lobbyscreen/proc/stop_music(client/C)
 	if(!musicTrack)

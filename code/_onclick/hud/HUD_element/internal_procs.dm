@@ -3,14 +3,14 @@ all vars and procs starting with _ are meant to be used only internally
 see external_procs.dm for usable procs and documentation on how to use them
 */
 
-/HUD_element/proc/_recalculateAlignmentOffset()
+/atom/movable/hud_element/proc/_recalculateAlignmentOffset()
 	/*
 	- look HUD_defines.dm for arguments
 
 	- in order to calculate screen width and height we use client.view which represents radius of screen
 	- we calculate size in pixels using (2 * (_observer ? _observer.view : 7) + 1) * 32
 	*/
-	var/HUD_element/parent = getParent()
+	var/atom/movable/hud_element/parent = getParent()
 	switch (_currentAlignmentHorizontal)
 		if (HUD_NO_ALIGNMENT)
 			_alignmentOffsetX = 0
@@ -76,11 +76,11 @@ see external_procs.dm for usable procs and documentation on how to use them
 				error("Passed wrong argument for vertical alignment.")
 				_alignmentOffsetY = 0
 
-/HUD_element/proc/_updatePosition()
+/atom/movable/hud_element/proc/_updatePosition()
 	var/realX = _relativePositionX
 	var/realY = _relativePositionY
 
-	var/HUD_element/parent = getParent()
+	var/atom/movable/hud_element/parent = getParent()
 	if (parent)
 		realX += parent._absolutePositionX
 		realY += parent._absolutePositionY
@@ -94,42 +94,42 @@ see external_procs.dm for usable procs and documentation on how to use them
 
 	screen_loc = "[_screenBottomLeftX]:[round(realX)],[_screenBottomLeftY]:[round(realY)]"
 
-	var/list/HUD_element/elements = getElements()
-	for(var/HUD_element/E in elements)
+	var/list/atom/movable/hud_element/elements = getElements()
+	for(var/atom/movable/hud_element/E in elements)
 		E._updatePosition()
 
 	return src
 
-/HUD_element/proc/_getObserverHUD()
+/atom/movable/hud_element/proc/_getObserverHUD()
 	var/client/observer = getObserver()
 	if (!observer)
 		var/identifier = getIdentifier()
 		log_to_dd("Error: HUD element with identifier '[identifier]' has no observer")
 		return
 
-	if (!observer.HUD_elements)
-		observer.HUD_elements = new
+	if (!observer.hud_elements)
+		observer.hud_elements = new
 
-	return observer.HUD_elements
+	return observer.hud_elements
 
-/HUD_element/proc/_setObserver(client/C)
+/atom/movable/hud_element/proc/_setObserver(client/C)
 	_observer = C
 
 	return src
 
-/HUD_element/proc/_connectElement(HUD_element/E)
+/atom/movable/hud_element/proc/_connectElement(atom/movable/hud_element/E)
 	if (!E)
 		log_to_dd("Error: Invalid HUD element '[E]'")
 		return
 
-	var/list/HUD_element/elements = getElements()
+	var/list/atom/movable/hud_element/elements = getElements()
 	if (elements.Find(E))
 		log_to_dd("Error: HUD element '[E]' already connected")
 		return
 
-	var/HUD_element/parent = E.getParent()
+	var/atom/movable/hud_element/parent = E.getParent()
 	if (parent)
-		var/list/HUD_element/elementRemove = parent.getElements()
+		var/list/atom/movable/hud_element/elementRemove = parent.getElements()
 		elementRemove.Remove(E)
 
 	E._setParent(src)
@@ -137,12 +137,12 @@ see external_procs.dm for usable procs and documentation on how to use them
 
 	return src
 
-/HUD_element/proc/_disconnectElement(HUD_element/E)
+/atom/movable/hud_element/proc/_disconnectElement(atom/movable/hud_element/E)
 	if (!E)
 		log_to_dd("Error: Invalid HUD element '[E]'")
 		return
 
-	var/list/HUD_element/elements = getElements()
+	var/list/atom/movable/hud_element/elements = getElements()
 	if (elements.Find(E))
 		elements.Remove(E)
 
@@ -150,17 +150,17 @@ see external_procs.dm for usable procs and documentation on how to use them
 
 	return src
 
-/HUD_element/proc/_setParent(HUD_element/E)
+/atom/movable/hud_element/proc/_setParent(atom/movable/hud_element/E)
 	_parent = E
 
 	return src
 
-/HUD_element/proc/_unsetParent()
+/atom/movable/hud_element/proc/_unsetParent()
 	_parent = null
 
 	return src
 
-/HUD_element/proc/_addAdditionIcon(additionType, additionName)
+/atom/movable/hud_element/proc/_addAdditionIcon(additionType, additionName)
 	if(!_iconsBuffer["[additionType]_[additionName]"])
 		if(getIconAdditionData(additionType, additionName))
 			error("Icon for [additionType]_[additionName] is not buffered.")
@@ -170,7 +170,7 @@ see external_procs.dm for usable procs and documentation on how to use them
 	else if(additionType == HUD_ICON_OVERLAY)
 		overlays += _iconsBuffer["[additionType]_[additionName]"]
 
-/HUD_element/proc/_assembleAndBufferIcon(additionType, additionName, list/data)
+/atom/movable/hud_element/proc/_assembleAndBufferIcon(additionType, additionName, list/data)
 	if(!data)
 		error("Nothing was passed to buffer")
 		return
@@ -188,7 +188,7 @@ see external_procs.dm for usable procs and documentation on how to use them
 		return I
 	return null
 
-/HUD_element/proc/_updateLayers()
+/atom/movable/hud_element/proc/_updateLayers()
 	overlays.Cut()
 	underlays.Cut()
 
@@ -207,19 +207,19 @@ see external_procs.dm for usable procs and documentation on how to use them
 		if(_onClickedState)
 			_addAdditionIcon(HUD_ICON_OVERLAY, HUD_OVERLAY_CLICKED)
 
-/HUD_element/button/MouseEntered(location)
+/atom/movable/hud_element/button/MouseEntered(location)
 	if(_onHoveredInteraction && !_onHoveredState)
 		_onHoveredState = TRUE
 		updateIcon()
 	return ..()
 
-/HUD_element/button/MouseExited(object,location,control,params)
+/atom/movable/hud_element/button/MouseExited(object,location,control,params)
 	if(_onHoveredInteraction)
 		_onHoveredState = FALSE
 		updateIcon()
 	return ..()
 
-/HUD_element/button/Click(location,control,params)
+/atom/movable/hud_element/button/Click(location,control,params)
 	if(_onClickedInteraction && !_onClickedState)
 		_onClickedState = TRUE
 		updateIcon()

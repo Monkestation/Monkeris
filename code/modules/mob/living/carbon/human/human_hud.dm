@@ -31,13 +31,13 @@
 	var/mob/living/carbon/human/H = src
 
 
-	for (var/obj/screen/inventory/HUDinv in H.HUDinventory)
+	for (var/atom/movable/screen/inventory/HUDinv in H.HUDinventory)
 
 		if (HUDinv.color != H.client.prefs.UI_style_color || HUDinv.alpha != H.client.prefs.UI_style_alpha)
 			return FALSE
 
 	for (var/p in HUDneed)
-		var/obj/screen/HUDelm = HUDneed[p]
+		var/atom/movable/screen/HUDelm = HUDneed[p]
 		if (HUDelm.color != H.client.prefs.UI_style_color || HUDelm.alpha != H.client.prefs.UI_style_alpha)
 			return FALSE
 	return TRUE
@@ -56,39 +56,39 @@
 	var/datum/hud/human/HUDdatum = GLOB.HUDdatums[H.defaultHUD]
 	if (H.client.prefs.UI_compact_style && HUDdatum.MinStyleFlag)
 		for (var/p in H.HUDneed)
-			var/obj/screen/HUD = H.HUDneed[p]
+			var/atom/movable/screen/HUD = H.HUDneed[p]
 			HUD.underlays.Cut()
 			if(HUDdatum.HUDneed[p]["minloc"])
 				HUD.screen_loc = HUDdatum.HUDneed[p]["minloc"]
 
 		for (var/p in H.HUDtech)
-			var/obj/screen/HUD = H.HUDtech[p]
+			var/atom/movable/screen/HUD = H.HUDtech[p]
 			if(HUDdatum.HUDoverlays[p]["minloc"])
 				HUD.screen_loc = HUDdatum.HUDoverlays[p]["minloc"]
 
-		for (var/obj/screen/inventory/HUDinv in H.HUDinventory)
+		for (var/atom/movable/screen/inventory/HUDinv in H.HUDinventory)
 			HUDinv.underlays.Cut()
 			for (var/p in H.species.hud.gear)
 				if(H.species.hud.gear[p] == HUDinv.slot_id)
 					if(HUDdatum.slot_data[p]["minloc"])
 						HUDinv.screen_loc = HUDdatum.slot_data[p]["minloc"]
 					break
-		for (var/obj/screen/frippery/HUDfri in H.HUDfrippery)
+		for (var/atom/movable/screen/frippery/HUDfri in H.HUDfrippery)
 			H.client.screen -= HUDfri
 	else
 
 		for (var/p in H.HUDneed)
-			var/obj/screen/HUD = H.HUDneed[p]
+			var/atom/movable/screen/HUD = H.HUDneed[p]
 			HUD.underlays.Cut()
 			if (HUDdatum.HUDneed[p]["background"])
 				HUD.underlays += HUDdatum.IconUnderlays[HUDdatum.HUDneed[p]["background"]]
 			HUD.screen_loc = HUDdatum.HUDneed[p]["loc"]
 
 		for (var/p in H.HUDtech)
-			var/obj/screen/HUD = H.HUDtech[p]
+			var/atom/movable/screen/HUD = H.HUDtech[p]
 			HUD.screen_loc = HUDdatum.HUDoverlays[p]["loc"]
 
-		for (var/obj/screen/inventory/HUDinv in H.HUDinventory)
+		for (var/atom/movable/screen/inventory/HUDinv in H.HUDinventory)
 			for (var/p in H.species.hud.gear)
 				if(H.species.hud.gear[p] == HUDinv.slot_id)
 					HUDinv.underlays.Cut()
@@ -96,7 +96,7 @@
 						HUDinv.underlays += HUDdatum.IconUnderlays[HUDdatum.slot_data[p]["background"]]
 					HUDinv.screen_loc = HUDdatum.slot_data[p]["loc"]
 					break
-		for (var/obj/screen/frippery/HUDfri in H.HUDfrippery)
+		for (var/atom/movable/screen/frippery/HUDfri in H.HUDfrippery)
 			H.client.screen += HUDfri
 	//update_equip_icon_position()
 	for(var/obj/item/I in get_equipped_items(1))
@@ -155,9 +155,9 @@
 			if(HUDdatum.slot_data[gear_slot]["type"])
 				HUDtype = HUDdatum.slot_data[gear_slot]["type"]
 			else
-				HUDtype = /obj/screen/inventory
+				HUDtype = /atom/movable/screen/inventory
 
-			var/obj/screen/inventory/inv_box = new HUDtype(gear_slot,\
+			var/atom/movable/screen/inventory/inv_box = new HUDtype(gear_slot,\
 			species.hud.gear[gear_slot],\
 			HUDdatum.icon, HUDdatum.slot_data[gear_slot]["state"], H)
 
@@ -177,7 +177,7 @@
 		else
 			var/HUDtype = HUDdatum.HUDneed[HUDname]["type"]
 
-			var/obj/screen/HUD = new HUDtype(HUDname, H,\
+			var/atom/movable/screen/HUD = new HUDtype(HUDname, H,\
 			HUDdatum.HUDneed[HUDname]["icon"] ? HUDdatum.HUDneed[HUDname]["icon"] : HUDdatum.icon,\
 			HUDdatum.HUDneed[HUDname]["icon_state"] ? HUDdatum.HUDneed[HUDname]["icon_state"] : null)
 
@@ -194,7 +194,7 @@
 
 
 	for (var/list/whistle in HUDdatum.HUDfrippery)
-		var/obj/screen/frippery/F = new (whistle["icon_state"],whistle["loc"],H)
+		var/atom/movable/screen/frippery/F = new (whistle["icon_state"],whistle["loc"],H)
 		F.icon = HUDdatum.icon
 		if(whistle["hideflag"])
 			F.hideflag = whistle["hideflag"]
@@ -209,7 +209,7 @@
 	for (var/techobject in HUDdatum.HUDoverlays)
 		var/HUDtype = HUDdatum.HUDoverlays[techobject]["type"]
 
-		var/obj/screen/HUD = new HUDtype(techobject,H,\
+		var/atom/movable/screen/HUD = new HUDtype(techobject,H,\
 		 HUDdatum.HUDoverlays[techobject]["icon"] ? HUDdatum.HUDoverlays[techobject]["icon"] : null,\
 		 HUDdatum.HUDoverlays[techobject]["icon_state"] ? HUDdatum.HUDoverlays[techobject]["icon_state"] : null)
 		HUD.layer = FLASH_LAYER
@@ -223,6 +223,6 @@
 
 /mob/living/carbon/human/dead_HUD()
 	for (var/i=1,i<=HUDneed.len,i++)
-		var/obj/screen/H = HUDneed[HUDneed[i]]
+		var/atom/movable/screen/H = HUDneed[HUDneed[i]]
 		H.DEADelize()
 	return

@@ -206,7 +206,7 @@ var/list/global/tank_gauge_cache = list()
 			else
 				to_chat(usr, span_warning("You need something to connect to \the [src]."))
 			if(location.HUDneed.Find("internal"))
-				var/obj/screen/HUDelm = location.HUDneed["internal"]
+				var/atom/movable/screen/HUDelm = location.HUDneed["internal"]
 				HUDelm.update_icon()
 		src.add_fingerprint(usr)
 

@@ -1,0 +1,5 @@
+author: flleeppyy
+delete-after: true
+changes:
+  - bugfix: Lobby music should respect user preferences now
+  - rscadd: Subsystems now display the order they are being loaded in

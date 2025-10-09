@@ -67,7 +67,7 @@
 			else
 				output += "<p>\[<a href='byond://?src=[REF(src)];showpoll=1'>Show Player Polls</A>\]</p>"
 
-	if (src.client.holder)
+	if (src?.client?.holder)
 		output += "<hr>"
 		output += "<div align='center'>[span_bold("Admin Quick Verbs")]"
 		if (SSticker.state <= GAME_STATE_PREGAME)
@@ -80,7 +80,7 @@
 
 	output += "</div>"
 
-	if (src.client.holder)
+	if (src?.client?.holder)
 		panel = new(src, "Welcome","Welcome", 240, 340, src)
 	else
 		panel = new(src, "Welcome","Welcome", 220, 280, src)
@@ -358,7 +358,7 @@
     var/mob/new_player/player = user
 
     data["name"] = player.client.prefs.be_random_name ? "friend" : player.client.prefs.real_name
-    data["roundDuration"] = gameTimestamp()
+    data["roundDuration"] = DisplayTimeText(world.time - SSticker.round_start_time)
 
     // Evacuation status
     data["evacuated"] = evacuation_controller.has_evacuated()

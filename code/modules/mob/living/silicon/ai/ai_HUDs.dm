@@ -5,33 +5,33 @@
 
 /datum/interface/AI_Eris/buildUI()
 	// #####	CREATING LAYOUTS    #####
-	var/HUD_element/layout/horizontal/actionPanel = newUIElement("actionPanel", /HUD_element/layout/horizontal)
-	var/HUD_element/layout/vertical/cameraPanel = newUIElement("cameraPanel", /HUD_element/layout/vertical)
-	var/HUD_element/layout/vertical/navigationPanel = newUIElement("navigationPanel", /HUD_element/layout/vertical)
+	var/atom/movable/hud_element/layout/horizontal/actionPanel = newUIElement("actionPanel", /atom/movable/hud_element/layout/horizontal)
+	var/atom/movable/hud_element/layout/vertical/cameraPanel = newUIElement("cameraPanel", /atom/movable/hud_element/layout/vertical)
+	var/atom/movable/hud_element/layout/vertical/navigationPanel = newUIElement("navigationPanel", /atom/movable/hud_element/layout/vertical)
 
 	// #####	CREATING LIST THAT WILL CONTAIN ELEMENTS FOR EASY ACCESS    #####
-	var/list/HUD_element/actions = list()
-	var/list/HUD_element/camera = list()
-	var/list/HUD_element/navigation = list()
+	var/list/atom/movable/hud_element/actions = list()
+	var/list/atom/movable/hud_element/camera = list()
+	var/list/atom/movable/hud_element/navigation = list()
 
 	// #####	CREATING UI ELEMENTS AND ASSIGNING THEM APPROPRIATE LISTS    #####
-	camera += newUIElement("Take Photo", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "photo"))
-	camera += newUIElement("View Photos", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "photos"))
-	camera += newUIElement("Cameras", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "cameras"))
-	camera += newUIElement("Toggle Camera Light", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "camera_light"))
-	camera += newUIElement("Track With Camera", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "track"))
+	camera += newUIElement("Take Photo", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "photo"))
+	camera += newUIElement("View Photos", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "photos"))
+	camera += newUIElement("Cameras", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "cameras"))
+	camera += newUIElement("Toggle Camera Light", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "camera_light"))
+	camera += newUIElement("Track With Camera", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "track"))
 
-	actions += newUIElement("Email", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "email"))
-	actions += newUIElement("Announce", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "announce"))
-	actions += newUIElement("Crew sensors", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "crew_sensors"))
-	actions += newUIElement("Subsystems", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "subsystems"))
-	actions += newUIElement("Show Alerts", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "alerts"))
-	actions += newUIElement("State Laws", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "state_laws"))
-	actions += newUIElement("Crew Manifest", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "manifest"))
+	actions += newUIElement("Email", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "email"))
+	actions += newUIElement("Announce", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "announce"))
+	actions += newUIElement("Crew sensors", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "crew_sensors"))
+	actions += newUIElement("Subsystems", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "subsystems"))
+	actions += newUIElement("Show Alerts", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "alerts"))
+	actions += newUIElement("State Laws", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "state_laws"))
+	actions += newUIElement("Crew Manifest", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "manifest"))
 
-	navigation += newUIElement("Move downwards", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "down"))
-	navigation += newUIElement("AI Core", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "core"))
-	navigation += newUIElement("Move upwards", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "up"))
+	navigation += newUIElement("Move downwards", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "down"))
+	navigation += newUIElement("AI Core", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "core"))
+	navigation += newUIElement("Move upwards", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "up"))
 
 	// #####	ADDING CLICK PROCS TO BUTTONS    #####
 	getElementByID("Take Photo").setClickProc(TYPE_PROC_REF(/mob/living/silicon/ai, take_photo), _observer.mob)
@@ -72,18 +72,18 @@
 
 /datum/interface/AI_Simple/buildUI()
 	// #####	CREATING LAYOUTS    #####
-	var/HUD_element/layout/vertical/navigationPanel = newUIElement("navigationPanel", /HUD_element/layout/vertical)
+	var/atom/movable/hud_element/layout/vertical/navigationPanel = newUIElement("navigationPanel", /atom/movable/hud_element/layout/vertical)
 
 	// #####	CREATING LIST THAT WILL CONTAIN ELEMENTS FOR EASY ACCESS    #####
-	var/list/HUD_element/navigation = list()
+	var/list/atom/movable/hud_element/navigation = list()
 
 	// #####	CREATING UI ELEMENTS AND ASSIGNING THEM APPROPRIATE LISTS    #####
-//	navigation += newUIElement("Track With Camera", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "track"))
-//	navigation += newUIElement("Crew Sensors", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "crew_sensors"))
-	navigation += newUIElement("Toogle Acceleration", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "camera_light"))
-	navigation += newUIElement("Reset Camera", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "core"))
-	navigation += newUIElement("Move Downwards", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "down"))
-	navigation += newUIElement("Move Upwards", /HUD_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "up"))
+//	navigation += newUIElement("Track With Camera", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "track"))
+//	navigation += newUIElement("Crew Sensors", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "crew_sensors"))
+	navigation += newUIElement("Toogle Acceleration", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "camera_light"))
+	navigation += newUIElement("Reset Camera", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "core"))
+	navigation += newUIElement("Move Downwards", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "down"))
+	navigation += newUIElement("Move Upwards", /atom/movable/hud_element/button/thin/ai, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi',icon_state = "up"))
 
 	// #####	ADDING CLICK PROCS TO BUTTONS    #####
 //	getElementByID("Track With Camera").setClickProc(/mob/living/silicon/ai/proc/ai_camera_track, _observer.mob)

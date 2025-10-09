@@ -17,7 +17,7 @@
 
 	var/template_flags = TEMPLATE_FLAG_ALLOW_DUPLICATES
 
-	var/static/dmm_suite/maploader = new
+	var/static/datum/dmm_suite/maploader = new
 
 	///if true, creates a list of all atoms created by this template loading, defaults to FALSE
 	var/returns_created_atoms = FALSE

@@ -33,11 +33,6 @@
 /datum/category_item/player_setup_item/augmentation/modifications/content(mob/user)
 	if(!pref.preview_icon)
 		pref.update_preview_icon(naked = TRUE)
-	if(pref.preview_north && pref.preview_south && pref.preview_east && pref.preview_west)
-		user << browse_rsc(pref.preview_north, "new_previewicon[NORTH].png")
-		user << browse_rsc(pref.preview_south, "new_previewicon[SOUTH].png")
-		user << browse_rsc(pref.preview_east, "new_previewicon[EAST].png")
-		user << browse_rsc(pref.preview_west, "new_previewicon[WEST].png")
 
 	var/dat = list()
 
@@ -69,9 +64,48 @@
 			dat += "<a href='byond://?src=\ref[src];color=[organ]'><span class='color_holder_box' style='background-color:[pref.modifications_colors[organ]]'></span></a>"
 		dat += "<br>[disp_name]<br>"
 
-	dat += "</td><td style='width:80px;'><center><img src=new_previewicon[pref.preview_dir].png height=64 width=64>"
-	dat += "<br><center><a href='byond://?src=\ref[src];rotate=right'>&lt;&lt;</a> <a href='byond://?src=\ref[src];rotate=left'>&gt;&gt;</a></center></td>"
+	dat += "</td><td style='width:80px;'><center>"
+	var/icon/north_icon = pref.preview_north
+	var/icon/south_icon = pref.preview_south
+	var/icon/east_icon = pref.preview_east
+	var/icon/west_icon = pref.preview_west
+
+	if(!north_icon) north_icon = pref.preview_icon
+	if(!south_icon) south_icon = pref.preview_icon
+	if(!east_icon) east_icon = pref.preview_icon
+	if(!west_icon) west_icon = pref.preview_icon
+
+	dat += "<style>.icon { width: 64px; }</style>"
+	dat += "<img class='icon' style='visibility: hidden'>"
+	dat += "<br><center>"
+	dat += "<a href='javascript:void(0)' onclick='rotatePreview(\"left\")'>&lt;&lt;</a> "
+	dat += "<a href='javascript:void(0)' onclick='rotatePreview(\"right\")'>&gt;&gt;</a>"
+	dat += "</center></td>"
 	dat += "<td style='width:115px; text-align:left'>"
+
+	// Dude I fucking hate putting javascript in fucking strings. fuck you, fuck this, fuck you WHYYYYYYYYY CANT THIS BE EASIER
+	dat += "<script>"
+	dat += "let previewIcons = {"
+	dat += "'north': `[ma2html(north_icon, user)]`,"
+	dat += "'south': `[ma2html(south_icon, user)]`,"
+	dat += "'east': `[ma2html(east_icon, user)]`,"
+	dat += "'west': `[ma2html(west_icon, user)]`"
+	dat += "};"
+	dat += "let curDir = localStorage.getItem('previewDirection') || 'south';"
+	dat += "rotatePreview(curDir);"
+	dat += "function rotatePreview(direction) {"
+	dat += "  let directions = \['north', 'east', 'south', 'west'\];"
+	dat += "  let index = directions.indexOf(curDir);"
+	dat += "  if (direction === 'right') {"
+	dat += "    index = (index + 1) % directions.length;"
+	dat += "  } else if (direction === 'left') {"
+	dat += "    index = (index - 1 + directions.length) % directions.length;"
+	dat += "  }"
+	dat += "  curDir = directions\[index\];"
+	dat += "  localStorage.setItem('previewDirection', curDir);"
+	dat += "  document.getElementsByClassName('icon')\[0\].outerHTML = previewIcons\[curDir\];"
+	dat += "}"
+	dat += "</script>"
 
 	for(var/organ in pref.l_organs)
 		var/datum/body_modification/mod = pref.get_modification(organ)
@@ -162,6 +196,7 @@
 		if(mod && mod.is_allowed(pref.current_organ, pref))
 			pref.modifications_data[pref.current_organ] = mod
 			pref.check_child_modifications(pref.current_organ)
+			pref.preview_should_rebuild_organs = TRUE
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["rotate"])

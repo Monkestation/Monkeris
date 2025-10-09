@@ -1,4 +1,4 @@
-//  values for setAlignment(var/horizontal, var/vertical) and alignElements(var/horizontal, var/vertical, var/list/HUD_element/targets) 
+//  values for setAlignment(var/horizontal, var/vertical) and alignElements(var/horizontal, var/vertical, var/list/atom/movable/hud_element/targets)
 #define HUD_NO_ALIGNMENT 0 						 //no alignment
 #define HUD_CENTER_ALIGNMENT 1					 //central alignment
 

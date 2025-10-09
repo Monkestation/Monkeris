@@ -265,6 +265,8 @@ SUBSYSTEM_DEF(job)
 		occupations += job
 		occupations_by_name[job.title] = job
 
+		job.get_job_mannequin()
+
 		var/datum/department/department = departments_by_name[job.department]
 		if(!department)
 			to_chat(world, span_warning("No department found for job [job.title]!!"))
@@ -671,7 +673,7 @@ SUBSYSTEM_DEF(job)
 	var/list/loadout_taken_slots = list()
 	if(H.client.prefs.Gear() && job.loadout_allowed)
 		for(var/thing in H.client.prefs.Gear())
-			var/datum/gear/G = gear_datums[thing]
+			var/datum/gear/G = GLOB.gear_datums[thing]
 			if(G)
 				var/permitted = 1
 				if(permitted)

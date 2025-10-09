@@ -1,0 +1,5 @@
+author: flleeppyy
+delete-after: true
+changes:
+  - tweak: Scanners have a cooldown now.
+  - bugfix: Add silicons as a department

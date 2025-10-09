@@ -18,7 +18,7 @@
 	item_state = "nothing"
 	w_class = ITEM_SIZE_COLOSSAL
 	spawn_tags = null
-	var/obj/screen/grab/hud
+	var/atom/movable/screen/grab/hud
 	var/mob/living/affecting
 	var/mob/living/carbon/human/assailant
 	var/state = GRAB_PASSIVE
@@ -59,7 +59,7 @@
 
 	affecting.grabbed_by += src
 
-	hud = new /obj/screen/grab(src)
+	hud = new /atom/movable/screen/grab(src)
 	hud.icon_state = "reinforce"
 	icon_state = "grabbed"
 	hud.name = "reinforce grab"
@@ -257,7 +257,7 @@
 				return TRUE
 	to_chat(assailant, span_warning("You failed to upgrade your grab."))
 
-/obj/item/grab/proc/s_click(obj/screen/S)
+/obj/item/grab/proc/s_click(atom/movable/screen/S)
 	if(!confirm())
 		return
 	if(state == GRAB_UPGRADING || state == GRAB_PRENECK)

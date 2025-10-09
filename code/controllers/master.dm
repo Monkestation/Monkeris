@@ -71,6 +71,8 @@ GLOBAL_REAL(Master, /datum/controller/master)
 	///used by CHECK_TICK as well so that the procs subsystems call can obey that SS's tick limits
 	var/static/current_ticklimit = TICK_LIMIT_RUNNING
 
+	var/list/list/stage_sorted_subsystems
+
 /datum/controller/master/New()
 	if(!config)
 		config = new
@@ -209,7 +211,7 @@ GLOBAL_REAL(Master, /datum/controller/master)
 	to_chat(world, span_boldannounce(msg))
 	log_world(msg)
 
-	var/list/stage_sorted_subsystems = new(INITSTAGE_MAX)
+	stage_sorted_subsystems = new(INITSTAGE_MAX)
 	for (var/i in 1 to INITSTAGE_MAX)
 		stage_sorted_subsystems[i] = list()
 
@@ -231,9 +233,10 @@ GLOBAL_REAL(Master, /datum/controller/master)
 
 		// Initialize subsystems.
 		for (var/datum/controller/subsystem/subsystem in stage_sorted_subsystems[current_init_stage])
-			if (subsystem.flags & SS_NO_INIT || subsystem.initialized) //Don't init SSs with the correspondig flag or if they already are initialzized
+			if (subsystem.flags & SS_NO_INIT || subsystem.initialized) //Don't init SSs with the corresponding flag or if they are already initialzized
 				continue
 			current_initializing_subsystem = subsystem
+			subsystem.order_in_stage = stage_sorted_subsystems[current_init_stage].Find(subsystem)
 
 			rustg_time_reset(SS_INIT_TIMER_KEY)
 			log_game("Initializing [subsystem.name] subsystem...")

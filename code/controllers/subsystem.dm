@@ -98,6 +98,9 @@
 	/// Previous subsystem in the queue of subsystems to run this tick
 	var/datum/controller/subsystem/queue_prev
 
+	/// Index of this SS in the stages, Set by master.
+	var/order_in_stage
+
 	//Do not blindly add vars here to the bottom, put it where it goes above
 	//If your var only has two values, put it in as a flag.
 
@@ -281,9 +284,9 @@
 
 	var/time = rustg_time_milliseconds(SS_INIT_TIMER_KEY)
 	var/seconds = round(time / 1000, 0.01)
-
-	var/msg_fancy = "Initialized [span_adminsay(name)] subsystem within [get_colored_thresh_text("[seconds] second[seconds == 1 ? "" : "s"]!", seconds, init_time_threshold / 10)]"
-	var/msg = "Initialized [name] subsystem within [seconds] second[seconds == 1 ? "" : "s"]!"
+	var/order_string = "S[init_stage]-[order_in_stage <= 9 ? "0" : ""][order_in_stage]/[Master.stage_sorted_subsystems[init_stage].len]"
+	var/msg_fancy = "<code>\[[order_string]\]</code> Initialized [span_adminsay(name)] subsystem within [get_colored_thresh_text("[seconds] second[seconds == 1 ? "" : "s"]!", seconds, init_time_threshold / 10)]"
+	var/msg = "\[[order_string]\] Initialized [name] subsystem within [seconds] second[seconds == 1 ? "" : "s"]!"
 	to_chat(world, span_boldannounce(msg_fancy))
 	log_world(msg)
 	return seconds

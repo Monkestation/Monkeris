@@ -101,7 +101,7 @@
 
 /obj/item/tool/Initialize(mapload, ...)
 	. = ..()
-	var/obj/screen/item_action/action = new /obj/screen/item_action/top_bar/tool_info
+	var/atom/movable/screen/item_action/action = new /atom/movable/screen/item_action/top_bar/tool_info
 	action.owner = src
 	hud_actions = list(action)
 
@@ -151,7 +151,7 @@
 
 //Cell reload
 /obj/item/tool/MouseDrop(over_object)
-	if((src.loc == usr) && istype(over_object, /obj/screen/inventory/hand) && eject_item(cell, usr))
+	if((src.loc == usr) && istype(over_object, /atom/movable/screen/inventory/hand) && eject_item(cell, usr))
 		cell = null
 		update_icon()
 	else
@@ -1111,7 +1111,7 @@
 
 #undef ADDITIONAL_TIME_LOWHEALTH
 
-/obj/screen/item_action/top_bar/tool_info
+/atom/movable/screen/item_action/top_bar/tool_info
 	icon = 'icons/mob/screen/gun_actions.dmi'
 	screen_loc = "8,1:13"
 	minloc = "7,2:13"

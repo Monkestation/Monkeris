@@ -164,8 +164,8 @@
 
 
 
-	for (var/obj/screen/H in HUDprocess)
-//		var/obj/screen/B = H
+	for (var/atom/movable/screen/H in HUDprocess)
+//		var/atom/movable/screen/B = H
 		H.Process()
 
 

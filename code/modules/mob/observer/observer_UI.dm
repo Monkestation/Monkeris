@@ -3,22 +3,22 @@
 	styleName = "ErisStyle"
 
 /datum/interface/ghost_Eris/postBuildUI()
-	for(var/HUD_element/button/E in _elements)
+	for(var/atom/movable/hud_element/button/E in _elements)
 		E.setIconAdditionColor(HUD_ICON_UNDERLAY, HUD_UNDERLAY_BACKGROUND, _observer.prefs.UI_style_color)
 	..()
 
 /datum/interface/ghost_Eris/buildUI()
 	// #####	CREATING LAYOUTS    #####
-	//var/HUD_element/layout/horizontal/actionPanel = newUIElement("actionPanel", /HUD_element/layout/horizontal)
-	var/HUD_element/layout/vertical/navigationPanel = newUIElement("navigationPanel", /HUD_element/layout/vertical)
+	//var/atom/movable/hud_element/layout/horizontal/actionPanel = newUIElement("actionPanel", /atom/movable/hud_element/layout/horizontal)
+	var/atom/movable/hud_element/layout/vertical/navigationPanel = newUIElement("navigationPanel", /atom/movable/hud_element/layout/vertical)
 
 	// #####	CREATING LIST THAT WILL CONTAIN ELEMENTS FOR EASY ACCESS    #####
-	//var/list/HUD_element/actions = list()
-	var/list/HUD_element/navigation = list()
+	//var/list/atom/movable/hud_element/actions = list()
+	var/list/atom/movable/hud_element/navigation = list()
 
 	// #####	CREATING UI ELEMENTS AND ASSIGNING THEM APPROPRIATE LISTS    #####
-	navigation += newUIElement("Move downwards", /HUD_element/button/thin, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi', icon_state = "down"))
-	navigation += newUIElement("Move upwards", /HUD_element/button/thin, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi', icon_state = "up"))
+	navigation += newUIElement("Move downwards", /atom/movable/hud_element/button/thin, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi', icon_state = "down"))
+	navigation += newUIElement("Move upwards", /atom/movable/hud_element/button/thin, list(icon = 'icons/mob/screen/silicon/AI/HUD_actionButtons.dmi', icon_state = "up"))
 
 	// #####	ADDING CLICK PROCS TO BUTTONS    #####
 	getElementByID("Move upwards").setClickProc(TYPE_PROC_REF(/client, moveup), _observer.mob)

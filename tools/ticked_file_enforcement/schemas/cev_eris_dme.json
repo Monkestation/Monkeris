@@ -9,7 +9,6 @@
 		"datums/components/ai_like_control.dm",
 		"datums/craft/recipes/_todo.dm",
 		"datums/craft/recipes/testing.dm",
-		"datums/lobbyscreen.dm",
 		"datums/lobbyscreen/screens/_template.dm",
 		"datums/setup_option/backgrounds/example.dm",
 		"datums/wires/suit_storage_unit.dm",
