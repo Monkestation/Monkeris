@@ -79,7 +79,7 @@
 /obj/item/clothing/Initialize(mapload, ...)
 	. = ..()
 
-	var/obj/screen/item_action/action = new /obj/screen/item_action/top_bar/clothing_info
+	var/atom/movable/screen/item_action/action = new /atom/movable/screen/item_action/top_bar/clothing_info
 	action.owner = src
 	if(!hud_actions)
 		hud_actions = list()
@@ -213,7 +213,7 @@
 		return TRUE
 	return ..()
 
-/obj/screen/item_action/top_bar/clothing_info
+/atom/movable/screen/item_action/top_bar/clothing_info
 	icon = 'icons/mob/screen/gun_actions.dmi'
 	screen_loc = "8,1:13"
 	minloc = "7,2:13"

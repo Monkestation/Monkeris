@@ -82,7 +82,7 @@
 	src.add_fingerprint(user)
 
 /obj/item/hand_tele/MouseDrop(over_object)
-	if((src.loc == usr) && istype(over_object, /obj/screen/inventory/hand) && eject_item(cell, usr))
+	if((src.loc == usr) && istype(over_object, /atom/movable/screen/inventory/hand) && eject_item(cell, usr))
 		cell = null
 
 /obj/item/hand_tele/attackby(obj/item/C, mob/living/user)

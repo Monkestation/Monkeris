@@ -22,7 +22,7 @@
 		for(var/i=1,i<=HUDneed.len,i++)
 			var/p = HUDneed[i]
 			src.client.screen += HUDneed[p]
-		for(var/obj/screen/HUDinv in src.HUDinventory)
+		for(var/atom/movable/screen/HUDinv in src.HUDinventory)
 			src.client.screen += HUDinv
 		for(var/i=1,i<=HUDtech.len,i++)
 			var/p = HUDtech[i]
@@ -33,13 +33,13 @@
 		for(var/i = 1 to HUDneed.len)
 			client.screen.Remove(HUDneed[HUDneed[i]])
 
-		for(var/obj/screen/HUDinv in HUDinventory)
+		for(var/atom/movable/screen/HUDinv in HUDinventory)
 			client.screen.Remove(HUDinv)
 
-		for(var/obj/screen/HUDinv in HUDfrippery)
+		for(var/atom/movable/screen/HUDinv in HUDfrippery)
 			client.screen.Remove(HUDinv)
 
-		for(var/obj/screen/HUDinv in HUDprocess)
+		for(var/atom/movable/screen/HUDinv in HUDprocess)
 			client.screen.Remove(HUDinv)
 
 		for(var/i = 1 to HUDtech.len)
@@ -51,10 +51,10 @@
 /mob/living/proc/recolor_HUD(_color, _alpha)
 	for(var/i=1,i<=HUDneed.len,i++)
 		var/p = HUDneed[i]
-		var/obj/screen/HUDelm = HUDneed[p]
+		var/atom/movable/screen/HUDelm = HUDneed[p]
 		HUDelm.color = _color
 		HUDelm.alpha = _alpha
-	for(var/obj/screen/HUDinv in src.HUDinventory)
+	for(var/atom/movable/screen/HUDinv in src.HUDinventory)
 		HUDinv.color = _color
 		HUDinv.alpha = _alpha
 

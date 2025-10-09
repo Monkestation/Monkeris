@@ -171,7 +171,7 @@
 	if(selected_hardpoint)
 		for(var/hardpoint in hardpoints)
 			if(hardpoint != selected_hardpoint) continue
-			var/obj/screen/movable/exosuit/hardpoint/H = HUDneed[hardpoint]
+			var/atom/movable/screen/movable/exosuit/hardpoint/H = HUDneed[hardpoint]
 			if(istype(H))
 				H.icon_state = "hardpoint"
 				break
@@ -246,7 +246,7 @@
 			if(hatch_locked)
 				if(!silent) to_chat(user, span_warning("The [body.hatch_descriptor] is locked."))
 				return
-			var/obj/screen/movable/exosuit/toggle/hatch_open/H = HUDneed["hatch open"]
+			var/atom/movable/screen/movable/exosuit/toggle/hatch_open/H = HUDneed["hatch open"]
 			if(H && istype(H))
 				H.toggled()
 			if(!silent)
@@ -710,7 +710,7 @@ Use this if you turn on armor ablation for mechs:
 		hatch_closed = !hatch_closed
 		playsound(src, 'sound/machines/Custom_closetopen.ogg', 50, 1)
 		to_chat(user, span_notice("You [hatch_closed ? "close" : "open"] the [body.hatch_descriptor]."))
-		var/obj/screen/movable/exosuit/toggle/hatch_open/H = HUDneed["hatch open"]
+		var/atom/movable/screen/movable/exosuit/toggle/hatch_open/H = HUDneed["hatch open"]
 		if(H && istype(H)) H.update_icon()
 		update_icon()
 		return

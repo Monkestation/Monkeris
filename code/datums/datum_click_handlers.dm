@@ -56,8 +56,8 @@
 //In the case of click catchers, we resolve and return the turf under it
 /datum/click_handler/proc/resolve_world_target(a)
 
-	if (istype(a, /obj/screen/click_catcher))
-		var/obj/screen/click_catcher/CC = a
+	if (istype(a, /atom/movable/screen/click_catcher))
+		var/atom/movable/screen/click_catcher/CC = a
 		return CC.resolve(owner.mob)
 
 	if (istype(a, /turf))
@@ -149,7 +149,7 @@
 
 /datum/click_handler/ai/Click(atom/target, location, control, params)
 	var/modifiers = params2list(params)
-	if(isHUDobj(target) || istype(target, /HUD_element) || istype(target, /obj/effect))
+	if(isHUDobj(target) || istype(target, /atom/movable/hud_element) || istype(target, /obj/effect))
 		return TRUE
 	if(!isatom(target))
 		return TRUE

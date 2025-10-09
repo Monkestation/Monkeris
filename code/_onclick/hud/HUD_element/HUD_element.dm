@@ -7,15 +7,13 @@ element identifiers are used to manage different hud parts for clients, f.e. the
 */
 
 
-/HUD_element
-	parent_type = /atom/movable
-
+/atom/movable/hud_element
 	layer = HUD_LAYER
 	plane = HUD_PLANE
 	//mouse_opacity = 2
 
-	var/list/HUD_element/_elements //child elements
-	var/HUD_element/_parent //parent element
+	var/list/atom/movable/hud_element/_elements //child elements
+	var/atom/movable/hud_element/_parent //parent element
 	var/client/_observer //each element is shown to at most 1 client
 	var/_identifier //unique identitifier for this element, if such element is already seen by a client, it is closed first
 
@@ -73,12 +71,12 @@ element identifiers are used to manage different hud parts for clients, f.e. the
 	var/_onToggledInteraction = FALSE
 	var/_onToggledState = FALSE
 
-/HUD_element/New(identifier)
+/atom/movable/hud_element/New(identifier)
 	_elements = new
 	_identifier = identifier
 	updateIconInformation()
 
-/HUD_element/Destroy()
+/atom/movable/hud_element/Destroy()
 	hide()
 
 	if (_data)
@@ -86,14 +84,14 @@ element identifiers are used to manage different hud parts for clients, f.e. the
 
 	vis_contents.Cut()
 
-	var/list/HUD_element/elements = getElements()
-	for(var/HUD_element/E in elements)
+	var/list/atom/movable/hud_element/elements = getElements()
+	for(var/atom/movable/hud_element/E in elements)
 		elements -= E
 		qdel(E)
 
-	var/HUD_element/parent = getParent()
+	var/atom/movable/hud_element/parent = getParent()
 	if (parent)
-		var/list/HUD_element/elementRemove = parent.getElements()
+		var/list/atom/movable/hud_element/elementRemove = parent.getElements()
 		elementRemove.Remove(src)
 		_setParent()
 
@@ -102,7 +100,7 @@ element identifiers are used to manage different hud parts for clients, f.e. the
 
 	return QDEL_HINT_QUEUE
 
-/HUD_element/Click(location,control,params)
+/atom/movable/hud_element/Click(location,control,params)
 	if(_clickProc)
 		if(_holder)
 			call(_holder, _clickProc)(src, usr, location, control, params)
@@ -111,26 +109,26 @@ element identifiers are used to manage different hud parts for clients, f.e. the
 
 
 	if (_passClickToParent)
-		var/HUD_element/parent = getParent()
+		var/atom/movable/hud_element/parent = getParent()
 		if (parent)
 			parent = parent.Click(location, control, params)
 			if (!parent) //parent deleted
 				return
 
 	if (_hideParentOnClick)
-		var/HUD_element/parent = getParent()
+		var/atom/movable/hud_element/parent = getParent()
 		if (parent)
 			parent = parent.hide()
 			if (!parent) //parent deleted
 				return
 
 // override if needed
-/HUD_element/DblClick(location, control, params)
+/atom/movable/hud_element/DblClick(location, control, params)
 	return
 
-/HUD_element/update_plane()
+/atom/movable/hud_element/update_plane()
 	return
 
-/HUD_element/set_plane(np)
+/atom/movable/hud_element/set_plane(np)
 	plane = np
 

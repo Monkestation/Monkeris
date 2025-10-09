@@ -7,7 +7,7 @@
 	//gas stuff
 	var/obj/item/tank/tank
 	var/mob/living/carbon/human/breather
-	var/obj/screen/internalsHud
+	var/atom/movable/screen/internalsHud
 	var/obj/item/clothing/mask/breath/contained
 
 	var/spawn_type = null

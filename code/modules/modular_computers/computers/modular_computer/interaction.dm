@@ -281,10 +281,10 @@
 
 /obj/item/modular_computer/MouseDrop(atom/over_object)
 	var/mob/M = usr
-	if(!istype(over_object, /obj/screen) && can_interact(M))
+	if(!istype(over_object, /atom/movable/screen) && can_interact(M))
 		return attack_self(M)
 
-	if((src.loc == M) && istype(over_object, /obj/screen/inventory/hand) && eject_item(cell, M))
+	if((src.loc == M) && istype(over_object, /atom/movable/screen/inventory/hand) && eject_item(cell, M))
 		cell = null
 		update_icon()
 

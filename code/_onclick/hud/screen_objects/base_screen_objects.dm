@@ -10,12 +10,11 @@
 	appearance_flags = RESET_COLOR
 
 
-/obj/screen
+/atom/movable/screen
 	name = ""
 	icon = 'icons/mob/screen1.dmi'
 	layer = ABOVE_HUD_LAYER
 	plane = ABOVE_HUD_PLANE
-	unacidable = 1
 	//appearance_flags = NO_CLIENT_COLOR
 	var/obj/master = null //A reference to the object in the slot. Grabs or items, generally.
 	var/mob/living/parentmob
@@ -23,7 +22,7 @@
 	var/hideflag = 0
 	var/list/image/ovrls = list()
 
-/obj/screen/New(_name = "unnamed", mob/living/_parentmob, _icon, _icon_state)//(_name = "unnamed", _screen_loc = "7,7", mob/living/_parentmob, _icon, _icon_state)
+/atom/movable/screen/New(_name = "unnamed", mob/living/_parentmob, _icon, _icon_state)//(_name = "unnamed", _screen_loc = "7,7", mob/living/_parentmob, _icon, _icon_state)
 	src.parentmob = _parentmob
 	src.name = _name
 //	src.screen_loc = _screen_loc
@@ -33,29 +32,29 @@
 		src.icon_state = _icon_state
 	..()
 
-/obj/screen/examine(mob/user, extra_description = "")
+/atom/movable/screen/examine(mob/user, extra_description = "")
 	if(desc)
 		to_chat(user, span_notice("<div id='examine'>[desc]</div>"))
 
-/obj/screen/Process()
+/atom/movable/screen/Process()
 	return
 
-/obj/screen/proc/DEADelize()
+/atom/movable/screen/proc/DEADelize()
 	return
 
-/obj/screen/Destroy()
+/atom/movable/screen/Destroy()
 	master = null
 	parentmob = null
 	return ..()
 
-/obj/screen/update_plane()
+/atom/movable/screen/update_plane()
 	return
 
-/obj/screen/set_plane(np)
+/atom/movable/screen/set_plane(np)
 	plane = np
 
 
-/obj/screen/Click(location, control, params)
+/atom/movable/screen/Click(location, control, params)
 	// Object Click() processed before and separately from mob's ClickOn(), thus every shift click doubles as just click
 	// This is a band aid to prevent such behavior
 	var/list/modifiers = params2list(params)
@@ -74,13 +73,13 @@
 	return TRUE
 //--------------------------------------------------close---------------------------------------------------------
 
-/obj/screen/close
+/atom/movable/screen/close
 	name = "close"
 
-/obj/screen/close/New()
+/atom/movable/screen/close/New()
 	return
 
-/obj/screen/close/Click()
+/atom/movable/screen/close/Click()
 	if(master)
 		if(istype(master, /obj/item/storage))
 			var/obj/item/storage/S = master
@@ -90,20 +89,20 @@
 
 
 //--------------------------------------------------GRAB---------------------------------------------------------
-/obj/screen/grab
+/atom/movable/screen/grab
 	icon = 'icons/mob/grab_icons.dmi'
 	name = "grab"
 
-/obj/screen/grab/Click()
+/atom/movable/screen/grab/Click()
 	if(master)
 		var/obj/item/grab/G = master
 		G.s_click(src)
 		return TRUE
 
-/obj/screen/grab/attack_hand()
+/atom/movable/screen/grab/attack_hand()
 	return
 
-/obj/screen/grab/attackby()
+/atom/movable/screen/grab/attackby()
 	return
 //-----------------------------------------------GRAB END---------------------------------------------------------
 
@@ -112,14 +111,14 @@
 
 
 //-----------------------------------------------ITEM ACTION---------------------------------------------------------
-/obj/screen/item_action
+/atom/movable/screen/item_action
 	var/obj/item/owner
 
-/obj/screen/item_action/Destroy()
+/atom/movable/screen/item_action/Destroy()
 	. = ..()
 	owner = null
 
-/obj/screen/item_action/Click()
+/atom/movable/screen/item_action/Click()
 	if(!usr || !owner)
 		return TRUE
 	if(!usr.can_click())
@@ -135,7 +134,7 @@
 	update_icon()
 	return TRUE
 
-/obj/screen/item_action/top_bar
+/atom/movable/screen/item_action/top_bar
 	name = "actionA"
 	icon = 'icons/mob/screen/ErisStyle.dmi'
 	icon_state = "actionA"
@@ -144,11 +143,11 @@
 	layer = ABOVE_HUD_LAYER
 	plane = ABOVE_HUD_PLANE
 
-/obj/screen/item_action/top_bar/Initialize()
+/atom/movable/screen/item_action/top_bar/Initialize()
 	. = ..()
 	name = initial(name)
 
-/obj/screen/item_action/top_bar/update_icon()
+/atom/movable/screen/item_action/top_bar/update_icon()
 	..()
 	if(!ismob(owner.loc))
 		return
@@ -161,19 +160,19 @@
 			screen_loc = initial(screen_loc)
 
 
-/obj/screen/item_action/top_bar/A
+/atom/movable/screen/item_action/top_bar/A
 	icon_state = "actionA"
 	screen_loc = "8,1:13"
 
-/obj/screen/item_action/top_bar/B
+/atom/movable/screen/item_action/top_bar/B
 	icon_state = "actionB"
 	screen_loc = "8,1:13"
 
-/obj/screen/item_action/top_bar/C
+/atom/movable/screen/item_action/top_bar/C
 	icon_state = "actionC"
 	screen_loc = "9,1:13"
 
-/obj/screen/item_action/top_bar/D
+/atom/movable/screen/item_action/top_bar/D
 	icon_state = "actionD"
 	screen_loc = "9,1:13"
 
@@ -183,13 +182,13 @@
 
 
 //--------------------------------------------------ZONE SELECT---------------------------------------------------------
-/obj/screen/zone_sel
+/atom/movable/screen/zone_sel
 	name = "damage zone"
 	icon_state = "zone_sel"
 	screen_loc = ui_zonesel
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/zone_sel/Click(location, control, params)
+/atom/movable/screen/zone_sel/Click(location, control, params)
 	var/list/PL = params2list(params)
 	var/icon_x = text2num(PL["icon-x"])
 	var/icon_y = text2num(PL["icon-y"])
@@ -243,22 +242,22 @@
 	set_selected_zone(selecting)
 	return TRUE
 
-/obj/screen/zone_sel/New()
+/atom/movable/screen/zone_sel/New()
 	..()
 	update_icon()
 
-/obj/screen/zone_sel/update_icon()
+/atom/movable/screen/zone_sel/update_icon()
 	cut_overlays()
 	overlays += image('icons/mob/zone_sel.dmi', "[parentmob.targeted_organ]")
 
-/obj/screen/zone_sel/proc/set_selected_zone(bodypart)
+/atom/movable/screen/zone_sel/proc/set_selected_zone(bodypart)
 	var/old_selecting = parentmob.targeted_organ
 	if(old_selecting != bodypart)
 		parentmob.targeted_organ = bodypart
 		update_icon()
 //--------------------------------------------------ZONE SELECT END---------------------------------------------------------
 
-/obj/screen/text
+/atom/movable/screen/text
 	icon = null
 	icon_state = null
 	mouse_opacity = 0
@@ -267,12 +266,12 @@
 	maptext_width = 480
 
 
-/obj/screen/storage
+/atom/movable/screen/storage
 	name = "storage"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
 
-/obj/screen/storage/Click()
+/atom/movable/screen/storage/Click()
 	if(!usr.can_click())
 		return TRUE
 	if(usr.stat || usr.paralysis || usr.stunned || usr.weakened)
@@ -284,14 +283,14 @@
 	return TRUE
 
 //--------------------------------------------------inventory---------------------------------------------------------
-/obj/screen/inventory
+/atom/movable/screen/inventory
 	var/slot_id //The indentifier for the slot. It has nothing to do with ID cards.
 	icon = 'icons/mob/screen/ErisStyle.dmi'
 	layer = HUD_LAYER
 	plane = HUD_PLANE
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/inventory/New(_name = "unnamed", _slot_id = null, _icon = null, _icon_state = null, _parentmob = null)//(_name = "unnamed", _screen_loc = "7,7", _slot_id = null, _icon = null, _icon_state = null, _parentmob = null)
+/atom/movable/screen/inventory/New(_name = "unnamed", _slot_id = null, _icon = null, _icon_state = null, _parentmob = null)//(_name = "unnamed", _screen_loc = "7,7", _slot_id = null, _icon = null, _icon_state = null, _parentmob = null)
 	name = _name
 //	screen_loc = _screen_loc
 	icon = _icon
@@ -299,7 +298,7 @@
 	icon_state = _icon_state
 	parentmob = _parentmob
 
-/obj/screen/inventory/Click()
+/atom/movable/screen/inventory/Click()
 	// At this point in client Click() code we have passed the 1/10 sec check and little else
 	// We don't even know if it's a middle click
 	if(!usr.can_click()) return TRUE
@@ -309,20 +308,20 @@
 		else usr.attack_ui(slot_id)
 	return TRUE
 
-/obj/screen/inventory/hand
+/atom/movable/screen/inventory/hand
 	name = "nonamehand"
 
-/obj/screen/inventory/hand/New()
+/atom/movable/screen/inventory/hand/New()
 	..()
 	ovrls["act_hand"] += new /image/no_recolor (icon = icon, icon_state ="act_hand[slot_id==slot_l_hand ? "-l" : "-r"]")
 	update_icon()
 
-/obj/screen/inventory/hand/Click()
+/atom/movable/screen/inventory/hand/Click()
 	var/mob/living/carbon/C = parentmob
 	if (slot_id == slot_l_hand) C.activate_hand("l")
 	else C.activate_hand("r")
 
-/obj/screen/inventory/hand/update_icon()
+/atom/movable/screen/inventory/hand/update_icon()
 	overlays -= ovrls["act_hand"]
 	if (slot_id == (parentmob.hand ? slot_l_hand : slot_r_hand))
 		overlays += ovrls["act_hand"]
@@ -333,7 +332,7 @@
 //--------------------------------------------------inventory end---------------------------------------------------------
 
 //--------------------------------------------------health---------------------------------------------------------
-/obj/screen/health
+/atom/movable/screen/health
 	name = "health"
 	desc = "Not your actual health, but an estimate of how much pain you feel.\
 	<br>Experience too much of it, and you will lose consciousness.\
@@ -344,7 +343,7 @@
 	process_flag = TRUE
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/health/New()
+/atom/movable/screen/health/New()
 	..()
 	ovrls["health0"] += new/image(icon = icon, icon_state ="health0")
 	ovrls["health1"] += new/image/no_recolor(icon = icon, icon_state ="health1")
@@ -356,10 +355,10 @@
 	ovrls["health7"] += new/image(icon = icon, icon_state ="health7")
 	update_icon()
 
-/obj/screen/health/Process()
+/atom/movable/screen/health/Process()
 	update_icon()
 
-/obj/screen/health/update_icon()
+/atom/movable/screen/health/update_icon()
 	if(parentmob:stat != DEAD)
 		cut_overlays()
 		if (parentmob:analgesic >= 100)
@@ -376,11 +375,11 @@
 				if(0 to 20)				overlays += ovrls["health5"]
 				else					overlays += ovrls["health6"]
 
-/obj/screen/health/DEADelize()
+/atom/movable/screen/health/DEADelize()
 	cut_overlays()
 	overlays += ovrls["health7"]
 
-/obj/screen/health/Click()
+/atom/movable/screen/health/Click()
 	if(!..())
 		return
 	if(ishuman(parentmob))
@@ -389,7 +388,7 @@
 
 //--------------------------------------------------health end---------------------------------------------------------
 //--------------------------------------------------sanity---------------------------------------------------------
-/obj/screen/sanity
+/atom/movable/screen/sanity
 	name = "sanity"
 	desc = "Soundness of your mind. Not keeping it in check may result in a breakdown.\
 	<br>Damaged by feeling pain, as well as seeing grime and gore; \
@@ -398,7 +397,7 @@
 	icon_state = "blank"
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/sanity/New()
+/atom/movable/screen/sanity/New()
 	..()
 	ovrls["sanity0"] += new /image/no_recolor(icon = src.icon, icon_state = "sanity0")
 	ovrls["sanity1"] += new /image/no_recolor(icon = src.icon, icon_state = "sanity1")
@@ -409,7 +408,7 @@
 	ovrls["sanity6"] += new /image/no_recolor(icon = src.icon, icon_state = "sanity6")
 	update_icon()
 
-/obj/screen/sanity/update_icon()
+/atom/movable/screen/sanity/update_icon()
 	var/mob/living/carbon/human/H = parentmob
 	if(!istype(H) || H.stat == DEAD)
 		return
@@ -452,11 +451,11 @@
 
 	overlays += ovrl
 
-/obj/screen/sanity/DEADelize()
+/atom/movable/screen/sanity/DEADelize()
 	cut_overlays()
 	overlays += ovrls["sanity0"]
 
-/obj/screen/sanity/Click()
+/atom/movable/screen/sanity/Click()
 	if(!..())
 		return
 	if(!ishuman(parentmob))
@@ -466,7 +465,7 @@
 	H.sanity.print_desires()
 	return TRUE
 
-/obj/screen/sanity_alt
+/atom/movable/screen/sanity_alt
 	name = "inspiration"
 	desc = "The color of the icon displays how close you are to receive an inspiration from your experiences.\
 	Once you gain an inspiration, you will crave for food, drinks or drugs, to be able to reflect upon all you've learned so far. \
@@ -474,7 +473,7 @@
 	you'll gain a new perk, for ill or good, and better stat gains."
 	icon_state = "insight1"
 
-/obj/screen/sanity_alt/New()
+/atom/movable/screen/sanity_alt/New()
 	..()
 	ovrls["sanity0"] += new /image/(icon = src.icon, icon_state = "sanity0")
 	ovrls["sanity1"] += new /image/(icon = src.icon, icon_state = "sanity1")
@@ -487,7 +486,7 @@
 	update_icon()
 
 
-/obj/screen/sanity_alt/update_icon()
+/atom/movable/screen/sanity_alt/update_icon()
 	var/mob/living/carbon/human/H = parentmob
 	if(!istype(H) || H.stat == DEAD)
 		return
@@ -528,11 +527,11 @@
 		if(1 to INFINITY)
 			icon_state = "insight1"
 
-/obj/screen/sanity_alt/DEADelize()
+/atom/movable/screen/sanity_alt/DEADelize()
 	cut_overlays()
 	add_overlay( ovrls["sanity0"])
 
-/obj/screen/sanity_alt/Click()
+/atom/movable/screen/sanity_alt/Click()
 	if(!..())
 		return
 	if(!ishuman(parentmob))
@@ -545,7 +544,7 @@
 
 //--------------------------------------------------sanity end---------------------------------------------------------
 //--------------------------------------------------nsa---------------------------------------------------------
-/obj/screen/nsa
+/atom/movable/screen/nsa
 	name = "nsa"
 	desc = "Neural System Accumulation depicts strain your body is experiencing.\
 	<br>It is increased by chemicals and mutations.\
@@ -553,7 +552,7 @@
 	icon_state = "blank"
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/nsa/New()
+/atom/movable/screen/nsa/New()
 	..()
 	ovrls["nsa0"]  += new /image/no_recolor(icon = src.icon, icon_state = "nsa0")
 	ovrls["nsa1"]  += new /image/no_recolor(icon = src.icon, icon_state = "nsa1")
@@ -568,7 +567,7 @@
 	ovrls["nsa10"] += new /image/no_recolor(icon = src.icon, icon_state = "nsa10")
 	update_icon()
 
-/obj/screen/nsa/update_icon()
+/atom/movable/screen/nsa/update_icon()
 	var/mob/living/carbon/C = parentmob
 	if(!istype(C) || C.stat == DEAD)
 		return
@@ -597,13 +596,13 @@
 		if(180 to 200)
 			overlays += ovrls["nsa9"]
 
-/obj/screen/nsa/DEADelize()
+/atom/movable/screen/nsa/DEADelize()
 	cut_overlays()
 	overlays += ovrls["nsa0"]
 
 //--------------------------------------------------nsa end---------------------------------------------------------
 //--------------------------------------------------nutrition---------------------------------------------------------
-/obj/screen/nutrition
+/atom/movable/screen/nutrition
 	name = "nutrition"
 	desc = "This shows how much hunger you feel. Being malnourished significantly slows you down. Not updated immediately after eating."
 	icon = 'icons/mob/screen/ErisStyle.dmi'
@@ -612,7 +611,7 @@
 	process_flag = TRUE
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/nutrition/New()
+/atom/movable/screen/nutrition/New()
 	..()
 	ovrls["nutrition0"] += new /image (icon = src.icon, icon_state ="nutrition0")
 	ovrls["nutrition1"] += new /image/no_recolor(icon = src.icon, icon_state ="nutrition1")
@@ -621,11 +620,11 @@
 	ovrls["nutrition4"] += new /image/no_recolor(icon = src.icon, icon_state ="nutrition4")
 	update_icon()
 
-/obj/screen/nutrition/Process()
+/atom/movable/screen/nutrition/Process()
 	//var/mob/living/carbon/human/H = parentmob
 	update_icon()
 
-/obj/screen/nutrition/update_icon()
+/atom/movable/screen/nutrition/update_icon()
 	// set src in usr.client.screen // whatever this is doing makes OD mad and there's almost certainly a better way
 	var/mob/living/carbon/human/H = parentmob
 	cut_overlays()
@@ -636,13 +635,13 @@
 		if(150 to 250)					overlays += ovrls["nutrition3"]
 		else							overlays += ovrls["nutrition4"]
 
-/obj/screen/nutrition/DEADelize()
+/atom/movable/screen/nutrition/DEADelize()
 	cut_overlays()
 	overlays += ovrls["nutrition4"]
 //--------------------------------------------------nutrition end---------------------------------------------------------
 
 //--------------------------------------------------bodytemp---------------------------------------------------------
-/obj/screen/bodytemp
+/atom/movable/screen/bodytemp
 	name = "bodytemp"
 	desc = "Temperature of your body. Affected by environment, health and ingested chemicals.\
 	<br>Fever might be a sign of untreated infection.\
@@ -654,7 +653,7 @@
 	appearance_flags = NO_CLIENT_COLOR
 
 
-/obj/screen/bodytemp/New()
+/atom/movable/screen/bodytemp/New()
 	..()
 	ovrls["temp0"] += new /image/no_recolor (icon = src.icon, icon_state ="temp0")
 	ovrls["temp1"] += new /image/no_recolor(icon = src.icon, icon_state ="temp1")
@@ -667,11 +666,11 @@
 	ovrls["temp-4"] += new /image/no_recolor(icon = src.icon, icon_state ="temp-4")
 	update_icon()
 
-/obj/screen/bodytemp/Process()
+/atom/movable/screen/bodytemp/Process()
 	update_icon()
 
 
-/obj/screen/bodytemp/update_icon()
+/atom/movable/screen/bodytemp/update_icon()
 	//TODO: precalculate all of this stuff when the species datum is created
 	var/mob/living/carbon/parentmobC = parentmob	// same parent mob but in correct type for accessing to species
 	var/base_temperature = parentmobC.species.body_temperature
@@ -708,14 +707,14 @@
 		else
 			overlays += ovrls["temp0"]
 
-/obj/screen/bodytemp/DEADelize()
+/atom/movable/screen/bodytemp/DEADelize()
 	cut_overlays()
 	overlays += ovrls["temp-4"]
 //--------------------------------------------------bodytemp end---------------------------------------------------------
 
 
 //--------------------------------------------------pressure---------------------------------------------------------
-/obj/screen/pressure
+/atom/movable/screen/pressure
 	name = "pressure"
 	desc = "Barometric pressure experienced by your body.\
 	<br>Being in an environment with extreme pressure without a voidsuit is fatal."
@@ -725,7 +724,7 @@
 	process_flag = TRUE
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/pressure/New()
+/atom/movable/screen/pressure/New()
 	..()
 	ovrls["pressure2"] += new /image/no_recolor (icon = src.icon, icon_state ="pressure2")
 	ovrls["pressure1"] += new /image/no_recolor(icon = src.icon, icon_state ="pressure1")
@@ -735,22 +734,22 @@
 	update_icon()
 
 
-/obj/screen/pressure/Process()
+/atom/movable/screen/pressure/Process()
 	update_icon()
 
-/obj/screen/pressure/update_icon()
+/atom/movable/screen/pressure/update_icon()
 	var/mob/living/carbon/human/H = parentmob
 //	icon_state = "pressure[H.pressure_alert]"
 	cut_overlays()
 	overlays += ovrls["pressure[H.pressure_alert]"]
 
-/obj/screen/pressure/DEADelize()
+/atom/movable/screen/pressure/DEADelize()
 	cut_overlays()
 	overlays += ovrls["pressure-2"]
 //--------------------------------------------------pressure end---------------------------------------------------------
 
 //--------------------------------------------------toxin---------------------------------------------------------
-/obj/screen/toxin
+/atom/movable/screen/toxin
 	name = "toxin"
 	icon = 'icons/mob/screen/ErisStyle.dmi'
 	icon_state = "tox0"
@@ -758,15 +757,15 @@
 	process_flag = 1
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/toxin/New()
+/atom/movable/screen/toxin/New()
 	..()
 	ovrls["tox1"] += new /image/no_recolor(icon = src.icon, icon_state ="tox1")
 	update_icon()
 
-/obj/screen/toxin/Process()
+/atom/movable/screen/toxin/Process()
 	update_icon()
 
-/obj/screen/toxin/update_icon()
+/atom/movable/screen/toxin/update_icon()
 	var/mob/living/carbon/human/H = parentmob
 	cut_overlays()
 	if(H.plasma_alert)
@@ -775,14 +774,14 @@
 //	else
 //		icon_state = "tox0"
 
-/obj/screen/toxin/DEADelize()
+/atom/movable/screen/toxin/DEADelize()
 	cut_overlays()
 	overlays += ovrls["tox1"]
 //--------------------------------------------------toxin end---------------------------------------------------------
 
 //--------------------------------------------------oxygen---------------------------------------------------------
 
-/obj/screen/oxygen
+/atom/movable/screen/oxygen
 	name = "oxygen"
 	icon = 'icons/mob/screen/ErisStyle.dmi'
 	icon_state = "oxy0"
@@ -790,16 +789,16 @@
 	process_flag = TRUE
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/oxygen/New()
+/atom/movable/screen/oxygen/New()
 	..()
 	ovrls["oxy1"] += new /image/no_recolor(icon = src.icon, icon_state ="oxy1")
 //	ovrls["oxy0"] += new /image/no_recolor(icon = src.icon, icon_state ="oxy0")
 	update_icon()
 
-/obj/screen/oxygen/Process()
+/atom/movable/screen/oxygen/Process()
 	update_icon()
 
-/obj/screen/oxygen/update_icon()
+/atom/movable/screen/oxygen/update_icon()
 	var/mob/living/carbon/human/H = parentmob
 	cut_overlays()
 	if(H.oxygen_alert)
@@ -808,13 +807,13 @@
 //	else
 //		icon_state = "oxy0"
 
-/obj/screen/oxygen/DEADelize()
+/atom/movable/screen/oxygen/DEADelize()
 	cut_overlays()
 	overlays += ovrls["oxy1"]
 //--------------------------------------------------oxygen end---------------------------------------------------------
 
 //--------------------------------------------------fire---------------------------------------------------------
-/obj/screen/fire
+/atom/movable/screen/fire
 	name = "fire"
 	icon = 'icons/mob/screen/ErisStyle.dmi'
 	icon_state = "blank"
@@ -823,45 +822,45 @@
 	appearance_flags = NO_CLIENT_COLOR
 
 
-/obj/screen/fire/New()
+/atom/movable/screen/fire/New()
 	..()
 	ovrls["fire1"] += new /image/no_recolor(icon = src.icon, icon_state ="fire1")
 	ovrls["fire0"] += new /image(icon = src.icon, icon_state ="fire0")
 	update_icon()
 //	ovrl.appearance_flags = RESET_COLOR
 
-/obj/screen/fire/Process()
+/atom/movable/screen/fire/Process()
 	update_icon()
 
-/obj/screen/fire/update_icon()
+/atom/movable/screen/fire/update_icon()
 	var/mob/living/carbon/human/H = parentmob
 	src.cut_overlays()
 	overlays += ovrls["fire[H.fire_alert == 1]"]
 
-/obj/screen/fire/DEADelize()
+/atom/movable/screen/fire/DEADelize()
 	cut_overlays()
 	overlays += ovrls["fire0"]
 //--------------------------------------------------fire end---------------------------------------------------------
-/*/obj/screen/slot_object
+/*/atom/movable/screen/slot_object
 	name = "slot"
 	icon = 'icons/mob/screen/ErisStyle.dmi'
 	icon_state = "block"
 	screen_loc = ""*/
 //-----------------------internal------------------------------
-/obj/screen/internal
+/atom/movable/screen/internal
 	name = "internal"
 	icon = 'icons/mob/screen/ErisStyle.dmi'
 	icon_state = "blank"
 	screen_loc = "15,14"
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/internal/New()
+/atom/movable/screen/internal/New()
 	..()
 	ovrls["internal0"] += new /image(icon = src.icon, icon_state = "internal0")
 	ovrls["internal1"] += new /image/no_recolor(icon = src.icon, icon_state = "internal1")
 	update_icon()
 
-/obj/screen/internal/Click()
+/atom/movable/screen/internal/Click()
 //	if("internal")
 	if(iscarbon(parentmob))
 		var/mob/living/carbon/C = parentmob
@@ -963,100 +962,100 @@
 						to_chat(C, span_notice("You don't have a[breathes=="oxygen" ? "n oxygen" : addtext(" ", breathes)] tank."))
 					update_icon()
 
-/obj/screen/internal/update_icon()
+/atom/movable/screen/internal/update_icon()
 	cut_overlays()
 	if(parentmob:internal)
 		overlays += ovrls["internal1"]
 	else
 		overlays += ovrls["internal0"]
 
-/obj/screen/internal/DEADelize()
+/atom/movable/screen/internal/DEADelize()
 	cut_overlays()
 //-----------------------internal END------------------------------
 
 //-----------------------jump------------------------------
-/obj/screen/jump
+/atom/movable/screen/jump
 	name = "jump"
 	icon_state = "jump"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
 //-----------------------jump END------------------------------
 //-----------------------look up------------------------------
-/obj/screen/look_up
+/atom/movable/screen/look_up
 	name = "look up"
 	icon_state = "look_up"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/look_up/Click()
+/atom/movable/screen/look_up/Click()
 	var/mob/living/carbon/human/H = parentmob
 	if(istype(H))
 		H.lookup()
 //-----------------------look up END------------------------------
 //-----------------------look down------------------------------
-/obj/screen/look_down
+/atom/movable/screen/look_down
 	name = "look down"
 	icon_state = "look_down"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/look_down/New()
+/atom/movable/screen/look_down/New()
 	..()
 	update_icon()
 
-/obj/screen/look_down/Click()
+/atom/movable/screen/look_down/Click()
 	var/mob/living/carbon/human/H = parentmob
 	if(istype(H))
 		var/turf/temp_turf = get_turf(H)
 		temp_turf.examine(H)
 //-----------------------look down END------------------------------
 //-----------------------wield------------------------------
-/obj/screen/wield
+/atom/movable/screen/wield
 	name = "wield"
 	icon_state = "wield"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/wield/Click()
+/atom/movable/screen/wield/Click()
 	var/mob/living/carbon/human/H = parentmob
 	H.do_wield()
 
-/obj/screen/wield_alt
+/atom/movable/screen/wield_alt
 	name = "wield"
 	icon_state = "wield-l"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
 
-/obj/screen/wield_alt/New()
+/atom/movable/screen/wield_alt/New()
 	..()
 	add_overlay( image(icon = src.icon, icon_state =  "wield-r", pixel_x = 32))
 
-/obj/screen/wield_alt/Click()
+/atom/movable/screen/wield_alt/Click()
 	var/mob/living/carbon/human/H = parentmob
 	H.do_wield()
 //-----------------------wield END------------------------------
 //-----------------------Pull------------------------------
 
-/obj/screen/pull
+/atom/movable/screen/pull
 	name = "pull"
 	icon = 'icons/mob/screen/ErisStyle.dmi'
 	icon_state = "pull0"
 	screen_loc = "14,2"
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/pull/New()
+/atom/movable/screen/pull/New()
 	..()
 	update_icon()
 
-/obj/screen/pull/Click()
+/atom/movable/screen/pull/Click()
 	usr.stop_pulling()
 	//update_icon()
 	//icon_state = "pull0"
 
-/obj/screen/pull/update_icon()
+/atom/movable/screen/pull/update_icon()
 	if (parentmob.pulling)
 		icon_state = "pull1"
 	else
@@ -1064,28 +1063,28 @@
 
 //-----------------------Pull end------------------------------
 //-----------------------throw------------------------------
-/obj/screen/HUDthrow
+/atom/movable/screen/HUDthrow
 	name = "throw"
 	icon = 'icons/mob/screen/ErisStyle.dmi'
 	icon_state = "act_throw_off"
 	screen_loc = "15,2"
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/HUDthrow/New()
+/atom/movable/screen/HUDthrow/New()
 	/*if(usr)
 		//parentmob = usr
-		//usr.verbs += /obj/screen/HUDthrow/verb/toggle_throw_mode()
+		//usr.verbs += /atom/movable/screen/HUDthrow/verb/toggle_throw_mode()
 		if(usr.client)
 			usr.client.screen += src*/
 	..()
 	update_icon()
 
-/obj/screen/HUDthrow/Click()
+/atom/movable/screen/HUDthrow/Click()
 	parentmob.toggle_throw_mode()
 	update_icon()
 	return TRUE
 
-/obj/screen/HUDthrow/update_icon()
+/atom/movable/screen/HUDthrow/update_icon()
 	if (parentmob.in_throw_mode)
 		icon_state = "act_throw_on"
 	else
@@ -1093,7 +1092,7 @@
 //-----------------------throw END------------------------------
 
 //-----------------------block------------------------------
-/obj/screen/block
+/atom/movable/screen/block
 	name = "block"
 	icon_state = "block_off"
 	screen_loc = "15:-16,3"
@@ -1101,16 +1100,16 @@
 	plane = HUD_PLANE
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/block/New()
+/atom/movable/screen/block/New()
 	..()
 	update_icon()
 
-/obj/screen/block/Click()
+/atom/movable/screen/block/Click()
 	if(usr.client)
 		usr.client.blocking()
 		update_icon()
 
-/obj/screen/block/update_icon()
+/atom/movable/screen/block/update_icon()
 	if(ishuman(parentmob))//always true, but just in case
 		var/mob/living/carbon/human/H = parentmob
 		if(H.blocking)
@@ -1120,7 +1119,7 @@
 //-----------------------block END------------------------------
 
 //-----------------------drop------------------------------
-/obj/screen/drop
+/atom/movable/screen/drop
 	name = "drop"
 	icon = 'icons/mob/screen/ErisStyle.dmi'
 	icon_state = "act_drop"
@@ -1129,13 +1128,13 @@
 	plane = HUD_PLANE
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/drop/Click()
+/atom/movable/screen/drop/Click()
 	if(usr.client)
 		usr.client.drop_item()
 //-----------------------drop END------------------------------
 
 //-----------------------resist------------------------------
-/obj/screen/resist
+/atom/movable/screen/resist
 	name = "resist"
 	icon = 'icons/mob/screen/ErisStyle.dmi'
 	icon_state = "act_resist"
@@ -1144,7 +1143,7 @@
 	plane = HUD_PLANE
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/resist/Click()
+/atom/movable/screen/resist/Click()
 	if(isliving(parentmob))
 		var/mob/living/L = parentmob
 		L.resist()
@@ -1152,18 +1151,18 @@
 
 //-----------------------resist END------------------------------
 //-----------------------rest------------------------------
-/obj/screen/rest
+/atom/movable/screen/rest
 	name = "rest"
 	icon_state = "rest"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/rest/Click()
+/atom/movable/screen/rest/Click()
 	parentmob.lay_down()
 //-----------------------rest END------------------------------
 //-----------------------mov_intent------------------------------
-/obj/screen/mov_intent
+/atom/movable/screen/mov_intent
 	name = "mov_intent"
 	icon = 'icons/mob/screen/ErisStyle.dmi'
 	icon_state = "running"
@@ -1171,7 +1170,7 @@
 	appearance_flags = NO_CLIENT_COLOR
 
 
-/obj/screen/mov_intent/Click()
+/atom/movable/screen/mov_intent/Click()
 	var/move_intent_type = next_list_item(usr.move_intent.type, usr.move_intents)
 	var/decl/move_intent/newintent = decls_repository.get_decl(move_intent_type)
 	if (newintent.can_enter(parentmob, TRUE))
@@ -1181,27 +1180,27 @@
 
 	update_icon()
 
-/obj/screen/mov_intent/New()
+/atom/movable/screen/mov_intent/New()
 	..()
 	update_icon()
 
-/obj/screen/mov_intent/update_icon()
+/atom/movable/screen/mov_intent/update_icon()
 	icon_state = parentmob.move_intent.hud_icon_state
 
 //-----------------------mov_intent END------------------------------
-/obj/screen/equip
+/atom/movable/screen/equip
 	name = "equip"
 	icon = 'icons/mob/screen/ErisStyle.dmi'
 	icon_state = "act_equip"
 	screen_loc = "8,2"
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/equip/Click()
+/atom/movable/screen/equip/Click()
 	if(ishuman(parentmob))
 		var/mob/living/carbon/human/H = parentmob
 		H.quick_equip()
 //-----------------------swap------------------------------
-/obj/screen/swap
+/atom/movable/screen/swap
 	name = "swap hand"
 	icon = 'icons/mob/screen/ErisStyle.dmi'
 	icon_state = "swap-l"
@@ -1209,27 +1208,27 @@
 	plane = HUD_PLANE
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/swap/New()
+/atom/movable/screen/swap/New()
 	..()
 	overlays += image(icon = src.icon, icon_state =  "swap-r", pixel_x = 32)
 
-/obj/screen/swap/Click()
+/atom/movable/screen/swap/Click()
 	parentmob.swap_hand()
 
 
-/obj/screen/swap_alt
+/atom/movable/screen/swap_alt
 	name = "swap hand"
 	icon = 'icons/mob/screen/LibertyStyle.dmi'
 	icon_state = "swap_alone"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
 
-/obj/screen/swap_alt/Click()
+/atom/movable/screen/swap_alt/Click()
 	parentmob.swap_hand()
 
 //-----------------------swap END------------------------------
 //-----------------------bionics------------------------------
-/obj/screen/bionics
+/atom/movable/screen/bionics
 	name = "bionics"
 	icon_state = "bionics"
 	layer = HUD_LAYER
@@ -1237,17 +1236,17 @@
 	var/target_organ
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/bionics/New()
+/atom/movable/screen/bionics/New()
 	..()
 	update_icon()
 
-/obj/screen/bionics/l_arm
+/atom/movable/screen/bionics/l_arm
 	target_organ = BP_L_ARM
 
-/obj/screen/bionics/r_arm
+/atom/movable/screen/bionics/r_arm
 	target_organ = BP_R_ARM
 
-/obj/screen/bionics/update_icon()
+/atom/movable/screen/bionics/update_icon()
 	var/mob/living/carbon/human/H = parentmob
 	if(istype(H))
 		var/obj/item/organ/external/E = H.organs_by_name[target_organ]
@@ -1256,13 +1255,13 @@
 			return
 	invisibility = 101
 
-/obj/screen/bionics/Click()
+/atom/movable/screen/bionics/Click()
 	var/mob/living/carbon/human/H = parentmob
 	if(istype(H))
 		var/obj/item/organ/external/E = H.organs_by_name[target_organ]
 		E?.module?.activate(H, E)
 //-----------------------bionics (implant)------------------------------
-/obj/screen/implant_bionics
+/atom/movable/screen/implant_bionics
 	name = "implant bionics"
 	icon_state = "bionics_implant"
 	layer = HUD_LAYER
@@ -1270,56 +1269,56 @@
 	appearance_flags = NO_CLIENT_COLOR
 //-----------------------bionics END------------------------------
 //-----------------------language------------------------------
-/obj/screen/language
+/atom/movable/screen/language
 	name = "language menu"
 	icon_state = "language"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
 
-/obj/screen/language/New()
+/atom/movable/screen/language/New()
 	..()
 	update_icon()
 
-/obj/screen/language/Click()
+/atom/movable/screen/language/Click()
 	parentmob.check_languages()
 
 //-----------------------language END------------------------------
 //-----------------------examine------------------------------
-/obj/screen/examine_area
+/atom/movable/screen/examine_area
 	name = "examine"
 	icon_state = "examine"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
 
-/obj/screen/examine_area/New()
+/atom/movable/screen/examine_area/New()
 	..()
 	update_icon()
 
-/obj/screen/examine_area/Click()
+/atom/movable/screen/examine_area/Click()
 	var/look_at = input("Examine:","Mob|Object|Turf") as mob|obj|turf in view()
 	parentmob.examinate(look_at)
 
 //-----------------------examine END------------------------------
 //-----------------------craft menu------------------------------
-/obj/screen/craft_menu
+/atom/movable/screen/craft_menu
 	name = "craft menu"
 	icon_state = "craft_menu"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/craft_menu/Click()
+/atom/movable/screen/craft_menu/Click()
 	parentmob.open_craft_menu()
 //-----------------------craft menu END------------------------------
 //-----------------------intent------------------------------
-/obj/screen/intent
+/atom/movable/screen/intent
 	name = "intent"
 	icon = 'icons/mob/screen/ErisStyle.dmi'
 	icon_state = "full"
 	screen_loc = "8,2"
 	appearance_flags = NO_CLIENT_COLOR
 
-/obj/screen/intent/New()
+/atom/movable/screen/intent/New()
 	..()
 	ovrls["disarm"] += new /image/no_recolor (icon = src.icon, icon_state ="disarm")
 	ovrls["harm"] += new /image/no_recolor (icon = src.icon, icon_state ="harm")
@@ -1327,7 +1326,7 @@
 	ovrls["help"] += new /image/no_recolor (icon = src.icon, icon_state ="help")
 	update_icon()
 
-/obj/screen/intent/Click(location, control, params)
+/atom/movable/screen/intent/Click(location, control, params)
 	var/_x = text2num(params2list(params)["icon-x"])
 	var/_y = text2num(params2list(params)["icon-y"])
 	if(_x<=16 && _y<=16)
@@ -1340,7 +1339,7 @@
 		parentmob.a_intent_change(I_DISARM)
 	SEND_SIGNAL_OLD(parentmob, COMSIG_HUMAN_ACTIONINTENT_CHANGE, parentmob)
 
-/obj/screen/intent/update_icon()
+/atom/movable/screen/intent/update_icon()
 	src.cut_overlays()
 	switch (parentmob.a_intent)
 		if(I_HELP)
@@ -1353,38 +1352,38 @@
 			src.overlays += ovrls["disarm"]
 //-----------------------intent END------------------------------
 
-/obj/screen/fastintent
+/atom/movable/screen/fastintent
 	name = "fastintent"
 	icon = 'icons/mob/screen/ErisStyle.dmi'
 	icon_state = "blank"
 	var/target_intent
 
-/obj/screen/fastintent/New()
+/atom/movable/screen/fastintent/New()
 	..()
 	src.overlays += new /image/no_recolor(icon = src.icon, icon_state = src.icon_state)
 
-/obj/screen/fastintent/Click()
+/atom/movable/screen/fastintent/Click()
 	parentmob.a_intent_change(target_intent)
 
-/obj/screen/fastintent/help
+/atom/movable/screen/fastintent/help
 	target_intent = I_HELP
 	icon_state = "intent_help"
 
-/obj/screen/fastintent/harm
+/atom/movable/screen/fastintent/harm
 	target_intent = I_HURT
 	icon_state = "intent_harm"
 
-/obj/screen/fastintent/grab
+/atom/movable/screen/fastintent/grab
 	target_intent = I_GRAB
 	icon_state = "intent_grab"
 
-/obj/screen/fastintent/disarm
+/atom/movable/screen/fastintent/disarm
 	target_intent = I_DISARM
 	icon_state = "intent_disarm"
 
 
 
-/obj/screen/drugoverlay
+/atom/movable/screen/drugoverlay
 	icon_state = "blank"
 	name = "drugs"
 	screen_loc = "WEST,SOUTH to EAST,NORTH"
@@ -1394,10 +1393,10 @@
 	plane = HUD_PLANE
 //	var/global/image/blind_icon = image('icons/mob/screen1_full.dmi', "blackimageoverlay")
 
-/obj/screen/drugoverlay/Process()
+/atom/movable/screen/drugoverlay/Process()
 	update_icon()
 
-/obj/screen/drugoverlay/update_icon()
+/atom/movable/screen/drugoverlay/update_icon()
 	underlays.Cut()
 //	if (parentmob.disabilities & NEARSIGHTED)
 //		var/obj/item/clothing/glasses/G = parentmob.get_equipped_item(slot_glasses)
@@ -1409,7 +1408,7 @@
 		underlays |= global_hud.druggy
 
 
-/obj/screen/full_1_tile_overlay
+/atom/movable/screen/full_1_tile_overlay
 	name = "full_1_tile_overlay"
 	icon_state = "blank"
 	screen_loc = "WEST,SOUTH to EAST,NORTH"
@@ -1417,7 +1416,7 @@
 	plane = HUD_PLANE
 	mouse_opacity = 0
 
-/obj/screen/damageoverlay
+/atom/movable/screen/damageoverlay
 	icon = 'icons/mob/screen1_full.dmi'
 	icon_state = "oxydamageoverlay0"
 	name = "dmg"
@@ -1429,17 +1428,17 @@
 	var/global/image/blind_icon = image('icons/mob/screen1_full.dmi', "blackimageoverlay")
 
 
-/obj/screen/damageoverlay/Process()
+/atom/movable/screen/damageoverlay/Process()
 	update_icon()
 
-/obj/screen/damageoverlay/update_icon()
+/atom/movable/screen/damageoverlay/update_icon()
 	cut_overlays()
 	UpdateHealthState()
 
 	underlays.Cut()
 	UpdateVisionState()
 
-/obj/screen/damageoverlay/proc/UpdateHealthState()
+/atom/movable/screen/damageoverlay/proc/UpdateHealthState()
 	var/mob/living/carbon/human/H = parentmob
 
 	if(H.stat == UNCONSCIOUS)
@@ -1509,23 +1508,23 @@
 					I = H.overlays_cache[23]
 			overlays += I
 
-/obj/screen/damageoverlay/proc/UpdateVisionState()
+/atom/movable/screen/damageoverlay/proc/UpdateVisionState()
 	if(parentmob.eye_blind)
 		underlays |= list(blind_icon)
 //	else
 //		underlays.Remove(list(blind_icon))
 //	world << underlays.len
 
-/obj/screen/frippery
+/atom/movable/screen/frippery
 	name = ""
 	layer = HUD_LAYER
 
-/obj/screen/frippery/New(_icon_state,_screen_loc = "7,7", mob/living/_parentmob)
+/atom/movable/screen/frippery/New(_icon_state,_screen_loc = "7,7", mob/living/_parentmob)
 	src.parentmob = _parentmob
 	src.screen_loc = _screen_loc
 	src.icon_state = _icon_state
 
-/obj/screen/glasses_overlay
+/atom/movable/screen/glasses_overlay
 	icon = null
 	name = "glasses"
 	screen_loc = "1:-32,1:-32"
@@ -1535,11 +1534,11 @@
 	plane = HUD_PLANE
 
 
-/obj/screen/glasses_overlay/Process()
+/atom/movable/screen/glasses_overlay/Process()
 	update_icon()
 	return
 
-/obj/screen/glasses_overlay/update_icon()
+/atom/movable/screen/glasses_overlay/update_icon()
 	cut_overlays()
 	var/mob/living/carbon/human/H = parentmob
 	if(istype(H.glasses, /obj/item/clothing/glasses))
@@ -1557,29 +1556,29 @@
 
 
 //-----------------------toggle_invetory------------------------------
-/obj/screen/toggle_invetory
+/atom/movable/screen/toggle_invetory
 	icon = 'icons/mob/screen/ErisStyle.dmi'
 	icon_state = "b-open"
 	name = "toggle inventory"
 	screen_loc = "1,0"
 
-/obj/screen/toggle_invetory/proc/hideobjects()
-	for (var/obj/screen/HUDelement in parentmob.HUDinventory)
+/atom/movable/screen/toggle_invetory/proc/hideobjects()
+	for (var/atom/movable/screen/HUDelement in parentmob.HUDinventory)
 		if (HUDelement.hideflag & TOGGLE_INVENTORY_FLAG)
 			HUDelement.invisibility = 101
 			hidden_inventory_update(HUDelement)
-	for (var/obj/screen/HUDelement in parentmob.HUDfrippery)
+	for (var/atom/movable/screen/HUDelement in parentmob.HUDfrippery)
 		if (HUDelement.hideflag & TOGGLE_INVENTORY_FLAG)
 			HUDelement.invisibility = 101
 
-/obj/screen/toggle_invetory/proc/showobjects()
-	for (var/obj/screen/HUDelement in parentmob.HUDinventory)
+/atom/movable/screen/toggle_invetory/proc/showobjects()
+	for (var/atom/movable/screen/HUDelement in parentmob.HUDinventory)
 		HUDelement.invisibility = 0
 		hidden_inventory_update(HUDelement)
-	for (var/obj/screen/HUDelement in parentmob.HUDfrippery)
+	for (var/atom/movable/screen/HUDelement in parentmob.HUDfrippery)
 		HUDelement.invisibility = 0
 
-/obj/screen/toggle_invetory/Click()
+/atom/movable/screen/toggle_invetory/Click()
 
 	if(parentmob.inventory_shown)
 		parentmob.inventory_shown = FALSE
@@ -1595,7 +1594,7 @@
 
 
 
-/obj/screen/toggle_invetory/proc/hidden_inventory_update(obj/screen/inventory/inv_elem)
+/atom/movable/screen/toggle_invetory/proc/hidden_inventory_update(atom/movable/screen/inventory/inv_elem)
 	var/mob/living/carbon/human/H = parentmob
 	switch (inv_elem.slot_id)
 		if(slot_head)

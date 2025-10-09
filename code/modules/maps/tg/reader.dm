@@ -5,14 +5,14 @@
 /*
 //global datum that will preload variables on atoms instanciation
 GLOBAL_VAR_INIT(use_preloader, FALSE)
-GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
+GLOBAL_DATUM_INIT(_preloader, /datum/dmm_suite/preloader, new)
 */
 
 //global datum that will preload variables on atoms instanciation
-var/global/dmm_suite/preloader/_preloader = new()
+var/global/datum/dmm_suite/preloader/_preloader = new()
 var/global/use_preloader = FALSE
 
-/dmm_suite
+/datum/dmm_suite
 		// /"([a-zA-Z]+)" = \(((?:.|\n)*?)\)\n(?!\t)|\((\d+),(\d+),(\d+)\) = \{"([a-zA-Z\n]*)"\}/g
 	var/static/regex/dmmRegex = new/regex({""(\[a-zA-Z]+)" = \\(((?:.|\n)*?)\\)\n(?!\t)|\\((\\d+),(\\d+),(\\d+)\\) = \\{"(\[a-zA-Z\n]*)"\\}"}, "g")
 		// /^[\s\n]+"?|"?[\s\n]+$|^"|"$/g
@@ -35,7 +35,7 @@ var/global/use_preloader = FALSE
  * 2) Read the map line by line, parsing the result (using parse_grid)
  *
  */
-/dmm_suite/load_map(dmm_file as file, x_offset as num, y_offset as num, z_offset as num, cropMap as num, measureOnly as num, no_changeturf as num, orientation as num)
+/datum/dmm_suite/load_map(dmm_file as file, x_offset as num, y_offset as num, z_offset as num, cropMap as num, measureOnly as num, no_changeturf as num, orientation as num)
 	//How I wish for RAII
 	if(!measureOnly)
 		Master.StartLoadingMap()
@@ -51,7 +51,7 @@ var/global/use_preloader = FALSE
 	if(!measureOnly)
 		Master.StopLoadingMap()
 
-/dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, orientation)
+/datum/dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, orientation)
 	var/tfile = dmm_file//the map file we're creating
 	if(isfile(tfile))
 		tfile = file2text(tfile)
@@ -263,7 +263,7 @@ var/global/use_preloader = FALSE
  * 4) Instanciates the atom with its variables
  *
  */
-/dmm_suite/proc/parse_grid(model as text, model_key as text, xcrd as num,ycrd as num,zcrd as num, no_changeturf as num, orientation as num)
+/datum/dmm_suite/proc/parse_grid(model as text, model_key as text, xcrd as num,ycrd as num,zcrd as num, no_changeturf as num, orientation as num)
 	/*Method parse_grid()
 	- Accepts a text string containing a comma separated list of type paths of the
 		same construction as those contained in a .dmm file, and instantiates them.
@@ -407,7 +407,7 @@ var/global/use_preloader = FALSE
 ////////////////
 
 //Instance an atom at (x,y,z) and gives it the variables in attributes
-/dmm_suite/proc/instance_atom(path,list/attributes, turf/crds, no_changeturf)
+/datum/dmm_suite/proc/instance_atom(path,list/attributes, turf/crds, no_changeturf)
 	_preloader.setup(attributes, path)
 
 	if(crds)
@@ -425,13 +425,13 @@ var/global/use_preloader = FALSE
 		stoplag()
 		SSatoms.map_loader_begin()
 
-/dmm_suite/proc/create_atom(path, crds)
+/datum/dmm_suite/proc/create_atom(path, crds)
 	set waitfor = FALSE
 	. = new path (crds)
 
 //text trimming (both directions) helper proc
 //optionally removes quotes before and after the text (for variable name)
-/dmm_suite/proc/trim_text(what as text,trim_quotes=0)
+/datum/dmm_suite/proc/trim_text(what as text,trim_quotes=0)
 	if(trim_quotes)
 		return trimQuotesRegex.Replace(what, "")
 	else
@@ -440,7 +440,7 @@ var/global/use_preloader = FALSE
 
 //find the position of the next delimiter,skipping whatever is comprised between opening_escape and closing_escape
 //returns 0 if reached the last delimiter
-/dmm_suite/proc/find_next_delimiter_position(text as text,initial_position as num, delimiter=",",opening_escape="\"",closing_escape="\"")
+/datum/dmm_suite/proc/find_next_delimiter_position(text as text,initial_position as num, delimiter=",",opening_escape="\"",closing_escape="\"")
 	var/position = initial_position
 	var/next_delimiter = findtext(text,delimiter,position,0)
 	var/next_opening = findtext(text,opening_escape,position,0)
@@ -459,7 +459,7 @@ var/global/use_preloader = FALSE
 // keys_only_string - If true, text that looks like an associative list has its keys treated as var names,
 //                    otherwise they are parsed as valid associative list keys.
 //return the filled list
-/dmm_suite/proc/readlist(text as text, delimiter=",", keys_only_string = FALSE)
+/datum/dmm_suite/proc/readlist(text as text, delimiter=",", keys_only_string = FALSE)
 
 	var/list/to_return = list()
 	if(text == "")
@@ -521,7 +521,7 @@ var/global/use_preloader = FALSE
 
 	return to_return
 
-/dmm_suite/Destroy()
+/datum/dmm_suite/Destroy()
 	..()
 	return QDEL_HINT_HARDDEL_NOW
 
@@ -529,18 +529,17 @@ var/global/use_preloader = FALSE
 //Preloader datum
 //////////////////
 
-/dmm_suite/preloader
-	parent_type = /datum
+/datum/dmm_suite/preloader
 	var/list/attributes
 	var/target_path
 
-/dmm_suite/preloader/proc/setup(list/the_attributes, path)
+/datum/dmm_suite/preloader/proc/setup(list/the_attributes, path)
 	if(the_attributes.len)
 		use_preloader = TRUE
 		attributes = the_attributes
 		target_path = path
 
-/dmm_suite/preloader/proc/load(atom/what)
+/datum/dmm_suite/preloader/proc/load(atom/what)
 	for(var/attribute in attributes)
 		var/value = attributes[attribute]
 		if(islist(value))

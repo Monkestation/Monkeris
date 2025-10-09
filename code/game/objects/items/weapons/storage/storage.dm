@@ -40,43 +40,43 @@
 	can_hold |= can_hold_extra
 	. = ..()
 
-/HUD_element/threePartBox/storageBackground
+/atom/movable/hud_element/threePartBox/storageBackground
 	start_icon = icon("icons/HUD/storage_start.png")
 	middle_icon = icon("icons/HUD/storage_middle.png")
 	end_icon = icon("icons/HUD/storage_end.png")
 	appearance_flags = NO_CLIENT_COLOR
 
-/HUD_element/threePartBox/storedItemBackground
+/atom/movable/hud_element/threePartBox/storedItemBackground
 	start_icon = icon("icons/HUD/stored_start.png")
 	middle_icon = icon("icons/HUD/stored_middle.png")
 	end_icon = icon("icons/HUD/stored_end.png")
 	appearance_flags = NO_CLIENT_COLOR
 
-/HUD_element/slottedItemBackground
+/atom/movable/hud_element/slottedItemBackground
 	icon = 'icons/HUD/block.png'
 
-/obj/item/storage/proc/storageBackgroundClick(HUD_element/sourceElement, mob/clientMob, location, control, params)
+/obj/item/storage/proc/storageBackgroundClick(atom/movable/hud_element/sourceElement, mob/clientMob, location, control, params)
 	var/atom/A = sourceElement.getData("item")
 	if(A)
 		var/obj/item/I = clientMob.get_active_held_item()
 		if(I)
 			clientMob.ClickOn(A)
 
-/obj/item/storage/proc/itemBackgroundClick(HUD_element/sourceElement, mob/clientMob, location, control, params)
+/obj/item/storage/proc/itemBackgroundClick(atom/movable/hud_element/sourceElement, mob/clientMob, location, control, params)
 	var/atom/A = sourceElement.getData("item")
 	if(A)
 		clientMob.ClickOn(A)
 
-/obj/item/storage/proc/closeButtonClick(HUD_element/sourceElement, mob/clientMob, location, control, params)
+/obj/item/storage/proc/closeButtonClick(atom/movable/hud_element/sourceElement, mob/clientMob, location, control, params)
 	var/obj/item/storage/S = sourceElement.getData("item")
 	if(S)
 		S.close(clientMob)
 
-/obj/item/storage/proc/setupItemBackground(HUD_element/itemBackground, atom/item, itemCount)
+/obj/item/storage/proc/setupItemBackground(atom/movable/hud_element/itemBackground, atom/item, itemCount)
 	itemBackground.setClickProc(TYPE_PROC_REF(/obj/item/storage, itemBackgroundClick), src)
 	itemBackground.setData("item", item)
 
-	var/HUD_element/itemIcon = itemBackground.add(new/HUD_element())
+	var/atom/movable/hud_element/itemIcon = itemBackground.add(new/atom/movable/hud_element())
 	itemIcon.setDimensions(32,32) //todo: should be width/height of real object icon
 	itemIcon.setAlignment(HUD_CENTER_ALIGNMENT,HUD_CENTER_ALIGNMENT) //center
 
@@ -95,11 +95,11 @@
 		item.maptext = "<font color='white'>[itemCount]</font>"
 
 /obj/item/storage/proc/generateHUD(datum/hud/data)
-	RETURN_TYPE(/HUD_element)
-	var/HUD_element/main = new("storage")
+	RETURN_TYPE(/atom/movable/hud_element)
+	var/atom/movable/hud_element/main = new("storage")
 	main.setDeleteOnHide(TRUE)
 
-	var/HUD_element/closeButton = new
+	var/atom/movable/hud_element/closeButton = new
 	closeButton.setName("HUD Storage Close Button")
 	closeButton.setIcon(icon("icons/mob/screen1.dmi","x"))
 	closeButton.setHideParentOnClick(TRUE)
@@ -112,7 +112,7 @@
 		var/baseline_max_storage_space = 16 //should be equal to default backpack capacity
 		var/minBackgroundWidth = min( round( 224 * max_storage_space/baseline_max_storage_space ,1) ,260) //in pixels
 
-		var/HUD_element/threePartBox/storageBackground/storageBackground = new()
+		var/atom/movable/hud_element/threePartBox/storageBackground/storageBackground = new()
 		main.add(storageBackground)
 
 		storageBackground.setName("HUD Storage Background")
@@ -131,7 +131,7 @@
 			var/itemStorageCost = I.get_storage_cost()
 			totalStorageCost += itemStorageCost
 
-			var/HUD_element/threePartBox/storedItemBackground/itemBackground = new()
+			var/atom/movable/hud_element/threePartBox/storedItemBackground/itemBackground = new()
 			storageBackground.add(itemBackground)
 
 			var/itemBackgroundWidth = round(minBackgroundWidth * itemStorageCost/max_storage_space)
@@ -189,7 +189,7 @@
 		var/currentItemNumber = 1
 		var/maxColumnCount = min(data.StorageData["ColCount"], slotsToDisplay)
 		for(currentSlot = 1; currentSlot <= slotsToDisplay; currentSlot++)
-			var/HUD_element/slottedItemBackground/itemBackground = new()
+			var/atom/movable/hud_element/slottedItemBackground/itemBackground = new()
 			main.add(itemBackground)
 			itemBackground.setPosition(totalWidth, totalHeight)
 

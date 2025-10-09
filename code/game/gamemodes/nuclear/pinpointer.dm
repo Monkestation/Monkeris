@@ -37,7 +37,7 @@
 		update_icon()
 
 /obj/item/pinpointer/MouseDrop(over_object)
-	if((src.loc == usr) && istype(over_object, /obj/screen/inventory/hand) && eject_item(slot, usr))
+	if((src.loc == usr) && istype(over_object, /atom/movable/screen/inventory/hand) && eject_item(slot, usr))
 		slot = null
 		update_icon()
 	else

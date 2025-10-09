@@ -2,31 +2,31 @@
 
 #define MECH_UI_STYLE(X) "<span style=\"font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 5px;\">" + X + "</span>"
 
-/obj/screen/movable/exosuit
+/atom/movable/screen/movable/exosuit
 	name = "hardpoint"
 	icon = MECH_HUD_ICON
 	icon_state = "base"
 	var/mob/living/exosuit/owner
 
-/obj/screen/movable/exosuit/proc/on_handle_hud(mob/living/exosuit/E)
+/atom/movable/screen/movable/exosuit/proc/on_handle_hud(mob/living/exosuit/E)
 	if(E) owner = E
 
-/obj/screen/movable/exosuit/Click()
+/atom/movable/screen/movable/exosuit/Click()
 	return (!owner || !usr.incapacitated() && (usr == owner || usr.loc == owner))
 
-/obj/screen/movable/exosuit/radio
+/atom/movable/screen/movable/exosuit/radio
 	name = "radio"
 	//icon_state = "radio"
 	maptext = MECH_UI_STYLE("RADIO")
 	maptext_x = 5
 	maptext_y = 12
 
-/obj/screen/movable/exosuit/radio/Click()
+/atom/movable/screen/movable/exosuit/radio/Click()
 	if(..())
 		if(owner.radio) owner.radio.attack_self(usr)
 		else to_chat(usr, span_warning("There is no radio installed."))
 
-/obj/screen/movable/exosuit/hardpoint
+/atom/movable/screen/movable/exosuit/hardpoint
 	name = "hardpoint"
 	icon_state = "hardpoint"
 	desc = "To activate additional hardpoint's options click on it with shift-button."
@@ -37,20 +37,20 @@
 	maptext_y = 3
 	maptext_width = 64
 
-/obj/screen/movable/exosuit/hardpoint/on_handle_hud(mob/living/exosuit/E)
+/atom/movable/screen/movable/exosuit/hardpoint/on_handle_hud(mob/living/exosuit/E)
 	. = ..()
 	update_system_info()
 
-/obj/screen/movable/exosuit/hardpoint/Initialize(mapload, newtag)
+/atom/movable/screen/movable/exosuit/hardpoint/Initialize(mapload, newtag)
 	. = ..()
 	hardpoint_tag = newtag
 	name = "hardpoint ([hardpoint_tag])"
 
-/obj/screen/movable/exosuit/hardpoint/MouseDrop()
+/atom/movable/screen/movable/exosuit/hardpoint/MouseDrop()
 	. = ..()
 	if(holding) holding.screen_loc = screen_loc
 
-/obj/screen/movable/exosuit/hardpoint/proc/update_system_info()
+/atom/movable/screen/movable/exosuit/hardpoint/proc/update_system_info()
 	maptext = null
 
 	// No point drawing it if we have no item to use or nobody to see it.
@@ -123,7 +123,7 @@
 	if(ovrls["hardpoint"]) new_overlays += ovrls["hardpoint"]
 	overlays = new_overlays
 
-/obj/screen/movable/exosuit/hardpoint/Click(location, control, params)
+/atom/movable/screen/movable/exosuit/hardpoint/Click(location, control, params)
 	if(..() && owner && holding)
 		var/modifiers = params2list(params)
 		if(modifiers["ctrl"])
@@ -139,39 +139,39 @@
 		else if(owner.set_hardpoint(hardpoint_tag)) icon_state = "hardpoint_selected"
 
 
-/obj/screen/movable/exosuit/toggle/power_control
+/atom/movable/screen/movable/exosuit/toggle/power_control
 	name = "Power control"
 	icon_state = "small_important"
 	maptext = MECH_UI_STYLE("POWER")
 	maptext_x = 3
 	maptext_y = 13
 
-/obj/screen/movable/exosuit/toggle/power_control/toggled()
+/atom/movable/screen/movable/exosuit/toggle/power_control/toggled()
 	. = ..()
 	owner.toggle_power(usr)
 
-/obj/screen/movable/exosuit/toggle/power_control/update_icon()
+/atom/movable/screen/movable/exosuit/toggle/power_control/update_icon()
 	toggled = (owner.power == MECH_POWER_ON)
 	. = ..()
 
-/obj/screen/movable/exosuit/eject
+/atom/movable/screen/movable/exosuit/eject
 	name = "eject"
 	//icon_state = "eject"
 	maptext = MECH_UI_STYLE("EJECT")
 	maptext_x = 5
 	maptext_y = 12
 
-/obj/screen/movable/exosuit/eject/Click()
+/atom/movable/screen/movable/exosuit/eject/Click()
 	if(..()) owner.eject(usr)
 
-/obj/screen/movable/exosuit/rename
+/atom/movable/screen/movable/exosuit/rename
 	name = "rename"
 	//icon_state = "rename"
 	maptext = MECH_UI_STYLE("RENAME")
 	maptext_x = 1
 	maptext_y = 12
 
-/obj/screen/movable/exosuit/power
+/atom/movable/screen/movable/exosuit/power
 	name = "power"
 	icon_state = null
 
@@ -180,38 +180,38 @@
 	maptext_y = 20
 
 
-/obj/screen/movable/exosuit/power/on_handle_hud(mob/living/exosuit/E)
+/atom/movable/screen/movable/exosuit/power/on_handle_hud(mob/living/exosuit/E)
 	. = ..()
 	if(owner)
 		var/obj/item/cell/C = owner.get_cell()
 		if(C && istype(C)) maptext = MECH_UI_STYLE("[round(C.charge)]/[round(C.maxcharge)]")
 		else maptext = MECH_UI_STYLE("CHECK POWER")
 
-/obj/screen/movable/exosuit/rename/Click()
+/atom/movable/screen/movable/exosuit/rename/Click()
 	if(..()) owner.rename(usr)
 
-/obj/screen/movable/exosuit/toggle
+/atom/movable/screen/movable/exosuit/toggle
 	name = "toggle"
 	var/toggled = FALSE
 
-/obj/screen/movable/exosuit/toggle/LateInitialize()
+/atom/movable/screen/movable/exosuit/toggle/LateInitialize()
 	. = ..()
 	update_icon()
 
-/obj/screen/movable/exosuit/toggle/update_icon()
+/atom/movable/screen/movable/exosuit/toggle/update_icon()
 	. = ..()
 	icon_state = "[initial(icon_state)][toggled ? "_enabled" : ""]"
 	maptext = FONT_COLORED(toggled ? COLOR_WHITE : COLOR_GRAY, initial(maptext))
 
-/obj/screen/movable/exosuit/toggle/Click()
+/atom/movable/screen/movable/exosuit/toggle/Click()
 	if(..()) toggled()
 
-/obj/screen/movable/exosuit/toggle/proc/toggled()
+/atom/movable/screen/movable/exosuit/toggle/proc/toggled()
 	toggled = !toggled
 	update_icon()
 	return toggled
 
-/obj/screen/movable/exosuit/toggle/air
+/atom/movable/screen/movable/exosuit/toggle/air
 	name = "air"
 	//icon_state = "air"
 	icon_state = "small_important"
@@ -219,12 +219,12 @@
 	maptext_x = 9
 	maptext_y = 13
 
-/obj/screen/movable/exosuit/toggle/air/toggled()
+/atom/movable/screen/movable/exosuit/toggle/air/toggled()
 	owner.use_air = ..()
 	to_chat(usr, span_notice("Auxiliary atmospheric system [owner.use_air ? "enabled" : "disabled"]."))
 	playsound(src, 'sound/machines/airlock.ogg', 50, 1)
 
-/obj/screen/movable/exosuit/toggle/maint
+/atom/movable/screen/movable/exosuit/toggle/maint
 	name = "toggle maintenance protocol"
 	//icon_state = "maint"
 	icon_state = "small"
@@ -232,31 +232,31 @@
 	maptext_x = 5
 	maptext_y = 13
 
-/obj/screen/movable/exosuit/toggle/maint/toggled()
+/atom/movable/screen/movable/exosuit/toggle/maint/toggled()
 	owner.maintenance_protocols = ..()
 	to_chat(usr, span_notice("Maintenance protocols [owner.maintenance_protocols ? "enabled" : "disabled"]."))
 	playsound(src, 'sound/machines/Custom_boltsup.ogg', 50, 1)
 
-/obj/screen/movable/exosuit/toggle/hardpoint
+/atom/movable/screen/movable/exosuit/toggle/hardpoint
 	name = "toggle hardpoint lock"
 	//icon_state = "hardpoint_lock"
 	maptext = MECH_UI_STYLE("GEAR")
 	maptext_x = 5
 	maptext_y = 12
 
-/obj/screen/movable/exosuit/toggle/hardpoint/toggled()
+/atom/movable/screen/movable/exosuit/toggle/hardpoint/toggled()
 	owner.hardpoints_locked = ..()
 	to_chat(usr, span_notice("Hardpoint system access is now [owner.hardpoints_locked ? "disabled" : "enabled"]."))
 	playsound(src, 'sound/mechs/UI_SCI-FI_Tone_10_stereo.ogg', 50, 1)
 
-/obj/screen/movable/exosuit/toggle/hatch
+/atom/movable/screen/movable/exosuit/toggle/hatch
 	name = "toggle hatch lock"
 	//icon_state = "hatch_lock"
 	maptext = MECH_UI_STYLE("LOCK")
 	maptext_x = 5
 	maptext_y = 12
 
-/obj/screen/movable/exosuit/toggle/hatch/toggled()
+/atom/movable/screen/movable/exosuit/toggle/hatch/toggled()
 	if(!owner.hatch_locked && !owner.hatch_closed)
 		to_chat(usr, span_warning("You cannot lock the hatch while it is open."))
 		return
@@ -268,7 +268,7 @@
 	to_chat(usr, span_notice("The [owner.body.hatch_descriptor] is [owner.hatch_locked ? "now" : "no longer" ] locked."))
 	update_icon()
 
-/obj/screen/movable/exosuit/toggle/hatch/update_icon()
+/atom/movable/screen/movable/exosuit/toggle/hatch/update_icon()
 	if(owner && owner.body && !(owner.body.has_hatch))
 		invisibility = 101
 		return
@@ -277,14 +277,14 @@
 	toggled = owner.hatch_locked
 	. = ..()
 
-/obj/screen/movable/exosuit/toggle/hatch_open
+/atom/movable/screen/movable/exosuit/toggle/hatch_open
 	name = "open or close hatch"
 	//icon_state = "hatch_status"
 	maptext = MECH_UI_STYLE("CLOSE")
 	maptext_x = 4
 	maptext_y = 12
 
-/obj/screen/movable/exosuit/toggle/hatch_open/toggled()
+/atom/movable/screen/movable/exosuit/toggle/hatch_open/toggled()
 	if(owner.hatch_locked && owner.hatch_closed)
 		to_chat(usr, span_warning("You cannot open the hatch while it is locked."))
 		return
@@ -294,7 +294,7 @@
 	owner.update_icon()
 	update_icon()
 
-/obj/screen/movable/exosuit/toggle/hatch_open/update_icon()
+/atom/movable/screen/movable/exosuit/toggle/hatch_open/update_icon()
 	if(owner && owner.body && !(owner.body.has_hatch))
 		invisibility = 101
 		return
@@ -310,11 +310,11 @@
 		maptext_x = 4
 
 // This is basically just a holder for the updates the exosuit does.
-/obj/screen/movable/exosuit/health
+/atom/movable/screen/movable/exosuit/health
 	name = "exosuit integrity"
 	icon_state = "health"
 
-/obj/screen/movable/exosuit/health/Click()
+/atom/movable/screen/movable/exosuit/health/Click()
 	if(..())
 		if(owner && owner.body && owner.body.diagnostics?.is_functional())
 			usr.setClickCooldown(1 SECONDS)
@@ -324,7 +324,7 @@
 				if(MC)
 					MC.return_diagnostics(usr)
 
-/obj/screen/movable/exosuit/health/on_handle_hud(mob/living/exosuit/E)
+/atom/movable/screen/movable/exosuit/health/on_handle_hud(mob/living/exosuit/E)
 	. = ..()
 	cut_overlays()
 	var/obj/item/cell/C = owner.get_cell()
@@ -355,7 +355,7 @@
 		overlays += GLOB.mech_damage_overlay_cache["[part]-[state]"]
 
 //Controls if cameras set the vision flags
-/obj/screen/movable/exosuit/toggle/camera
+/atom/movable/screen/movable/exosuit/toggle/camera
 	name = "toggle camera matrix"
 	//icon_state = "camera"
 	icon_state = "small_important"
@@ -363,7 +363,7 @@
 	maptext_x = 1
 	maptext_y = 13
 
-/obj/screen/movable/exosuit/toggle/camera/toggled()
+/atom/movable/screen/movable/exosuit/toggle/camera/toggled()
 	if(!owner.head)
 		to_chat(usr, span_warning("I/O Error: Camera systems not found."))
 		return
@@ -375,33 +375,33 @@
 	to_chat(usr, span_notice("[owner.head.name] advanced sensor mode is [owner.head.active_sensors ? "now" : "no longer" ] active."))
 	update_icon()
 
-/obj/screen/movable/exosuit/toggle/camera/update_icon()
+/atom/movable/screen/movable/exosuit/toggle/camera/update_icon()
 	if(owner.head)
 		toggled = owner.head.active_sensors
 	else toggled = FALSE
 	. = ..()
 
-/obj/screen/movable/exosuit/needle
+/atom/movable/screen/movable/exosuit/needle
 	vis_flags = VIS_INHERIT_ID
 	icon_state = "heatprobe_needle"
 
-/obj/screen/movable/exosuit/heat
+/atom/movable/screen/movable/exosuit/heat
 	name = "heat probe"
 	icon_state = "heatprobe"
 	var/celsius = TRUE
-	var/obj/screen/movable/exosuit/needle/gauge_needle = null
+	var/atom/movable/screen/movable/exosuit/needle/gauge_needle = null
 	desc = "TEST"
 
-/obj/screen/movable/exosuit/heat/Initialize()
+/atom/movable/screen/movable/exosuit/heat/Initialize()
 	. = ..()
-	gauge_needle = new /obj/screen/movable/exosuit/needle(owner)
+	gauge_needle = new /atom/movable/screen/movable/exosuit/needle(owner)
 	vis_contents += gauge_needle
 
-/obj/screen/movable/exosuit/heat/Destroy()
+/atom/movable/screen/movable/exosuit/heat/Destroy()
 	QDEL_NULL(gauge_needle)
 	. = ..()
 
-/obj/screen/movable/exosuit/heat/Click(location, control, params)
+/atom/movable/screen/movable/exosuit/heat/Click(location, control, params)
 	if(..())
 		var/modifiers = params2list(params)
 		if(modifiers["shift"])
@@ -426,7 +426,7 @@
 		else
 			usr.show_message(span_warning("The life support panel isn't responding."))
 
-/obj/screen/movable/exosuit/heat/proc/Update()
+/atom/movable/screen/movable/exosuit/heat/proc/Update()
 	//Relative value of heat
 	if(owner && owner.body && owner.body.diagnostics?.is_functional() && gauge_needle)
 		var/value = clamp( owner.bodytemperature / (owner.material.melting_point * 1.55), 0, 1)
@@ -435,11 +435,11 @@
 		rot_matrix.Translate(0, -2)
 		animate(gauge_needle, transform = rot_matrix, 0.1, easing = SINE_EASING)
 
-/obj/screen/movable/exosuit/toggle/strafe
+/atom/movable/screen/movable/exosuit/toggle/strafe
 	name = "toggle strafing"
 	icon_state = "strafe"
 
-/obj/screen/movable/exosuit/toggle/strafe/toggled() // Prevents exosuits from strafing when EMP'd enough
+/atom/movable/screen/movable/exosuit/toggle/strafe/toggled() // Prevents exosuits from strafing when EMP'd enough
 	if(owner.legs.can_strafe == MECH_STRAFING_NONE)
 		to_chat(usr, span_warning("Error: This propulsion system doesn't support synchronization!"))
 		return

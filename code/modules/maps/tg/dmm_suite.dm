@@ -1,4 +1,4 @@
-dmm_suite{
+/datum/dmm_suite{
 	/*
 
 		dmm_suite version 1.0
@@ -6,7 +6,7 @@ dmm_suite{
 
 		NOTE: Map saving functionality removed
 
-		defines the object /dmm_suite
+		defines the object /datum/dmm_suite
 			- Provides the proc load_map()
 				- Loads the specified map file onto the specified z-level.
 			- provides the proc write_map()
@@ -23,7 +23,7 @@ dmm_suite{
 
 		------------------------
 
-		To save a map at runtime, create an instance of /dmm_suite, and then call
+		To save a map at runtime, create an instance of /datum/dmm_suite, and then call
 		write_map(), which accepts three arguments:
 			- A turf representing one corner of a three dimensional grid (Required).
 			- Another turf representing the other corner of the same grid (Required).
@@ -36,12 +36,12 @@ dmm_suite{
 
 		------------------------
 
-		To load a map at runtime, create an instance of /dmm_suite, and then call load_map(),
+		To load a map at runtime, create an instance of /datum/dmm_suite, and then call load_map(),
 		which accepts two arguments:
 			- A .dmm file to load (Required).
 			- A number representing the z-level on which to start loading the map (Optional).
 
-		The /dmm_suite will load the map file starting on the specified z-level. If no
+		The /datum/dmm_suite will load the map file starting on the specified z-level. If no
 		z-level	was specified, world.maxz will be increased so as to fit the map. Note
 		that if you wish to load a map onto a z-level that already has objects on it,
 		you will have to handle the removal of those objects. Otherwise the new map will
