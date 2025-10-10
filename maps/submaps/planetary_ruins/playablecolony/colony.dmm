@@ -1246,7 +1246,7 @@
 /turf/floor/plating,
 /area/map_template/colony/atmospherics)
 "dA" = (
-/obj/structure/dispenser,
+/obj/structure/tank_dispenser,
 /obj/machinery/light{
 	dir = 4
 	},
