@@ -1,46 +1,46 @@
-import { Box, Button, LabeledList, Section } from 'tgui-core/components';
+import { Button, LabeledList, Section } from 'tgui-core/components';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
 
 interface TankDispenserData {
   name: string;
-  oxygentanks: number;
-  plasmatanks: number;
+  oxygen: number;
+  plasma: number;
 }
 
-export const TankDispenser = () => {
+export const TankDispenser = (props) => {
   const { act, data } = useBackend<TankDispenserData>();
-  const { name, oxygentanks, plasmatanks } = data;
-
   return (
-    <Window width={400} height={300}>
+    <Window width={275} height={103}>
       <Window.Content>
-        <Section title={name}>
+        <Section>
           <LabeledList>
-            <LabeledList.Item label="Oxygen tanks">
-              <Box inline mr={2}>
-                {oxygentanks}
-              </Box>
-              {oxygentanks > 0 ? (
-                <Button content="Dispense" onClick={() => act('oxygen')} />
-              ) : (
-                <Box color="red" inline>
-                  empty
-                </Box>
-              )}
+            <LabeledList.Item
+              label="Plasma"
+              buttons={
+                <Button
+                  icon={data.plasma ? 'square' : 'square-o'}
+                  content="Dispense"
+                  disabled={!data.plasma}
+                  onClick={() => act('plasma')}
+                />
+              }
+            >
+              {data.plasma}
             </LabeledList.Item>
-            <LabeledList.Item label="Plasma tanks">
-              <Box inline mr={2}>
-                {plasmatanks}
-              </Box>
-              {plasmatanks > 0 ? (
-                <Button content="Dispense" onClick={() => act('plasma')} />
-              ) : (
-                <Box color="red" inline>
-                  empty
-                </Box>
-              )}
+            <LabeledList.Item
+              label="Oxygen"
+              buttons={
+                <Button
+                  icon={data.oxygen ? 'square' : 'square-o'}
+                  content="Dispense"
+                  disabled={!data.oxygen}
+                  onClick={() => act('oxygen')}
+                />
+              }
+            >
+              {data.oxygen}
             </LabeledList.Item>
           </LabeledList>
         </Section>

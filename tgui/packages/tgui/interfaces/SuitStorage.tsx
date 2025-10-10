@@ -41,7 +41,7 @@ export const SuitStorage = () => {
 
   if (panelOpen) {
     return (
-      <Window width={400} height={300}>
+      <Window width={435} height={300}>
         <Window.Content>
           <Section title="Maintenance Panel Controls">
             <Stack vertical>
@@ -54,11 +54,9 @@ export const SuitStorage = () => {
                   </Box>
                   .
                 </Box>
-                <Button
-                  content={`Turn towards ${issuperUV ? '185nm' : '15nm'}`}
-                  onClick={() => act('toggleUV')}
-                  mb={2}
-                />
+                <Button onClick={() => act('toggleUV')} mb={2}>
+                  {`Turn towards ${issuperUV ? '185nm' : '15nm'}`}
+                </Button>
               </Stack.Item>
 
               <Stack.Item>
@@ -70,10 +68,9 @@ export const SuitStorage = () => {
                   </Box>{' '}
                   LED is on.
                 </Box>
-                <Button
-                  content="Press button"
-                  onClick={() => act('togglesafeties')}
-                />
+                <Button onClick={() => act('togglesafeties')}>
+                  Press button
+                </Button>
               </Stack.Item>
             </Stack>
           </Section>
@@ -110,44 +107,40 @@ export const SuitStorage = () => {
                   <Box color={helmet ? 'default' : 'grey'}>
                     {helmet || 'No helmet detected.'}
                   </Box>
-                  {helmet && isOpen && (
-                    <Button
-                      content="Dispense helmet"
-                      onClick={() => act('dispense_helmet')}
-                      mt={1}
-                    />
-                  )}
+                  {helmet && isOpen ? (
+                    <Button onClick={() => act('dispense_helmet')} mt={1}>
+                      Dispense helmet
+                    </Button>
+                  ) : undefined}
                 </LabeledList.Item>
 
                 <LabeledList.Item label="Suit storage compartment">
                   <Box color={suit ? 'default' : 'grey'}>
                     {suit || 'No exosuit detected.'}
                   </Box>
-                  {suit && isOpen && (
-                    <Button
-                      content="Dispense suit"
-                      onClick={() => act('dispense_suit')}
-                      mt={1}
-                    />
-                  )}
+                  {suit && isOpen ? (
+                    <Button onClick={() => act('dispense_suit')} mt={1}>
+                      Dispense suit
+                    </Button>
+                  ) : undefined}
                 </LabeledList.Item>
 
                 <LabeledList.Item label="Breathmask storage compartment">
                   <Box color={mask ? 'default' : 'grey'}>
                     {mask || 'No breathmask detected.'}
                   </Box>
-                  {mask && isOpen && (
+                  {mask && isOpen ? (
                     <Button
                       content="Dispense mask"
                       onClick={() => act('dispense_mask')}
                       mt={1}
                     />
-                  )}
+                  ) : undefined}
                 </LabeledList.Item>
               </LabeledList>
             </Stack.Item>
 
-            {hasOccupant && (
+            {hasOccupant ? (
               <Stack.Item>
                 <Divider />
                 <NoticeBox color="red">
@@ -162,7 +155,7 @@ export const SuitStorage = () => {
                   mt={1}
                 />
               </Stack.Item>
-            )}
+            ) : undefined}
 
             <Stack.Item>
               <Divider />
@@ -175,13 +168,14 @@ export const SuitStorage = () => {
                     content={isOpen ? 'Close Unit' : 'Open Unit'}
                     onClick={() => act('toggle_open')}
                   />
-                  {!isOpen && (
+                  {isOpen ? undefined : (
                     <Button
-                      content={locked ? 'Unlock Unit' : 'Lock Unit'}
                       onClick={() => act('toggle_lock')}
                       color="orange"
                       ml={1}
-                    />
+                    >
+                      {locked ? 'Unlock Unit' : 'Lock Unit'}
+                    </Button>
                   )}
                 </LabeledList.Item>
 
@@ -193,10 +187,13 @@ export const SuitStorage = () => {
               </LabeledList>
 
               <Button
-                content="Start Disinfection cycle"
                 onClick={() => act('start_UV')}
+                disabled={isOpen}
+                tooltip={isOpen ? 'Unit must be closed' : ''}
                 mt={2}
-              />
+              >
+                Start Disinfection cycle
+              </Button>
             </Stack.Item>
           </Stack>
         </Section>

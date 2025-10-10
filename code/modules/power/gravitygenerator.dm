@@ -205,9 +205,6 @@ var/const/GRAV_NEEDS_WRENCH = 3
 		ui = new(user, src, "GravityGenerator", name)
 		ui.open()
 
-/obj/machinery/gravity_generator/main/ui_state(mob/user)
-	return GLOB.default_state
-
 /obj/machinery/gravity_generator/main/ui_data(mob/user)
 	var/list/data = list()
 
