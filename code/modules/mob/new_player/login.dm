@@ -12,6 +12,9 @@
 		mind.active = TRUE
 		mind.current = src
 
+	// It's neccessary to have a hud since we need it for anything ma2html related
+	hud_used = new /datum/hud(src)
+
 	// . = ..()
 	// if(!. || !client)
 	// 	return FALSE
@@ -27,5 +30,6 @@
 
 	new_player_panel()
 
-	GLOB.lobbyScreen.play_music(client)
+	if (SSticker.state != GAME_STATE_STARTUP)
+		GLOB.lobbyScreen.play_music(client)
 	GLOB.lobbyScreen.show_titlescreen(client)

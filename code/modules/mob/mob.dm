@@ -1399,3 +1399,42 @@ All Canmove setting in this proc is temporary. This var should not be set from h
 /mob/vv_auto_rename(new_name)
 	//Do not do parent's actions, as we *usually* do this differently.
 	fully_replace_character_name(real_name, new_name)
+
+/// Makes a client temporarily aware of an appearance via and invisible vis contents object.
+/mob/proc/send_appearance(mutable_appearance/appearance) as /atom/movable/screen
+	RETURN_TYPE(/atom/movable/screen)
+	if(!hud_used || isnull(appearance))
+		return
+
+	var/atom/movable/screen/container = new
+	container.appearance = appearance
+
+	hud_used.vis_holder.vis_contents += container
+	addtimer(CALLBACK(src, PROC_REF(remove_appearance), container), 5 SECONDS, TIMER_DELETE_ME)
+
+	return container
+
+/mob/proc/remove_appearance(container)
+	if(!hud_used)
+		return
+
+	hud_used.vis_holder.vis_contents -= container
+
+/proc/ma2html(mutable_appearance/appearance, mob/viewer, extra_classes = "")
+	if(isatom(appearance))
+		var/atom/atom = appearance
+		appearance = copy_appearance_filter_overlays(atom.appearance)
+	else if(isappearance_or_image(appearance) || isicon(appearance))
+		appearance = copy_appearance_filter_overlays(appearance)
+	else
+		CRASH("Invalid appearance passed to ma2html - either a appearance, image, icon, or atom must be passed!")
+
+	if(IS_CLIENT_OR_MOCK(viewer))
+		var/datum/client_interface/client = viewer
+		viewer = client.mob
+	if(!ismob(viewer))
+		CRASH("Invalid viewer passed to ma2html")
+	var/atom/movable/screen/container = viewer.send_appearance(appearance)
+	if(QDELETED(container))
+		CRASH("Failed to send appearance to client")
+	return "<img class='icon [extra_classes]' src='\ref[container]' style='image-rendering: pixelated; -ms-interpolation-mode: nearest-neighbor'>"

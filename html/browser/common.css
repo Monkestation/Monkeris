@@ -207,6 +207,11 @@ div.notice {
 	clear: both;
 }
 
+.icon {
+	image-rendering: pixelated;
+	-ms-interpolation-mode: nearest-neighbor
+}
+
 .statusDisplay {
 	background: #000000;
 	color: #ffffff;

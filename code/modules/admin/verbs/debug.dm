@@ -429,3 +429,16 @@
 		return
 	if(tgui_alert(usr, "Are you absolutely sure you want to reload the configuration from the default path on the disk, wiping any in-round modifications?", "Really reset?", list("No", "Yes")) == "Yes")
 		config.admin_reload()
+
+/client/proc/get(atom/movable/A)
+	set category = "Debug"
+	set name = "Get"
+
+	if (isnull(usr.loc))
+		to_chat(usr, "Can't move to nullspace!")
+		return
+
+	if(QDELETED(A))
+		return
+
+	A.forceMove(get_turf(usr))

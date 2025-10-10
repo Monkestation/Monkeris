@@ -106,3 +106,10 @@
 /datum/department/offship // Money from serbomat and billomat come here
 	name = "Offship entities"
 	id = DEPARTMENT_OFFSHIP
+
+/datum/department/silicon
+	name = "Silicons"
+	id = DEPARTMENT_SILICON
+	// Robots arent real. they dont need money
+	account_initial_balance = 0
+	budget_base = 0

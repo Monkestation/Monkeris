@@ -20,6 +20,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	var/equip_preview_mob = EQUIP_PREVIEW_ALL
 
+	var/preview_should_rebuild_organs = TRUE
+
 	var/icon/bgstate = "black"
 	var/list/bgstate_options = list("steel", "dark_steel", "white_tiles", "black_tiles", "wood", "carpet", "white", "black")
 
@@ -27,6 +29,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	name = "Body"
 	sort_order = 2
 	var/hide_species = TRUE
+	var/randomize_shutup = FALSE
 
 /datum/category_item/player_setup_item/physical/body/load_character(savefile/S)
 	from_file(S["species"], pref.species)
@@ -82,7 +85,6 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 /datum/category_item/player_setup_item/physical/body/content(mob/user)
 	if(!pref.preview_icon)
 		pref.update_preview_icon()
-	user << browse_rsc(pref.preview_icon, "previewicon.png")
 
 	var/datum/species/mob_species = GLOB.all_species[pref.species]
 	. += "<style>span.color_holder_box{display: inline-block; width: 20px; height: 8px; border:1px solid #000; padding: 0px;}</style>"
@@ -118,7 +120,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		. += "<a href='byond://?src=\ref[src];skin_color=1'><span class='color_holder_box' style='background-color:[pref.skin_color]'></span></a><br>"
 
 	. += "</td><td style = 'text-align:center;' width = 35%><b>Preview</b><br>"
-	. += "<div style ='padding-bottom:-2px;' class='statusDisplay'><img src=previewicon.png width=[pref.preview_icon.Width()] height=[pref.preview_icon.Height()]></div>"
+	. += "<style>.previewicon { width: 192px;height: 128px; }</style>"
+	. += "<div class='statusDisplay'>[ma2html(pref.preview_icon, user, "previewicon")]</div>"
 	. += "<br><a href='byond://?src=\ref[src];cycle_bg=1'>Cycle background</a>"
 	. += "<br><a href='byond://?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_LOADOUT]'>[pref.equip_preview_mob & EQUIP_PREVIEW_LOADOUT ? "Hide loadout" : "Show loadout"]</a>"
 	. += "<br><a href='byond://?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_JOB]'>[pref.equip_preview_mob & EQUIP_PREVIEW_JOB ? "Hide job gear" : "Show job gear"]</a>"
@@ -138,6 +141,17 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		return TOPIC_REFRESH
 
 	else if(href_list["random"])
+		if(randomize_shutup)
+			pref.randomize_appearance_and_body_for()
+			return TOPIC_REFRESH_UPDATE_PREVIEW
+
+		var/ohgod = alert(user, "Are you SURE you want to randomize your character? (You can always click \"Reload Slot\" at the top)", "Randomize Character", "Yes", "Yes (Shut up)", "No!")
+		if(ohgod == "No!")
+			return
+
+		if(ohgod == "Yes (Shut up)")
+			randomize_shutup = TRUE
+
 		pref.randomize_appearance_and_body_for()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
@@ -215,10 +229,6 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["disabilities"])
 		var/disability_flag = text2num(href_list["disabilities"])
 		pref.disabilities ^= disability_flag
-		return TOPIC_REFRESH_UPDATE_PREVIEW
-
-	else if(href_list["toggle_preview_value"])
-		pref.equip_preview_mob ^= text2num(href_list["toggle_preview_value"])
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["cycle_bg"])

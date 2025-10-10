@@ -952,6 +952,18 @@ var/list/rank_prefix = list(\
 
 	species = GLOB.all_species[new_species]
 
+	if (ismannequin(src))
+		holder_type = species?.holder_type
+		maxHealth = species.total_health
+		skin_color = species.base_color || "#000000"
+		icon_state = lowertext(species.name)
+		if (!organs.len)
+			rebuild_organs()
+			src.sync_organ_dna()
+
+		species.handle_post_spawn(src)
+		return !!species
+
 	if(species.language)
 		add_language(species.language)
 
@@ -1004,10 +1016,7 @@ var/list/rank_prefix = list(\
 		hud_used = new /datum/hud(src)
 		update_hud()
 	*/
-	if(species)
-		return 1
-	else
-		return 0
+	return !!species
 
 //Needed for augmentation
 /mob/living/carbon/human/proc/rebuild_organs(from_preference)

@@ -338,24 +338,10 @@ GLOBAL_LIST_INIT(scary_sounds, list(
 
 	return 1
 
-var/global/list/admin_permissions = list(
-	"fun" = 0x1,
-	"server" = 0x2,
-	"debug" = 0x4,
-	"permissions" = 0x8,
-	"mentor" = 0x10,
-	"ban" = 0x20,
-	"admin" = 0x40,
-	"host" = 0x80
-	)
-
 /proc/get_mannequin(ckey)
-	if(!GLOB.mannequins_)
-		GLOB.mannequins_ = new()
+	if(!GLOB.mannequins_[ckey])
+		GLOB.mannequins_[ckey] = new/mob/living/carbon/human/dummy/mannequin()
 	. = GLOB.mannequins_[ckey]
-	if(!.)
-		. = new/mob/living/carbon/human/dummy/mannequin()
-		GLOB.mannequins_[ckey] = .
 
 var/global/list/severity_to_string = list("[EVENT_LEVEL_MUNDANE]" = "Mundane", "[EVENT_LEVEL_MODERATE]" = "Moderate", "[EVENT_LEVEL_MAJOR]" = "Major", "[EVENT_LEVEL_ROLESET]" = "Roleset","[EVENT_LEVEL_ECONOMY]" = "Economy")
 
