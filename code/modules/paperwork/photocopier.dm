@@ -11,6 +11,7 @@
 	power_channel = STATIC_EQUIP
 	var/obj/item/copyitem = null	//what's in the copier!
 	var/copies = 1	//how many copies to print!
+	// TODO: Make toner an item instead of a value
 	var/toner = 30 //how much toner is left! woooooo~
 	var/maxcopies = 10	//how many copies can be copied at once- idea shamelessly stolen from bs12's copier!
 
@@ -32,6 +33,7 @@
 	data["hasCopyitem"] = !!copyitem
 	data["toner"] = toner
 	data["copies"] = copies
+	data["max_copies"] = maxcopies
 	data["isSilicon"] = issilicon(user)
 
 	return data
@@ -41,88 +43,65 @@
 	if(.)
 		return TRUE
 
-	// Map TGUI actions to existing Topic parameters
-	var/list/href_list = list()
-
 	switch(action)
 		if("remove")
-			href_list["remove"] = "1"
+			if(copyitem)
+				copyitem.loc = usr.loc
+				usr.put_in_hands(copyitem)
+				to_chat(usr, span_notice("You take \the [copyitem] out of \the [src]."))
+				copyitem = null
 		if("copy")
-			href_list["copy"] = "1"
-		if("min")
-			href_list["min"] = "1"
-		if("add")
-			href_list["add"] = "1"
+			if(stat & (BROKEN|NOPOWER))
+				return
+
+			for(var/i = 0; i < copies; i++)
+				if(toner <= 0)
+					break
+
+				if (istype(copyitem, /obj/item/paper))
+					copy(copyitem)
+					sleep(15)
+				else if (istype(copyitem, /obj/item/photo))
+					photocopy(copyitem)
+					sleep(15)
+				else if (istype(copyitem, /obj/item/paper_bundle))
+					var/obj/item/paper_bundle/B = bundlecopy(copyitem)
+					sleep(15*B.pages.len)
+				else
+					to_chat(usr, span_warning("\The [copyitem] can't be copied by \the [src]."))
+					break
+
+				use_power(active_power_usage)
+		if("set_copies")
+			if(params["num_copies"] <= maxcopies)
+				copies = params["num_copies"]
 		if("aipic")
-			href_list["aipic"] = "1"
 
-	// Call existing Topic method
-	Topic("", href_list)
+			if(!issilicon(usr))
+				return
+			if(stat & (BROKEN|NOPOWER))
+				return
+
+			if(toner >= 5)
+				var/mob/living/silicon/tempAI = usr
+				var/obj/item/device/camera/siliconcam/camera = tempAI.aiCamera
+
+				if(!camera)
+					return
+				var/obj/item/photo/selection = camera.selectpicture()
+				if (!selection)
+					return
+
+				var/obj/item/photo/p = photocopy(selection)
+				if (p.desc == "")
+					p.desc += "Copied by [tempAI.name]"
+				else
+					p.desc += " - Copied by [tempAI.name]"
+				toner -= 5
+				sleep(15)
+			return
+
 	return TRUE
-
-/obj/machinery/photocopier/Topic(href, href_list)
-	if(href_list["copy"])
-		if(stat & (BROKEN|NOPOWER))
-			return
-
-		for(var/i = 0; i < copies; i++)
-			if(toner <= 0)
-				break
-
-			if (istype(copyitem, /obj/item/paper))
-				copy(copyitem)
-				sleep(15)
-			else if (istype(copyitem, /obj/item/photo))
-				photocopy(copyitem)
-				sleep(15)
-			else if (istype(copyitem, /obj/item/paper_bundle))
-				var/obj/item/paper_bundle/B = bundlecopy(copyitem)
-				sleep(15*B.pages.len)
-			else
-				to_chat(usr, span_warning("\The [copyitem] can't be copied by \the [src]."))
-				break
-
-			use_power(active_power_usage)
-		updateUsrDialog()
-	else if(href_list["remove"])
-		if(copyitem)
-			copyitem.loc = usr.loc
-			usr.put_in_hands(copyitem)
-			to_chat(usr, span_notice("You take \the [copyitem] out of \the [src]."))
-			copyitem = null
-			updateUsrDialog()
-	else if(href_list["min"])
-		if(copies > 1)
-			copies--
-			updateUsrDialog()
-	else if(href_list["add"])
-		if(copies < maxcopies)
-			copies++
-			updateUsrDialog()
-	else if(href_list["aipic"])
-		if(!issilicon(usr))
-			return
-		if(stat & (BROKEN|NOPOWER))
-			return
-
-		if(toner >= 5)
-			var/mob/living/silicon/tempAI = usr
-			var/obj/item/device/camera/siliconcam/camera = tempAI.aiCamera
-
-			if(!camera)
-				return
-			var/obj/item/photo/selection = camera.selectpicture()
-			if (!selection)
-				return
-
-			var/obj/item/photo/p = photocopy(selection)
-			if (p.desc == "")
-				p.desc += "Copied by [tempAI.name]"
-			else
-				p.desc += " - Copied by [tempAI.name]"
-			toner -= 5
-			sleep(15)
-		updateUsrDialog()
 
 /obj/machinery/photocopier/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/paper) || istype(I, /obj/item/photo) || istype(I, /obj/item/paper_bundle))
@@ -132,7 +111,6 @@
 			I.loc = src
 			to_chat(user, span_notice("You insert \the [I] into \the [src]."))
 			flick(insert_anim, src)
-			updateUsrDialog()
 		else
 			to_chat(user, span_notice("There is already something in \the [src]."))
 	else if(istype(I, /obj/item/device/toner))
@@ -142,7 +120,6 @@
 			var/obj/item/device/toner/T = I
 			toner += T.toner_amount
 			qdel(I)
-			updateUsrDialog()
 		else
 			to_chat(user, span_notice("This cartridge is not yet ready for replacement! Use up the rest of the toner."))
 	if(QUALITY_BOLT_TURNING in I.tool_qualities)
@@ -218,8 +195,8 @@
 	return p
 
 //If need_toner is 0, the copies will still be lightened when low on toner, however it will not be prevented from printing. TODO: Implement print queues for fax machines and get rid of need_toner
-/obj/machinery/photocopier/proc/bundlecopy(obj/item/paper_bundle/bundle, need_toner=1)
-	var/obj/item/paper_bundle/p = new /obj/item/paper_bundle (src)
+/obj/machinery/photocopier/proc/bundlecopy(obj/item/paper_bundle/bundle, need_toner = TRUE)
+	var/obj/item/paper_bundle/p = new /obj/item/paper_bundle(src)
 	for(var/obj/item/W in bundle.pages)
 		if(toner <= 0 && need_toner)
 			toner = 0
