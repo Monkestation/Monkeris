@@ -1,4 +1,5 @@
 import { Box, Button, Section, Stack } from 'tgui-core/components';
+import { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
@@ -6,9 +7,9 @@ import { Window } from '../layouts';
 interface LateJoinData {
   name: string;
   roundDuration: string | number;
-  evacuated: boolean;
-  evacuating: boolean;
-  emergencyEvac: boolean;
+  evacuated: BooleanLike;
+  evacuating: BooleanLike;
+  emergencyEvac: BooleanLike;
   jobs: Array<{
     title: string;
     positions: number;
@@ -29,7 +30,7 @@ export const LateJoin = () => {
 
   return (
     <Window width={400} height={640}>
-      <Window.Content>
+      <Window.Content scrollable>
         <Section>
           <Box mb={1}>Welcome, {name}.</Box>
           <Box mb={2}>Round Duration: {roundDuration}</Box>

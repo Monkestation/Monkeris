@@ -212,18 +212,7 @@ var/const/GRAV_NEEDS_WRENCH = 3
 	data["on"] = on
 	data["charging_state"] = charging_state
 	data["charge_count"] = charge_count
-
-	// Status text
-	if(charging_state != POWER_IDLE)
-		data["status"] = "warning"
-		data["statusText"] = charging_state == POWER_UP ? "Charging..." : "Discharging..."
-	else if(on)
-		data["status"] = "powered"
-		data["statusText"] = "Powered."
-	else
-		data["status"] = "unpowered"
-		data["statusText"] = "Unpowered."
-
+	data["operational"] = !(stat & BROKEN)
 	return data
 
 /obj/machinery/gravity_generator/main/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)

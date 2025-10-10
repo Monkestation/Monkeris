@@ -9,6 +9,7 @@ import {
   Stack,
   Table,
 } from 'tgui-core/components';
+import { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
@@ -16,15 +17,15 @@ import { Window } from '../layouts';
 interface ATMData {
   machine_id: string;
   held_card: string | null;
-  emagged: boolean;
-  locked_down: boolean;
-  authenticated: boolean;
+  emagged: BooleanLike;
+  locked_down: BooleanLike;
+  authenticated: BooleanLike;
   screen: number;
   account?: {
     owner_name: string;
     money: number;
     security_level: number;
-    suspended: boolean;
+    suspended: BooleanLike;
   };
   transactions?: Array<{
     date: string;

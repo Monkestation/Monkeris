@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useBackend } from 'tgui/backend';
 import { Box, Section, Stack, Tabs, Tooltip } from 'tgui-core/components';
-import { classes } from 'tgui-core/react';
+import { BooleanLike, classes } from 'tgui-core/react';
 import { capitalize } from 'tgui-core/string';
 
 import { Window } from '../layouts';
@@ -24,7 +24,7 @@ interface PerkData {
 
 interface StatsData {
   name: string;
-  hasPerks: boolean;
+  hasPerks: BooleanLike;
   stats: StatData[];
   perks: PerkData[];
 }

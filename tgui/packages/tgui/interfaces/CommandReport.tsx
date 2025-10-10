@@ -15,7 +15,7 @@ import { BooleanLike } from 'tgui-core/react';
 import { Window } from '../layouts';
 
 type Data = {
-  announce_to_all_mobs: boolean;
+  announce_to_all_mobs: BooleanLike;
   announcer_sounds: string[];
   command_name: string;
   command_name_presets: string[];

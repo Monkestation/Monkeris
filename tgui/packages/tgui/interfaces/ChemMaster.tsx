@@ -7,6 +7,7 @@ import {
   Section,
   Stack,
 } from 'tgui-core/components';
+import { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
@@ -19,9 +20,9 @@ interface Reagent {
 }
 
 interface ChemMasterData {
-  condi: boolean;
-  mode: boolean;
-  hasBeaker: boolean;
+  condi: BooleanLike;
+  mode: BooleanLike;
+  hasBeaker: BooleanLike;
   useramount: number;
   pillamount: number;
   pillsprite: string;
@@ -39,7 +40,7 @@ interface ChemMasterData {
 
 interface ReagentControlsProps {
   reagent: Reagent;
-  isBeaker: boolean;
+  isBeaker: BooleanLike;
 }
 
 export const ChemMaster = () => {

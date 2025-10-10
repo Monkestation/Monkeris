@@ -7,18 +7,19 @@ import {
   Section,
   Stack,
 } from 'tgui-core/components';
+import { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
 
 interface SuitStorageData {
-  panelOpen: boolean;
-  isUV: boolean;
-  isOpen: boolean;
-  locked: boolean;
-  issuperUV: boolean;
-  safeties: boolean;
-  hasOccupant: boolean;
+  panelOpen: BooleanLike;
+  isUV: BooleanLike;
+  isOpen: BooleanLike;
+  locked: BooleanLike;
+  issuperUV: BooleanLike;
+  safeties: BooleanLike;
+  hasOccupant: BooleanLike;
   helmet: string | null;
   suit: string | null;
   mask: string | null;
