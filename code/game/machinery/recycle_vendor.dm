@@ -94,7 +94,7 @@
 		qdel(I)
 		return TRUE
 
-	if(istype(I, /obj/item/card/id))
+	if(isidcard(I))
 		to_chat(user, span_warning("[src] is cash-only."))
 		return
 
@@ -560,7 +560,7 @@
 				if(PakKash && !QDELING(PakKash))
 					PakKash.forceMove(get_turf(src))
 					visible_message("[PakKash] falls out of [src].", "You hear a mute impact with the floor alongside quiet clinking.")
-	if(istype(I, /obj/item/card/id))
+	if(isidcard(I))
 		visible_message(span_info("\The [usr] swipes \the [I] through \the [src]."))
 		var/obj/item/card/id/swiped = I
 		if(!required_access)

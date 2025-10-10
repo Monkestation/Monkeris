@@ -124,7 +124,7 @@
 	if (authorized.len >= req_authorizations)
 		return 0 //don't need any more
 
-	if (!istype(ident, /obj/item/card/id) && !istype(ident, /obj/item/modular_computer/pda))
+	if (!isidcard(ident) && !istype(ident, /obj/item/modular_computer/pda))
 		return
 
 	var/obj/item/card/id/ID

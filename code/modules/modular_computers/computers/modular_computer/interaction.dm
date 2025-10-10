@@ -165,7 +165,7 @@
 		turn_on(user)
 
 /obj/item/modular_computer/attackby(obj/item/W, mob/user, params, sound_mute = FALSE)
-	if(istype(W, /obj/item/card/id)) // ID Card, try to insert it.
+	if(isidcard(W)) // ID Card, try to insert it.
 		var/obj/item/card/id/I = W
 		if(!card_slot)
 			to_chat(user, span_notice("You try to insert [I] into [src], but it does not have an ID card slot installed."))

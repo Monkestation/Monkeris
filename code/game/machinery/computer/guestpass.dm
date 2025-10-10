@@ -64,7 +64,7 @@
 	uid = "[rand(100,999)]-G[rand(10,99)]"
 
 /obj/machinery/computer/guestpass/attackby(obj/O, mob/user)
-	if(istype(O, /obj/item/card/id))
+	if(isidcard(O))
 		if(!giver && user.unEquip(O))
 			O.loc = src
 			giver = O
@@ -158,7 +158,7 @@
 					accesses.Cut()
 				else
 					var/obj/item/I = usr.get_active_held_item()
-					if (istype(I, /obj/item/card/id) && usr.unEquip(I))
+					if (isidcard(I) && usr.unEquip(I))
 						I.loc = src
 						giver = I
 				updateUsrDialog()

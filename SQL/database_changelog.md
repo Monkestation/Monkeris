@@ -21,6 +21,38 @@ DROP TABLE IF EXISTS `stickyban_matched_ip`;
 DROP TABLE IF EXISTS `stickyban_matched_cid`;
 ```
 -----------------------------------------------------
+Version 3.1 3 October 2025, by Flleeppyy
+Alter `library` table to add , add `library_action` table.
+
+```sql
+ALTER TABLE `library`
+DROP FOREIGN KEY `fk_rails_53d51ce16a`,
+DROP INDEX `index_library_on_author_id`,
+CHANGE COLUMN `author` `author` VARCHAR(45) NOT NULL ,
+CHANGE COLUMN `title` `title` VARCHAR(45) NOT NULL ,
+CHANGE COLUMN `content` `content` TEXT NOT NULL ,
+CHANGE COLUMN `category` `category` ENUM('Any','Fiction','Non-Fiction','Adult','Reference','Religion') NOT NULL ,
+CHANGE COLUMN `author_id` `ckey` VARCHAR(32) NOT NULL DEFAULT 'LEGACY' ,
+CHANGE COLUMN `created_at` `datetime` DATETIME NOT NULL ,
+DROP COLUMN `updated_at`,
+ADD COLUMN `round_id_created` INT(11) UNSIGNED NULL AFTER `deleted`,
+ADD INDEX `deleted_idx` (`deleted` ASC),
+ADD INDEX `idx_lib_id_del` (`id` ASC, `deleted` ASC),
+ADD INDEX `idx_lib_del_title` (`deleted` ASC, `title` ASC),
+ADD INDEX `idx_lib_search` (`deleted` ASC, `author` ASC, `title` ASC, `category` ASC);
+
+CREATE TABLE `library_action` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `book` int(10) unsigned NOT NULL,
+  `reason` longtext DEFAULT NULL,
+  `ckey` varchar(32) NOT NULL DEFAULT '',
+  `datetime` datetime NOT NULL DEFAULT current_timestamp(),
+  `action` varchar(11) NOT NULL DEFAULT '',
+  `ip_addr` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
+```
+-----------------------------------------------------
 Version 3.0 3 October 2025, by Flleeppyy
 Add `admin_log`, `admin_ranks` table
 

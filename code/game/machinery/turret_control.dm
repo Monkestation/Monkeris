@@ -77,7 +77,7 @@
 	if(stat & BROKEN)
 		return
 
-	if(istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
+	if(isidcard(W)||istype(W, /obj/item/modular_computer))
 		if(src.allowed(usr))
 			playsound(loc, 'sound/machines/id_swipe.ogg', 100, 1)
 			if(emagged)

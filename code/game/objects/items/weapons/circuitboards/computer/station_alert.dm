@@ -20,7 +20,7 @@
 		SA.register_monitor(monitor)
 		return 1
 
-/obj/item/electronics/circuitboard/stationalert/deconstruct(obj/machinery/computer/station_alert/SA)
+/obj/item/electronics/circuitboard/stationalert/_deconstruct(obj/machinery/computer/station_alert/SA)
 	if(..(SA))
 		alarm_handlers.Cut()
 		if(SA.alarm_monitor)

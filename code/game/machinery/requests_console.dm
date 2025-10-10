@@ -198,7 +198,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 					//err... hacking code, which has no reason for existing... but anyway... it was once supposed to unlock priority 3 messanging on that console (EXTREME priority...), but the code for that was removed.
 /obj/machinery/requests_console/attackby(obj/item/O as obj, mob/user as mob)
 
-	if (istype(O, /obj/item/card/id))
+	if (isidcard(O))
 		if(inoperable(MAINT)) return
 		if(screen == RCS_MESSAUTH)
 			var/obj/item/card/id/T = O

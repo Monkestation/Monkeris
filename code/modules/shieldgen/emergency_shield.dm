@@ -296,7 +296,7 @@
 				to_chat(user, span_notice("You repair the [src]!"))
 				update_icon()
 
-	else if(istype(I, /obj/item/card/id) || istype(I, /obj/item/modular_computer))
+	else if(isidcard(I) || istype(I, /obj/item/modular_computer))
 		if(src.allowed(user))
 			src.locked = !src.locked
 			to_chat(user, "The controls are now [src.locked ? "locked." : "unlocked."]")

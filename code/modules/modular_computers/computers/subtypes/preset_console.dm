@@ -181,11 +181,6 @@
 	hard_drive.remove_file(CM)
 	hard_drive.store_file(new/datum/computer_file/program/records())
 
-// Civilian Library
-/obj/item/modular_computer/console/preset/civilian/professional/library/install_default_programs()
-	..()
-	hard_drive.store_file(new/datum/computer_file/program/library())
-
 // Trade Console
 /obj/item/modular_computer/console/preset/trade/install_default_hardware()
 	..()
