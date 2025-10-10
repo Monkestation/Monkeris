@@ -55,6 +55,10 @@
 			return topic_onset
 		return TOPIC_NOACTION
 
+	if(href_list["toggle_preview_value"])
+		pref.equip_preview_mob ^= text2num(href_list["toggle_preview_value"])
+		return TOPIC_REFRESH_UPDATE_PREVIEW
+
 	return ..()
 
 /datum/category_item/player_setup_item/proc/show_popup(move_to_top=FALSE)
@@ -102,7 +106,7 @@
 		for(var/perk in selected_option.perks)
 			var/datum/perk/P = perk
 			if(initial(P.icon))
-				dat += "<img style='vertical-align: middle;width=18px;height=18px;' src='[SSassets.transport.get_asset_url(SANITIZE_FILENAME("[P].png"))]'/>"
+				dat += "<img style='vertical-align: middle;width: 18px;height: 18px;' src='[SSassets.transport.get_asset_url(SANITIZE_FILENAME("[P].png"))]'/>"
 			dat += " [initial(P.name)]<br>"
 		dat += "<br>"
 

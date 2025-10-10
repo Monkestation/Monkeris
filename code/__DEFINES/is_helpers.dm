@@ -43,6 +43,10 @@ GLOBAL_VAR_INIT(refid_filter, TYPEID(filter(type="angular_blur")))
 
 #define ismech(A) istype(A, /mob/living/exosuit)
 
+#define isdummy(A) istype(A, /mob/living/carbon/human/dummy)
+
+#define ismannequin(A) istype(A, /mob/living/carbon/human/dummy/mannequin)
+
 //++++++++++++++++++++++++++++++++++++++++++++++
 
 #define isliving(A) istype(A, /mob/living)

@@ -1352,3 +1352,63 @@ non_blocking var, if true, will allow sleeping to prevent server freeze, at the 
 		var/icon/my_icon = icon(icon_path)
 		GLOB.icon_dimensions[icon_path] = list("width" = my_icon.Width(), "height" = my_icon.Height())
 	return GLOB.icon_dimensions[icon_path]
+
+/// Strips all underlays on a different plane from an appearance.
+/// Returns the stripped appearance.
+/proc/strip_appearance_underlays(mutable_appearance/appearance) as /mutable_appearance
+	RETURN_TYPE(/mutable_appearance)
+	var/base_plane = appearance.plane
+	for(var/mutable_appearance/underlay as anything in appearance.underlays)
+		if(isnull(underlay))
+			continue
+		if(underlay.plane != base_plane)
+			appearance.underlays -= underlay
+	return appearance
+
+/**
+ * Copies the passed /appearance, returns a /mutable_appearance
+ *
+ * Filters out certain overlays from the copy, depending on their planes
+ * Prevents stuff like lighting from being copied to the new appearance
+ */
+/proc/copy_appearance_filter_overlays(appearance_to_copy) as /mutable_appearance
+	RETURN_TYPE(/mutable_appearance)
+	var/mutable_appearance/copy = new(appearance_to_copy)
+	var/static/list/plane_whitelist = list(FLOAT_PLANE, GAME_PLANE, FLOOR_PLANE)
+
+	copy.overlays = recursively_filter_emissive_blockers(copy.overlays, plane_whitelist)
+	copy.underlays = recursively_filter_emissive_blockers(copy.underlays, plane_whitelist)
+
+	return copy
+
+/proc/recursively_filter_emissive_blockers(list/input_list, list/plane_whitelist)
+	var/list/filtered_list = list()
+
+	for(var/mutable_appearance/overlay_item as anything in input_list)
+		if(isnull(overlay_item))
+			continue
+
+		var/mutable_appearance/real = new()
+		real.appearance = overlay_item
+
+		// // Skip emissive blockers
+		// if(is_emissive_blocker(real))
+		// 	continue
+
+		// Skip non-whitelisted planes
+		if(!(real.plane in plane_whitelist))
+			continue
+
+		if(length(real.overlays))
+			real.overlays = recursively_filter_emissive_blockers(real.overlays, plane_whitelist)
+		if(length(real.underlays))
+			real.underlays = recursively_filter_emissive_blockers(real.underlays, plane_whitelist)
+
+		filtered_list += real
+
+	return filtered_list
+
+// /proc/is_emissive_blocker(mutable_appearance/MA)
+// 	if(MA.plane == EMISSIVE_PLANE)
+// 		return TRUE
+// 	return FALSE

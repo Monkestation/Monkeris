@@ -11,3 +11,11 @@
 2025-10-08:
   flleeppyy:
   - rscdel: Remove Stickybans
+2025-10-10:
+  flleeppyy:
+  - tweak: Scanners have a cooldown now.
+  - bugfix: Add silicons as a department
+  - bugfix: shield integrity reports now show properly.
+  - bugfix: Lobby music should respect user preferences now
+  - rscadd: Subsystems now display the order they are being loaded in
+  - code_imp: Renamed `HUD_elemnet` and `/obj/screen` to be types of `/atom/movable`

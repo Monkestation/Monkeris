@@ -74,6 +74,7 @@ GLOBAL_LIST_INIT(admin_verbs_debug, list(
 	/client/proc/view_runtimes,
 	/client/proc/spawn_disciple,
 	/client/proc/delete_npcs,
+	/client/proc/get, /*Teleport atom to where usr is*/
 	/client/proc/map_template_load,
 	/client/proc/map_template_load_on_new_z,
 	/client/proc/map_template_upload,

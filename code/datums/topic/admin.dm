@@ -452,6 +452,20 @@
 	var/mob/observer/ghost/ghost = usr
 	ghost.ManualFollow(target)
 
+/datum/admin_topic/admingetmovable
+	keyword = "admingetmovable"
+	require_perms = list(R_ADMIN)
+
+/datum/admin_topic/admingetmovable/Run(list/input)
+	var/atom/movable/AM = locate(input["admingetmovable"])
+	if(QDELETED(AM))
+		return
+	if (isnull(usr.loc))
+		to_chat(usr, "Can't move to nullspace!")
+		return
+
+	AM.forceMove(get_turf(usr))
+
 /datum/admin_topic/adminplayerobservecoodjump
 	keyword = "adminplayerobservecoodjump"
 	require_perms = list(R_ADMIN)

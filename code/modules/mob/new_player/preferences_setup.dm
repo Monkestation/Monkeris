@@ -38,7 +38,7 @@
 	var/green
 	var/blue
 
-	var/col = pick ("blonde", "black", "chestnut", "copper", "brown", "wheat", "old", "punk")
+	var/col = pick("blonde", "black", "chestnut", "copper", "brown", "wheat", "old", "punk")
 	switch(col)
 		if("blonde")
 			red = 255
@@ -88,7 +88,7 @@
 	var/green
 	var/blue
 
-	var/col = pick ("black", "grey", "brown", "chestnut", "blue", "lightblue", "green", "albino")
+	var/col = pick("black", "grey", "brown", "chestnut", "blue", "lightblue", "green", "albino")
 	switch(col)
 		if("black")
 			red = 0
@@ -134,7 +134,7 @@
 	var/green
 	var/blue
 
-	var/col = pick ("black", "grey", "brown", "chestnut", "blue", "lightblue", "green", "albino")
+	var/col = pick("black", "grey", "brown", "chestnut", "blue", "lightblue", "green", "albino")
 	switch(col)
 		if("black")
 			red = 0
@@ -175,53 +175,59 @@
 
 	skin_color = rgb(red, green, blue)
 
+/datum/preferences/proc/get_preview_job()
+	if (!SSjob)
+		return
+	// Determine what job is marked as 'High' priority, and dress them up as such.
+	if(ASSISTANT_TITLE in job_low)
+		return SSjob.GetJob(ASSISTANT_TITLE)
+	else
+		for(var/datum/job/job in SSjob.occupations)
+			if(job.title == job_high)
+				return job
+
 /datum/preferences/proc/dress_preview_mob(mob/living/carbon/human/mannequin, naked = FALSE)
 	var/update_icon = FALSE
 	copy_to(mannequin, TRUE)
 
-	if(!naked)
-		var/datum/job/previewJob
-		if(equip_preview_mob && SSjob)
-			// Determine what job is marked as 'High' priority, and dress them up as such.
-			if(ASSISTANT_TITLE in job_low)
-				previewJob = SSjob.GetJob(ASSISTANT_TITLE)
+	if(naked)
+		return
+
+	var/datum/job/previewJob = get_preview_job()
+	if(!equip_preview_mob || !previewJob)
+		return
+
+	if((equip_preview_mob & EQUIP_PREVIEW_JOB) && previewJob)
+		mannequin.job = previewJob.title
+		previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title])
+		update_icon = TRUE
+
+	if((equip_preview_mob & EQUIP_PREVIEW_LOADOUT) && !(previewJob && (equip_preview_mob & EQUIP_PREVIEW_JOB) && (previewJob.type == /datum/job/ai || previewJob.type == /datum/job/cyborg)))
+		// Equip custom gear loadout, replacing any job items
+		var/list/loadout_taken_slots = list()
+		for(var/thing in Gear())
+			var/datum/gear/G = GLOB.gear_datums[thing]
+			if(!G)
+				continue
+
+			var/permitted = 0
+			if(G.allowed_roles && G.allowed_roles.len)
+				if(previewJob)
+					for(var/job_title in G.allowed_roles)
+						if(previewJob.title == job_title)
+							permitted = 1
 			else
-				for(var/datum/job/job in SSjob.occupations)
-					if(job.title == job_high)
-						previewJob = job
-						break
-		else
-			return
+				permitted = 1
 
-		if((equip_preview_mob & EQUIP_PREVIEW_JOB) && previewJob)
-			mannequin.job = previewJob.title
-			previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title])
-			update_icon = TRUE
+			if(G.whitelisted && (G.whitelisted != mannequin.species.name))
+				permitted = 0
 
-		if((equip_preview_mob & EQUIP_PREVIEW_LOADOUT) && !(previewJob && (equip_preview_mob & EQUIP_PREVIEW_JOB) && (previewJob.type == /datum/job/ai || previewJob.type == /datum/job/cyborg)))
-			// Equip custom gear loadout, replacing any job items
-			var/list/loadout_taken_slots = list()
-			for(var/thing in Gear())
-				var/datum/gear/G = gear_datums[thing]
-				if(G)
-					var/permitted = 0
-					if(G.allowed_roles && G.allowed_roles.len)
-						if(previewJob)
-							for(var/job_title in G.allowed_roles)
-								if(previewJob.title == job_title)
-									permitted = 1
-					else
-						permitted = 1
+			if(!permitted)
+				continue
 
-					if(G.whitelisted && (G.whitelisted != mannequin.species.name))
-						permitted = 0
-
-					if(!permitted)
-						continue
-
-					if(G.slot && G.slot != slot_accessory_buffer && !(G.slot in loadout_taken_slots) && G.spawn_on_mob(mannequin, gear_list[gear_slot][G.display_name]))
-						loadout_taken_slots.Add(G.slot)
-						update_icon = TRUE
+			if(G.slot && G.slot != slot_accessory_buffer && !(G.slot in loadout_taken_slots) && G.spawn_on_mob(mannequin, gear_list[gear_slot][G.display_name]))
+				loadout_taken_slots.Add(G.slot)
+				update_icon = TRUE
 
 	if(update_icon)
 		mannequin.update_icons()

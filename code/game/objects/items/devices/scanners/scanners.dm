@@ -32,6 +32,8 @@
 
 	var/is_virtual = FALSE // for non-physical scanner to avoid displaying action messages
 
+	COOLDOWN_DECLARE(use_cooldown)
+
 
 /obj/item/device/scanner/attack_self(mob/user)
 	if(!scan_data)
@@ -67,6 +69,13 @@
 		return
 	if(!can_use(user))
 		return
+
+	if(!COOLDOWN_FINISHED(src, use_cooldown))
+		// TODO: Replace with balloon_alert
+		to_chat(user, "on cooldown!")
+		return
+
+	COOLDOWN_START(src, use_cooldown, 1 SECOND)
 
 	if(is_valid_scan_target(A) && A.simulated)
 		if(!is_virtual)
