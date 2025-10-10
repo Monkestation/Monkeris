@@ -11,6 +11,7 @@ import { ChatPageSettings } from '../chat';
 import { changeSettingsTab } from './actions';
 import { SETTINGS_TABS } from './constants';
 import { selectActiveTab } from './selectors';
+import { ExperimentalSettings } from './SettingsExperimental';
 import { SettingsGeneral } from './SettingsGeneral';
 import { SettingsStatPanel } from './SettingsStatPanel';
 import { TextHighlightSettings } from './TextHighlight';
@@ -47,6 +48,7 @@ export function SettingsPanel(props) {
         {activeTab === 'chatPage' && <ChatPageSettings />}
         {activeTab === 'textHighlight' && <TextHighlightSettings />}
         {activeTab === 'statPanel' && <SettingsStatPanel />}
+        {activeTab === 'experimentalPanel' && <ExperimentalSettings />}
       </Stack.Item>
     </Stack>
   );

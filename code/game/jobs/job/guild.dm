@@ -6,6 +6,9 @@
 	head_position = TRUE
 	aster_guild_member = TRUE
 	department_flag = GUILD | COMMAND
+	exp_requirements = 600
+	exp_required_type_department = DEPARTMENT_GUILD
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 1
 	spawn_positions = 1
@@ -70,6 +73,7 @@ Your second loyalty is to the guild. Ensure it retains good relations with priva
 	flag = GUILDTECH
 	department = DEPARTMENT_GUILD
 	department_flag = GUILD
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 3
 	spawn_positions = 3
@@ -123,6 +127,7 @@ Your main duties are to keep the local guild branch operational and profitable. 
 	flag = MINER
 	department = DEPARTMENT_GUILD
 	department_flag = GUILD
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 4
 	spawn_positions = 4

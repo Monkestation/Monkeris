@@ -10,7 +10,7 @@
 	status_flags = PASSEMOTES
 	a_intent = I_HURT
 	mob_size = MOB_GIGANTIC
-	can_be_fed = 0
+	can_be_fed = FALSE
 	defaultHUD = "exosuits"
 	bad_type = /mob/living/exosuit
 

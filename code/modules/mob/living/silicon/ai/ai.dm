@@ -791,3 +791,10 @@ var/list/ai_verbs_default = list(
 		bound_drone.death(TRUE)
 	else
 		to_chat(src, span_warning("You have no active AI-bound maintenance drone."))
+
+/mob/living/silicon/ai/get_exp_list(minutes)
+	. = ..()
+
+	var/datum/job/ai/ai_job_ref = SSjob.GetJobType(/datum/job/ai)
+
+	.[ai_job_ref.title] = minutes

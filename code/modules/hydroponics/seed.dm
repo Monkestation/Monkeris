@@ -12,7 +12,7 @@
 	F.genesource = genesource
 	F.genesource_uid = genesource_uid
 	F.genetype = genetype
-	F.values = deepCopyList(values)
+	F.values = deep_copy_list(values)
 
 	return F
 

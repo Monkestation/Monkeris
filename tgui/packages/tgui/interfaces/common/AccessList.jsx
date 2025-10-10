@@ -1,7 +1,6 @@
 import { sortBy } from 'common/collections';
-import { Button, Flex, Section, Tabs } from 'tgui-core/components';
-
 import { useSharedState } from 'tgui/backend';
+import { Button, Flex, Section, Tabs } from 'tgui-core/components';
 
 export const AccessList = (props) => {
   const {

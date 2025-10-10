@@ -5,6 +5,14 @@
 	if(!client)
 		return
 
+	if(CONFIG_GET(flag/use_exp_tracking))
+		client?.set_exp_from_db()
+		client?.set_db_player_flags()
+		if(!client)
+			// client disconnected during one of the db queries
+			return FALSE
+
+
 	update_Login_details()	//handles setting lastKnownIP and computer_id for use by the ban systems as well as checking for multikeying
 
 	if(!mind)
@@ -33,3 +41,6 @@
 	if (SSticker.state != GAME_STATE_STARTUP)
 		GLOB.lobbyScreen.play_music(client)
 	GLOB.lobbyScreen.show_titlescreen(client)
+
+	if(GLOB.admin_notice)
+		to_chat(src, span_notice("<b>Admin Notice:</b>\n \t [GLOB.admin_notice]"))

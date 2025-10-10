@@ -5,6 +5,9 @@
 	head_position = TRUE
 	aster_guild_member = TRUE
 	department_flag = COMMAND
+	exp_requirements = 300
+	exp_required_type = /datum/job/hop::title
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 1
 	spawn_positions = 1
@@ -71,6 +74,9 @@ Your second loyalty is to your command officers. The heads of each faction. List
 	title = "First Officer"
 	flag = FIRSTOFFICER
 	department = DEPARTMENT_COMMAND
+	exp_requirements = 300
+	exp_required_type_department = DEPARTMENT_CIVILIAN
+	exp_granted_type = EXP_TYPE_CREW
 	head_position = TRUE
 	aster_guild_member = TRUE
 	department_flag = COMMAND

@@ -39,6 +39,7 @@ const initialState = {
     visible: false,
     activeTab: SETTINGS_TABS[0].id,
   },
+  scrollTrackingTolerance: 24,
   initialized: false,
   statLinked: true,
   statFontSize: 12,

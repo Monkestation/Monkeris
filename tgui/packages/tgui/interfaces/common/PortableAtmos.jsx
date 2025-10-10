@@ -1,3 +1,4 @@
+import { useBackend } from 'tgui/backend';
 import {
   AnimatedNumber,
   Box,
@@ -5,8 +6,6 @@ import {
   LabeledList,
   Section,
 } from 'tgui-core/components';
-
-import { useBackend } from 'tgui/backend';
 
 export const PortableBasicInfo = (props) => {
   const { act, data } = useBackend();

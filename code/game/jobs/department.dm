@@ -5,22 +5,28 @@
 */
 
 /datum/department
-	var/name = "unspecifieddepartment"	//Name may be shown in UIs, proper capitalisation
-	var/id	= "department" //This should be one of the DEPARTMENT_XXX defines in __defines/jobs.dm
+	/// Name may be shown in UIs, proper capitalisation
+	var/name = "unspecifieddepartment"
+	/// This should be one of the DEPARTMENT_XXX defines in __defines/jobs.dm
+	var/id	= "department"
+	/// Experience granted by playing in a job of this department.
+	var/department_experience_type = null
 	var/account_number = 0
 	var/account_pin
-	var/account_initial_balance = 3500	//How much money this account starts off with
+	/// How much money this account starts off with
+	var/account_initial_balance = 3500
 
-	// Where the money for wages and budget comes from
+
+	/// Where the money for wages and budget comes from
 	var/funding_source
 
-	// Budget for misc department expenses, paid regardless of it being manned or not
+	/// Budget for misc department expenses, paid regardless of it being manned or not
 	var/budget_base = 500
 
-	// Budget for crew salaries. Summed up initial wages of department's personnel
+	/// Budget for crew salaries. Summed up initial wages of department's personnel
 	var/budget_personnel = 0
 
-	// How much account failed to pay to employees. Used for emails
+	/// How much account failed to pay to employees. Used for emails
 	var/total_debt = 0
 
 	var/list/jobs = list() //List of jobs in this department, used for job selection
@@ -38,6 +44,7 @@
 /datum/department/command
 	name = "CEV Eris Command"
 	id = DEPARTMENT_COMMAND
+	department_experience_type = DEPARTMENT_COMMAND
 	/*
 	The command account is the ship account. It is the master account that retainer departments are paid from,
 	and represents the Captain's wealth, assets and holdings
@@ -56,16 +63,19 @@
 /datum/department/ironhammer
 	name = "Ironhammer Mercenary Company"
 	id = DEPARTMENT_SECURITY
+	department_experience_type = DEPARTMENT_SECURITY
 	funding_source = DEPARTMENT_COMMAND
 
 /datum/department/technomancers
 	name = "Technomancer League"
 	id = DEPARTMENT_ENGINEERING
+	department_experience_type = DEPARTMENT_ENGINEERING
 	funding_source = DEPARTMENT_COMMAND
 
 /datum/department/civilian
 	name = "CEV Eris Civilian"
 	id = DEPARTMENT_CIVILIAN
+	department_experience_type = DEPARTMENT_CIVILIAN
 	funding_source = DEPARTMENT_COMMAND
 
 
@@ -76,16 +86,19 @@
 /datum/department/moebius_medical
 	name = "Moebius Labs: Medical Division"
 	id = DEPARTMENT_MEDICAL
+	department_experience_type = DEPARTMENT_MEDICAL
 	funding_source = "Moebius Labs."
 
 /datum/department/moebius_research
 	name = "Moebius Labs: Research Division"
 	id = DEPARTMENT_SCIENCE
+	department_experience_type = DEPARTMENT_SCIENCE
 	funding_source = "Moebius Labs."
 
 /datum/department/church
 	name = "Church of NeoTheology"
 	id = DEPARTMENT_CHURCH
+	department_experience_type = DEPARTMENT_CHURCH
 	funding_source = "Church of NeoTheology"
 
 
@@ -96,6 +109,7 @@
 /datum/department/guild
 	name = "Asters Merchant Guild"
 	id = DEPARTMENT_GUILD
+	department_experience_type = DEPARTMENT_GUILD
 
 	/*
 		The guild account represents the holdings of the local branch, and merchant.
@@ -106,10 +120,12 @@
 /datum/department/offship // Money from serbomat and billomat come here
 	name = "Offship entities"
 	id = DEPARTMENT_OFFSHIP
+	department_experience_type = DEPARTMENT_OFFSHIP
 
 /datum/department/silicon
 	name = "Silicons"
 	id = DEPARTMENT_SILICON
+	department_experience_type = DEPARTMENT_SILICON
 	// Robots arent real. they dont need money
 	account_initial_balance = 0
 	budget_base = 0

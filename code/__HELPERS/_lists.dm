@@ -894,7 +894,7 @@ Checks if a list has the same entries and values as an element of big.
 
 //Copies a list, and all lists inside it recusively
 //Does not copy any other reference type
-/proc/deepCopyList(list/l)
+/proc/deep_copy_list(list/l)
 	if(!islist(l))
 		return l
 	. = l.Copy()
@@ -905,10 +905,10 @@ Checks if a list has the same entries and values as an element of big.
 			continue
 		var/value = .[key]
 		if(islist(value))
-			value = deepCopyList(value)
+			value = deep_copy_list(value)
 			.[key] = value
 		if(islist(key))
-			key = deepCopyList(key)
+			key = deep_copy_list(key)
 			.[i] = key
 			.[key] = value
 

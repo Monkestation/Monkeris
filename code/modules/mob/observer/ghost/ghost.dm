@@ -164,7 +164,7 @@ Works together with spawning an observer, noted above.
 				set_respawn_bonus("CRYOSLEEP", CRYOPOD_WOUNDED_RESPAWN_BONUS)
 			src << 'sound/effects/magic/blind.ogg' //Play this sound to a player whenever their respawn time gets reduced
 
-		ghost.ckey = ckey
+		ghost.PossessByPlayer(ckey)
 		ghost.client = client
 		ghost.client.init_verbs()
 		ghost.initialise_postkey()

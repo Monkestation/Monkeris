@@ -296,6 +296,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	/////////////////////////
 	user.lastattacked = M
 	M.lastattacker = user
+	M.lastattackerckey = user.ckey
 
 	if(!no_attack_log)
 		user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"

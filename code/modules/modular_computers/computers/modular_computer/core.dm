@@ -302,7 +302,9 @@
 /obj/item/modular_computer/proc/update_label()
 	var/obj/item/card/id/I = GetIdCard()
 	if (istype(I))
-		SetName("[initial(name)]-[I.registered_name] ([I.assignment])")
+		if (ismob(loc))
+			I.update_intern_status(loc)
+		SetName("[initial(name)]-[I.name]")
 		return
 
 	SetName(initial(name))

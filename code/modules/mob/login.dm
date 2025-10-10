@@ -33,6 +33,9 @@
 		return FALSE
 	GLOB.player_list |= src
 	update_Login_details()
+	canon_client = client
+	client.persistent_client.set_mob(src)
+
 	world.update_status()
 
 	client.images = list()				//remove the images such as AIs being unable to see runes
@@ -90,6 +93,20 @@
 		update_action_buttons()
 
 		client.CAN_MOVE_DIAGONALLY = FALSE
+
+		for(var/datum/action/A as anything in persistent_client.player_actions)
+			A.Grant(src)
+
+		for(var/datum/callback/CB as anything in persistent_client.post_login_callbacks)
+			CB.Invoke()
+
+		log_played_names(
+			client.ckey,
+			list(
+				"[name]" = tag,
+				"[real_name]" = tag,
+			),
+		)
 
 	update_client_colour(0)
 

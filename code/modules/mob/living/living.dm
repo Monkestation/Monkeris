@@ -930,3 +930,21 @@ default behaviour is:
 	switch(var_name)
 		if(NAMEOF(src, maxHealth))
 			updatehealth()
+
+/**
+ * Returns an assoc list of assignments and minutes for updating a client's exp time in the databse.
+ *
+ * Arguments:
+ * * minutes - The number of minutes to allocate to each valid role.
+ */
+/mob/living/proc/get_exp_list(minutes)
+	var/list/exp_list = list()
+
+	if(mind && player_is_antag(mind) && !(mind.datum_flags & DF_VAR_EDITED))
+		for(var/datum/antagonist/antag in mind.antagonist)
+			exp_list[antag.id] = minutes
+
+	if(mind.assigned_role in GLOB.exp_specialmap[EXP_TYPE_SPECIAL])
+		exp_list[mind.assigned_role] = minutes
+
+	return exp_list

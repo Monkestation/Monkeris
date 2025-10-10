@@ -114,6 +114,9 @@ SUBSYSTEM_DEF(ticker)
 				to_chat(world, span_boldnotice("Please, setup your character and select ready. Game will start in [DisplayTimeText(SSticker.GetTimeLeft())]."))
 			to_chat(world, span_notice("<b>Welcome to [station_name()]!</b>"))
 			current_state = GAME_STATE_PREGAME
+			// Start playing music for clients
+			for(var/client/C in GLOB.clients)
+				GLOB.lobbyScreen.play_music(C)
 			SEND_SIGNAL(src, COMSIG_TICKER_ENTER_PREGAME)
 			fire()
 		if(GAME_STATE_PREGAME)
@@ -180,8 +183,6 @@ SUBSYSTEM_DEF(ticker)
 			if(!nuke_in_progress && game_finished)
 				current_state = GAME_STATE_FINISHED
 				Master.SetRunLevel(RUNLEVEL_POSTGAME)
-				for(var/client_key in SSinactivity_and_job_tracking.current_playtimes)
-					SSjob.SavePlaytimes(client_key)
 				declare_completion()
 
 // This proc will scan for player and if the game is in progress and...
@@ -599,8 +600,9 @@ SUBSYSTEM_DEF(ticker)
 	if(dronecount)
 		to_chat(world, "<b>There [dronecount>1 ? "were" : "was"] [dronecount] industrious maintenance [dronecount>1 ? "drones" : "drone"] at the end of this round.</b>")
 
-	GLOB.storyteller.declare_completion()//To declare normal completion.
-	scoreboard()//scores
+	GLOB.storyteller.declare_completion() //To declare normal completion.
+	scoreboard() //scores
+	gather_roundend_feedback()
 	//Ask the event manager to print round end information
 	SSevent.RoundEnd()
 	SSdbcore.SetRoundEnd()
@@ -625,6 +627,37 @@ SUBSYSTEM_DEF(ticker)
 	ready_for_reboot = TRUE
 	standard_reboot()
 
+/datum/controller/subsystem/ticker/proc/gather_roundend_feedback()
+	gather_antag_data()
+
+/datum/controller/subsystem/ticker/proc/gather_antag_data()
+	// var/team_gid = 1
+	// var/list/team_ids = list()
+
+	for(var/datum/antagonist/A in GLOB.antagonists)
+		if(!A.owner)
+			continue
+
+		var/list/antag_info = list()
+		antag_info["key"] = A.owner.key
+		antag_info["name"] = A.owner.name
+		antag_info["antagonist_type"] = A.type
+		antag_info["antagonist_name"] = A.id //For auto and custom roles
+		antag_info["objectives"] = list()
+		antag_info["team"] = list()
+		// var/datum/team/T = A.get_team()
+		// if(T)
+		// 	antag_info["team"]["type"] = T.type
+		// 	antag_info["team"]["name"] = T.name
+		// 	if(!team_ids[T])
+		// 		team_ids[T] = team_gid++
+		// 	antag_info["team"]["id"] = team_ids[T]
+
+		if(length(A.objectives))
+			for(var/datum/objective/O in A.objectives)
+				var/result = O.check_completion() ? "SUCCESS" : "FAIL"
+				antag_info["objectives"] += list(list("objective_type"=O.type,"text"=O.explanation_text,"result"=result))
+		SSblackbox.record_feedback("associative", "antagonists", 1, antag_info)
 /datum/controller/subsystem/ticker/proc/save_admin_data()
 	if(IsAdminAdvancedProcCall())
 		to_chat(usr, "<span class='admin prefix'>Admin rank DB Sync blocked: Advanced ProcCall detected.</span>")
