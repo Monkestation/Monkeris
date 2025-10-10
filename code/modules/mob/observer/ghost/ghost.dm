@@ -199,7 +199,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			message_admins("[key_name_admin(usr)] has ghosted. [ADMIN_JMP(src)]")
 			log_game("[key_name_admin(usr)] has ghosted.")
 			ghostize(0)
-			announce_ghost_joinleave(client)
+			announce_ghost_joinleave(src)
 
 /mob/observer/ghost/can_use_hands()
 /mob/observer/ghost/is_active()
@@ -798,7 +798,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		log_game("[usr.key] AM failed due to disconnect.")
 		return
 
-	announce_ghost_joinleave(client, 0)
+	announce_ghost_joinleave(src, 0)
 
 	var/mob/new_player/M = new /mob/new_player()
 	if(!client)

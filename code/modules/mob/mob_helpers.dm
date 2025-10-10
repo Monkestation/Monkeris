@@ -373,10 +373,11 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 					name = M.real_name
 		if(!name)
 			name = (C.holder && C.holder.fakekey) ? C.holder.fakekey : C.key
+		var/verby = pick("skulks","lurks","prowls","creeps","stalks")
 		if(joined_ghosts)
-			deadchat_broadcast("The ghost of [span_name("[name]")] now [pick("skulks","lurks","prowls","creeps","stalks")] among the dead. [message]")
+			deadchat_broadcast("The ghost of [span_name("[name]")] now [verby] among the dead. [message]")
 		else
-			deadchat_broadcast("[span_name("[name]")] no longer [pick("skulks","lurks","prowls","creeps","stalks")] in the realm of the dead. [message]")
+			deadchat_broadcast("[span_name("[name]")] no longer [verby] in the realm of the dead. [message]")
 
 /mob/proc/switch_to_camera(obj/machinery/camera/C)
 	if (!C.can_use() || stat || (get_dist(C, src) > 1 || machine != src || blinded || !canmove))
