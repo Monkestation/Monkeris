@@ -171,6 +171,7 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 	/client/proc/unban_panel,
 	/client/proc/game_panel,
 	/client/proc/secrets,
+	/client/proc/fix_air_all,
 	/client/proc/fix_air,
 	/client/proc/colorooc,
 	/client/proc/stealth,
@@ -388,8 +389,8 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	if (holder)
 		holder.Secrets()
 
-/client/proc/fix_air()
-	set name = "Fix air (lags)"
+/client/proc/fix_air_all()
+	set name = "Fix air everywhere (lags)"
 	set category = "Admin"
 	ASSERT(holder)
 
@@ -419,6 +420,45 @@ GLOBAL_PROTECT(admin_verbs_possess)
 
 	log_and_message_admins("[src] fixed the air.")
 
+
+// Proc taken from yogstation, credit to nichlas0010 for the original
+/client/proc/fix_air(turf/open/T in world)
+	set name = "Fix Air"
+	set category = "Admin.Game"
+	set desc = "Fixes air in specified radius."
+
+	if(!holder)
+		to_chat(src, "Only administrators may use this command.", confidential = TRUE)
+		return
+	if(check_rights(R_ADMIN, TRUE))
+		var/range = input("Enter range:","Num",2) as num
+		message_admins("[key_name_admin(usr)] fixed air with range [range] in area [T.loc.name]")
+		usr.log_message("fixed air with range [range] in area [T.loc.name]", LOG_ADMIN)
+		var/list/zones_to_update = list()
+		for(var/turf/open/turf in range(range,T))
+			if(turf.blocks_air)
+			//skip walls
+				continue
+			if(turf.zone)
+				turf.zone.remove(turf) // Handles visual updates and a part of fire removal
+			if (turf.air)
+				turf.reset_air()
+
+			for(var/datum/zone/zone in SSair.zones)
+				if(zone.contents.Find(T) && !zones_to_update.Find(zone))
+					zones_to_update += zone
+
+
+		for(var/datum/zone/zone in zones_to_update)
+			// Find the zone this turf is in and reinstance it.
+			// Doing reset_air alone on a turf does not do it justice.
+			qdel(zone.air)
+			zone.air = new
+
+			for(var/turf/turf in zone.contents)
+				if(turf.air)
+					zone.add(turf)
+			break
 
 //allows us to set a custom colour for everythign we say in ooc
 /client/proc/colorooc()

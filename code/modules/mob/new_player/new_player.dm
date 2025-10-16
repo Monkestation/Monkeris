@@ -81,7 +81,7 @@
 	output += "</div>"
 
 	if (src?.client?.holder)
-		panel = new(src, "Welcome","Welcome", 240, 340, src)
+		panel = new(src, "Welcome","Welcome", 240, 360, src)
 	else
 		panel = new(src, "Welcome","Welcome", 220, 280, src)
 
