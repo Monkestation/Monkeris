@@ -282,6 +282,11 @@
 		MATERIAL_GLASS = 2
 	)
 
+/obj/item/clothing/head/armor/bulletproof/panzer
+	name = "panzer helmet"
+	desc = "A bulletproof helmet, made from panzer chitin."
+	icon_state = "bulletproof_panzer"
+
 /obj/item/clothing/head/armor/laserproof //TODO: Give it reflection capabilities after refactor
 	name = "ablative helmet"
 	desc = "A ablative security helmet that excels in protecting the wearer against energy and laser projectiles."

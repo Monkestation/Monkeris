@@ -313,6 +313,12 @@
 		MATERIAL_PLASTEEL = 3,
 	)
 
+/obj/item/clothing/suit/armor/bulletproof/panzer
+	name = "panzer suit"
+	desc = "A chitin vest with hand and arm-guards attached that excels in protecting the wearer against high-velocity solid projectiles."
+	icon_state = "bulletproof_panzer"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+
 /obj/item/clothing/suit/armor/platecarrier
 	name = "black platecarrier vest"
 	desc = "A vest that excels in protecting the wearer against high-velocity solid projectiles."
