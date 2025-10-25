@@ -12,7 +12,7 @@
 	var/obj/item/copyitem = null	//what's in the copier!
 	var/copies = 1	//how many copies to print!
 	// TODO: Make toner an item instead of a value
-	var/toner = 30 //how much toner is left! woooooo~
+	var/obj/item/device/toner/toner
 	var/maxcopies = 10	//how many copies can be copied at once- idea shamelessly stolen from bs12's copier!
 
 /obj/machinery/photocopier/attack_hand(mob/user as mob)
@@ -31,7 +31,7 @@
 	var/list/data = list()
 
 	data["hasCopyitem"] = !!copyitem
-	data["toner"] = toner
+	data["toner"] = toner.toner_amount
 	data["copies"] = copies
 	data["max_copies"] = maxcopies
 	data["isSilicon"] = issilicon(user)
@@ -55,7 +55,7 @@
 				return
 
 			for(var/i = 0; i < copies; i++)
-				if(toner <= 0)
+				if(toner.toner_amount <= 0)
 					break
 
 				if (istype(copyitem, /obj/item/paper))
@@ -82,7 +82,7 @@
 			if(stat & (BROKEN|NOPOWER))
 				return
 
-			if(toner >= 5)
+			if(toner.toner_amount >= 5)
 				var/mob/living/silicon/tempAI = usr
 				var/obj/item/device/camera/siliconcam/camera = tempAI.aiCamera
 
@@ -97,7 +97,7 @@
 					p.desc += "Copied by [tempAI.name]"
 				else
 					p.desc += " - Copied by [tempAI.name]"
-				toner -= 5
+				toner.toner_amount -= 5
 				sleep(15)
 			return
 
