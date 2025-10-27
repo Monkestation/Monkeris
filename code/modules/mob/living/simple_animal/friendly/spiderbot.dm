@@ -104,14 +104,14 @@
 			to_chat(user, span_warning("\The [src] is undamaged!"))
 		return
 
-	else if(istype(O, /obj/item/card/id)||istype(O, /obj/item/modular_computer/pda))
+	else if(isidcard(O)||istype(O, /obj/item/modular_computer/pda))
 		if (!mmi)
 			to_chat(user, span_danger("There's no reason to swipe your ID - \the [src] has no brain to remove."))
 			return 0
 
 		var/obj/item/card/id/id_card
 
-		if(istype(O, /obj/item/card/id))
+		if(isidcard(O))
 			id_card = O
 		else
 			id_card = O.GetIdCard()

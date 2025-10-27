@@ -2276,7 +2276,7 @@
 	dir = 10
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/item/contraband/poster/placed{
+/obj/structure/sign/poster/erisposters/founders{
 	icon_state = "ironhammer";
 	pixel_x = 32
 	},
@@ -3354,7 +3354,7 @@
 /area/eris/crew_quarters/sleep)
 "aih" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/item/contraband/poster/placed{
+/obj/structure/sign/poster/erisposters/founders{
 	icon_state = "ironhammer2";
 	pixel_x = 32
 	},
@@ -9835,7 +9835,7 @@
 /area/eris/crew_quarters/library)
 "axZ" = (
 /obj/structure/table/woodentable,
-/obj/machinery/librarypubliccomp,
+/obj/machinery/computer/libraryconsole,
 /turf/floor/wood,
 /area/eris/crew_quarters/library)
 "aya" = (
@@ -22400,9 +22400,9 @@
 /turf/floor/tiled/white/brown_perforated,
 /area/eris/medical/virology)
 "bdk" = (
-/obj/item/contraband/poster,
-/obj/item/contraband/poster,
-/obj/item/contraband/poster,
+/obj/item/poster/random_eris,
+/obj/item/poster/random_eris,
+/obj/item/poster/random_eris,
 /obj/structure/table/rack/shelf,
 /obj/spawner/gun/handmade,
 /turf/floor/tiled/techmaint,
@@ -23208,7 +23208,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/item/contraband/poster/placed{
+/obj/structure/sign/poster/erisposters/founders{
 	icon_state = "chrome";
 	pixel_x = -32
 	},
@@ -25658,7 +25658,7 @@
 "bkM" = (
 /obj/structure/table/standard,
 /obj/item/storage/box/bodybags,
-/obj/item/contraband/poster/placed{
+/obj/structure/sign/poster/erisposters/founders{
 	icon_state = "chrome";
 	pixel_x = 32
 	},
@@ -32185,7 +32185,7 @@
 /obj/spawner/pack/gun_loot,
 /obj/spawner/pack/rare/low_chance,
 /obj/spawner/pack/rare/low_chance,
-/obj/item/contraband/poster/placed{
+/obj/structure/sign/poster/erisposters/founders{
 	icon_state = "stonks";
 	pixel_x = 32
 	},
@@ -44069,7 +44069,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
 	dir = 6
 	},
-/obj/item/contraband/poster/placed{
+/obj/structure/sign/poster/erisposters/founders{
 	icon_state = "chrome";
 	pixel_y = 32
 	},
@@ -48717,7 +48717,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
-/obj/item/contraband/poster/placed{
+/obj/structure/sign/poster/erisposters/founders{
 	icon_state = "roachburger";
 	pixel_x = -32
 	},
@@ -51956,7 +51956,7 @@
 /area/eris/maintenance/section4deck3port)
 "cxy" = (
 /obj/spawner/material/resources/rare/low_chance,
-/obj/item/contraband/poster/placed{
+/obj/structure/sign/poster/erisposters/founders{
 	icon_state = "founders";
 	pixel_x = -32
 	},
@@ -61147,13 +61147,13 @@
 /area/eris/hallway/side/section3deck2port)
 "cVZ" = (
 /obj/structure/closet/crate,
-/obj/item/contraband/poster,
-/obj/item/contraband/poster,
-/obj/item/contraband/poster,
-/obj/item/contraband/poster,
-/obj/item/contraband/poster,
-/obj/item/contraband/poster,
-/obj/item/contraband/poster,
+/obj/item/poster/random_eris,
+/obj/item/poster/random_eris,
+/obj/item/poster/random_eris,
+/obj/item/poster/random_eris,
+/obj/item/poster/random_eris,
+/obj/item/poster/random_eris,
+/obj/item/poster/random_eris,
 /obj/spawner/contraband/low_chance,
 /turf/floor/tiled/techmaint,
 /area/eris/maintenance/section4deck3port)
@@ -73665,9 +73665,9 @@
 /area/eris/command/mbo)
 "dzt" = (
 /obj/structure/closet,
-/obj/item/contraband/poster,
-/obj/item/contraband/poster,
-/obj/item/contraband/poster,
+/obj/item/poster/random_eris,
+/obj/item/poster/random_eris,
+/obj/item/poster/random_eris,
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -96974,7 +96974,7 @@
 /area/eris/hallway/side/section3deck2port)
 "eWR" = (
 /obj/structure/table/rack,
-/obj/item/contraband/poster/placed{
+/obj/structure/sign/poster/erisposters/founders{
 	icon_state = "poster6";
 	pixel_x = -32
 	},
@@ -97145,7 +97145,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/contraband/poster/placed{
+/obj/structure/sign/poster/erisposters/founders{
 	icon_state = "poster6";
 	pixel_x = 0;
 	pixel_y = 32
@@ -97753,7 +97753,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/spawner/junk/low_chance,
 /obj/spawner/junk/low_chance,
-/obj/item/contraband/poster/placed{
+/obj/structure/sign/poster/erisposters/founders{
 	icon_state = "founders";
 	pixel_y = 32
 	},
@@ -102270,7 +102270,7 @@
 /turf/floor/tiled/steel,
 /area/eris/hallway/side/section3starboard)
 "oYo" = (
-/obj/item/contraband/poster/placed{
+/obj/structure/sign/poster/erisposters/founders{
 	icon_state = "paramedic";
 	pixel_y = -32
 	},
@@ -103602,7 +103602,7 @@
 "rKX" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/blue,
-/obj/item/contraband/poster/placed{
+/obj/structure/sign/poster/erisposters/founders{
 	icon_state = "ironhammer";
 	pixel_y = 32
 	},
@@ -103881,7 +103881,7 @@
 /area/eris/crew_quarters/janitor)
 "seZ" = (
 /obj/spawner/junk/low_chance,
-/obj/item/contraband/poster/placed{
+/obj/structure/sign/poster/erisposters/founders{
 	icon_state = "excel2";
 	pixel_y = 32
 	},
@@ -105585,7 +105585,7 @@
 /obj/spawner/scrap/dense/low_chance,
 /obj/spawner/scrap/dense/low_chance,
 /obj/spawner/scrap/dense/low_chance,
-/obj/item/contraband/poster/placed{
+/obj/structure/sign/poster/erisposters/founders{
 	icon_state = "excel1";
 	pixel_x = 32
 	},

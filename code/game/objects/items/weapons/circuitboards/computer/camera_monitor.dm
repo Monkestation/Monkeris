@@ -33,7 +33,7 @@
 	if (..(C))
 		C.network = network.Copy()
 
-/obj/item/electronics/circuitboard/security/deconstruct(obj/machinery/computer/security/C)
+/obj/item/electronics/circuitboard/security/_deconstruct(obj/machinery/computer/security/C)
 	if (..(C))
 		network = C.network.Copy()
 

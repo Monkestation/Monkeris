@@ -222,7 +222,7 @@
 	src.attack_self(usr)
 
 /obj/item/device/eftpos/proc/scan_card(obj/item/card/I, obj/item/ID_container)
-	if (!istype(I, /obj/item/card/id))
+	if (!isidcard(I))
 		return
 
 	var/obj/item/card/id/C = I
