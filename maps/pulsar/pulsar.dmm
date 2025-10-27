@@ -687,7 +687,7 @@
 /area/outpost/pulsar)
 "zu" = (
 /obj/machinery/light,
-/obj/structure/dispenser/plasma,
+/obj/structure/tank_dispenser/plasma,
 /turf/floor/tiled/dark,
 /area/outpost/pulsar)
 "zv" = (
@@ -1178,7 +1178,7 @@
 /turf/floor/tiled/steel/brown_platform,
 /area/outpost/pulsar/maintenance)
 "NZ" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_dispenser/oxygen,
 /turf/floor/tiled/steel/brown_platform,
 /area/outpost/pulsar/maintenance)
 "Om" = (

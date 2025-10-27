@@ -691,7 +691,7 @@
 /turf/floor/tiled/steel,
 /area/outpost/prisonhulk/cells)
 "LG" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_dispenser/oxygen,
 /turf/floor/tiled/techmaint,
 /area/outpost/prisonhulk/security)
 "LU" = (
