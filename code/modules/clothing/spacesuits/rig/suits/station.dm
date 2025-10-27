@@ -26,8 +26,8 @@
 	Industrial Suit: For Mining
 ****************************************/
 /obj/item/rig/industrial
-	name = "industrial suit control module"
-	suit_type = "industrial hardsuit"
+	name = "goliath suit control module"
+	suit_type = "goliath hardsuit"
 	desc = "A heavy, powerful rig used by construction crews and mining corporations. The soft plating can protect the wearer from unexpected hazards, but is not reliable in prolonged combat."
 	icon_state = "engineering_rig"
 	price_tag = 350
@@ -64,7 +64,6 @@
 	initial_modules = list(
 		/obj/item/rig_module/device/drill,
 		/obj/item/rig_module/device/orescanner,
-		/obj/item/rig_module/device/rcd,
 		/obj/item/rig_module/vision/meson,
 		/obj/item/rig_module/storage
 		)
