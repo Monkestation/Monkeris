@@ -200,7 +200,13 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	GLOB.clients += src
 	GLOB.directory[ckey] = src
 	var/reconnecting = FALSE
-	// TODO: Persistent Clients
+	if(GLOB.persistent_clients_by_ckey[ckey])
+		reconnecting = TRUE
+		persistent_client = GLOB.persistent_clients_by_ckey[ckey]
+	else
+		persistent_client = new(ckey)
+	persistent_client.set_client(src)
+
 
 	winset(src, null, list("browser-options" = "find,refresh,byondstorage"))
 
@@ -477,9 +483,6 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	initialize_menus()
 
-	// TODO: Uncomment when new notes system is ported
-	// if(CONFIG_GET(flag/autoconvert_notes))
-	// 	convert_notes_sql(ckey)
 	if(ckey in GLOB.clientmessages)
 		for(var/message in GLOB.clientmessages[ckey])
 			to_chat(src, message)
@@ -492,6 +495,8 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	if(CONFIG_GET(flag/autoconvert_notes))
 		convert_notes_sql(ckey)
+
+	set_db_player_flags()
 
 	var/user_messages = get_message_output("message", ckey)
 	if(user_messages)
@@ -523,6 +528,8 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	GLOB.clients -= src
 	GLOB.directory -= ckey
+	persistent_client?.set_client(null)
+
 	log_access("Logout: [key_name(src)]")
 	if(holder)
 		holder.owner = null
@@ -732,8 +739,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		// The amount of hours needed to bypass the panic bunker.
 		var/living_recs = CONFIG_GET(number/panic_bunker_living)
 		// This relies on prefs existing, but this proc is only called after that occurs, so we're fine.
-		// var/minutes = get_exp_living(pure_numeric = TRUE)
-		var/minutes = SSjob.GetTotalPlaytimeMinutesCkey(ckey)
+		var/minutes = get_exp_living(pure_numeric = TRUE)
 
 		// If we don't have panic_bunker_living set and the client is not in the DB, reject them.
 		// Otherwise, if we do have a panic_bunker_living set, check if they have enough minutes played.
@@ -1160,8 +1166,8 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 /client/proc/add_verbs_from_config()
 	if(CONFIG_GET(flag/see_own_notes))
 		add_verb(src, /client/proc/self_notes)
-	// if(CONFIG_GET(flag/use_exp_tracking))
-	// 	add_verb(src, /client/proc/self_playtime)
+	if(CONFIG_GET(flag/use_exp_tracking))
+		add_verb(src, /client/proc/self_playtime)
 	// if(!CONFIG_GET(flag/forbid_preferences_export))
 	// 	add_verb(src, /client/proc/export_preferences)
 

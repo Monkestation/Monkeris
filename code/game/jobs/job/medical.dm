@@ -4,6 +4,9 @@
 	head_position = 1
 	department = DEPARTMENT_MEDICAL
 	department_flag = MEDICAL | COMMAND
+	exp_requirements = 600
+	exp_required_type_department = DEPARTMENT_MEDICAL
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 1
 	spawn_positions = 1
@@ -64,6 +67,8 @@ Your second loyalty is to your career with Moebius corp, and to your coworkers i
 	flag = DOCTOR
 	department = DEPARTMENT_MEDICAL
 	department_flag = MEDICAL
+	exp_requirements = 600
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 5
 	spawn_positions = 5
@@ -125,6 +130,7 @@ Your second loyalty is to your career with Moebius corp, and to your coworkers i
 	flag = CHEMIST
 	department = DEPARTMENT_MEDICAL
 	department_flag = MEDICAL
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 2
 	spawn_positions = 2
@@ -177,6 +183,7 @@ Your second loyalty is to your career with Moebius corp, and to your coworkers i
 	flag = PARAMEDIC
 	department = DEPARTMENT_MEDICAL
 	department_flag = MEDICAL
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 3
 	spawn_positions = 3
@@ -246,6 +253,9 @@ Remember that you are a noncombatant. Any weapons you carry should be used for b
 	flag = BIOENGINEER
 	department = DEPARTMENT_MEDICAL
 	department_flag = MEDICAL
+	exp_requirements = 300
+	exp_required_type = EXP_TYPE_CREW
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 2
 	spawn_positions = 2

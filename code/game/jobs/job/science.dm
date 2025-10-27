@@ -4,6 +4,9 @@
 	head_position = 1
 	department = DEPARTMENT_SCIENCE
 	department_flag = SCIENCE | COMMAND
+	exp_requirements = 600
+	exp_required_type_department = DEPARTMENT_SCIENCE
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 1
 	spawn_positions = 1
@@ -123,6 +126,7 @@ Your second loyalty is to moebius corp. In order to ensure it can continue its m
 	flag = ROBOTICIST
 	department = DEPARTMENT_SCIENCE
 	department_flag = SCIENCE
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 3
 	spawn_positions = 3
@@ -173,6 +177,7 @@ Lastly, though they're not commonly used, you have the facilities to construct m
 	flag = PSYCHIATRIST
 	department = DEPARTMENT_SCIENCE
 	department_flag = SCIENCE
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 1
 	spawn_positions = 1

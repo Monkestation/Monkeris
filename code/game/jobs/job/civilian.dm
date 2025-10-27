@@ -7,6 +7,8 @@
 	flag = CLUBMANAGER
 	department = DEPARTMENT_CIVILIAN
 	department_flag = SERVICE
+	exp_required_type_department = DEPARTMENT_CIVILIAN
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 1
 	spawn_positions = 1
@@ -44,6 +46,7 @@
 	flag = CLUBWORKER
 	department = DEPARTMENT_CIVILIAN
 	department_flag = SERVICE
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 2
 	spawn_positions = 2
@@ -84,6 +87,7 @@
 	flag = ARTIST
 	department = DEPARTMENT_CIVILIAN
 	department_flag = SERVICE
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 2
 	spawn_positions = 1

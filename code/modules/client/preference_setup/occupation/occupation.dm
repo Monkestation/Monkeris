@@ -1,8 +1,3 @@
-#define JOB_LEVEL_NEVER  4
-#define JOB_LEVEL_LOW    3
-#define JOB_LEVEL_MEDIUM 2
-#define JOB_LEVEL_HIGH   1
-
 /datum/preferences
 	//Since there can only be 1 high job.
 	var/job_high = null
@@ -123,17 +118,18 @@
 		lastJob = job
 		. += "<a href='byond://?src=\ref[src];job_info=[rank]'>\[?\]</a>"
 		var/bad_message = ""
+		var/required_playtime_remaining = job.required_playtime_remaining(user.client)
 		if(job.total_positions == 0 && job.spawn_positions == 0)
 			bad_message = "<b> \[UNAVAILABLE]</b>"
 		else if(jobban_isbanned(user.ckey, rank))
 			bad_message = "<b> \[BANNED]</b>"
-		else if(IsGuestKey(user.key) && SSjob.job_to_playtime_requirement[job.title])
+		else if(IsGuestKey(user.key) && job.exp_requirements)
 			bad_message = "<b> \[ACCOUNT REQUIRED] </b>"
-		else if(SSjob.ckey_to_job_to_can_play[user.client.ckey] && !SSjob.ckey_to_job_to_can_play[user.client.ckey][job.title])
-			bad_message = "\[PLAYTIME REQUIRED : [SSjob.job_to_playtime_requirement[job.title]] Minutes as [job.department]]"
-		/*else if(!job.player_old_enough(user.client))
+		else if(required_playtime_remaining)
+			bad_message = "\[PLAYTIME REQUIRED : [required_playtime_remaining] Minutes as [job.get_exp_req_type() || "crew"]]"
+		else if(!job.player_old_enough(user.client))
 			var/available_in_days = job.available_in_days(user.client)
-			bad_message = "\[IN [(available_in_days)] DAYS]"*/
+			bad_message = "\[IN [(available_in_days)] DAYS]"
 		else if(job.minimum_character_age && user.client && (user.client.prefs.age < job.minimum_character_age))
 			bad_message = "\[MINIMUM CHARACTER AGE: [job.minimum_character_age]]"
 		else if(user.client && job.is_setup_restricted(user.client.prefs.setup_options))
@@ -187,6 +183,33 @@
 	. += "</tt><br>"
 	//. += "Jobs that [span_Points("look like this")] have unspent skill points remaining."
 	. = jointext(.,null)
+
+/datum/category_item/player_setup_item/occupation/proc/get_required_job_playtime(mob/user)
+	var/list/data = list()
+
+	var/list/job_days_left = list()
+	var/list/job_required_experience = list()
+
+	for (var/datum/job/job as anything in SSjob.occupations)
+		var/required_playtime_remaining = job.required_playtime_remaining(user.client)
+		if (required_playtime_remaining)
+			job_required_experience[job.title] = list(
+				"experience_type" = job.get_exp_req_type(),
+				"required_playtime" = required_playtime_remaining,
+			)
+
+			continue
+
+		if (!job.player_old_enough(user.client))
+			job_days_left[job.title] = job.available_in_days(user.client)
+
+	if (job_days_left.len)
+		data["job_days_left"] = job_days_left
+
+	if (job_required_experience)
+		data["job_required_experience"] = job_required_experience
+
+	return data
 
 /datum/category_item/player_setup_item/occupation/OnTopic(href, href_list, user)
 	if(href_list["reset_jobs"])
@@ -495,8 +518,3 @@
 
 /datum/preferences/proc/GetPlayerAltTitle(datum/job/job)
 	return (job.title in player_alt_titles) ? player_alt_titles[job.title] : job.title
-
-#undef JOB_LEVEL_NEVER
-#undef JOB_LEVEL_LOW
-#undef JOB_LEVEL_MEDIUM
-#undef JOB_LEVEL_HIGH

@@ -242,6 +242,8 @@
 	GLOB.player_list -= M.ckey
 	NP.ckey = M.ckey
 	qdel(M)
+	sound_to(NP, sound(null, repeat = 0, wait = 0, volume = 100))
+
 
 /datum/admin_topic/mute
 	keyword = "mute"

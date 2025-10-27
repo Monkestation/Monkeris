@@ -1233,3 +1233,10 @@
 	if(duration)
 		if(!HasTrait(CYBORG_TRAIT_FLASH_RESISTANT))
 			Weaken(duration)
+
+/mob/living/silicon/robot/get_exp_list(minutes)
+	. = ..()
+
+	var/datum/job/cyborg/cyborg_job_ref = SSjob.GetJobType(/datum/job/cyborg)
+
+	.[cyborg_job_ref.title] = minutes

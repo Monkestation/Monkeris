@@ -4,6 +4,9 @@
 	head_position = 1
 	department = DEPARTMENT_ENGINEERING
 	department_flag = ENGINEERING | COMMAND
+	exp_requirements = 600
+	exp_required_type_department = DEPARTMENT_ENGINEERING
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 1
 	spawn_positions = 1
@@ -60,6 +63,7 @@ Your second loyalty is to your clan. Ensure they are paid, fed and safe. Don't r
 	flag = TECHNOMANCER
 	department = DEPARTMENT_ENGINEERING
 	department_flag = ENGINEERING
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 5
 	spawn_positions = 5
