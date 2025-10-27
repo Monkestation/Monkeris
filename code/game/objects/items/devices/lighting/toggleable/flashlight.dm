@@ -241,7 +241,7 @@
 			calculate_dir()
 		if(!cell_use_check(tick_cost))
 			if(ismob(src.loc))
-				to_chat(src.loc, span_warning("Your flashlight dies. You are alone now."))
+				to_chat(src.loc, span_warning("Your [name] dies. You are alone now."))
 			turn_off()
 		else if(cell && (cell.percent() <= 25))
 			apply_power_deficiency()

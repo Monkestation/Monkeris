@@ -4,6 +4,9 @@
 	head_position = 1
 	department = DEPARTMENT_CHURCH
 	department_flag = CHURCH | COMMAND
+	exp_requirements = 600
+	exp_required_type_department = DEPARTMENT_CHURCH
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 1
 	spawn_positions = 1
@@ -73,6 +76,9 @@
 	flag = ACOLYTE
 	department = DEPARTMENT_CHURCH
 	department_flag = CHURCH
+	exp_requirements = 300
+	exp_required_type = EXP_TYPE_CREW
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 2
 	spawn_positions = 2
@@ -117,6 +123,7 @@
 	flag = BOTANIST
 	department = DEPARTMENT_CHURCH
 	department_flag = CHURCH
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 3
 	spawn_positions = 3
@@ -164,6 +171,7 @@
 	flag = JANITOR
 	department = DEPARTMENT_CHURCH
 	department_flag = CHURCH
+	exp_granted_type = EXP_TYPE_CREW
 	faction = "CEV Eris"
 	total_positions = 4
 	spawn_positions = 4

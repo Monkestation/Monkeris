@@ -121,6 +121,7 @@
 	s.set_up(5, 1, src)
 	s.start()
 	QDEL_IN(src, 10)
+	suicided = TRUE
 
 	if(key)
 		var/mob/observer/ghost/ghost = ghostize(TRUE)

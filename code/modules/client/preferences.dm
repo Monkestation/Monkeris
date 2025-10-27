@@ -12,7 +12,11 @@
 	var/last_ip
 	var/last_id
 
+	var/db_flags
+
 	var/save_load_cooldown
+
+	var/list/exp = list()
 
 	//game-preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
@@ -90,7 +94,6 @@
 
 	var/dat = "<html><body><center>"
 	if(path)
-		SSjob.UpdatePlayableJobs(user.client.ckey)
 		dat += "Slot - "
 		dat += "<a href='byond://?src=\ref[src];load=1'>Load slot</a> - "
 		dat += "<a href='byond://?src=\ref[src];save=1'>Save slot</a> - "
@@ -289,3 +292,12 @@
 		panel.close()
 		panel = null
 	user << browse(null, "window=saves")
+
+/datum/preferences/proc/GetJobLevel(datum/job/job)
+	. = JOB_LEVEL_NEVER
+	if(job_high == job.title)
+		. = JOB_LEVEL_HIGH
+	else if(job.title in job_medium)
+		. = JOB_LEVEL_MEDIUM
+	else if(job.title in job_low)
+		. = JOB_LEVEL_LOW

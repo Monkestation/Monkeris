@@ -104,6 +104,8 @@ var/global/floorIsLava = 0
 		body += " played by <b><a href='http://byond.com/members/[M.client.ckey]'>[M.client]</b></a> "
 		body += "\[<A href='byond://?src=\ref[src];[HrefToken()];editrights=show'>[M.client.holder ? M.client.holder.rank_names() : "Player"]<br>"
 		body += "<b>Registration date:</b> [M.client.account_join_date ? M.client.account_join_date : "Unknown"]<br>"
+		if(CONFIG_GET(flag/use_exp_tracking))
+			body += "\[<A href='byond://?_src_=holder;[HrefToken()];getplaytimewindow=[REF(M)]'>" + M.client.get_exp_living(FALSE) + " Playtime</a>\]"
 		body += "<b>IP:</b> [M.client.address ? M.client.address : "Unknown"]<br>"
 
 		var/country = M.client.country
@@ -550,7 +552,7 @@ var/global/floorIsLava = 0
 
 	var/result = input(usr, "Select reboot method", "World Reboot", options[1]) as null|anything in options
 	if(result)
-		// SSblackbox.record_feedback("tally", "admin_verb", 1, "Reboot World") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		SSblackbox.record_feedback("tally", "admin_verb", 1, "Reboot World") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 		var/init_by = "Initiated by [usr.client.holder.fakekey ? "Admin" : usr.key]."
 		switch(result)
 			if("Regular Restart")
@@ -1138,6 +1140,7 @@ var/global/floorIsLava = 0
 		tomob.ghostize(0)
 	message_admins(span_adminnotice("[key_name_admin(usr)] has put [frommob.ckey] in control of [tomob.name]."))
 	log_admin("[key_name(usr)] stuffed [frommob.ckey] into [tomob.name].")
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Ghost Drag Control")
 
 	tomob.ckey = frommob.ckey
 	if(tomob.client)

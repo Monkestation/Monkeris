@@ -543,7 +543,7 @@ var/global/use_preloader = FALSE
 	for(var/attribute in attributes)
 		var/value = attributes[attribute]
 		if(islist(value))
-			value = deepCopyList(value)
+			value = deep_copy_list(value)
 		what.vars[attribute] = value
 	use_preloader = FALSE
 

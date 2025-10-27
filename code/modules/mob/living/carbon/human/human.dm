@@ -1599,6 +1599,12 @@ var/list/rank_prefix = list(\
 	update_block_overlay()
 	return
 
+/mob/living/carbon/human/get_exp_list(minutes)
+	. = ..()
+
+	if(mind.assigned_role in SSjob.occupations_by_name)
+		.[mind.assigned_role] = minutes
+
 /mob/living/carbon/human/vv_get_dropdown()
 	. = ..()
 	VV_DROPDOWN_OPTION("", VV_HK_SPACER)
