@@ -58848,6 +58848,7 @@
 /obj/item/clothing/suit/space/void/mining,
 /obj/item/clothing/mask/breath,
 /obj/item/device/scanner/mining,
+/obj/item/rig/industrial/equipped,
 /obj/item/tool/karl,
 /turf/shuttle/floor/mining{
 	icon_state = "2,21"
@@ -59110,6 +59111,7 @@
 /obj/item/clothing/suit/space/void/mining,
 /obj/item/clothing/mask/breath,
 /obj/item/device/scanner/mining,
+/obj/item/rig/industrial/equipped,
 /obj/item/tool/karl,
 /turf/shuttle/floor/mining{
 	icon_state = "2,20"
