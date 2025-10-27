@@ -2943,6 +2943,7 @@
 #include "interface\interface.dm"
 #include "interface\menu.dm"
 #include "interface\stylesheet.dm"
+#include "interface\skin.dmf"
 #include "interface\fonts\fonts_datum.dm"
 #include "interface\fonts\grand_9k.dm"
 #include "interface\fonts\pixellari.dm"
@@ -2990,5 +2991,4 @@
 #include "maps\submaps\planetary_ruins\radshrine\radshrine.dm"
 #include "maps\submaps\planetary_ruins\spider_nest\spider_nest.dm"
 #include "maps\submaps\planetary_ruins\tar_anomaly\tar_anomaly.dm"
-#include "interface\skin.dmf"
 // END_INCLUDE
