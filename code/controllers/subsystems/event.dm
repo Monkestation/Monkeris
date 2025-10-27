@@ -61,7 +61,7 @@ SUBSYSTEM_DEF(event)
 	log_debug("Event '[name]' has completed at [stationtime2text()].")
 
 /datum/controller/subsystem/event/proc/change_parallax(new_parallax)
-	for(var/obj/parallax/P in all_parallaxes)
+	for(var/atom/movable/screen/parallax/P in all_parallaxes)
 		P.update_icon(new_parallax)
 
 /datum/controller/subsystem/event/proc/RoundEnd()

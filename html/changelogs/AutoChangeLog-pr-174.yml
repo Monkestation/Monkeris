@@ -1,0 +1,4 @@
+author: flleeppyy
+delete-after: true
+changes:
+  - bugfix: parent call to mob.Login should no longer call 600k moives.

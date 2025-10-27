@@ -20,18 +20,15 @@
 		mind.active = TRUE
 		mind.current = src
 
-	// It's neccessary to have a hud since we need it for anything ma2html related
-	hud_used = new /datum/hud(src)
-
-	// . = ..()
-	// if(!. || !client)
-	// 	return FALSE
+	. = ..()
+	if(!. || !client)
+		return FALSE
+	loc = null
 
 	if(join_motd)
 		to_chat(src, "<div class='motd'>[join_motd]</div>")
 	to_chat(src, "<div class='info'>Round ID: <div class='danger'>[GLOB.round_id]</div></div>")
 
-	loc = null
 	my_client = client
 	sight |= SEE_TURFS
 	GLOB.player_list |= src
