@@ -159,7 +159,7 @@
 		error("Invalid type [armor.type] found in .armor during /obj Initialize()")
 	if(chameleon_type)
 		verbs.Add(/obj/item/proc/set_chameleon_appearance)
-	tact_visual = new(src)
+	tact_visual = new /obj/effect/effect/melee/alert
 	. = ..()
 
 /obj/item/Destroy(force)
