@@ -93,6 +93,8 @@
 	var/slowdown = 0
 	/// How much holding an item slows you down.
 	var/slowdown_hold
+	/// How much this item slows you down while being used to block attacks.
+	var/slowdown_blocking = ITEM_BLOCKING_SLOWDOWN
 
 	/// Ref to the armor datum
 	var/datum/armor/armor

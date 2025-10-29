@@ -134,6 +134,9 @@
 #define COMSIG_HUMAN_HEALTH "human_health"					   //from human/updatehealth()
 #define COMSIG_HUMAN_SANITY "human_sanity"						//from /datum/sanity/proc/onLife()
 #define COMSIG_HUMAN_INSTALL_IMPLANT "human_install_implant"
+#define COMSIG_HUMAN_START_BLOCKING "start_blocking"           //from /mob/living/carbon/human/proc/start_blocking()
+#define COMSIG_HUMAN_STOP_BLOCKING "stop_blocking"             //from /mob/living/carbon/human/proc/stop_blocking()
+
 // /datum/species signals
 
 // /obj signals

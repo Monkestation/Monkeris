@@ -885,6 +885,7 @@ default behaviour is:
 		SSmobs.mob_living_by_zlevel[registered_z] -= src	// STOP_PROCESSING() doesn't remove the mob from this list
 	QDEL_NULL(stats)
 	QDEL_NULL(static_overlay)
+	blocking_item = null
 	return ..()
 
 /mob/living/proc/vomit()
