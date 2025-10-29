@@ -18,6 +18,13 @@ var/command_name
 	return "Nyx"
 
 
+/proc/get_default_world_name()
+	var/config_server_name = CONFIG_GET(string/servername)
+	if(config_server_name)
+		return "[config_server_name][config_server_name == GLOB.station_name ? "" : ": [html_decode(GLOB.station_name)]"]"
+	else
+		return html_decode(GLOB.station_name)
+
 /proc/station_name()
 	if(!GLOB.station_name)
 		var/newname
@@ -29,11 +36,7 @@ var/command_name
 /proc/set_station_name(new_name)
 	GLOB.station_name = new_name
 
-	var/config_server_name = CONFIG_GET(string/servername)
-	if(config_server_name)
-		world.name = "[config_server_name][config_server_name == GLOB.station_name ? "" : ": [html_decode(GLOB.station_name)]"]"
-	else
-		world.name = html_decode(GLOB.station_name)
+	world.name = get_default_world_name()
 
 /proc/world_name(name)
 	GLOB.station_name = name

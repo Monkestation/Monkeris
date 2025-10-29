@@ -240,6 +240,7 @@ GLOBAL_REAL(Master, /datum/controller/master)
 
 			rustg_time_reset(SS_INIT_TIMER_KEY)
 			log_game("Initializing [subsystem.name] subsystem...")
+			world.name = "[get_default_world_name(FALSE)] - [subsystem.order_string()] Initializing [subsystem.name] subsystem..."
 			subsystem.Initialize()
 
 			CHECK_TICK
@@ -257,6 +258,8 @@ GLOBAL_REAL(Master, /datum/controller/master)
 
 	var/msg_fancy = "Initializations complete within [get_colored_thresh_text("[time] second[time == 1 ? "" : "s"]!", time, 200 SECONDS / 10)]!"
 	msg = "Initializations complete within [time] second[time == 1 ? "" : "s"]!"
+
+	world.name = get_default_world_name()
 
 	to_chat(world, span_boldannounce(msg_fancy))
 	log_world(msg)
