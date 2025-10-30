@@ -38,3 +38,6 @@
   - rscadd: replaced the suitcase with a rig skin for the merc rig
   - rscadd: Cyclops mining voidsuit replaces the current mining voidsuit sprites
   - rscadd: Industrial rigs to mining shuttle
+2025-10-30:
+  flleeppyy:
+  - code_imp: revert "Cleaned stationary air tank code"
