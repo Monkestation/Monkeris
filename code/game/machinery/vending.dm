@@ -1034,7 +1034,7 @@
 					/obj/item/reagent_containers/food/snacks/cheesiehonkers = 40, /obj/item/reagent_containers/food/snacks/tastybread = 50)
 	vendor_department = DEPARTMENT_CIVILIAN
 
-/obj/machinery/vending/snack/flavorless
+/obj/machinery/vending/snack/flavorless //For public areas
 	name = "Getmore Chocolate Corp"
 	desc = "A snack machine courtesy of the Getmore Chocolate Corporation."
 	product_slogans = "Try our new nougat bar!;Twice the calories for half the price!"
