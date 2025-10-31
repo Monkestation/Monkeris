@@ -496,6 +496,8 @@
 				return FALSE
 		else if(!L.stat || L.health <= (ishuman(L) ? CONFIG_GET(number/health_threshold_crit) : TRUE))
 			return FALSE
+		else if(L.stat == DEAD)
+			return FALSE
 
 	if(istype(_target_mob, /obj/machinery/bot))
 		var/obj/machinery/bot/B = _target_mob
