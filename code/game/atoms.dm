@@ -15,7 +15,7 @@
 	var/fluorescent
 	/// Prevents thrown atoms from spinning when disabled on thrown or target
 	var/allow_spin = TRUE
-	/// For tools system, check for it should forbid to work on atom for more than one user at time
+	/// For do_afters and the tool system, check if it should forbid work on atom for more than one do_after at time
 	var/used_now = FALSE
 	var/auto_init = TRUE
 	var/initialized = FALSE
