@@ -19,6 +19,7 @@ GLOBAL_LIST_INIT(antag_item_targets,list(
 		"the hypospray" = /obj/item/reagent_containers/hypospray,
 		"the captain's pinpointer" = /obj/item/pinpointer,
 		"an ablative armor vest" = /obj/item/clothing/suit/armor/laserproof/full,
+		"the Comms Officer's headset" = /obj/item/device/radio/headset/heads/comm,
 		"an Ironhammer hardsuit control module" = /obj/item/rig/combat/ironhammer
 	))
 GLOBAL_LIST_INIT(excel_item_targets,list(
