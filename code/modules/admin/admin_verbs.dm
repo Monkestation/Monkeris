@@ -893,7 +893,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 							for(var/i in 2 to LAZYLEN(GLOB.custom_kits[kit_of_choice]))
 								var/item_path = GLOB.custom_kits[kit_of_choice][i]
 								new item_path(storage)
-						log_and_message_admins("[ckey] spawned custom kit at [admin_jump_link(location, src)]")
+						log_and_message_admins("[ckey] spawned custom kit at [ADMIN_COORDJMP(location)]")
 			if("Create or edit")
 				var/do_what_exactly = alert(user, "What do?", "[header]", "Create", "Edit", "Cancel")
 				switch(do_what_exactly)

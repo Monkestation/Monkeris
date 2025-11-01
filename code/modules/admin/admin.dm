@@ -133,7 +133,7 @@ var/global/floorIsLava = 0
 		<a href='byond://?src=\ref[src];[HrefToken()];subtlemessage=\ref[M]'>SM</a> -
 		<a href='byond://?src=\ref[src];[HrefToken()];manup=\ref[M]'>MAN_UP</a> -
 		<a href='byond://?src=\ref[src];[HrefToken()];paralyze=\ref[M]'>PARA</a> -
-		[admin_jump_link(M, src)] -
+		[ADMIN_JMP(M)] -
 		<a href='byond://?src=\ref[src];[HrefToken()];viewlogs=\ref[M]'>LOGS</a>\] <br>
 		<b>Mob type</b> = [M.type]<br><br>
 		<A href='byond://?src=\ref[src];[HrefToken()];boot2=\ref[M]'>Kick</A> |
@@ -1076,39 +1076,6 @@ var/global/floorIsLava = 0
 	if(C.holder.rank_flags() & R_MENTOR)
 		return TRUE
 	return FALSE
-
-/proc/get_options_bar(whom, detail = 2, name = 0, link = 1, highlight_special = 1)
-	if(!whom)
-		return "<b>(*null*)</b>"
-	var/mob/M
-	var/client/C
-	if(isclient(whom))
-		C = whom
-		M = C.mob
-	else if(ismob(whom))
-		M = whom
-		C = M.client
-	else
-		return "<b>(*not an mob*)</b>"
-	switch(detail)
-		if(0)
-			return "<b>[key_name(C, link, name, highlight_special)]</b>"
-
-		if(1)	//Private Messages
-			return "<b>[key_name(C, link, name, highlight_special)][ADMIN_QUE(M)]</b>"
-
-		if(2)	//Admins
-			var/ref_mob = "\ref[M]"
-			return "<b>[key_name(C, link, name, highlight_special)] [ADMIN_QUE(ref_mob)] [ADMIN_PP(ref_mob)] [ADMIN_VV(ref_mob)] [ADMIN_SM(ref_mob)] ([admin_jump_link(M, UNLINT(src))]) (<A href='byond://?_src_=holder;[HrefToken()];check_antagonist=1'>CA</A>)</b>"
-
-		if(3)	//Devs
-			var/ref_mob = "\ref[M]"
-			return "<b>[key_name(C, link, name, highlight_special)] [ADMIN_VV(ref_mob)] ([admin_jump_link(M, UNLINT(src))])</b>"
-
-		if(4)	//Mentors
-			var/ref_mob = "\ref[M]"
-			return "<b>[key_name(C, link, name, highlight_special)] [ADMIN_QUE(M)] [ADMIN_PP(ref_mob)] [ADMIN_VV(ref_mob)] [ADMIN_SM(ref_mob)] ([admin_jump_link(M, UNLINT(src))])</b>"
-
 
 //
 //
