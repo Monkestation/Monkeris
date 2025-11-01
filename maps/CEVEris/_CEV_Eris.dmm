@@ -65630,14 +65630,9 @@
 /area/eris/hallway/side/bridgehallway)
 "dgy" = (
 /obj/structure/table/woodentable,
-/obj/item/device/radio/headset{
-	pixel_w = 10;
-	pixel_y = 5
-	},
 /obj/item/device/radio/headset,
-/obj/item/device/radio/headset{
-	pixel_w = 5
-	},
+/obj/item/device/radio/headset,
+/obj/item/device/radio/headset,
 /turf/floor/wood,
 /area/eris/command/comm)
 "dgz" = (
@@ -97389,9 +97384,6 @@
 /obj/structure/sign/securearea,
 /turf/wall/reinforced,
 /area/eris/maintenance/section1deck4central)
-"fDw" = (
-/turf/floor/wood,
-/area/eris/command/comm)
 "fDX" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -97626,13 +97618,6 @@
 	},
 /turf/floor/carpet/bcarpet,
 /area/eris/neotheology/chapel)
-"fYR" = (
-/obj/machinery/photocopier,
-/obj/machinery/keycard_auth{
-	pixel_y = 24
-	},
-/turf/floor/wood,
-/area/eris/command/comm)
 "fZp" = (
 /obj/machinery/computer/general_air_control/large_tank_control{
 	input_tag = "propulsion_in";
@@ -98089,6 +98074,13 @@
 	},
 /turf/floor/tiled/white/brown_perforated,
 /area/eris/crew_quarters/kitchen_freezer)
+"gRX" = (
+/obj/machinery/photocopier,
+/obj/machinery/keycard_auth{
+	pixel_y = 24
+	},
+/turf/floor/wood,
+/area/eris/command/comm)
 "gTF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -99814,6 +99806,9 @@
 /obj/effect/shuttle_landmark/merc/atmos,
 /turf/space,
 /area/space)
+"jUW" = (
+/turf/wall,
+/area/eris/command/comm)
 "jVQ" = (
 /obj/structure/table/standard,
 /obj/spawner/pack/tech_loot,
@@ -100379,11 +100374,6 @@
 /obj/structure/railing,
 /turf/open,
 /area/eris/engineering/atmos)
-"lio" = (
-/obj/structure/table/woodentable,
-/obj/item/device/lighting/toggleable/lamp/green,
-/turf/floor/wood,
-/area/eris/command/comm)
 "liy" = (
 /obj/spawner/pack/machine,
 /turf/floor/tiled/white,
@@ -102659,13 +102649,6 @@
 /obj/machinery/neotheology/biomass_container,
 /turf/floor/tiled/white/golden,
 /area/eris/neotheology/altar)
-"pwO" = (
-/obj/structure/bed/chair/comfy/black{
-	dir = 8
-	},
-/obj/landmark/join/start/hop,
-/turf/floor/carpet/bcarpet,
-/area/eris/command/meeting_room)
 "pxc" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
@@ -103350,6 +103333,11 @@
 	},
 /turf/floor/tiled/techmaint,
 /area/eris/maintenance/section3deck3port)
+"qNE" = (
+/obj/structure/table/woodentable,
+/obj/item/device/lighting/toggleable/lamp/green,
+/turf/floor/wood,
+/area/eris/command/comm)
 "qOc" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
@@ -103623,12 +103611,6 @@
 /obj/structure/closet/secure_closet/personal,
 /turf/floor/tiled/white/brown_perforated,
 /area/eris/crew_quarters/fitness)
-"roA" = (
-/obj/item/modular_computer/console/preset/command{
-	dir = 1
-	},
-/turf/floor/wood,
-/area/eris/command/comm)
 "rpd" = (
 /obj/machinery/conveyor/north{
 	id = "minetocargo"
@@ -104022,6 +104004,9 @@
 /obj/structure/closet/firecloset,
 /turf/floor/tiled/steel/orangecorner,
 /area/eris/engineering/propulsion/left)
+"rXD" = (
+/turf/floor/wood,
+/area/eris/command/comm)
 "rXJ" = (
 /obj/structure/bed/chair/custom/bar_special,
 /turf/floor/tiled/steel/bar_light,
@@ -104988,6 +104973,12 @@
 	},
 /turf/floor/tiled/steel/gray_platform,
 /area/eris/engineering/long_range_scanner)
+"tDH" = (
+/obj/item/modular_computer/console/preset/command{
+	dir = 1
+	},
+/turf/floor/wood,
+/area/eris/command/comm)
 "tEu" = (
 /obj/machinery/light{
 	dir = 1
@@ -105715,6 +105706,13 @@
 	},
 /turf/floor/tiled/steel/gray_platform,
 /area/eris/engineering/shield_generator)
+"uUm" = (
+/obj/structure/bed/chair/comfy/black{
+	dir = 8
+	},
+/obj/landmark/join/start/hop,
+/turf/floor/carpet/bcarpet,
+/area/eris/command/meeting_room)
 "uUD" = (
 /obj/machinery/atmospherics/valve/open{
 	dir = 4;
@@ -107246,9 +107244,6 @@
 "xIm" = (
 /turf/wall/reinforced,
 /area/eris/hallway/side/section3port)
-"xKi" = (
-/turf/wall,
-/area/eris/command/comm)
 "xLv" = (
 /obj/effect/shuttle_landmark/merc/sec2west,
 /turf/space,
@@ -245645,7 +245640,7 @@ deK
 dfi
 cAc
 dfP
-xKi
+jUW
 dgy
 dBp
 dho
@@ -245847,11 +245842,11 @@ deb
 deb
 deb
 cEw
-xKi
-lio
+jUW
+qNE
 ogz
 dhp
-fDw
+rXD
 cZW
 dbF
 dbF
@@ -246049,7 +246044,7 @@ dec
 dAn
 dec
 dec
-xKi
+jUW
 rTm
 ogz
 dhp
@@ -246251,8 +246246,8 @@ deL
 deL
 dfC
 dfR
-xKi
-fYR
+jUW
+gRX
 ogz
 dhq
 dhO
@@ -246453,7 +246448,7 @@ deL
 deL
 dfC
 dec
-xKi
+jUW
 dOi
 dgP
 dhr
@@ -246655,11 +246650,11 @@ deM
 dfj
 dfD
 dfS
-xKi
+jUW
 ike
 dgQ
 vYU
-roA
+tDH
 cZW
 dbF
 dbF
@@ -247062,8 +247057,8 @@ cAX
 cBB
 dcW
 cXJ
-xKi
-xKi
+jUW
+jUW
 dfH
 dbF
 dbF
@@ -248266,7 +248261,7 @@ ddm
 cgc
 ddN
 deh
-pwO
+uUm
 dex
 deT
 dfp
