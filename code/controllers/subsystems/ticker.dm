@@ -293,7 +293,6 @@ SUBSYSTEM_DEF(ticker)
 		N.new_player_panel_proc()
 
 	CHECK_TICK
-	setup_codespeak()
 	generate_contracts(min(6 + round(minds.len / 5), 12))
 	generate_excel_contracts(min(6 + round(minds.len / 5), 12))
 	excel_check()
