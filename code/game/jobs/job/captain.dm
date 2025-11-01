@@ -168,13 +168,14 @@ Act as the captain's sidekick, bodyguard, and last line of defense in a crisis o
 
 	description = "You are a junior officer serving under the Captain of the CEV Eris, enlisted to tend to the ship's Comms. <br>\
 	Your duty is to serve as command's ears- listen well, and ensure nothing escapes your hearing.  <br>\
-	Many comms officers are children of power, the spawn of wealthy, influential, or otherwise well connected peoples whetting their teeth on a relatively low command position."
+	Many comms officers are children of power, the spawn of wealthy, well connected peoples whetting their teeth on a relatively humble command position.<br>\
+	Others might be ambitious young crewmembers, promoted in the line of duty."
 
-	duties = "Monitor communications in every nook and cranny of the ship. Ensure not a single word escapes your grasp.  <br>\
-	Sort through the chaos and find information of value to your Captian- dangers, opportunities, items of interest. Make sure he is well informed of the goings on of the ship. <br>\
+	duties = "Monitor communications in every nook and cranny of the CEV Eris. <br>\
+	Sort through the chaos and find information of value to your Captain- dangers, opportunities, items of interest. Make sure he is well informed of the goings on of the ship. <br>\
 	<br>\
-	Relay the captain's words back to the crew. You have access to their local comms, making it easier to get their attention. <br>\
-	Make sure the captain's will is well understood by his peons- though recognize your power is entirely provisional to theirs. <br>\
+	Relay the Captain's words back to the crew. You have access to their factional comms, making it easier to get their attention. <br>\
+	Make sure the Captain's will is well understood by his peons- though recognize your power is entirely provisional to theirs. <br>\
 	<br>\
 	Ensure nothing stops the (air)mail. Prevent any interruption the ship's internal communications network- divided, the crew will be good as doomed.	<br>\
 	Work together with technomancers to address any technical issues- and take matters into your own hands if the situation becomes desperate.<br>\
@@ -182,14 +183,14 @@ Act as the captain's sidekick, bodyguard, and last line of defense in a crisis o
 	Provide what limited counsel you can to the captain on various matters. You lack the experience or influence of your senior officer, but 3 heads are often better than two.<br>\
 	And, if circumstance should threaten their lives, more bodies to throw at the problem couldn't hurt."
 
-	loyalties = "As Comms officer, your first loyalty is to the Captain. Consider their word to be law.<br>\
+	loyalties = "As Comms officer, your first loyalty is to the Captain, who is solely responsible for your livelihood and potential future career prospects. <br>\
 		<br>\
 		Your second loyalty is to the First Officer, who wields the Captain's authority in their stead. Since the Captain rarely concerns themselves with minor details, many matters will instead pass through the FO.<br>\
 		<br>\
 		Your third loyalty is to the ship, and to its mission. Your career won't have much of a future if your first command posting goes down in flames."
 
 	//MAKE THIS
-	outfit_type = /decl/hierarchy/outfit/job/comm
+	//outfit_type = /decl/hierarchy/outfit/job/comm
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/camera_monitor,
