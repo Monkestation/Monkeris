@@ -1,5 +1,4 @@
 /mob
-	datum_flags = DF_USE_TAG
 	density = TRUE
 	layer = 4
 	animate_movement = 2
@@ -253,7 +252,7 @@
 
 	// Did they suicide?
 	var/suicided = FALSE
-  
+
 	///The z level this mob is currently registered in
 	var/registered_z
 

@@ -357,6 +357,9 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/internal/vital/brain/B = H.internal_organs_by_efficiency[BP_BRAIN]
+		#warn remove this once debugged - Marisa
+		if(!istype(B, /obj/item/organ/internal/vital/brain))
+			stack_trace("Brain on mob type [H] has unknown brain type [B.type]")
 		if(!BP_IS_ROBOTIC(B) && prob(75))
 			M.add_chemical_effect(CE_PAINKILLER, 10)
 			M.add_chemical_effect(CE_BRAINHEAL, 1)

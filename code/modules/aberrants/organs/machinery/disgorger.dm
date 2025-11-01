@@ -137,7 +137,7 @@
 		for(var/obj/item/O in I.GetAllContents(2, TRUE))
 			amount_to_take += max(0, O.matter[MATERIAL_BIOMATTER])
 			var/is_valid_organ = FALSE
-			if(istype(O, /obj/item/organ) && LAZYLEN(organ.transplant_data))
+			if(istype(O, /obj/item/organ) && LAZYLEN(astype(O, /obj/item/organ).transplant_data))
 				is_valid_organ = TRUE
 			qdel(O)
 			if(amount_to_take)
