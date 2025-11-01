@@ -1,6 +1,7 @@
 #define SAVEFILE_VERSION_MIN	8
 #define SAVEFILE_VERSION_MAX	18
 
+#warn REMOVE DEBUG STATEMENTS WHEN DONE - Marisa
 /datum/preferences/proc/load_path(ckey,filename="preferences.sav")
 	if(!ckey)	return
 	path = "data/player_saves/[copytext(ckey,1,2)]/[ckey]/[filename]"
@@ -13,6 +14,7 @@
 			to_chat(client, span_warning("You're attempting to load your preferences a little too fast. Wait half a second, then try again."))
 		return 0
 	if(!fexists(path))		return 0
+	debug_world_log("LOADING PREFS FOR [usr]/[usr.ckey] - PATH: [path]")
 	var/savefile/S = new /savefile(path)
 	if(!S)					return 0
 	S.cd = "/"
@@ -28,6 +30,7 @@
 		if(istype(client))
 			to_chat(client, span_warning("You're attempting to save your preferences a little too fast. Wait half a second, then try again."))
 		return 0
+	debug_world_log("SAVING PREFS FOR [usr]/[usr.ckey] - PATH: [path]")
 	var/savefile/S = new /savefile(path)
 	if(!S)					return 0
 	S.cd = "/"
@@ -46,6 +49,7 @@
 
 	if(!fexists(path))		return 0
 
+	debug_world_log("LOADING CHARACTER FOR [usr]/[usr.ckey] - PATH: [path]")
 	var/savefile/S = new /savefile(path)
 	if(!S)					return 0
 	S.cd = "/"
@@ -76,6 +80,7 @@
 		if(istype(client))
 			to_chat(client, span_warning("You're attempting to save your character a little too fast. Wait half a second, then try again."))
 		return 0
+	debug_world_log("SAVING CHARACTER FOR [usr]/[usr.ckey] - PATH: [path]")
 	var/savefile/S = new /savefile(path)
 	if(!S)					return 0
 	S.cd = GLOB.maps_data.character_save_path(default_slot)
