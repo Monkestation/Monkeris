@@ -11,7 +11,7 @@
 	linked = null
 	..()
 
-/turf/space/pulsar/update_starlight(intensity=1)
+/turf/space/pulsar/update_starlight(datum/source, intensity=1)
 	if(intensity)
 		// Increase both radius and brightness
 		set_light(intensity, intensity, PULSAR_COLOR)
