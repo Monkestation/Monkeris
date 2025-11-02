@@ -143,13 +143,9 @@ SUBSYSTEM_DEF(statpanels)
 						continue
 					if(turf_content in overrides)
 						continue
-					if(LAZYLEN(turfitems) < 30) // Only create images for the first 30 items on the turf, for performance reasons
-						if(!("\ref[turf_content]" in cached_images))
-							target << browse_rsc(getFlatIcon(turf_content, no_anim = TRUE), "\ref[turf_content].png")
-							cached_images += "\ref[turf_content]"
-						turfitems[++turfitems.len] = list("[turf_content.name]", "\ref[turf_content]", "\ref[turf_content].png")
 					else
-						turfitems[++turfitems.len] = list("[turf_content.name]", "\ref[turf_content]")
+						#warn TEST TURF STATPANEL TURF PREVIEWS - Marisa
+						turfitems += list("[turf_content.name]", "[ma2html(turf_content, target_mob)]")
 				turfitems = url_encode(json_encode(turfitems))
 				target << output("[turfitems];", "statbrowser:update_listedturf")
 		if(MC_TICK_CHECK)
