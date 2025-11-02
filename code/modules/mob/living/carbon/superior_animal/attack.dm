@@ -12,7 +12,7 @@
 	else
 		damage = rand(melee_damage_lower, melee_damage_upper)
 
-	. = A.attack_generic(src, damage, pick(attacktext), environment_smash, melee_sharp, melee_edge, wound_mult)
+	. = A.attack_generic(src, damage, pick(attacktext), environment_smash, melee_sharp, melee_edge, wound_mult, FALSE)
 	if(.)
 		if (attack_sound && loc && prob(attack_sound_chance))
 			playsound(loc, attack_sound, attack_sound_volume, 1)
