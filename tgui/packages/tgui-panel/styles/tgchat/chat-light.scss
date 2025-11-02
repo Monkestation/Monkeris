@@ -328,6 +328,10 @@ em {
   color: hsl(264, 100%, 45.1%);
 }
 
+.angelsay {
+  color: hsl(40, 80%, 41%);
+}
+
 .binarysay {
   color: hsl(114, 86.5%, 40.8%);
   background-color: var(--color-black);
@@ -343,16 +347,23 @@ em {
   color: hsl(120, 100%, 76.7%);
 }
 
+/* RADIO COLORS */
+/* IF YOU CHANGE THIS KEEP IT IN SYNC WITH TGUI CONSTANTS */
+
 .radio {
   color: hsl(120, 100%, 25.1%);
+}
+
+.comradio {
+  color: hsl(197, 90%, 39%);
 }
 
 .sciradio {
   color: hsl(300, 50%, 40%);
 }
 
-.comradio {
-  color: hsl(57.9, 97.3%, 29.4%);
+.ntradio {
+  color: hsl(46, 48%, 41%);
 }
 
 .secradio {
@@ -367,11 +378,11 @@ em {
   color: hsl(17.3, 96.7%, 52.9%);
 }
 
-.suppradio {
+.supradio {
   color: hsl(34.6, 59.2%, 41.4%);
 }
 
-.servradio {
+.srvradio {
   color: hsl(88.6, 58.9%, 42%);
 }
 
@@ -387,7 +398,7 @@ em {
   color: hsl(0, 0%, 40.8%);
 }
 
-.aiprivradio {
+.airadio {
   color: hsl(300, 100%, 50%);
 }
 
@@ -549,6 +560,10 @@ h2.alert {
 .boldnotice {
   color: hsl(240, 100%, 30%);
   font-weight: bold;
+}
+
+.alium {
+  color: #0ca00c;
 }
 
 .hear {
@@ -746,6 +761,19 @@ h2.alert {
   color: hsl(0, 100%, 50%);
   font-size: 185%;
   font-weight: bold;
+}
+
+.revolution {
+  color: hsl(344, 100%, 35%);
+  font-weight: bold;
+  font-style: italic;
+}
+
+.revolution_alert {
+  color: hsl(344, 100%, 35%);
+  font-weight: bold;
+  font-style: italic;
+  font-size: 200%;
 }
 
 .spiderbroodmother {
@@ -1259,6 +1287,49 @@ $border-width-px: $border-width * 1px;
 .looc {
   color: #2e57d1;
   font-weight: bold;
+}
+
+.alien {
+  color: #543354;
+}
+
+.monkey {
+  color: #22228b;
+}
+
+.rough {
+  font-family:
+    Trebuchet MS,
+    cursive,
+    sans-serif;
+}
+
+.say_quote {
+  font-family: Georgia, Verdana, sans-serif;
+}
+
+.russian {
+  color: #665f15;
+}
+
+.serbian {
+  color: #ad6f1d;
+}
+
+.jive {
+  color: #575757;
+}
+
+.german {
+  color: #0219c2;
+}
+
+.neohongo {
+  color: #6b186b;
+}
+
+.latin {
+  color: #7e6415;
 }
 
 .death_message {

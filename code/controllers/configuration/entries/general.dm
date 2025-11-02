@@ -104,6 +104,31 @@
 /datum/config_entry/flag/autoconvert_notes //if all connecting player's notes should attempt to be converted to the database
 	protection = CONFIG_ENTRY_LOCKED
 
+// Pop caps
+/datum/config_entry/number/soft_popcap
+	default = null
+	min_val = 0
+
+/datum/config_entry/number/hard_popcap
+	default = null
+	min_val = 0
+
+/datum/config_entry/number/extreme_popcap
+	default = null
+	min_val = 0
+
+/datum/config_entry/string/soft_popcap_message
+	default = "Be warned that the server is currently serving a high number of users, consider using alternative game servers."
+
+/datum/config_entry/string/hard_popcap_message
+	default = "The server is currently serving a high number of users, You cannot currently join. You may wait for the number of living crew to decline, observe, or find alternative servers."
+
+/datum/config_entry/string/extreme_popcap_message
+	default = "The server is currently serving a high number of users, find alternative servers."
+
+/datum/config_entry/flag/byond_member_bypass_popcap
+
+
 /******************/
 /* Job/Role Prefs */
 /******************/

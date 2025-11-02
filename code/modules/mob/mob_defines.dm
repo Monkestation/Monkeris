@@ -259,3 +259,10 @@
 	bad_type = /mob
 
 	var/list/update_on_move = list() // Call entered_with_container() on atoms inside when the mob moves
+
+	/// had to move these to mob bc. shield code is a mess.
+	/// for implementation please see /mob/living/carbon/human
+	/// ready to block melee attacks?
+	var/blocking = FALSE
+	/// item being used to block. Please remember to GC this
+	var/obj/item/blocking_item

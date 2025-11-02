@@ -1,5 +1,0 @@
-author: blackwolf602
-delete-after: true
-changes:
-  - rscadd: New sprite for the voidsuit
-  - bugfix: removed random white dot on helmet lighting

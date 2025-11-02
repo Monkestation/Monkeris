@@ -29,6 +29,10 @@
 		to_chat(src, "<div class='motd'>[join_motd]</div>")
 	to_chat(src, "<div class='info'>Round ID: <div class='danger'>[GLOB.round_id]</div></div>")
 
+	var/spc = CONFIG_GET(number/soft_popcap)
+	if(spc && living_player_count() >= spc)
+		to_chat(src, span_notice("<b>Server Notice:</b>\n \t [CONFIG_GET(string/soft_popcap_message)]"))
+
 	my_client = client
 	sight |= SEE_TURFS
 	GLOB.player_list |= src

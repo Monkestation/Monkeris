@@ -203,7 +203,7 @@
 
 /obj/item/shield/riot/nt
 	name = "NT Scutum"
-	desc = "A saintly-looking shield. Too heavy to be held upright while running. The leather straps on the back can hold melee weapons."
+	desc = "A saintly-looking shield. Too heavy to be used properly unless raised. The leather straps on the back can hold melee weapons."
 	icon = 'icons/obj/nt_melee.dmi'
 	icon_state = "nt_shield"
 	item_state = "nt_shield"
@@ -211,8 +211,8 @@
 	aspects = list(SANCTIFIED)
 	spawn_blacklisted = TRUE
 	price_tag = 1000
-	base_block_chance = 45
-	shield_difficulty = 40
+	base_block_chance = 15
+	shield_difficulty = 38
 	item_flags = DRAG_AND_DROP_UNEQUIP
 	shield_integrity = 200
 	var/obj/item/storage/internal/container
@@ -272,8 +272,8 @@
 	aspects = list(SANCTIFIED)
 	spawn_blacklisted = TRUE
 	price_tag = 300
-	base_block_chance = 35
-	shield_difficulty = 70
+	base_block_chance = 25
+	shield_difficulty = 60
 	item_flags = DRAG_AND_DROP_UNEQUIP
 	shield_integrity = 180
 	var/obj/item/storage/internal/container

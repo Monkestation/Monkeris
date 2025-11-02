@@ -83,8 +83,6 @@
 	var/gunshot_residue
 	/// Are you trying not to hurt your opponent?
 	var/holding_back
-	/// ready to block melee attacks?
-	var/blocking = FALSE
 
 	mob_bump_flag = HUMAN
 	mob_push_flags = ~HEAVY

@@ -173,10 +173,32 @@
 			return 1
 
 	if(href_list["late_join"])
-
 		if(!SSticker.IsRoundInProgress())
 			to_chat(usr, span_red("The round is either not ready, or has already finished..."))
 			return
+
+		//Determines Relevent Population Cap
+		var/relevant_cap
+		var/hard_popcap = CONFIG_GET(number/hard_popcap)
+		var/extreme_popcap = CONFIG_GET(number/extreme_popcap)
+		if(hard_popcap && extreme_popcap)
+			relevant_cap = min(hard_popcap, extreme_popcap)
+		else
+			relevant_cap = max(hard_popcap, extreme_popcap)
+
+		if(SSticker.queued_players.len || (relevant_cap && living_player_count() >= relevant_cap && !(ckey(src.key) in GLOB.admin_datums)))
+			to_chat(src, span_danger("[CONFIG_GET(string/hard_popcap_message)]"))
+
+			var/queue_position = SSticker.queued_players.Find(src)
+			if(queue_position == 1)
+				to_chat(src, span_notice("You are next in line to join the game. You will be notified when a slot opens up."))
+			else if(queue_position)
+				to_chat(src, span_notice("There are [queue_position-1] players in front of you in the queue to join the game."))
+			else
+				SSticker.queued_players += src
+				to_chat(src, span_notice("You have been added to the queue to join the game. Your position in queue is [SSticker.queued_players.len]."))
+			return
+
 
 		// Warn the player if they are trying to spawn without a brain
 		var/datum/body_modification/mod = client.prefs.get_modification(BP_BRAIN)
@@ -197,8 +219,13 @@
 		if(!check_rights(R_ADMIN, 0))
 			var/datum/species/S = GLOB.all_species[client.prefs.species]
 			if(!(S.spawn_flags & CAN_JOIN))
-				src << alert("Your current species, [client.prefs.species], is not available for play on the station.")
+				tgui_alert(src, "Your current species, [client.prefs.species], is not available for play on the station.", "Species unavailable")
 				return FALSE
+
+		if(SSticker.queued_players.len && !(ckey(src.key) in GLOB.admin_datums))
+			if((living_player_count() >= relevant_cap) || (src != SSticker.queued_players[1]))
+				tgui_alert(src, "The server is full!", "Oh No!")
+				return TRUE
 
 		LateChoices()
 

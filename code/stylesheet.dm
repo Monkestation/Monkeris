@@ -51,18 +51,18 @@ em						{font-style: normal;font-weight: bold;}
 .newscaster				{color: #750000;}
 
 /* Radio Channels */
-.comradio				{color: #193A7A;}
-.syndradio				{color: #6D3F40;}
-.centradio				{color: #5C5C8A;}
-.airadio				{color: #FF00FF;}
-.ntradio				{color: #D4AF37;}
+.comradio				{color: #193A7A;} /* Command */
+.syndradio				{color: #6D3F40;} /* Command */
+.centradio				{color: #5C5C8A;} /* Central command - Not used */
+.airadio				{color: #FF00FF;} /* Ai */
+.ntradio				{color: #D4AF37;} /* NeoTheology */
 
-.secradio				{color: #A30000;}
-.engradio				{color: #A66300;}
-.medradio				{color: #0081A3;}
-.sciradio				{color: #993399;}
-.supradio				{color: #5F4519;}
-.srvradio				{color: #6eaa2c;}
+.secradio				{color: #A30000;} /* Security */
+.engradio				{color: #A66300;} /* Techno */
+.medradio				{color: #0081A3;} /* Medical */
+.sciradio				{color: #993399;} /* Science */
+.supradio				{color: #5F4519;} /* Guild */
+.srvradio				{color: #6eaa2c;} /* Club */
 
 /* Miscellaneous */
 .name					{font-weight: bold;}

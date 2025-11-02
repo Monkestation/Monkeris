@@ -563,3 +563,11 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 			to_chat(M, rendered_message, avoid_highlighting = speaker_ckey == M.key)
 		else
 			to_chat(M, message, avoid_highlighting = speaker_ckey == M.key)
+
+///Returns the amount of currently living players
+/proc/living_player_count()
+	var/living_player_count = 0
+	for(var/mob in GLOB.player_list)
+		if(mob in GLOB.mob_list && !(mob in GLOB.dead_mob_list))
+			living_player_count += 1
+	return living_player_count

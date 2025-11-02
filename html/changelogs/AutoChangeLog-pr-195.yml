@@ -1,0 +1,4 @@
+author: Sun-Soaked
+delete-after: true
+changes:
+  - bugfix: simplemobs now ignore enemy simplemobs once they die

@@ -1,0 +1,4 @@
+author: flleeppyy
+delete-after: true
+changes:
+  - rscadd: current initing subsystem now shows in window title.

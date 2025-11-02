@@ -19,3 +19,25 @@
   - bugfix: Lobby music should respect user preferences now
   - rscadd: Subsystems now display the order they are being loaded in
   - code_imp: Renamed `HUD_elemnet` and `/obj/screen` to be types of `/atom/movable`
+2025-10-28:
+  blackwolf602:
+  - bugfix: fixed boot knife sprite
+  - rscadd: New sprite for the voidsuit
+  - bugfix: removed random white dot on helmet lighting
+  flleeppyy:
+  - rscadd: SQL playtime system, check your playtime via OOC > View tracked playtime
+  - server: Added population caps
+  - bugfix: Fonts not showing properly in Runechat
+  - bugfix: OOC color now has a default instead of pure black
+  - bugfix: parent call to mob.Login should no longer call 600k moives.
+  - bugfix: Chat colors being off.
+2025-10-29:
+  blackwolf602:
+  - bugfix: removed random white dot on panzer side view
+  - rscadd: Goliath Skin over industrial
+  - rscadd: replaced the suitcase with a rig skin for the merc rig
+  - rscadd: Cyclops mining voidsuit replaces the current mining voidsuit sprites
+  - rscadd: Industrial rigs to mining shuttle
+2025-10-30:
+  flleeppyy:
+  - code_imp: revert "Cleaned stationary air tank code"

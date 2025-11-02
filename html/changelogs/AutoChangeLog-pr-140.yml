@@ -1,0 +1,11 @@
+author: Sun-Soaked
+delete-after: true
+changes:
+  - rscadd: Shields now trigger their raised state when blocking instead of when
+      walking. The slowdown is preserved.
+  - rscadd: bucklers and other non-riot shields can now be raised.
+  - tweak: Adds three shield-related gameplay tips
+  - balance: Adjusts the balance of many shields to work with being raised
+  - bugfix: removes unused shield code in human_defense.dm that was causing 
+      runtimes whenever someone attacked a raised shield
+  - code_imp: moved some blocking related vars up to /mob.

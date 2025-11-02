@@ -35,22 +35,34 @@ SUBSYSTEM_DEF(job)
 	init_order = INIT_ORDER_JOBS
 	wait = 1 MINUTE
 
-	var/list/occupations = list()			//List of all jobs
-	var/list/occupations_by_name = list()	//Dict of all jobs, keys are titles
-	var/list/occupations_by_type = list()	//List of all jobs datums, keys are titles
-	var/list/departments = list()			//List of all departments
-	var/list/departments_by_name = list()	//Dict of all departments, keys are names
-	// var/list/datum/department/joinable_departments = list()
-	var/list/unassigned = list()			//Players who need jobs
-	var/list/job_debug = list()				//Debug info
-	var/list/job_mannequins = list()				//Cache of icons for job info window
+	/// List of all jobs
+	var/list/occupations = list()
+	/// Dict of all jobs, keys are titles
+	var/list/occupations_by_name = list()
+	/// List of all jobs datums, keys are titles
+	var/list/occupations_by_type = list()
+	/// List of all departments
+	var/list/departments = list()
+	/// Dict of all departments, keys are names
+	var/list/departments_by_name = list()
+	/// Players who need jobs
+	var/list/unassigned = list()
+	/// Debug info
+	var/list/job_debug = list()
+	/// Cache of icons for job info window
+	var/list/job_mannequins = list()
+	/**
+	 * var/list/datum/department/joinable_departments = list()
+	 * / Used for checking against population caps
+	 */
+	var/initial_players_to_assign = 0
 
-	/// DOS Attack prevention by locking off file-reads.
+	/// / DOS Attack prevention by locking off file-reads.
 	var/list/queries_by_key = list()
-	/// Dictionary that maps job priorities to low/medium/high. Keys have to be number-strings as assoc lists cannot be indexed by integers. Set in setup_job_lists.
+	/// / Dictionary that maps job priorities to low/medium/high. Keys have to be number-strings as assoc lists cannot be indexed by integers. Set in setup_job_lists.
 	var/list/job_priorities_to_strings
 
-	/// Dictionary of jobs indexed by the experience type they grant.
+	/// / Dictionary of jobs indexed by the experience type they grant.
 	var/list/experience_jobs_map = list()
 
 /datum/controller/subsystem/job/Initialize(start_timeofday)
@@ -225,6 +237,9 @@ SUBSYSTEM_DEF(job)
 	JobDebug("Running FOC, Job: [job], Level: [job_priority_level_to_string(level)]")
 	var/list/candidates = list()
 	for(var/mob/new_player/player in unassigned)
+		if(popcap_reached())
+			JobDebug("FOC popcap reached, rejecting player: [player]")
+			continue
 		if(!player)
 			JobDebug("FOC player no longer exists.")
 			continue
@@ -269,6 +284,10 @@ SUBSYSTEM_DEF(job)
 
 		// This check handles its own output to JobDebug.
 		if(check_job_eligibility(player, job, "GRJ", add_job_to_log = TRUE) != JOB_AVAILABLE)
+			continue
+
+		if(popcap_reached())
+			Debug("GRJ: Popcap reached, rejecting: [player]")
 			continue
 
 		var/datum/category_item/setup_option/core_implant/I = player.client.prefs.get_option("Core implant")
@@ -363,7 +382,10 @@ SUBSYSTEM_DEF(job)
 		if(player.ready && player.mind && !player.mind.assigned_role)
 			unassigned += player
 
-	Debug("DO, Len: [length(unassigned)]")
+	initial_players_to_assign = length(unassigned)
+
+	Debug("DO: Player count to assign roles to: [initial_players_to_assign]")
+
 	if(!length(unassigned))
 		return FALSE
 
@@ -411,6 +433,10 @@ SUBSYSTEM_DEF(job)
 				/*if(!job || SSticker.mode.disabled_jobs.Find(job.title) )
 					continue
 				*/
+				if(popcap_reached())
+					Debug("Popcap reached, trying to reject player: [player]")
+					continue
+
 				if(jobban_isbanned(player.ckey, job.title))
 					Debug("DO isbanned failed, Player: [player], Job:[job.title]")
 					continue
@@ -737,6 +763,15 @@ SUBSYSTEM_DEF(job)
 	if(!job || job == ASSISTANT_TITLE)
 		return FALSE
 	return job.create_record
+
+/datum/controller/subsystem/job/proc/popcap_reached()
+	var/hpc = CONFIG_GET(number/hard_popcap)
+	var/epc = CONFIG_GET(number/extreme_popcap)
+	if(hpc || epc)
+		var/relevent_cap = max(hpc, epc)
+		if((initial_players_to_assign - length(unassigned)) >= relevent_cap)
+			return 1
+	return 0
 
 /// Builds various lists of jobs based on station, centcom and additional jobs with icons associated with them.
 /datum/controller/subsystem/job/proc/setup_job_lists()
