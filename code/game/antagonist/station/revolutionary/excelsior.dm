@@ -40,5 +40,5 @@
 	BITSET(owner.current.hud_updateflag, EXCELSIOR_HUD)
 
 /datum/antagonist/excelsior/remove_antagonist()
-	. = ..()
 	BITSET(owner.current.hud_updateflag, EXCELSIOR_HUD)
+	. = ..()

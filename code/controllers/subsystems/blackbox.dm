@@ -91,6 +91,8 @@ SUBSYSTEM_DEF(blackbox)
 
 	for(var/player_key in GLOB.clients)
 		var/datum/persistent_client/PD = GLOB.persistent_clients_by_ckey[player_key]
+		if (!PD)
+			continue
 		record_feedback("tally", "client_byond_version", 1, PD.full_byond_version())
 
 /datum/controller/subsystem/blackbox/Shutdown()

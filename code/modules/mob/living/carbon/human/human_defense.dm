@@ -161,7 +161,7 @@ meteor_act
 	var/obj/item/shield/shield = has_shield()
 
 	if(shield)
-		protection += shield.armor[type]
+		protection += shield.armor.vars[type]
 
 	if (protection > 75) // reducing the risks from powergaming
 		switch (type)

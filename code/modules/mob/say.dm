@@ -53,10 +53,11 @@
 			emote(message)
 
 
+#warn Test dead say, talking as dead mob while in mob - Marisa
 /mob/proc/say_dead(message)
 	var/name = real_name
 	var/alt_name = ""
-	var/the_client = usr.client || src.client
+	var/client/the_client = usr.client || src.client
 	if (!the_client)
 		return
 	if(say_disabled)	//This is here to try to identify lag problems
