@@ -56,10 +56,13 @@
 /mob/proc/say_dead(message)
 	var/name = real_name
 	var/alt_name = ""
+	var/the_client = usr.client || src.client
+	if (!the_client)
+		return
 	if(say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, span_danger("Speech is currently admin-disabled."))
 		return
-	if(src.client && !src.client.holder && !GLOB.dsay_allowed)
+	if(the_client && !the_client.holder && !GLOB.dsay_allowed)
 		to_chat(src, span_danger("Deadchat is globally muted."))
 		return
 
@@ -71,7 +74,7 @@
 		to_chat(src, span_danger("You are muted from deadchat."))
 		return
 
-	if (src.client && src.client.handle_spam_prevention(message, MUTE_DEADCHAT))
+	if (the_client && the_client.handle_spam_prevention(message, MUTE_DEADCHAT))
 		return
 
 	if (mind?.name)
