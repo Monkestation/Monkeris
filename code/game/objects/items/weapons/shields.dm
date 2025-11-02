@@ -487,7 +487,7 @@
 		user.take_organ_damage(5)
 	active = !active
 */
-	if(active)
+	if(!active)
 		active = TRUE
 		force = WEAPON_FORCE_PAINFUL
 		update_icon()
