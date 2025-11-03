@@ -20,6 +20,10 @@
 		mind.active = TRUE
 		mind.current = src
 
+	// It's neccessary to have a hud since we need it for anything ma2html related
+	hud_used = new /datum/hud(src)
+
+
 	loc = locate(1,1,1)
 	. = ..()
 	if(!. || !client)
