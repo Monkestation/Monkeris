@@ -20,10 +20,10 @@
 		mind.active = TRUE
 		mind.current = src
 
+	loc = locate(1,1,1)
 	. = ..()
 	if(!. || !client)
 		return FALSE
-	loc = null
 
 	if(join_motd)
 		to_chat(src, "<div class='motd'>[join_motd]</div>")
