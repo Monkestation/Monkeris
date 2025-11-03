@@ -29,8 +29,8 @@
 
 /mob/observer/ghost/ClickOn(atom/A, params)
 	var/list/pa = params2list(params)
-	if(check_rights(R_ADMIN)) // Admin click shortcuts
-		if(pa.Find("shift") && pa.Find("ctrl"))
+	if(pa.Find("shift") && pa.Find("ctrl"))
+		if(check_rights(R_ADMIN)) // Admin click shortcuts
 			client.debug_variables(A)
 			return
 
