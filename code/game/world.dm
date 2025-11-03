@@ -348,12 +348,8 @@ var/world_topic_spam_protect_time = world.timeofday
 				return FALSE
 
 /world/Reboot(reason = 0, fast_track = FALSE)
-	if(!CONFIG_GET(flag/tts_cache))
-		for(var/i in GLOB.tts_death_row)
-			fdel(i)
-
-	if(reason || fast_track) //special reboot, do none of the normal stuff
-		if(usr)
+	if (reason || fast_track) //special reboot, do none of the normal stuff
+		if (usr)
 			log_admin("[key_name(usr)] Has requested an immediate world restart via client side debugging tools")
 			message_admins("[key_name_admin(usr)] Has requested an immediate world restart via client side debugging tools")
 		to_chat(world, span_boldannounce("Rebooting World immediately due to host request."))
@@ -361,33 +357,46 @@ var/world_topic_spam_protect_time = world.timeofday
 		to_chat(world, span_boldannounce("Rebooting world..."))
 		Master.Shutdown() //run SS shutdowns
 
-	for(var/client/C in GLOB.clients)
-		if(CONFIG_GET(string/server))	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
-			C << link("byond://[CONFIG_GET(string/server)]")
-
-
 	#ifdef UNIT_TESTS
 	FinishTestRun()
-	#else
-	..()
+	return
 	#endif
 
-	if(check_hard_reboot())
-		log_world("World hard rebooted at [time_stamp()]")
-		// shutdown_logging() // See comment below.
-		QDEL_NULL(Tracy)
-		QDEL_NULL(Debugger)
-		TgsEndProcess()
-		return ..()
+	if(TgsAvailable())
+		var/do_hard_reboot
+		// check the hard reboot counter
+		var/ruhr = CONFIG_GET(number/rounds_until_hard_restart)
+		switch(ruhr)
+			if(-1)
+				do_hard_reboot = FALSE
+			if(0)
+				do_hard_reboot = TRUE
+			else
+				if(GLOB.restart_counter >= ruhr)
+					do_hard_reboot = TRUE
+				else
+					text2file("[++GLOB.restart_counter]", RESTART_COUNTER_PATH)
+					do_hard_reboot = FALSE
 
+		if(do_hard_reboot)
+			log_world("World hard rebooted at [time_stamp()]")
+			shutdown_logging() // See comment below.
+			QDEL_NULL(Tracy)
+			QDEL_NULL(Debugger)
+			// SSplexora.notify_shutdown(PLEXORA_SHUTDOWN_KILLDD)
+			TgsEndProcess()
+			return ..()
+
+	// SSplexora.notify_shutdown()
 	log_world("World rebooted at [time_stamp()]")
 
-	// shutdown_logging() // Past this point, no logging procs can be used, at risk of data loss.
+	shutdown_logging() // Past this point, no logging procs can be used, at risk of data loss.
 	QDEL_NULL(Tracy)
 	QDEL_NULL(Debugger)
 
-	TgsReboot()
+	TgsReboot() // TGS can decide to kill us right here, so it's important to do it last
 
+	..()
 
 
 /hook/startup/proc/loadMode()

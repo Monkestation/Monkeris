@@ -122,6 +122,14 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 /client/proc/_Topic(datum/hsrc, href, list/href_list)
 	return hsrc.Topic(href, href_list)
 
+/client/proc/is_localhost()
+	var/static/localhost_addresses = list(
+		"127.0.0.1",
+		"::1",
+		null,
+	)
+	return address in localhost_addresses
+
 /*
  * Call back proc that should be checked in all paths where a client can send messages
  *

@@ -541,7 +541,6 @@ var/global/floorIsLava = 0
 	if (!usr.client.holder)
 		return
 
-	var/localhost_addresses = list("127.0.0.1", "::1")
 	var/list/options = list("Regular Restart", "Regular Restart (with delay)", "Hard Restart (No Delay/Feedback Reason)", "Hardest Restart (No actions, just reboot)")
 	if(world.TgsAvailable())
 		options += "Server Restart (Kill and restart DD)";
@@ -556,7 +555,7 @@ var/global/floorIsLava = 0
 		var/init_by = "Initiated by [usr.client.holder.fakekey ? "Admin" : usr.key]."
 		switch(result)
 			if("Regular Restart")
-				if(!(isnull(usr.client.address) || (usr.client.address in localhost_addresses)))
+				if(!usr.client.is_localhost())
 					if(alert(usr, "Are you sure you want to restart the server?","This server is live", "Restart", "Cancel") != "Restart")
 						return FALSE
 				// SSplexora.restart_requester = usr
@@ -566,7 +565,7 @@ var/global/floorIsLava = 0
 				var/delay = input("What delay should the restart have (in seconds)?", "Restart Delay", 5) as num|null
 				if(!delay)
 					return FALSE
-				if(!(isnull(usr.client.address) || (usr.client.address in localhost_addresses)))
+				if(!usr.client.is_localhost())
 					if(alert(usr,"Are you sure you want to restart the server?","This server is live", "Restart", "Cancel") != "Restart")
 						return FALSE
 				// SSplexora.restart_requester = usr
