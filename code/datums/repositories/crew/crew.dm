@@ -58,14 +58,14 @@ var/global/datum/repository/crew/crew_repository = new()
 				if(H.w_uniform != C)
 					continue
 
-				var/list/crewmemberData = list("name"=H.name,"sensor_type"=C.sensor_mode, "stat"=H.stat, "area"="", "x"=-1, "y"=-1, "z"=-1, "ref"="\ref[H]")
+				var/list/crewmemberData = alist("name"=H.name,"sensor_type"=C.sensor_mode, "stat"=H.stat, "area"="", "x"=-1, "y"=-1, "z"=-1, "ref"="\ref[H]")
 				if(!(run_queues(H, C, pos, crewmemberData) & MOD_SUIT_SENSORS_REJECTED))
 					var/datum/computer_file/report/crew_record/CR = get_crewmember_record(crewmemberData["name"])
 					if(CR)
 						// We wont include sensors of deceased people
 						if(CR.get_status() == "Deceased")
 							continue
-					crewmembers[++crewmembers.len] = crewmemberData
+					crewmembers += crewmemberData
 					if (crewmemberData["alert"])
 						cache_data_alert[num2text(z_level)] = TRUE
 
