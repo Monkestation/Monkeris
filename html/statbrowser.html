@@ -295,6 +295,7 @@ var inner = "";
 var sqdl2 = [];
 var permanent_tabs = []; // tabs that won't be cleared by wipes
 var turfcontents = [];
+var last_turfcontents_json = null;
 var turfname = "";
 var menu = document.querySelector('#menu');
 var under_menu = document.getElementById('under_menu');
@@ -779,14 +780,22 @@ function remove_admin_tabs() {
 }
 
 function create_listedturf(TN) {
+	if (TN === last_turfname_json) return;
+	last_turfname_json = TN;
+	// last_turfcontents_json = null; // reset contents cache when turf changes
+
 	remove_listedturf(); // remove the last one if we had one
 	turfname = JSON.parse(TN);
 	addPermanentTab(turfname);
 	tab_change(turfname);
 }
+
 function update_listedturf(TC) {
+	if (TC === last_turfcontents_json) return;
+	last_turfcontents_json = TC;
+
 	turfcontents = JSON.parse(TC);
-	if(current_tab == turfname)
+	if (current_tab === turfname)
 		draw_listedturf();
 }
 
@@ -805,7 +814,7 @@ function draw_listedturf() {
 		b.innerHTML = `<div class="turf-entry-label">${label}</div>${html}`;
 		b.onmousedown = (e => {
 			e.preventDefault();
-			let clickcatcher = "?src=" + part[1] + ";statpanel_item_click=1"; // if you still need src
+			let clickcatcher = "?src=" + part[1] + ";statpanel_item_click=1";
 			if (e.shiftKey) clickcatcher += ";statpanel_item_shiftclick=1";
 			if (e.ctrlKey) clickcatcher += ";statpanel_item_ctrlclick=1";
 			if (e.altKey) clickcatcher += ";statpanel_item_altclick=1";
@@ -820,7 +829,7 @@ function draw_listedturf() {
 function remove_listedturf() {
 	removePermanentTab(turfname);
 	checkStatusTab();
-	if(current_tab == turfname)
+	if (current_tab === turfname)
 		tab_change("Status");
 }
 function draw_sqdl2(){
