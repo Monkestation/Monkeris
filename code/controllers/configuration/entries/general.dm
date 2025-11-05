@@ -373,6 +373,15 @@
 /*     ADMIN     */
 /*****************/
 
+/// if autoadmin is enabled
+/datum/config_entry/flag/autoadmin
+	protection = CONFIG_ENTRY_LOCKED
+
+/// the rank given to autoadmins
+/datum/config_entry/string/autoadmin_rank
+	default = "Game Master"
+	protection = CONFIG_ENTRY_LOCKED
+
 /// allows admins with relevant permissions to have their own ooc colour
 /datum/config_entry/flag/allow_admin_ooccolor
 
