@@ -348,6 +348,10 @@ var/world_topic_spam_protect_time = world.timeofday
 				return FALSE
 
 /world/Reboot(reason = 0, fast_track = FALSE)
+	if(!CONFIG_GET(flag/tts_cache))
+		for(var/i in GLOB.tts_death_row)
+			fdel(i)
+
 	if (reason || fast_track) //special reboot, do none of the normal stuff
 		if (usr)
 			log_admin("[key_name(usr)] Has requested an immediate world restart via client side debugging tools")
