@@ -1,8 +1,9 @@
+#define MIDNIGHT_ROLLOVER		864000	//number of deciseconds in a day
+
 //time of day but automatically adjusts to the server going into the next day within the same round.
 //for when you need a reliable time number that doesn't depend on byond time.
-#define MIDNIGHT_ROLLOVER		864000	//number of deciseconds in a day
 #define REALTIMEOFDAY (world.timeofday + (MIDNIGHT_ROLLOVER * MIDNIGHT_ROLLOVER_CHECK))
-#define MIDNIGHT_ROLLOVER_CHECK ( rollovercheck_last_timeofday != world.timeofday ? update_midnight_rollover() : midnight_rollovers )
+#define MIDNIGHT_ROLLOVER_CHECK ( GLOB.rollovercheck_last_timeofday != world.timeofday ? update_midnight_rollover() : GLOB.midnight_rollovers )
 
 #define CURRENT_SHIP_YEAR (GLOB.year_integer + SHIP_YEAR_OFFSET)
 

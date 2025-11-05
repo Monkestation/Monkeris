@@ -52,6 +52,7 @@ SUBSYSTEM_DEF(ticker)
 
 	var/quoted = FALSE
 	var/round_start_time = 0
+	var/real_round_start_time = 0
 	var/round_end_announced = 0 // Spam Prevention. Announce round end only once.
 
 	/// ID of round reboot timer, if it exists
@@ -287,6 +288,9 @@ SUBSYSTEM_DEF(ticker)
 
 	callHook("roundstart")
 
+	round_start_time = world.time //otherwise round_start_time would be 0 for the signals
+	real_round_start_time = REALTIMEOFDAY
+
 	// no, block the main thread.
 	GLOB.storyteller.set_up()
 	to_chat(world, span_notice("<B>Welcome to [station_name()], enjoy your stay!</B>"))
@@ -310,8 +314,6 @@ SUBSYSTEM_DEF(ticker)
 			admins_number++
 	if(admins_number == 0)
 		send2adminchat("Round has started with no admins online.")
-
-	round_start_time = world.time //otherwise round_start_time would be 0 for the signals
 
 	PostSetup()
 	return TRUE

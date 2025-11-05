@@ -140,13 +140,13 @@ var/last_roundduration2text = 0
 /proc/SQLtime(timevar)
 	return time2text(timevar || world.timeofday, "YYYY-MM-DD hh:mm:ss")
 
-var/global/midnight_rollovers = 0
-var/global/rollovercheck_last_timeofday = 0
-
+GLOBAL_VAR_INIT(midnight_rollovers, 0)
+GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 /proc/update_midnight_rollover()
-	if (world.timeofday < rollovercheck_last_timeofday) //TIME IS GOING BACKWARDS!
-		return midnight_rollovers++
-	return midnight_rollovers
+    if (world.timeofday < GLOB.rollovercheck_last_timeofday) //TIME IS GOING BACKWARDS!
+        GLOB.midnight_rollovers++
+    GLOB.rollovercheck_last_timeofday = world.timeofday
+    return GLOB.midnight_rollovers
 
 /proc/ticks_to_text(ticks)
 	if(ticks%1 != 0)
