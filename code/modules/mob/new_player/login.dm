@@ -24,7 +24,9 @@
 	hud_used = new /datum/hud(src)
 
 
-	loc = locate(1,1,1)
+	if(!loc)
+		Move(locate(/area/misc/start))
+
 	. = ..()
 	if(!. || !client)
 		return FALSE
