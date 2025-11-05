@@ -38,7 +38,8 @@ SUBSYSTEM_DEF(statpanels)
 		global_data += list(list("Players: [LAZYLEN(GLOB.clients)]"))
 		if (!SSticker.HasRoundStarted())
 			global_ready_data += list(list("Players Ready: [SSticker.totalPlayersReady]"))
-			global_ready_data += list(list("Time To Start: [DisplayTimeText(SSticker.GetTimeLeft())]"))
+			if(SSticker.state != GAME_STATE_SETTING_UP)
+				global_ready_data += list(list("Time To Start: [DisplayTimeText(SSticker.GetTimeLeft())]"))
 			private_ready_data += list(
 				list("-------------------"),
 				list("Admins Ready: [SSticker.total_admins_ready] / [length(GLOB.admins)]"),

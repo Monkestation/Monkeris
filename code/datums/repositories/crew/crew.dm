@@ -60,7 +60,7 @@ var/global/datum/repository/crew/crew_repository = new()
 		if(H.w_uniform != C)
 			continue
 
-		var/list/crewmemberData = alist("name"=H.name,"sensor_type"=C.sensor_mode, "stat"=H.stat, "area"="", "x"=-1, "y"=-1, "z"=-1, "ref"="\ref[H]")
+		var/alist/crewmemberData = alist("name"=H.name,"sensor_type"=C.sensor_mode, "stat"=H.stat, "area"="", "x"=-1, "y"=-1, "z"=-1, "ref"="\ref[H]")
 		if(run_queues(H, C, pos, crewmemberData) & MOD_SUIT_SENSORS_REJECTED)
 			continue
 
@@ -68,7 +68,7 @@ var/global/datum/repository/crew/crew_repository = new()
 		// We wont include sensors of deceased people
 		if(CR?.get_status() == "Deceased")
 			continue
-		crewmembers += crewmemberData
+		crewmembers += list(crewmemberData)
 		if (crewmemberData["alert"])
 			cache_data_alert[num2text(z_level)] = TRUE
 
