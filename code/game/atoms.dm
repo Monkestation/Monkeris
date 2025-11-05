@@ -32,6 +32,11 @@
 	var/light_power = 1
 	/// Range in tiles of the light.
 	var/light_range = 0
+	// how many zs we can go down through open spaces
+	var/light_depth = 1
+	// how many zs we can go up through open spaces
+	var/light_height = 1
+
 	/// Hexadecimal RGB string representing the colour of the light.
 	var/light_color
 
