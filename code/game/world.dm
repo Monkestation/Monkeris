@@ -402,6 +402,10 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	..()
 
+/world/Del()
+	QDEL_NULL(Tracy)
+	QDEL_NULL(Debugger)
+	. = ..()
 
 /hook/startup/proc/loadMode()
 	world.load_storyteller()
