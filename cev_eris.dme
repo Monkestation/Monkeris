@@ -122,6 +122,7 @@
 #include "code\__DEFINES\spawner\_spawner.dm"
 #include "code\__DEFINES\spawner\excelsior.dm"
 #include "code\__DEFINES\spawner\frozen_star.dm"
+#include "code\__HELPERS\_auxtools_api.dm"
 #include "code\__HELPERS\_global_lists.dm"
 #include "code\__HELPERS\_global_objects.dm"
 #include "code\__HELPERS\_lists.dm"

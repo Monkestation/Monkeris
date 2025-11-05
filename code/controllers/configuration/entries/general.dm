@@ -530,10 +530,6 @@
 
 /datum/config_entry/flag/use_overmap
 
-
-/// Path to the python2 executable on the system.
-/datum/config_entry/string/python_path
-
 /**
  * motd.txt
  * Sets an MOTD of the server.

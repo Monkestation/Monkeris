@@ -118,9 +118,8 @@ GLOBAL_VAR(restart_counter)
 
 	Master.Initialize(10, FALSE, TRUE)
 
-	#ifdef UNIT_TESTS
-	HandleTestRun()
-	#endif
+	RunUnattendedFunctions()
+
 
 	if(CONFIG_GET(flag/tor_ban))
 		SSticker.OnRoundstart(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(ToRban_autoupdate)))
@@ -134,14 +133,6 @@ GLOBAL_VAR(restart_counter)
  * (i.e. basically nothing should be added before load_admins() in here)
  */
 /world/proc/ConfigLoaded()
-
-	//apply a default value to CONFIG_GET(string/python_path), if needed
-	if (!CONFIG_GET(string/python_path))
-		if(world.system_type == UNIX)
-			CONFIG_SET(string/python_path, "/usr/bin/env python2")
-		else //probably windows, if not this should work anyway
-			CONFIG_SET(string/python_path, "python")
-
 	SSdbcore.InitializeRound()
 
 	SetupLogs()
@@ -170,6 +161,12 @@ GLOBAL_VAR(restart_counter)
 		GLOB.restart_counter = text2num(trim(file2text(RESTART_COUNTER_PATH)))
 		fdel(RESTART_COUNTER_PATH)
 
+/// Runs after the call to Master.Initialize, but before the delay kicks in. Used to turn the world execution into some single function then exit
+/world/proc/RunUnattendedFunctions()
+	#ifdef UNIT_TESTS
+	HandleTestRun()
+	#endif
+
 /world/proc/InitTgs()
 	TgsNew(new /datum/tgs_event_handler/impl, TGS_SECURITY_TRUSTED)
 	GLOB.revdata.load_tgs_info()
@@ -186,7 +183,7 @@ GLOBAL_VAR(restart_counter)
 #ifdef UNIT_TESTS
 	cb = CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(RunUnitTests))
 #else
-	cb = VARSET_CALLBACK(global, universe_has_ended, TRUE)
+	cb = VARSET_CALLBACK(global, universe_has_ended, ADMIN_FORCE_END_ROUND)
 #endif
 	SSticker.OnRoundstart(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(_addtimer), cb, 10 SECONDS))
 
@@ -288,7 +285,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 /world/Topic(T, addr, master, key)
 	TGS_TOPIC //redirect to server tools if necessary
-	var/list/topic_handlers = WorldTopicHandlers()
+	var/static/list/topic_handlers = WorldTopicHandlers()
 
 	var/list/input = params2list(T)
 	var/datum/world_topic/handler
@@ -316,8 +313,8 @@ var/world_topic_spam_protect_time = world.timeofday
 		if(GLOB.failed_any_test)
 			LAZYADD(fail_reasons, "Unit Tests failed!")
 #endif
-		// if(!GLOB.log_directory)
-		// 	LAZYADD(fail_reasons, "Missing GLOB.log_directory!")
+		if(!GLOB.log_directory)
+			LAZYADD(fail_reasons, "Missing GLOB.log_directory!")
 	else
 		fail_reasons = list("Missing GLOB!")
 	if(!fail_reasons)
@@ -325,27 +322,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	else
 		log_world("Test run failed!\n[fail_reasons.Join("\n")]")
 	sleep(0) //yes, 0, this'll let Reboot finish and prevent byond memes
-	qdel(src) //shut it down
-
-/// Returns TRUE if the world should do a TGS hard reboot.
-/world/proc/check_hard_reboot()
-	if(!TgsAvailable())
-		return FALSE
-	// byond-tracy can't clean up itself, and thus we should always hard reboot if its enabled, to avoid an infinitely growing trace.
-	if(Tracy?.enabled)
-		return TRUE
-	var/ruhr = CONFIG_GET(number/rounds_until_hard_restart)
-	switch(ruhr)
-		if(-1)
-			return FALSE
-		if(0)
-			return TRUE
-		else
-			if(GLOB.restart_counter >= ruhr)
-				return TRUE
-			else
-				text2file("[++GLOB.restart_counter]", RESTART_COUNTER_PATH)
-				return FALSE
+	del(src) //shut it down
 
 /world/Reboot(reason = 0, fast_track = FALSE)
 	if(!CONFIG_GET(flag/tts_cache))
