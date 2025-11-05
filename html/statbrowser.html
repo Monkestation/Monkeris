@@ -780,10 +780,6 @@ function remove_admin_tabs() {
 }
 
 function create_listedturf(TN) {
-	if (TN === last_turfname_json) return;
-	last_turfname_json = TN;
-	// last_turfcontents_json = null; // reset contents cache when turf changes
-
 	remove_listedturf(); // remove the last one if we had one
 	turfname = JSON.parse(TN);
 	addPermanentTab(turfname);
@@ -791,9 +787,6 @@ function create_listedturf(TN) {
 }
 
 function update_listedturf(TC) {
-	if (TC === last_turfcontents_json) return;
-	last_turfcontents_json = TC;
-
 	turfcontents = JSON.parse(TC);
 	if (current_tab === turfname)
 		draw_listedturf();
