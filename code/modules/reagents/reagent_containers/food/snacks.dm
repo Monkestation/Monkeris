@@ -1247,7 +1247,6 @@
 	trash = /obj/item/trash/plate
 	bitesize = 3
 	nutriment_amt = 8
-	preloaded_reagents = list("protein" = 8)
 	cooked = TRUE
 	taste_tag = list(INSECTS_FOOD,MEAT_FOOD)
 
@@ -1257,9 +1256,26 @@
 	icon_state = "meat_crab_boiled"
 	bitesize = 3
 	nutriment_amt = 8
-	preloaded_reagents = list("protein" = 8)
 	cooked = TRUE
 	taste_tag = list(INSECTS_FOOD,MEAT_FOOD)
+
+/obj/item/reagent_containers/food/snacks/rangoon_crab
+	name = "crab rangoon"
+	desc = "A crab dish stuffed with cream cheese and fried to golden perfection."
+	icon_state = "rangoon"
+	bitesize = 3
+	nutriment_amt = 5
+	cooked = TRUE
+	taste_tag = list(INSECTS_FOOD,MEAT_FOOD,CHEESE_FOOD)
+
+/obj/item/reagent_containers/food/snacks/rangoon
+	name = "cream cheese rangoon"
+	desc = "A delicious fried dumpling stuffed with cream cheese."
+	icon_state = "rangoon"
+	bitesize = 3
+	nutriment_amt = 5
+	cooked = TRUE
+	taste_tag = list(CHEESE_FOOD)
 
 /obj/item/reagent_containers/food/snacks/roach_egg
 	name = "boiled roach egg"
