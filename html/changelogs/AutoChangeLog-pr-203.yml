@@ -1,0 +1,5 @@
+author: dwasint
+delete-after: true
+changes:
+  - rscadd: lighting respects z-levels
+  - bugfix: Eliminates 2 minute roundstart lag.

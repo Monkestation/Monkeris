@@ -15,3 +15,7 @@
   flleeppyy:
   - rscadd: current initing subsystem now shows in window title.
   - rscadd: missing update_ping verb.
+2025-11-06:
+  Sun-Soaked:
+  - bugfix: characters with only a first name no longer have an extra unessecary space
+      in their chat messages
