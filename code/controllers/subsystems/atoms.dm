@@ -303,11 +303,11 @@ SUBSYSTEM_DEF(atoms)
 	. += "}"
 	. += "</script>"
 
-	var/node_id = 0
-	. += build_tree_html(cost_tree, total_cost, node_id, sort_by_avg)
+	. += build_tree_html(cost_tree, total_cost, sort_by_avg)
 
-/datum/controller/subsystem/atoms/proc/build_tree_html(list/tree, total_cost, node_id, sort_by_avg = FALSE)
+/datum/controller/subsystem/atoms/proc/build_tree_html(list/tree, total_cost, sort_by_avg = FALSE)
 	. = ""
+	var/static/node_id = 0
 
 	var/list/sorted_keys = list()
 	for(var/key in tree)
@@ -358,7 +358,7 @@ SUBSYSTEM_DEF(atoms)
 
 		if(has_children)
 			. += "<div id='[current_id]' class='tree-node'>"
-			. += build_tree_html(node["children"], total_cost, node_id, sort_by_avg)
+			. += build_tree_html(node["children"], total_cost, sort_by_avg)
 			. += "</div>"
 
 /client/proc/cmd_display_init_costs()
