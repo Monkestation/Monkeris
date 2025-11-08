@@ -551,7 +551,7 @@ var/global/floorIsLava = 0
 
 	var/result = input(usr, "Select reboot method", "World Reboot", options[1]) as null|anything in options
 	if(result)
-		SSblackbox.record_feedback("tally", "admin_verb", 1, "Reboot World") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		BLACKBOX_LOG_ADMIN_VERB("Reboot World") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 		var/init_by = "Initiated by [usr.client.holder.fakekey ? "Admin" : usr.key]."
 		switch(result)
 			if("Regular Restart")
@@ -1106,7 +1106,7 @@ var/global/floorIsLava = 0
 		tomob.ghostize(0)
 	message_admins(span_adminnotice("[key_name_admin(usr)] has put [frommob.ckey] in control of [tomob.name]."))
 	log_admin("[key_name(usr)] stuffed [frommob.ckey] into [tomob.name].")
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Ghost Drag Control")
+	BLACKBOX_LOG_ADMIN_VERB("Ghost Drag Control")
 
 	tomob.ckey = frommob.ckey
 	if(tomob.client)

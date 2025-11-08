@@ -353,7 +353,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 
 	if(usr.client.holder)
 		usr.client.holder.player_panel_new()
-		SSblackbox.record_feedback("tally", "admin_verb", 1, "Player Panel New") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		BLACKBOX_LOG_ADMIN_VERB("Player Panel New") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/storyteller_panel()
 	set name = "Storyteller Panel"
@@ -367,7 +367,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	if(!check_rights(R_BAN))
 		return
 	holder.ban_panel()
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Banning Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	BLACKBOX_LOG_ADMIN_VERB("Banning Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/unban_panel()
 	set name = "Unbanning Panel"
@@ -375,7 +375,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	if(!check_rights(R_BAN))
 		return
 	holder.unban_panel()
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Unbanning Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	BLACKBOX_LOG_ADMIN_VERB("Unbanning Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 //game panel, allows to change game-mode etc
 /client/proc/game_panel()
@@ -383,7 +383,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	set category = "Admin"
 	if(holder)
 		holder.Game()
-		SSblackbox.record_feedback("tally", "admin_verb", 1, "Game Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		BLACKBOX_LOG_ADMIN_VERB("Game Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
 /client/proc/secrets()
@@ -391,7 +391,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	set category = "Admin"
 	if (holder)
 		holder.Secrets()
-		SSblackbox.record_feedback("tally", "admin_verb", 1, "Unbanning Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		BLACKBOX_LOG_ADMIN_VERB("Unbanning Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
 
@@ -425,7 +425,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 				zone.add(turf)
 
 	log_and_message_admins("[src] fixed the air.")
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Fix air") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	BLACKBOX_LOG_ADMIN_VERB("Fix air") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
 
@@ -620,7 +620,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	to_chat(src, span_interface("You are now a normal player."))
 	log_admin("[src] deadminned themselves.")
 	message_admins("[src] deadminned themselves.")
-	// SSblackbox.record_feedback("tally", "admin_verb", 1, "Deadmin")
+	BLACKBOX_LOG_ADMIN_VERB("Deadmin")
 
 /client/proc/readmin()
 	set name = "Readmin"
@@ -645,7 +645,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	to_chat(src, span_interface("You are now an admin."), confidential = TRUE)
 	message_admins("[src] re-adminned themselves.")
 	log_admin("[src] re-adminned themselves.")
-	// SSblackbox.record_feedback("tally", "admin_verb", 1, "Readmin")
+	BLACKBOX_LOG_ADMIN_VERB("Readmin")
 
 /client/proc/toggle_log_hrefs()
 	set name = "Toggle href logging"

@@ -33,5 +33,5 @@
 	log_prayer("[src.key]/([src.name]): [msg]")
 
 	//log_admin("HELP: [key_name(src)]: [msg]")
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Prayer") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	BLACKBOX_LOG_ADMIN_VERB("Prayer") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
