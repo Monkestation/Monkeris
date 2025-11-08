@@ -133,4 +133,4 @@
 //gc our prox trigger
 /obj/effect/ambush_snare/Destroy()
 	QDEL_NULL(snare)
-	..()
+	. = ..()
