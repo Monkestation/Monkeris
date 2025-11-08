@@ -62,10 +62,10 @@
 
 /datum/ambush_controller/Destroy()
 	processing = FALSE
-	QDEL_NULL(our_datum)
 	for(var/obj/structure/ambush_burrow/burrow in burrows)  // Unlink burrows and controller
 		burrow.stop()
-	..()
+	QDEL_NULL(our_datum)
+	. = ..()
 
 /datum/ambush_controller/Process()
 	// I'm too scared to test this -Sun
@@ -82,7 +82,7 @@
 	// Check if new burrows can be created
 	if((burrow_num < our_datum.max_burrows) && (world.time - time_burrow) > our_datum.burrow_interval)
 		time_burrow = world.time
-		for(var/mob/ourmob in hearers(8, ambush_loc))
+		for(var/mob/ourmob as anything in hearers(8, ambush_loc))
 			shake_camera(ourmob, 6, 0.5, 0.25)
 		for(var/burrow in 1 to our_datum.burrow_number)
 			count++
@@ -127,7 +127,7 @@
 	// Disable processing
 	processing = FALSE
 	//give mobs in range an indicate that it's over
-	for(var/mob/ourmob in hearers(8, ambush_loc))
+	for(var/mob/ourmob as anything in hearers(8, ambush_loc))
 		ourmob.show_message(span_danger("The shaking in the ground finally subsides."),2)
 	for(var/obj/structure/ambush_burrow/burrow in burrows)  //visibly collapse burrows to show players it's over
 		burrow.crumble()
