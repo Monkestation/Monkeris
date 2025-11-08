@@ -44,7 +44,7 @@
 		ambush_loc = trigger_location
 
 	//give mobs in range a warning they're about to be ambushed
-	for(var/mob/ourmob in hearers(8, ambush_loc))
+	for(var/mob/ourmob as anything in hearers(8, ambush_loc))
 		ourmob.show_message(span_userdanger("You feel the ground tremble beneath you..."),2)
 		shake_camera(ourmob, 6, 0.5, 0.25)
 	playsound(ambush_loc, 'sound/effects/impacts/rumble4.ogg', 75, TRUE, extrarange = 4)
