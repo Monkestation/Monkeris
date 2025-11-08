@@ -43,7 +43,7 @@
 		return
 
 	if(isnull(deconstruction_steps_left))
-		deconstruction_steps_left = is_reinforced ? 5 : 1
+		deconstruction_steps_left = is_reinforced || window_type ? 5 : 1
 
 	// Most qualities available to try at all times
 	var/list/usable_qualities = list(QUALITY_WELDING, QUALITY_HAMMERING, QUALITY_WIRE_CUTTING, QUALITY_PRYING, QUALITY_BOLT_TURNING)
