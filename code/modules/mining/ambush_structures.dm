@@ -68,7 +68,7 @@
 
 /obj/structure/ambush_burrow/attack_generic(mob/user, damage)
 	user.do_attack_animation(src)
-	visible_message(SPAN_DANGER("\The [user] smashes \the [src]!"))
+	visible_message(span_danger("\The [user] smashes \the [src]!"))
 	take_damage(damage)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN * 1.5)
 
