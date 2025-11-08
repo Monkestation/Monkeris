@@ -18,7 +18,7 @@
 	our_ambush = ambush_datum //Give burrow datum
 	if(!controller || !our_ambush)
 		log_runtime("[src.type] was spawned without required arguments!")
-		stop()
+		QDEL(src)
 
 	shake_animation(duration = our_ambush.setup_time)
 	if(our_ambush.ambush_type == AMBUSH_SKIRMISH)
@@ -56,7 +56,7 @@
 /obj/structure/ambush_burrow/proc/crumble()
 	icon_state = "maint_hole_collapsed"
 	desc = "It's filled with lose debris. As you watch, it begins to crumble away..."
-	addtimer(CALLBACK(src, PROC_REF(stop)), 5 SECOND)
+	QDEL_IN(src, 3 SECONDS)
 
 /obj/structure/ambush_burrow/Destroy()
 	visible_message(SPAN_DANGER("\The [src] crumbles away!"))
@@ -97,9 +97,6 @@
 	if(health == 0)
 		qdel(src)
 	return
-
-/obj/structure/ambush_burrow/proc/stop()
-	qdel(src)  // Delete burrow
 
 ///lies in wait until a human mob enters its watched turfs, then creates an ambush event tied to them
 /obj/effect/ambush_snare

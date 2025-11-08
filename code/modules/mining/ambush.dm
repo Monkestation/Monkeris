@@ -63,7 +63,7 @@
 /datum/ambush_controller/Destroy()
 	processing = FALSE
 	for(var/obj/structure/ambush_burrow/burrow in burrows)  // Unlink burrows and controller
-		burrow.stop()
+		QDEL(burrow)
 	QDEL_NULL(our_datum)
 	. = ..()
 
