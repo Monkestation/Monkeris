@@ -36,6 +36,7 @@
 	if(!trigger_location || !our_datum)//if they forgot to pass a wave datum or trigger location, explode
 		log_runtime("[src.type] is missing required new() arguments!")
 		QDEL_NULL(src)
+		return
 
 	if(ambushed_mob) //get the starting location for our ambush
 		ambush_loc = ambush_follow_check()
