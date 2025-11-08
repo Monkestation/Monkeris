@@ -188,7 +188,7 @@
 	var/max_burrows = 4
 	/// the number of burrows to spawn in a single wave
 	var/burrow_number = 2
-  	/// Number of seconds that pass between each new burrow spawn wave
+  /// Number of seconds that pass between each new burrow spawn wave
 	var/burrow_interval = 10 SECONDS
 	///the starting range at which the ambush controller will try to place burrows
 	var/burrow_spawn_range = 6
