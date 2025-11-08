@@ -59,7 +59,7 @@
 	QDEL_IN(src, 3 SECONDS)
 
 /obj/structure/ambush_burrow/Destroy()
-	visible_message(SPAN_DANGER("\The [src] crumbles away!"))
+	visible_message(span_danger("\The [src] crumbles away!"))
 	new /obj/effect/decal/cleanable/rubble(src.loc)
 	if(controller)
 		controller.burrows -= src
