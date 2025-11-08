@@ -1,5 +1,3 @@
-// #define INIT_TRACK
-
 #define BAD_INIT_QDEL_BEFORE 1
 #define BAD_INIT_DIDNT_INIT 2
 #define BAD_INIT_SLEPT 4
