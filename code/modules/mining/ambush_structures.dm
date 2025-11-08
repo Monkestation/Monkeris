@@ -18,7 +18,7 @@
 	our_ambush = ambush_datum //Give burrow datum
 	if(!controller || !our_ambush)
 		log_runtime("[src.type] was spawned without required arguments!")
-		QDEL(src)
+		qdel(src)
 
 	shake_animation(duration = our_ambush.setup_time)
 	if(our_ambush.ambush_type == AMBUSH_SKIRMISH)
