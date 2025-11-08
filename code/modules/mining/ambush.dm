@@ -1,23 +1,33 @@
-#define AMBUSH_CLEANUP_DELAY 3 MINUTES //after the ambush ends, mobs & burrows will despawn this many minutes later.
+#define AMBUSH_CLEANUP_DELAY 3 MINUTES //after the ambush ends, living mobs & any remaining burrows will be deleted this many minutes later.
 
 #define AMBUSH_SKIRMISH "ambush_skirmish" //burrows will immediately unload 1 wave of enemies, then close up
 #define AMBUSH_SIEGE "ambush_siege" //burrows will periodically spawn mobs according to spawn_interval until the ambush ends.
 
 /datum/ambush_controller
 
-	var/mob/living/ambushed_mob // the guy who triggered the ambush
-	var/turf/ambush_loc  // Location of the ambush
-	var/list/obj/structure/ambush_burrow/burrows = list()  // List of burrows tied to the controller
-	var/list/mob/living/carbon/superior_animal/ourmobs = list()  // List of mobs tied to the controller
+	///the mob that triggered the ambush
+	var/mob/living/ambushed_mob
+	/// The location of the ambush
+	var/turf/ambush_loc
+	/// A List of burrows tied to this controller
+	var/list/obj/structure/ambush_burrow/burrows = list()
+	/// A List of mobs tied to this controller
+	var/list/mob/living/carbon/superior_animal/ourmobs = list()
+	///Allegedly used to keep processing() from runtiming
 	var/processing = TRUE
-	//var/obj/machinery/mining/deep_drill/DD
 
-	var/datum/ambush_type/our_datum // ambush datum
-	var/count = 0  // Number of burrows created since the start
-	var/time_burrow = 0  // Timestamp of last created burrow
-	var/time_spawn = 0  // Timestamp of last spawn wave
-	var/start_time = 0 // reference to time ambush began
-	var/following = TRUE //Do ambush spawns appear around the mob who spawned them, even if they move?
+	///A datum containing the behavior of our ambush
+	var/datum/ambush_type/our_datum
+	/// Number of burrows created since the start of the ambush
+	var/count = 0
+	/// A Timestamp of the last created burrow
+	var/time_burrow = 0
+	// A Timestamp of last spawn wave (in siege mode)
+	var/time_spawn = 0
+	/// reference to time ambush began
+	var/start_time = 0
+	///Do ambush burrows appear around the mob who spawned them, even if they move?
+	var/following = TRUE
 
 /datum/ambush_controller/New(turf/trigger_location, new_ambushed_mob, ambush_datum)
 	our_datum = new ambush_datum()
@@ -52,12 +62,12 @@
 /datum/ambush_controller/Destroy()
 	processing = FALSE
 	QDEL_NULL(our_datum)
-	//DD = null
 	for(var/obj/structure/ambush_burrow/burrow in burrows)  // Unlink burrows and controller
 		burrow.stop()
 	..()
 
 /datum/ambush_controller/Process()
+	// I'm too scared to test this -Sun
 	// Currently, STOP_PROCESSING does NOT instantly remove the object from processing queue
 	// This is a quick and dirty fix for runtime error spam caused by this
 	if(!processing)
@@ -144,8 +154,9 @@
 			return TRUE
 	return FALSE
 
-// AMBUSH TYPE DEFINES
 
+
+// AMBUSH TYPE DEFINES
 
 /datum/ambush_type
 	//ambush behavior vars
