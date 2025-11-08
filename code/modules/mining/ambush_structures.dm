@@ -80,7 +80,7 @@
 			var/volume =  min(damage * 3.5, 15)
 			if (I.hitsound)
 				playsound(src, I.hitsound, volume, 1, -1)
-			visible_message(SPAN_DANGER("[src] has been hit by [user] with [I]."))
+			visible_message(span_danger("[src] has been hit by [user] with [I]."))
 			take_damage(damage)
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN * 1.5)
 	return TRUE
