@@ -101,12 +101,16 @@
 /datum/ambush_controller/proc/spawn_burrow()
 	ambush_loc = ambush_follow_check()
 	// Spawn burrow randomly in a donut around our ambush turf
-	var/turf/burrow_turf = pick(getcircle(ambush_loc, 6))
-	if(!istype(burrow_turf))  // Try again with a smaller circle
-		burrow_turf = pick(getcircle(ambush_loc, 5))
-		if(!istype(burrow_turf))  // Something wrong is happening
-			log_and_message_admins("Ambush controller failed to create a new burrow around ([ambush_loc.x], [ambush_loc.y], [ambush_loc.z]).")
-			return
+	var/radius = our_datum.burrow_spawn_range
+	var/turf/burrow_turf
+	while(radius > 2)
+		burrow_turf = pick(getcircle(ambush_loc, radius))
+		if(!istype(burrow_turf)) // Try again with a smaller circle
+			radius--
+			continue
+	if(!istype(burrow_turf))  // Something wrong is happening
+		log_and_message_admins("Ambush controller failed to create a new burrow around ([ambush_loc.x], [ambush_loc.y], [ambush_loc.z]).")
+		return
 
 	//if we are in a closed space or target is not visible, move towards the spawn turf
 	while(ambush_loc && check_density_no_mobs(burrow_turf) && burrow_turf != ambush_loc || !can_see(burrow_turf, ambush_loc))
@@ -166,8 +170,8 @@
 	var/ambush_duration = 20 SECONDS
 	/// If set, ambush ends once this many burrows have spawned
 	var/spawn_cap = 8
-	/// Amnt. of prep time given between when the ambush first triggers & mobs start spawning
-	var/setup_time = 5 SECONDS
+	/// Amnt. of prep time given between when the burrows first appear & mobs start spawning
+	var/setup_time = 4 SECONDS
 
 	//burrow vars
 	/// If set, total number of burrows that can exist at any single time
@@ -176,6 +180,8 @@
 	var/burrow_number = 2
   	/// Number of seconds that pass between each new burrow spawn wave
 	var/burrow_interval = 10 SECONDS
+	///the starting range at which the ambush controller will try to place burrows
+	var/burrow_spawn_range = 6
 
 	//mob vars
  	/// Number of mobs spawned by each burrow on spawn event
