@@ -1,4 +1,4 @@
-//#define INIT_TRACK
+#define INIT_TRACK
 
 #define BAD_INIT_QDEL_BEFORE 1
 #define BAD_INIT_DIDNT_INIT 2
@@ -203,163 +203,202 @@ SUBSYSTEM_DEF(atoms)
 	else
 		usr << browse(HTML_SKELETON(replacetext(SSatoms.InitLog(), "\n", "<br>")), "window=initlog")
 
-/datum/controller/subsystem/atoms/proc/InitCostLog(sort_by_avg = FALSE, show_late_init = FALSE)
-	var/list/costs_to_use = show_late_init ? late_init_costs : init_costs
-	var/list/counts_to_use = show_late_init ? late_init_counts : init_counts
 
-	if(!LAZYLEN(costs_to_use))
-		return "<div class='summary'><h2>No [show_late_init ? "Late " : ""]Initialization Data</h2></div>"
+/datum/controller/subsystem/atoms/proc/BuildCostLogHtml()
+	var/list/init_data = list()
+	for(var/path in init_costs)
+		init_data[path] = list(
+			"cost" = init_costs[path],
+			"count" = init_counts[path]
+		)
 
-	var/list/cost_tree = list()
-	var/total_cost = 0
-	var/total_count = 0
+	var/list/late_data = list()
+	for(var/path in late_init_costs)
+		late_data[path] = list(
+			"cost" = late_init_costs[path],
+			"count" = late_init_counts[path]
+		)
 
-	for(var/path in costs_to_use)
-		var/cost = costs_to_use[path]
-		var/count = counts_to_use[path]
-		total_cost += cost
-		total_count += count
+	var/list/payload = list(
+		"init" = init_data,
+		"late" = late_data
+	)
 
-		var/list/path_parts = splittext("[path]", "/")
-		var/list/current_level = cost_tree
-		var/built_path = ""
+	var/json_payload = json_encode(payload)
 
-		for(var/i in 1 to path_parts.len)
-			var/part = path_parts[i]
-			if(!part) continue
+	. = {"
+<style>
+body { font-family: monospace; background: #1e1e1e; color: #d4d4d4; padding: 20px; }
+.tree-node { margin-left: 20px; margin-top: 5px; }
+.tree-item { cursor: pointer; padding: 3px 5px; border-radius: 3px; }
+.tree-item:hover { background: #2d2d30; }
+.cost-high { color: #f48771; font-weight: bold; }
+.cost-med { color: #dcdcaa; }
+.cost-low { color: #4ec9b0; }
+.expander { display: inline-block; width: 15px; }
+.percentage { color: #858585; font-size: 0.9em; }
+.count { color: #9cdcfe; font-size: 0.9em; }
+.avg { color: #ce9178; font-size: 0.9em; }
+.summary { background: #252526; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+.controls { background: #252526; padding: 10px; border-radius: 5px; margin-bottom: 15px; }
+button { background: #0e639c; color: white; border: none; padding: 8px 15px; border-radius: 3px; cursor: pointer; margin-right: 10px; }
+button:hover { background: #1177bb; }
+button.active { background: #1177bb; }
+.tab-group { display: inline-block; margin-right: 20px; }
+</style>
 
-			built_path += "[built_path ? "/" : ""][part]"
+<div class='controls'>
+<div class='tab-group'>
+<button id='btn_init' class='active' onclick='setMode(\"init\")'>Initialize()</button>
+<button id='btn_late' onclick='setMode(\"late\")'>LateInitialize()</button>
+</div>
+<div class='tab-group'>
+<button id='btn_total' class='active' onclick='setSort(\"total\")'>Sort by Total Time</button>
+<button id='btn_avg' onclick='setSort(\"avg\")'>Sort by Average Time</button>
+</div>
+</div>
 
-			if(!current_level[part])
-				current_level[part] = list(
-					"cost" = 0,
-					"count" = 0,
-					"direct_cost" = 0,
-					"direct_count" = 0,
-					"children" = list(),
-					"path" = built_path,
-					"is_leaf" = (i == path_parts.len)
-				)
+<div id='summary' class='summary'></div>
+<div id='tree_root'></div>
 
-			if(i == path_parts.len)
-				current_level[part]["direct_cost"] = cost
-				current_level[part]["direct_count"] = count
+<script>
+window.DATA = [json_payload];
+</script>
+<script>
+let MODE = 'init'; // 'init' or 'late'
+let SORT = 'total'; // 'total' or 'avg'
 
-			current_level[part]["cost"] += cost
-			current_level[part]["count"] += count
-			current_level = current_level[part]["children"]
+function buildTree(flat) {
+  const root = {};
+  for(const path in flat) {
+    const entry = flat\[path\];
+    const parts = path.split('/').filter(Boolean);
+    let node = root;
+    let built = '';
+    for(let i=0;i<parts.length;i++) {
+      const part = parts\[i\];
+      built += (built ? '/' : '') + part;
+      if(!node\[part\]) {
+        node\[part\] = { cost: 0, count: 0, direct_cost: 0, direct_count: 0, children: {}, path: built, is_leaf: i === parts.length - 1 };
+      }
+      if(i === parts.length - 1) {
+        node\[part\].direct_cost = entry.cost || 0;
+        node\[part\].direct_count = entry.count || 0;
+      }
+      node\[part\].cost += entry.cost || 0;
+      node\[part\].count += entry.count || 0;
+      node = node\[part\].children;
+    }
+  }
+  return root;
+}
 
-	. = "<style>"
-	. += "body { font-family: monospace; background: #1e1e1e; color: #d4d4d4; padding: 20px; }"
-	. += ".tree-node { margin-left: 20px; margin-top: 5px; }"
-	. += ".tree-item { cursor: pointer; padding: 3px 5px; border-radius: 3px; }"
-	. += ".tree-item:hover { background: #2d2d30; }"
-	. += ".cost-high { color: #f48771; font-weight: bold; }"
-	. += ".cost-med { color: #dcdcaa; }"
-	. += ".cost-low { color: #4ec9b0; }"
-	. += ".expander { display: inline-block; width: 15px; }"
-	. += ".percentage { color: #858585; font-size: 0.9em; }"
-	. += ".count { color: #9cdcfe; font-size: 0.9em; }"
-	. += ".avg { color: #ce9178; font-size: 0.9em; }"
-	. += ".summary { background: #252526; padding: 15px; border-radius: 5px; margin-bottom: 20px; }"
-	. += ".controls { background: #252526; padding: 10px; border-radius: 5px; margin-bottom: 15px; }"
-	. += "button { background: #0e639c; color: white; border: none; padding: 8px 15px; border-radius: 3px; cursor: pointer; margin-right: 10px; }"
-	. += "button:hover { background: #1177bb; }"
-	. += "button.active { background: #1177bb; }"
-	. += ".tab-group { display: inline-block; margin-right: 20px; }"
-	. += "</style>"
+function formatNumber(n) { return Math.round(n * 1000) / 1000; }
+function clearChildren(el) { while(el.firstChild) el.removeChild(el.firstChild); }
 
-	. += "<div class='controls'>"
-	. += "<div class='tab-group'>"
-	. += "<button class='[show_late_init ? "" : "active"]' onclick='window.location.href=\"byond://?src=[REF(src)];init_costs=1;sort=[sort_by_avg ? "avg" : "total"];mode=init\"'>Initialize()</button>"
-	. += "<button class='[show_late_init ? "active" : ""]' onclick='window.location.href=\"byond://?src=[REF(src)];init_costs=1;sort=[sort_by_avg ? "avg" : "total"];mode=late\"'>LateInitialize()</button>"
-	. += "</div>"
-	. += "<div class='tab-group'>"
-	. += "<button class='[sort_by_avg ? "" : "active"]' onclick='window.location.href=\"byond://?src=[REF(src)];init_costs=1;sort=total;mode=[show_late_init ? "late" : "init"]\"'>Sort by Total Time</button>"
-	. += "<button class='[sort_by_avg ? "active" : ""]' onclick='window.location.href=\"byond://?src=[REF(src)];init_costs=1;sort=avg;mode=[show_late_init ? "late" : "init"]\"'>Sort by Average Time</button>"
-	. += "</div>"
-	. += "</div>"
+function sortedKeys(tree, sortByAvg, totalCost) {
+  const keys = Object.keys(tree);
+  keys.sort((a,b)=>{
+    const n1 = tree\[a\], n2 = tree\[b\];
+    const v1 = sortByAvg ? (n1.cost / Math.max(n1.count,1)) : n1.cost;
+    const v2 = sortByAvg ? (n2.cost / Math.max(n2.count,1)) : n2.cost;
+    return v2 - v1; // descending
+  });
+  return keys;
+}
 
-	. += "<div class='summary'>"
-	. += "<h2>[show_late_init ? "Late " : ""]Initialization Cost Analysis</h2>"
-	. += "<b>Total [show_late_init ? "Late " : ""]Init Time:</b> [total_cost] ds ([round(total_cost / 10, 0.01)]s)<br>"
-	. += "<b>Total Instances:</b> [total_count]<br>"
-	. += "<b>Total Types:</b> [length(costs_to_use)]<br>"
-	. += "<b>Average Cost:</b> [round(total_cost / max(total_count, 1), 0.001)] ds per instance<br>"
-	. += "<b>Sorting by:</b> [sort_by_avg ? "Average time per instance" : "Total time"]"
-	. += "</div>"
+let idCounter = 0;
+function renderTree(tree, container, totalCost, sortByAvg) {
+  const keys = sortedKeys(tree, sortByAvg, totalCost);
+  for(const key of keys) {
+    const node = tree\[key\];
+    const cost = node.cost;
+    const count = node.count;
+    const direct_cost = node.direct_cost;
+    const direct_count = node.direct_count;
+    const avg_cost = formatNumber(cost / Math.max(count,1));
+    const percentage = totalCost > 0 ? formatNumber((cost / totalCost) * 100) : 0;
+    idCounter++;
+    const myId = 'node' + idCounter;
+    const hasChildren = Object.keys(node.children).length > 0;
+    let costClass = 'cost-low';
+    if(percentage >= 10) costClass = 'cost-high';
+    else if(percentage >= 1) costClass = 'cost-med';
 
-	. += "<script>"
-	. += "function toggle(id) {"
-	. += "  var elem = document.getElementById(id);"
-	. += "  var exp = document.getElementById('exp_' + id);"
-	. += "  if(elem.style.display === 'none') {"
-	. += "    elem.style.display = 'block';"
-	. += "    exp.innerHTML = '▼';"
-	. += "  } else {"
-	. += "    elem.style.display = 'none';"
-	. += "    exp.innerHTML = '▶';"
-	. += "  }"
-	. += "}"
-	. += "</script>"
+    const item = document.createElement('div');
+    item.className = 'tree-item';
 
-	. += build_tree_html(cost_tree, total_cost, sort_by_avg)
+    const exp = document.createElement('span');
+    exp.className = 'expander';
+    exp.id = 'exp_' + myId;
+    exp.textContent = hasChildren ? '▼' : '\\u00A0';
+    if(hasChildren) exp.style.cursor = 'pointer';
+    item.appendChild(exp);
 
-/datum/controller/subsystem/atoms/proc/build_tree_html(list/tree, total_cost, sort_by_avg = FALSE)
-	. = ""
-	var/static/node_id = 0
+    const nameSpan = document.createElement('span');
+    nameSpan.className = costClass;
+    nameSpan.textContent = key;
+    item.appendChild(nameSpan);
 
-	var/list/sorted_keys = list()
-	for(var/key in tree)
-		sorted_keys += key
+    const info = document.createElement('span');
+    info.innerHTML = ' - <b>' + cost + 'ds</b> <span class=\"count\">(' + count + 'x)</span> <span class=\"avg\">' + avg_cost + 'ds avg</span>';
+    if(direct_cost > 0 && hasChildren) {
+      const directAvg = formatNumber(direct_cost / Math.max(direct_count,1));
+      info.innerHTML += ' (direct: ' + direct_cost + 'ds, ' + direct_count + 'x, ' + directAvg + 'ds avg) ';
+    }
+    info.innerHTML += ' <span class=\"percentage\">(' + percentage + '%)</span>';
+    item.appendChild(info);
 
-	// she ubble on my sort till she top
-	for(var/i in 1 to length(sorted_keys))
-		for(var/j in 1 to length(sorted_keys) - 1)
-			var/key1 = sorted_keys[j]
-			var/key2 = sorted_keys[j + 1]
-			var/val1 = sort_by_avg ? (tree[key1]["cost"] / max(tree[key1]["count"], 1)) : tree[key1]["cost"]
-			var/val2 = sort_by_avg ? (tree[key2]["cost"] / max(tree[key2]["count"], 1)) : tree[key2]["cost"]
-			if(val1 < val2)
-				sorted_keys[j] = key2
-				sorted_keys[j + 1] = key1
+    container.appendChild(item);
 
-	for(var/key in sorted_keys)
-		var/list/node = tree[key]
-		var/cost = node["cost"]
-		var/count = node["count"]
-		var/direct_cost = node["direct_cost"]
-		var/direct_count = node["direct_count"]
-		var/avg_cost = round(cost / max(count, 1), 0.001)
-		var/percentage = round((cost / total_cost) * 100, 0.01)
+    if(hasChildren) {
+      const childContainer = document.createElement('div');
+      childContainer.className = 'tree-node';
+      childContainer.id = myId;
+      container.appendChild(childContainer);
+      // by default children are visible; toggle handler
+      exp.addEventListener('click', ()=>{
+        if(childContainer.style.display === 'none') { childContainer.style.display = 'block'; exp.textContent = '▼'; }
+        else { childContainer.style.display = 'none'; exp.textContent = '▶'; }
+      });
+      renderTree(node.children, childContainer, totalCost, sortByAvg);
+    }
+  }
+}
 
-		node_id++
-		var/current_id = "node[node_id]"
+function renderAll() {
+  const flat = (MODE === 'init') ? DATA.init : DATA.late;
+  const tree = buildTree(flat);
+  // compute totals
+  let totalCost = 0, totalCount = 0, types = 0;
+  for(const k in flat) { totalCost += (flat\[k\].cost || 0); totalCount += (flat\[k\].count || 0); types++; }
 
-		var/cost_class = "cost-low"
-		if(percentage >= 10)
-			cost_class = "cost-high"
-		else if(percentage >= 1)
-			cost_class = "cost-med"
+  const summary = document.getElementById('summary');
+  summary.innerHTML = '<h2>' + (MODE === 'late' ? 'Late ' : '') + 'Initialization Cost Analysis</h2>' +
+    '<b>Total ' + (MODE === 'late' ? 'Late ' : '') + 'Init Time:</b> ' + totalCost + ' ds (' + (formatNumber(totalCost/10)) + 's)<br>' +
+    '<b>Total Instances:</b> ' + totalCount + '<br>' +
+    '<b>Total Types:</b> ' + types + '<br>' +
+    '<b>Average Cost:</b> ' + (formatNumber(totalCost / Math.max(totalCount,1))) + ' ds per instance<br>' +
+    '<b>Sorting by:</b> ' + (SORT === 'avg' ? 'Average time per instance' : 'Total time');
 
-		var/has_children = length(node["children"]) > 0
-		var/expander = has_children ? "<span class='expander' id='exp_[current_id]' onclick='toggle(\"[current_id]\")'>▼</span>" : "<span class='expander'>&nbsp;</span>"
+  const root = document.getElementById('tree_root');
+  clearChildren(root);
+  idCounter = 0;
+  renderTree(tree, root, totalCost, SORT === 'avg');
+  // update buttons classes
+  document.getElementById('btn_init').className = (MODE === 'init') ? 'active' : '';
+  document.getElementById('btn_late').className = (MODE === 'late') ? 'active' : '';
+  document.getElementById('btn_total').className = (SORT === 'total') ? 'active' : '';
+  document.getElementById('btn_avg').className = (SORT === 'avg') ? 'active' : '';
+}
 
-		. += "<div class='tree-item'>"
-		. += "[expander] <span class='[cost_class]'>[key]</span> "
-		. += "- <b>[cost]ds</b> "
-		. += "<span class='count'>([count]x)</span> "
-		. += "<span class='avg'>[avg_cost]ds avg</span> "
-		if(direct_cost > 0 && has_children)
-			var/direct_avg = round(direct_cost / max(direct_count, 1), 0.001)
-			. += "(direct: [direct_cost]ds, [direct_count]x, [direct_avg]ds avg) "
-		. += "<span class='percentage'>([percentage]%)</span>"
-		. += "</div>"
+function setMode(m) { if(MODE === m) return; MODE = m; renderAll(); }
+function setSort(s) { if(SORT === s) return; SORT = s; renderAll(); }
 
-		if(has_children)
-			. += "<div id='[current_id]' class='tree-node'>"
-			. += build_tree_html(node["children"], total_cost, sort_by_avg)
-			. += "</div>"
+renderAll();
+</script>
+"}
+
 
 /client/proc/cmd_display_init_costs()
 	set category = "Debug"
@@ -368,12 +407,7 @@ SUBSYSTEM_DEF(atoms)
 
 	if(!LAZYLEN(SSatoms.init_costs))
 		to_chat(usr, span_notice("Init costs list is empty."))
+	if(alert(usr, "Are you sure you want to view the initialization costs? This may take more than a minute to load.", "Confirm", "Yes", "No") != "Yes")
+		return
 	else
-		usr << browse(HTML_SKELETON(SSatoms.InitCostLog()), "window=initcosts;size=900x600")
-
-/datum/controller/subsystem/atoms/Topic(href, href_list)
-	. = ..()
-	if(href_list["init_costs"])
-		var/sort_by_avg = (href_list["sort"] == "avg")
-		var/show_late_init = (href_list["mode"] == "late")
-		usr << browse(HTML_SKELETON(InitCostLog(sort_by_avg, show_late_init)), "window=initcosts;size=900x600")
+		usr << browse(HTML_SKELETON(SSatoms.BuildCostLogHtml()), "window=initcosts;size=900x600")
