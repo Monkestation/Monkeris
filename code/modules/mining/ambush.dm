@@ -147,16 +147,15 @@
 ///properly cleans up the controller. Final step of the deletion chain
 /datum/ambush_controller/proc/cleanup()
 	// Delete any remaining burrows
-	for(var/obj/structure/ambush_burrow/burrow in burrows)
+	for(var/obj/structure/ambush_burrow/burrow as anything in burrows)
 		qdel(burrow)
 
 	// Delete mobs
-	for(var/mob/living/carbon/superior_animal/mob in ourmobs)
+	for(var/mob/living/carbon/superior_animal/mob as anything in ourmobs)
 		if(mob.stat == DEAD)
 			continue
 		qdel(mob)
 
-	// Delete controller
 	qdel(src)
 
 //inherited from old golem controller. Why is it defined here? Good question
