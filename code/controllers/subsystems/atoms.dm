@@ -271,12 +271,12 @@ SUBSYSTEM_DEF(atoms)
 
 	. += "<div class='controls'>"
 	. += "<div class='tab-group'>"
-	. += "<button class='[show_late_init ? "" : "active"]' onclick='window.location.href=\"?src=[REF(src)];init_costs=1;sort=[sort_by_avg ? "avg" : "total"];mode=init\"'>Initialize()</button>"
-	. += "<button class='[show_late_init ? "active" : ""]' onclick='window.location.href=\"?src=[REF(src)];init_costs=1;sort=[sort_by_avg ? "avg" : "total"];mode=late\"'>LateInitialize()</button>"
+	. += "<button class='[show_late_init ? "" : "active"]' onclick='window.location.href=\"byond://?src=[REF(src)];init_costs=1;sort=[sort_by_avg ? "avg" : "total"];mode=init\"'>Initialize()</button>"
+	. += "<button class='[show_late_init ? "active" : ""]' onclick='window.location.href=\"byond://?src=[REF(src)];init_costs=1;sort=[sort_by_avg ? "avg" : "total"];mode=late\"'>LateInitialize()</button>"
 	. += "</div>"
 	. += "<div class='tab-group'>"
-	. += "<button class='[sort_by_avg ? "" : "active"]' onclick='window.location.href=\"?src=[REF(src)];init_costs=1;sort=total;mode=[show_late_init ? "late" : "init"]\"'>Sort by Total Time</button>"
-	. += "<button class='[sort_by_avg ? "active" : ""]' onclick='window.location.href=\"?src=[REF(src)];init_costs=1;sort=avg;mode=[show_late_init ? "late" : "init"]\"'>Sort by Average Time</button>"
+	. += "<button class='[sort_by_avg ? "" : "active"]' onclick='window.location.href=\"byond://?src=[REF(src)];init_costs=1;sort=total;mode=[show_late_init ? "late" : "init"]\"'>Sort by Total Time</button>"
+	. += "<button class='[sort_by_avg ? "active" : ""]' onclick='window.location.href=\"byond://?src=[REF(src)];init_costs=1;sort=avg;mode=[show_late_init ? "late" : "init"]\"'>Sort by Average Time</button>"
 	. += "</div>"
 	. += "</div>"
 
