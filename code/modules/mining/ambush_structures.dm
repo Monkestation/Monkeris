@@ -1,5 +1,5 @@
 /obj/structure/ambush_burrow
-	name = "ambush burrow"
+	name = "burrow"
 	icon = 'icons/obj/burrows.dmi'
 	icon_state = "cracks_animated"
 	desc = "A pile of debris that regularly pulses and shifts. Something is coming..."
@@ -55,7 +55,7 @@
 ///visibly indicates to players that this burrow is out of commission. Also preps for deletion
 /obj/structure/ambush_burrow/proc/crumble()
 	icon_state = "maint_hole_collapsed"
-	desc = "It's filled with lose debris. As you watch, it begins to crumble away..."
+	desc = "It's filled with loose debris. As you watch, it begins to crumble away..."
 	QDEL_IN(src, 3 SECONDS)
 
 /obj/structure/ambush_burrow/Destroy()
@@ -124,8 +124,7 @@
 /obj/effect/ambush_snare/proc/trip_snare(sucker)
 	if(!isturf(loc) || !ishuman(sucker) || !can_see(src, sucker))//let's keep this on visible players for now
 		return
-	var/mob/living/livingsucker = sucker
-	if(livingsucker in SSmobs.ambushed_mobs)//don't spam ambushes if someone walks into multiple snares
+	if(sucker in SSmobs.ambushed_mobs)//don't spam ambushes if someone walks into multiple snares
 		return
 	new /datum/ambush_controller(loc, sucker, our_ambush_type)
 	qdel(src)
