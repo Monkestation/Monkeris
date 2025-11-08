@@ -127,7 +127,7 @@
 
 	// Delete mobs
 	for(var/mob/living/carbon/superior_animal/mob in ourmobs)
-		if(mob.state == DEAD)
+		if(mob.stat == DEAD)
 			continue
 		qdel(mob)
 
