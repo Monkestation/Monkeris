@@ -88,15 +88,25 @@
 			count++
 			spawn_burrow()
 
-	if(our_datum.ambush_type == AMBUSH_SIEGE)//if we're in siege mode, ambush controller handles spawns directly
-		if((world.time - start_time) > our_datum.setup_time)
-			if((world.time - time_spawn) > our_datum.spawn_interval)// Check if a new spawn wave should occur
-				time_spawn = world.time
-				for(var/obj/structure/ambush_burrow/ourburrow in burrows)
-					if(!ourburrow.loc)  // If the burrow is in nullspace for some reason
-						burrows -= ourburrow  // Remove it from the pool of burrows
-						continue
-					ourburrow.spawn_mobs()
+	// if we're in siege mode, ambush controller handles spawns directly
+	if(our_datum.ambush_type != AMBUSH_SIEGE)
+		return
+
+	if((world.time - start_time) <= our_datum.setup_time)
+		return
+
+	// Check if a new spawn wave should occur
+	if((world.time - time_spawn) <= our_datum.spawn_interval)
+		return
+
+	time_spawn = world.time
+
+	for(var/obj/structure/ambush_burrow/ourburrow as anything in burrows)
+		if(!get_turf(ourburrow))  // If the burrow is in nullspace for some reason
+			burrows -= ourburrow  // Remove it from the pool of burrows
+			continue
+		ourburrow.spawn_mobs()
+
 
 ///locates an appropriate turf to spawn a burrow, then creates it
 /datum/ambush_controller/proc/spawn_burrow()
