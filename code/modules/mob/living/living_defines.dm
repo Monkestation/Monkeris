@@ -112,3 +112,6 @@
 
 	spawn_frequency = 10
 	bad_type = /mob/living
+
+	//set to TRUE while this mob is being ambushed. Prevents multiple ambush events from triggering at once.
+	var/ambushed = FALSE

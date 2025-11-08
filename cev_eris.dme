@@ -1952,6 +1952,8 @@
 #include "code\modules\media\mediamanager.dm"
 #include "code\modules\mining\abandonedcrates.dm"
 #include "code\modules\mining\alloys.dm"
+#include "code\modules\mining\ambush.dm"
+#include "code\modules\mining\ambush_structures.dm"
 #include "code\modules\mining\coins.dm"
 #include "code\modules\mining\machine_processing.dm"
 #include "code\modules\mining\machine_stacking.dm"
