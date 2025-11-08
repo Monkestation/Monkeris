@@ -125,7 +125,7 @@
 	if(!isturf(loc) || !ishuman(sucker) || !can_see(src, sucker))//let's keep this on visible players for now
 		return
 	var/mob/living/livingsucker = sucker
-	if(livingsucker.ambushed)//don't spam ambushes if someone walks into multiple snares
+	if(livingsucker in SSmobs.ambushed_mobs)//don't spam ambushes if someone walks into multiple snares
 		return
 	new /datum/ambush_controller(loc, sucker, our_ambush_type)
 	qdel(src)

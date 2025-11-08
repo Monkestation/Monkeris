@@ -29,6 +29,9 @@
 	///Do ambush burrows appear around the mob who spawned them, even if they move?
 	var/following = TRUE
 
+	///Essentially local list of ambushed mobs, to compare ssmobs.ambushed_mobs to
+	var/list/our_ambushed_mobs
+
 /datum/ambush_controller/New(turf/trigger_location, new_ambushed_mob, ambush_datum)
 	our_datum = new ambush_datum()
 	ambushed_mob = new_ambushed_mob
@@ -43,8 +46,12 @@
 	if(!ambush_loc) //if no ambushed mob, just use the trigger location
 		ambush_loc = trigger_location
 
+	var/list/our_ambushed_mobs = new()
 	//give mobs in range a warning they're about to be ambushed
-	for(var/mob/ourmob as anything in hearers(8, ambush_loc))
+	for(var/mob/living/ourmob as anything in hearers(8, ambush_loc))
+		//add the mob to ambush reference lists
+		our_ambushed_mobs += ourmob
+		SSmobs.ambushed_mobs += ourmob
 		ourmob.show_message(span_userdanger("You feel the ground tremble beneath you..."),2)
 		shake_camera(ourmob, 6, 0.5, 0.25)
 	playsound(ambush_loc, 'sound/effects/impacts/rumble4.ogg', 75, TRUE, extrarange = 4)
@@ -62,6 +69,9 @@
 
 /datum/ambush_controller/Destroy()
 	processing = FALSE
+	//just in case the controller was qdel'd
+	for(var/mob/living/ambushee as anything in our_ambushed_mobs)
+		SSmobs.ambushed_mobs.Remove(ambushee)
 	for(var/obj/structure/ambush_burrow/burrow in burrows)  // Unlink burrows and controller
 		qdel(burrow)
 	QDEL_NULL(our_datum)
@@ -141,6 +151,9 @@
 		ourmob.show_message(span_danger("The shaking in the ground finally subsides."),2)
 	for(var/obj/structure/ambush_burrow/burrow in burrows)  //visibly collapse burrows to show players it's over
 		burrow.crumble()
+	//allow mobs in the original ambush range to once again trigger ambushes
+	for(var/mob/living/ambushee as anything in our_ambushed_mobs)
+		SSmobs.ambushed_mobs.Remove(ambushee)
 	// Clean up controller and all remaining objects after given delay
 	addtimer(CALLBACK(src, PROC_REF(cleanup)), AMBUSH_CLEANUP_DELAY)
 
