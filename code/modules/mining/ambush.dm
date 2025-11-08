@@ -88,15 +88,25 @@
 			count++
 			spawn_burrow()
 
-	if(our_datum.ambush_type == AMBUSH_SIEGE)//if we're in siege mode, ambush controller handles spawns directly
-		if((world.time - start_time) > our_datum.setup_time)
-			if((world.time - time_spawn) > our_datum.spawn_interval)// Check if a new spawn wave should occur
-				time_spawn = world.time
-				for(var/obj/structure/ambush_burrow/ourburrow in burrows)
-					if(!ourburrow.loc)  // If the burrow is in nullspace for some reason
-						burrows -= ourburrow  // Remove it from the pool of burrows
-						continue
-					ourburrow.spawn_mobs()
+	// if we're in siege mode, ambush controller handles spawns directly
+	if(our_datum.ambush_type != AMBUSH_SIEGE)
+		return
+
+	if((world.time - start_time) <= our_datum.setup_time)
+		return
+
+	// Check if a new spawn wave should occur
+	if((world.time - time_spawn) <= our_datum.spawn_interval)
+		return
+
+	time_spawn = world.time
+
+	for(var/obj/structure/ambush_burrow/ourburrow as anything in burrows)
+		if(!get_turf(ourburrow))  // If the burrow is in nullspace for some reason
+			burrows -= ourburrow  // Remove it from the pool of burrows
+			continue
+		ourburrow.spawn_mobs()
+
 
 ///locates an appropriate turf to spawn a burrow, then creates it
 /datum/ambush_controller/proc/spawn_burrow()
@@ -137,16 +147,15 @@
 ///properly cleans up the controller. Final step of the deletion chain
 /datum/ambush_controller/proc/cleanup()
 	// Delete any remaining burrows
-	for(var/obj/structure/ambush_burrow/burrow in burrows)
+	for(var/obj/structure/ambush_burrow/burrow as anything in burrows)
 		qdel(burrow)
 
 	// Delete mobs
-	for(var/mob/living/carbon/superior_animal/mob in ourmobs)
+	for(var/mob/living/carbon/superior_animal/mob as anything in ourmobs)
 		if(mob.stat == DEAD)
 			continue
 		qdel(mob)
 
-	// Delete controller
 	qdel(src)
 
 //inherited from old golem controller. Why is it defined here? Good question
@@ -179,7 +188,7 @@
 	var/max_burrows = 4
 	/// the number of burrows to spawn in a single wave
 	var/burrow_number = 2
-  	/// Number of seconds that pass between each new burrow spawn wave
+  /// Number of seconds that pass between each new burrow spawn wave
 	var/burrow_interval = 10 SECONDS
 	///the starting range at which the ambush controller will try to place burrows
 	var/burrow_spawn_range = 6
