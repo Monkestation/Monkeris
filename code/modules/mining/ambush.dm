@@ -297,7 +297,7 @@
 /datum/ambush_type/golem/nightmare
 	special_probability = 35
 	normal_types = list(/mob/living/carbon/superior_animal/golem/coal/enhanced,
-						/mob/living/carbon/superior_animal/golem/iron
+						/mob/living/carbon/superior_animal/golem/iron,
 						/mob/living/carbon/superior_animal/golem/uranium,
 						/mob/living/carbon/superior_animal/golem/platinum,
 						/mob/living/carbon/superior_animal/golem/silver/enhanced)
