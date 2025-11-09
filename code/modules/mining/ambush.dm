@@ -140,6 +140,7 @@
 	if(burrow_turf == ambush_loc)
 		burrow_turf = get_step(ambush_loc, pick(GLOB.cardinal))
 
+	burrow_turf.shake_animation(14)//HEY! Pay attention to this spot
 	burrows += new /obj/structure/ambush_burrow(burrow_turf, src, our_datum)  // Spawn burrow at final location
 
 ///ends the ambush. Should preferentially be called before cleanup or a qdel
@@ -191,8 +192,8 @@
 	var/ambush_duration = 20 SECONDS
 	/// If set, ambush ends once this many burrows have spawned
 	var/spawn_cap = 8
-	/// Amnt. of prep time given between when the burrows first appear & mobs start spawning
-	var/setup_time = 4 SECONDS
+	/// Amnt. of prep time given between when burrows first appear & mobs start spawning
+	var/setup_time = 3 SECONDS
 
 	//burrow vars
 	/// If set, total number of burrows that can exist at any single time
@@ -285,7 +286,7 @@
 /datum/ambush_type/golem/expert
 	special_probability = 30
 	normal_types = list(/mob/living/carbon/superior_animal/golem/coal/enhanced,
-						/mob/living/carbon/superior_animal/golem/iron
+						/mob/living/carbon/superior_animal/golem/iron,
 						/mob/living/carbon/superior_animal/golem/uranium,
 						/mob/living/carbon/superior_animal/golem/platinum,
 						/mob/living/carbon/superior_animal/golem/silver/enhanced)
