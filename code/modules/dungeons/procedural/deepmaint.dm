@@ -126,6 +126,8 @@ var/global/list/big_deepmaint_room_templates = list()
 
 /obj/procedural/jp_DungeonGenerator/deepmaint/proc/makeNiche(turf/T)
 	var/list/nicheline = list()
+	//only 1 hard encounter per niche zone please
+	var/ambush_placed = FALSE
 	for(var/i in list(NORTH,EAST,SOUTH,WEST)) //Checks range of 5 tiles in all 4 directions from the turf tile being passed
 		switch(i)
 			if(NORTH)
@@ -146,6 +148,8 @@ var/global/list/big_deepmaint_room_templates = list()
 		for(var/turf/W in nicheline) //Every turf in the path returned by findNicheTurfs has a 30% chance of becoming a random deepmaint machine
 			if(prob(30))
 				new /obj/spawner/pack/deep_machine(W)
+			if(prob(1))
+				new /obj/effect/ambush_snare
 		for(var/turf/W in wall_line) //Every turf in the path returned by checkForWalls is turned into a floor tile, and has a 70% chance of becoming a random deepmaint machine
 			if(locate(/obj/machinery/light/small/autoattach, W))
 				var/obj/machinery/light/small/autoattach/L = locate(/obj/machinery/light/small/autoattach, W)
@@ -176,6 +180,7 @@ var/global/list/big_deepmaint_room_templates = list()
 	var/niche_count = 20
 	var/try_count = niche_count * 7 //In case it somehow zig-zags all of the corridors and stucks in a loop
 	var/trap_count = 100
+	var/ambush_count = rand(4, 8)// Add a few ambushes in corridors to keep players on their toes
 	var/list/path_turfs_copy = path_turfs.Copy()
 	while(niche_count > 0 && try_count > 0)
 		try_count = try_count - 1
@@ -188,6 +193,11 @@ var/global/list/big_deepmaint_room_templates = list()
 		var/turf/N = pick(path_turfs_copy)
 		path_turfs_copy -= N
 		new /obj/spawner/traps(N)
+	while(ambush_count > 0)
+		ambush_count = ambush_count - 1
+		var/turf/ourturf = pick(path_turfs_copy)
+		path_turfs_copy -= ourturf
+		new /obj/effect/ambush_snare(ourturf)
 	for(var/turf/T in path_turfs)
 		if(prob(30))
 			new /obj/effect/decal/cleanable/dirt(T) //Wanted to put rust on the floors in deep maint, but by god, the overlay looks like ASS

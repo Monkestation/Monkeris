@@ -182,9 +182,7 @@
 	return FALSE
 
 
-
-// AMBUSH TYPE DEFINES
-
+///contains the code that manages an ambush controller's behavior
 /datum/ambush_type
 	//ambush behavior vars
 	/// Determines the logic burrows follow when spawning mobs
@@ -228,57 +226,84 @@
 	/// Number of seconds that pass between spawn events of burrows - if siege mode is enabled.
 	var/spawn_interval = 15 SECONDS
 
+
+// AMBUSH TYPE DEFINES
+
 /datum/ambush_type/golem
+	ambush_duration = 30 SECONDS
+	spawn_cap = 12
+
 	max_burrows = 6
 	burrow_number = 3
 
-	special_probability = 5
+	special_probability = 25
 
 	normal_types = list(/mob/living/carbon/superior_animal/golem/coal,
 						/mob/living/carbon/superior_animal/golem/iron)
 
 	special_types = list(/mob/living/carbon/superior_animal/golem/silver,
+						/mob/living/carbon/superior_animal/golem/silver/enhanced,
 						/mob/living/carbon/superior_animal/golem/gold,
+						/mob/living/carbon/superior_animal/golem/plasma,
+						/mob/living/carbon/superior_animal/golem/ansible,
+						/mob/living/carbon/superior_animal/golem/coal/enhanced,
+						/mob/living/carbon/superior_animal/golem/diamond,
+						/mob/living/carbon/superior_animal/golem/uranium)
+
+
+/datum/ambush_type/golem/beginner
+	special_probability = 0
+
+
+/datum/ambush_type/golem/novice
+	special_probability = 25
+
+	special_types = list(/mob/living/carbon/superior_animal/golem/silver)
+
+
+/datum/ambush_type/golem/adept
+	normal_types = list(/mob/living/carbon/superior_animal/golem/coal,
+						/mob/living/carbon/superior_animal/golem/iron,
+						/mob/living/carbon/superior_animal/golem/silver)
+
+	special_types = list(/mob/living/carbon/superior_animal/golem/platinum,
+						/mob/living/carbon/superior_animal/golem/coal/enhanced,
 						/mob/living/carbon/superior_animal/golem/plasma,
 						/mob/living/carbon/superior_animal/golem/uranium)
 
 
-// /datum/golem_wave/negligible
-// 	burrow_count = 2
-// 	burrow_interval = 24 SECONDS
-// 	golem_spawn = 2
-// 	spawn_interval = 20 SECONDS
-// 	special_probability = 0
-// 	mineral_multiplier = 1.4
+/datum/ambush_type/golem/experienced
+	normal_types = list(/mob/living/carbon/superior_animal/golem/coal/enhanced,
+						/mob/living/carbon/superior_animal/golem/iron,
+						/mob/living/carbon/superior_animal/golem/silver)
 
-// /datum/golem_wave/typical
-// 	burrow_count = 3
-// 	burrow_interval = 24 SECONDS
-// 	golem_spawn = 3
-// 	spawn_interval = 18 SECONDS
-// 	special_probability = 10
-// 	mineral_multiplier = 1.7
+	special_types = list(/mob/living/carbon/superior_animal/golem/platinum,
+						/mob/living/carbon/superior_animal/golem/plasma,
+						/mob/living/carbon/superior_animal/golem/uranium)
 
-// /datum/golem_wave/substantial
-// 	burrow_count = 3
-// 	burrow_interval = 24 SECONDS
-// 	golem_spawn = 3
-// 	spawn_interval = 18 SECONDS
-// 	special_probability = 20
-// 	mineral_multiplier = 2
 
-// /datum/golem_wave/major
-// 	burrow_count = 4
-// 	burrow_interval = 20 SECONDS
-// 	golem_spawn = 4
-// 	spawn_interval = 14 SECONDS
-// 	special_probability = 30
-// 	mineral_multiplier = 2.3
+/datum/ambush_type/golem/expert
+	special_probability = 30
+	normal_types = list(/mob/living/carbon/superior_animal/golem/coal/enhanced,
+						/mob/living/carbon/superior_animal/golem/iron
+						/mob/living/carbon/superior_animal/golem/uranium,
+						/mob/living/carbon/superior_animal/golem/platinum,
+						/mob/living/carbon/superior_animal/golem/silver/enhanced)
 
-// /datum/golem_wave/abnormal
-// 	burrow_count = 5
-// 	burrow_interval = 18 SECONDS
-// 	golem_spawn = 4
-// 	spawn_interval = 12 SECONDS
-// 	special_probability = 30
-// 	mineral_multiplier = 3.0
+	special_types = list(/mob/living/carbon/superior_animal/golem/plasma,
+						/mob/living/carbon/superior_animal/golem/gold)
+
+
+/datum/ambush_type/golem/nightmare
+	special_probability = 35
+	normal_types = list(/mob/living/carbon/superior_animal/golem/coal/enhanced,
+						/mob/living/carbon/superior_animal/golem/iron
+						/mob/living/carbon/superior_animal/golem/uranium,
+						/mob/living/carbon/superior_animal/golem/platinum,
+						/mob/living/carbon/superior_animal/golem/silver/enhanced)
+
+	special_types = list(/mob/living/carbon/superior_animal/golem/plasma,
+						/mob/living/carbon/superior_animal/golem/ansible,
+						/mob/living/carbon/superior_animal/golem/diamond,
+						/mob/living/carbon/superior_animal/golem/gold)
+
