@@ -152,7 +152,7 @@ SUBSYSTEM_DEF(statpanels)
 					if(turf_content in overrides)
 						continue
 					else
-						#warn TEST TURF STATPANEL TURF PREVIEWS - Marisa
+						// This works but we need to figure out caching later
 						turfitems += list(list("[turf_content.name]", "[ma2html(turf_content, target_mob)]"))
 				turfitems = url_encode(json_encode(turfitems))
 				target << output("[turfitems];", "statbrowser:update_listedturf")
