@@ -390,7 +390,7 @@
 	set category = "Debug"
 	set name = "View Runtimes"
 	set desc = "Open the Runtime Viewer"
-	GLOB.error_cache.showTo(usr)
+	GLOB.error_cache.show_to(src)
 
 /client/proc/spawn_disciple()
 	set category = "Debug"
@@ -449,7 +449,7 @@
 
 /proc/cmp_playtime_asc(client/a, client/b)
 	return cmp_numeric_asc(a.get_exp_living(TRUE), b.get_exp_living(TRUE))
-  
+
 /client/proc/get(atom/movable/A)
 	set category = "Debug"
 	set name = "Get"
