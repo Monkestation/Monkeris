@@ -21,7 +21,7 @@
 /obj/item/mech_component/propulsion/examine(mob/user)
 	. = ..()
 	if(can_strafe != MECH_STRAFING_NONE)
-		to_chat(user, span_notice(can_strafe == MECH_STRAFING_BACK ? "Can only strafe foward and backwards" : "Can strafe in all directions."))
+		to_chat(user, span_notice("[can_strafe == MECH_STRAFING_BACK ? "Can only strafe forward and backwards" : "Can strafe in all directions."]"))
 
 /obj/item/mech_component/propulsion/show_missing_parts(mob/user)
 	if(!motivator)

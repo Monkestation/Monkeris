@@ -112,5 +112,4 @@
 /datum/uplink_item/abstract/announcements/fake_serb/get_goods(obj/item/device/uplink/U, loc)
 	var/datum/shuttle/autodock/multi/antag/mercenary/merc = /datum/shuttle/autodock/multi/antag/mercenary
 	priority_announce(initial(merc.arrival_message), sender_override = initial(merc.announcer) || "[GLOB.boss_name]")
-	qdel(merc)
 	return 1

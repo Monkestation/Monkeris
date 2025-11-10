@@ -291,22 +291,3 @@
 
 /atom/proc/extra_admin_link()
 	return
-
-/mob/extra_admin_link(source)
-	if(client && eyeobj)
-		return "|<A href='byond://?[source];[HrefToken()];adminobservejump=\ref[eyeobj]'>EYE</A>"
-
-/mob/observer/ghost/extra_admin_link(source)
-	if(mind && mind.current)
-		return "|<A href='byond://?[source];[HrefToken()];adminobservejump=\ref[mind.current]'>BDY</A>"
-
-/proc/admin_jump_link(atom/target, source)
-	if(!target) return
-	// The way admin jump links handle their src is weirdly inconsistent...
-	if(istype(source, /datum/admins))
-		source = "src=\ref[source]"
-	else
-		source = "_src_=holder"
-
-	. = "<A href='byond://?[source];[HrefToken()];adminobservejump=\ref[target]'>JMP</A>"
-	. += target.extra_admin_link(source)

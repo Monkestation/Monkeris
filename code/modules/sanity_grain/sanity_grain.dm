@@ -16,7 +16,8 @@
 
 /mob/living/carbon/human/show_HUD()
 	..()
-	if(client)
+	// this bih aint got no sanity
+	if(client && sanity)
 		client.screen += sanity.grain
 
 /datum/sanity/updateLevel(new_level)

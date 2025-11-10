@@ -833,8 +833,8 @@
 		if(target.Adjacent(src.owner) && !target.anchored)
 			to_chat(user, span_notice("You hook \the [src] onto \the [target]!"))
 			currentlyTowing = target
-			RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(onTowingMove))
-			RegisterSignal(target, COMSIG_ATTEMPT_PULLING, PROC_REF(onTowingPullAttempt))
+			RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(onTowingMove), TRUE)
+			RegisterSignal(target, COMSIG_ATTEMPT_PULLING, PROC_REF(onTowingPullAttempt), TRUE)
 	else if(currentlyTowing == target)
 		to_chat(user, span_notice("You unhook \the [src] from \the [target]."))
 		UnregisterSignal(currentlyTowing,list(COMSIG_MOVABLE_MOVED,COMSIG_ATTEMPT_PULLING))

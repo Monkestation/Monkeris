@@ -117,7 +117,10 @@
 					seeds += i
 			if(!LAZYLEN(seeds))
 				seeds = tts_seeds
-			pref.tts_seed = pick(seeds)
+			if(!LAZYLEN(seeds))
+				pref.tts_seed = "No seeds available"
+			else
+				pref.tts_seed = pick(seeds)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["age"])

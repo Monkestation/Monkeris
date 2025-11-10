@@ -132,7 +132,7 @@ GLOBAL_LIST_EMPTY(all_obelisk)
 	var/list/no_longer_affected = currently_affected - affected
 	for(var/i in no_longer_affected)
 		var/mob/living/carbon/human/H = i
-		H.stats.removePerk(/datum/perk/active_sanityboost)
+		H.stats?.removePerk(/datum/perk/active_sanityboost)
 
 
 	currently_affected -= no_longer_affected

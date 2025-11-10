@@ -97,3 +97,7 @@
 
 /// A value for /datum/admins/cached_feedback_link to indicate empty, rather than unobtained
 #define NO_FEEDBACK_LINK "no_feedback_link"
+
+/// Used in logging uses of admin verbs (and sometimes some non-admin or debug verbs) to the blackbox
+/// Only pass it a string key, the verb being used.
+#define BLACKBOX_LOG_ADMIN_VERB(the_verb) SSblackbox.record_feedback("tally", "admin_verb", 1, the_verb)

@@ -430,19 +430,6 @@
 	source.show_player_panel(M)
 
 
-/datum/admin_topic/adminobservejump
-	keyword = "adminobservejump"
-	require_perms = list(R_MENTOR|R_ADMIN)
-
-/datum/admin_topic/adminobservejump/Run(list/input)
-	var/mob/M = locate(input["adminobservejump"])
-
-	var/client/C = usr.client
-	if(!isghost(usr))
-		C.admin_ghost()
-		sleep(2)
-	C.jumptomob(M)
-
 /datum/admin_topic/adminplayerobservefollow
 	keyword = "adminplayerobservefollow"
 
