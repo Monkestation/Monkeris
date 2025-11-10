@@ -45,6 +45,12 @@
 */
 //#define REAGENTS_TESTING
 
+/*
+Enables tracking init and lateinit costs for Atoms, via the debug verb "Display Init Costs"
+*/
+// #define INIT_TRACK
+
+
 #define VISUALIZE_ACTIVE_TURFS //Highlights atmos active turfs in green
 #define TRACK_MAX_SHARE //Allows max share tracking, for use in the atmos debugging ui
 #endif //ifdef TESTING

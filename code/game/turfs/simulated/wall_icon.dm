@@ -33,7 +33,7 @@
 
 
 // Check in which directions there are connectable walls, so the corner overlays could be created correctly later
-/turf/wall/proc/update_connections()
+/turf/wall/proc/update_connections(map_load)
 	if(is_using_flat_icon)
 		return
 	for(var/direction in GLOB.alldirs)
@@ -44,7 +44,8 @@
 			// Update neighbour connections as well
 			wall.any_wall_connections[turn(direction, 180)] = TRUE
 			wall.full_wall_connections[turn(direction, 180)] = is_low_wall ? FALSE : TRUE
-			wall.update_icon()
+			if(!map_load)
+				wall.update_icon()
 		else
 			any_wall_connections[direction] = FALSE
 			full_wall_connections[direction] = FALSE
