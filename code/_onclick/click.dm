@@ -79,7 +79,18 @@
 		build_click(src, client.buildmode, params, A)
 		return
 
+
 	var/list/modifiers = params2list(params)
+
+	if(LAZYACCESS(modifiers, "right") && LAZYACCESS(modifiers, "shift"))
+		if(mind && mind.active_uis["quake_console"])
+			if(client.holder)
+				client.holder.marked_datum = A
+				var/datum/visual_ui/console/console =  mind.active_uis["quake_console"]
+				var/obj/abstract/visual_ui_element/scrollable/console_output/output = locate(/obj/abstract/visual_ui_element/scrollable/console_output) in console.elements
+				output.add_line("MARKED: [A]")
+
+
 	if(modifiers["shift"] && modifiers["ctrl"])
 		CtrlShiftClickOn(A, params)
 		return 1
