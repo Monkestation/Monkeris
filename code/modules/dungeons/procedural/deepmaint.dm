@@ -148,8 +148,9 @@ var/global/list/big_deepmaint_room_templates = list()
 		for(var/turf/W in nicheline) //Every turf in the path returned by findNicheTurfs has a 30% chance of becoming a random deepmaint machine
 			if(prob(30))
 				new /obj/spawner/pack/deep_machine(W)
-			if(prob(1))
+			if(!ambush_placed && prob(1))
 				new /obj/effect/ambush_snare
+				ambush_placed = TRUE
 		for(var/turf/W in wall_line) //Every turf in the path returned by checkForWalls is turned into a floor tile, and has a 70% chance of becoming a random deepmaint machine
 			if(locate(/obj/machinery/light/small/autoattach, W))
 				var/obj/machinery/light/small/autoattach/L = locate(/obj/machinery/light/small/autoattach, W)
