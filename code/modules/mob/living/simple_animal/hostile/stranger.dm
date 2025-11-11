@@ -60,7 +60,7 @@
 	do_sparks(3, 0, src.loc)
 	qdel(src)
 
-/mob/living/simple_animal/hostile/stranger/attack_generic(mob/user, damage, attack_message)
+/mob/living/simple_animal/hostile/stranger/attack_generic(mob/user, damage, attack_message, block_handled)
 	if(!damage || !istype(user))
 		return FALSE
 	if(prob(prob_tele))

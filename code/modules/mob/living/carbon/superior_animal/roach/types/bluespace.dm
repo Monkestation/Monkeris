@@ -79,7 +79,7 @@
 		return FALSE
 	. = ..()
 
-/mob/living/carbon/superior_animal/roach/bluespace/attack_generic(mob/user, damage, attack_message)
+/mob/living/carbon/superior_animal/roach/bluespace/attack_generic(mob/user, damage, attack_message, block_handled)
 	if(!damage || !istype(user))
 		return FALSE
 	if(prob(change_tele_to_mob))

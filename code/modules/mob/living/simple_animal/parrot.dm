@@ -747,7 +747,7 @@
 		return
 	speech_buffer.Add(message)
 
-/mob/living/simple_animal/parrot/attack_generic(mob/user, damage, attack_message)
+/mob/living/simple_animal/parrot/attack_generic(mob/user, damage, attack_message, block_handled)
 
 	var/success = ..()
 
