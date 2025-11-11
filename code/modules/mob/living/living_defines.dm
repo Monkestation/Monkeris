@@ -112,3 +112,4 @@
 
 	spawn_frequency = 10
 	bad_type = /mob/living
+
