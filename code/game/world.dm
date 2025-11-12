@@ -377,6 +377,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		// shutdown_logging() // See comment below.
 		QDEL_NULL(Tracy)
 		QDEL_NULL(Debugger)
+		SSplexora.notify_shutdown(PLEXORA_SHUTDOWN_KILLDD)
 		TgsEndProcess()
 		return ..()
 

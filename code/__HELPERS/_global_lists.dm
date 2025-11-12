@@ -1,6 +1,7 @@
 GLOBAL_LIST_EMPTY(clients)	//list of all clients
 GLOBAL_LIST_EMPTY(admins)	//list of all clients whom are admins
 GLOBAL_LIST_EMPTY(directory)	//list of all ckeys with associated client
+GLOBAL_LIST_EMPTY(stealthminID) //reference list with IDs that store ckeys, for stealthmins
 GLOBAL_LIST_EMPTY(deadmins) //all ckeys who have used the de-admin verb.
 
 //Since it didn't really belong in any other category, I'm putting this here
