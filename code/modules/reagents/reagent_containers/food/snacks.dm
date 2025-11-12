@@ -1240,6 +1240,43 @@
 			extra_description += "\nLooking at \the [src] gives you a sense of darkness, it must be unholy!"
 	..(user, extra_description)
 
+/obj/item/reagent_containers/food/snacks/boiled_spiderleg
+	name = "boiled spider leg"
+	desc = "A spider leg that has been boiled in salted water. It no longer twitches."
+	icon_state = "meat_spider_boiled"
+	trash = /obj/item/trash/plate
+	bitesize = 3
+	nutriment_amt = 8
+	cooked = TRUE
+	taste_tag = list(INSECTS_FOOD,MEAT_FOOD)
+
+/obj/item/reagent_containers/food/snacks/boiled_crab
+	name = "boiled crab"
+	desc = "Crab meat that has been boiled in salted water. You can almost taste the ocean breeze."
+	icon_state = "meat_crab_boiled"
+	bitesize = 3
+	nutriment_amt = 8
+	cooked = TRUE
+	taste_tag = list(INSECTS_FOOD,MEAT_FOOD)
+
+/obj/item/reagent_containers/food/snacks/rangoon_crab
+	name = "crab rangoon"
+	desc = "A crab dish stuffed with cream cheese and fried to golden perfection."
+	icon_state = "rangoon"
+	bitesize = 3
+	nutriment_amt = 5
+	cooked = TRUE
+	taste_tag = list(INSECTS_FOOD,MEAT_FOOD,CHEESE_FOOD)
+
+/obj/item/reagent_containers/food/snacks/rangoon
+	name = "cream cheese rangoon"
+	desc = "A delicious fried dumpling stuffed with cream cheese."
+	icon_state = "rangoon"
+	bitesize = 3
+	nutriment_amt = 5
+	cooked = TRUE
+	taste_tag = list(CHEESE_FOOD)
+
 /obj/item/reagent_containers/food/snacks/roach_egg
 	name = "boiled roach egg"
 	desc = "A cockroach egg that has been boiled in salted water. It no longer pulses with an inner life."
