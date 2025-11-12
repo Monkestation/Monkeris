@@ -87,6 +87,8 @@
 	remove_hud_actions(user)
 	if(overslot && is_held())
 		remove_overslot_contents(user)
+	if(ready && !no_double_tact)
+		end_tact(user)
 	user.update_on_move -= src
 	if(action_button_name)
 		user.action_button_remove(src)

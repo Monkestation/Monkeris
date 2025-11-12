@@ -235,7 +235,7 @@
 
 /datum/stat/robustness
 	name = STAT_ROB
-	desc = "Violence is what people do when they run out of good ideas. Increases your health, damage in unarmed combat, affect the knockdown chance."
+	desc = "Violence is what people do when they run out of good ideas. This stat increases your health, improves the handling of shields and heavy melee weapons, and increases damage and knockdown chance in unarmed combat."
 
 /datum/stat/toughness
 	name = STAT_TGH
