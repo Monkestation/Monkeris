@@ -100,7 +100,7 @@
 /turf/wall/untinted/onestar_reinforced,
 /area/crawler)
 "A" = (
-/turf/wall/low/onestar,
+/turf/wall/low/with_glass/onestar/reinf,
 /area/crawler)
 "B" = (
 /obj/machinery/light/built{

@@ -124,10 +124,10 @@
 /turf/floor/tiled/dark/brown_perforated,
 /area/outpost/blacksite/medium)
 "ci" = (
-/turf/wall/low/onestar,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/turf/wall/low/with_glass/onestar/reinf,
 /area/outpost/blacksite/medium)
 "cr" = (
 /obj/machinery/door/airlock/centcom{
@@ -528,6 +528,10 @@
 /obj/structure/reagent_dispensers/water_cooler,
 /turf/floor/tiled/derelict,
 /area/outpost/blacksite/medium)
+"kT" = (
+/obj/spawner/junk/low_chance,
+/turf/wall/low/with_glass/onestar/reinf,
+/area/outpost/blacksite/medium)
 "lc" = (
 /obj/structure/sign/derelict1{
 	pixel_x = 32
@@ -891,7 +895,7 @@
 /turf/floor/tiled/steel/bar_light,
 /area/outpost/blacksite/medium)
 "tc" = (
-/turf/wall/low/onestar,
+/turf/wall/low/with_glass/onestar/reinf,
 /area/outpost/blacksite/medium)
 "tg" = (
 /obj/spawner/toy/plushie,
@@ -1587,6 +1591,9 @@
 	pixel_y = -4
 	},
 /turf/floor/tiled/derelict,
+/area/outpost/blacksite/medium)
+"Rr" = (
+/turf/wall/low/with_glass/onestar,
 /area/outpost/blacksite/medium)
 "Ry" = (
 /obj/structure/sign/faction/one_star{
@@ -2664,9 +2671,9 @@ eO
 QS
 ZS
 jH
-tc
-tc
-tc
+Rr
+Rr
+Rr
 jH
 ZS
 px
@@ -2860,9 +2867,9 @@ eO
 QS
 ZS
 jH
-tc
-tc
-tc
+Rr
+Rr
+Rr
 jH
 ZS
 px
@@ -2969,7 +2976,7 @@ fD
 YU
 bw
 eO
-Xm
+kT
 YZ
 eO
 eO
@@ -3276,15 +3283,15 @@ zL
 eO
 eO
 eO
-tc
-tc
+Rr
+Rr
 fV
 fV
-tc
-tc
+Rr
+Rr
 eO
 eO
-tc
+Rr
 eO
 eO
 eO
