@@ -267,3 +267,10 @@
 	var/blocking = FALSE
 	/// item being used to block. Please remember to GC this
 	var/obj/item/blocking_item
+
+	///the icon currently used for the typing indicator's bubble
+	var/active_typing_indicator
+	///the icon currently used for the thinking indicator's bubble
+	var/active_thinking_indicator
+	/// What icon the mob uses for speechbubbles
+	var/bubble_icon = "default"

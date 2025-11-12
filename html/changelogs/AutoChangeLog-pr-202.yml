@@ -1,5 +1,0 @@
-author: Sun-Soaked
-delete-after: true
-changes:
-  - bugfix: characters with only a first name no longer have an extra unessecary
-      space in their chat messages

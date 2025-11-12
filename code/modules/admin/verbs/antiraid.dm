@@ -85,5 +85,6 @@ GLOBAL_LIST_EMPTY(PB_bypass) //Handles ckey
 		log_and_message_admins("[key_name(usr)] has toggled VPN checks for [ckey].")
 		query = SSdbcore.NewQuery("UPDATE [format_table_name("player")] SET VPN_check_white = !VPN_check_white WHERE id = :temp_id", list("temp_id" = temp_id))
 		query.Execute()
+		qdel(query)
 	else
 		to_chat(usr,"Player [ckey] not found!")

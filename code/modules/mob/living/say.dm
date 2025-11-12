@@ -131,7 +131,7 @@ var/list/channel_to_radio_key = new
 		volume ++
 	return volume
 
-/mob/living/say(message, datum/language/speaking = null, verb = src.verb_say, alt_name="")
+/mob/living/say(message, datum/language/speaking = null, verb = src.verb_say, alt_name="", bubble_type = bubble_icon)
 	if(client)
 		if(client.prefs.muted&MUTE_IC)
 			to_chat(src, span_red("You cannot speak in IC (Muted)."))
@@ -309,10 +309,6 @@ var/list/channel_to_radio_key = new
 
 		listening_obj |= getHearersInRangeChunked(T, message_range)
 
-	var/speech_bubble_test = say_test(message)
-	var/image/speech_bubble = image('icons/mob/talk.dmi', src, "h[speech_bubble_test]")
-	speech_bubble.layer = ABOVE_MOB_LAYER
-	QDEL_IN(speech_bubble, 30)
 
 	var/list/speech_bubble_recipients = list()
 	for(var/mob/M in listening)
@@ -325,7 +321,19 @@ var/list/channel_to_radio_key = new
 			speech_bubble_recipients += M.client
 		M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol, 1)
 
-	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(animate_speechbubble), speech_bubble, speech_bubble_recipients, 30)
+	// Speech bubble, but only for those who have runechat off
+	for(var/mob/M in listening)
+		if(M.client && !M.client.prefs.RC_enabled)
+			speech_bubble_recipients.Add(M.client)
+
+	var/talk_icon_state = say_test(message)
+	var/image/say_popup = image('icons/mob/talk.dmi', src, "[bubble_type][talk_icon_state]", FLY_LAYER)
+	say_popup.plane = ABOVE_HUD_PLANE
+	say_popup.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
+	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(animate_speechbubble), say_popup, speech_bubble_recipients, 3 SECONDS)
+	// LAZYADD(update_on_z, say_popup)
+	// addtimer(CALLBACK(src, PROC_REF(clear_saypopup), say_popup), 3.5 SECONDS)
+
 	// INVOKE_ASYNC(src, TYPE_PROC_REF(/atom/movable, animate_chat), message, speaking, italics, speech_bubble_recipients, 40, verb)
 	if(CONFIG_GET(flag/tts_enabled) && !message_mode && (!client || !BITTEST(client.prefs.muted, MUTE_TTS)) && (tts_seed || ishuman(src)))
 		//TO DO: Remove need for that damn copypasta
@@ -354,14 +362,12 @@ var/list/channel_to_radio_key = new
 
 
 /proc/animate_speechbubble(image/I, list/show_to, duration)
-	var/matrix/M = matrix()
-	M.Scale(0,0)
-	I.transform = M
-	I.alpha = 0
 	for(var/client/C in show_to)
 		C.images += I
-	animate(I, transform = 0, alpha = 255, time = 5, easing = ELASTIC_EASING)
-	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(fade_speechbubble), I), duration-3)
+	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(fade_speechbubble), I), duration - 1 SECONDS, TIMER_CLIENT_TIME)
+
+	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(remove_image_from_clients), I, show_to), duration, TIMER_CLIENT_TIME)
+
 
 /proc/fade_speechbubble(image/I)
 	animate(I, alpha = 0, time = 1, easing = EASE_IN)
@@ -371,9 +377,6 @@ var/list/channel_to_radio_key = new
 	for (var/mob/O in viewers(get_turf(src)))
 		O.hear_signlang(message, verb, language, src)
 	return 1
-
-/obj/effect/speech_bubble
-	var/mob/parent
 
 /mob/living/GetVoice()
 	return name

@@ -8,6 +8,8 @@
 	var/turf/source_turf    // The turf under the above.
 	var/light_power         // Intensity of the emitter light.
 	var/light_range         // The range of the emitted light.
+	var/light_depth         // multiz - how many levels down
+	var/light_height        // multiz - how many levels up
 	var/light_color         // The colour of the light, string, decomposed by parse_light_color()
 
 	// Variables for keeping track of the colour.
@@ -46,6 +48,8 @@
 	source_turf = top_atom
 	light_power = source_atom.light_power
 	light_range = source_atom.light_range
+	light_depth = source_atom.light_depth
+	light_height = source_atom.light_height
 	light_color = source_atom.light_color
 
 	parse_light_color()
@@ -129,6 +133,14 @@
 
 	if (source_atom.light_range != light_range)
 		light_range = source_atom.light_range
+		. = 1
+
+	if (source_atom.light_depth != light_depth)
+		light_depth = source_atom.light_depth
+		. = 1
+
+	if (source_atom.light_height != light_height)
+		light_height = source_atom.light_height
 		. = 1
 
 	if (light_range && light_power && !applied)
@@ -216,6 +228,98 @@
 
 		T.affecting_lights += src
 		affecting_turfs    += T
+
+		var/turf/O = T
+		if(O?.is_transparent && light_depth >= 1)
+			var/turf/B = GetBelow(T)
+			if(istype(B, /turf))
+				if (!B.lighting_corners_initialised)
+					B.generate_missing_corners()
+
+				for(var/A in B.get_corners())
+					var/datum/lighting_corner/C = A
+					if (C.update_gen == update_gen)
+						continue
+					C.update_gen = update_gen
+					C.affecting += src
+					if (!C.active)
+						effect_str[C] = 0
+						continue
+					APPLY_CORNER(C)
+
+				if (!B.affecting_lights)
+					B.affecting_lights = list()
+				B.affecting_lights += src
+				affecting_turfs += B
+
+				if(light_depth > 1)
+					if(B?.is_transparent)
+						B = GetBelow(B)
+						if(istype(B, /turf))
+							if (!B.lighting_corners_initialised)
+								B.generate_missing_corners()
+
+							for(var/A in B.get_corners())
+								var/datum/lighting_corner/C = A
+								if (C.update_gen == update_gen)
+									continue
+								C.update_gen = update_gen
+								C.affecting += src
+								if (!C.active)
+									effect_str[C] = 0
+									continue
+								APPLY_CORNER(C)
+
+							if (!B.affecting_lights)
+								B.affecting_lights = list()
+							B.affecting_lights += src
+							affecting_turfs += B
+
+				if(light_depth > 2)
+					if(B?.is_transparent)
+						B = GetBelow(B)
+						if(istype(B, /turf))
+							if (!B.lighting_corners_initialised)
+								B.generate_missing_corners()
+
+							for(var/A in B.get_corners())
+								var/datum/lighting_corner/C = A
+								if (C.update_gen == update_gen)
+									continue
+								C.update_gen = update_gen
+								C.affecting += src
+								if (!C.active)
+									effect_str[C] = 0
+									continue
+								APPLY_CORNER(C)
+
+							if (!B.affecting_lights)
+								B.affecting_lights = list()
+							B.affecting_lights += src
+							affecting_turfs += B
+
+		if(light_height >= 1)
+			var/turf/B = GetAbove(T)
+			if(B?.is_transparent)
+				if (!B.lighting_corners_initialised)
+					B.generate_missing_corners()
+
+				for(var/A in B.get_corners())
+					var/datum/lighting_corner/C = A
+					if (C.update_gen == update_gen)
+						continue
+					C.update_gen = update_gen
+					C.affecting += src
+					if (!C.active)
+						effect_str[C] = 0
+						continue
+					APPLY_CORNER(C)
+
+				if (!B.affecting_lights)
+					B.affecting_lights = list()
+				B.affecting_lights += src
+				affecting_turfs += B
+
 	END_FOR_DVIEW
 
 	update_gen++
@@ -252,6 +356,42 @@
 			T.generate_missing_corners()
 		corners |= T.get_corners()
 		turfs   += T
+
+		var/turf/O = T
+		if(O?.is_transparent && light_depth >= 1)
+			var/turf/B = GetBelow(T)
+			if(istype(B, /turf))
+				if (!B.lighting_corners_initialised)
+					B.generate_missing_corners()
+				corners |= B.get_corners()
+				turfs += B
+
+				if(light_depth > 1)
+					if(B?.is_transparent)
+						B = GetBelow(B)
+						if(istype(B, /turf))
+							if (!B.lighting_corners_initialised)
+								B.generate_missing_corners()
+							corners |= B.get_corners()
+							turfs += B
+
+				if(light_depth > 2)
+					if(B?.is_transparent)
+						B = GetBelow(B)
+						if(istype(B, /turf))
+							if (!B.lighting_corners_initialised)
+								B.generate_missing_corners()
+							corners |= B.get_corners()
+							turfs += B
+
+		if(light_height >= 1)
+			var/turf/B = GetAbove(T)
+			if(B?.is_transparent)
+				if (!B.lighting_corners_initialised)
+					B.generate_missing_corners()
+				corners |= B.get_corners()
+				turfs += B
+
 	END_FOR_DVIEW
 
 	var/list/L = turfs - affecting_turfs // New turfs, add us to the affecting lights of them.

@@ -79,8 +79,6 @@ GLOBAL_LIST_EMPTY(HUDdatums)
 
 // #define all_genders_define_list list(MALE, FEMALE, PLURAL, NEUTER)
 
-GLOBAL_LIST_EMPTY(turfs)			//list of all turfs
-
 GLOBAL_LIST_EMPTY(mannequins_)
 
 //Languages/species/whitelist.
