@@ -17,7 +17,7 @@
 
 
 /obj/item/storage/lockbox/attackby(obj/item/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/card/id))
+	if (isidcard(W))
 		if(src.broken)
 			to_chat(user, span_warning("It appears to be broken."))
 			return

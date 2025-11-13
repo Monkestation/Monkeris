@@ -36,7 +36,7 @@
 	var/hunger_factor = DEFAULT_HUNGER_FACTOR            // Multiplier for hunger.
 	var/taste_sensitivity = TASTE_NORMAL                 // How sensitive the species is to minute tastes.
 
-	var/min_age = 17
+	var/min_age = AGE_MIN
 	var/max_age = 70
 
 	// Language vars.

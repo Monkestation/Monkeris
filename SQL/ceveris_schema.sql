@@ -232,18 +232,39 @@ DROP TABLE IF EXISTS `library`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `library` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `author` varchar(255) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `content` varchar(255) DEFAULT NULL,
-  `category` varchar(255) DEFAULT NULL,
-  `author_id` varchar(32) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
+  `author` varchar(45) NOT NULL,
+  `title` varchar(45) NOT NULL,
+  `content` text NOT NULL,
+  `category` enum('Any','Fiction','Non-Fiction','Adult','Reference','Religion') NOT NULL,
+  `ckey` varchar(32) NOT NULL DEFAULT 'LEGACY',
+  `datetime` datetime NOT NULL,
   `deleted` tinyint(1) unsigned DEFAULT NULL,
+  `round_id_created` int(11) unsigned NULL,
   PRIMARY KEY (`id`),
-  KEY `index_library_on_author_id` (`author_id`),
-  CONSTRAINT `fk_rails_53d51ce16a` FOREIGN KEY (`author_id`) REFERENCES `player` (`ckey`)
+  KEY `deleted_idx` (`deleted`),
+  KEY `idx_lib_id_del` (`id`,`deleted`),
+  KEY `idx_lib_del_title` (`deleted`,`title`),
+  KEY `idx_lib_search` (`deleted`,`author`,`title`,`category`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `library_action`
+--
+
+DROP TABLE IF EXISTS `library_action`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `library_action` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `book` int(10) unsigned NOT NULL,
+  `reason` longtext DEFAULT NULL,
+  `ckey` varchar(32) NOT NULL DEFAULT '',
+  `datetime` datetime NOT NULL DEFAULT current_timestamp(),
+  `action` varchar(11) NOT NULL DEFAULT '',
+  `ip_addr` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
