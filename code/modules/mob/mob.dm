@@ -4,6 +4,8 @@
 		STOP_PROCESSING(SShumans, src)
 	else
 		STOP_PROCESSING(SSmobs, src)
+	if(buckled)
+		buckled.unbuckle_mob()
 	GLOB.dead_mob_list -= src
 	GLOB.living_mob_list -= src
 	GLOB.mob_list -= src
