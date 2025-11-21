@@ -368,7 +368,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 		var/quotedmsg = null
 		if(M)
-			quotedmsg = M.say_quote(message)
+			quotedmsg = M.say_quote_old(message)
 		else
 			quotedmsg = "says, \"[message]\""
 

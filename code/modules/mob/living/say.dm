@@ -219,7 +219,7 @@ var/list/channel_to_radio_key = new
 		speaking.broadcast(src, trim(message))
 		return 1
 
-	verb = say_quote(message, speaking)
+	verb = say_quote_old(message, speaking)
 
 	message = trim_left(message)
 	var/message_pre_stutter = message

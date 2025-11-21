@@ -149,6 +149,17 @@
 	else
 		return verb_say
 
+
+/mob/proc/say_quote_old(message, datum/language/speaking = null)
+	var/verb = "says"
+	var/ending = copytext(message, length(message))
+	if(ending=="!")
+		verb=pick("exclaims", "shouts", "yells")
+	else if(ending=="?")
+		verb="asks"
+
+	return verb
+
 /atom/movable/proc/say_quote(input, list/spans=list(speech_span), list/message_mods = list())
 	if(!input)
 		input = "..."
