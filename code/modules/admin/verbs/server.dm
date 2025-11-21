@@ -17,7 +17,7 @@
 		message_admins("[key_name(usr)] set the admin notice.")
 		log_admin("[key_name(usr)] set the admin notice:\n[new_admin_notice]")
 		to_chat(world, span_adminnotice("<b>Admin Notice:</b>\n \t [new_admin_notice]"))
-	BLACKBOX_LOG_ADMIN_VERB("Set Admin Notice") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	BLACKBOX_LOG_ADMIN_VERB("Set Admin Notice")
 	GLOB.admin_notice = new_admin_notice
 	return
 

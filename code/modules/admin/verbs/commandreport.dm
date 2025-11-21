@@ -30,7 +30,7 @@
 	if(!check_rights(R_ADMIN))
 		return
 
-	BLACKBOX_LOG_ADMIN_VERB("Create Command Report") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	BLACKBOX_LOG_ADMIN_VERB("Create Command Report")
 	var/datum/command_report_menu/tgui = new(usr)
 	tgui.ui_interact(usr)
 

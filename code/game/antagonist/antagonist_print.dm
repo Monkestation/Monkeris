@@ -98,7 +98,7 @@
 				text += "<br><font color='red'><B>The [role_text] has failed.</B></font>"
 			else
 				text += "<br><font color='green'><B>The [role_text] was successful!</B></font>"
-	if (!length(text))
+	if(!length(text))
 		return "<br><b>No objectives available</b>"
 	return text
 

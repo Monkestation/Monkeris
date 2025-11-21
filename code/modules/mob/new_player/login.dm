@@ -20,13 +20,10 @@
 		mind.active = TRUE
 		mind.current = src
 
-	// It's neccessary to have a hud since we need it for anything ma2html related
-	hud_used = new /datum/hud(src)
-
-
 	if(!loc)
 		Move(locate(/area/misc/start))
 
+	// we get a hud in the parent proc, a hud is neccessary for ma2html which character previews rely on
 	. = ..()
 	if(!. || !client)
 		return FALSE

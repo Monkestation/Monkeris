@@ -1,7 +1,6 @@
 #define SAVEFILE_VERSION_MIN	8
 #define SAVEFILE_VERSION_MAX	18
 
-#warn REMOVE DEBUG STATEMENTS WHEN DONE - Marisa
 /datum/preferences/proc/load_path(ckey,filename="preferences.sav")
 	if(!ckey)	return
 	path = "data/player_saves/[copytext(ckey,1,2)]/[ckey]/[filename]"

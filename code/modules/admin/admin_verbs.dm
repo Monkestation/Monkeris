@@ -353,7 +353,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 
 	if(usr.client.holder)
 		usr.client.holder.player_panel_new()
-		BLACKBOX_LOG_ADMIN_VERB("Player Panel New") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		BLACKBOX_LOG_ADMIN_VERB("Player Panel New")
 
 /client/proc/storyteller_panel()
 	set name = "Storyteller Panel"
@@ -367,7 +367,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	if(!check_rights(R_BAN))
 		return
 	holder.ban_panel()
-	BLACKBOX_LOG_ADMIN_VERB("Banning Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	BLACKBOX_LOG_ADMIN_VERB("Banning Panel")
 
 /client/proc/unban_panel()
 	set name = "Unbanning Panel"
@@ -375,7 +375,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	if(!check_rights(R_BAN))
 		return
 	holder.unban_panel()
-	BLACKBOX_LOG_ADMIN_VERB("Unbanning Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	BLACKBOX_LOG_ADMIN_VERB("Unbanning Panel")
 
 //game panel, allows to change game-mode etc
 /client/proc/game_panel()
@@ -383,7 +383,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	set category = "Admin"
 	if(holder)
 		holder.Game()
-		BLACKBOX_LOG_ADMIN_VERB("Game Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		BLACKBOX_LOG_ADMIN_VERB("Game Panel")
 
 
 /client/proc/secrets()
@@ -391,7 +391,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	set category = "Admin"
 	if (holder)
 		holder.Secrets()
-		BLACKBOX_LOG_ADMIN_VERB("Unbanning Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		BLACKBOX_LOG_ADMIN_VERB("Unbanning Panel")
 
 
 
@@ -425,7 +425,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 				zone.add(turf)
 
 	log_and_message_admins("[src] fixed the air.")
-	BLACKBOX_LOG_ADMIN_VERB("Fix air") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	BLACKBOX_LOG_ADMIN_VERB("Fix air")
 
 
 
