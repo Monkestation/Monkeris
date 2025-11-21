@@ -394,10 +394,6 @@
 /// Forid admins from possessing scringularaitirtiys
 /datum/config_entry/flag/forbid_singulo_possession
 
-/// Gives the !localhost! rank to any client connecting from 127.0.0.1 or ::1
-/datum/config_entry/flag/enable_localhost_rank
-	protection = CONFIG_ENTRY_LOCKED
-
 /// Defines whether the server uses the legacy admin system with admins.txt or the SQL system
 /datum/config_entry/flag/admin_legacy_system
 	protection = CONFIG_ENTRY_LOCKED

@@ -356,7 +356,6 @@
 		"inv3" = list("type" = /atom/movable/screen/silicon/module,     "loc" = "8,1", "module_num" = 3, "icon_state" = "inv3")
 	)
 
-	#warn Test cyborg bag HUD things. Runtime this happened at: haste.fleepy.tv\/ulahanecudoj.js - Marisa
 	StorageData = list(
 		"Xspace" = 4.5*32, //in pixels
 		"Yspace" = 1.5*32, //in pixels

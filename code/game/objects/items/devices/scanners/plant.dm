@@ -70,7 +70,6 @@
 		grown_seed = H.seed
 		grown_reagents = H.reagents
 
-	#warn Test scanning hydroponics trays that have no seeds in them - Marisa
 	if (grown_seed)
 		var/form_title = "[grown_seed.seed_name] (#[grown_seed.uid])"
 		dat += "<h3>Plant data for [form_title]</h3>"

@@ -232,7 +232,6 @@
 	else
 		usr.visible_message(span_info("\The [usr] swipes \the [ID_container] through \the [src]."))
 
-	#warn Test EFTPOS icons - Marisa
 	if(transaction_locked && !transaction_paid)
 		if(!linked_account)
 			to_chat(usr, "[ma2html(src, usr)][span_warning("EFTPOS is not connected to an account.")]")
@@ -244,7 +243,6 @@
 
 		var/attempt_pin = ""
 		var/datum/money_account/D = get_account(C.associated_account_number)
-		#warn Test EFTPOS account not existing - Marisa
 		if(!D)
 			to_chat(usr, "[ma2html(src, usr)][span_warning("That account does not exist.")]")
 			return

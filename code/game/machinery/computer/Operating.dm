@@ -24,8 +24,6 @@
 		return
 	interact(user)
 
-#warn Test putting non-human carbons on the operating table. - Marisa
-
 /obj/machinery/computer/operating/interact(mob/user)
 	if ( (get_dist(src, user) > 1 ) || (stat & (BROKEN|NOPOWER)) )
 		if (!issilicon(user))

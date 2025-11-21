@@ -97,7 +97,7 @@
 	for(var/mob/M in GLOB.player_list)
 		if(M == src)
 			continue
-		if(SSticker.current_state != GAME_STATE_FINISHED && (M.see_invisible < invisibility))
+		if(SSticker.current_state != GAME_STATE_FINISHED && (M.see_invisible < invisibility || !isdead(M)))
 			continue
 		if (M.client.prefs.RC_enabled)
 			M.create_chat_message(src, /datum/language/common, message)
