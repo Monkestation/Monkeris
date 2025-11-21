@@ -169,7 +169,6 @@
 
 
 
-	text += "<b>Votes:</b><br>"
 	for(var/datum/vote_choice/ch in choice_votes)
 		if(ch == winner)
 			text += "<b>"
@@ -178,11 +177,11 @@
 			text += "</b>"
 
 	if(!winner)
-		text += "\t<b>Did not vote - [non_voters]</b><br>"
+		text += "\<b>Did not vote - [non_voters]</b><br>"
 	else
 		text += "\tDid not vote - [non_voters]<br>"
 		winner.on_win()
 
-
 	log_vote(text)
-	to_chat(world, "<font color='purple'>[text]</font>")
+	to_chat(world, vote_font(fieldset_block("Vote Results: [name] ", text, "boxed_message purple_box")))
+	return

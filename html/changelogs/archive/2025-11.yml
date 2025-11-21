@@ -1,0 +1,31 @@
+2025-11-03:
+  Sun-Soaked:
+  - rscadd: Shields now trigger their raised state when blocking instead of when walking.
+      The slowdown is preserved.
+  - rscadd: bucklers and other non-riot shields can now be raised.
+  - tweak: Adds three shield-related gameplay tips
+  - balance: Adjusts the balance of many shields to work with being raised
+  - bugfix: removes unused shield code in human_defense.dm that was causing runtimes
+      whenever someone attacked a raised shield
+  - code_imp: moved some blocking related vars up to /mob.
+  - bugfix: simplemobs now ignore enemy simplemobs once they die
+  blackwolf602:
+  - rscadd: flavorless vender
+  - tweak: rearranged some venders and stripes
+  flleeppyy:
+  - rscadd: current initing subsystem now shows in window title.
+  - rscadd: missing update_ping verb.
+2025-11-06:
+  Sun-Soaked:
+  - bugfix: characters with only a first name no longer have an extra unessecary space
+      in their chat messages
+2025-11-08:
+  dwasint:
+  - rscadd: lighting respects z-levels
+  - bugfix: Eliminates 2 minute roundstart lag.
+2025-11-10:
+  flleeppyy:
+  - bugfix: add qdels to DB queries that were missing it
+  - tweak: Made votes look nicer
+  - rscadd: new speech bubbles
+  - bugfix: speech bubbles no longer stay after you type.

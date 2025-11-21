@@ -16,11 +16,7 @@
 			return
 
 	if(!message)
-		set_typing_indicator(TRUE)
-		hud_typing = TRUE
 		message = input("", "say (text)") as text
-		hud_typing = FALSE
-		set_typing_indicator(FALSE)
 	if(message)
 		say(message)
 
@@ -40,11 +36,7 @@
 			return
 
 	if(!message)
-		set_typing_indicator(TRUE)
-		hud_typing = TRUE
 		message = input("", "me (text)") as text
-		hud_typing = FALSE
-		set_typing_indicator(FALSE)
 	if(message)
 		message = sanitize(message)
 		if(use_me)

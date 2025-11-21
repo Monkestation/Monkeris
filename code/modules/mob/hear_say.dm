@@ -182,7 +182,7 @@
 	if(. != speaker.real_name && !isAI(speaker))
 	 //Announce computer and various stuff that broadcasts doesn't use it's real name but AI's can't pretend to be other mobs.
 		. = "[speaker.real_name] ([.])"
-	return "[.] [ghost_follow_link(speaker, src)]"
+	return "[ghost_follow_link(speaker, src)] [.]"
 
 /proc/say_timestamp()
 	return "<span class='say_quote'>\[[stationtime2text()]\]</span>"

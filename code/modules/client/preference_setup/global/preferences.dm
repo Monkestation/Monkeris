@@ -180,9 +180,6 @@ var/list/_client_preferences_by_type
 	key = "SHOW_TYPING"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
-/datum/client_preference/show_typing_indicator/changed(mob/preference_mob, new_value)
-	if(new_value == GLOB.PREF_HIDE)
-		QDEL_NULL(preference_mob.typing_indicator)
 
 /datum/client_preference/show_ooc
 	description ="OOC chat"

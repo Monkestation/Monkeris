@@ -27,7 +27,7 @@
 
 	whisper_say(message, speaking)
 
-/mob/living/proc/whisper_say(message, datum/language/speaking = null, alt_name="", verb="whispers")
+/mob/living/proc/whisper_say(message, datum/language/speaking = null, alt_name="", verb="whispers", bubble_type = bubble_icon)
 	if (istype(src.wear_mask, /obj/item/clothing/mask/muzzle) || istype(src.wear_mask, /obj/item/grenade))
 		to_chat(src, span_danger("You're muzzled and cannot speak!"))
 		return
@@ -126,9 +126,6 @@
 	watching  -= eavesdropping
 
 	//now mobs
-	var/speech_bubble_test = say_test(message)
-	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")
-	QDEL_IN(speech_bubble, 30)
 
 	var/list/speech_bubble_recipients = list()
 	for(var/mob/M in listening)
@@ -136,14 +133,20 @@
 			speech_bubble_recipients |= M.client
 		M.hear_say(message, verb, speaking, alt_name, italics, src)
 
-	if (eavesdropping.len)
+	if (length(eavesdropping))
 		var/new_message = stars(message)	//hopefully passing the message twice through stars() won't hurt... I guess if you already don't understand the language, when they speak it too quietly to hear normally you would be able to catch even less.
 		for(var/mob/M in eavesdropping)
 			if(M.client)
 				speech_bubble_recipients |= M.client
 			M.hear_say(new_message, verb, speaking, alt_name, italics, src)
 
-	animate_speechbubble(speech_bubble, speech_bubble_recipients, 30)
+	var/talk_icon_state = say_test(message)
+	var/image/say_popup = image('icons/mob/talk.dmi', src, "[bubble_type][talk_icon_state]", FLY_LAYER)
+	say_popup.plane = ABOVE_HUD_PLANE
+	say_popup.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
+	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(animate_speechbubble), say_popup, speech_bubble_recipients, 3 SECONDS)
+	// LAZYADD(update_on_z, say_popup)
+	// addtimer(CALLBACK(src, PROC_REF(clear_saypopup), say_popup), 3.5 SECONDS)
 
 	if (watching.len)
 		var/rendered = "<span class='game say'>[span_name("[src.name]")] [not_heard].</span>"

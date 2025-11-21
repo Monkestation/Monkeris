@@ -53,7 +53,6 @@
 /turf/Initialize(mapload, ...)
 	if(opacity)
 		has_opaque_atom = TRUE
-	GLOB.turfs += src
 
 	// TODO: Check which areas are on the ship, but marked improperly, and remove this code
 	var/area/A = loc
@@ -63,7 +62,6 @@
 	. = ..() // Calls /atom/proc/Initialize()
 
 /turf/Destroy()
-	GLOB.turfs -= src
 	updateVisibility(src)
 	..()
 	return QDEL_HINT_IWILLGC
@@ -75,6 +73,12 @@
 	return FALSE
 
 /turf/proc/can_build_cable(mob/user) // , floors override that
+	return FALSE
+
+/turf/proc/multiz_turf_del(turf/T, dir)
+	return FALSE
+
+/turf/proc/multiz_turf_new(turf/T, dir)
 	return FALSE
 
 /turf/attackby(obj/item/I, mob/user, params)
