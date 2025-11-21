@@ -503,8 +503,7 @@
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 		to_chat(user, span_notice("\The [src] can now be concealed."))
 		if(ishuman(user) && user.blocking)
-			var/mob/living/carbon/human/ourhuman = user
-			ourhuman.stop_blocking()
+			astype(user, /mob/living/carbon/human)?.stop_blocking()
 
 	add_fingerprint(user)
 	return
