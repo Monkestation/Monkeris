@@ -123,8 +123,6 @@
 	_clear_signal_refs()
 	//END: ECS SHIT
 
-	_clear_signal_refs()
-
 	return QDEL_HINT_QUEUE
 
 ///Only override this if you know what you're doing. You do not know what you're doing
