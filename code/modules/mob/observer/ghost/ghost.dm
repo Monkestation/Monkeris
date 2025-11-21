@@ -87,15 +87,39 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	return ..()
 
 /mob/observer/ghost/Topic(href, href_list)
-	if (href_list["track"])
-		if(ismob(href_list["track"]))
-			var/mob/target = locate(href_list["track"]) in SSmobs.mob_list | SShumans.mob_list
-			if(target)
+	..()
+	if(usr == src)
+		if(href_list["follow"] || href_list["track"])
+			var/atom/movable/target = locate(href_list["follow"] || href_list["track"])
+			if(istype(target) && (target != src))
 				ManualFollow(target)
-		else
-			var/atom/target = locate(href_list["track"])
+				return
+
+		if(href_list["x"] && href_list["y"] && href_list["z"])
+			var/tx = text2num(href_list["x"])
+			var/ty = text2num(href_list["y"])
+			var/tz = text2num(href_list["z"])
+			var/turf/target = locate(tx, ty, tz)
 			if(istype(target))
-				ManualFollow(target)
+				forceMove(target)
+				return
+
+		if(href_list["reenter"])
+			reenter_corpse()
+			return
+
+		if(href_list["jump"])
+			var/atom/movable/target = locate(href_list["jump"])
+			var/turf/target_turf = get_turf(target)
+			if(target_turf && isturf(target_turf))
+				forceMove(target_turf)
+
+		if(href_list["play"])
+			var/atom/movable/target = locate(href_list["play"])
+			if(istype(target) && (target != src))
+				target.attack_ghost(usr)
+				return
+
 
 /*
 Transfer_mind is there to check if mob is being deleted/not going to have a body.

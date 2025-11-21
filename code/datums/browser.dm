@@ -112,7 +112,11 @@
 	var/window_size = ""
 	if(width && height)
 		if(user?.get_preference_value(/datum/client_preference/ui_scale))
-			var/scaling = user.client.window_scaling
+			var/scaling = 1
+			if (!user.client)
+				to_chat(user, "We couldn't apply your UI scaling preferences. Please try reconnecting.")
+			else
+				scaling = user.client.window_scaling
 			window_size = "size=[width * scaling]x[height * scaling];"
 		else
 			window_size = "size=[width]x[height];"
