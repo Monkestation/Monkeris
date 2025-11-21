@@ -389,7 +389,7 @@
 		component_parts -= I
 	if(circuit)
 		circuit.forceMove(loc)
-		circuit.deconstruct(src)
+		circuit._deconstruct(src)
 	qdel(src)
 	return 1
 

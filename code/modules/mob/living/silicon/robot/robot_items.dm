@@ -264,6 +264,7 @@
 
 	//n_name = copytext(n_name, 1, 32)
 	if(( get_dist(user,paper) <= 1  && user.stat == 0))
+		log_paper("[key_name(user)] renamed [paper.name] to [n_name]")
 		paper.name = "paper[(n_name ? text("- '[n_name]'") : null)]"
 	add_fingerprint(user)
 	return
