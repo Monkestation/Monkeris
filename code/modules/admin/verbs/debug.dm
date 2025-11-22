@@ -390,7 +390,7 @@
 	set category = "Debug"
 	set name = "View Runtimes"
 	set desc = "Open the Runtime Viewer"
-	GLOB.error_cache.showTo(usr)
+	GLOB.error_cache.show_to(src)
 
 /client/proc/spawn_disciple()
 	set category = "Debug"
