@@ -279,7 +279,7 @@
 /turf/floor/tiled/dark/brown_perforated/airless,
 /area/outpost/blacksite/small)
 "oU" = (
-/turf/wall/low/onestar,
+/turf/wall/low/with_glass/onestar/reinf,
 /area/outpost/blacksite/small)
 "pg" = (
 /mob/living/carbon/superior_animal/stalker/dual,
