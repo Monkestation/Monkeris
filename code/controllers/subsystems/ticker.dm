@@ -41,6 +41,9 @@ SUBSYSTEM_DEF(ticker)
 	/// Num of ready admins, used for pregame stats on statpanel (only viewable by admins)
 	var/total_admins_ready = 0
 
+	var/queue_delay = 0
+	var/list/queued_players = list() //used for join queues when the server exceeds the hard population cap
+
 	var/delay_end = FALSE //if set true, the round will not restart on it's own
 	var/admin_delay_notice = "" //a message to display to anyone who tries to restart the world after a delay
 	var/ready_for_reboot = FALSE //all roundend preparation done with, all that's left is reboot
@@ -49,6 +52,7 @@ SUBSYSTEM_DEF(ticker)
 
 	var/quoted = FALSE
 	var/round_start_time = 0
+	var/real_round_start_time = 0
 	var/round_end_announced = 0 // Spam Prevention. Announce round end only once.
 
 	/// ID of round reboot timer, if it exists
@@ -114,6 +118,9 @@ SUBSYSTEM_DEF(ticker)
 				to_chat(world, span_boldnotice("Please, setup your character and select ready. Game will start in [DisplayTimeText(SSticker.GetTimeLeft())]."))
 			to_chat(world, span_notice("<b>Welcome to [station_name()]!</b>"))
 			current_state = GAME_STATE_PREGAME
+			// Start playing music for clients
+			for(var/client/C in GLOB.clients)
+				GLOB.lobbyScreen.play_music(C)
 			SEND_SIGNAL(src, COMSIG_TICKER_ENTER_PREGAME)
 			fire()
 		if(GAME_STATE_PREGAME)
@@ -171,6 +178,7 @@ SUBSYSTEM_DEF(ticker)
 		if(GAME_STATE_PLAYING)
 			GLOB.storyteller.Process()
 			GLOB.storyteller.process_events()
+			check_queue()
 
 			if(!process_empty_server())
 				return
@@ -180,8 +188,6 @@ SUBSYSTEM_DEF(ticker)
 			if(!nuke_in_progress && game_finished)
 				current_state = GAME_STATE_FINISHED
 				Master.SetRunLevel(RUNLEVEL_POSTGAME)
-				for(var/client_key in SSinactivity_and_job_tracking.current_playtimes)
-					SSjob.SavePlaytimes(client_key)
 				declare_completion()
 
 // This proc will scan for player and if the game is in progress and...
@@ -282,6 +288,9 @@ SUBSYSTEM_DEF(ticker)
 
 	callHook("roundstart")
 
+	round_start_time = world.time //otherwise round_start_time would be 0 for the signals
+	real_round_start_time = REALTIMEOFDAY
+
 	// no, block the main thread.
 	GLOB.storyteller.set_up()
 	to_chat(world, span_notice("<B>Welcome to [station_name()], enjoy your stay!</B>"))
@@ -292,7 +301,6 @@ SUBSYSTEM_DEF(ticker)
 		N.new_player_panel_proc()
 
 	CHECK_TICK
-	setup_codespeak()
 	generate_contracts(min(6 + round(minds.len / 5), 12))
 	generate_excel_contracts(min(6 + round(minds.len / 5), 12))
 	excel_check()
@@ -306,8 +314,6 @@ SUBSYSTEM_DEF(ticker)
 			admins_number++
 	if(admins_number == 0)
 		send2adminchat("Round has started with no admins online.")
-
-	round_start_time = world.time //otherwise round_start_time would be 0 for the signals
 
 	PostSetup()
 	return TRUE
@@ -599,8 +605,9 @@ SUBSYSTEM_DEF(ticker)
 	if(dronecount)
 		to_chat(world, "<b>There [dronecount>1 ? "were" : "was"] [dronecount] industrious maintenance [dronecount>1 ? "drones" : "drone"] at the end of this round.</b>")
 
-	GLOB.storyteller.declare_completion()//To declare normal completion.
-	scoreboard()//scores
+	GLOB.storyteller.declare_completion() //To declare normal completion.
+	scoreboard() //scores
+	gather_roundend_feedback()
 	//Ask the event manager to print round end information
 	SSevent.RoundEnd()
 	SSdbcore.SetRoundEnd()
@@ -625,6 +632,37 @@ SUBSYSTEM_DEF(ticker)
 	ready_for_reboot = TRUE
 	standard_reboot()
 
+/datum/controller/subsystem/ticker/proc/gather_roundend_feedback()
+	gather_antag_data()
+
+/datum/controller/subsystem/ticker/proc/gather_antag_data()
+	// var/team_gid = 1
+	// var/list/team_ids = list()
+
+	for(var/datum/antagonist/A in GLOB.antagonists)
+		if(!A.owner)
+			continue
+
+		var/list/antag_info = list()
+		antag_info["key"] = A.owner.key
+		antag_info["name"] = A.owner.name
+		antag_info["antagonist_type"] = A.type
+		antag_info["antagonist_name"] = A.id //For auto and custom roles
+		antag_info["objectives"] = list()
+		antag_info["team"] = list()
+		// var/datum/team/T = A.get_team()
+		// if(T)
+		// 	antag_info["team"]["type"] = T.type
+		// 	antag_info["team"]["name"] = T.name
+		// 	if(!team_ids[T])
+		// 		team_ids[T] = team_gid++
+		// 	antag_info["team"]["id"] = team_ids[T]
+
+		if(length(A.objectives))
+			for(var/datum/objective/O in A.objectives)
+				var/result = O.check_completion() ? "SUCCESS" : "FAIL"
+				antag_info["objectives"] += list(list("objective_type"=O.type,"text"=O.explanation_text,"result"=result))
+		SSblackbox.record_feedback("associative", "antagonists", 1, antag_info)
 /datum/controller/subsystem/ticker/proc/save_admin_data()
 	if(IsAdminAdvancedProcCall())
 		to_chat(usr, "<span class='admin prefix'>Admin rank DB Sync blocked: Advanced ProcCall detected.</span>")
@@ -705,6 +743,39 @@ SUBSYSTEM_DEF(ticker)
 				return
 			qdel(query_update_everything_ranks)
 		qdel(query_check_everything_ranks)
+
+/datum/controller/subsystem/ticker/proc/check_queue()
+	if(!queued_players.len)
+		return
+	var/hard_popcap = CONFIG_GET(number/hard_popcap)
+	if(!hard_popcap)
+		list_clear_nulls(queued_players)
+		for (var/mob/new_player/new_player in queued_players)
+			to_chat(new_player, span_userdanger("The alive players limit has been released!<br><a href='byond://?src=[REF(new_player)];late_join=override'>[html_encode(">>Join Game<<")]</a>"))
+			SEND_SOUND(new_player, sound('sound/misc/notice1.ogg'))
+			send_link(new_player, "?late_join=override")
+		queued_players.len = 0
+		queue_delay = 0
+		return
+
+	queue_delay++
+	var/mob/new_player/next_in_line = queued_players[1]
+
+	switch(queue_delay)
+		if(5) //every 5 ticks check if there is a slot available
+			list_clear_nulls(queued_players)
+			if(living_player_count() < hard_popcap)
+				if(next_in_line?.client)
+					to_chat(next_in_line, span_userdanger("A slot has opened! You have approximately 20 seconds to join. <a href='byond://?src=[REF(next_in_line)];late_join=override'>\>\>Join Game\<\<</a>"))
+					SEND_SOUND(next_in_line, sound('sound/misc/notice1.ogg'))
+					send_link(next_in_line, "?late_join=override")
+					return
+				queued_players -= next_in_line //Client disconnected, remove he
+			queue_delay = 0 //No vacancy: restart timer
+		if(25 to INFINITY)  //No response from the next in line when a vacancy exists, remove he
+			to_chat(next_in_line, span_danger("No response received. You have been removed from the line."))
+			queued_players -= next_in_line
+			queue_delay = 0
 
 
 /datum/controller/subsystem/ticker/proc/HasRoundStarted()

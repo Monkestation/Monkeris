@@ -58,6 +58,7 @@ GLOBAL_LIST_INIT(admin_verbs_debug, list(
 	/client/proc/restart_controller,
 	/client/proc/debug_antagonist_template,
 	/client/proc/cmd_display_init_log,
+	/client/proc/cmd_display_init_costs,
 	/client/proc/kill_air,
 	/datum/admins/proc/spawn_fruit,
 	/datum/admins/proc/spawn_plant,
@@ -74,6 +75,7 @@ GLOBAL_LIST_INIT(admin_verbs_debug, list(
 	/client/proc/view_runtimes,
 	/client/proc/spawn_disciple,
 	/client/proc/delete_npcs,
+	/client/proc/get, /*Teleport atom to where usr is*/
 	/client/proc/map_template_load,
 	/client/proc/map_template_load_on_new_z,
 	/client/proc/map_template_upload,
@@ -157,19 +159,21 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 	/client/proc/cmd_debug_del_all,
 	/client/proc/cmd_display_del_log,
 	/client/proc/cmd_admin_delete,
-	/client/verb/whitelistPlayerForJobs,
-	/client/verb/unwhitelistPlayerForJobs,
+	// /client/verb/whitelistPlayerForJobs,
+	// /client/verb/unwhitelistPlayerForJobs,
 	/client/proc/empty_ai_core_toggle_latejoin,
 	/client/proc/investigate_show,
 	/client/proc/admin_memo,
 	/client/proc/admin_ghost,
 	/client/proc/invisimin,
 	/datum/verbs/menu/Admin/verb/playerpanel, /* It isn't /datum/admin but it fits no less */
+	/client/proc/cmd_admin_check_player_exp, /* shows players by playtime */
 	/client/proc/storyteller_panel,
 	/client/proc/ban_panel,
 	/client/proc/unban_panel,
 	/client/proc/game_panel,
 	/client/proc/secrets,
+	/client/proc/fix_air_all,
 	/client/proc/fix_air,
 	/client/proc/colorooc,
 	/client/proc/stealth,
@@ -350,7 +354,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 
 	if(usr.client.holder)
 		usr.client.holder.player_panel_new()
-		// SSblackbox.record_feedback("tally", "admin_verb", 1, "Player Panel New") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		BLACKBOX_LOG_ADMIN_VERB("Player Panel New")
 
 /client/proc/storyteller_panel()
 	set name = "Storyteller Panel"
@@ -364,7 +368,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	if(!check_rights(R_BAN))
 		return
 	holder.ban_panel()
-	// SSblackbox.record_feedback("tally", "admin_verb", 1, "Banning Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	BLACKBOX_LOG_ADMIN_VERB("Banning Panel")
 
 /client/proc/unban_panel()
 	set name = "Unbanning Panel"
@@ -372,7 +376,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	if(!check_rights(R_BAN))
 		return
 	holder.unban_panel()
-	// SSblackbox.record_feedback("tally", "admin_verb", 1, "Unbanning Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	BLACKBOX_LOG_ADMIN_VERB("Unbanning Panel")
 
 //game panel, allows to change game-mode etc
 /client/proc/game_panel()
@@ -380,15 +384,20 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	set category = "Admin"
 	if(holder)
 		holder.Game()
+		BLACKBOX_LOG_ADMIN_VERB("Game Panel")
+
 
 /client/proc/secrets()
 	set name = "Secrets"
 	set category = "Admin"
 	if (holder)
 		holder.Secrets()
+		BLACKBOX_LOG_ADMIN_VERB("Unbanning Panel")
 
-/client/proc/fix_air()
-	set name = "Fix air (lags)"
+
+
+/client/proc/fix_air_all()
+	set name = "Fix air everywhere (lags)"
 	set category = "Admin"
 	ASSERT(holder)
 
@@ -417,7 +426,48 @@ GLOBAL_PROTECT(admin_verbs_possess)
 				zone.add(turf)
 
 	log_and_message_admins("[src] fixed the air.")
+	BLACKBOX_LOG_ADMIN_VERB("Fix air")
 
+
+
+// Proc taken from yogstation, credit to nichlas0010 for the original
+/client/proc/fix_air(turf/open/T in world)
+	set name = "Fix Air"
+	set category = "Admin.Game"
+	set desc = "Fixes air in specified radius."
+
+	if(!holder)
+		to_chat(src, "Only administrators may use this command.", confidential = TRUE)
+		return
+	if(check_rights(R_ADMIN, TRUE))
+		var/range = input("Enter range:","Num",2) as num
+		message_admins("[key_name_admin(usr)] fixed air with range [range] in area [T.loc.name]")
+		usr.log_message("fixed air with range [range] in area [T.loc.name]", LOG_ADMIN)
+		var/list/zones_to_update = list()
+		for(var/turf/open/turf in range(range,T))
+			if(turf.blocks_air)
+			//skip walls
+				continue
+			if(turf.zone)
+				turf.zone.remove(turf) // Handles visual updates and a part of fire removal
+			if (turf.air)
+				turf.reset_air()
+
+			for(var/datum/zone/zone in SSair.zones)
+				if(zone.contents.Find(T) && !zones_to_update.Find(zone))
+					zones_to_update += zone
+
+
+		for(var/datum/zone/zone in zones_to_update)
+			// Find the zone this turf is in and reinstance it.
+			// Doing reset_air alone on a turf does not do it justice.
+			qdel(zone.air)
+			zone.air = new
+
+			for(var/turf/turf in zone.contents)
+				if(turf.air)
+					zone.add(turf)
+			break
 
 //allows us to set a custom colour for everythign we say in ooc
 /client/proc/colorooc()
@@ -571,7 +621,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	to_chat(src, span_interface("You are now a normal player."))
 	log_admin("[src] deadminned themselves.")
 	message_admins("[src] deadminned themselves.")
-	// SSblackbox.record_feedback("tally", "admin_verb", 1, "Deadmin")
+	BLACKBOX_LOG_ADMIN_VERB("Deadmin")
 
 /client/proc/readmin()
 	set name = "Readmin"
@@ -596,7 +646,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	to_chat(src, span_interface("You are now an admin."), confidential = TRUE)
 	message_admins("[src] re-adminned themselves.")
 	log_admin("[src] re-adminned themselves.")
-	// SSblackbox.record_feedback("tally", "admin_verb", 1, "Readmin")
+	BLACKBOX_LOG_ADMIN_VERB("Readmin")
 
 /client/proc/toggle_log_hrefs()
 	set name = "Toggle href logging"
@@ -844,7 +894,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 							for(var/i in 2 to LAZYLEN(GLOB.custom_kits[kit_of_choice]))
 								var/item_path = GLOB.custom_kits[kit_of_choice][i]
 								new item_path(storage)
-						log_and_message_admins("[ckey] spawned custom kit at [admin_jump_link(location, src)]")
+						log_and_message_admins("[ckey] spawned custom kit at [ADMIN_COORDJMP(location)]")
 			if("Create or edit")
 				var/do_what_exactly = alert(user, "What do?", "[header]", "Create", "Edit", "Cancel")
 				switch(do_what_exactly)

@@ -818,7 +818,7 @@
 			user.put_in_active_hand(broken_device)
 
 //Robots take half damage from basic attacks.
-/mob/living/silicon/robot/attack_generic(mob/user, damage, attack_message)
+/mob/living/silicon/robot/attack_generic(mob/user, damage, attack_message, block_handled)
 	return ..(user,FLOOR(damage * 0.5, 1),attack_message)
 
 /mob/living/silicon/robot/proc/allowed(atom/movable/A)
@@ -1233,3 +1233,10 @@
 	if(duration)
 		if(!HasTrait(CYBORG_TRAIT_FLASH_RESISTANT))
 			Weaken(duration)
+
+/mob/living/silicon/robot/get_exp_list(minutes)
+	. = ..()
+
+	var/datum/job/cyborg/cyborg_job_ref = SSjob.GetJobType(/datum/job/cyborg)
+
+	.[cyborg_job_ref.title] = minutes

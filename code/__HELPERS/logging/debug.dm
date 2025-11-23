@@ -11,6 +11,10 @@
 /proc/log_filter_raw(text, list/data)
 	logger.Log(LOG_CATEGORY_FILTER, text, data)
 
+/// Logging for job slot changes
+/proc/log_job_debug(text, list/data)
+	logger.Log(LOG_CATEGORY_DEBUG_JOB, text, data)
+
 // #ifndef DISABLE_DREAMLUAU
 // /// Logging for lua scripting
 // /proc/log_lua(text, list/data)

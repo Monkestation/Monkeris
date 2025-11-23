@@ -33,6 +33,9 @@
 		return FALSE
 	GLOB.player_list |= src
 	update_Login_details()
+	canon_client = client
+	client.persistent_client.set_mob(src)
+
 	world.update_status()
 
 	client.images = list()				//remove the images such as AIs being unable to see runes
@@ -43,11 +46,12 @@
 
 	next_move = 1
 	sight |= SEE_SELF
+	client.statobj = src
 
-	// YES, this is expensive
-	// YES, this calls 200k Move() calls
-	// however eris paralax is so bad that removing this breaks it
+	MakeParallax()
 
+	// We don't call the parent login proc. Previous comment below.
+	// --
 	// BYOND's internal implementation of login does two things
 	// 1: Set statobj to the mob being logged into (We got this covered)
 	// 2: And I quote "If the mob has no location, place it near (1,1,1) if possible"
@@ -58,7 +62,6 @@
 	// We don't allow moves from nullspace -> somewhere. This means the loop has to iterate all the turfs in (1,1,1)'s area
 	// For us, (1,1,1) is a space tile. This means roughly 200,000! calls to Move()
 	// You do not want this
-	..()
 
 	if(!client)
 		return FALSE
@@ -90,6 +93,20 @@
 		update_action_buttons()
 
 		client.CAN_MOVE_DIAGONALLY = FALSE
+
+		for(var/datum/action/A as anything in persistent_client.player_actions)
+			A.Grant(src)
+
+		for(var/datum/callback/CB as anything in persistent_client.post_login_callbacks)
+			CB.Invoke()
+
+		log_played_names(
+			client.ckey,
+			list(
+				"[name]" = tag,
+				"[real_name]" = tag,
+			),
+		)
 
 	update_client_colour(0)
 

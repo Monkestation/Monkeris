@@ -1,16 +1,15 @@
 GLOBAL_VAR_INIT(random_parallax, pick("space0", "space1", "space2", "space3", "space4", "space5", "space6"))
 
-/obj/parallax
+/atom/movable/screen/parallax
 	icon = 'icons/parallax.dmi'
 	icon_state = "space0"
 	name = "parallax"
 	mouse_opacity = 0
 	blend_mode = BLEND_MULTIPLY
 	plane = PLANE_SPACE_PARALLAX
-	anchored = TRUE
 	var/mob/owner
 
-/obj/parallax/New(mob/M)
+/atom/movable/screen/parallax/New(mob/M)
 	owner = M
 	owner.parallax += src
 	SSevent.all_parallaxes += src
@@ -18,7 +17,7 @@ GLOBAL_VAR_INIT(random_parallax, pick("space0", "space1", "space2", "space3", "s
 	update()
 	..(null)
 
-/obj/parallax/Destroy()
+/atom/movable/screen/parallax/Destroy()
 	owner = null
 	SSevent.all_parallaxes -= src
 	return ..()
@@ -27,7 +26,7 @@ GLOBAL_VAR_INIT(random_parallax, pick("space0", "space1", "space2", "space3", "s
  * This proc updates your parallax (duh). If your view has been altered by binoculars, admin fuckery, and so on.
  * We need to make the space bigger by applying a matrix transform to it. This is hardcoded for now.
  */
-/obj/parallax/proc/update()
+/atom/movable/screen/parallax/proc/update()
 	if(!owner || !owner.client)
 		return
 	var/turf/T = get_turf(owner.client.eye)
@@ -59,32 +58,33 @@ GLOBAL_VAR_INIT(random_parallax, pick("space0", "space1", "space2", "space3", "s
 		M.Scale(1)
 	transform = M
 
-/obj/parallax/update_icon(new_icon_state)
+/atom/movable/screen/parallax/update_icon(new_icon_state)
 	icon_state = new_icon_state
 
-/obj/parallax/update_plane()
+/atom/movable/screen/parallax/update_plane()
 	return
 
-/obj/parallax/set_plane(np)
+/atom/movable/screen/parallax/set_plane(np)
 	plane = np
 
 // Mob stuff
 /mob
-	var/obj/parallax/parallax
+	var/atom/movable/screen/parallax/parallax
 
 /mob/Move(NewLoc, Dir = 0, step_x = 0, step_y = 0, glide_size_override = 0)
 	. = ..()
-	if(. && parallax)
-		parallax.update()
+	if(.)
+		parallax?.update()
 
 /mob/forceMove(atom/destination, special_event, glide_size_override=0)
 	. = ..()
-	if(. && parallax)
-		parallax.update()
+	if(.)
+		parallax?.update()
 
 
-/mob/Login()
-	if(!parallax)
+/mob/proc/MakeParallax(force = FALSE)
+	if(!parallax || force)
 		parallax = new(src)
-	client.screen += parallax
-	..()
+		var/atom/movable/screen/parallax/oldpara = locate() in client.screen
+		qdel(oldpara)
+	client.screen |= parallax

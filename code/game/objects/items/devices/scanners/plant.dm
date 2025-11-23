@@ -70,18 +70,22 @@
 		grown_seed = H.seed
 		grown_reagents = H.reagents
 
-	var/form_title = "[grown_seed.seed_name] (#[grown_seed.uid])"
-	dat += "<h3>Plant data for [form_title]</h3>"
+	if (grown_seed)
+		var/form_title = "[grown_seed.seed_name] (#[grown_seed.uid])"
+		dat += "<h3>Plant data for [form_title]</h3>"
+	else
+		dat += "<h3>No seed present</h3>"
 
 	dat += "<h2>General Data</h2>"
 
-	dat += "<table>"
-	dat += "<tr><td><b>Endurance</b></td><td>[grown_seed.get_trait(TRAIT_ENDURANCE)]</td></tr>"
-	dat += "<tr><td><b>Yield</b></td><td>[grown_seed.get_trait(TRAIT_YIELD)]</td></tr>"
-	dat += "<tr><td><b>Maturation time</b></td><td>[grown_seed.get_trait(TRAIT_MATURATION)]</td></tr>"
-	dat += "<tr><td><b>Production time</b></td><td>[grown_seed.get_trait(TRAIT_PRODUCTION)]</td></tr>"
-	dat += "<tr><td><b>Potency</b></td><td>[grown_seed.get_trait(TRAIT_POTENCY)]</td></tr>"
-	dat += "</table>"
+	if (grown_seed)
+		dat += "<table>"
+		dat += "<tr><td><b>Endurance</b></td><td>[grown_seed.get_trait(TRAIT_ENDURANCE)]</td></tr>"
+		dat += "<tr><td><b>Yield</b></td><td>[grown_seed.get_trait(TRAIT_YIELD)]</td></tr>"
+		dat += "<tr><td><b>Maturation time</b></td><td>[grown_seed.get_trait(TRAIT_MATURATION)]</td></tr>"
+		dat += "<tr><td><b>Production time</b></td><td>[grown_seed.get_trait(TRAIT_PRODUCTION)]</td></tr>"
+		dat += "<tr><td><b>Potency</b></td><td>[grown_seed.get_trait(TRAIT_POTENCY)]</td></tr>"
+		dat += "</table>"
 
 	if(grown_reagents && grown_reagents.reagent_list && grown_reagents.reagent_list.len)
 		dat += "<h2>Reagent Data</h2>"
@@ -89,6 +93,9 @@
 		dat += "<br>This sample contains: "
 		for(var/datum/reagent/R in grown_reagents.reagent_list)
 			dat += "<br>- [R.id], [grown_reagents.get_reagent_amount(R.id)] unit(s)"
+
+	if (!grown_seed)
+		return JOINTEXT(dat)
 
 	dat += "<h2>Other Data</h2>"
 

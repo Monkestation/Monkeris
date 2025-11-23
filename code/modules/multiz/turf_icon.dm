@@ -5,9 +5,6 @@
 	is_transparent = TRUE
 
 /turf/open/update_icon(update_neighbors, roundstart_update = FALSE)
-	if (!SSticker.IsRoundInProgress())
-		return
-
 	if (roundstart_update)
 		if (_initialized_transparency)
 			return
@@ -30,9 +27,6 @@
 	update_openspace() //propagate update upwards
 
 /turf/space/update_icon(update_neighbors, roundstart_update = FALSE)
-	if (SSticker.current_state < GAME_STATE_PLAYING)
-		return
-
 	if (roundstart_update)
 		if (_initialized_transparency)
 			return
@@ -52,14 +46,6 @@
 
 	_initialized_transparency = TRUE
 	update_openspace()
-
-/hook/roundstart/proc/init_openspace()
-	for (var/turf/T in GLOB.turfs)
-		if (T.is_transparent)
-			T.update_icon(null, TRUE)
-
-		CHECK_TICK
-	return TRUE
 
 /atom/proc/update_openspace()
 	var/turf/T = GetAbove(src)

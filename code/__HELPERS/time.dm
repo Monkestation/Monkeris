@@ -38,9 +38,9 @@ var/next_station_date_change = 1 DAYS
 		station_date = num2text((text2num(time2text(timeofday, "YYYY")) + 544)) + "-" + time2text(timeofday, "MM-DD")
 	return station_date
 
-/proc/time_stamp()
-	return time2text(world.timeofday, "hh:mm:ss")
-
+/proc/time_stamp(format = "hh:mm:ss", show_ds)
+	var/time_string = time2text(world.timeofday, format)
+	return show_ds ? "[time_string]:[world.timeofday % 10]" : time_string
 
 //Returns the world time in english
 /proc/worldtime2text(time = world.time, timeshift = 1)
@@ -140,13 +140,13 @@ var/last_roundduration2text = 0
 /proc/SQLtime(timevar)
 	return time2text(timevar || world.timeofday, "YYYY-MM-DD hh:mm:ss")
 
-var/global/midnight_rollovers = 0
-var/global/rollovercheck_last_timeofday = 0
-
+GLOBAL_VAR_INIT(midnight_rollovers, 0)
+GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 /proc/update_midnight_rollover()
-	if (world.timeofday < rollovercheck_last_timeofday) //TIME IS GOING BACKWARDS!
-		return midnight_rollovers++
-	return midnight_rollovers
+    if (world.timeofday < GLOB.rollovercheck_last_timeofday) //TIME IS GOING BACKWARDS!
+        GLOB.midnight_rollovers++
+    GLOB.rollovercheck_last_timeofday = world.timeofday
+    return GLOB.midnight_rollovers
 
 /proc/ticks_to_text(ticks)
 	if(ticks%1 != 0)

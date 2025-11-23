@@ -6,9 +6,9 @@
 
 
 	if(isghost(src) || stats.getPerk(PERK_CODESPEAK_COP))
-		message = cop_codes.find_message(message) ? "[message] ([cop_codes.find_message(message)])" : message
+		message = GLOB.cop_codes.find_message(message) ? "[message] ([GLOB.cop_codes.find_message(message)])" : message
 	if(isghost(src) || stats.getPerk(PERK_CODESPEAK_SERB))
-		message = serb_codes.find_message(message) ? "[message] ([serb_codes.find_message(message)])" : message
+		message = GLOB.serb_codes.find_message(message) ? "[message] ([GLOB.serb_codes.find_message(message)])" : message
 
 	var/speaker_name = speaker.name
 	if(ishuman(speaker))
@@ -79,11 +79,11 @@
 		return
 
 	if(isghost(src) || stats.getPerk(PERK_CODESPEAK_COP))
-		var/found = cop_codes.find_message_radio(message)
+		var/found = GLOB.cop_codes.find_message_radio(message)
 		if(found)
 			message = "[message] ([found])"
 	if(isghost(src) || stats.getPerk(PERK_CODESPEAK_SERB))
-		var/found = serb_codes.find_message_radio(message)
+		var/found = GLOB.serb_codes.find_message_radio(message)
 		if(found)
 			message = "[message] ([found])"
 
@@ -182,7 +182,7 @@
 	if(. != speaker.real_name && !isAI(speaker))
 	 //Announce computer and various stuff that broadcasts doesn't use it's real name but AI's can't pretend to be other mobs.
 		. = "[speaker.real_name] ([.])"
-	return "[.] [ghost_follow_link(speaker, src)]"
+	return "[ghost_follow_link(speaker, src)] [.]"
 
 /proc/say_timestamp()
 	return "<span class='say_quote'>\[[stationtime2text()]\]</span>"

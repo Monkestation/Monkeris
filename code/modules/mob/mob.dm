@@ -1,8 +1,11 @@
 /mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
+	persistent_client?.set_mob(null)
 	if(ishuman(src))
 		STOP_PROCESSING(SShumans, src)
 	else
 		STOP_PROCESSING(SSmobs, src)
+	if(buckled)
+		buckled.unbuckle_mob()
 	GLOB.dead_mob_list -= src
 	GLOB.living_mob_list -= src
 	GLOB.mob_list -= src
@@ -1293,6 +1296,17 @@ All Canmove setting in this proc is temporary. This var should not be set from h
 		"[key_name(src)] manually changed selected zone",
 		data = zones
 	)
+
+/// Cleanup proc that's called when a mob loses a client, either through client destroy or logout
+/// Logout happens post client del, so we can't just copypaste this there. This keeps things clean and consistent
+/mob/proc/become_uncliented()
+	if(!canon_client)
+		return
+
+	for(var/datum/callback/callback as anything in persistent_client?.post_logout_callbacks)
+		callback.Invoke()
+
+	canon_client = null
 
 /mob/proc/set_stat(new_stat)
 	. = stat != new_stat

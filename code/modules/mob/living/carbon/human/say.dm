@@ -144,7 +144,7 @@
    for it but just ignore it.
 */
 
-/mob/living/carbon/human/say_quote(message, datum/language/speaking = null)
+/mob/living/carbon/human/say_quote_old(message, datum/language/speaking = null)
 	var/verb = verb_say
 	var/ending = copytext(message, length(message))
 

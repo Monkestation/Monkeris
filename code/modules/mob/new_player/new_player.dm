@@ -81,7 +81,7 @@
 	output += "</div>"
 
 	if (src?.client?.holder)
-		panel = new(src, "Welcome","Welcome", 240, 340, src)
+		panel = new(src, "Welcome","Welcome", 240, 360, src)
 	else
 		panel = new(src, "Welcome","Welcome", 220, 280, src)
 
@@ -148,7 +148,6 @@
 				to_chat(src, span_danger("Could not locate an observer spawn point. Use the Teleport verb to jump to the station map."))
 			observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 
-			announce_ghost_joinleave(src)
 			observer.icon = client.prefs.update_preview_icon()
 			observer.alpha = 127
 
@@ -159,20 +158,47 @@
 			if(!client.holder && !CONFIG_GET(flag/antag_hud_allowed)) // For new ghosts we remove the verb from even showing up if it's not allowed.
 				remove_verb(observer, /mob/observer/ghost/verb/toggle_antagHUD)
 			//observer.key = key
-			observer.ckey = ckey
+			observer.PossessByPlayer(ckey)
 			observer.client.init_verbs()
 			observer.initialise_postkey()
+			observer.client = client
+
+			if (observer.client)
+				observer.persistent_client.time_of_death = world.time
 
 			observer.client.create_UI(observer.type)
 			qdel(src)
+			announce_ghost_joinleave(observer)
 
 			return 1
 
 	if(href_list["late_join"])
-
 		if(!SSticker.IsRoundInProgress())
 			to_chat(usr, span_red("The round is either not ready, or has already finished..."))
 			return
+
+		//Determines Relevent Population Cap
+		var/relevant_cap
+		var/hard_popcap = CONFIG_GET(number/hard_popcap)
+		var/extreme_popcap = CONFIG_GET(number/extreme_popcap)
+		if(hard_popcap && extreme_popcap)
+			relevant_cap = min(hard_popcap, extreme_popcap)
+		else
+			relevant_cap = max(hard_popcap, extreme_popcap)
+
+		if(SSticker.queued_players.len || (relevant_cap && living_player_count() >= relevant_cap && !(ckey(src.key) in GLOB.admin_datums)))
+			to_chat(src, span_danger("[CONFIG_GET(string/hard_popcap_message)]"))
+
+			var/queue_position = SSticker.queued_players.Find(src)
+			if(queue_position == 1)
+				to_chat(src, span_notice("You are next in line to join the game. You will be notified when a slot opens up."))
+			else if(queue_position)
+				to_chat(src, span_notice("There are [queue_position-1] players in front of you in the queue to join the game."))
+			else
+				SSticker.queued_players += src
+				to_chat(src, span_notice("You have been added to the queue to join the game. Your position in queue is [SSticker.queued_players.len]."))
+			return
+
 
 		// Warn the player if they are trying to spawn without a brain
 		var/datum/body_modification/mod = client.prefs.get_modification(BP_BRAIN)
@@ -193,8 +219,13 @@
 		if(!check_rights(R_ADMIN, 0))
 			var/datum/species/S = GLOB.all_species[client.prefs.species]
 			if(!(S.spawn_flags & CAN_JOIN))
-				src << alert("Your current species, [client.prefs.species], is not available for play on the station.")
+				tgui_alert(src, "Your current species, [client.prefs.species], is not available for play on the station.", "Species unavailable")
 				return FALSE
+
+		if(SSticker.queued_players.len && !(ckey(src.key) in GLOB.admin_datums))
+			if((living_player_count() >= relevant_cap) || (src != SSticker.queued_players[1]))
+				tgui_alert(src, "The server is full!", "Oh No!")
+				return TRUE
 
 		LateChoices()
 
@@ -275,9 +306,9 @@
 		return FALSE
 	if(!job.is_position_available())
 		return FALSE
-	if(IsGuestKey(ckey) && SSjob.job_to_playtime_requirement[job.title])
+	if(IsGuestKey(ckey) && job.exp_requirements)
 		return FALSE
-	if(!SSjob.ckey_to_job_to_can_play[client.ckey][job.title])
+	if(SSjob.check_job_eligibility(src, job))
 		return FALSE
 	if(jobban_isbanned(src.ckey,rank))
 		return FALSE
@@ -419,6 +450,8 @@
 	if(!new_character)
 		new_character = new(NULLSPACE)
 
+	LAZYADD(persistent_client.joined_as_slots, "[client.prefs.default_slot]")
+
 	new_character.lastarea = get_area(NULLSPACE)
 
 	for(var/lang in client.prefs.alternate_languages)
@@ -431,7 +464,7 @@
 	if(mind)
 		mind.active = 0//we wish to transfer the key manually
 		mind.original = new_character
-		if(client.prefs.relations.len)
+		if(length(client.prefs.relations))
 			for(var/T in client.prefs.relations)
 				var/TT = matchmaker.relation_types[T]
 				var/datum/relation/R = new TT
@@ -462,7 +495,7 @@
 	new_character.force_update_limbs()
 	new_character.update_eyes()
 	new_character.regenerate_icons()
-	new_character.key = key//Manually transfer the key to log them in
+	new_character.PossessByPlayer(key)//Manually transfer the key to log them in
 	new_character.client.init_verbs()
 
 	return new_character
@@ -499,3 +532,24 @@
 
 /mob/new_player/MayRespawn()
 	return 1
+
+/proc/get_job_unavailable_error_message(retval, jobtitle)
+	switch(retval)
+		if(JOB_AVAILABLE)
+			return "[jobtitle] is available."
+		if(JOB_UNAVAILABLE_GENERIC)
+			return "[jobtitle] is unavailable."
+		if(JOB_UNAVAILABLE_BANNED)
+			return "You are currently banned from [jobtitle]."
+		if(JOB_UNAVAILABLE_PLAYTIME)
+			return "You do not have enough relevant playtime for [jobtitle]."
+		if(JOB_UNAVAILABLE_ACCOUNTAGE)
+			return "Your account is not old enough for [jobtitle]."
+		if(JOB_UNAVAILABLE_SLOTFULL)
+			return "[jobtitle] is already filled to capacity."
+		if(JOB_UNAVAILABLE_ANTAG_INCOMPAT)
+			return "[jobtitle] is not compatible with some antagonist role assigned to you."
+		if(JOB_UNAVAILABLE_CONDITIONS_UNMET)
+			return "Conditions for [jobtitle] unmet."
+
+	return GENERIC_JOB_UNAVAILABLE_ERROR

@@ -1,0 +1,103 @@
+2025-11-03:
+  Sun-Soaked:
+  - rscadd: Shields now trigger their raised state when blocking instead of when walking.
+      The slowdown is preserved.
+  - rscadd: bucklers and other non-riot shields can now be raised.
+  - tweak: Adds three shield-related gameplay tips
+  - balance: Adjusts the balance of many shields to work with being raised
+  - bugfix: removes unused shield code in human_defense.dm that was causing runtimes
+      whenever someone attacked a raised shield
+  - code_imp: moved some blocking related vars up to /mob.
+  - bugfix: simplemobs now ignore enemy simplemobs once they die
+  blackwolf602:
+  - rscadd: flavorless vender
+  - tweak: rearranged some venders and stripes
+  flleeppyy:
+  - rscadd: current initing subsystem now shows in window title.
+  - rscadd: missing update_ping verb.
+2025-11-06:
+  Sun-Soaked:
+  - bugfix: characters with only a first name no longer have an extra unessecary space
+      in their chat messages
+2025-11-08:
+  dwasint:
+  - rscadd: lighting respects z-levels
+  - bugfix: Eliminates 2 minute roundstart lag.
+2025-11-10:
+  flleeppyy:
+  - bugfix: add qdels to DB queries that were missing it
+  - tweak: Made votes look nicer
+  - rscadd: new speech bubbles
+  - bugfix: speech bubbles no longer stay after you type.
+2025-11-22:
+  Sun-Soaked:
+  - rscadd: Double Tact weapons now automatically start raising after being swung,
+      reducing the number of clicks needed for repeat attacks
+  - tweak: made Robustness's stat description slightly more accurate.
+  - balance: double_tact weapons now take slightly longer to swing, using a short
+      windup period that is affected by the ROB stat.
+  - bugfix: do_afters no longer ignore the state of the "immobile" arg if their user
+      is also the target
+  - bugfix: you no longer keep raising nothing after dropping a double tact weapon
+  - code_imp: moves the handling for only 1 do_after at a time on tools to do_after
+      itself, handled by the "unique" arg
+  - refactor: double_tact() now splits into the start_tact and end_tact procs, which
+      can also be called pretty much anywhere to affect the current item's tact state
+  blackwolf602:
+  - rscadd: spider leg meat sprites
+  - rscadd: boiled spider legs recipe
+  - rscadd: crab meat
+  - rscadd: crab meat recipes
+  - rscadd: crab rangoon
+  - rscadd: cheese rangoon
+  dwasint:
+  - bugfix: Atoms init much faster now
+2025-11-23:
+  Sun-Soaked:
+  - balance: raised shields can now block attacks from simplemobs and superior mobs
+  - bugfix: eshields now respond properly to being activated
+  flleeppyy:
+  - rscadd: Real round time in stat panel, since time dilation. Also added conditionals
+      for showing some statpanel entries.
+  - admin: Tickets now have their ticket number in the message when one is created
+  - code_imp: Codespeak global was moved to GLOB, and should properly init now.
+  - code_imp: new_player mobs have been moved to the start area room instead of being
+      thrown into the bottom left.
+  - code_imp: rename say_quote to say_quote_old since that was conflicting and messing
+      up dead say.
+  - code_imp: Replaces some shutdown/reboot code which fixes some Reboot options doing
+      nothing
+  - code_imp: span_\*'s being called with ternary's that should have been wrapped
+      in a string instead of being directly passed.
+  - config: Add autoadminning for development
+  - config: added enable_localhost_rank to default config file
+  - config: Config system will copy the required/neccessary files depending on if
+      non-default files are present in the config directory.
+  - rscdel: adminobservejump has been removed in place of `adminplayerobservecoodjump`
+  - rscdel: get_options_bar & admin_jump_link removed in favor of ADMIN_JMP and ADMIN_FULLMONTY
+  - rscdel: remove's python2 from config, it wasn't used at all.
+  - bugfix: Admin href links should no longer not do anything.
+  - bugfix: alive players being able to see dead mob messages in runechat.
+  - bugfix: Clicking on turfs should not generate a permission error intended for
+      quick VV, it should only happen when you ctrl shift click now.
+  - bugfix: deadsay should no longer runtime when talking as a dead mob that's also
+      technically a ghost
+  - bugfix: EFTPOS runtiming when an account doesn't exist.
+  - bugfix: Fix a sorting bug for something related to crewmember sensor data.
+  - bugfix: fix runtime on disgorger when processing organs
+  - bugfix: fixed a few instances where mobs speaking would have blank messages.
+  - bugfix: Follow buttons for ghosts in chat should NOW PROPERLY ACTUALLY WORK FOR
+      REAL THIS TIME!
+  - bugfix: ghosts having a null client
+  - bugfix: hydroponic trays should no longer runtime when scanning them and properly
+      returns no data if no seeds are present.
+  - bugfix: LOOC should now display properly.
+  - bugfix: mobs should now unbuckle from whatever they are buckled too, if they are
+      Destroyed
+  - bugfix: moebius uselessly processing when nobody is wearing it.
+  - bugfix: show_titlescreen no longer complains about invalid mob.
+  - bugfix: Signal proc refs having an incorrect first argument
+  - bugfix: Target zone switches should no longer complain about invalid data params.
+  - bugfix: Viewing turf on statpanel should no longer scream about invalid resource.
+  - bugfix: Fixed browser windows not being able to get UI scaling prefs if the client
+      doesn't exist yet, is fine.

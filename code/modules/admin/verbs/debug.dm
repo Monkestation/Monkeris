@@ -211,7 +211,7 @@
 		qdel(oldmob)
 	message_admins(span_adminnotice("[key_name_admin(usr)] gave away direct control of [M] to [newkey]."))
 	log_admin("[key_name(usr)] gave away direct control of [M] to [newkey].")
-	// SSblackbox.record_feedback("tally", "admin_verb", 1, "Give Direct Control") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	BLACKBOX_LOG_ADMIN_VERB("Give Direct Control")
 
 
 /client/proc/cmd_admin_areatest()
@@ -429,3 +429,36 @@
 		return
 	if(tgui_alert(usr, "Are you absolutely sure you want to reload the configuration from the default path on the disk, wiping any in-round modifications?", "Really reset?", list("No", "Yes")) == "Yes")
 		config.admin_reload()
+
+/client/proc/cmd_admin_check_player_exp() //Allows admins to determine who the newer players are.
+	set category = "Admin"
+	set name = "Player Playtime"
+	if(!check_rights(R_ADMIN))
+		return
+
+	if(!CONFIG_GET(flag/use_exp_tracking))
+		to_chat(usr, span_warning("Tracking is disabled in the server configuration file."), confidential = TRUE)
+		return
+
+	var/list/msg = list()
+	msg += "<html><head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'><title>Playtime Report</title></head><body>Playtime:<BR><UL>"
+	for(var/client/client in sortList(GLOB.clients, GLOBAL_PROC_REF(cmp_playtime_asc)))
+		msg += "<LI> [ADMIN_PP(client.mob)] [key_name_admin(client)]: <A href='byond://?_src_=holder;[HrefToken()];getplaytimewindow=[REF(client.mob)]'>" + client.get_exp_living() + "</a></LI>"
+	msg += "</UL></BODY></HTML>"
+	src << browse(msg.Join(), "window=Player_playtime_check")
+
+/proc/cmp_playtime_asc(client/a, client/b)
+	return cmp_numeric_asc(a.get_exp_living(TRUE), b.get_exp_living(TRUE))
+
+/client/proc/get(atom/movable/A)
+	set category = "Debug"
+	set name = "Get"
+
+	if (isnull(usr.loc))
+		to_chat(usr, "Can't move to nullspace!")
+		return
+
+	if(QDELETED(A))
+		return
+
+	A.forceMove(get_turf(usr))

@@ -566,7 +566,7 @@
 		else
 			A.forceMove(dump)
 			if(!isobserver(A))
-				log_and_message_admins("[A] has been moved to [admin_jump_link(dump, src)] to avoid deletion in cave collapse.")
+				log_and_message_admins("[A] has been moved to [ADMIN_JMP(dump)] to avoid deletion in cave collapse.")
 
 	// Clean up shards and rods created when girders and windows are deleted at previous step
 	cave_content = get_area_contents(/area/asteroid/cave)

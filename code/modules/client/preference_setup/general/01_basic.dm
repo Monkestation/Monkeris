@@ -68,7 +68,7 @@
 					if(findtext(new_fname, config.ic_filter_regex))
 						new_fname = random_first_name(pref.gender, pref.species)
 				pref.real_first_name = new_fname
-				pref.real_name = pref.real_first_name + " " + pref.real_last_name
+				pref.real_name = pref.real_first_name + (pref.real_last_name ? " " + pref.real_last_name : pref.real_last_name)
 				return TOPIC_REFRESH
 			else
 				to_chat(user, span_warning("Invalid first name. Your name should be at least 2 and at most [MAX_NAME_LEN] characters long. It may only contain the characters A-Z, a-z, -, ' and ."))
@@ -89,7 +89,7 @@
 						if(findtext(new_lname, config.ic_filter_regex))
 							new_lname = random_last_name(pref.gender, pref.species)
 					pref.real_last_name = new_lname
-					pref.real_name = pref.real_first_name + " " + pref.real_last_name
+					pref.real_name = pref.real_first_name + (pref.real_last_name ? " " + pref.real_last_name : pref.real_last_name)
 					return TOPIC_REFRESH
 				else
 					to_chat(user, span_warning("Invalid last name. Your name should be at least 2 and at most [last_name_max_length] characters long. It may only contain the characters A-Z, a-z, -, ' and ."))
@@ -117,7 +117,10 @@
 					seeds += i
 			if(!LAZYLEN(seeds))
 				seeds = tts_seeds
-			pref.tts_seed = pick(seeds)
+			if(!LAZYLEN(seeds))
+				pref.tts_seed = "No seeds available"
+			else
+				pref.tts_seed = pick(seeds)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["age"])

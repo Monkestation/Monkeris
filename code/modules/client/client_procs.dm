@@ -122,6 +122,14 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 /client/proc/_Topic(datum/hsrc, href, list/href_list)
 	return hsrc.Topic(href, href_list)
 
+/client/proc/is_localhost()
+	var/static/localhost_addresses = list(
+		"127.0.0.1",
+		"::1",
+		null,
+	)
+	return address in localhost_addresses
+
 /*
  * Call back proc that should be checked in all paths where a client can send messages
  *
@@ -199,8 +207,15 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	GLOB.clients += src
 	GLOB.directory[ckey] = src
+
 	var/reconnecting = FALSE
-	// TODO: Persistent Clients
+	if(GLOB.persistent_clients_by_ckey[ckey])
+		reconnecting = TRUE
+		persistent_client = GLOB.persistent_clients_by_ckey[ckey]
+	else
+		persistent_client = new(ckey)
+	persistent_client.set_client(src)
+
 
 	winset(src, null, list("browser-options" = "find,refresh,byondstorage"))
 
@@ -210,29 +225,6 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	tgui_say = new(src, "tgui_say")
 
 	initialize_commandbar_spy()
-
-	var/connecting_admin = FALSE //because de-admined admins connecting should be treated like admins.
-	//Admin Authorisation
-	var/datum/admins/admin_datum = GLOB.admin_datums[ckey]
-	if (!isnull(admin_datum))
-		admin_datum.associate(src)
-		connecting_admin = TRUE
-	// if(CONFIG_GET(flag/autoadmin))
-	// 	if(!GLOB.admin_datums[ckey])
-	// 		var/datum/admin_rank/autorank
-	// 		for(var/datum/admin_rank/R in GLOB.GLOB.admin_ranks)
-	// 			if(R.name == CONFIG_GET(string/autoadmin_rank))
-	// 				autorank = R
-	// 				break
-	// 		if(!autorank)
-	// 			to_chat(world, "Autoadmin rank not found")
-	// 		else
-	// 			new /datum/admins(autorank, ckey)
-	if(CONFIG_GET(flag/enable_localhost_rank) && !connecting_admin)
-		var/localhost_addresses = list("127.0.0.1", "::1")
-		if(isnull(address) || (address in localhost_addresses))
-			var/datum/admins/localhost_rank = new("!localhost!", R_EVERYTHING, ckey)
-			localhost_rank.associate(src)
 
 	//preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum)
 	prefs = SScharacter_setup.preferences_datums[ckey]
@@ -287,9 +279,31 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 					message_admins(span_danger("<B>[message_type]: </B></span><span class='notice'>Connecting player [key_name_admin(src)] has the same [matches] as [joined_player_ckey](no longer logged in)<b>[in_round]</b>. "))
 					log_admin_private("[message_type]: Connecting player [key_name(src)] has the same [matches] as [joined_player_ckey](no longer logged in)[in_round].")
 
-
-
 	. = ..() //calls mob.Login()
+
+	// Admin Verbs need the client's mob to exist. Must be after ..()
+	var/connecting_admin = FALSE //because de-admined admins connecting should be treated like admins.
+	//Admin Authorization
+	var/datum/admins/admin_datum = GLOB.admin_datums[ckey]
+	if (!isnull(admin_datum))
+		admin_datum.associate(src)
+		connecting_admin = TRUE
+	else if(GLOB.deadmins[ckey])
+		add_verb(src, /client/proc/readmin)
+		connecting_admin = TRUE
+	if(CONFIG_GET(flag/autoadmin))
+		if(!GLOB.admin_datums[ckey])
+			var/list/autoadmin_ranks = ranks_from_rank_name(CONFIG_GET(string/autoadmin_rank))
+			if (autoadmin_ranks.len == 0)
+				to_chat(world, "Autoadmin rank not found")
+			else
+				new /datum/admins(autoadmin_ranks, ckey)
+
+	if(CONFIG_GET(flag/enable_localhost_rank) && !connecting_admin && is_localhost())
+		var/datum/admin_rank/localhost_rank = new("!localhost!", R_EVERYTHING, R_DBRANKS, R_EVERYTHING) //+EVERYTHING -DBRANKS *EVERYTHING
+		new /datum/admins(list(localhost_rank), ckey, 1, 1)
+
+	// This is where I would put my mentors datum. IF I HAD ONE!!!!
 
 	if (byond_version >= 512)
 		if (!byond_build || byond_build < 1386)
@@ -310,6 +324,16 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 				return
 
 	to_chat_immediate(src, span_red("If the title screen is black, resources are still downloading. Please be patient until the title screen appears."))
+
+	src << browse(file('html/statbrowser.html'), "window=statbrowser")
+	// addtimer(CALLBACK(src, PROC_REF(check_panel_loaded)), 30 SECONDS)
+
+	INVOKE_ASYNC(src, PROC_REF(acquire_dpi))
+	// Initialize tgui panel
+	tgui_panel.initialize()
+
+	tgui_say.initialize()
+
 	if(alert_mob_dupe_login && !holder)
 		var/dupe_login_message = "Your ComputerID has already logged in with another key this round, please log out of this one NOW or risk being banned!"
 		if (alert_admin_multikey)
@@ -320,10 +344,10 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 			alert(mob, dupe_login_message) //players get banned if they don't see this message, do not convert to tgui_alert (or even tg_alert) please.
 			to_chat_immediate(mob, span_danger(dupe_login_message))
 
-
 	connection_time = world.time
 	connection_realtime = world.realtime
 	connection_timeofday = world.timeofday
+	winset(src, null, "command=\".configure graphics-hwmode on\"")
 	var/breaking_version = CONFIG_GET(number/client_error_version)
 	var/breaking_build = CONFIG_GET(number/client_error_build)
 	var/warn_version = CONFIG_GET(number/client_warn_version)
@@ -356,20 +380,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 			to_chat(src, "Visit <a href=\"https://secure.byond.com/download\">BYOND's website</a> to get the latest version of BYOND.")
 
 
-	src << browse(file('html/statbrowser.html'), "window=statbrowser")
 	// addtimer(CALLBACK(src, PROC_REF(check_panel_loaded)), 30 SECONDS)
-
-	connection_time = world.time
-	connection_realtime = world.realtime
-	connection_timeofday = world.timeofday
-	winset(src, null, "command=\".configure graphics-hwmode on\"")
-
-	INVOKE_ASYNC(src, PROC_REF(acquire_dpi))
-
-	// Initialize tgui panel
-	tgui_panel.initialize()
-
-	tgui_say.initialize()
 
 	/* byond err version check here (configurable) */
 
@@ -477,9 +488,6 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	initialize_menus()
 
-	// TODO: Uncomment when new notes system is ported
-	// if(CONFIG_GET(flag/autoconvert_notes))
-	// 	convert_notes_sql(ckey)
 	if(ckey in GLOB.clientmessages)
 		for(var/message in GLOB.clientmessages[ckey])
 			to_chat(src, message)
@@ -492,6 +500,8 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	if(CONFIG_GET(flag/autoconvert_notes))
 		convert_notes_sql(ckey)
+
+	set_db_player_flags()
 
 	var/user_messages = get_message_output("message", ckey)
 	if(user_messages)
@@ -523,6 +533,8 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	GLOB.clients -= src
 	GLOB.directory -= ckey
+	persistent_client?.set_client(null)
+
 	log_access("Logout: [key_name(src)]")
 	if(holder)
 		holder.owner = null
@@ -732,8 +744,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		// The amount of hours needed to bypass the panic bunker.
 		var/living_recs = CONFIG_GET(number/panic_bunker_living)
 		// This relies on prefs existing, but this proc is only called after that occurs, so we're fine.
-		// var/minutes = get_exp_living(pure_numeric = TRUE)
-		var/minutes = SSjob.GetTotalPlaytimeMinutesCkey(ckey)
+		var/minutes = get_exp_living(pure_numeric = TRUE)
 
 		// If we don't have panic_bunker_living set and the client is not in the DB, reject them.
 		// Otherwise, if we do have a panic_bunker_living set, check if they have enough minutes played.
@@ -1160,8 +1171,8 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 /client/proc/add_verbs_from_config()
 	if(CONFIG_GET(flag/see_own_notes))
 		add_verb(src, /client/proc/self_notes)
-	// if(CONFIG_GET(flag/use_exp_tracking))
-	// 	add_verb(src, /client/proc/self_playtime)
+	if(CONFIG_GET(flag/use_exp_tracking))
+		add_verb(src, /client/proc/self_playtime)
 	// if(!CONFIG_GET(flag/forbid_preferences_export))
 	// 	add_verb(src, /client/proc/export_preferences)
 

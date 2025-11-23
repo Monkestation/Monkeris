@@ -246,55 +246,33 @@ img {
 <div id="under_menu"></div>
 <div id="statcontent"></div>
 <script>
-// Polyfills and compatibility ------------------------------------------------
-var decoder = decodeURIComponent || unescape;
-var textContentKey = (typeof document.body.textContent != 'undefined') ? 'textContent' : 'innerText';
-if(!Array.prototype.includes) {
-	Array.prototype.includes = function(thing) {
-		for(var i = 0; i < this.length; i++) {
-			if(this[i] == thing) return true;
-		}
-		return false;
-	}
-}
-if (!String.prototype.trim) {
-	String.prototype.trim = function () {
-		return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
-	};
-}
-
 // Browser passthrough code ---------------------------------------------------
 if (window.location) {
-	var anti_spam = []; // wow I wish I could use e.repeat but IE is dumb and doesn't have it.
-	document.addEventListener("keydown", function(e) {
-		if(e.target && (e.target.localName == "input" || e.target.localName == "textarea"))
+	document.addEventListener("keydown", (e) => {
+		const tag = e.target?.localName;
+		if (tag === "input" || tag === "textarea")
 			return;
-		if(e.defaultPrevented)
-			return; // do e.preventDefault() to prevent this behavior.
-		if(e.which) {
-			if(!anti_spam[e.which]) {
-				anti_spam[e.which] = true;
-				var href = "?__keydown=" + e.which;
-				if(e.ctrlKey === false) href += "&ctrlKey=0"
-				else if(e.ctrlKey === true) href += "&ctrlKey=1"
-				window.location.href = href;
-			}
-		}
+		if (e.defaultPrevented || e.repeat)
+			return;
+
+		let href = "?__keydown=" + encodeURIComponent(e.code);
+		href += "&ctrlKey=" + (e.ctrlKey ? "1" : "0");
+		window.location.href = href;
 	});
-	document.addEventListener("keyup", function(e) {
-		if(e.target && (e.target.localName == "input" || e.target.localName == "textarea"))
+
+	document.addEventListener("keyup", (e) => {
+		const tag = e.target?.localName;
+		if (tag === "input" || tag === "textarea")
 			return;
-		if(e.defaultPrevented)
+		if (e.defaultPrevented)
 			return;
-		if(e.which) {
-			anti_spam[e.which] = false;
-			var href = "?__keyup=" + e.which;
-			if(e.ctrlKey === false) href += "&ctrlKey=0"
-			else if(e.ctrlKey === true) href += "&ctrlKey=1"
-			window.location.href = href;
-		}
+
+		let href = "?__keyup=" + encodeURIComponent(e.code);
+		href += "&ctrlKey=" + (e.ctrlKey ? "1" : "0");
+		window.location.href = href;
 	});
 }
+
 /* document.addEventListener("mousedown", function(e){
  var shiftPressed=0;
  var evt = e?e:window.event;
@@ -317,6 +295,7 @@ var inner = "";
 var sqdl2 = [];
 var permanent_tabs = []; // tabs that won't be cleared by wipes
 var turfcontents = [];
+var last_turfcontents_json = null;
 var turfname = "";
 var menu = document.querySelector('#menu');
 var under_menu = document.getElementById('under_menu');
@@ -330,7 +309,7 @@ function createStatusTab(name) {
 	var B = document.createElement("BUTTON");
 	B.onclick = function() {tab_change(name)};
 	B.id = name;
-	B[textContentKey] = name;
+	B.textContent = name;
 	B.className = "button";
 	//ORDERING ALPHABETICALLY
 	B.style.order = name.charCodeAt(0);
@@ -582,64 +561,64 @@ function tab_change(tab) {
 		draw_listedturf();
 	} else {
 		var statcontentdiv = document.getElementById("statcontent");
-		statcontentdiv[textContentKey] = "loading...";
+		statcontentdiv.textContent = "Loading...";
 	}
 	window.location.href = "byond://winset?statbrowser.is-visible=true";
 }
 
 function draw_debug() {
 	var statcontentdiv = document.getElementById("statcontent");
-	statcontentdiv[textContentKey] = "";
+	statcontentdiv.textContent = "";
 	var wipeverbstabs = document.createElement("div");
 	var link = document.createElement("a");
 	link.onclick = function() {wipe_verbs()};
-	link[textContentKey] = "Wipe All Verbs";
+	link.textContent = "Wipe All Verbs";
 	wipeverbstabs.appendChild(link);
 	document.getElementById("statcontent").appendChild(wipeverbstabs);
 	var text = document.createElement("div");
-	text[textContentKey] = "Verb Tabs:";
+	text.textContent = "Verb Tabs:";
 	document.getElementById("statcontent").appendChild(text);
 	var table1 = document.createElement("table");
 	for(var i=0; i < verb_tabs.length ; i++) {
 		var part = verb_tabs[i];
 		var tr = document.createElement("tr");
 		var td1 = document.createElement("td");
-		td1[textContentKey] = part;
+		td1.textContent = part;
 		var a = document.createElement("a");
 		a.onclick = function (part) {
 			return function() {removeStatusTab(part)};
 		}(part);
-		a[textContentKey] = " Delete Tab " + part;
+		a.textContent = " Delete Tab " + part;
 		td1.appendChild(a);
 		tr.appendChild(td1);
 		table1.appendChild(tr);
 	}
 	document.getElementById("statcontent").appendChild(table1);
 	var header2 = document.createElement("div");
-	header2[textContentKey] = "Verbs:";
+	header2.textContent = "Verbs:";
 	document.getElementById("statcontent").appendChild(header2);
 	var table2 = document.createElement("table");
 	for(var v = 0; v < verbs.length; v++) {
 		var part2 = verbs[v];
 		var trr = document.createElement("tr");
 		var tdd1 = document.createElement("td");
-		tdd1[textContentKey] = part2[0];
+		tdd1.textContent = part2[0];
 		var tdd2 = document.createElement("td");
-		tdd2[textContentKey] = part2[1];
+		tdd2.textContent = part2[1];
 		trr.appendChild(tdd1);
 		trr.appendChild(tdd2);
 		table2.appendChild(trr);
 	}
 	document.getElementById("statcontent").appendChild(table2);
 	var text3 = document.createElement("div");
-	text3[textContentKey] = "Permanent Tabs:";
+	text3.textContent = "Permanent Tabs:";
 	document.getElementById("statcontent").appendChild(text3);
 	var table3 = document.createElement("table");
 	for(var i=0; i < permanent_tabs.length ; i++) {
 		var part3 = permanent_tabs[i];
 		var trrr = document.createElement("tr");
 		var tddd1 = document.createElement("td");
-		tddd1[textContentKey] = part3;
+		tddd1.textContent = part3;
 		trrr.appendChild(tddd1);
 		table3.appendChild(trrr);
 	}
@@ -652,7 +631,7 @@ function draw_status() {
 		createStatusTab("Status");
 		current_tab = "Status";
 	}
-	statcontentdiv[textContentKey] = inner;
+	statcontentdiv.textContent = inner;
 	for(var i = 0; i < status_tab_parts.length; i++) {
 		var part = status_tab_parts[i];
 
@@ -701,7 +680,7 @@ function draw_status() {
 					if(current_module_data[1] != null)
 					{
 						var a = document.createElement("a");
-						a[textContentKey] = current_module_data[0];
+						a.textContent = current_module_data[0];
 						a.href = "?_src_=statpanel;statpanel_ref=" + current_module_data[1];
 						module_div.appendChild(a);
 						module_div.appendChild(document.createElement("br"));
@@ -709,7 +688,7 @@ function draw_status() {
 					else
 					{
 						var div = document.createElement("div");
-						div[textContentKey] = current_module_data[0];
+						div.textContent = current_module_data[0];
 						module_div.appendChild(div);
 					}
 
@@ -731,7 +710,7 @@ function draw_status() {
 			}
 			var a = document.createElement("a");
 			a.href = "?_src_=statpanel;statpanel_ref=" + part[1];
-			a[textContentKey] = part[0];
+			a.textContent = part[0];
 			document.getElementById("statcontent").appendChild(a);
 
 			var br = document.createElement("br");
@@ -740,7 +719,7 @@ function draw_status() {
 		else
 		{
 			var div = document.createElement("div");
-			div[textContentKey] = part[0];
+			div.textContent = part[0];
 			document.getElementById("statcontent").appendChild(div);
 		}
 	}
@@ -751,21 +730,21 @@ function draw_status() {
 }
 function draw_mc() {
 	var statcontentdiv = document.getElementById("statcontent");
-	statcontentdiv[textContentKey] = "";
+	statcontentdiv.textContent = "";
 	var table = document.createElement("table");
 	for(var i = 0; i < mc_tab_parts.length; i++) {
 		var part = mc_tab_parts[i];
 		var tr = document.createElement("tr");
 		var td1 = document.createElement("td");
-		td1[textContentKey] = part[0];
+		td1.textContent = part[0];
 		var td2 = document.createElement("td");
 		if(part[2]) {
 			var a = document.createElement("a");
 			a.href = "?_src_=vars;" + href_token + ";Vars=" + part[2];
-			a[textContentKey] = part[1];
+			a.textContent = part[1];
 			td2.appendChild(a);
 		} else {
-			td2[textContentKey] = part[1];
+			td2.textContent = part[1];
 		}
 		tr.appendChild(td1);
 		tr.appendChild(td2);
@@ -806,74 +785,63 @@ function create_listedturf(TN) {
 	addPermanentTab(turfname);
 	tab_change(turfname);
 }
+
 function update_listedturf(TC) {
 	turfcontents = JSON.parse(TC);
-	if(current_tab == turfname)
+	if (current_tab === turfname)
 		draw_listedturf();
 }
 
 function draw_listedturf() {
-	var statcontentdiv = document.getElementById("statcontent");
-	statcontentdiv[textContentKey] = "";
-	var table = document.createElement("table");
-	for(var i = 0; i < turfcontents.length; i++) {
-		var part = turfcontents[i];
-		if(part[2]) {
-			var img = document.createElement("img");
-			img.src = part[2];
-			table.appendChild(img);
-		}
-		var b = document.createElement("div");
-		var clickcatcher = "";
-		b.className = "link";
-		b.onmousedown = function (part) {
-			// The outer function is used to close over a fresh "part" variable,
-			// rather than every onmousedown getting the "part" of the last entry.
-			return function(e) {
-				e.preventDefault();
-				clickcatcher = "?src=" + part[1] + ";statpanel_item_click=1";
-				if(e.shiftKey){
-					clickcatcher += ";statpanel_item_shiftclick=1";
-				}
-				if(e.ctrlKey){
-					clickcatcher += ";statpanel_item_ctrlclick=1";
-				}
-				if(e.altKey) {
-					clickcatcher += ";statpanel_item_altclick=1";
-				}
-				window.location.href = clickcatcher;
-			}
-		}(part);
-		b[textContentKey] = part[0];
-		table.appendChild(b);
-		table.appendChild(document.createElement("br"));
-	}
-	document.getElementById("statcontent").appendChild(table);
-}
+	const statcontentdiv = document.getElementById("statcontent");
+	statcontentdiv.textContent = "";
 
+	const container = document.createElement("div");
+
+	for (let i = 0; i < turfcontents.length; i++) {
+		const part = turfcontents[i];
+		const [label, html] = part;
+
+		const b = document.createElement("div");
+		b.className = "link";
+		b.innerHTML = `<div class="turf-entry-label">${label}</div>${html}`;
+		b.onmousedown = (e => {
+			e.preventDefault();
+			let clickcatcher = "?src=" + part[1] + ";statpanel_item_click=1";
+			if (e.shiftKey) clickcatcher += ";statpanel_item_shiftclick=1";
+			if (e.ctrlKey) clickcatcher += ";statpanel_item_ctrlclick=1";
+			if (e.altKey) clickcatcher += ";statpanel_item_altclick=1";
+			window.location.href = clickcatcher;
+		});
+
+		container.appendChild(b);
+	}
+
+	statcontentdiv.appendChild(container);
+}
 function remove_listedturf() {
 	removePermanentTab(turfname);
 	checkStatusTab();
-	if(current_tab == turfname)
+	if (current_tab === turfname)
 		tab_change("Status");
 }
 function draw_sqdl2(){
 	var statcontentdiv = document.getElementById("statcontent");
-	statcontentdiv[textContentKey] = "";
+	statcontentdiv.textContent = "";
 	var table = document.createElement("table");
 	for(var i = 0; i < sqdl2.length; i++) {
 		var part = sqdl2[i];
 		var tr = document.createElement("tr");
 		var td1 = document.createElement("td");
-		td1[textContentKey] = part[0];
+		td1.textContent = part[0];
 		var td2 = document.createElement("td");
 		if(part[2]) {
 			var a = document.createElement("a");
 			a.href = "?src=" + part[2] + ";statpanel_item_click=1";
-			a[textContentKey] = part[1];
+			a.textContent = part[1];
 			td2.appendChild(a);
 		} else {
-			td2[textContentKey] = part[1];
+			td2.textContent = part[1];
 		}
 		tr.appendChild(td1);
 		tr.appendChild(td2);
@@ -977,7 +945,7 @@ function getCookie(cname) {
 	var c = ca[i];
 	while (c.charAt(0)==' ') c = c.substring(1);
 		if (c.indexOf(name) === 0) {
-			return decoder(c.substring(name.length,c.length));
+			return decodeURIComponent(c.substring(name.length,c.length));
 		}
 	}
 	return '';

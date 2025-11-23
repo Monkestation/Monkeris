@@ -675,3 +675,26 @@ Contractors and the like can also be revived with the previous role mostly intac
 		config.allow_random_events = 0
 		to_chat(usr, "Random events disabled")
 		message_admins("Admin [key_name_admin(usr)] has disabled random events.", 1)
+
+
+/datum/admins/proc/toggle_exempt_status(client/C)
+	if(!check_rights(R_ADMIN))
+		return
+	if(!C)
+		to_chat(usr, span_danger("ERROR: Client not found."), confidential = TRUE)
+		return
+
+	if(!C.set_db_player_flags())
+		to_chat(usr, span_danger("ERROR: Unable read player flags from database. Please check logs."), confidential = TRUE)
+	var/dbflags = C.prefs.db_flags
+	var/newstate = FALSE
+	if(dbflags & DB_FLAG_EXEMPT)
+		newstate = FALSE
+	else
+		newstate = TRUE
+
+	if(C.update_flag_db(DB_FLAG_EXEMPT, newstate))
+		to_chat(usr, span_danger("ERROR: Unable to update player flags. Please check logs."), confidential = TRUE)
+	else
+		message_admins("[key_name_admin(usr)] has [newstate ? "activated" : "deactivated"] job exp exempt status on [key_name_admin(C)]")
+		log_admin("[key_name(usr)] has [newstate ? "activated" : "deactivated"] job exp exempt status on [key_name(C)]")

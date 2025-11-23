@@ -48,9 +48,8 @@
 	s["vote"] = CONFIG_GET(flag/allow_vote_mode)
 	s["ai"] = CONFIG_GET(flag/allow_ai)
 	s["host"] = host ? host : null
-
 	// This is dumb, but spacestation13.com's banners break if player count isn't the 8th field of the reply, so... this has to go here.
-	s["players"] = 0
+	s["players"] = GLOB.clients.len
 	s["shiptime"] = stationtime2text()
 	s["roundduration"] = SSticker ? round((world.time-(SSticker.round_start_time || 0))/10) : 0
 
@@ -81,6 +80,11 @@
 
 		s["players"] = n
 		s["admins"] = admins
+
+	s["soft_popcap"] = CONFIG_GET(number/soft_popcap) || 0
+	s["hard_popcap"] = CONFIG_GET(number/hard_popcap) || 0
+	s["extreme_popcap"] = CONFIG_GET(number/extreme_popcap) || 0
+	s["popcap"] = max(CONFIG_GET(number/soft_popcap), CONFIG_GET(number/hard_popcap), CONFIG_GET(number/extreme_popcap)) //generalized field for this concept for use across ss13 codebases
 
 	if(!key_valid)
 		GLOB.topic_status_cache = .

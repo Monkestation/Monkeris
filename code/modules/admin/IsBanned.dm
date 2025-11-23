@@ -64,20 +64,19 @@
 		return list("reason"="Using ToR", "desc"="\nReason: The network you are using to connect has been banned.\nIf you believe this is a mistake, please request help at [CONFIG_GET(string/banappeals)]")
 
 	//Population Cap Checking
-	// var/extreme_popcap = CONFIG_GET(number/extreme_popcap)
-	// if(!real_bans_only && !C && extreme_popcap)
-	// 	var/popcap_value = GLOB.clients.len
-	// 	if(popcap_value >= extreme_popcap && !GLOB.joined_player_list.Find(ckey))
-	// 		var/supporter = get_patreon_rank(ckey) > 0
-	// 		if (admin || mentor || supporter)
-	// 			var/msg = "Popcap Login: [ckey] - Is a(n) [admin ? "admin" : mentor ? "mentor" : supporter ? "patreon supporter" : "???"], therefore allowed passed the popcap of [extreme_popcap] - [popcap_value] clients connected"
-	// 			log_access(msg)
-	// 			message_admins(msg)
-	// 		if(!CONFIG_GET(flag/byond_member_bypass_popcap) || !world.IsSubscribed(ckey, "BYOND"))
-	// 			var/msg = "Failed Login: [ckey] - Population cap reached"
-	// 			log_access(msg)
-	// 			message_admins(msg)
-	// 			return list("reason"="popcap", "desc"= "\nReason: [CONFIG_GET(string/extreme_popcap_message)]")
+	var/extreme_popcap = CONFIG_GET(number/extreme_popcap)
+	if(!real_bans_only && !C && extreme_popcap)
+		var/popcap_value = GLOB.clients.len
+		if(popcap_value >= extreme_popcap && !GLOB.joined_player_list.Find(ckey))
+			if (admin || mentor)
+				var/msg = "Popcap Login: [ckey] - Is a(n) [admin ? "admin" : mentor ? "mentor" : "???"], therefore allowed passed the popcap of [extreme_popcap] - [popcap_value] clients connected"
+				log_access(msg)
+				message_admins(msg)
+			if(!CONFIG_GET(flag/byond_member_bypass_popcap) || !world.IsSubscribed(ckey, "BYOND"))
+				var/msg = "Failed Login: [ckey] - Population cap reached"
+				log_access(msg)
+				message_admins(msg)
+				return list("reason"="popcap", "desc"= "\nReason: [CONFIG_GET(string/extreme_popcap_message)]")
 
 
 	if(CONFIG_GET(flag/sql_enabled))

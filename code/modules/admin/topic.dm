@@ -38,6 +38,15 @@
 	if (!CheckAdminHref(href, href_list))
 		return
 
+	if(href_list["getplaytimewindow"])
+		if(!check_rights(R_ADMIN))
+			return
+		var/mob/M = locate(href_list["getplaytimewindow"]) in GLOB.mob_list
+		if(!M)
+			to_chat(usr, span_danger("ERROR: Mob not found."), confidential = TRUE)
+			return
+		cmd_show_exp_panel(M.client)
+
 	if(href_list["openticket"])
 		var/ticketID = text2num(href_list["openticket"])
 		if(!href_list["is_mhelp"])
@@ -282,22 +291,3 @@
 
 /atom/proc/extra_admin_link()
 	return
-
-/mob/extra_admin_link(source)
-	if(client && eyeobj)
-		return "|<A href='byond://?[source];[HrefToken()];adminobservejump=\ref[eyeobj]'>EYE</A>"
-
-/mob/observer/ghost/extra_admin_link(source)
-	if(mind && mind.current)
-		return "|<A href='byond://?[source];[HrefToken()];adminobservejump=\ref[mind.current]'>BDY</A>"
-
-/proc/admin_jump_link(atom/target, source)
-	if(!target) return
-	// The way admin jump links handle their src is weirdly inconsistent...
-	if(istype(source, /datum/admins))
-		source = "src=\ref[source]"
-	else
-		source = "_src_=holder"
-
-	. = "<A href='byond://?[source];[HrefToken()];adminobservejump=\ref[target]'>JMP</A>"
-	. += target.extra_admin_link(source)

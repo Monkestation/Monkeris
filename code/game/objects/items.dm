@@ -32,7 +32,10 @@
 	var/forced_broad_strike = FALSE
 	/// Wielded spears can hit alive things one tile further.
 	var/extended_reach = FALSE
-	/// All weapons that are ITEM_SIZE_BULKY or bigger have double tact, meaning you have to click twice.
+	/**
+	 * All weapons that are ITEM_SIZE_BULKY or bigger have double tact, meaning you have to wind up to launch an attack.
+	 * This var keeps track of whether a double_tact item is currently raised and prepared to attack normally.
+	 */
 	var/ready = FALSE
 	/// For when you,  for some inconceivable reason, want a bulky item to not have double tact
 	var/no_double_tact = FALSE
@@ -93,6 +96,8 @@
 	var/slowdown = 0
 	/// How much holding an item slows you down.
 	var/slowdown_hold
+	/// How much this item slows you down while being used to block attacks.
+	var/slowdown_blocking = ITEM_BLOCKING_SLOWDOWN
 
 	/// Ref to the armor datum
 	var/datum/armor/armor
@@ -141,6 +146,11 @@
 
 	var/chameleon_type
 
+	/**
+	 * Vis Effect for double tact. Placed here so it can be properly tracked by
+	 * the different double_tact procs no matter where they're called
+	 */
+	var/obj/effect/effect/melee/alert/tact_visual
 
 /obj/item/Initialize()
 	if(islist(armor))
@@ -151,6 +161,7 @@
 		error("Invalid type [armor.type] found in .armor during /obj Initialize()")
 	if(chameleon_type)
 		verbs.Add(/obj/item/proc/set_chameleon_appearance)
+	tact_visual = new /obj/effect/effect/melee/alert
 	. = ..()
 
 /obj/item/Destroy(force)
@@ -166,6 +177,7 @@
 	QDEL_NULL(hidden_uplink)
 	blood_overlay = null
 	QDEL_NULL(action)
+	QDEL_NULL(tact_visual)
 	if(hud_actions)
 		for(var/action in hud_actions)
 			qdel(action)

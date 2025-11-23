@@ -1,3 +1,5 @@
+GLOBAL_LIST_EMPTY(antagonists)
+
 /datum/antagonist
 
 	// Base vars
@@ -51,6 +53,7 @@
 
 /datum/antagonist/New()
 	..()
+	GLOB.antagonists += src
 	if(!role_text_plural)
 		role_text_plural = role_text
 	if(CONFIG_GET(flag/protect_roles_from_antagonist))
@@ -61,3 +64,7 @@
 			GLOB.hud_icon_reference = list()
 		if(role_text)
 			GLOB.hud_icon_reference[role_text] = antaghud_indicator
+
+/datum/antagonist/Destroy()
+	GLOB.antagonists -= src
+	return ..()

@@ -37,6 +37,10 @@
 /proc/cmp_text_dsc(a,b)
 	return sorttext(a, b)
 
+/// Passed a list of assoc lists, sorts them by the list's "name" keys.
+/proc/cmp_assoc_list_name(list/A, list/B)
+    return sorttext(B["name"], A["name"])
+
 /proc/cmp_qdel_item_time(datum/qdel_item/A, datum/qdel_item/B)
 	. = B.hard_delete_time - A.hard_delete_time
 	if (!.)

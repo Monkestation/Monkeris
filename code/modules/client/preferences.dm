@@ -12,7 +12,11 @@
 	var/last_ip
 	var/last_id
 
+	var/db_flags
+
 	var/save_load_cooldown
+
+	var/list/exp = list()
 
 	//game-preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
@@ -90,7 +94,6 @@
 
 	var/dat = "<html><body><center>"
 	if(path)
-		SSjob.UpdatePlayableJobs(user.client.ckey)
 		dat += "Slot - "
 		dat += "<a href='byond://?src=\ref[src];load=1'>Load slot</a> - "
 		dat += "<a href='byond://?src=\ref[src];save=1'>Save slot</a> - "
@@ -171,7 +174,7 @@
 	character.set_species(species)
 	var/random_first = random_first_name(gender, species)
 	var/random_last = random_last_name(gender, species)
-	var/random_full = real_first_name + " " + real_last_name
+	var/random_full = real_first_name + (real_last_name ? " " + real_last_name : real_last_name)
 
 	if(be_random_name)
 		real_first_name = random_first
@@ -289,3 +292,12 @@
 		panel.close()
 		panel = null
 	user << browse(null, "window=saves")
+
+/datum/preferences/proc/GetJobLevel(datum/job/job)
+	. = JOB_LEVEL_NEVER
+	if(job_high == job.title)
+		. = JOB_LEVEL_HIGH
+	else if(job.title in job_medium)
+		. = JOB_LEVEL_MEDIUM
+	else if(job.title in job_low)
+		. = JOB_LEVEL_LOW

@@ -5,32 +5,71 @@
 /// You get 25 queries as the cap.
 #define PERMITTED_QUERIES_IN_TOTAL 25
 
+GLOBAL_LIST_INIT(exp_specialmap, list(
+	EXP_TYPE_LIVING = list(), // all living mobs
+	EXP_TYPE_ANTAG = list(),
+	EXP_TYPE_SPECIAL = list(
+		ROLE_BORER,
+		ROLE_BORER_REPRODUCED,
+		ROLE_MERCENARY,
+		ROLE_PIRATE,
+		ROLE_CARRION,
+		ROLE_MONKEY,
+		ROLE_MALFUNCTION,
+		ROLE_CONTRACTOR,
+		ROLE_CONTRACTOR_SYNTH,
+		ROLE_MARSHAL,
+		ROLE_EXCELSIOR_REV,
+		ROLE_INQUISITOR,
+		ROLE_BLITZ,
+		ROLE_PAI,
+		ROLE_DRONE,
+		ROLE_POSIBRAIN
+		), // Ghost roles
+	EXP_TYPE_GHOST = list() // dead people, observers
+))
+GLOBAL_PROTECT(exp_specialmap)
+
 SUBSYSTEM_DEF(job)
 	name = "Jobs"
 	init_order = INIT_ORDER_JOBS
 	wait = 1 MINUTE
 
-	var/list/occupations = list()			//List of all jobs
-	var/list/occupations_by_name = list()	//Dict of all jobs, keys are titles
-	var/list/departments = list()			//List of all departments
-	var/list/departments_by_name = list()	//Dict of all departments, keys are names
-	// var/list/datum/department/joinable_departments = list()
-	var/list/unassigned = list()			//Players who need jobs
-	var/list/job_debug = list()				//Debug info
-	var/list/job_mannequins = list()				//Cache of icons for job info window
-	var/list/ckey_to_job_to_playtime = list()
-	/// Eris specific stuff , playtimes are based off overall hours , and not on hours in said departament.
-	var/list/ckey_to_total_playtime = list()
-	var/list/ckey_to_job_to_can_play = list()
-	var/list/job_to_playtime_requirement = list()
-	/// DOS Attack prevention by locking off file-reads.
+	/// List of all jobs
+	var/list/occupations = list()
+	/// Dict of all jobs, keys are titles
+	var/list/occupations_by_name = list()
+	/// List of all jobs datums, keys are titles
+	var/list/occupations_by_type = list()
+	/// List of all departments
+	var/list/departments = list()
+	/// Dict of all departments, keys are names
+	var/list/departments_by_name = list()
+	/// Players who need jobs
+	var/list/unassigned = list()
+	/// Debug info
+	var/list/job_debug = list()
+	/// Cache of icons for job info window
+	var/list/job_mannequins = list()
+	/**
+	 * var/list/datum/department/joinable_departments = list()
+	 * / Used for checking against population caps
+	 */
+	var/initial_players_to_assign = 0
+
+	/// / DOS Attack prevention by locking off file-reads.
 	var/list/queries_by_key = list()
+	/// / Dictionary that maps job priorities to low/medium/high. Keys have to be number-strings as assoc lists cannot be indexed by integers. Set in setup_job_lists.
+	var/list/job_priorities_to_strings
+
+	/// / Dictionary of jobs indexed by the experience type they grant.
+	var/list/experience_jobs_map = list()
 
 /datum/controller/subsystem/job/Initialize(start_timeofday)
-	if(!occupations.len)
+	setup_job_lists()
+	if(!length(occupations))
 		SetupOccupations()
 		LoadJobs("config/jobs.txt")
-		LoadPlaytimeRequirements("config/job_playtime_requirements.txt")
 	return ..()
 
 /datum/controller/subsystem/job/fire(resumed)
@@ -38,205 +77,58 @@ SUBSYSTEM_DEF(job)
 		if(queries_by_key[key] > 3)
 			queries_by_key[key] -= 3
 
-/datum/controller/subsystem/job/proc/UpdatePlayableJobs(ckey)
-	if(!length(ckey_to_job_to_can_play[ckey]))
-		ckey_to_job_to_can_play[ckey] = list()
-	if(!length(ckey_to_job_to_playtime[ckey]))
-		LoadPlaytimes(ckey)
-	var/savefile/save_data = new("data/player_saves/[copytext(ckey, 1, 2)]/[ckey]/playtimes.sav")
-	var/whitelisted = FALSE
-	from_file(save_data["whitelisted"], whitelisted)
-	for(var/occupation in occupations_by_name)
-		if(is_admin(get_client_by_ckey(ckey)) || whitelisted)
-			ckey_to_job_to_can_play[ckey][occupation] = TRUE
-		else
-			ckey_to_job_to_can_play[ckey][occupation] = CanHaveJob(ckey, occupation)
+/// Takes a job priority #define such as JP_LOW and gets its string representation for logging.
+/datum/controller/subsystem/job/proc/job_priority_level_to_string(priority)
+	return job_priorities_to_strings["[priority]"] || "Undefined Priority \[[priority]\]"
 
-/client/verb/whitelistPlayerForJobs()
-	set category = "Admin"
-	set name = "Allow client to bypass all job requirement playtimes"
+/**
+ * Runs a standard suite of eligibility checks to make sure the player can take the reqeusted job.
+ *
+ * Checks:
+ * * Role bans
+ * * How many days old the player account is
+ * * Whether the player has the required hours in other jobs to take that role
+ * * If the job is in the mind's restricted roles, for example if they have an antag datum that's incompatible with certain roles.
+ *
+ * Arguments:
+ * * player - The player to check for job eligibility.
+ * * possible_job - The job to check for eligibility against.
+ * * debug_prefix - Logging prefix for the JobDebug log entries. For example, GRJ during GiveRandomJob or DO during DivideOccupations.
+ * * add_job_to_log - If TRUE, appends the job type to the log entry. If FALSE, does not. Set to FALSE when check is part of iterating over players for a specific job, set to TRUE when check is part of iterating over jobs for a specific player and you don't want extra log entry spam.
+ */
+/datum/controller/subsystem/job/proc/check_job_eligibility(mob/new_player/player, datum/job/possible_job, debug_prefix = "", add_job_to_log = FALSE)
+	if(!player.mind)
+		JobDebug("[debug_prefix] player has no mind, Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
+		return JOB_UNAVAILABLE_GENERIC
 
-	if(!holder)	return
+	// if(possible_job.title in player.mind.restricted_roles)
+	// 	JobDebug("[debug_prefix] Error: [get_job_unavailable_error_message(JOB_UNAVAILABLE_ANTAG_INCOMPAT, possible_job.title)], Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
+	// 	return JOB_UNAVAILABLE_ANTAG_INCOMPAT
 
-	var/client/the_chosen_one = input(usr, "Select player to whitelist for jobs", "THE CHOSEN ONE!", null) in GLOB.clients
-	if(!the_chosen_one)
-		to_chat(usr, span_danger("No client selected to whitelist"))
-		return
-	SSjob.WhitelistPlayer(the_chosen_one.ckey)
+	if(!possible_job.player_old_enough(player.client))
+		JobDebug("[debug_prefix] Error: [get_job_unavailable_error_message(JOB_UNAVAILABLE_ACCOUNTAGE, possible_job.title)], Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
+		return JOB_UNAVAILABLE_ACCOUNTAGE
 
-/client/verb/unwhitelistPlayerForJobs()
-	set category = "Admin"
-	set name = "Unwhitelist a client from all job requirement playtimes"
+	var/required_playtime_remaining = possible_job.required_playtime_remaining(player.client)
+	if(required_playtime_remaining)
+		JobDebug("[debug_prefix] Error: [get_job_unavailable_error_message(JOB_UNAVAILABLE_PLAYTIME, possible_job.title)], Player: [player], MissingTime: [required_playtime_remaining][add_job_to_log ? ", Job: [possible_job]" : ""]")
+		return JOB_UNAVAILABLE_PLAYTIME
 
-	if(!holder)	return
+	if(!possible_job.conditions_met())
+		JobDebug("[debug_prefix] Error: [get_job_unavailable_error_message(JOB_UNAVAILABLE_CONDITIONS_UNMET, possible_job.title)], Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
+		return  JOB_UNAVAILABLE_CONDITIONS_UNMET
 
-	var/client/the_disavowed_one = input(usr, "Select player to unwhitelist from jobs", "THE DISAVOWED ONE!", null) in GLOB.clients
-	if(!the_disavowed_one)
-		to_chat(usr, span_danger("No client selected to unwhitelist"))
-		return
-	SSjob.UnwhitelistPlayer(the_disavowed_one.ckey)
+	// Run the banned check last since it should be the rarest check to fail and can access the database.
+	if(is_banned_from(player.ckey, possible_job.title))
+		JobDebug("[debug_prefix] Error: [get_job_unavailable_error_message(JOB_UNAVAILABLE_BANNED, possible_job.title)], Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
+		return JOB_UNAVAILABLE_BANNED
 
-/client/verb/showPlaytimes()
-	set category = "OOC"
-	set name = "Show playtimes"
+	// Need to recheck the player exists after is_banned_from since it can query the DB which may sleep.
+	if(QDELETED(player))
+		JobDebug("[debug_prefix] player is qdeleted, Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
+		return JOB_UNAVAILABLE_GENERIC
 
-	if(!SSjob.initialized)
-		to_chat(mob, span_notice("The Jobs subsystem is not initialized yet, please wait."))
-		return
-
-	var/client_key = ckey
-
-	if(!client_key) return
-
-	var/htmlContent = {"<ul>"}
-
-	if(!length(SSjob.ckey_to_job_to_playtime[ckey]))
-		SSjob.LoadPlaytimes(ckey)
-	if(!length(SSjob.ckey_to_job_to_playtime[ckey]))
-		to_chat(mob, span_notice("SSjobs was unable to load your playtimes."))
-	for(var/occupation in SSjob.occupations_by_name)
-		var/value = round(SSjob.ckey_to_job_to_playtime[client_key][occupation]/600)
-		if(length(SSinactivity_and_job_tracking.current_playtimes))
-			if(length(SSinactivity_and_job_tracking.current_playtimes[ckey]))
-				value += round(SSinactivity_and_job_tracking.current_playtimes[ckey][occupation]/600)
-
-		if(!isnum(value))
-			message_admins("Value wasn't a number,  value was [value]")
-			value = 0
-		htmlContent += "<li> [occupation] : [value] Minutes</li>"
-	htmlContent += {"
-		</ul>"}
-
-	usr << browse(HTML_SKELETON_TITLE("Registered playtimes onboard CEV ERIS", htmlContent), "window=playtimes;file=playtimes;display=1; size=300x300;border=0;can_close=1; can_resize=1;can_minimize=1;titlebar=1" )
-
-/datum/controller/subsystem/job/proc/WhitelistPlayer(ckey)
-	var/savefile/save_data = new("data/player_saves/[copytext(ckey, 1, 2)]/[ckey]/playtimes.sav")
-	to_file(save_data["whitelisted"], TRUE)
-
-/datum/controller/subsystem/job/proc/UnwhitelistPlayer(ckey)
-	var/savefile/save_data = new("data/player_saves/[copytext(ckey, 1, 2)]/[ckey]/playtimes.sav")
-	to_file(save_data["whitelisted"], FALSE)
-
-/datum/controller/subsystem/job/proc/CanHaveJob(ckey, job_title)
-	if(!occupations_by_name[job_title])
-		return FALSE
-	if(!ckey)
-		return FALSE
-	if(job_to_playtime_requirement[job_title] == 0)
-		return TRUE
-
-	var/datum/job/wanted_job = occupations_by_name[job_title]
-	var/datum/job/checking_job
-	if(!wanted_job)
-		return FALSE
-	var/total_playtime
-	if(ckey_to_job_to_playtime[ckey])
-		if(ckey_to_job_to_playtime[ckey][job_title])
-			total_playtime += ckey_to_job_to_playtime[ckey][job_title]
-	for(var/job_name in ckey_to_job_to_playtime[ckey])
-		checking_job = occupations_by_name[job_name]
-		if(!checking_job)
-			continue
-		if(checking_job.department_flag & wanted_job.department_flag)
-			total_playtime += ckey_to_job_to_playtime[ckey][job_name]
-	if(length(SSinactivity_and_job_tracking))
-		if(length(SSinactivity_and_job_tracking[ckey]))
-			/// Blame linters!!!!
-			var/iter_ref = SSinactivity_and_job_tracking[ckey]
-			for(var/played_job in iter_ref)
-				checking_job = occupations_by_name[played_job]
-				if(!checking_job)
-					continue
-				if(checking_job.department_flag & wanted_job.department_flag)
-					total_playtime += round(SSinactivity_and_job_tracking[ckey][played_job])
-	if(total_playtime + ckey_to_total_playtime[ckey] >= job_to_playtime_requirement[job_title])
-		return TRUE
-	else
-		return FALSE
-
-/datum/controller/subsystem/job/proc/GetTotalPlaytimeMinutesCkey(ckey)
-	if(!ckey)
-		return 0
-	if(!ckey_to_total_playtime[ckey])
-		LoadPlaytimes(ckey)
-	if(!ckey_to_total_playtime[ckey])
-		return 0
-	return round(ckey_to_total_playtime[ckey] / 600)
-
-/datum/controller/subsystem/job/proc/LoadPlaytimeRequirements(folderPath)
-	if (!rustg_file_exists(folderPath))
-		to_chat(world, span_warning("Job playtime requirements file not found at [folderPath]."))
-		log_world("Job playtime requirements file not found at [folderPath].")
-		return FALSE
-	var/list/le_playtimes = file2list(folderPath)
-	for(var/playtime in le_playtimes)
-		if(!playtime)
-			continue
-		playtime = trim(playtime)
-		if (!length(playtime))
-			continue
-		var/pos = findtext(playtime, "=")
-		var/name = null
-		var/value = null
-		if(pos)
-			name = copytext(playtime, 1, pos)
-			value = copytext(playtime, pos + 1)
-		else
-			continue
-		if(name && value)
-			job_to_playtime_requirement[name] = text2num(value)
-		else if(name)
-			job_to_playtime_requirement[name] = 0
-
-
-
-	/// failsafe for non-existant config folders.
-	for(var/occupation in occupations_by_name)
-		if(!isnum(job_to_playtime_requirement[occupation]))
-			job_to_playtime_requirement[occupation] = 0
-	return TRUE
-
-/datum/controller/subsystem/job/proc/LoadPlaytimes(ckey)
-	if(!ckey)
-		return
-	if(queries_by_key[ckey] > PERMITTED_QUERIES_IN_TOTAL)
-		return
-	queries_by_key[ckey]++
-	var/savefile/save_data = new("data/player_saves/[copytext(ckey, 1, 2)]/[ckey]/playtimes.sav")
-	var/total_playtime = 0
-	for(var/occupation in occupations_by_name)
-		save_data.cd = occupation
-		if(!length(ckey_to_job_to_playtime[ckey]))
-			ckey_to_job_to_playtime[ckey] = list()
-		var/value
-		from_file(save_data["playtime"], value)
-		if(!isnum(value) || !value)
-			value = 0
-		total_playtime += value
-		ckey_to_job_to_playtime[ckey][occupation] = value
-		// return to last directory
-		save_data.cd = ".."
-	ckey_to_total_playtime[ckey] = total_playtime
-
-/datum/controller/subsystem/job/proc/SavePlaytimes(ckey)
-	if(!ckey)
-		return FALSE
-	var/savefile/save_data = new("data/player_saves/[copytext(ckey, 1, 2)]/[ckey]/playtimes.sav")
-	/// No playtimes registered
-	if(!length(SSinactivity_and_job_tracking.current_playtimes[ckey]))
-		return FALSE
-	for(var/occupation in SSinactivity_and_job_tracking.current_playtimes[ckey])
-		var/playtime = SSinactivity_and_job_tracking.current_playtimes[ckey][occupation]
-		var/playtime_from_file
-		save_data.cd = occupation
-		from_file(save_data["playtime"], playtime_from_file)
-		playtime = round(playtime) + playtime_from_file
-		if(!isnum(playtime))
-			message_admins("Malformatted input into job save playtimes for [ckey] [occupation], not saving the new playtime : [playtime]")
-			continue
-		to_file(save_data["playtime"], playtime)
-		/// return to last dir
-		save_data.cd = ".."
+	return JOB_AVAILABLE
 
 /datum/controller/subsystem/job/proc/CreateConfigFile()
 	// This is a file used for generating a template of all the current jobs..
@@ -246,11 +138,17 @@ SUBSYSTEM_DEF(job)
 	for(var/datum/job/occupation in occupations)
 		file << "[occupation.title]=0"
 
+/datum/controller/subsystem/job/proc/JobDebug(message)
+	log_job_debug(message)
+
 /datum/controller/subsystem/job/proc/SetupOccupations(faction = "CEV Eris")
 	occupations.Cut()
 	occupations_by_name.Cut()
+	occupations_by_type.Cut()
 	departments.Cut()
 	departments_by_name.Cut()
+	experience_jobs_map.Cut()
+//i am a dork lol
 
 	for(var/D in subtypesof(/datum/department))
 		var/datum/department/department = new D()
@@ -264,6 +162,10 @@ SUBSYSTEM_DEF(job)
 			continue
 		occupations += job
 		occupations_by_name[job.title] = job
+		occupations_by_type[job.type] = job
+
+		if(job.exp_granted_type)
+			experience_jobs_map[job.exp_granted_type] += list(job)
 
 		job.get_job_mannequin()
 
@@ -275,8 +177,11 @@ SUBSYSTEM_DEF(job)
 		if(!department.jobs)
 			department.jobs = list()
 		department.jobs += job
+		if(department.department_experience_type)
+			experience_jobs_map[department.department_experience_type] = department.jobs.Copy()
 
-	if(!occupations.len)
+	if(!length(occupations))
+		experience_jobs_map = list()
 		to_chat(world, span_warning("Error setting up jobs, no job datums found!"))
 		return FALSE
 	return TRUE
@@ -288,7 +193,14 @@ SUBSYSTEM_DEF(job)
 	return TRUE
 
 /datum/controller/subsystem/job/proc/GetJob(rank)
+	RETURN_TYPE(/datum/job)
 	return rank && occupations_by_name[rank]
+
+/datum/controller/subsystem/job/proc/GetJobType(jobtype)
+	RETURN_TYPE(/datum/job)
+	if(!length(occupations))
+		SetupOccupations()
+	return occupations_by_type[jobtype]
 
 /datum/controller/subsystem/job/proc/AssignRole(mob/new_player/player, rank, latejoin = FALSE)
 	Debug("Running AR, Player: [player], Rank: [rank], LJ: [latejoin]")
@@ -321,26 +233,36 @@ SUBSYSTEM_DEF(job)
 		return TRUE
 	return FALSE
 
-/datum/controller/subsystem/job/proc/FindOccupationCandidates(datum/job/job, level, flag)
-	Debug("Running FOC, Job: [job], Level: [level], Flag: [flag]")
+/datum/controller/subsystem/job/proc/FindOccupationCandidates(datum/job/job, level)
+	JobDebug("Running FOC, Job: [job], Level: [job_priority_level_to_string(level)]")
 	var/list/candidates = list()
 	for(var/mob/new_player/player in unassigned)
-		if(!CanHaveJob(player.client.ckey, job.title))
-			Debug("FOC playtime failed, Player:[player]")
+		if(popcap_reached())
+			JobDebug("FOC popcap reached, rejecting player: [player]")
 			continue
-		if(jobban_isbanned(player, job.title))
-			Debug("FOC isbanned failed, Player: [player]")
+		if(!player)
+			JobDebug("FOC player no longer exists.")
 			continue
-		if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
-			Debug("FOC character not old enough, Player: [player]")
+		if(!player.client)
+			JobDebug("FOC player client no longer exists, Player: [player]")
 			continue
-		if(flag && !(flag in player.client.prefs.be_special_role))
-			Debug("FOC flag failed, Player: [player], Flag: [flag], ")
+		// Initial screening check. Does the player even have the job enabled, if they do - Is it at the correct priority level?
+		var/player_job_level = player.client?.prefs.GetJobLevel(job)
+		if(isnull(player_job_level))
+			JobDebug("FOC player job not enabled, Player: [player]")
 			continue
-		if(player.client.prefs.CorrectLevel(job,level))
-			Debug("FOC pass, Player: [player], Level:[level]")
-			candidates += player
+		else if(player_job_level != level)
+			JobDebug("FOC player job enabled at wrong level, Player: [player], TheirLevel: [job_priority_level_to_string(player_job_level)], ReqLevel: [job_priority_level_to_string(level)]")
+			continue
+
+		// This check handles its own output to JobDebug.
+		if(check_job_eligibility(player, job, "FOC", add_job_to_log = FALSE) != JOB_AVAILABLE)
+			continue
+
+		JobDebug("FOC pass, Player: [player], Level: [job_priority_level_to_string(level)]")
+		candidates += player
 	return candidates
+
 
 /datum/controller/subsystem/job/proc/GiveRandomJob(mob/new_player/player)
 	Debug("GRJ Giving random job, Player: [player]")
@@ -348,11 +270,7 @@ SUBSYSTEM_DEF(job)
 		if(!job)
 			continue
 
-
 		if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
-			continue
-
-		if(!CanHaveJob(player.client.ckey, job.title))
 			continue
 
 		if(istype(job, GetJob(ASSISTANT_TITLE))) // We don't want to give him assistant, that's boring!
@@ -364,8 +282,12 @@ SUBSYSTEM_DEF(job)
 		if(job.is_restricted(player.client.prefs))
 			continue
 
-		if(jobban_isbanned(player.ckey, job.title))
-			Debug("GRJ isbanned failed, Player: [player], Job: [job.title]")
+		// This check handles its own output to JobDebug.
+		if(check_job_eligibility(player, job, "GRJ", add_job_to_log = TRUE) != JOB_AVAILABLE)
+			continue
+
+		if(popcap_reached())
+			Debug("GRJ: Popcap reached, rejecting: [player]")
 			continue
 
 		var/datum/category_item/setup_option/core_implant/I = player.client.prefs.get_option("Core implant")
@@ -396,7 +318,7 @@ SUBSYSTEM_DEF(job)
 			if(!job)
 				continue
 			var/list/candidates = FindOccupationCandidates(job, level)
-			if(!candidates.len)
+			if(!length(candidates))
 				continue
 
 			// Build a weighted list, weight by age.
@@ -433,7 +355,7 @@ SUBSYSTEM_DEF(job)
 		if(!job)
 			continue
 		var/list/candidates = FindOccupationCandidates(job, level)
-		if(!candidates.len)
+		if(!length(candidates))
 			continue
 		var/mob/new_player/candidate = pick(candidates)
 		AssignRole(candidate, command_position)
@@ -460,8 +382,11 @@ SUBSYSTEM_DEF(job)
 		if(player.ready && player.mind && !player.mind.assigned_role)
 			unassigned += player
 
-	Debug("DO, Len: [unassigned.len]")
-	if(unassigned.len == 0)
+	initial_players_to_assign = length(unassigned)
+
+	Debug("DO: Player count to assign roles to: [initial_players_to_assign]")
+
+	if(!length(unassigned))
 		return FALSE
 
 	//Shuffle players and jobs
@@ -473,7 +398,7 @@ SUBSYSTEM_DEF(job)
 	Debug("DO, Running Assistant Check 1")
 	var/datum/job/assist = new DEFAULT_JOB_TYPE ()
 	var/list/assistant_candidates = FindOccupationCandidates(assist, 3)
-	Debug("AC1, Candidates: [assistant_candidates.len]")
+	Debug("AC1, Candidates: [length(assistant_candidates)]")
 	for(var/mob/new_player/player in assistant_candidates)
 		Debug("AC1 pass, Player: [player]")
 		AssignRole(player, ASSISTANT_TITLE)
@@ -508,6 +433,10 @@ SUBSYSTEM_DEF(job)
 				/*if(!job || SSticker.mode.disabled_jobs.Find(job.title) )
 					continue
 				*/
+				if(popcap_reached())
+					Debug("Popcap reached, trying to reject player: [player]")
+					continue
+
 				if(jobban_isbanned(player.ckey, job.title))
 					Debug("DO isbanned failed, Player: [player], Job:[job.title]")
 					continue
@@ -803,7 +732,7 @@ SUBSYSTEM_DEF(job)
 			possibilities -= SP.name //Lets subtract the one we already tested
 		SP = null
 
-		while (possibilities.len)
+		while (length(possibilities))
 			//Randomly pick things from our shortlist
 			var/spawn_name = pick(possibilities)
 			SP = possibilities[spawn_name]
@@ -835,10 +764,94 @@ SUBSYSTEM_DEF(job)
 		return FALSE
 	return job.create_record
 
-/proc/get_exp_format(expnum)
-	if(expnum > 60)
-		return num2text(round(expnum / 60)) + "h"
-	else if(expnum > 0)
-		return num2text(expnum) + "m"
-	else
-		return "0h"
+/datum/controller/subsystem/job/proc/popcap_reached()
+	var/hpc = CONFIG_GET(number/hard_popcap)
+	var/epc = CONFIG_GET(number/extreme_popcap)
+	if(hpc || epc)
+		var/relevent_cap = max(hpc, epc)
+		if((initial_players_to_assign - length(unassigned)) >= relevent_cap)
+			return 1
+	return 0
+
+/// Builds various lists of jobs based on station, centcom and additional jobs with icons associated with them.
+/datum/controller/subsystem/job/proc/setup_job_lists()
+	job_priorities_to_strings = list(
+		"[JOB_LEVEL_LOW]" = "Low Priority",
+		"[JOB_LEVEL_MEDIUM]" = "Medium Priority",
+		"[JOB_LEVEL_HIGH]" = "High Priority",
+	)
+
+// /client/proc/showPlaytimesFor(ckey)
+// 	ckey = ckey(ckey)
+// 	if(!SSjob.initialized)
+// 		to_chat(mob, span_notice("The Jobs subsystem is not initialized yet, please wait."))
+// 		return
+
+// 	if (ckey != src.ckey && check_rights(R_ADMIN))
+// 		to_chat(mob, span_warning("You do not have the rights to view playtimes for others!"))
+// 		return
+
+// 	var/htmlContent = {"<ul>"}
+// 	new /datum/job_report_menu(src, usr)
+
+
+// 	if(!length(SSjob.ckey_to_job_to_playtime[ckey]))
+// 		SSjob.LoadPlaytimes(ckey)
+// 	if(!length(SSjob.ckey_to_job_to_playtime[ckey]))
+// 		to_chat(mob, span_notice("SSjobs was unable to load your playtimes."))
+// 	for(var/occupation in SSjob.occupations_by_name)
+// 		var/value = round(SSjob.ckey_to_job_to_playtime[client_key][occupation]/600)
+// 		if(length(SSinactivity_and_job_tracking.current_playtimes))
+// 			if(length(SSinactivity_and_job_tracking.current_playtimes[ckey]))
+// 				value += round(SSinactivity_and_job_tracking.current_playtimes[ckey][occupation]/600)
+
+// 		if(!isnum(value))
+// 			stack_trace("Value wasn't a number, value was [value]")
+// 			value = 0
+// 		htmlContent += "<li> [occupation] : [value] Minutes</li>"
+// 	htmlContent += {"
+// 		</ul>"}
+
+// 	usr << browse(HTML_SKELETON_TITLE("Registered playtimes onboard CEV ERIS", htmlContent), "window=playtimes;file=playtimes;display=1; size=300x300;border=0;can_close=1; can_resize=1;can_minimize=1;titlebar=1" )
+
+// #define OPTION_MYSELF "Myself"
+// #define OPTION_SOMEONEELSE "Another player"
+// #define OPTION_YES "Yes"
+// #define OPTION_NO "No"
+// #define TITLE_PLAYTIMES1 "Show Playtimes For Someone Else"
+// /client/verb/showPlaytimes()
+// 	set category = "OOC"
+// 	set name = "Show playtimes"
+
+// 	if (!check_rights(R_ADMIN))
+// 		showPlaytimesFor(ckey)
+// 		return
+
+// 	var/result = tgui_input_list(src, "Who do you want to view playtime for?", "Show Playtimes", list(OPTION_MYSELF, OPTION_SOMEONEELSE), OPTION_MYSELF)
+// 	if (isnull(result))
+// 		return
+// 	if(result == OPTION_MYSELF)
+// 		showPlaytimesFor(ckey)
+// 	else if(result == OPTION_SOMEONEELSE)
+// 		var/whom = tgui_alert(src, "Is this person online right now?", TITLE_PLAYTIMES1, list(OPTION_YES, OPTION_NO))
+// 		if (isnull(whom))
+// 			return
+// 		if (whom == OPTION_YES)
+// 			var/list/online = list()
+// 			for (var/client/player in GLOB.clients)
+// 				online.Add("[ckey] - [player.mob.real_name]")
+
+// 			result = tgui_input_list(src, "Choose a player (ckey - mob name)", TITLE_PLAYTIMES1, online)
+// 			if (isnull(result))
+// 				return
+// 			var/selected_ckey = splittext(result, " - ")[1]
+// 			showPlaytimesFor(selected_ckey)
+// 		if (whom == OPTION_NO)
+// 			var/whom_ckey = tgui_input_text(src, "Enter the ckey of the player you'd like to view playtimes for", TITLE_PLAYTIMES1)
+// 			showPlaytimesFor(ckey(whom_ckey))
+
+// #undef TITLE_PLAYTIMES1
+// #undef OPTION_NO
+// #undef OPTION_YES
+// #undef OPTION_SOMEONEELSE
+// #undef OPTION_MYSELF

@@ -1,5 +1,5 @@
 
-GLOBAL_VAR_INIT(OOC_COLOR, null)//If this is null, use the CSS for OOC. Otherwise, use a custom colour.
+GLOBAL_VAR_INIT(OOC_COLOR, "#cca300")//If this is null, use the CSS for OOC. Otherwise, use a custom colour.
 GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 
 /client/verb/ooc(msg as text)
@@ -122,10 +122,10 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 			to_chat(src, span_danger("LOOC is globally muted."))
 			return
 		if(!GLOB.dooc_allowed && (mob.stat == DEAD))
-			to_chat(usr, span_danger("OOC for dead mobs has been turned off."))
+			to_chat(usr, span_danger("LOOC for dead mobs has been turned off."))
 			return
 		if(prefs.muted & MUTE_OOC)
-			to_chat(src, span_danger("You cannot use OOC (muted)."))
+			to_chat(src, span_danger("You cannot use LOOC (muted)."))
 			return
 		if(handle_spam_prevention(msg, MUTE_OOC))
 			return
@@ -173,28 +173,22 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 
 
 	for(var/client/hearer in listening)
-		var/admin_stuff = ""
 		var/prefix = ""
-		if(hearer in GLOB.admins)
-			admin_stuff += "/([key])"
-			if(hearer != src)
-				admin_stuff += "([admin_jump_link(mob, hearer.holder)])"
 		if(isAI(hearer.mob))
 			if(hearer in eye_heard)
 				prefix = "(Eye) "
 			else
 				prefix = "(Core) "
+		to_chat(hearer, span_looc("[span_prefix("LOOC:")] [span_prefix(prefix)]<EM>[span_name("[mob.name]")]:</EM> <span class='message linkify'>[msg]</span>"), type = MESSAGE_TYPE_LOOC, avoid_highlighting = (hearer == mob))
 		if(hearer.prefs.RC_see_looc_on_map)
 			hearer.mob?.create_chat_message(mob, /datum/language/common, "\[LOOC: [msg]\]", runechat_flags = LOOC_MESSAGE)
-		to_chat(hearer, span_looc("[span_prefix("LOOC:")] [span_prefix(prefix)]<EM>[span_name("[mob.name]")][admin_stuff]:</EM> <span class='message linkify'>[msg]</span>"), type = MESSAGE_TYPE_LOOC, avoid_highlighting = (hearer == mob))
 
 	for(var/client/client in GLOB.admins)	//Now send to all admins that weren't in range.
 		if(!(client in listening) && client.get_preference_value(/datum/client_preference/staff/show_rlooc) == GLOB.PREF_SHOW)
-			var/admin_stuff = "/([key])([admin_jump_link(client, client.holder)])"
 			var/prefix = "[listening[client] ? "" : "(R)"]LOOC"
 			if(client.prefs.RC_see_looc_on_map)
 				client.mob?.create_chat_message(mob, /datum/language/common, "\[LOOC: [msg]\]", runechat_flags = LOOC_MESSAGE)
-			to_chat(client, span_looc("[span_prefix("[prefix]:")] <EM>[admin_stuff]:</EM> <span class='message linkify'>[msg]</span>"), type = MESSAGE_TYPE_LOOC, avoid_highlighting = (client == src))
+			to_chat(client, span_looc("[span_prefix("[prefix]:")] <EM>[ADMIN_LOOKUPFLW(mob)]:</EM> <span class='message linkify'>[msg]</span>"), type = MESSAGE_TYPE_LOOC, avoid_highlighting = (client == src))
 
 /mob/proc/get_looc_source()
 	return src
@@ -225,3 +219,14 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 		return
 
 	browse_messages(null, usr.ckey, null, TRUE)
+
+/client/proc/self_playtime()
+	set name = "View tracked playtime"
+	set category = "OOC"
+	set desc = "View the amount of playtime for roles the server has tracked."
+
+	if(!CONFIG_GET(flag/use_exp_tracking))
+		to_chat(usr, span_notice("Sorry, tracking is currently disabled."))
+		return
+
+	new /datum/job_report_menu(src, usr)

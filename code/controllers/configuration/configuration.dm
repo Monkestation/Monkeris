@@ -159,6 +159,32 @@
 		CRASH("/datum/controller/configuration/Load() called more than once!")
 	configuration_errors ||= list()
 	InitEntries()
+	var/list/default_files = list("example", "names", ".gitignore")
+	var/trip = FALSE
+	// if there's no files in the config directory, just copy everything from the example folder.
+	for (var/f in flist("[directory]/"))
+		if(f in default_files)
+			continue
+
+		if(copytext(f, -1) == "/")
+			continue
+
+		trip = TRUE
+		break
+
+	if (!trip)
+		log_config("Config directory empty, copying from examples.")
+		for(var/f in flist("[directory]/example/"))
+			if(copytext(f, -1) == "/")
+				continue
+			fcopy("[directory]/example/[f]", "[directory]/[f]")
+
+	var/list/required_files = list("admin.txt", "admin_ranks.txt", "config.txt")
+	for(var/file in required_files)
+		if (!fexists("[directory]/[file]") && fexists("[directory]/example/[file]"))
+			log_config("Missing required [file] file, copying from examples.")
+			fcopy("[directory]/example/[file]", "[directory]/[file]")
+
 	if(fexists("[directory]/config.txt") && LoadEntries("config.txt") <= 1)
 		var/list/legacy_configs = list("game_options.txt", "dbconfig.txt", "comms.txt")
 		for(var/I in legacy_configs)
@@ -167,15 +193,20 @@
 				for(var/J in legacy_configs)
 					LoadEntries(J)
 				break
+
+	// this technically doesn't need to exist anymore because we have example configs
+	// but that is a whole discussion topic to have with devs. but also considering nobody besides me
+	// is really maintaining on this codebase, i will say, I don't care - chen
 	if (fexists("[directory]/dev_overrides.txt"))
 		LoadEntries("dev_overrides.txt")
+	// TODO: (oh yay more tech debt) Add EZDB to the codebase.
 	// if (fexists("[directory]/ezdb.txt"))
 	// 	LoadEntries("ezdb.txt")
 	load_important_notices()
 	LoadMOTD()
 	LoadChatFilter()
-	// if(CONFIG_GET(flag/load_jobs_from_txt))
-	// 	validate_job_config()
+	if(CONFIG_GET(flag/load_jobs_from_txt))
+		validate_job_config()
 	if(CONFIG_GET(flag/usewhitelist))
 		load_whitelist()
 
@@ -489,30 +520,30 @@
 	var/regex_filter = whitespace_split != "" ? "([whitespace_split]|[word_bounds])" : word_bounds
 	return regex(regex_filter, "i")
 
-/// Check to ensure that the jobconfig is valid/in-date.
-// /datum/controller/configuration/proc/validate_job_config()
-// 	var/config_toml = "[directory]/jobconfig.toml"
-// 	var/config_txt = "[directory]/jobs.txt"
-// 	var/message = "Notify Server Operators: "
-// 	log_config("Validating config file jobconfig.toml...")
+// / Check to ensure that the jobconfig is valid/in-date.
+/datum/controller/configuration/proc/validate_job_config()
+	var/config_toml = "[directory]/jobconfig.toml"
+	var/config_txt = "[directory]/jobs.txt"
+	var/message = "Notify Server Operators: "
+	log_config("Validating config file jobconfig.toml...")
 
-// 	if(!fexists(file(config_toml)))
-// 		SSjob.legacy_mode = TRUE
-// 		message += "jobconfig.toml not found, falling back to legacy mode (using jobs.txt). To surpress this warning, generate a jobconfig.toml by running the verb 'Generate Job Configuration' in the Server tab.\n // put backslash here if and when you uncomment this (to shut up linters)
-// 			From there, you can then add it to the /config folder of your server to have it take effect for future rounds."
+	if(!fexists(file(config_toml)))
+		// SSjob.legacy_mode = TRUE
+		message += "jobconfig.toml not found, falling back to legacy mode (using jobs.txt). To surpress this warning, generate a jobconfig.toml by running the verb 'Generate Job Configuration' in the Server tab.\n \
+			From there, you can then add it to the /config folder of your server to have it take effect for future rounds."
 
-// 		if(!fexists(file(config_txt)))
-// 			message += "\n\nFailed to set up legacy mode, jobs.txt not found! Codebase defaults will be used. If you do not wish to use this system, please disable it by commenting out the LOAD_JOBS_FROM_TXT config flag."
+		if(!fexists(file(config_txt)))
+			message += "\n\nFailed to set up legacy mode, jobs.txt not found! Codebase defaults will be used. If you do not wish to use this system, please disable it by commenting out the LOAD_JOBS_FROM_TXT config flag."
 
-// 		log_config(message)
-// 		DelayedMessageAdmins(span_notice(message))
-// 		return
+		log_config(message)
+		DelayedMessageAdmins(span_notice(message))
+		return
 
-// 	var/list/result = rustg_raw_read_toml_file(config_toml)
-// 	if(!result["success"])
-// 		message += "The job config (jobconfig.toml) is not configured correctly! [result["content"]]"
-// 		log_config(message)
-// 		DelayedMessageAdmins(span_notice(message))
+	var/list/result = rustg_raw_read_toml_file(config_toml)
+	if(!result["success"])
+		message += "The job config (jobconfig.toml) is not configured correctly! [result["content"]]"
+		log_config(message)
+		DelayedMessageAdmins(span_notice(message))
 
 //Message admins when you can.
 /datum/controller/configuration/proc/DelayedMessageAdmins(text)

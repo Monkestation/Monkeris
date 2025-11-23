@@ -211,13 +211,21 @@ Proc for attack log creation, because really why not
 	if (progbar)
 		qdel(progbar)
 
-/proc/do_after(mob/user, delay, atom/target, needhand = 1, progress = 1, incapacitation_flags = INCAPACITATION_DEFAULT, immobile = 1)
+/proc/do_after(mob/user, delay, atom/target, needhand = 1, progress = 1, incapacitation_flags = INCAPACITATION_DEFAULT, immobile = 1, unique = FALSE)
 	if(!user)
 		return 0
 
 	var/atom/target_loc
 	if(target)
 		target_loc = target.loc
+		//if unique is enabled, won't trigger if the obj is already in use
+		if(target.used_now && unique)
+			if(target != user)
+				to_chat(user, span_warning("[target.name] is already in use."))
+			//stop telling everyone you're already using their body. it's weird.
+			else
+				to_chat(user, span_warning("You are already performing an action, wait for it to end!"))
+			return 0
 
 	var/atom/original_loc = user.loc
 
@@ -234,6 +242,9 @@ Proc for attack log creation, because really why not
 
 	if (progress)
 		progbar = new(user, delay, progtarget)
+
+	if(target)
+		target.used_now = TRUE
 
 	var/endtime = world.time + delay
 	var/starttime = world.time
@@ -252,9 +263,12 @@ Proc for attack log creation, because really why not
 				. = 0
 				break
 
-		if(target_loc && (!target || target_loc != target.loc))
-			. = 0
-			break
+		if(target_loc)
+			//if user is the target & immobile is not enabled we can safely ignore their loc changing
+			//otherwise, death to progbar
+			if(!target || (target != user && target_loc != target.loc))
+				. = 0
+				break
 
 		if(needhand)
 			if(user.get_active_held_item() != holding)
@@ -263,6 +277,8 @@ Proc for attack log creation, because really why not
 
 	if (progbar)
 		qdel(progbar)
+	if(target)
+		target.used_now = FALSE
 
 //Defined at mob level for ease of use
 /mob/proc/body_part_covered(bodypart)
@@ -445,6 +461,9 @@ Proc for attack log creation, because really why not
 /proc/get_mob_by_ckey(key)
 	if(!key)
 		return
+	var/mob/persistent_mob = GLOB.persistent_clients_by_ckey[key]?.mob
+	if(persistent_mob)
+		return persistent_mob
 	for(var/mob/mob in GLOB.mob_list)
 		if(mob.ckey == key)
 			return mob
@@ -560,3 +579,11 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 			to_chat(M, rendered_message, avoid_highlighting = speaker_ckey == M.key)
 		else
 			to_chat(M, message, avoid_highlighting = speaker_ckey == M.key)
+
+///Returns the amount of currently living players
+/proc/living_player_count()
+	var/living_player_count = 0
+	for(var/mob in GLOB.player_list)
+		if(mob in GLOB.mob_list && !(mob in GLOB.dead_mob_list))
+			living_player_count += 1
+	return living_player_count

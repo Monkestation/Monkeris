@@ -1,3 +1,7 @@
+# HEY
+
+Most of this document is still useful but we generally recommend you read up on [tgstation's CONTRIBUTING.MD](https://github.com/tgstation/tgstation/blob/master/.github/CONTRIBUTING.md) first, applying anything you can there, before you read up here.
+
 # General
 * Where possible, large projects should be broken up into several smaller pull requests, and/or done in phases over time.
 * Pull requests should not contain commented code except TODOs and explanation comments.

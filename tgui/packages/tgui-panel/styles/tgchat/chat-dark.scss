@@ -340,31 +340,35 @@ em {
   color: hsl(132.8, 74.4%, 45.9%);
 }
 
-.sciradio {
-  color: hsl(271.6, 91.7%, 76.5%);
+.comradio {
+  color: hsl(202, 98%, 50%);
 }
 
-.comradio {
-  color: hsl(53, 97.6%, 50%);
+.ntradio {
+  color: hsl(46, 65%, 52%);
 }
 
 .secradio {
   color: hsl(0, 71.2%, 53.7%);
 }
 
-.medradio {
-  color: hsl(202, 83.6%, 64.1%);
-}
-
 .engradio {
   color: hsl(17, 87.8%, 61.4%);
 }
 
-.suppradio {
+.medradio {
+  color: hsl(202, 83.6%, 64.1%);
+}
+
+.sciradio {
+  color: hsl(271.6, 91.7%, 76.5%);
+}
+
+.supradio {
   color: hsl(33.7, 44.9%, 49.8%);
 }
 
-.servradio {
+.srvradio {
   color: hsl(88.1, 60.6%, 40.8%);
 }
 
@@ -380,7 +384,7 @@ em {
   color: hsl(197, 62.6%, 39.8%);
 }
 
-.aiprivradio {
+.airadio {
   color: hsl(332.2, 59.6%, 60.2%);
 }
 
@@ -402,10 +406,6 @@ em {
 
 .yellowteamradio {
   color: hsl(60, 98%, 59.8%) !important;
-}
-
-.captaincast {
-  color: hsl(157.1, 39.6%, 62.4%);
 }
 
 .yell {
@@ -448,6 +448,7 @@ em {
   color: hsl(0, 73.6%, 44.5%);
   font-size: 90%;
 }
+
 .warning {
   color: hsl(0, 73.6%, 44.5%);
   font-style: italic;
@@ -549,6 +550,10 @@ em {
 .boldnotice {
   color: hsl(227, 87.7%, 68%);
   font-weight: bold;
+}
+
+.alium {
+  color: hsl(120, 68%, 50%);
 }
 
 .hear {
@@ -742,6 +747,19 @@ em {
   color: hsl(0, 100%, 50%);
   font-size: 185%;
   font-weight: bold;
+}
+
+.revolution {
+  color: hsl(344, 100%, 35%);
+  font-weight: bold;
+  font-style: italic;
+}
+
+.revolution_alert {
+  color: hsl(344, 100%, 35%);
+  font-weight: bold;
+  font-style: italic;
+  font-size: 200%;
 }
 
 .spiderbroodmother {
@@ -1297,33 +1315,42 @@ $border-width-px: $border-width * 1px;
 .alien {
   color: #543354;
 }
+
 .monkey {
   color: #22228b;
 }
+
 .rough {
   font-family:
     Trebuchet MS,
     cursive,
     sans-serif;
 }
+
 .say_quote {
   font-family: Georgia, Verdana, sans-serif;
 }
+
 .russian {
   color: #635d17;
 }
+
 .serbian {
   color: #ad6f1d;
 }
+
 .jive {
   color: #666666;
 }
+
 .german {
   color: #001fff;
 }
+
 .neohongo {
   color: #993399;
 }
+
 .latin {
   color: #deb63d;
 }

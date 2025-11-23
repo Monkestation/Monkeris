@@ -1,18 +1,3 @@
-//Defines
-//Deciseconds until ticket becomes stale if unanswered. Alerts admins.
-#define TICKET_TIMEOUT 10 MINUTES // 10 minutes
-//Decisecions before the user is allowed to open another ticket while their existing one is open.
-#define TICKET_DUPLICATE_COOLDOWN 5 MINUTES // 5 minutes
-
-//Status defines
-#define TICKET_OPEN       1
-#define TICKET_CLOSED     2
-#define TICKET_RESOLVED   3
-#define TICKET_STALE      4
-
-#define TICKET_STAFF_MESSAGE_ADMIN_CHANNEL 1
-#define TICKET_STAFF_MESSAGE_PREFIX 2
-
 SUBSYSTEM_DEF(tickets)
 	name = "Admin Tickets"
 	init_order = INIT_ORDER_TICKETS
@@ -119,9 +104,9 @@ SUBSYSTEM_DEF(tickets)
  */
 /datum/controller/subsystem/tickets/proc/makeUrlMessage(client/C, msg, ticketNum)
 	var/list/L = list()
-	L += "<span class='[ticket_help_span]'>[ticket_help_type]: </span><span class='boldnotice'>[key_name(C, TRUE, ticket_help_type)] "
-	L += "([ADMIN_QUE(C.mob)]) ([ADMIN_PP(C.mob)]) ([ADMIN_VV(C.mob)]) ([ADMIN_TP(C.mob)]) ([ADMIN_SM(C.mob)]) "
-	L += "([admin_jump_link(C.mob)]) (<a href='byond://?_src_=holder;[HrefToken()];openticket=[ticketNum][anchor_link_extra]'>TICKET</a>) "
+	L += "<span class='[ticket_help_span]'>[ticket_help_type] #[ticketNum]: </span><span class='boldnotice'>[key_name(C, TRUE, ticket_help_type)] "
+	L += ADMIN_FULLMONTY(C.mob)
+	L += " (<a href='byond://?_src_=holder;[HrefToken()];openticket=[ticketNum][anchor_link_extra]'>TICKET</a>) "
 	L += "[isAI(C.mob) ? "(<a href='byond://?_src_=holder;[HrefToken()];adminchecklaws=\ref[C.mob]'>CL</a>)" : ""] (<a href='byond://?_src_=holder;[HrefToken()];take_question=[ticketNum][anchor_link_extra]'>TAKE</a>) "
 	L += "(<a href='byond://?_src_=holder;[HrefToken()];resolve=[ticketNum][anchor_link_extra]'>RESOLVE</a>) (<a href='byond://?_src_=holder;[HrefToken()];autorespond=[ticketNum][anchor_link_extra]'>AUTO</a>) "
 	L += " :</span> <span class='[ticket_help_span]'>[msg]</span>"

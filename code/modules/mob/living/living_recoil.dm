@@ -59,7 +59,7 @@
 		ASSERT(isicon(base))
 		client.mouse_pointer_icon = base
 
-/mob/living/proc/remove_cursor()
+/mob/proc/remove_cursor()
 	if(client)
 		client.mouse_pointer_icon = initial(client.mouse_pointer_icon)
 

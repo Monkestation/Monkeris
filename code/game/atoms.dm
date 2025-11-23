@@ -15,7 +15,7 @@
 	var/fluorescent
 	/// Prevents thrown atoms from spinning when disabled on thrown or target
 	var/allow_spin = TRUE
-	/// For tools system, check for it should forbid to work on atom for more than one user at time
+	/// For do_afters and the tool system, check if it should forbid work on atom for more than one do_after at time
 	var/used_now = FALSE
 	var/auto_init = TRUE
 	var/initialized = FALSE
@@ -32,6 +32,11 @@
 	var/light_power = 1
 	/// Range in tiles of the light.
 	var/light_range = 0
+	// how many zs we can go down through open spaces
+	var/light_depth = 1
+	// how many zs we can go up through open spaces
+	var/light_height = 1
+
 	/// Hexadecimal RGB string representing the colour of the light.
 	var/light_color
 
@@ -158,7 +163,7 @@
  * that all atoms will actually exist in the "WORLD" at this time and that all their Intialization
  * code has been run
  */
-/atom/proc/LateInitialize()
+/atom/proc/LateInitialize(mapload_arg)
 	set waitfor = FALSE
 
 /**

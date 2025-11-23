@@ -33,3 +33,5 @@
 	log_prayer("[src.key]/([src.name]): [msg]")
 
 	//log_admin("HELP: [key_name(src)]: [msg]")
+	BLACKBOX_LOG_ADMIN_VERB("Prayer")
+
