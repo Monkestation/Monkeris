@@ -398,7 +398,6 @@
 
     // Available jobs
     var/list/jobs = list()
-    SSjob.UpdatePlayableJobs(player.client.ckey)
 
     for(var/datum/job/job in SSjob.occupations)
         if(job && player.IsJobAvailable(job.title) && !job.is_restricted(player.client.prefs))
