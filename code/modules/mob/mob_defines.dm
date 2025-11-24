@@ -49,7 +49,6 @@
 	var/use_me = 1
 	var/damageoverlaytemp = 0
 	var/obj/machinery/machine
-	var/poll_answer = 0
 	var/sdisabilities = 0	//Carbon
 	var/disabilities = 0	//Carbon
 
@@ -64,8 +63,6 @@
 	var/hand = 0
 	var/real_name
 
-	var/bhunger = 0			//Carbon
-	var/ajourn = 0
 	var/seer = 0 //for cult//Carbon, probably Human
 
 	var/druggy = 0			//Carbon

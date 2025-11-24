@@ -176,7 +176,7 @@ var/list/channel_to_radio_key = new
 		to_chat(src, span_danger("You're muzzled and cannot speak!"))
 		return
 
-	var/prefix = copytext(message,1,2)
+	var/prefix = message[1]
 	if(prefix == get_prefix_key(/decl/prefix/custom_emote))
 		return emote(copytext(message,2))
 	if(prefix == get_prefix_key(/decl/prefix/visible_emote))
