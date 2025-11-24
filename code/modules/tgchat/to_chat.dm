@@ -79,6 +79,8 @@
 			CRASH("Empty or null string in to_chat proc call.")
 	if(target == world)
 		target = GLOB.clients
+	if(findtext(html, "notice"))
+		stack_trace("found notice: [html]")
 
 	// Build a message
 	var/message = list()
