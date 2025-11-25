@@ -44,6 +44,11 @@
 
 	injury_type = INJURY_TYPE_UNLIVING // Has no soft vitals, but also contains delicate electronics
 
+	///a datum containing our silicon's laws
+	var/datum/ai_laws/laws = null
+	///additional radio channels to state laws over
+	var/list/additional_law_channels = list("State" = "")
+
 /mob/living/silicon/Initialize()
 	GLOB.silicon_mob_list |= src
 	. = ..()

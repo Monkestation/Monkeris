@@ -46,9 +46,6 @@ var/global/datum/codespeak_list/serb_codes
 		if(findtext(index, saved_index))
 			return codes[saved_index]
 
-/mob/living/carbon/human/
-	var/codespeak_cooldown
-
 /mob/living/carbon/human/proc/codesay(message, state_location, say_localy, faction = "IH")
 	var/prefix = get_prefix_key(/decl/prefix/radio_channel_selection)
 	if(world.time < src.codespeak_cooldown)
