@@ -38,7 +38,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	add_fingerprint(user)
 	if(ishuman(user))//monkeys can use items, unfortunately
 		var/mob/living/carbon/human/H = user
-		if(H.blocking)
+		if(H.blocking && !istype(H.blocking_item, /obj/item/shield))
 			H.stop_blocking()
 	if(ishuman(user) && !(user == A) && !(user.loc == A) && (w_class >=  ITEM_SIZE_NORMAL) && wielded && user.a_intent == I_HURT && !istype(src, /obj/item/gun) && !istype(A, /obj/structure) && !istype(A, /turf/wall) && A.loc != user && !no_swing)
 		swing_attack(A, user, params)
@@ -47,40 +47,50 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		return 1 //Swinging calls its own attacks
 	return A.attackby(src, user, params)
 
-//Returns TRUE if attack is to be carried out, FALSE otherwise.
+/// The default method of invoking double tact. Returns TRUE if attack is to be carried out, FALSE otherwise.
 /obj/item/proc/double_tact(mob/user, atom/atom_target, adjacent)
 	if(atom_target.loc == user)//putting stuff in your backpack, or something else on your person?
 		return TRUE //regular bags won't even be able to hold items this big, but who knows
 	if((w_class >= ITEM_SIZE_HUGE || (w_class == ITEM_SIZE_BULKY && !wielded)) && !abstract && !istype(src, /obj/item/gun) && !no_double_tact)//grabs have colossal w_class. You can't raise something that does not exist.
 		if(!adjacent || istype(atom_target, /turf) || istype(atom_target, /mob) || user.a_intent == I_HURT)//guns have the point blank privilege
 			if(!ready)
-				user.visible_message(span_danger("[user] raises [src]!"))
-				ready = TRUE
-				var/obj/effect/effect/melee/alert/A = new()
-				user.vis_contents += A
-				qdel(A)
-				var/unready_time = world.time + (10 SECONDS)
-				while(world.time < unready_time)
-					sleep(1)
-					if(!(ready))
-						user.vis_contents -= A
-						return FALSE
-					if(!(is_equipped()))
-						ready = FALSE
-						user.vis_contents -= A
-						return FALSE
-				user.visible_message(span_notice("[user] lowers \his [src]."))
-				ready = FALSE
-				user.vis_contents -= A
+				start_tact(user, atom_target)
 				return FALSE
 			else
-				ready = FALSE
+				if(used_now)//do not unready or resolve, we are currently prepping an attack
+					return FALSE
+				end_tact(user, atom_target, TRUE)
 				return TRUE
 		else
 			return TRUE
 	else
 		return TRUE
 
+
+/// attempts to activate double tact state, can be called independently of double_tact.
+/obj/item/proc/start_tact(mob/user, target)
+	//is our object eligible for double tact?
+	if((w_class >= ITEM_SIZE_HUGE || (w_class == ITEM_SIZE_BULKY && !wielded)) && !abstract && !istype(src, /obj/item/gun) && !no_double_tact)
+		//tact windup length is scaled inversely with the robustness stat, bottoming out at MIN_TACT_DURATION
+		var/tact_duration = max(MIN_TACT_DURATION, BASE_TACT_DURATION * (1 - user.stats.getStat(STAT_ROB) / 150))
+		if(!ready && do_after(user, tact_duration, user, TRUE, immobile = FALSE, unique = TRUE))
+			user.vis_contents += tact_visual
+			user.visible_message(span_danger("[user] raises \the [src]!"))
+			ready = TRUE
+			//this will eventually cancel the raised state if it isn't used elsewhere
+			addtimer(CALLBACK(src, PROC_REF(end_tact), user, target, FALSE), 10 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
+		return
+
+/// if a double_tact item is raised, lowers it.
+/obj/item/proc/end_tact(mob/user, target, combo)
+	if(user && ready)
+		ready = FALSE
+		user.vis_contents.Remove(tact_visual)
+		//Automatically start winding back up after the 1st double tact swing. Makes double_tact smoother to use
+		if(combo)
+			addtimer(CALLBACK(src, PROC_REF(start_tact), user, target), 2, TIMER_UNIQUE | TIMER_OVERRIDE)
+		else
+			user.visible_message(span_notice("[user] lowers \his [src]."))
 
 /obj/item/proc/swing_attack(atom/A, mob/user, params)
 	var/holdinghand = user.get_inventory_slot(src)

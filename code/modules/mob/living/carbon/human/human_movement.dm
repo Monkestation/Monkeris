@@ -22,8 +22,13 @@
 				tally += 0.5
 	if(stats.getPerk(PERK_FAST_WALKER))
 		tally -= 0.5
+
 	if(blocking)
-		tally += 1
+		if(blocking_item)
+			tally += blocking_item.slowdown_blocking
+		else
+			tally += 1
+
 
 	if(recoil)
 		var/obj/item/gun/GA = get_active_held_item()

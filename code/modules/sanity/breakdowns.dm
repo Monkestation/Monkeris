@@ -317,12 +317,12 @@
 	images.Cut()
 	..()
 
-/datum/breakdown/negative/fabric/proc/add_image(image/I)
+/datum/breakdown/negative/fabric/proc/add_image(datum/source, image/I)
 	SIGNAL_HANDLER
 	images |= I
 	holder.owner.client?.images |= I
 
-/datum/breakdown/negative/fabric/proc/update_client_images()
+/datum/breakdown/negative/fabric/proc/update_client_images(datum/source)
 	SIGNAL_HANDLER
 	holder.owner.client?.images |= images
 

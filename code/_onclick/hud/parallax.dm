@@ -67,10 +67,6 @@ GLOBAL_VAR_INIT(random_parallax, pick("space0", "space1", "space2", "space3", "s
 /atom/movable/screen/parallax/set_plane(np)
 	plane = np
 
-// Mob stuff
-/mob
-	var/atom/movable/screen/parallax/parallax
-
 /mob/Move(NewLoc, Dir = 0, step_x = 0, step_y = 0, glide_size_override = 0)
 	. = ..()
 	if(.)

@@ -813,7 +813,7 @@
 
 /obj/item/mech_equipment/mounted_system/attack_self(mob/user)
 	. = ..()
-	owner.update_icon()
+	owner?.update_icon()
 
 /obj/item/mech_equipment/mounted_system/mace/Initialize()
 	. = ..()

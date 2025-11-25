@@ -21,7 +21,7 @@
 	text = "Restart Round"
 
 /datum/vote_choice/restart/on_win()
-	to_chat(world, "<b>World restarting due to vote...<b>")
+	to_chat(world, span_boldannounce("World restarting due to vote..."))
 	sleep(50)
 	log_game("Rebooting due to restart vote")
 	world.Reboot()

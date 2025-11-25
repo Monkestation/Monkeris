@@ -133,7 +133,7 @@ var/global/floorIsLava = 0
 		<a href='byond://?src=\ref[src];[HrefToken()];subtlemessage=\ref[M]'>SM</a> -
 		<a href='byond://?src=\ref[src];[HrefToken()];manup=\ref[M]'>MAN_UP</a> -
 		<a href='byond://?src=\ref[src];[HrefToken()];paralyze=\ref[M]'>PARA</a> -
-		[admin_jump_link(M, src)] -
+		[ADMIN_JMP(M)] -
 		<a href='byond://?src=\ref[src];[HrefToken()];viewlogs=\ref[M]'>LOGS</a>\] <br>
 		<b>Mob type</b> = [M.type]<br><br>
 		<A href='byond://?src=\ref[src];[HrefToken()];boot2=\ref[M]'>Kick</A> |
@@ -541,7 +541,6 @@ var/global/floorIsLava = 0
 	if (!usr.client.holder)
 		return
 
-	var/localhost_addresses = list("127.0.0.1", "::1")
 	var/list/options = list("Regular Restart", "Regular Restart (with delay)", "Hard Restart (No Delay/Feedback Reason)", "Hardest Restart (No actions, just reboot)")
 	if(world.TgsAvailable())
 		options += "Server Restart (Kill and restart DD)";
@@ -552,11 +551,11 @@ var/global/floorIsLava = 0
 
 	var/result = input(usr, "Select reboot method", "World Reboot", options[1]) as null|anything in options
 	if(result)
-		SSblackbox.record_feedback("tally", "admin_verb", 1, "Reboot World") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		BLACKBOX_LOG_ADMIN_VERB("Reboot World")
 		var/init_by = "Initiated by [usr.client.holder.fakekey ? "Admin" : usr.key]."
 		switch(result)
 			if("Regular Restart")
-				if(!(isnull(usr.client.address) || (usr.client.address in localhost_addresses)))
+				if(!usr.client.is_localhost())
 					if(alert(usr, "Are you sure you want to restart the server?","This server is live", "Restart", "Cancel") != "Restart")
 						return FALSE
 				// SSplexora.restart_requester = usr
@@ -566,7 +565,7 @@ var/global/floorIsLava = 0
 				var/delay = input("What delay should the restart have (in seconds)?", "Restart Delay", 5) as num|null
 				if(!delay)
 					return FALSE
-				if(!(isnull(usr.client.address) || (usr.client.address in localhost_addresses)))
+				if(!usr.client.is_localhost())
 					if(alert(usr,"Are you sure you want to restart the server?","This server is live", "Restart", "Cancel") != "Restart")
 						return FALSE
 				// SSplexora.restart_requester = usr
@@ -1077,39 +1076,6 @@ var/global/floorIsLava = 0
 		return TRUE
 	return FALSE
 
-/proc/get_options_bar(whom, detail = 2, name = 0, link = 1, highlight_special = 1)
-	if(!whom)
-		return "<b>(*null*)</b>"
-	var/mob/M
-	var/client/C
-	if(isclient(whom))
-		C = whom
-		M = C.mob
-	else if(ismob(whom))
-		M = whom
-		C = M.client
-	else
-		return "<b>(*not an mob*)</b>"
-	switch(detail)
-		if(0)
-			return "<b>[key_name(C, link, name, highlight_special)]</b>"
-
-		if(1)	//Private Messages
-			return "<b>[key_name(C, link, name, highlight_special)][ADMIN_QUE(M)]</b>"
-
-		if(2)	//Admins
-			var/ref_mob = "\ref[M]"
-			return "<b>[key_name(C, link, name, highlight_special)] [ADMIN_QUE(ref_mob)] [ADMIN_PP(ref_mob)] [ADMIN_VV(ref_mob)] [ADMIN_SM(ref_mob)] ([admin_jump_link(M, UNLINT(src))]) (<A href='byond://?_src_=holder;[HrefToken()];check_antagonist=1'>CA</A>)</b>"
-
-		if(3)	//Devs
-			var/ref_mob = "\ref[M]"
-			return "<b>[key_name(C, link, name, highlight_special)] [ADMIN_VV(ref_mob)] ([admin_jump_link(M, UNLINT(src))])</b>"
-
-		if(4)	//Mentors
-			var/ref_mob = "\ref[M]"
-			return "<b>[key_name(C, link, name, highlight_special)] [ADMIN_QUE(M)] [ADMIN_PP(ref_mob)] [ADMIN_VV(ref_mob)] [ADMIN_SM(ref_mob)] ([admin_jump_link(M, UNLINT(src))])</b>"
-
-
 //
 //
 //ALL DONE
@@ -1140,7 +1106,7 @@ var/global/floorIsLava = 0
 		tomob.ghostize(0)
 	message_admins(span_adminnotice("[key_name_admin(usr)] has put [frommob.ckey] in control of [tomob.name]."))
 	log_admin("[key_name(usr)] stuffed [frommob.ckey] into [tomob.name].")
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Ghost Drag Control")
+	BLACKBOX_LOG_ADMIN_VERB("Ghost Drag Control")
 
 	tomob.ckey = frommob.ckey
 	if(tomob.client)

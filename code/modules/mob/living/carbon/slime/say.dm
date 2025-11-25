@@ -2,7 +2,7 @@
 
 	message = sanitize(message)
 	message = trim_left(message)
-	var/verb = say_quote(message)
+	var/verb = say_quote_old(message)
 
 	if(copytext(message,1,2) == get_prefix_key(/decl/prefix/custom_emote))
 		return emote(copytext(message,2))
@@ -14,7 +14,7 @@
 
 	return ..(message, null, verb)
 
-/mob/living/carbon/slime/say_quote(text)
+/mob/living/carbon/slime/say_quote_old(text)
 	var/ending = copytext(text, length(text))
 
 	if (ending == "?")

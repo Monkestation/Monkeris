@@ -158,11 +158,6 @@ meteor_act
 			if(istype(C) && C.body_parts_covered & def_zone.body_part && C.armor)
 				protection = 100 - (100 - C.armor.vars[type]) * (100 - protection) * 0.01 // Same as above
 
-	var/obj/item/shield/shield = has_shield()
-
-	if(shield)
-		protection += shield.armor[type]
-
 	if (protection > 75) // reducing the risks from powergaming
 		switch (type)
 			if (ARMOR_MELEE,ARMOR_BULLET,ARMOR_ENERGY) protection = (75+protection/2)
@@ -267,7 +262,8 @@ meteor_act
 
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		H.stop_blocking()
+		if(!istype(H.blocking_item, /obj/item/shield))
+			H.stop_blocking()
 
 	visible_message(span_danger("[src] has been [I.attack_verb.len? pick(I.attack_verb) : "attacked"] in the [affecting.name] with [I.name] by [user]!"))
 
@@ -280,7 +276,7 @@ meteor_act
 	if(!affecting)
 		return FALSE
 
-	if(blocking)
+	if(blocking && !istype(blocking_item, /obj/item/shield))
 		if(istype(get_active_held_item(), /obj/item/grab))//we are blocking with a human shield! We redirect the attack. You know, because grab doesn't exist as an item.
 			var/obj/item/grab/G = get_active_held_item()
 			grab_redirect_attack(G, I)

@@ -61,3 +61,8 @@
 /turf/beach/water/New()
 	..()
 	overlays += image("icon"='icons/misc/beach.dmi',"icon_state"="water2","layer"=MOB_LAYER+0.1)
+
+/turf/misc/start
+	name = "start area"
+	icon = 'icons/turf/space.dmi'
+	icon_state = "startarea"

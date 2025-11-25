@@ -158,12 +158,12 @@
 			if(holder.hallucination_power > 50)
 				phrases += list("What did you come here for[add]?","Don't touch me[add].","You're not getting out of here[add].", "You are a failure, [pick(names)].","Just die already, [pick(names)].","Put on some clothes[add].","Take off your clothes[add].")
 			message = pick(phrases)
-			to_chat(holder,"<span class='game say'>[span_name("[talker.name]")] [holder.say_quote(message)], [span_message("<span class='body'>\"[message]\"")]</span></span>")
+			to_chat(holder,"<span class='game say'>[span_name("[talker.name]")] [holder.say_quote_old(message)], [span_message("<span class='body'>\"[message]\"")]</span></span>")
 		else
 			to_chat(holder,"<B>[talker.name]</B> points at [holder.name]")
 			to_chat(holder,"<span class='game say'>[span_name("[talker.name]")] says something softly.</span>")
-		var/image/speech_bubble = image('icons/mob/talk.dmi',talker,"h[holder.say_test(message)]")
-		spawn(30) qdel(speech_bubble)
+		var/image/speech_bubble = image('icons/mob/talk.dmi',talker,"default[holder.say_test(message)]")
+		QDEL_IN(speech_bubble, 3 SECONDS)
 		holder << speech_bubble
 		sanity-- //don't spam them in very populated rooms.
 		if(!sanity)

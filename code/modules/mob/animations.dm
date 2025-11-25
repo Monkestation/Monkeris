@@ -18,11 +18,6 @@ below 100 is not dizzy
 		spawn(0)
 			dizzy_process()
 
-
-/mob/living/carbon
-	var/dizziness = 0
-	var/is_dizzy = 0
-
 /*
 dizzy process - wiggles the client's pixel offset over time
 spawned from make_dizzy(), will terminate automatically when dizziness gets <100
@@ -46,10 +41,6 @@ note dizziness decrements automatically in the mob's Life() proc.
 // jitteriness - copy+paste of dizziness
 /mob/proc/make_jittery(amount)
 	return
-
-/mob/living/carbon
-	var/is_jittery = 0
-	var/jitteriness = 0
 
 /mob/living/carbon/human/make_jittery(amount)
 	jitteriness = min(1000, jitteriness + amount)	// store what will be new value

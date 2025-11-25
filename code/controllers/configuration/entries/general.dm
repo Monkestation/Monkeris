@@ -373,6 +373,15 @@
 /*     ADMIN     */
 /*****************/
 
+/// if autoadmin is enabled
+/datum/config_entry/flag/autoadmin
+	protection = CONFIG_ENTRY_LOCKED
+
+/// the rank given to autoadmins
+/datum/config_entry/string/autoadmin_rank
+	default = "Game Master"
+	protection = CONFIG_ENTRY_LOCKED
+
 /// allows admins with relevant permissions to have their own ooc colour
 /datum/config_entry/flag/allow_admin_ooccolor
 
@@ -384,10 +393,6 @@
 
 /// Forid admins from possessing scringularaitirtiys
 /datum/config_entry/flag/forbid_singulo_possession
-
-/// Gives the !localhost! rank to any client connecting from 127.0.0.1 or ::1
-/datum/config_entry/flag/enable_localhost_rank
-	protection = CONFIG_ENTRY_LOCKED
 
 /// Defines whether the server uses the legacy admin system with admins.txt or the SQL system
 /datum/config_entry/flag/admin_legacy_system
@@ -520,10 +525,6 @@
 /datum/config_entry/flag/random_submap_orientation
 
 /datum/config_entry/flag/use_overmap
-
-
-/// Path to the python2 executable on the system.
-/datum/config_entry/string/python_path
 
 /**
  * motd.txt

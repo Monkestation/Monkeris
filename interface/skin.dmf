@@ -706,7 +706,6 @@ window "mainwindow"
 		is-default = true
 		saved-params = "pos;size;is-minimized;is-maximized"
 		statusbar = false
-		title = "CEV Eris: Fullscreen Edition"
 		icon = 'icons\\ss13_64.png'
 		macro = "default"
 		menu = "menu"

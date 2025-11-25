@@ -84,7 +84,7 @@
 	else if(location)
 		target = get_turf(location)
 		target.explosion_act(1000, null)
-	explosion(cur_turf, 400, 180)
+	explosion(target || location || cur_turf, 400, 180)
 	/*
 	if(target)
 		if (istype(target, /turf/wall))

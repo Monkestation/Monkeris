@@ -1,5 +1,4 @@
 /mob
-	datum_flags = DF_USE_TAG
 	density = TRUE
 	layer = 4
 	animate_movement = 2
@@ -77,6 +76,7 @@
 	var/lying_prev = 0
 	var/canmove = 1
 
+	var/atom/movable/screen/parallax/parallax
 
 	/**
 	 * Allows mobs to move through dense areas without restriction. For instance, in space or out of holder objects.
@@ -253,10 +253,34 @@
 
 	// Did they suicide?
 	var/suicided = FALSE
-  
+
 	///The z level this mob is currently registered in
 	var/registered_z
 
 	bad_type = /mob
 
 	var/list/update_on_move = list() // Call entered_with_container() on atoms inside when the mob moves
+
+	var/get_rig_stats = 0
+
+	//forensics related vars
+	var/bloody_hands = 0
+	var/mob/living/carbon/human/bloody_hands_mob
+	var/track_blood = 0
+	var/list/feet_blood_DNA
+	var/track_blood_type
+	var/feet_blood_color
+
+	/// had to move these to mob bc. shield code is a mess.
+	/// for implementation please see /mob/living/carbon/human
+	/// ready to block melee attacks?
+	var/blocking = FALSE
+	/// item being used to block. Please remember to GC this
+	var/obj/item/blocking_item
+
+	///the icon currently used for the typing indicator's bubble
+	var/active_typing_indicator
+	///the icon currently used for the thinking indicator's bubble
+	var/active_thinking_indicator
+	/// What icon the mob uses for speechbubbles
+	var/bubble_icon = "default"
