@@ -355,3 +355,9 @@
 		"inv2" = list("type" = /atom/movable/screen/silicon/module,     "loc" = "7,1", "module_num" = 2, "icon_state" = "inv2"),
 		"inv3" = list("type" = /atom/movable/screen/silicon/module,     "loc" = "8,1", "module_num" = 3, "icon_state" = "inv3")
 	)
+
+	StorageData = list(
+		"Xspace" = 4.5*32, //in pixels
+		"Yspace" = 1.5*32, //in pixels
+		"ColCount" = 7,
+	)

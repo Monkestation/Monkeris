@@ -174,7 +174,7 @@
 	character.set_species(species)
 	var/random_first = random_first_name(gender, species)
 	var/random_last = random_last_name(gender, species)
-	var/random_full = real_first_name + " " + real_last_name
+	var/random_full = real_first_name + (real_last_name ? " " + real_last_name : real_last_name)
 
 	if(be_random_name)
 		real_first_name = random_first

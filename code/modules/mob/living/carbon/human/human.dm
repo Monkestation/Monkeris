@@ -1566,22 +1566,33 @@ var/list/rank_prefix = list(\
 	if(blocking)//already blocking with an item somehow?
 		return
 	blocking = TRUE
-	visible_message(span_warning("[src] tenses up, ready to block!"))
+
 	if(HUDneed.Find("block"))
 		var/atom/movable/screen/block/HUD = HUDneed["block"]
 		HUD.update_icon()
 	update_block_overlay()
+	visible_message(span_warning("[src] tenses up, ready to block!"))
+
+	var/obj/item/shield/shield = has_shield()
+	if(shield)	//if we're holding a shield, that is the blocking item.
+		blocking_item = shield
+	else	//otherwise, if there is an item in the active hand, that is the blocking item.
+		blocking_item = get_active_held_item()
+
+	SEND_SIGNAL(src, COMSIG_HUMAN_START_BLOCKING)
 	return
 
 /mob/living/carbon/human/proc/stop_blocking()
 	if(!blocking)//already blockingn't with an item somehow?
 		return
 	blocking = FALSE
+	blocking_item = null
 	visible_message(span_notice("[src] lowers \his guard."))
 	if(HUDneed.Find("block"))
 		var/atom/movable/screen/block/HUD = HUDneed["block"]
 		HUD.update_icon()
 	update_block_overlay()
+	SEND_SIGNAL(src, COMSIG_HUMAN_STOP_BLOCKING)
 	return
 
 /mob/living/carbon/human/get_exp_list(minutes)

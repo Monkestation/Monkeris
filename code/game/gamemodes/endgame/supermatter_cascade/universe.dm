@@ -90,7 +90,7 @@ AUTOMATED ALERT: Link to [command_name()] lost.
 			else
 				L.update_overlay(0, 0.4, 1)
 
-		for(var/turf/space/T in GLOB.turfs)
+		for(var/turf/space/T in world)
 			OnTurfChange(T)
 
 /datum/universal_state/supermatter_cascade/proc/MiscSet()

@@ -3,6 +3,7 @@
 	voice_name = "synthesized voice"
 	bad_type = /mob/living/silicon
 	tts_seed = "Robot_1"
+	bubble_icon = "robot"
 	var/syndicate = 0
 	var/const/MAIN_CHANNEL = "Main Frequency"
 	/// Default channel on which to state laws

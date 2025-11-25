@@ -100,7 +100,7 @@
 				return
 
 	to_chat(C, "[span_pm("<span class='in'>" + create_text_tag("pm_in", "", C) + " <b>\[[recieve_pm_type] PM\]</b> <span class='name'>[key_name(src, TRUE, C.holder ? 1 : 0)]")]: <span class='message linkify'>[msg]</span></span></span>")
-	to_chat(src, "[span_pm("<span class='out'>" + create_text_tag("pm_out_alt", "PM", src) + " to <span class='name'>[get_options_bar(C, holder ? 1 : 0, holder ? 1 : 0, 1)]")]: <span class='message linkify'>[msg]</span></span></span>")
+	to_chat(src, "[span_pm("<span class='out'>" + create_text_tag("pm_out_alt", "PM", src) + " to <span class='name'>[ADMIN_FULLMONTY(src)]")]: <span class='message linkify'>[msg]</span></span></span>")
 
 	//play the recieving admin the adminhelp sound (if they have them enabled)
 	//non-admins shouldn't be able to disable this

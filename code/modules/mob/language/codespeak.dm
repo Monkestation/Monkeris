@@ -1,6 +1,13 @@
+// Add new ones here
+GLOBAL_DATUM_INIT(cop_codes, /datum/codespeak_list, new("IH"))
+GLOBAL_DATUM_INIT(serb_codes, /datum/codespeak_list, new("SA"))
+
 /datum/codespeak_list
 	var/list/codes = list()
 	var/codetype
+
+/datum/codespeak_list/New(code_type)
+	codetype = code_type
 
 /datum/codespeak_list/proc/get_cop_code()
 	if(codetype == "IH")
@@ -13,14 +20,6 @@
 		var/serb_code_2 = pick("Srbije", "Rakija", "Cevapi", "Tito", "Artiljerija", "Budala", "Slava")
 		return "[serb_code_1]! [serb_code_2]!"
 
-// Add new ones here
-var/global/datum/codespeak_list/cop_codes
-var/global/datum/codespeak_list/serb_codes
-/proc/setup_codespeak()
-	cop_codes = new()
-	cop_codes.codetype = "IH"
-	serb_codes = new()
-	serb_codes.codetype = "SA"
 
 // Takes meaning, returns code or generates new code
 /datum/codespeak_list/proc/find_index(message)
@@ -65,9 +64,9 @@ var/global/datum/codespeak_list/serb_codes
 
 	switch(faction)
 		if("IH")
-			code_index = cop_codes.find_index(code_meaning)
+			code_index = GLOB.cop_codes.find_index(code_meaning)
 		if("SM")
-			code_index = serb_codes.find_index(code_meaning)
+			code_index = GLOB.serb_codes.find_index(code_meaning)
 		else
 			return
 	if(say_localy)

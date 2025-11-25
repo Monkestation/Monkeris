@@ -42,8 +42,8 @@
 	else
 		update_icon()
 
-/turf/wall/LateInitialize()
-	update_connections()
+/turf/wall/LateInitialize(mapload_arg)
+	update_connections(mapload_arg)
 	if(window_prespawned_material)
 		create_window(window_prespawned_material)
 	else

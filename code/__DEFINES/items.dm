@@ -177,6 +177,17 @@
 					/obj/item/stash_spawner = 4,\
 					/obj/item/storage/deferred/crate/german_uniform = 4)
 
+//Double Tact Defines
+/// Windup duration at rob stat level 0
+#define BASE_TACT_DURATION 1 SECONDS
+/// Hard floor for improved windup duration
+#define MIN_TACT_DURATION 0.3 SECONDS
+
 GLOBAL_LIST_INIT(tool_aspects_blacklist, list(UPGRADE_COLOR, UPGRADE_ITEMFLAGPLUS, UPGRADE_CELLPLUS, UPGRADE_SHARP, UPGRADE_BULK))
 GLOBAL_LIST_INIT(weapon_aspects_blacklist, list(GUN_UPGRADE_SILENCER, GUN_UPGRADE_FORCESAFETY, GUN_UPGRADE_HONK, GUN_UPGRADE_FULLAUTO,
 											GUN_UPGRADE_EXPLODE, GUN_UPGRADE_RIGGED, UPGRADE_SANCTIFY))
+
+///Blocking defines
+#define ITEM_BLOCKING_SLOWDOWN 1
+#define SHIELD_BLOCKING_SLOWDOWN 1.5
+#define HVY_SHIELD_BLOCKING_SLOWDOWN 2

@@ -1,5 +1,4 @@
 /mob
-	datum_flags = DF_USE_TAG
 	density = TRUE
 	layer = 4
 	animate_movement = 2
@@ -271,3 +270,17 @@
 	var/list/feet_blood_DNA
 	var/track_blood_type
 	var/feet_blood_color
+
+	/// had to move these to mob bc. shield code is a mess.
+	/// for implementation please see /mob/living/carbon/human
+	/// ready to block melee attacks?
+	var/blocking = FALSE
+	/// item being used to block. Please remember to GC this
+	var/obj/item/blocking_item
+
+	///the icon currently used for the typing indicator's bubble
+	var/active_typing_indicator
+	///the icon currently used for the thinking indicator's bubble
+	var/active_thinking_indicator
+	/// What icon the mob uses for speechbubbles
+	var/bubble_icon = "default"

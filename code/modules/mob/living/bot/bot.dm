@@ -3,6 +3,7 @@
 	health = 20
 	maxHealth = 20
 	icon = 'icons/obj/aibots.dmi'
+	bubble_icon = "machine"
 	layer = MOB_LAYER
 	universal_speak = 1
 	density = FALSE

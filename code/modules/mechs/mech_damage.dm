@@ -26,7 +26,7 @@
 			return body.pilot_coverage * body.coverage_multipliers[2]
 
 
-/mob/living/exosuit/attack_generic(mob/user, damage, attack_message)
+/mob/living/exosuit/attack_generic(mob/user, damage, attack_message, block_handled)
 	if(!damage || !istype(user))
 		return
 

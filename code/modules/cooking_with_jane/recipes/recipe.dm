@@ -174,6 +174,51 @@
 		list(CWJ_USE_OVEN, J_MED, 30 SECONDS)
 	)
 
+/datum/cooking_with_jane/recipe/boiled_spiderleg
+	cooking_container = POT
+	product_type = /obj/item/reagent_containers/food/snacks/boiled_spiderleg
+	step_builder = list(
+		list(CWJ_ADD_ITEM, /obj/item/reagent_containers/food/snacks/meat/spider, qmod=0.5),
+		list(CWJ_ADD_REAGENT, "water", 5),
+		list(CWJ_ADD_REAGENT_OPTIONAL, "sodiumchloride", 1, base=1),
+		list(CWJ_USE_STOVE, J_MED, 15 SECONDS)
+	)
+
+/datum/cooking_with_jane/recipe/boiled_crab
+	cooking_container = POT
+	product_type = /obj/item/reagent_containers/food/snacks/boiled_crab
+	step_builder = list(
+		list(CWJ_ADD_ITEM, /obj/item/reagent_containers/food/snacks/meat/crab, qmod=0.5),
+		list(CWJ_ADD_REAGENT, "water", 5),
+		list(CWJ_ADD_REAGENT_OPTIONAL, "sodiumchloride", 1, base=1),
+		list(CWJ_USE_STOVE, J_MED, 15 SECONDS)
+	)
+
+/datum/cooking_with_jane/recipe/rangoon_crab
+	cooking_container = PAN
+	product_type = /obj/item/reagent_containers/food/snacks/rangoon_crab
+	step_builder = list(
+		list(CWJ_ADD_ITEM, /obj/item/reagent_containers/food/snacks/meat/crab, qmod=0.5),
+		list(CWJ_ADD_ITEM, /obj/item/reagent_containers/food/snacks/cheesewedge),
+		list(CWJ_ADD_REAGENT, "soysauce", 5),
+		list(CWJ_ADD_ITEM, /obj/item/reagent_containers/food/snacks/doughslice, qmod=0.5),
+		list(CWJ_ADD_ITEM, /obj/item/reagent_containers/food/snacks/egg, qmod=0.5),
+		list(CWJ_ADD_REAGENT_OPTIONAL, "cornoil", 1, base=1),
+		list(CWJ_USE_STOVE, J_MED, 15 SECONDS)
+	)
+
+/datum/cooking_with_jane/recipe/rangoon
+	cooking_container = PAN
+	product_type = /obj/item/reagent_containers/food/snacks/rangoon
+	step_builder = list(
+		list(CWJ_ADD_ITEM, /obj/item/reagent_containers/food/snacks/cheesewedge),
+		list(CWJ_ADD_REAGENT, "soysauce", 5),
+		list(CWJ_ADD_ITEM, /obj/item/reagent_containers/food/snacks/doughslice, qmod=0.5),
+		list(CWJ_ADD_ITEM, /obj/item/reagent_containers/food/snacks/egg, qmod=0.5),
+		list(CWJ_ADD_REAGENT_OPTIONAL, "cornoil", 1, base=1),
+		list(CWJ_USE_STOVE, J_MED, 15 SECONDS)
+	)
+
 /datum/cooking_with_jane/recipe/boiled_egg
 	cooking_container = POT
 	product_type = /obj/item/reagent_containers/food/snacks/boiledegg

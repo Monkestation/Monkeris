@@ -53,11 +53,14 @@ see multiz/movement.dm for some info.
 	icon_state = "transparentclickable"
 	..()
 
+/turf/open/Initialize(mapload, ...)
+	. = ..()
+	if(is_transparent)
+		return INITIALIZE_HINT_LATELOAD
+
 /turf/open/LateInitialize()
 	. = ..()
-	below = GetBelow(src)
-	ASSERT(HasBelow(z))
-	update_icon()
+	update_icon(null, TRUE)
 
 /turf/open/is_plating()
 	return TRUE

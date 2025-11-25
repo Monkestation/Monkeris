@@ -66,6 +66,11 @@
 	var/core_removal_stage = 0 //For removing cores.
 
 	injury_type = INJURY_TYPE_HOMOGENOUS
+	bubble_icon = "slime"
+	verb_say = "blorbles"
+	verb_ask = "inquisitively blorbles"
+	verb_exclaim = "loudly blorbles"
+	verb_yell = "loudly blorbles"
 
 /mob/living/carbon/slime/New(location, colour="grey")
 

@@ -2,6 +2,7 @@
 
 /client/var/commandbar_thinking = FALSE
 /client/var/commandbar_typing = FALSE
+/mob/var/thinking_in_character
 
 /client/proc/initialize_commandbar_spy()
 	src << output('html/typing_indicator.html', "commandbar_spy")
@@ -32,12 +33,12 @@
 /client/proc/start_thinking()
 	if(get_preference_value(/datum/client_preference/show_typing_indicator) == GLOB.PREF_HIDE)
 		return FALSE
-	// ADD_TRAIT(mob, TRAIT_THINKING_IN_CHARACTER, CURRENTLY_TYPING_TRAIT)
-	mob?.set_typing_indicator(TRUE)
+	mob.thinking_in_character = TRUE
+	mob.create_thinking_indicator()
 
 /** Removes typing/thinking indicators and flags the mob as not thinking */
 /client/proc/stop_thinking()
-	mob?.set_typing_indicator(FALSE)
+	mob?.remove_all_indicators()
 
 /**
  * Handles the user typing. After a brief period of inactivity,
@@ -45,10 +46,10 @@
  */
 /client/proc/start_typing()
 	var/mob/client_mob = mob
-	client_mob.set_typing_indicator(FALSE)
-	if(get_preference_value(/datum/client_preference/show_typing_indicator) == GLOB.PREF_HIDE)
+	client_mob.remove_thinking_indicator()
+	if(get_preference_value(/datum/client_preference/show_typing_indicator) == GLOB.PREF_HIDE || !client_mob.thinking_in_character)
 		return FALSE
-	client_mob.set_typing_indicator(TRUE)
+	client_mob.create_typing_indicator()
 	addtimer(CALLBACK(src, PROC_REF(stop_typing)), 5 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE | TIMER_STOPPABLE)
 
 /**
@@ -59,9 +60,9 @@
 	if(isnull(mob))
 		return FALSE
 	var/mob/client_mob = mob
-	client_mob.set_typing_indicator(FALSE)
-	if(get_preference_value(/datum/client_preference/show_typing_indicator) == GLOB.PREF_HIDE)
+	client_mob.remove_typing_indicator()
+	if(get_preference_value(/datum/client_preference/show_typing_indicator) == GLOB.PREF_HIDE || !client_mob.thinking_in_character)
 		return FALSE
-	client_mob.set_typing_indicator(TRUE)
+	client_mob.create_thinking_indicator()
 
 #undef IC_VERBS
