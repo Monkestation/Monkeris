@@ -1,6 +1,3 @@
-/mob/living
-	var/datum/nano_module/craft/CM
-
 //this one is called when you need just a regular CM, without strick tab opened
 /mob/living/verb/craft_menu()
 	set name = "Craft Menu"

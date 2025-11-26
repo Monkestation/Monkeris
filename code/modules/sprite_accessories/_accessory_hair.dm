@@ -725,3 +725,40 @@
 /datum/sprite_accessory/hair/aviator2
 	name = "Aviator 2"
 	icon_state = "aviator2"
+
+/datum/sprite_accessory/hair/spicy
+	name = "Spicy"
+	icon_state = "spicy"
+
+/datum/sprite_accessory/hair/shortbedhead
+	name = "Short Bedhead"
+	icon_state = "shortbedhead"
+
+/datum/sprite_accessory/hair/phoenixhalfshaven
+	name = "Phoenix Halfshaven"
+	icon_state = "phoenix_halfshaven"
+
+/datum/sprite_accessory/hair/phoenix
+	name = "Phoenix"
+	icon_state = "phoenix"
+
+/datum/sprite_accessory/hair/kobeni
+	name = "Kobeni"
+	icon_state = "kobeni"
+
+/datum/sprite_accessory/hair/kajam
+	name = "Kajam"
+	icon_state = "kajam"
+
+/datum/sprite_accessory/hair/hyenamane
+	name = "Hyena Mane"
+	icon_state = "hyenamane"
+
+/datum/sprite_accessory/hair/dave
+	name = "Dave"
+	icon_state = "dave"
+
+/datum/sprite_accessory/hair/halfshavedalt
+	name = "Halfshaved alt"
+	icon_state = "halfshaved_alt"
+

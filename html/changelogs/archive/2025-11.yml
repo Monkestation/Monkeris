@@ -101,3 +101,9 @@
   - bugfix: Viewing turf on statpanel should no longer scream about invalid resource.
   - bugfix: Fixed browser windows not being able to get UI scaling prefs if the client
       doesn't exist yet, is fine.
+2025-11-26:
+  Snack-Max:
+  - rscadd: Ported hair from Monke Main to Eris
+  Sun-Soaked:
+  - code_imp: removes a bunch of ghastly local repathings/re-definitions of /mob and
+      it's subtypes and moves the vars under them into their appropriate define files
