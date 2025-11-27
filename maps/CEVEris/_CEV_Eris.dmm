@@ -21435,6 +21435,9 @@
 	dir = 1
 	},
 /obj/structure/catwalk,
+/obj/structure/sign/atmos_air{
+	pixel_y = -32
+	},
 /turf/floor/plating/under,
 /area/eris/crew_quarters/sleep/cryofirst)
 "bcg" = (
@@ -21450,13 +21453,16 @@
 /turf/floor/plating/under,
 /area/eris/crew_quarters/sleep/cryofirst)
 "bch" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/catwalk,
-/turf/floor/plating/under,
+/turf/open,
 /area/eris/crew_quarters/sleep/cryofirst)
 "bci" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -21514,6 +21520,9 @@
 	},
 /obj/machinery/light/small,
 /obj/structure/catwalk,
+/obj/structure/sign/atmos_air{
+	pixel_y = -32
+	},
 /turf/open,
 /area/eris/crew_quarters/sleep/cryofirst)
 "bcn" = (
@@ -35969,6 +35978,9 @@
 /obj/machinery/light/small,
 /obj/spawner/flora/low_chance,
 /obj/structure/catwalk,
+/obj/structure/sign/atmos_air{
+	pixel_y = -32
+	},
 /turf/open,
 /area/eris/crew_quarters/sleep/cryofirst)
 "bKt" = (
@@ -98436,18 +98448,6 @@
 	},
 /turf/floor/plating/under,
 /area/eris/maintenance/section3deck5starboard)
-"iuI" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/structure/catwalk,
-/turf/floor/plating/under,
-/area/eris/crew_quarters/sleep/cryofirst)
 "iwg" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -99720,6 +99720,10 @@
 	},
 /turf/floor/reinforced/almost_airless,
 /area/eris/engineering/atmos)
+"kPQ" = (
+/obj/structure/catwalk,
+/turf/floor/plating/under,
+/area/eris/crew_quarters/sleep/cryofirst)
 "kPU" = (
 /obj/machinery/button/remote/blast_door{
 	dir = 1;
@@ -100857,6 +100861,18 @@
 	},
 /turf/floor/plating/under,
 /area/eris/engineering/atmos)
+"nfj" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/catwalk,
+/turf/floor/plating/under,
+/area/eris/crew_quarters/sleep/cryofirst)
 "nfm" = (
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 27
@@ -101263,6 +101279,9 @@
 /obj/item/storage/bag/produce,
 /turf/floor/grass,
 /area/eris/crew_quarters/hydroponics/garden)
+"nQx" = (
+/turf/wall/low/with_glass/smart,
+/area/eris/crew_quarters/sleep/cryofirst)
 "nQZ" = (
 /obj/effect/floor_decal/industrial/warning/corner,
 /turf/floor/tiled/steel/monofloor,
@@ -102754,6 +102773,15 @@
 /obj/spawner/junk/nondense,
 /turf/floor/tiled/techmaint,
 /area/eris/maintenance/section3deck1central)
+"qLr" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/catwalk,
+/turf/floor/plating/under,
+/area/eris/crew_quarters/sleep/cryofirst)
 "qLE" = (
 /obj/landmark/storyevent/midgame_stash_spawn{
 	navigation = "Section 2, floor 3. West of medbay, maint coridor behind the glass."
@@ -105997,18 +106025,6 @@
 /obj/structure/table/rack,
 /turf/floor/tiled/steel/techfloor_grid,
 /area/eris/engineering/breakroom)
-"wvc" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/structure/catwalk,
-/turf/open,
-/area/eris/crew_quarters/sleep/cryofirst)
 "wwg" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -106400,6 +106416,12 @@
 "xld" = (
 /turf/floor/tiled/steel/gray_platform,
 /area/eris/engineering/engine_room)
+"xlA" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/floor/plating/under,
+/area/eris/crew_quarters/sleep/cryofirst)
 "xnE" = (
 /obj/effect/decal/cleanable/graffiti/graffiti_moebius{
 	pixel_y = 33
@@ -106717,6 +106739,12 @@
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/floor/tiled/steel/techfloor_grid,
 /area/eris/medical/chemstor)
+"xQE" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/turf/floor/plating/under,
+/area/eris/crew_quarters/sleep/cryofirst)
 "xQW" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock{
@@ -160633,24 +160661,24 @@ abF
 aad
 aad
 aad
-abF
-abF
-abF
-abF
-abF
-abF
-abF
+agD
+agD
+agD
+agD
+agD
+agD
+agD
 agD
 bbB
 bcf
+agY
+agY
 agD
 agD
 agD
-abF
-abF
-abF
-aaa
-aaa
+agD
+agD
+agD
 aaa
 aad
 aaa
@@ -160835,24 +160863,24 @@ abF
 aaa
 aaa
 aaa
-abF
-abF
-abF
-abF
-abF
-abF
-abF
+agD
+xlA
+xlA
+agf
+xlA
+xlA
+xlA
 agf
 bbC
 bcg
 agf
-abF
-abF
-abF
-abF
-abF
-aaa
-aaa
+xlA
+xlA
+xlA
+nQx
+xlA
+xlA
+agD
 aaa
 aad
 aaa
@@ -161037,24 +161065,24 @@ abF
 aaa
 aaa
 aaa
-abF
-abF
-abF
-abF
-abF
-abF
-abF
-agf
-iuI
-bch
-agf
-abF
-abF
-abF
-abF
-abF
-aad
-aad
+agD
+kPQ
+kPQ
+aUQ
+kPQ
+kPQ
+kPQ
+bno
+nfj
+qLr
+aUQ
+kPQ
+kPQ
+kPQ
+bno
+kPQ
+kPQ
+agD
 aad
 aad
 aaa
@@ -161239,24 +161267,24 @@ abF
 aaa
 aaa
 aaa
-abF
-abF
-abF
-abF
-abF
-abF
-abF
+agD
+xQE
+xQE
+agf
+xQE
+xQE
+xQE
 agf
 bwG
 bci
 agf
-abF
-abF
-abF
-abF
-abF
-aaa
-aaa
+xQE
+xQE
+xQE
+agf
+xQE
+xQE
+agD
 aaa
 aad
 aaa
@@ -161444,21 +161472,21 @@ aaa
 agD
 agD
 agD
-agD
-agD
-agD
-agD
-agD
+agY
+agY
+agY
+agY
+agY
 bbF
 bKs
+agY
+agY
+agY
+agY
+agY
+agY
+agY
 agD
-abF
-abF
-abF
-abF
-abF
-aaa
-aaa
 aaa
 aad
 aaa
@@ -161654,13 +161682,13 @@ bmA
 bbG
 bck
 agf
-abF
-abF
-abF
-abF
-abF
-aaa
-aaa
+bal
+bal
+bal
+nQx
+xlA
+xlA
+agD
 aaa
 aad
 aaa
@@ -161854,15 +161882,15 @@ aYW
 aYW
 bno
 bbD
-wvc
-agf
-abF
-abF
-abF
-abF
-abF
-aaa
-aaa
+bch
+aUQ
+aYW
+aYW
+aYW
+bno
+kPQ
+kPQ
+agD
 aaa
 aad
 aaa
@@ -162058,13 +162086,13 @@ jgq
 bbE
 bcl
 agf
-abF
-abF
-abF
-abF
-abF
-aaa
-aaa
+bam
+bam
+bam
+agf
+xQE
+xQE
+agD
 aaa
 aad
 aaa
@@ -162259,14 +162287,14 @@ agY
 agY
 bbH
 bcm
+agY
+agY
+agY
+agY
+agY
 agD
 agD
 agD
-agD
-agD
-agD
-aaa
-aaa
 aad
 cIS
 cIS
