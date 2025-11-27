@@ -431,6 +431,12 @@
 	area_light_color = COLOR_LIGHTING_SCI_BRIGHT
 	flags = AREA_FLAG_CRITICAL | AREA_FLAG_RAD_SHIELDED
 
+/area/eris/crew_quarters/sleep/cryofirst
+	name = "\improper Cryogenic Storage - First Section"
+	icon_state = "Sleep"
+	area_light_color = COLOR_LIGHTING_SCI_BRIGHT
+	flags = AREA_FLAG_CRITICAL | AREA_FLAG_RAD_SHIELDED
+
 /area/eris/crew_quarters/sleep_male
 	name = "\improper Male Dorm"
 	icon_state = "Sleep"
