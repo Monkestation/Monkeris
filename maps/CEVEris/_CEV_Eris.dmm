@@ -54854,7 +54854,8 @@
 /turf/floor/tiled/steel,
 /area/eris/hallway/main/section3)
 "cFQ" = (
-/obj/structure/reagent_dispensers/water_cooler,
+/obj/structure/table/standard,
+/obj/spawner/junkfood/low_chance,
 /turf/floor/tiled/steel/gray_perforated,
 /area/eris/hallway/main/section3)
 "cFR" = (
@@ -54883,10 +54884,7 @@
 /turf/floor/tiled/steel/gray_platform,
 /area/eris/command/exultant/quarters)
 "cFT" = (
-/obj/structure/table/standard,
-/obj/item/reagent_containers/food/drinks/drinkingglass,
-/obj/item/reagent_containers/food/drinks/drinkingglass,
-/obj/item/reagent_containers/food/drinks/drinkingglass,
+/obj/structure/reagent_dispensers/watertank,
 /turf/floor/tiled/steel/gray_perforated,
 /area/eris/hallway/main/section3)
 "cFU" = (
@@ -55670,13 +55668,9 @@
 /turf/open,
 /area/eris/maintenance/section2deck2port)
 "cHX" = (
-/obj/machinery/atm{
-	pixel_x = 32
-	},
-/obj/structure/window/reinforced,
-/obj/machinery/door/window/westleft,
-/turf/floor/tiled/steel/gray_platform,
-/area/eris/hallway/side/section3deck2port)
+/obj/machinery/vending/cola,
+/turf/space,
+/area/space)
 "cHY" = (
 /obj/structure/catwalk,
 /obj/machinery/camera/network/third_section{
@@ -55993,12 +55987,6 @@
 	},
 /turf/floor/tiled/steel/cargo,
 /area/eris/quartermaster/miningdock)
-"cIR" = (
-/obj/machinery/vending/printomat{
-	dir = 8
-	},
-/turf/floor/tiled/steel/gray_perforated,
-/area/eris/hallway/side/section3deck2port)
 "cIS" = (
 /turf/wall/reinforced,
 /area/eris/maintenance/section2deck4port)
@@ -56390,9 +56378,9 @@
 /turf/floor/tiled/steel/gray_platform,
 /area/eris/crew_quarters/sleep/cryo)
 "cJR" = (
-/obj/machinery/vending/cola,
-/turf/floor/tiled/steel/gray_perforated,
-/area/eris/hallway/side/section3deck2port)
+/obj/machinery/atm,
+/turf/space,
+/area/space)
 "cJS" = (
 /obj/structure/table/standard,
 /obj/spawner/powercell,
@@ -56553,9 +56541,9 @@
 /turf/wall/low/with_glass/smart,
 /area/eris/hallway/main/section4)
 "cKm" = (
-/obj/machinery/vending/cigarette,
-/turf/floor/tiled/steel/gray_perforated,
-/area/eris/hallway/side/section3deck2port)
+/obj/machinery/vending/coffee,
+/turf/space,
+/area/space)
 "cKn" = (
 /turf/floor/tiled/steel/gray_platform,
 /area/eris/hallway/side/section3deck2port)
@@ -56896,9 +56884,9 @@
 /turf/open,
 /area/eris/hallway/main/section4)
 "cLa" = (
-/obj/machinery/vending/coffee,
-/turf/floor/tiled/steel/gray_perforated,
-/area/eris/hallway/side/section3deck2port)
+/obj/machinery/vending/cigarette,
+/turf/space,
+/area/space)
 "cLb" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/command{
@@ -57066,17 +57054,9 @@
 /turf/floor/tiled/steel/techfloor_grid,
 /area/eris/engineering/breakroom)
 "cLz" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
-	id = "CargoTotalLockdown";
-	layer = 2.6;
-	name = "Cargo Total Lockdown";
-	opacity = 0
-	},
-/obj/machinery/door/firedoor,
-/turf/wall/low/with_glass/reinforced,
-/area/eris/quartermaster/office)
+/obj/structure/cyberplant,
+/turf/floor/tiled/steel/gray_perforated,
+/area/eris/hallway/side/section3deck2port)
 "cLA" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/visible{
@@ -57466,15 +57446,12 @@
 /turf/floor,
 /area/shuttle/mining/station)
 "cMw" = (
-/obj/machinery/computer/guestpass{
-	pixel_x = 32
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/machinery/door/window/westleft,
-/turf/floor/tiled/steel/gray_platform,
-/area/eris/hallway/side/section3deck2port)
+/obj/structure/table/standard,
+/obj/item/reagent_containers/food/drinks/drinkingglass,
+/obj/item/reagent_containers/food/drinks/drinkingglass,
+/obj/item/reagent_containers/food/drinks/drinkingglass,
+/turf/floor/tiled/steel,
+/area/eris/hallway/main/section3)
 "cMy" = (
 /obj/machinery/hologram/holopad,
 /turf/floor/tiled/steel/techfloor_grid,
@@ -61749,6 +61726,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
+/obj/structure/reagent_dispensers/water_cooler,
 /turf/floor/tiled/steel/cargo,
 /area/eris/hallway/main/section3)
 "cYm" = (
@@ -91178,11 +91156,10 @@
 /turf/floor/plating/under,
 /area/eris/maintenance/section3deck1central)
 "etY" = (
-/obj/structure/table/standard,
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/spawner/junkfood/low_chance,
+/obj/structure/reagent_dispensers/fueltank,
 /turf/floor/tiled/steel/gray_perforated,
 /area/eris/hallway/main/section3)
 "etZ" = (
@@ -91290,17 +91267,11 @@
 /turf/floor/tiled/steel/gray_perforated,
 /area/eris/quartermaster/misc)
 "euk" = (
-/obj/machinery/door/firedoor,
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
-	id = "CargoTotalLockdown";
-	layer = 2.6;
-	name = "Cargo Total Lockdown";
-	opacity = 0
+/obj/machinery/vending/printomat{
+	dir = 8
 	},
-/turf/wall/low/with_glass/reinforced,
-/area/eris/quartermaster/office)
+/turf/space,
+/area/space)
 "eul" = (
 /obj/machinery/light{
 	dir = 4
@@ -92710,7 +92681,6 @@
 	dir = 8;
 	pixel_x = 22
 	},
-/obj/structure/reagent_dispensers/watertank,
 /turf/floor/tiled/steel/cargo,
 /area/eris/hallway/side/section3deck2port)
 "exI" = (
@@ -92824,18 +92794,18 @@
 /obj/machinery/firealarm{
 	pixel_y = 28
 	},
-/turf/floor/tiled/steel/gray_perforated,
+/turf/floor/tiled/steel,
 /area/eris/hallway/side/section3deck2port)
 "exR" = (
 /obj/effect/shuttle_landmark/skipjack/southeast,
 /turf/space,
 /area/space)
 "exS" = (
-/obj/machinery/camera/network/third_section{
-	dir = 4
+/obj/machinery/computer/guestpass{
+	pixel_x = 32
 	},
-/turf/floor/tiled/steel/gray_perforated,
-/area/eris/hallway/side/section3deck2port)
+/turf/space,
+/area/space)
 "exT" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/brown,
@@ -92919,7 +92889,7 @@
 	dir = 1;
 	pixel_y = -23
 	},
-/turf/floor/tiled/steel/gray_perforated,
+/turf/floor/tiled/steel,
 /area/eris/hallway/side/section3deck2port)
 "eyi" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -96959,13 +96929,6 @@
 	},
 /turf/floor/tiled/white/golden,
 /area/eris/neotheology/churchbooth)
-"fAs" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1
-	},
-/obj/structure/reagent_dispensers/fueltank,
-/turf/floor/tiled/steel/cargo,
-/area/eris/hallway/side/section3deck2port)
 "fBx" = (
 /obj/machinery/holomap{
 	dir = 4;
@@ -98605,7 +98568,7 @@
 /area/eris/neotheology/chapelritualroom)
 "izl" = (
 /obj/machinery/light,
-/turf/floor/tiled/steel/gray_perforated,
+/turf/floor/tiled/steel,
 /area/eris/hallway/side/section3deck2port)
 "izq" = (
 /obj/structure/sign/faction/excelsior_old{
@@ -245923,7 +245886,7 @@ gQw
 ucx
 dpF
 dte
-aaa
+cJR
 aaa
 abF
 ybs
@@ -246125,7 +246088,7 @@ dtI
 dpn
 evg
 dty
-aaa
+euk
 aaa
 abF
 ybs
@@ -246136,12 +246099,12 @@ vhi
 eaq
 vhi
 cDu
-cHX
-cIR
-cJR
-cKm
-cLa
-cMw
+cDu
+eEP
+eEP
+eEP
+eEP
+cDu
 cDu
 eyo
 eqJ
@@ -246327,7 +246290,7 @@ dtI
 dnP
 dpl
 dty
-aaa
+cHX
 aaa
 dqI
 dqI
@@ -246338,12 +246301,12 @@ exz
 eas
 cFK
 cDu
-cDu
-eEP
-eEP
-eEP
-eEP
-cDu
+eyt
+vhi
+vhi
+vhi
+vhi
+vhi
 cDu
 eyp
 emW
@@ -246529,7 +246492,7 @@ dtI
 dnP
 lcL
 dty
-aaa
+cLa
 aaa
 dqI
 cDh
@@ -246538,14 +246501,14 @@ cIj
 dIj
 dYo
 eaE
-fAs
+cFK
 eEP
-exS
-cIZ
-cIZ
-cIZ
-cIZ
-cIZ
+vhi
+vhi
+vhi
+vhi
+vhi
+vhi
 eEP
 cUU
 enc
@@ -246731,7 +246694,7 @@ euW
 evd
 hGz
 dty
-aaa
+cKm
 dqI
 dqI
 ebM
@@ -246742,12 +246705,12 @@ cDR
 ecD
 exH
 eEP
-cIZ
-cIZ
 vhi
 vhi
-cIZ
-cIZ
+vhi
+vhi
+vhi
+vhi
 eEP
 eyq
 cWz
@@ -246933,7 +246896,7 @@ dtI
 dnP
 lcL
 dty
-aaa
+exS
 dqI
 dqB
 dqB
@@ -246944,11 +246907,11 @@ ybs
 edl
 cDu
 cDu
-cIZ
-cIZ
 vhi
 vhi
-cIZ
+vhi
+vhi
+vhi
 izl
 cDu
 cDu
@@ -247147,10 +247110,10 @@ edz
 cFK
 cDu
 exQ
-cIZ
 vhi
 vhi
-cIZ
+vhi
+vhi
 eyh
 cDu
 euf
@@ -247954,12 +247917,12 @@ ecC
 egi
 cFK
 eEP
-cIZ
+cLz
 cJg
 vhi
 vhi
 eul
-cIZ
+cLz
 eEP
 cUU
 ewI
@@ -249781,7 +249744,7 @@ cHs
 cRC
 cVd
 cpo
-cpo
+cMw
 buH
 eyR
 eBW
@@ -250783,9 +250746,9 @@ ctr
 dzb
 ctr
 ctr
-euk
-cLz
-euk
+ctr
+ctr
+ctr
 ctr
 chY
 chY
