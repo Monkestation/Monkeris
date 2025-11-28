@@ -96924,9 +96924,6 @@
 /obj/structure/cryofeed,
 /turf/floor/tiled/dark/cargo,
 /area/eris/security/armory)
-"fvD" = (
-/turf/space,
-/area/eris/hallway/main/section3)
 "fwf" = (
 /obj/structure/railing,
 /obj/structure/lattice,
@@ -248372,7 +248369,7 @@ kOE
 kOE
 kOE
 xOd
-fvD
+xOd
 xOd
 chY
 mwt
@@ -248574,7 +248571,7 @@ xOd
 xOd
 xOd
 xOd
-fvD
+xOd
 xOd
 cwM
 eyS
@@ -248776,7 +248773,7 @@ xOd
 xOd
 xOd
 xOd
-fvD
+xOd
 xOd
 cwM
 dqP
@@ -248978,7 +248975,7 @@ ofB
 ofB
 ofB
 xOd
-fvD
+xOd
 xOd
 chY
 cYP
