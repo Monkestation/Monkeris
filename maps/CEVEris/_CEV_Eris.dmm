@@ -61016,7 +61016,10 @@
 /turf/floor/tiled/steel/bar_light,
 /area/eris/crew_quarters/bar)
 "cWz" = (
-/obj/machinery/door/airlock,
+/obj/machinery/door/airlock{
+	name = "S-Unit 1";
+	id_tag = "small_rental_1"
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/floor/tiled/steel/cargo,
@@ -85553,6 +85556,12 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
+/obj/machinery/button/remote/airlock{
+	pixel_x = 5;
+	pixel_y = -25;
+	id = "small_rental_1";
+	name = "Privacy Button"
+	},
 /turf/floor/carpet/sblucarpet,
 /area/eris/crew_quarters/sleep/bedrooms)
 "efY" = (
@@ -91291,6 +91300,11 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/floor/tiled/steel,
 /area/eris/crew_quarters/sleep/bedrooms)
 "eul" = (
@@ -92813,6 +92827,12 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
+/obj/machinery/button/remote/airlock{
+	pixel_x = -5;
+	pixel_y = -25;
+	name = "Privacy Button";
+	id = "small_rental_2"
+	},
 /turf/floor/carpet/sblucarpet,
 /area/eris/crew_quarters/sleep/bedrooms)
 "exR" = (
@@ -92985,6 +93005,11 @@
 "eyp" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/floor/tiled/steel,
 /area/eris/crew_quarters/sleep/bedrooms)
 "eyq" = (
@@ -93677,6 +93702,12 @@
 	dir = 6
 	},
 /obj/structure/table/woodentable,
+/obj/machinery/button/remote/airlock{
+	pixel_x = 5;
+	pixel_y = 25;
+	id = "medium_rental_1";
+	name = "Privacy Button"
+	},
 /turf/floor/carpet,
 /area/eris/crew_quarters/sleep/bedrooms)
 "ezZ" = (
@@ -96554,6 +96585,22 @@
 /obj/spawner/junk/low_chance,
 /turf/floor/plating/under,
 /area/eris/maintenance/section3deck4central)
+"eQE" = (
+/obj/structure/table/woodentable,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/machinery/button/remote/airlock{
+	pixel_x = 5;
+	pixel_y = 25;
+	name = "Privacy Button";
+	id = "small_rental_3"
+	},
+/turf/floor/carpet/sblucarpet,
+/area/eris/crew_quarters/sleep/bedrooms)
 "eRb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/catwalk,
@@ -96645,6 +96692,11 @@
 	},
 /obj/machinery/light{
 	dir = 1
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/floor/tiled/steel,
 /area/eris/crew_quarters/sleep/bedrooms)
@@ -96779,6 +96831,14 @@
 	},
 /turf/floor/reinforced/n20,
 /area/eris/engineering/atmos)
+"fkX" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock{
+	id_tag = "medbay_bathroom_2";
+	name = "Unisex Restrooms"
+	},
+/turf/floor/tiled/steel/cargo,
+/area/eris/hallway/main/section3)
 "flg" = (
 /obj/machinery/light{
 	dir = 1
@@ -97118,6 +97178,21 @@
 	},
 /turf/floor/tiled/steel,
 /area/eris/crew_quarters/sleep/cryofirst)
+"fQt" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "North APC";
+	pixel_y = 28
+	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/floor/tiled/steel,
+/area/eris/crew_quarters/sleep/bedrooms)
 "fRP" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -97222,6 +97297,19 @@
 /obj/item/device/lighting/toggleable/lamp/green,
 /turf/floor/carpet,
 /area/eris/medical/psych)
+"fWw" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/structure/table/woodentable,
+/obj/machinery/button/remote/airlock{
+	pixel_x = 5;
+	pixel_y = 25;
+	id = "medium_rental_2";
+	name = "Privacy Button"
+	},
+/turf/floor/carpet,
+/area/eris/crew_quarters/sleep/bedrooms)
 "fXG" = (
 /obj/spawner/junk,
 /turf/floor/tiled/techmaint,
@@ -97814,17 +97902,8 @@
 /turf/floor/tiled/dark/golden,
 /area/eris/crew_quarters/janitor)
 "haX" = (
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "North APC";
-	pixel_y = 28
-	},
-/obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/turf/floor/tiled/steel,
-/area/eris/crew_quarters/sleep/bedrooms)
+/turf/space,
+/area/eris/maintenance/section3deck1central)
 "hbi" = (
 /obj/structure/railing,
 /obj/machinery/light/small{
@@ -98443,6 +98522,22 @@
 "idG" = (
 /turf/floor/reinforced/engine,
 /area/eris/engineering/wastingroom)
+"idI" = (
+/obj/structure/table/woodentable,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/machinery/button/remote/airlock{
+	pixel_x = -5;
+	pixel_y = 25;
+	name = "Privacy Button";
+	id = "small_rental_4"
+	},
+/turf/floor/carpet/sblucarpet,
+/area/eris/crew_quarters/sleep/bedrooms)
 "igk" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/shutters{
@@ -98672,6 +98767,19 @@
 	},
 /turf/floor/tiled/techmaint,
 /area/eris/maintenance/section2deck1port)
+"izV" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/structure/table/woodentable,
+/obj/machinery/button/remote/airlock{
+	pixel_x = 5;
+	pixel_y = 25;
+	id = "medium_rental_3";
+	name = "Privacy Button"
+	},
+/turf/floor/carpet,
+/area/eris/crew_quarters/sleep/bedrooms)
 "iAD" = (
 /obj/structure/sign/faction/neotheology_cross/gold{
 	pixel_y = 32
@@ -101126,7 +101234,10 @@
 /turf/floor/tiled/steel/techfloor_grid,
 /area/eris/maintenance/section2deck1port)
 "mXS" = (
-/obj/machinery/door/airlock,
+/obj/machinery/door/airlock{
+	name = "L-Unit 1";
+	id_tag = "large_rental_1"
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -102388,7 +102499,10 @@
 /turf/floor/tiled/white/golden,
 /area/eris/neotheology/churchbooth)
 "prG" = (
-/obj/machinery/door/airlock,
+/obj/machinery/door/airlock{
+	name = "M-Unit 2";
+	id_tag = "medium_rental_2"
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/floor/tiled/steel/cargo,
@@ -102649,6 +102763,12 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/machinery/button/remote/airlock{
+	pixel_x = -5;
+	pixel_y = 25;
+	id = "large_rental_1";
+	name = "Privacy Button"
+	},
 /turf/floor/carpet,
 /area/eris/crew_quarters/sleep/bedrooms)
 "pOe" = (
@@ -102830,6 +102950,24 @@
 /obj/structure/disposalpipe/segment,
 /turf/floor/plating/under,
 /area/eris/maintenance/section3deck4port)
+"qfd" = (
+/obj/machinery/door/airlock{
+	name = "S-Unit 2";
+	id_tag = "small_rental_2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/floor/tiled/steel/cargo,
+/area/eris/crew_quarters/sleep/bedrooms)
+"qgH" = (
+/obj/machinery/door/airlock{
+	name = "M-Unit 1";
+	id_tag = "medium_rental_1"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/floor/tiled/steel/cargo,
+/area/eris/crew_quarters/sleep/bedrooms)
 "qhu" = (
 /obj/structure/railing,
 /turf/open,
@@ -103140,6 +103278,15 @@
 	},
 /turf/floor/plating/under,
 /area/eris/maintenance/section4deck2starboard)
+"qDP" = (
+/obj/machinery/door/airlock{
+	name = "M-Unit 3";
+	id_tag = "medium_rental_3"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/floor/tiled/steel/cargo,
+/area/eris/crew_quarters/sleep/bedrooms)
 "qFv" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/medical{
@@ -104333,6 +104480,15 @@
 	name = "Service Maintenance";
 	req_access = list(12)
 	},
+/turf/floor/tiled/steel/cargo,
+/area/eris/crew_quarters/sleep/bedrooms)
+"sDZ" = (
+/obj/machinery/door/airlock{
+	name = "S-Unit 3";
+	id_tag = "small_rental_3"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/floor/tiled/steel/cargo,
 /area/eris/crew_quarters/sleep/bedrooms)
 "sEG" = (
@@ -105931,6 +106087,22 @@
 	},
 /turf/floor/tiled/steel,
 /area/eris/hallway/main/section2)
+"viB" = (
+/obj/structure/toilet{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/button/remote/airlock{
+	desc = "A remote control switch.";
+	id = "medbay_bathroom_2";
+	name = "Privacy Button";
+	pixel_y = -22;
+	specialfunctions = 4
+	},
+/turf/floor/tiled/steel,
+/area/eris/hallway/main/section3)
 "viM" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -107057,6 +107229,15 @@
 /obj/item/stool/padded,
 /turf/floor/tiled/white,
 /area/eris/crew_quarters/fitness)
+"xhK" = (
+/obj/machinery/door/airlock{
+	name = "S-Unit 4";
+	id_tag = "small_rental_4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/floor/tiled/steel/cargo,
+/area/eris/crew_quarters/sleep/bedrooms)
 "xhY" = (
 /turf/wall,
 /area/eris/neotheology/funeral)
@@ -107397,6 +107578,17 @@
 "xIm" = (
 /turf/wall/reinforced,
 /area/eris/hallway/side/section3port)
+"xKp" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/floor/tiled/steel,
+/area/eris/crew_quarters/sleep/bedrooms)
 "xLv" = (
 /obj/effect/shuttle_landmark/merc/sec2west,
 /turf/space,
@@ -246880,10 +247072,10 @@ eEu
 cDu
 efX
 eEu
-haX
+cJR
 euf
 eEu
-efX
+eQE
 cDu
 eEu
 emW
@@ -247084,7 +247276,7 @@ exS
 cWz
 euk
 cFe
-cWz
+sDZ
 wih
 eur
 eEu
@@ -247485,10 +247677,10 @@ edl
 eEu
 egi
 pOg
-cWz
+qfd
 eyp
 cFe
-cWz
+xhK
 izl
 dUJ
 eEu
@@ -247688,10 +247880,10 @@ eEu
 cXv
 exQ
 eEu
-exY
+xKp
 hTT
 eEu
-exQ
+idI
 cXv
 eEu
 evj
@@ -247890,7 +248082,7 @@ eEu
 eEu
 eEu
 eEu
-exY
+fQt
 rtN
 eEu
 eEu
@@ -249098,7 +249290,7 @@ xOd
 xOd
 xOd
 xOd
-xOd
+viB
 xOd
 xOd
 hxU
@@ -249300,7 +249492,7 @@ xOd
 xOd
 xOd
 xOd
-xOd
+fkX
 xOd
 xOd
 hxU
@@ -288498,7 +288690,7 @@ eKJ
 mTb
 mTb
 rFE
-prG
+qgH
 iIi
 eAe
 lLt
@@ -288903,7 +289095,7 @@ exH
 exH
 xiz
 eEu
-ezY
+fWw
 bvl
 vEz
 eEu
@@ -289495,7 +289687,7 @@ abF
 abF
 dXi
 aLZ
-aLZ
+haX
 aZv
 bdK
 bhd
@@ -289509,7 +289701,7 @@ vtu
 vjo
 buv
 eEu
-ezY
+izV
 bvl
 vEz
 eEu
@@ -289697,7 +289889,7 @@ abF
 abF
 dXi
 aLZ
-aLZ
+haX
 aZv
 bdI
 bhv
@@ -289710,7 +289902,7 @@ dUa
 ltg
 xDd
 sqw
-prG
+qDP
 iIi
 eAe
 lLt
