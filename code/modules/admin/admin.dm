@@ -695,6 +695,21 @@ var/global/floorIsLava = 0
 	log_admin("[key_name(usr)] toggled Dead OOC.")
 	message_admins("[key_name_admin(usr)] toggled Dead OOC.", 1)
 
+/datum/admins/proc/togglediagonalmovement()
+	set category = "Server"
+	set desc="Toggle Diagonal Movement."
+	set name="Toggle Diagonal Movement"
+
+	if(!check_rights(R_ADMIN))
+		return
+
+	GLOB.diagonal_movement = !( GLOB.diagonal_movement )
+	for (var/client/client in GLOB.clients)
+		client.CAN_MOVE_DIAGONALLY = GLOB.diagonal_movement
+	log_admin("[key_name(usr)] toggled diagonal movement ([(GLOB.diagonal_movement ? "ON" : "OFF")]).")
+	message_admins("[key_name_admin(usr)] toggled diagonal movement ([(GLOB.diagonal_movement ? "ON" : "OFF")]).")
+
+
 /datum/admins/proc/startnow()
 	set category = "Server"
 	set desc="Start the round RIGHT NOW"
