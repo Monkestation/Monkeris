@@ -3155,7 +3155,7 @@
 /area/eris/command/commander)
 "ahF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/wall,
+/turf/wall/low/with_glass/smart,
 /area/eris/crew_quarters/sleep/cryofirst)
 "ahG" = (
 /turf/floor/tiled/techmaint,
@@ -3163,7 +3163,7 @@
 "ahH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
-/turf/wall,
+/turf/wall/low/with_glass/smart,
 /area/eris/crew_quarters/sleep/cryofirst)
 "ahI" = (
 /obj/structure/disposalpipe/segment,
@@ -3298,12 +3298,6 @@
 "aic" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
-	},
-/obj/machinery/light{
-	dir = 1
-	},
-/obj/machinery/firealarm{
-	pixel_y = 28
 	},
 /turf/floor/tiled/steel,
 /area/eris/crew_quarters/sleep/cryofirst)
@@ -3698,9 +3692,9 @@
 /turf/floor/tiled/steel,
 /area/eris/crew_quarters/sleep/cryofirst)
 "ajc" = (
-/obj/machinery/alarm{
+/obj/machinery/firealarm{
 	dir = 1;
-	pixel_y = -26
+	pixel_y = -28
 	},
 /turf/floor/tiled/steel,
 /area/eris/crew_quarters/sleep/cryofirst)
@@ -4755,10 +4749,11 @@
 /area/eris/security/maintpost)
 "alR" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 5
+	dir = 9;
+	pixel_x = 3
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
+	dir = 5
 	},
 /obj/machinery/hologram/holopad,
 /obj/landmark/join/late/cryo/foward,
@@ -4984,18 +4979,17 @@
 /turf/floor/tiled/techmaint,
 /area/eris/maintenance/section2deck1starboard)
 "amu" = (
-/obj/machinery/light,
-/obj/machinery/firealarm{
-	dir = 1;
-	pixel_y = -28
+/obj/machinery/cryopod{
+	dir = 4;
+	icon_state = "cryopod_0"
 	},
-/turf/floor/tiled/steel,
+/obj/machinery/light,
+/turf/floor/tiled/steel/gray_platform,
 /area/eris/crew_quarters/sleep/cryofirst)
 "amy" = (
 /obj/structure/sign/sec1{
 	pixel_y = -32
 	},
-/obj/machinery/light,
 /turf/floor/tiled/steel,
 /area/eris/crew_quarters/sleep/cryofirst)
 "amz" = (
@@ -28159,6 +28153,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/disposalpipe/segment,
 /turf/floor/tiled/techmaint_cargo,
 /area/eris/crew_quarters/sleep/bedrooms)
 "brP" = (
@@ -28273,8 +28268,10 @@
 /turf/floor/tiled/dark/gray_platform,
 /area/eris/quartermaster/hangarsupply)
 "bsj" = (
-/obj/structure/cyberplant,
-/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/disposal,
+/obj/structure/disposalpipe/trunk{
+	dir = 4
+	},
 /turf/floor/tiled/steel,
 /area/eris/crew_quarters/sleep/bedrooms)
 "bsk" = (
@@ -29370,6 +29367,9 @@
 /area/eris/maintenance/section3deck1central)
 "bvl" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/light{
+	dir = 8
+	},
 /turf/floor/carpet,
 /area/eris/crew_quarters/sleep/bedrooms)
 "bvm" = (
@@ -55849,6 +55849,7 @@
 /area/eris/maintenance/section2deck2starboard)
 "cIu" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/disposalpipe/segment,
 /turf/floor/tiled/steel,
 /area/eris/hallway/side/section3deck2port)
 "cIv" = (
@@ -56064,13 +56065,14 @@
 /turf/floor/tiled/steel/cargo,
 /area/eris/engineering/foyer)
 "cIZ" = (
-/obj/structure/railing{
-	dir = 8
-	},
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/floor/tiled/steel/gray_perforated,
+/obj/structure/cyberplant,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/floor/tiled/steel/cargo,
 /area/eris/crew_quarters/sleep/bedrooms)
 "cJa" = (
 /obj/structure/table/standard,
@@ -56121,16 +56123,20 @@
 /turf/floor/tiled/steel,
 /area/eris/engineering/engeva)
 "cJf" = (
-/obj/structure/railing{
-	dir = 8
-	},
-/obj/structure/railing,
-/turf/floor/tiled/steel/gray_perforated,
-/area/eris/crew_quarters/sleep/bedrooms)
+/obj/machinery/cryopod,
+/obj/machinery/light,
+/turf/floor/tiled/steel/gray_platform,
+/area/eris/crew_quarters/sleep/cryofirst)
 "cJg" = (
-/obj/structure/railing,
-/turf/floor/tiled/steel/gray_perforated,
-/area/eris/crew_quarters/sleep/bedrooms)
+/obj/machinery/cryopod{
+	dir = 4;
+	icon_state = "cryopod_0"
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/floor/tiled/steel/gray_platform,
+/area/eris/crew_quarters/sleep/cryofirst)
 "cJh" = (
 /obj/structure/railing,
 /obj/structure/railing{
@@ -61017,8 +61023,8 @@
 /area/eris/crew_quarters/bar)
 "cWz" = (
 /obj/machinery/door/airlock{
-	name = "S-Unit 1";
-	id_tag = "small_rental_1"
+	name = "S-Unit 4";
+	id_tag = "small_rental_4"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -73416,6 +73422,7 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/glass,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/disposalpipe/segment,
 /turf/floor/tiled/steel/cargo,
 /area/eris/crew_quarters/sleep/bedrooms)
 "dzK" = (
@@ -83524,9 +83531,8 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 8;
-	icon_state = "pipe-c"
+/obj/structure/disposalpipe/junction{
+	dir = 8
 	},
 /turf/floor/tiled/steel,
 /area/eris/hallway/side/section3deck2port)
@@ -84242,6 +84248,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/floor/tiled/steel,
 /area/eris/hallway/side/section3deck2port)
 "ecE" = (
@@ -84532,6 +84541,9 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -84888,6 +84900,10 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 1
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 2;
+	icon_state = "pipe-c"
 	},
 /turf/floor/tiled/steel,
 /area/eris/hallway/side/section3deck2port)
@@ -85558,9 +85574,10 @@
 	},
 /obj/machinery/button/remote/airlock{
 	pixel_x = 5;
-	pixel_y = -25;
-	id = "small_rental_1";
-	name = "Privacy Button"
+	pixel_y = 25;
+	name = "Privacy Button";
+	id = "small_rental_3";
+	specialfunctions = 4
 	},
 /turf/floor/carpet/sblucarpet,
 /area/eris/crew_quarters/sleep/bedrooms)
@@ -92770,7 +92787,6 @@
 /turf/floor/tiled/steel,
 /area/eris/quartermaster/hangarsupply)
 "exN" = (
-/obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
 	},
@@ -92793,6 +92809,7 @@
 	dir = 2;
 	icon_state = "pipe-j2"
 	},
+/obj/structure/catwalk,
 /turf/floor/plating/under,
 /area/eris/maintenance/section3deck1central)
 "exO" = (
@@ -92829,9 +92846,10 @@
 	},
 /obj/machinery/button/remote/airlock{
 	pixel_x = -5;
-	pixel_y = -25;
+	pixel_y = 25;
 	name = "Privacy Button";
-	id = "small_rental_2"
+	id = "small_rental_4";
+	specialfunctions = 4
 	},
 /turf/floor/carpet/sblucarpet,
 /area/eris/crew_quarters/sleep/bedrooms)
@@ -93679,8 +93697,9 @@
 /area/eris/maintenance/section3deck1central)
 "ezW" = (
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
-/obj/structure/disposalpipe/segment{
-	dir = 4
+/obj/structure/disposalpipe/junction{
+	dir = 8;
+	icon_state = "pipe-j2"
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -93705,8 +93724,9 @@
 /obj/machinery/button/remote/airlock{
 	pixel_x = 5;
 	pixel_y = 25;
-	id = "medium_rental_1";
-	name = "Privacy Button"
+	id = "medium_rental_3";
+	name = "Privacy Button";
+	specialfunctions = 4
 	},
 /turf/floor/carpet,
 /area/eris/crew_quarters/sleep/bedrooms)
@@ -93764,9 +93784,6 @@
 "eAe" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
-	},
-/obj/machinery/light/small{
-	dir = 4
 	},
 /turf/floor/carpet,
 /area/eris/crew_quarters/sleep/bedrooms)
@@ -96382,6 +96399,9 @@
 /obj/machinery/alarm{
 	pixel_y = 26
 	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/floor/tiled/steel,
 /area/eris/crew_quarters/sleep/bedrooms)
 "eKK" = (
@@ -96585,22 +96605,6 @@
 /obj/spawner/junk/low_chance,
 /turf/floor/plating/under,
 /area/eris/maintenance/section3deck4central)
-"eQE" = (
-/obj/structure/table/woodentable,
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 4
-	},
-/obj/machinery/light/small{
-	dir = 8
-	},
-/obj/machinery/button/remote/airlock{
-	pixel_x = 5;
-	pixel_y = 25;
-	name = "Privacy Button";
-	id = "small_rental_3"
-	},
-/turf/floor/carpet/sblucarpet,
-/area/eris/crew_quarters/sleep/bedrooms)
 "eRb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/catwalk,
@@ -96831,14 +96835,6 @@
 	},
 /turf/floor/reinforced/n20,
 /area/eris/engineering/atmos)
-"fkX" = (
-/obj/machinery/door/firedoor,
-/obj/machinery/door/airlock{
-	id_tag = "medbay_bathroom_2";
-	name = "Unisex Restrooms"
-	},
-/turf/floor/tiled/steel/cargo,
-/area/eris/hallway/main/section3)
 "flg" = (
 /obj/machinery/light{
 	dir = 1
@@ -97178,21 +97174,6 @@
 	},
 /turf/floor/tiled/steel,
 /area/eris/crew_quarters/sleep/cryofirst)
-"fQt" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "North APC";
-	pixel_y = 28
-	},
-/obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/turf/floor/tiled/steel,
-/area/eris/crew_quarters/sleep/bedrooms)
 "fRP" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -97297,19 +97278,6 @@
 /obj/item/device/lighting/toggleable/lamp/green,
 /turf/floor/carpet,
 /area/eris/medical/psych)
-"fWw" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
-	},
-/obj/structure/table/woodentable,
-/obj/machinery/button/remote/airlock{
-	pixel_x = 5;
-	pixel_y = 25;
-	id = "medium_rental_2";
-	name = "Privacy Button"
-	},
-/turf/floor/carpet,
-/area/eris/crew_quarters/sleep/bedrooms)
 "fXG" = (
 /obj/spawner/junk,
 /turf/floor/tiled/techmaint,
@@ -97556,8 +97524,11 @@
 /turf/floor/tiled/white/brown_perforated,
 /area/eris/medical/genetics)
 "gtf" = (
-/obj/structure/cyberplant,
-/turf/floor/tiled/steel/gray_perforated,
+/obj/machinery/disposal,
+/obj/structure/disposalpipe/trunk{
+	dir = 8
+	},
+/turf/floor/tiled/steel/cargo,
 /area/eris/crew_quarters/sleep/bedrooms)
 "gtF" = (
 /obj/machinery/atmospherics/pipe/zpipe/up{
@@ -97902,8 +97873,14 @@
 /turf/floor/tiled/dark/golden,
 /area/eris/crew_quarters/janitor)
 "haX" = (
-/turf/space,
-/area/eris/maintenance/section3deck1central)
+/obj/machinery/door/airlock{
+	name = "S-Unit 3";
+	id_tag = "small_rental_3"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/floor/tiled/steel/cargo,
+/area/eris/crew_quarters/sleep/bedrooms)
 "hbi" = (
 /obj/structure/railing,
 /obj/machinery/light/small{
@@ -98522,22 +98499,6 @@
 "idG" = (
 /turf/floor/reinforced/engine,
 /area/eris/engineering/wastingroom)
-"idI" = (
-/obj/structure/table/woodentable,
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 8
-	},
-/obj/machinery/light/small{
-	dir = 4
-	},
-/obj/machinery/button/remote/airlock{
-	pixel_x = -5;
-	pixel_y = 25;
-	name = "Privacy Button";
-	id = "small_rental_4"
-	},
-/turf/floor/carpet/sblucarpet,
-/area/eris/crew_quarters/sleep/bedrooms)
 "igk" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/shutters{
@@ -98605,6 +98566,15 @@
 	},
 /turf/floor/plating/under,
 /area/eris/maintenance/section3deck4starboard)
+"ikz" = (
+/obj/machinery/door/airlock{
+	name = "S-Unit 2";
+	id_tag = "small_rental_2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/floor/tiled/steel/cargo,
+/area/eris/crew_quarters/sleep/bedrooms)
 "ikI" = (
 /obj/machinery/atmospherics/valve/open{
 	dir = 4;
@@ -98767,19 +98737,6 @@
 	},
 /turf/floor/tiled/techmaint,
 /area/eris/maintenance/section2deck1port)
-"izV" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
-	},
-/obj/structure/table/woodentable,
-/obj/machinery/button/remote/airlock{
-	pixel_x = 5;
-	pixel_y = 25;
-	id = "medium_rental_3";
-	name = "Privacy Button"
-	},
-/turf/floor/carpet,
-/area/eris/crew_quarters/sleep/bedrooms)
 "iAD" = (
 /obj/structure/sign/faction/neotheology_cross/gold{
 	pixel_y = 32
@@ -98821,6 +98778,15 @@
 /obj/item/computer_hardware/scanner/paper,
 /turf/floor/plating/under,
 /area/eris/maintenance/section4deck3port)
+"iEY" = (
+/obj/machinery/door/airlock{
+	name = "M-Unit 3";
+	id_tag = "medium_rental_3"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/floor/tiled/steel/cargo,
+/area/eris/crew_quarters/sleep/bedrooms)
 "iFm" = (
 /turf/wall,
 /area/eris/maintenance/section3deck4central)
@@ -99194,6 +99160,9 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 27
 	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/floor/tiled/steel,
 /area/eris/crew_quarters/sleep/bedrooms)
 "jeM" = (
@@ -99495,10 +99464,22 @@
 	},
 /turf/floor/tiled/white/golden,
 /area/eris/neotheology/altar)
-"jKh" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 5
+"jKg" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
 	},
+/obj/structure/table/woodentable,
+/obj/machinery/button/remote/airlock{
+	pixel_x = 5;
+	pixel_y = 25;
+	id = "medium_rental_1";
+	name = "Privacy Button";
+	specialfunctions = 4
+	},
+/turf/floor/carpet,
+/area/eris/crew_quarters/sleep/bedrooms)
+"jKh" = (
+/obj/structure/cyberplant,
 /turf/floor/tiled/steel,
 /area/eris/crew_quarters/sleep/bedrooms)
 "jKn" = (
@@ -99601,6 +99582,17 @@
 	},
 /turf/floor/tiled/steel/techfloor_grid,
 /area/eris/engineering/propulsion/left)
+"jQR" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/floor/tiled/steel,
+/area/eris/crew_quarters/sleep/bedrooms)
 "jRe" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -99768,6 +99760,20 @@
 /obj/machinery/camera/network/third_section,
 /turf/floor/tiled/steel/bar_dance,
 /area/holodeck/alphadeck)
+"kfm" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/structure/table/woodentable,
+/obj/machinery/button/remote/airlock{
+	pixel_x = 5;
+	pixel_y = 25;
+	id = "medium_rental_2";
+	name = "Privacy Button";
+	specialfunctions = 4
+	},
+/turf/floor/carpet,
+/area/eris/crew_quarters/sleep/bedrooms)
 "kfP" = (
 /turf/floor/tiled/white/brown_platform,
 /area/eris/medical/medbreak)
@@ -101011,6 +101017,9 @@
 	dir = 4
 	},
 /obj/machinery/light,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/floor/tiled/steel,
 /area/eris/hallway/side/section3deck2port)
 "mAm" = (
@@ -101027,6 +101036,9 @@
 /obj/structure/railing,
 /obj/machinery/light{
 	dir = 1
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
 	},
 /turf/floor/tiled/steel,
 /area/eris/crew_quarters/sleep/bedrooms)
@@ -101221,6 +101233,7 @@
 /obj/structure/railing{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/floor/tiled/steel,
 /area/eris/crew_quarters/sleep/bedrooms)
 "mUH" = (
@@ -101256,6 +101269,11 @@
 	},
 /turf/floor/plating/under,
 /area/eris/maintenance/section3deck5port)
+"mZH" = (
+/obj/spawner/traps/low_chance,
+/obj/structure/railing/grey,
+/turf/floor/tiled/techmaint,
+/area/eris/maintenance/section3deck1central)
 "nab" = (
 /turf/floor/tiled/steel/bar_flat,
 /area/holodeck/alphadeck)
@@ -101555,6 +101573,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/catwalk,
+/obj/structure/disposalpipe/segment,
 /turf/floor/plating/under,
 /area/eris/maintenance/section3deck1central)
 "nwF" = (
@@ -102413,6 +102432,13 @@
 	},
 /turf/floor/dirt,
 /area/eris/neotheology/chapelritualroom)
+"pbm" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/floor/tiled/steel,
+/area/eris/crew_quarters/sleep/bedrooms)
 "pbI" = (
 /turf/floor/wood,
 /area/eris/medical/psych)
@@ -102500,8 +102526,8 @@
 /area/eris/neotheology/churchbooth)
 "prG" = (
 /obj/machinery/door/airlock{
-	name = "M-Unit 2";
-	id_tag = "medium_rental_2"
+	name = "M-Unit 1";
+	id_tag = "medium_rental_1"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -102767,7 +102793,8 @@
 	pixel_x = -5;
 	pixel_y = 25;
 	id = "large_rental_1";
-	name = "Privacy Button"
+	name = "Privacy Button";
+	specialfunctions = 4
 	},
 /turf/floor/carpet,
 /area/eris/crew_quarters/sleep/bedrooms)
@@ -102843,6 +102870,15 @@
 "pVr" = (
 /turf/wall/reinforced,
 /area/eris/maintenance/sorter)
+"pVz" = (
+/obj/machinery/door/airlock{
+	name = "S-Unit 1";
+	id_tag = "small_rental_1"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/floor/tiled/steel/cargo,
+/area/eris/crew_quarters/sleep/bedrooms)
 "pVN" = (
 /obj/structure/sign/faction/technomancers{
 	pixel_x = -32
@@ -102950,24 +102986,13 @@
 /obj/structure/disposalpipe/segment,
 /turf/floor/plating/under,
 /area/eris/maintenance/section3deck4port)
-"qfd" = (
-/obj/machinery/door/airlock{
-	name = "S-Unit 2";
-	id_tag = "small_rental_2"
+"qhl" = (
+/obj/machinery/cryopod,
+/obj/machinery/light{
+	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/floor/tiled/steel/cargo,
-/area/eris/crew_quarters/sleep/bedrooms)
-"qgH" = (
-/obj/machinery/door/airlock{
-	name = "M-Unit 1";
-	id_tag = "medium_rental_1"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/floor/tiled/steel/cargo,
-/area/eris/crew_quarters/sleep/bedrooms)
+/turf/floor/tiled/steel/gray_platform,
+/area/eris/crew_quarters/sleep/cryofirst)
 "qhu" = (
 /obj/structure/railing,
 /turf/open,
@@ -103278,15 +103303,6 @@
 	},
 /turf/floor/plating/under,
 /area/eris/maintenance/section4deck2starboard)
-"qDP" = (
-/obj/machinery/door/airlock{
-	name = "M-Unit 3";
-	id_tag = "medium_rental_3"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/floor/tiled/steel/cargo,
-/area/eris/crew_quarters/sleep/bedrooms)
 "qFv" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/medical{
@@ -103682,6 +103698,23 @@
 /obj/structure/closet/secure_closet/personal,
 /turf/floor/tiled/white/brown_perforated,
 /area/eris/crew_quarters/fitness)
+"roX" = (
+/obj/structure/table/woodentable,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/machinery/button/remote/airlock{
+	pixel_x = 5;
+	pixel_y = -25;
+	id = "small_rental_1";
+	name = "Privacy Button";
+	specialfunctions = 4
+	},
+/turf/floor/carpet/sblucarpet,
+/area/eris/crew_quarters/sleep/bedrooms)
 "rpd" = (
 /obj/machinery/conveyor/north{
 	id = "minetocargo"
@@ -103822,7 +103855,7 @@
 	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 1
+	dir = 8
 	},
 /turf/floor/tiled/steel,
 /area/eris/crew_quarters/sleep/bedrooms)
@@ -104051,6 +104084,9 @@
 /obj/structure/railing,
 /obj/item/device/radio/intercom{
 	pixel_y = 24
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
 	},
 /turf/floor/tiled/steel,
 /area/eris/crew_quarters/sleep/bedrooms)
@@ -104480,15 +104516,6 @@
 	name = "Service Maintenance";
 	req_access = list(12)
 	},
-/turf/floor/tiled/steel/cargo,
-/area/eris/crew_quarters/sleep/bedrooms)
-"sDZ" = (
-/obj/machinery/door/airlock{
-	name = "S-Unit 3";
-	id_tag = "small_rental_3"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/floor/tiled/steel/cargo,
 /area/eris/crew_quarters/sleep/bedrooms)
 "sEG" = (
@@ -105232,6 +105259,14 @@
 	},
 /turf/floor/tiled/techmaint,
 /area/eris/maintenance/section1deck4central)
+"tMH" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/disposalpipe/segment{
+	dir = 1;
+	icon_state = "pipe-c"
+	},
+/turf/floor/tiled/steel,
+/area/eris/crew_quarters/sleep/bedrooms)
 "tNt" = (
 /obj/structure/table/standard{
 	name = "plastic table frame"
@@ -105916,6 +105951,18 @@
 	},
 /turf/floor/tiled/steel/techfloor,
 /area/eris/engineering/propulsion/right)
+"uVi" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/floor/tiled/steel,
+/area/eris/hallway/side/section3deck2port)
 "uVI" = (
 /obj/structure/sign/faction/neotheology_cross/gold{
 	pixel_y = 32
@@ -106021,6 +106068,10 @@
 "vcZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/disposalpipe/segment{
+	dir = 8;
+	icon_state = "pipe-c"
+	},
 /turf/floor/tiled/steel,
 /area/eris/crew_quarters/sleep/bedrooms)
 "vdS" = (
@@ -106087,22 +106138,6 @@
 	},
 /turf/floor/tiled/steel,
 /area/eris/hallway/main/section2)
-"viB" = (
-/obj/structure/toilet{
-	dir = 4
-	},
-/obj/machinery/light{
-	dir = 1
-	},
-/obj/machinery/button/remote/airlock{
-	desc = "A remote control switch.";
-	id = "medbay_bathroom_2";
-	name = "Privacy Button";
-	pixel_y = -22;
-	specialfunctions = 4
-	},
-/turf/floor/tiled/steel,
-/area/eris/hallway/main/section3)
 "viM" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -106180,6 +106215,21 @@
 /obj/structure/curtain/open/shower,
 /turf/floor/tiled/white/brown_perforated,
 /area/eris/crew_quarters/fitness)
+"vph" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "North APC";
+	pixel_y = 28
+	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/floor/tiled/steel,
+/area/eris/crew_quarters/sleep/bedrooms)
 "vpB" = (
 /obj/structure/bed/chair{
 	dir = 8
@@ -106335,6 +106385,23 @@
 /obj/structure/jtb_pillar,
 /turf/floor/tiled/dark/danger,
 /area/eris/maintenance/junk)
+"vDN" = (
+/obj/structure/table/woodentable,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/machinery/button/remote/airlock{
+	pixel_x = -5;
+	pixel_y = -25;
+	name = "Privacy Button";
+	id = "small_rental_2";
+	specialfunctions = 4
+	},
+/turf/floor/carpet/sblucarpet,
+/area/eris/crew_quarters/sleep/bedrooms)
 "vEz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -106817,6 +106884,15 @@
 /obj/machinery/hologram/holopad,
 /turf/floor/grass,
 /area/eris/crew_quarters/hydroponics/garden)
+"wpY" = (
+/obj/machinery/door/airlock{
+	name = "M-Unit 2";
+	id_tag = "medium_rental_2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/floor/tiled/steel/cargo,
+/area/eris/crew_quarters/sleep/bedrooms)
 "wqk" = (
 /obj/structure/closet/secure_closet/personal/artist,
 /obj/machinery/atmospherics/unary/vent_pump/on,
@@ -106881,6 +106957,9 @@
 "wwQ" = (
 /obj/machinery/firealarm{
 	pixel_y = 28
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
 	},
 /turf/floor/tiled/steel,
 /area/eris/crew_quarters/sleep/bedrooms)
@@ -106998,8 +107077,8 @@
 /obj/item/cell/small,
 /obj/item/cell/small,
 /obj/item/tool/crowbar,
-/obj/machinery/light{
-	dir = 1
+/obj/machinery/alarm{
+	pixel_y = 26
 	},
 /turf/floor/tiled/steel/gray_platform,
 /area/eris/crew_quarters/sleep/cryofirst)
@@ -107229,15 +107308,6 @@
 /obj/item/stool/padded,
 /turf/floor/tiled/white,
 /area/eris/crew_quarters/fitness)
-"xhK" = (
-/obj/machinery/door/airlock{
-	name = "S-Unit 4";
-	id_tag = "small_rental_4"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/floor/tiled/steel/cargo,
-/area/eris/crew_quarters/sleep/bedrooms)
 "xhY" = (
 /turf/wall,
 /area/eris/neotheology/funeral)
@@ -107578,17 +107648,6 @@
 "xIm" = (
 /turf/wall/reinforced,
 /area/eris/hallway/side/section3port)
-"xKp" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/floor/tiled/steel,
-/area/eris/crew_quarters/sleep/bedrooms)
 "xLv" = (
 /obj/effect/shuttle_landmark/merc/sec2west,
 /turf/space,
@@ -121979,7 +122038,7 @@ agD
 agD
 agD
 agD
-aif
+cJg
 aif
 qGe
 agY
@@ -121988,7 +122047,7 @@ acf
 agY
 sLc
 aif
-aif
+amu
 agD
 aaa
 aaa
@@ -122190,7 +122249,7 @@ acf
 agY
 aEf
 acf
-amu
+ajc
 agD
 agD
 aaa
@@ -123191,7 +123250,7 @@ aaa
 aaa
 agD
 agD
-alS
+qhl
 alS
 alS
 akw
@@ -123200,7 +123259,7 @@ akA
 akw
 alS
 alS
-alS
+cJf
 agD
 aad
 aad
@@ -247070,12 +247129,12 @@ exz
 eas
 eEu
 cDu
-efX
+roX
 eEu
 cJR
 euf
 eEu
-eQE
+efX
 cDu
 eEu
 emW
@@ -247273,10 +247332,10 @@ eaE
 eEu
 fAs
 exS
-cWz
+pVz
 euk
 cFe
-sDZ
+haX
 wih
 eur
 eEu
@@ -247677,10 +247736,10 @@ edl
 eEu
 egi
 pOg
-qfd
+ikz
 eyp
 cFe
-xhK
+cWz
 izl
 dUJ
 eEu
@@ -247875,15 +247934,15 @@ dqI
 ybs
 cLz
 eyt
-evj
+uVi
 eEu
 cXv
-exQ
+vDN
 eEu
-xKp
+jQR
 hTT
 eEu
-idI
+exQ
 cXv
 eEu
 evj
@@ -248082,7 +248141,7 @@ eEu
 eEu
 eEu
 eEu
-fQt
+vph
 rtN
 eEu
 eEu
@@ -248282,7 +248341,7 @@ vhi
 eek
 cIu
 dzJ
-cJc
+tMH
 cJc
 woi
 eLw
@@ -248485,7 +248544,7 @@ ewI
 cUU
 cLa
 cIZ
-cJf
+dUa
 exY
 dUa
 cLj
@@ -248687,7 +248746,7 @@ exy
 cFK
 cLa
 gtf
-cJg
+dUa
 cFf
 dUa
 eul
@@ -249290,7 +249349,7 @@ xOd
 xOd
 xOd
 xOd
-viB
+xOd
 xOd
 xOd
 hxU
@@ -249492,7 +249551,7 @@ xOd
 xOd
 xOd
 xOd
-fkX
+xOd
 xOd
 xOd
 hxU
@@ -288081,7 +288140,7 @@ esg
 cNH
 ydE
 cNH
-aQV
+mZH
 cNH
 cNH
 cNH
@@ -288485,11 +288544,11 @@ ezV
 uSo
 cLa
 bsj
-cJc
-cJc
+dUa
+dUa
 jKh
 eEu
-ezY
+jKg
 bvl
 qHN
 eEu
@@ -288687,10 +288746,10 @@ ezV
 cNH
 cLa
 eKJ
-mTb
+pbm
 mTb
 rFE
-qgH
+prG
 iIi
 eAe
 lLt
@@ -289095,7 +289154,7 @@ exH
 exH
 xiz
 eEu
-fWw
+kfm
 bvl
 vEz
 eEu
@@ -289296,7 +289355,7 @@ jdk
 dUa
 dUa
 sqw
-prG
+wpY
 iIi
 eAe
 lLt
@@ -289687,7 +289746,7 @@ abF
 abF
 dXi
 aLZ
-haX
+aLZ
 aZv
 bdK
 bhd
@@ -289701,7 +289760,7 @@ vtu
 vjo
 buv
 eEu
-izV
+ezY
 bvl
 vEz
 eEu
@@ -289889,7 +289948,7 @@ abF
 abF
 dXi
 aLZ
-haX
+aLZ
 aZv
 bdI
 bhv
@@ -289902,7 +289961,7 @@ dUa
 ltg
 xDd
 sqw
-qDP
+iEY
 iIi
 eAe
 lLt
