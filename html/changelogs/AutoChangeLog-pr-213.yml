@@ -1,0 +1,6 @@
+author: flleeppyy
+delete-after: true
+changes:
+  - bugfix: borked augments
+  - bugfix: check_momentum timer spam
+  - bugfix: empty notices from perks with no lose/gain_text

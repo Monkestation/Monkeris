@@ -398,6 +398,8 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		host = key
 		world.update_status()
 
+	CAN_MOVE_DIAGONALLY = GLOB.diagonal_movement
+
 	if(holder)
 		add_admin_verbs()
 		admin_memo_show()

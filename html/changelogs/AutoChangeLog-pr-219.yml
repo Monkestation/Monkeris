@@ -1,0 +1,4 @@
+author: flleeppyy
+delete-after: true
+changes:
+  - admin: admins can now toggle diagonal movement via Server verb tab

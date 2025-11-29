@@ -196,6 +196,7 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 	/datum/admins/proc/togglelooc,
 	/datum/admins/proc/toggledsay,
 	/datum/admins/proc/toggleoocdead,
+	/datum/admins/proc/togglediagonalmovement,
 	/datum/admins/proc/toggleenter,
 	/datum/admins/proc/toggleAI,
 	/datum/admins/proc/toggleguests,
