@@ -28154,6 +28154,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
+/obj/machinery/door/firedoor,
 /turf/floor/tiled/techmaint_cargo,
 /area/eris/crew_quarters/sleep/bedrooms)
 "brP" = (
@@ -28595,6 +28596,15 @@
 /obj/spawner/junk/low_chance,
 /turf/floor/tiled/techmaint_panels,
 /area/eris/maintenance/section3deck1central)
+"bti" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/door/firedoor,
+/turf/floor/tiled/steel,
+/area/eris/crew_quarters/sleep/bedrooms)
 "btj" = (
 /obj/structure/table/reinforced,
 /obj/spawner/rations,
@@ -56567,6 +56577,7 @@
 /obj/machinery/door/airlock/multi_tile/glass{
 	dir = 2
 	},
+/obj/machinery/door/firedoor,
 /turf/floor/tiled/steel,
 /area/eris/crew_quarters/sleep/bedrooms)
 "cKn" = (
@@ -61026,6 +61037,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor,
 /turf/floor/tiled/steel/cargo,
 /area/eris/crew_quarters/sleep/bedrooms)
 "cWA" = (
@@ -83944,6 +83956,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/floor/tiled/steel/cargo,
 /area/eris/crew_quarters/sleep/bedrooms)
 "ebM" = (
@@ -95581,9 +95594,6 @@
 	},
 /turf/floor/plating/under,
 /area/eris/maintenance/section3deck1central)
-"eEw" = (
-/turf/wall/low/with_glass/smart,
-/area/eris/crew_quarters/sleep/bedrooms)
 "eEy" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -97874,6 +97884,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor,
 /turf/floor/tiled/steel/cargo,
 /area/eris/crew_quarters/sleep/bedrooms)
 "hbi" = (
@@ -98568,6 +98579,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor,
 /turf/floor/tiled/steel/cargo,
 /area/eris/crew_quarters/sleep/bedrooms)
 "ikI" = (
@@ -98780,6 +98792,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/firedoor,
 /turf/floor/tiled/steel/cargo,
 /area/eris/crew_quarters/sleep/bedrooms)
 "iFm" = (
@@ -101217,6 +101230,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/floor/tiled/steel/cargo,
 /area/eris/crew_quarters/sleep/bedrooms)
 "mXZ" = (
@@ -101229,11 +101243,6 @@
 	},
 /turf/floor/plating/under,
 /area/eris/maintenance/section3deck5port)
-"mZH" = (
-/obj/spawner/traps/low_chance,
-/obj/structure/railing/grey,
-/turf/floor/tiled/techmaint,
-/area/eris/maintenance/section3deck1central)
 "nab" = (
 /turf/floor/tiled/steel/bar_flat,
 /area/holodeck/alphadeck)
@@ -102491,6 +102500,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/firedoor,
 /turf/floor/tiled/steel/cargo,
 /area/eris/crew_quarters/sleep/bedrooms)
 "pse" = (
@@ -102837,6 +102847,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor,
 /turf/floor/tiled/steel/cargo,
 /area/eris/crew_quarters/sleep/bedrooms)
 "pVN" = (
@@ -103889,6 +103900,7 @@
 /turf/floor/tiled/cafe,
 /area/eris/crew_quarters/kitchen)
 "rLN" = (
+/obj/machinery/door/firedoor,
 /turf/floor/tiled/techmaint_cargo,
 /area/eris/crew_quarters/sleep/bedrooms)
 "rMC" = (
@@ -104470,6 +104482,7 @@
 	name = "Service Maintenance";
 	req_access = list(12)
 	},
+/obj/machinery/door/firedoor,
 /turf/floor/tiled/steel/cargo,
 /area/eris/crew_quarters/sleep/bedrooms)
 "sEG" = (
@@ -106846,6 +106859,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/firedoor,
 /turf/floor/tiled/steel/cargo,
 /area/eris/crew_quarters/sleep/bedrooms)
 "wqk" = (
@@ -246888,7 +246902,7 @@ eEu
 eEu
 eEu
 eEu
-cJR
+bti
 cKm
 eEu
 eEu
@@ -288099,7 +288113,7 @@ esg
 cNH
 ydE
 cNH
-mZH
+aQV
 cNH
 cNH
 cNH
@@ -291330,8 +291344,8 @@ bmj
 esh
 boN
 cLa
-eEw
-eEw
+edz
+edz
 eEu
 eEu
 eEu
