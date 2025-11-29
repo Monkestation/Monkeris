@@ -28595,9 +28595,6 @@
 /obj/spawner/junk/low_chance,
 /turf/floor/tiled/techmaint_panels,
 /area/eris/maintenance/section3deck1central)
-"bti" = (
-/turf/floor/tiled/techmaint_panels,
-/area/eris/maintenance/section3deck1central)
 "btj" = (
 /obj/structure/table/reinforced,
 /obj/spawner/rations,
@@ -289329,7 +289326,7 @@ dXi
 dXi
 dXi
 dXi
-aae
+abF
 abF
 abF
 eAj
@@ -289530,8 +289527,8 @@ dXi
 mLo
 bso
 bsl
-qXC
-aae
+dXi
+dXi
 aaa
 aaa
 eAj
@@ -289732,8 +289729,8 @@ dXi
 bth
 bth
 nTB
-bth
-aae
+qXC
+dXi
 aaa
 aaa
 eAj
@@ -289935,7 +289932,7 @@ buj
 bui
 buh
 buh
-aae
+dXi
 aaa
 aaa
 eAj
@@ -290135,9 +290132,9 @@ eEp
 boN
 bth
 bth
-bti
 bth
-aae
+bth
+dXi
 aaa
 aaa
 esa
@@ -290339,7 +290336,7 @@ buJ
 buJ
 buK
 buJ
-aae
+dXi
 aaa
 aaa
 esa
@@ -290541,7 +290538,7 @@ dXi
 dXi
 dXi
 dXi
-aae
+dXi
 aaa
 aaa
 esa
