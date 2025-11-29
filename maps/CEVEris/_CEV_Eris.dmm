@@ -29366,7 +29366,9 @@
 /turf/floor/tiled/techmaint,
 /area/eris/maintenance/section3deck1central)
 "bvl" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
 /obj/machinery/light{
 	dir = 8
 	},
@@ -53831,11 +53833,10 @@
 /turf/floor/tiled/steel/gray_platform,
 /area/eris/command/exultant/quarters)
 "cDu" = (
-/obj/structure/closet/secure_closet/personal,
+/obj/structure/closet/wardrobe/pjs,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/item/clothing/under/pj/blue,
 /turf/floor/carpet/sblucarpet,
 /area/eris/crew_quarters/sleep/bedrooms)
 "cDv" = (
@@ -61390,11 +61391,10 @@
 /turf/floor/tiled/steel/gray_platform,
 /area/eris/engineering/breakroom)
 "cXv" = (
-/obj/structure/closet/secure_closet/personal,
+/obj/structure/closet/wardrobe/pjs,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/item/clothing/under/pj/blue,
 /turf/floor/carpet/sblucarpet,
 /area/eris/crew_quarters/sleep/bedrooms)
 "cXw" = (
@@ -93717,9 +93717,6 @@
 /turf/floor/tiled/steel/techfloor,
 /area/eris/engineering/shield_generator)
 "ezY" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
-	},
 /obj/structure/table/woodentable,
 /obj/machinery/button/remote/airlock{
 	pixel_x = 5;
@@ -93727,6 +93724,9 @@
 	id = "medium_rental_3";
 	name = "Privacy Button";
 	specialfunctions = 4
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
 	},
 /turf/floor/carpet,
 /area/eris/crew_quarters/sleep/bedrooms)
@@ -93782,8 +93782,9 @@
 /turf/floor/plating/under,
 /area/eris/maintenance/section3deck1central)
 "eAe" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9;
+	pixel_x = 3
 	},
 /turf/floor/carpet,
 /area/eris/crew_quarters/sleep/bedrooms)
@@ -96192,9 +96193,6 @@
 "eFK" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/red,
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1
-	},
 /turf/floor/carpet,
 /area/eris/crew_quarters/sleep/bedrooms)
 "eFM" = (
@@ -97150,12 +97148,6 @@
 /obj/effect/shuttle_landmark/merc/sec3east4,
 /turf/space,
 /area/space)
-"fMO" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 10
-	},
-/turf/floor/carpet,
-/area/eris/crew_quarters/sleep/bedrooms)
 "fNM" = (
 /obj/structure/flora/ausbushes/genericbush,
 /turf/floor/grass,
@@ -97441,8 +97433,14 @@
 /area/eris/neotheology/chapelritualroom)
 "gnd" = (
 /obj/structure/table/woodentable,
-/obj/item/flame/lighter/zippo,
-/obj/item/storage/fancy/cigar,
+/obj/item/flame/lighter/zippo{
+	pixel_x = 13;
+	pixel_y = 4
+	},
+/obj/item/storage/fancy/cigar{
+	pixel_x = -7;
+	pixel_y = 4
+	},
 /turf/floor/carpet,
 /area/eris/crew_quarters/sleep/bedrooms)
 "gnx" = (
@@ -98831,11 +98829,10 @@
 /turf/space,
 /area/space)
 "iIi" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 9;
-	pixel_x = 3
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/floor/carpet,
 /area/eris/crew_quarters/sleep/bedrooms)
 "iJH" = (
@@ -99464,20 +99461,6 @@
 	},
 /turf/floor/tiled/white/golden,
 /area/eris/neotheology/altar)
-"jKg" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
-	},
-/obj/structure/table/woodentable,
-/obj/machinery/button/remote/airlock{
-	pixel_x = 5;
-	pixel_y = 25;
-	id = "medium_rental_1";
-	name = "Privacy Button";
-	specialfunctions = 4
-	},
-/turf/floor/carpet,
-/area/eris/crew_quarters/sleep/bedrooms)
 "jKh" = (
 /obj/structure/cyberplant,
 /turf/floor/tiled/steel,
@@ -99760,20 +99743,6 @@
 /obj/machinery/camera/network/third_section,
 /turf/floor/tiled/steel/bar_dance,
 /area/holodeck/alphadeck)
-"kfm" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
-	},
-/obj/structure/table/woodentable,
-/obj/machinery/button/remote/airlock{
-	pixel_x = 5;
-	pixel_y = 25;
-	id = "medium_rental_2";
-	name = "Privacy Button";
-	specialfunctions = 4
-	},
-/turf/floor/carpet,
-/area/eris/crew_quarters/sleep/bedrooms)
 "kfP" = (
 /turf/floor/tiled/white/brown_platform,
 /area/eris/medical/medbreak)
@@ -100110,8 +100079,10 @@
 /turf/floor/tiled/white/brown_platform,
 /area/eris/medical/reception)
 "kUM" = (
-/obj/structure/closet/secure_closet/personal,
-/obj/item/clothing/under/pj/red,
+/obj/structure/closet/wardrobe,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
 /turf/floor/carpet,
 /area/eris/crew_quarters/sleep/bedrooms)
 "kVP" = (
@@ -100568,14 +100539,6 @@
 "lLd" = (
 /turf/wall,
 /area/eris/medical/medbay/organs)
-"lLt" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
-	},
-/obj/structure/bed/padded,
-/obj/item/bedsheet/red,
-/turf/floor/carpet,
-/area/eris/crew_quarters/sleep/bedrooms)
 "lMs" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -102937,9 +102900,6 @@
 /turf/floor/tiled/white/golden,
 /area/eris/neotheology/bioprinter)
 "qaD" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 5
-	},
 /obj/structure/bed/chair/custom/wood/wings,
 /turf/floor/carpet,
 /area/eris/crew_quarters/sleep/bedrooms)
@@ -103079,9 +103039,6 @@
 /area/eris/maintenance/sorter)
 "qmk" = (
 /obj/structure/table/woodentable,
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1
-	},
 /obj/item/reagent_containers/food/drinks/drinkingglass/shot{
 	pixel_x = -5
 	},
@@ -103096,6 +103053,7 @@
 	pixel_x = -5;
 	pixel_y = 10
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/floor/carpet,
 /area/eris/crew_quarters/sleep/bedrooms)
 "qmJ" = (
@@ -103360,11 +103318,10 @@
 /turf/floor/plating/under,
 /area/eris/crew_quarters/kitchen)
 "qHN" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 5
+/obj/structure/closet/wardrobe/pjs,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
 	},
-/obj/structure/closet/secure_closet/personal,
-/obj/item/clothing/under/pj/red,
 /turf/floor/carpet,
 /area/eris/crew_quarters/sleep/bedrooms)
 "qJx" = (
@@ -105327,6 +105284,9 @@
 /obj/machinery/light{
 	dir = 1
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
 /turf/floor/carpet,
 /area/eris/crew_quarters/sleep/bedrooms)
 "tSk" = (
@@ -106403,12 +106363,10 @@
 /turf/floor/carpet/sblucarpet,
 /area/eris/crew_quarters/sleep/bedrooms)
 "vEz" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 5
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
 	},
-/obj/structure/closet/secure_closet/personal,
-/obj/item/clothing/under/pj/red,
-/obj/item/clothing/under/pj/red,
+/obj/structure/closet/wardrobe/pjs,
 /turf/floor/carpet,
 /area/eris/crew_quarters/sleep/bedrooms)
 "vGh" = (
@@ -107045,15 +107003,19 @@
 "wGY" = (
 /obj/structure/table/woodentable,
 /obj/item/reagent_containers/food/drinks/bottle/vodka{
-	pixel_x = 5
+	pixel_x = 6;
+	pixel_y = 5
 	},
 /obj/item/reagent_containers/food/drinks/bottle/whiskey{
-	pixel_y = 5;
+	pixel_y = 10;
 	pixel_x = -5
 	},
 /obj/item/reagent_containers/food/drinks/bottle/cognac{
-	pixel_y = 1;
+	pixel_y = 5;
 	pixel_x = -5
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
 	},
 /turf/floor/carpet,
 /area/eris/crew_quarters/sleep/bedrooms)
@@ -288548,9 +288510,9 @@ dUa
 dUa
 jKh
 eEu
-jKg
+ezY
 bvl
-qHN
+vEz
 eEu
 nsg
 abF
@@ -288752,7 +288714,7 @@ rFE
 prG
 iIi
 eAe
-lLt
+eFK
 eEu
 nsg
 abF
@@ -289154,7 +289116,7 @@ exH
 exH
 xiz
 eEu
-kfm
+ezY
 bvl
 vEz
 eEu
@@ -289358,7 +289320,7 @@ sqw
 wpY
 iIi
 eAe
-lLt
+eFK
 eEu
 cNH
 cNH
@@ -289964,7 +289926,7 @@ sqw
 iEY
 iIi
 eAe
-lLt
+eFK
 eEu
 cNH
 cNH
@@ -290566,7 +290528,7 @@ cLa
 bsk
 ltg
 eEu
-fMO
+sxx
 qaD
 gnd
 eEu
@@ -290769,7 +290731,7 @@ tgo
 ltg
 eEu
 tRb
-sxx
+jSb
 sfn
 eEu
 eEs
@@ -290971,7 +290933,7 @@ ovO
 tgB
 eEu
 kUM
-sxx
+jSb
 jSb
 eEu
 eED
@@ -291172,8 +291134,8 @@ cLa
 bsp
 nnN
 eEu
-kUM
-fMO
+qHN
+jSb
 eFK
 eEu
 eAO
