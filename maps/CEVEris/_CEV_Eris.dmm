@@ -28596,15 +28596,6 @@
 /obj/spawner/junk/low_chance,
 /turf/floor/tiled/techmaint_panels,
 /area/eris/maintenance/section3deck1central)
-"bti" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/door/firedoor,
-/turf/floor/tiled/steel,
-/area/eris/crew_quarters/sleep/bedrooms)
 "btj" = (
 /obj/structure/table/reinforced,
 /obj/spawner/rations,
@@ -56079,6 +56070,9 @@
 /obj/structure/cyberplant,
 /obj/structure/disposalpipe/segment{
 	dir = 4
+	},
+/obj/machinery/firealarm{
+	pixel_y = 28
 	},
 /turf/floor/tiled/steel/cargo,
 /area/eris/crew_quarters/sleep/bedrooms)
@@ -95594,6 +95588,15 @@
 	},
 /turf/floor/plating/under,
 /area/eris/maintenance/section3deck1central)
+"eEw" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/door/firedoor,
+/turf/floor/tiled/steel,
+/area/eris/crew_quarters/sleep/bedrooms)
 "eEy" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -246902,7 +246905,7 @@ eEu
 eEu
 eEu
 eEu
-bti
+eEw
 cKm
 eEu
 eEu
