@@ -124,10 +124,10 @@
 /turf/floor/tiled/dark/brown_perforated,
 /area/outpost/blacksite/large)
 "ci" = (
-/turf/wall/low/onestar,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/turf/wall/low/with_glass/onestar/reinf,
 /area/outpost/blacksite/large)
 "cr" = (
 /obj/machinery/door/airlock/centcom{
@@ -743,6 +743,10 @@
 	},
 /turf/floor/tiled/white/brown_perforated,
 /area/outpost/blacksite/large)
+"pP" = (
+/obj/effect/decal/cleanable/rubble,
+/turf/floor/tiled/derelict/white_small_edges,
+/area/outpost/blacksite/large)
 "qe" = (
 /obj/structure/table/rack/shelf,
 /obj/spawner/medical_lowcost/low_chance,
@@ -859,7 +863,7 @@
 /turf/floor/tiled/steel/bar_light,
 /area/outpost/blacksite/large)
 "tc" = (
-/turf/wall/low/onestar,
+/turf/wall/low/with_glass/onestar/reinf,
 /area/outpost/blacksite/large)
 "tg" = (
 /obj/spawner/toy/plushie,
@@ -965,7 +969,6 @@
 /turf/floor/tiled/dark/brown_perforated,
 /area/outpost/blacksite/large)
 "yv" = (
-/obj/machinery/dna_scannernew,
 /turf/floor/tiled/white/brown_platform,
 /area/outpost/blacksite/large)
 "yD" = (
@@ -1276,8 +1279,7 @@
 /turf/floor/tiled/white/brown_perforated,
 /area/outpost/blacksite/large)
 "HD" = (
-/obj/machinery/computer/scan_consolenew,
-/turf/floor/tiled/white/brown_platform,
+/turf/wall/low/with_glass/onestar,
 /area/outpost/blacksite/large)
 "HF" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -2458,7 +2460,7 @@ jH
 KI
 hN
 eO
-YZ
+pP
 YZ
 tc
 Ls
@@ -2594,9 +2596,9 @@ eO
 QS
 ZS
 jH
-tc
-tc
-tc
+HD
+HD
+HD
 jH
 ZS
 px
@@ -2790,9 +2792,9 @@ eO
 QS
 ZS
 jH
-tc
-tc
-tc
+HD
+HD
+HD
 jH
 ZS
 px
@@ -3206,15 +3208,15 @@ zL
 eO
 eO
 eO
-tc
-tc
+HD
+HD
 fV
 fV
-tc
-tc
+HD
+HD
 eO
 eO
-tc
+HD
 eO
 eO
 eO
@@ -3380,7 +3382,7 @@ BB
 Jv
 ii
 eO
-HD
+yv
 pH
 px
 px
