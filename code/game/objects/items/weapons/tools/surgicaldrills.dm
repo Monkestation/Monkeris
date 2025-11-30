@@ -1,7 +1,7 @@
 /obj/item/tool/surgicaldrill
 	name = "surgical drill"
 	desc = "You can drill using this item. You dig?"
-	icon_state = "drill"
+	icon_state = "surgical_drill"
 	hitsound = WORKSOUND_DRIVER_TOOL
 	worksound = WORKSOUND_DRIVER_TOOL
 	matter = list(MATERIAL_STEEL = 4, MATERIAL_PLASTIC = 2)

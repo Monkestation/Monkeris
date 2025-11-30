@@ -2,6 +2,7 @@
 	name = "Asters \"Munchkin 5000\""
 	desc = "A fuel powered monster of a tool. Its welding attachment is capable of welding things without an eye-damaging flash, so no eye protection is required."
 	icon_state = "omnitool"
+	item_state = "omnitool"
 	w_class = ITEM_SIZE_NORMAL
 	worksound = WORKSOUND_DRIVER_TOOL
 	switched_on_qualities = list(QUALITY_SCREW_DRIVING = 50, QUALITY_BOLT_TURNING = 50, QUALITY_DRILLING = 20, QUALITY_WELDING = 30, QUALITY_CAUTERIZING = 10)
@@ -15,6 +16,21 @@
 	max_upgrades = 2
 	rarity_value = 96
 	spawn_tags = SPAWN_TAG_TOOL_ADVANCED
+
+/obj/item/tool/omnitool/turn_on(mob/user)
+	.=..()
+	if(.)
+		playsound(loc, 'sound/items/welderactivate.ogg', 50, 1)
+		damtype = BURN
+		START_PROCESSING(SSobj, src)
+		item_state = "[initial(item_state)]_on"
+		update_wear_icon()
+
+/obj/item/tool/omnitool/turn_off(mob/user)
+	item_state = initial(item_state)
+	playsound(loc, 'sound/items/welderdeactivate.ogg', 50, 1)
+	..()
+	damtype = initial(damtype)
 
 /obj/item/tool/medmultitool
 	name = "One Star medmultitool"

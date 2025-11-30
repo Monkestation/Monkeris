@@ -223,6 +223,7 @@
 	gender = PLURAL
 	singular_name = "ointment"
 	icon_state = "ointment5"
+	item_state = "ointment"
 	heal_burn = 4
 	origin_tech = list(TECH_BIO = 1)
 	preloaded_reagents = list("silicon" = 4, "carbon" = 8)
