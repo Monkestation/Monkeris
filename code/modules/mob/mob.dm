@@ -1315,6 +1315,41 @@ All Canmove setting in this proc is temporary. This var should not be set from h
 /mob/proc/ssd_check()
 	return !client && !teleop
 
+
+/**
+ * Checks if there is enough light where the mob is located
+ *
+ * Args:
+ *  light_amount (optional) - A decimal amount between 1.0 through 0.0 (default is 0.2)
+**/
+/mob/proc/has_light_nearby(light_amount = LIGHTING_TILE_IS_DARK)
+	var/turf/mob_location = get_turf(src)
+	return mob_location.get_lumcount() > light_amount
+
+
+/// Returns if the user has night vision or not.
+/mob/proc/has_nightvision()
+	return !!get_active_mutation(src, MUTATION_NIGHT_VISION)
+
+/// This mob is able to read books
+/mob/proc/is_literate()
+	// I have no idea what to check here. There is no such thing as illiterate in this codebase but maybe in the future...
+	return TRUE
+
+/// Can this mob read
+/mob/proc/can_read(atom/viewed_atom, reading_check_flags = (READING_CHECK_LITERACY|READING_CHECK_LIGHT), silent = FALSE)
+	if((reading_check_flags & READING_CHECK_LITERACY) && !is_literate())
+		if(!silent)
+			to_chat(src, span_warning("You try to read [viewed_atom], but can't comprehend any of it."))
+		return FALSE
+
+	if((reading_check_flags & READING_CHECK_LIGHT) && !has_light_nearby() && !has_nightvision())
+		if(!silent)
+			to_chat(src, span_warning("It's too dark in here to read!"))
+		return FALSE
+
+	return TRUE
+
 /**
  * Get the mob VV dropdown extras
  */

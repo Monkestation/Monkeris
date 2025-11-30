@@ -84,7 +84,7 @@ const CentComName = (props) => {
           mt={1}
           value={command_name}
           placeholder={command_name}
-          onChange={(_, value) =>
+          onChange={(value) =>
             act('update_command_name', {
               updated_name: value,
             })
@@ -114,7 +114,7 @@ const SubHeader = (props) => {
         mt={1}
         value={subheader}
         placeholder={subheader}
-        onChange={(_, value) =>
+        onChange={(value) =>
           act('set_subheader', {
             new_subheader: value,
           })
@@ -215,7 +215,7 @@ const ReportText = (props) => {
       <TextArea
         height="200px"
         mb={1}
-        onInput={(_, value) => setCommandReport(value)}
+        onChange={(value) => setCommandReport(value)}
         value={commandReport}
       />
       <Stack vertical>

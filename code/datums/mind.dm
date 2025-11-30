@@ -69,6 +69,9 @@
 
 	var/creation_time = 0 //World time when this datum was New'd. Useful to tell how long since a character spawned
 
+	/// A list to keep track of which books a person has read (to prevent people from reading the same book again and again for positive mood events)
+	var/list/book_titles_read
+
 /datum/mind/New(key)
 	src.key = key
 	creation_time = world.time

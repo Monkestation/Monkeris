@@ -617,7 +617,7 @@
 			span_notice("You insert the power cell."))
 		chargecount = 0
 		update_icon()
-	else if (istype(I, /obj/item/card/id)||istype(I, /obj/item/modular_computer))
+	else if (isidcard(I)||istype(I, /obj/item/modular_computer))
 		toggle_lock(user)
 	else if (istype(I, /obj/item/stack/cable_coil) && !terminal && opened && has_electronics!=2)
 		var/turf/T = loc
