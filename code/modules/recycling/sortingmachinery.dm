@@ -222,7 +222,7 @@
 /obj/item/packageWrap
 	name = "package wrapper"
 	icon = 'icons/obj/items.dmi'
-	icon_state = "deliveryPaper"
+	icon_state = "deliverypaper"
 	w_class = ITEM_SIZE_NORMAL
 	spawn_tags = SPAWN_TAG_ITEM_UTILITY
 	rarity_value = 50
