@@ -366,8 +366,8 @@ BLIND     // can't see anything
 	name = "head"
 	icon = 'icons/inventory/head/icon.dmi'
 	item_icons = list(
-		slot_l_hand_str = 'icons/mob/items/lefthand_hats.dmi',
-		slot_r_hand_str = 'icons/mob/items/righthand_hats.dmi',
+		slot_l_hand_str = 'icons/mob/inhands/lefthand_hats.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/righthand_hats.dmi',
 		)
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
@@ -597,8 +597,8 @@ BLIND     // can't see anything
 /obj/item/clothing/under
 	icon = 'icons/inventory/uniform/icon.dmi'
 	item_icons = list(
-		slot_l_hand_str = 'icons/mob/items/lefthand_uniforms.dmi',
-		slot_r_hand_str = 'icons/mob/items/righthand_uniforms.dmi',
+		slot_l_hand_str = 'icons/mob/inhands/clothing_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/clothing_righthand.dmi',
 		)
 	name = "jumpsuit"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS

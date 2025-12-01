@@ -9,8 +9,8 @@
 	icon_state = "crossbow"
 	item_state = "crossbow"
 	item_icons = list(
-		icon_l_hand = 'icons/mob/items/lefthand_guns.dmi',
-		icon_r_hand = 'icons/mob/items/righthand_guns.dmi',
+		icon_l_hand = 'icons/mob/inhands/weapons/guns_lefthand.dmi',
+		icon_r_hand = 'icons/mob/inhands/weapons/guns_righthand.dmi',
 		)
 	w_class = ITEM_SIZE_SMALL
 	matter = list(MATERIAL_PLASTIC = 2)
