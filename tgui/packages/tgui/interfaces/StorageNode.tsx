@@ -6,7 +6,6 @@ import {
   Collapsible,
   Divider,
   Dropdown,
-  Input,
   LabeledList,
   NumberInput,
 } from 'tgui-core/components';
@@ -284,12 +283,13 @@ const Administration = (props: AdministrationProps) => {
       )}
       {<LabeledList.Item label="Account">{accountname}</LabeledList.Item>}
       {authorization && (
-        <Input
+        <NumberInput
+          minValue={0}
+          maxValue={99999999}
+          step={1}
           value={newaccount}
-          onInput={(e, value: string) => {
-            if (Number.isInteger(Number(value))) {
-              setAccount(Number(value));
-            }
+          onChange={(value) => {
+            setAccount(value);
           }}
         />
       )}
