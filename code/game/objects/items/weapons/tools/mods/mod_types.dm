@@ -163,6 +163,7 @@
 	name = "red paint"
 	desc = "Do red tools really work faster, or is the effect purely psychological?"
 	icon_state = "paint_red"
+	item_state = "paintcan"
 	rarity_value = 20
 	spawn_tags = SPAWN_TAG_TOOL_UPGRADE_RARE
 	matter = list(MATERIAL_STEEL = 3, MATERIAL_PLASTIC = 1)
