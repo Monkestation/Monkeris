@@ -117,6 +117,7 @@
 	singular_name = "gauze length"
 	desc = "Some sterile gauze to wrap around bloody stumps."
 	icon_state = "brutepack"
+	item_state = "brutepack"
 	origin_tech = list(TECH_BIO = 1)
 	heal_brute = 4
 	preloaded_reagents = list("silicon" = 4, "ethanol" = 8)
