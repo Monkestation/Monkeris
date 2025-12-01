@@ -297,7 +297,6 @@
 	slot_flags = SLOT_EARS
 	matter = list(MATERIAL_STEEL = 1, MATERIAL_PLASTIC = 1)
 
-
 ///////////////////////////////////////////////////////////////////////
 //Glasses
 /*
