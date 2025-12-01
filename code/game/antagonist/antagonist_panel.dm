@@ -65,7 +65,7 @@
 				MN["CANCEL"] = null
 
 				var/datum/mind/M = input("Select mind for role.","Add antagonist",null) in MN
-				if(M)
+				if(isdatum(M))
 					create_antagonist(M)
 			else
 				var/list/CD = list()
@@ -75,7 +75,7 @@
 				CD["CANCEL"] = null
 
 				var/mob/M = input("Select ghost for role.","Add antagonist",null) in CD
-				if(M)
+				if(ismob(M))
 					create_from_ghost(M)
 
 	else if(href_list["remove_antagonist"])

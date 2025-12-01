@@ -131,6 +131,13 @@
 				patchnote.surgery_operations &= ~AUTODOC_DIALYSIS
 
 		else if (patchnote.surgery_operations & AUTODOC_BLOOD)
+			if (patient.species && patient.species.flags & NO_BLOOD)
+				to_chat(patient, span_warning("Unable to administer blood, patients species is not capabale of taking blood."))
+				return
+			if (!length(patient.vessel.reagent_list))
+				// this bih aint go NO blood
+				to_chat(patient, span_warning("Unable to administer blood, has no blood and should be dead."))
+				return
 			to_chat(patient, span_notice("Administering blood IV to patient."))
 			var/datum/reagent/organic/blood/blood = patient.vessel.reagent_list[1]
 			blood.volume = min(blood.volume + damage_heal_amount, patient.vessel.maximum_volume)

@@ -173,7 +173,7 @@
 	return ..()
 
 /proc/can_select_ooc_color(mob/user)
-	return CONFIG_GET(flag/allow_admin_ooccolor) && check_rights(R_ADMIN, 0, user)
+	return CONFIG_GET(flag/allow_admin_ooccolor) && check_rights_for(user, R_ADMIN)
 
 /proc/can_select_asay_color(mob/user)
-	return CONFIG_GET(flag/allow_admin_asaycolor) && check_rights(R_ADMIN, 0, user)
+	return CONFIG_GET(flag/allow_admin_asaycolor) && check_rights_for(user, R_ADMIN)

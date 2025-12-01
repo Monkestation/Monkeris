@@ -28,7 +28,9 @@ GLOBAL_DATUM_INIT(default_state, /datum/nano_topic_state/default, new)
 		return
 
 	// robots can interact with things they can see within their view range
-	if((src_object in view(src)) && get_dist(src_object, src) <= src.client.view)
+	var/distance = get_dist(src_object, src)
+	var/list/client_view_size = getviewsize(src.client.view)
+	if((src_object in view(src)) && distance <= client_view_size[1] && distance <= client_view_size[2])
 		return STATUS_INTERACTIVE	// interactive (green visibility)
 	return STATUS_DISABLED			// no updates, completely disabled (red visibility)
 
@@ -40,7 +42,8 @@ GLOBAL_DATUM_INIT(default_state, /datum/nano_topic_state/default, new)
 	// Prevents the AI from using Topic on admin levels (by for example viewing through the court/thunderdome cameras)
 	// unless it's on the same level as the object it's interacting with.
 	var/turf/T = get_turf(src_object)
-	if(!T || !(z == T.z || isPlayerLevel(T.z)))
+	var/turf/A = get_turf(src)
+	if(!A || !T || !AreConnectedZLevels(A.z, T.z))
 		return STATUS_CLOSE
 
 	// If an object is in view then we can interact with it
@@ -58,7 +61,16 @@ GLOBAL_DATUM_INIT(default_state, /datum/nano_topic_state/default, new)
 
 	return STATUS_CLOSE
 
-//Some atoms such as vehicles might have special rules for how mobs inside them interact with NanoUI.
+/**
+ * Handles additional special checks for whether or not NanoUI interactions are valid. Some atoms such as vehicles might
+ * have special rules for how mobs inside them interact with NanoUI.
+ *
+ * **Parameters**:
+ * - `src_object` - The original object being interacted with.
+ * - `user` - The mob attempting the interaction.
+ *
+ * Returns int (One of `STATUS_*`).
+ */
 /atom/proc/contents_nano_distance(src_object, mob/living/user)
 	return user.shared_living_nano_distance(src_object)
 

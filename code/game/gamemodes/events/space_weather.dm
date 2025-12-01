@@ -224,29 +224,32 @@
 
 /datum/event/graveyard/tick()
 	if(!(activeFor % 50))		// Every 50th tick
-		switch(rand(1,3))
-			if(1) //random broadcasts
-				var/message = pick("They are ", "He is ", "All of them are ", "I'm ", "We are ")
-				message += pick("going to die... ", "about to turn into those spider mutants... ", "being forcefully converted... ")
-				message += pick("Run while you still can.", "Help!", "Angels bless our souls...", "It's... too late.")
+		broadcast()
 
-				GLOB.announcer.autosay(message, "Emergency Broadcast")
-			if(2) //predetermined broadcasts
-				var/message_list = list(
-					"Blessed Angels, guide us to safety!",
-					"Comrades, we have captured the last survivors on this wreck. Expecting extraction at-",
-					"Whoever hears this, RUN WHILE YOU STILL CAN!",
-					"We are barely managing to keep this place safe. Please, whoever recieves this signal, pick us up at-",
-					"Our food and water supplies are going to run out soon. We have money. Just help us, anyone, please...",
-					"TO ANYONE STILL LOYAL LEFT, WE MAKE OUR FINAL STAND IN THE CONTROL ROOM.",
-					"Weld the vents. Weld The vents! WELD THE VENTS!!",
-					"Security is... All gone. With medical bay soon to follow. These abominations know nothing but hunger, consumed most of our crew, and yet they remain unsatiated... Do not try to help in any way. This station is a lost cause."
-				)
+/datum/event/graveyard/proc/broadcast()
+	switch(rand(1,3))
+		if(1) //random broadcasts
+			var/message = pick("They are ", "He is ", "All of them are ", "I'm ", "We are ")
+			message += pick("going to die... ", "about to turn into those spider mutants... ", "being forcefully converted... ")
+			message += pick("Run while you still can.", "Help!", "Angels bless our souls...", "It's... too late.")
 
-				GLOB.announcer.autosay(pick(message_list), "Emergency Broadcast")
-			if(3) //sekrit stuf
-				if(prob(2))
-					GLOB.announcer.autosay("Man, all those people really suck. Just don't get hit and beat everything until it dies.", "Emergency Broadcast")
+			GLOB.announcer.autosay(message, "Emergency Broadcast")
+		if(2) //predetermined broadcasts
+			var/message_list = list(
+				"Blessed Angels, guide us to safety!",
+				"Comrades, we have captured the last survivors on this wreck. Expecting extraction at-",
+				"Whoever hears this, RUN WHILE YOU STILL CAN!",
+				"We are barely managing to keep this place safe. Please, whoever recieves this signal, pick us up at-",
+				"Our food and water supplies are going to run out soon. We have money. Just help us, anyone, please...",
+				"TO ANYONE STILL LOYAL LEFT, WE MAKE OUR FINAL STAND IN THE CONTROL ROOM.",
+				"Weld the vents. Weld The vents! WELD THE VENTS!!",
+				"Security is... All gone. With medical bay soon to follow. These abominations know nothing but hunger, consumed most of our crew, and yet they remain unsatiated... Do not try to help in any way. This station is a lost cause."
+			)
+
+			GLOB.announcer.autosay(pick(message_list), "Emergency Broadcast")
+		if(3) //sekrit stuf
+			if(prob(2))
+				GLOB.announcer.autosay("Man, all those people really suck. Just don't get hit and beat everything until it dies.", "Emergency Broadcast")
 
 /datum/event/graveyard/end()
 	priority_announce("The station wrecks have moved away from the ship.", "Space Graveyard")
