@@ -13,8 +13,8 @@
 /datum/sanity/proc/effect_sound()
 	var/sound/S = pick_sound()
 	if(islist(S))
-		to_chat(owner,span_danger(S[2]))
-		S = S[1]
+		to_chat(owner,span_danger(astype(S, /list)[2]))
+		S = astype(S,/list)[1]
 	owner.playsound_local(owner, S, 50, 0, 8, null, 8)
 
 /datum/sanity/proc/effect_whisper()

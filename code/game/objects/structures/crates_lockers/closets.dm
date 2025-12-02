@@ -311,7 +311,7 @@
 
 // this should probably use dump_contents()
 
-/obj/structure/closet/explosion_act(target_power, explosion_handler/handler)
+/obj/structure/closet/explosion_act(target_power, datum/explosion_handler/handler)
 	if(target_power > health)
 		for(var/atom/movable/A as mob|obj in src)//pulls everything out of the locker and hits it with an explosion
 			A.explosion_act(target_power - health, handler)

@@ -380,7 +380,7 @@ var/list/comet_mini = list(\
 		meteor_effect()
 		qdel(src)
 
-/obj/effect/meteor/explosion_act(target_power, explosion_handler/handler)
+/obj/effect/meteor/explosion_act(target_power, datum/explosion_handler/handler)
 	return 0
 
 /obj/effect/meteor/attackby(obj/item/W as obj, mob/user as mob, params)

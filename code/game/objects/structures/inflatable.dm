@@ -74,7 +74,7 @@
 	return
 
 
-/obj/structure/inflatable/explosion_act(target_power, explosion_handler/handler)
+/obj/structure/inflatable/explosion_act(target_power, datum/explosion_handler/handler)
 	var/absorbed = take_damage(target_power)
 	return absorbed
 

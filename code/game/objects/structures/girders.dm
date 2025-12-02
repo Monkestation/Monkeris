@@ -210,7 +210,7 @@
 		. = damage
 	. *= explosion_coverage
 
-/obj/structure/girder/explosion_act(target_power, explosion_handler/handler)
+/obj/structure/girder/explosion_act(target_power, datum/explosion_handler/handler)
 	var/absorbed = take_damage(target_power)
 	return absorbed
 

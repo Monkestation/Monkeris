@@ -159,7 +159,7 @@ GLOBAL_LIST_EMPTY(explosion_watcher_list)
 
 	channels = list("Science" = 1)
 
-/obj/item/device/radio/beacon/explosion_watcher/explosion_act(target_power, explosion_handler/handler)
+/obj/item/device/radio/beacon/explosion_watcher/explosion_act(target_power, datum/explosion_handler/handler)
 	return 0
 
 

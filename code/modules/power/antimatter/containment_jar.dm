@@ -14,7 +14,7 @@
 	var/fuel_max = 10000//Lets try this for now
 	var/stability = 100//TODO: add all the stability things to this so its not very safe if you keep hitting in on things
 
-/obj/item/am_containment/explosion_act(target_power, explosion_handler/handle)
+/obj/item/am_containment/explosion_act(target_power, datum/explosion_handler/handle)
 	take_damage(target_power)
 	return 0
 
