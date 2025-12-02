@@ -193,7 +193,7 @@
 	if(health <= 0)
 		qdel(src)
 
-/obj/item/explosion_act(target_power, explosion_handler/handler)
+/obj/item/explosion_act(target_power, datum/explosion_handler/handler)
 	take_damage(target_power)
 	return 0
 

@@ -145,7 +145,7 @@
 	..()
 	healthcheck()
 
-/obj/vehicle/explosion_act(target_power, explosion_handler/handler)
+/obj/vehicle/explosion_act(target_power, datum/explosion_handler/handler)
 	health -= rand(5,10)*fire_dam_coeff
 	health -= rand(10,20)*brute_dam_coeff
 	healthcheck()

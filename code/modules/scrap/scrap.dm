@@ -80,7 +80,7 @@ GLOBAL_LIST_EMPTY(scrap_base_cache)
 				projectile.throw_at(locate(loc.x + rand(10) - 5, loc.y + rand(10) - 5, loc.z), 3, 1)
 	return INITIALIZE_HINT_QDEL
 
-/obj/structure/scrap_spawner/explosion_act(target_power, explosion_handler/handler)
+/obj/structure/scrap_spawner/explosion_act(target_power, datum/explosion_handler/handler)
 	if(target_power > 300)
 		new /obj/effect/scrapshot(src.loc, 2)
 	else

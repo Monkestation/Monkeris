@@ -337,7 +337,7 @@
 		update_icon()
 
 
-/turf/wall/explosion_act(target_power, explosion_handler/handler)
+/turf/wall/explosion_act(target_power, datum/explosion_handler/handler)
 	if(!is_simulated)
 		return 0
 	var/absorbed = take_damage(target_power)

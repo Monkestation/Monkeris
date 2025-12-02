@@ -199,7 +199,7 @@
 
 		if(!istype(Proj ,/obj/item/projectile/beam/lastertag) && !istype(Proj ,/obj/item/projectile/beam/practice) )
 			explode()
-/obj/structure/reagent_dispensers/fueltank/explosion_act(target_power, explosion_handler/handle)
+/obj/structure/reagent_dispensers/fueltank/explosion_act(target_power, datum/explosion_handler/handle)
 	if(target_power > health)
 		explode()
 	else

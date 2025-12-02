@@ -100,7 +100,7 @@
 /obj/machinery/computer/shuttle_control/bullet_act(obj/item/projectile/Proj)
 	visible_message("\The [Proj] ricochets off \the [src]!")
 
-/obj/machinery/computer/shuttle_control/explosion_act(target_power, explosion_handler/handler)
+/obj/machinery/computer/shuttle_control/explosion_act(target_power, datum/explosion_handler/handler)
 	return 0
 
 /obj/machinery/computer/shuttle_control/emp_act()

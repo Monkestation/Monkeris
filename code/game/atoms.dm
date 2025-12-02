@@ -474,7 +474,7 @@
  * overlays and other visual stuff as much as possible , since they cause massive time delays
  * in explosion processing.
  */
-/atom/proc/explosion_act(target_power, explosion_handler/handler)
+/atom/proc/explosion_act(target_power, datum/explosion_handler/handler)
 	return 0
 
 /atom/proc/emag_act(remaining_charges, mob/user, emag_source)

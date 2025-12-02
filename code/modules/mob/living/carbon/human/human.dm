@@ -174,7 +174,7 @@
 		return
 	..(duration, drop_items, doblind, doblurry)
 
-/mob/living/carbon/human/explosion_act(target_power, explosion_handler/handle)
+/mob/living/carbon/human/explosion_act(target_power, datum/explosion_handler/handle)
 	var/BombDamage = target_power - (getarmor(null, ARMOR_BOMB) + mob_bomb_defense)
 	var/obj/item/rig/hardsuitChad = back
 	if(back && istype(hardsuitChad))

@@ -141,7 +141,7 @@
 	ACT PROCS
 **************/
 
-/obj/effect/plant/explosion_act(target_power, explosion_handler/handler)
+/obj/effect/plant/explosion_act(target_power, datum/explosion_handler/handler)
 	if(target_power > 100)
 		die_off()
 	else

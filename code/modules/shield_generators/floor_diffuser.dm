@@ -118,5 +118,5 @@
 		extra_description += "\nA red LED labeled \"Proximity Alarm\" is blinking on the control panel."
 	..(user, extra_description)
 
-/obj/machinery/shield_diffuser/explosion_act(target_power, explosion_handler/handler)
+/obj/machinery/shield_diffuser/explosion_act(target_power, datum/explosion_handler/handler)
 	return 0

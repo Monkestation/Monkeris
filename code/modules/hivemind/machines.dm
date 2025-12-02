@@ -292,7 +292,7 @@
 			damage_reaction()
 			stun(10)
 
-/obj/machinery/hivemind_machine/explosion_act(target_power, explosion_handler/handler)
+/obj/machinery/hivemind_machine/explosion_act(target_power, datum/explosion_handler/handler)
 	take_damage(round(target_power / 10))
 	return 0
 

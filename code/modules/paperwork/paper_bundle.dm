@@ -165,16 +165,16 @@
 
 			to_chat(usr, span_notice("You remove the [W.name] from the bundle."))
 
-			if(pages.len <= 1)
-				var/obj/item/paper/P = src[1]
+			if(length(pages) <= 1)
+				var/obj/item/paper/P = src.contents[1]
 				usr.drop_from_inventory(src)
 				usr.put_in_hands(P)
 				qdel(src)
 
 				return
 
-			if(page > pages.len)
-				page = pages.len
+			if(page > length(pages.len))
+				page = length(pages.len)
 
 			update_icon()
 	else

@@ -100,7 +100,7 @@
 	..()
 	return 0
 
-/obj/machinery/power/am_control_unit/explosion_act(target_power, explosion_handler/handler)
+/obj/machinery/power/am_control_unit/explosion_act(target_power, datum/explosion_handler/handler)
 	stability -= target_power / 10
 	check_stability()
 	return target_power

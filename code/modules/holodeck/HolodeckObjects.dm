@@ -10,7 +10,7 @@
 	return
 	// HOLOFLOOR DOES NOT GIVE A FUCK
 
-/turf/floor/holofloor/explosion_act(target_power, explosion_handler/handler)
+/turf/floor/holofloor/explosion_act(target_power, datum/explosion_handler/handler)
 	if(target_power > 800) //No fucks otherwise
 		take_damage(target_power / 2, BLAST)
 	return 0

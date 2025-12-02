@@ -46,7 +46,7 @@
 
 /turf/mineral/is_plating()
 	return TRUE
-/turf/mineral/explosion_act(target_power, explosion_handler/handler)
+/turf/mineral/explosion_act(target_power, datum/explosion_handler/handler)
 	. = ..()
 	if(src && target_power > 75)
 		mined_ore = 1
@@ -214,7 +214,7 @@
 		updateMineralOverlays(1)
 	seismic_activity = rand(1,6)
 
-/turf/floor/asteroid/explosion_act(target_power, explosion_handler/handler)
+/turf/floor/asteroid/explosion_act(target_power, datum/explosion_handler/handler)
 	. = ..()
 	if(src && target_power > 50)
 		gets_dug()

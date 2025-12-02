@@ -255,7 +255,7 @@
 		for (var/obj/effect/blob/B in blob_neighbors)
 			B.set_awake()
 
-/obj/effect/blob/explosion_act(target_power, explosion_handler/handle)
+/obj/effect/blob/explosion_act(target_power, datum/explosion_handler/handle)
 	take_damage(round(target_power / brute_resist))
 	return 0
 

@@ -23,7 +23,7 @@
 	update_nearby_tiles()
 	. = ..()
 
-/obj/effect/energy_field/explosion_act(target_power, explosion_handler/handler)
+/obj/effect/energy_field/explosion_act(target_power, datum/explosion_handler/handler)
 	Stress(0.5 + target_power / 100)
 	return 0
 

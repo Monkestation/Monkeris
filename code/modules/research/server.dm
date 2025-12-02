@@ -63,7 +63,7 @@
 	griefProtection()
 	..()
 
-/obj/machinery/r_n_d/server/explosion_act(target_power, explosion_handler/handler)
+/obj/machinery/r_n_d/server/explosion_act(target_power, datum/explosion_handler/handler)
 	griefProtection()
 	. = ..()
 

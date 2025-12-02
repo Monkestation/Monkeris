@@ -213,7 +213,7 @@
 	if (charge < 0)
 		charge = 0
 	..()
-/obj/item/cell/explosion_act(target_power, explosion_handler/handle)
+/obj/item/cell/explosion_act(target_power, datum/explosion_handler/handle)
 	take_damage(target_power)
 	return 0
 

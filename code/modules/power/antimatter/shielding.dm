@@ -86,7 +86,7 @@
 /obj/machinery/am_shielding/emp_act()//Immune due to not really much in the way of electronics.
 	return FALSE
 
-/obj/machinery/am_shielding/explosion_act(target_power, explosion_handler/handler)
+/obj/machinery/am_shielding/explosion_act(target_power, datum/explosion_handler/handler)
 	stability -= target_power / 10
 	check_stability()
 	return  0

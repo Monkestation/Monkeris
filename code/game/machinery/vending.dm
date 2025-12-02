@@ -296,7 +296,7 @@
 	if(amount > 50)
 		malfunction()
 
-/obj/machinery/vending/explosion_act(target_power, explosion_handler/handler)
+/obj/machinery/vending/explosion_act(target_power, datum/explosion_handler/handler)
 	// Blocks 60% at most
 	return round(take_damage(target_power) * 0.6)
 

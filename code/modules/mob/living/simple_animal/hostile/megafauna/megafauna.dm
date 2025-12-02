@@ -67,7 +67,7 @@
 	L.gib()
 	return TRUE
 
-/mob/living/simple_animal/hostile/megafauna/explosion_act(target_power, explosion_handler/handle)
+/mob/living/simple_animal/hostile/megafauna/explosion_act(target_power, datum/explosion_handler/handle)
 	adjustBruteLoss(target_power / 3)
 	return health
 
