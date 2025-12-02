@@ -394,6 +394,10 @@ if(!N.lighthack)
 	icon = 'icons/obj/discs.dmi'
 	icon_state = "nuclear"
 	item_state = "card-id"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/idcards_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/idcards_lefthand.dmi',
+		)
 	w_class = ITEM_SIZE_TINY
 
 /obj/item/disk/nuclear/touch_map_edge()
