@@ -3,6 +3,10 @@
 	siemens_coefficient = 0.9
 	item_flags = DRAG_AND_DROP_UNEQUIP
 	bad_type = /obj/item/clothing
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/clothing_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/clothing_righthand.dmi',
+		)
 	rarity_value = 5
 	spawn_frequency = 10
 	spawn_tags = SPAWN_TAG_CLOTHING
@@ -595,10 +599,6 @@ BLIND     // can't see anything
 //Under clothing
 /obj/item/clothing/under
 	icon = 'icons/inventory/uniform/icon.dmi'
-	item_icons = list(
-		slot_l_hand_str = 'icons/mob/inhands/equipment/clothing_lefthand.dmi',
-		slot_r_hand_str = 'icons/mob/inhands/equipment/clothing_righthand.dmi',
-		)
 	name = "jumpsuit"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	permeability_coefficient = 0.90
