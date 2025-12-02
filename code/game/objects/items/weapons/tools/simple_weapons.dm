@@ -41,6 +41,10 @@
 	desc = "A very sharp axe blade upon a short fibremetal handle. It has a long history of chopping things, but now it is used for chopping wood."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "hatchet"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/hydroponics_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/hydroponics_righthand.dmi',
+		)
 	matter = list(MATERIAL_STEEL = 4, MATERIAL_PLASTIC = 3)
 	worksound = WORKSOUND_HARD_SLASH
 	force = WEAPON_FORCE_PAINFUL
@@ -114,6 +118,10 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "hoe"
 	item_state = "hoe"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/hydroponics_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/hydroponics_righthand.dmi',
+		)
 	matter = list(MATERIAL_PLASTEEL = 2, MATERIAL_PLASTIC = 2)
 	force = WEAPON_FORCE_WEAK
 	throwforce = WEAPON_FORCE_WEAK
