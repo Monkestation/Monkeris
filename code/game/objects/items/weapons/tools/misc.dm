@@ -78,6 +78,11 @@
 	desc = "A jury-rigged implant, holding cobbled-together tools. For those who are more interested in tool carrying than scared of tetanus."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "multitool_improvised"
+	item_state = "toolbox_blue"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/toolbox_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/toolbox_righthand.dmi',
+		)
 	force = WEAPON_FORCE_PAINFUL
 	switched_on_force = WEAPON_FORCE_PAINFUL * 0.8
 	worksound = WORKSOUND_DRIVER_TOOL
