@@ -4,6 +4,10 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "red"
 	item_state = "toolbox_red"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/toolbox_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/toolbox_righthand.dmi',
+		)
 	flags = CONDUCT
 	force = WEAPON_FORCE_PAINFUL
 	structure_damage_factor = STRUCTURE_DAMAGE_BLUNT
