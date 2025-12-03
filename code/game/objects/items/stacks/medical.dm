@@ -118,6 +118,10 @@
 	desc = "Some sterile gauze to wrap around bloody stumps."
 	icon_state = "brutepack"
 	item_state = "brutepack"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/medical_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/medical_righthand.dmi',
+		)
 	origin_tech = list(TECH_BIO = 1)
 	heal_brute = 4
 	preloaded_reagents = list("silicon" = 4, "ethanol" = 8)
@@ -216,6 +220,7 @@
 	singular_name = "non sterile bandage"
 	desc = "Parts of clothes that can be wrapped around bloody stumps."
 	icon_state = "hm_brutepack"
+	item_state = "hm_brutepack"
 	spawn_blacklisted = TRUE
 
 /obj/item/stack/medical/ointment
@@ -225,6 +230,10 @@
 	singular_name = "ointment"
 	icon_state = "ointment5"
 	item_state = "ointment"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/medical_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/medical_righthand.dmi',
+		)
 	heal_burn = 4
 	origin_tech = list(TECH_BIO = 1)
 	preloaded_reagents = list("silicon" = 4, "carbon" = 8)
