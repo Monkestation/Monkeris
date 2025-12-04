@@ -6,6 +6,11 @@
 	desc = "Pinpoints your location using the ship navigation system."
 	icon = 'icons/obj/telescience.dmi'
 	icon_state = "gps-c"
+	item_state = "electronic"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
 	//item_state = "locator"
 
 	w_class = ITEM_SIZE_SMALL
