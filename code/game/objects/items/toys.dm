@@ -35,6 +35,10 @@
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "waterballoon-e"
 	item_state = "balloon-empty"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/balloons_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/balloons_righthand.dmi',
+		)
 	preloaded_reagents = list()
 
 /obj/item/toy/balloon/New()
