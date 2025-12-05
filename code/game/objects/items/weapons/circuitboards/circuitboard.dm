@@ -15,6 +15,10 @@
 	icon = 'icons/obj/module.dmi'
 	icon_state = "id_mod"
 	item_state = "electronic"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
 	origin_tech = list(TECH_DATA = 2)
 	matter = list(MATERIAL_PLASTIC = 2, MATERIAL_STEEL = 2)
 	matter_reagents = list("silicon" = 10)

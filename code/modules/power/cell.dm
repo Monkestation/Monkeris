@@ -9,6 +9,10 @@
 	icon = 'icons/obj/power_cells.dmi'
 	icon_state = "b_st"
 	item_state = "cell"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
 	origin_tech = list(TECH_POWER = 1)
 	force = WEAPON_FORCE_WEAK
 	throwforce = WEAPON_FORCE_WEAK

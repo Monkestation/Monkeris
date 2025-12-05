@@ -18,7 +18,11 @@ var/global/list/robot_modules = list(
 	icon = 'icons/obj/module.dmi'
 	icon_state = "std_module"
 	w_class = 100
-	item_state = "electronic"
+	item_state = "electronic"\
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
 	flags = CONDUCT
 	bad_type = /obj/item/robot_module
 	var/hide_on_manifest = FALSE

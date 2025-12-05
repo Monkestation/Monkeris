@@ -30,6 +30,10 @@ var/global/list/default_medbay_channels = list(
 	suffix = "\[3\]"
 	icon_state = "walkietalkie"
 	item_state = "radio"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throw_speed = 2
