@@ -3,6 +3,10 @@
 	desc = "A device used to project your voice. Loudly."
 	icon_state = "megaphone"
 	item_state = "megaphone"
+	item_icons = list(
+		slot_l_hand_str =  'icons/mob/inhands/lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/righthand.dmi',
+		)
 	matter = list(MATERIAL_PLASTIC = 2, MATERIAL_GLASS = 1)
 	w_class = ITEM_SIZE_SMALL
 	flags = CONDUCT
