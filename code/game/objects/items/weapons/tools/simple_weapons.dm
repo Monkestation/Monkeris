@@ -10,6 +10,10 @@
 	force = WEAPON_FORCE_PAINFUL
 	throwforce = WEAPON_FORCE_WEAK
 	item_state = "beer"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/food_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/food_righthand.dmi',
+		)
 	attack_verb = list("stabbed", "slashed", "attacked")
 	sharp = TRUE
 	edge = FALSE

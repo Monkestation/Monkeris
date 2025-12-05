@@ -6,6 +6,10 @@
 	name = "snack"
 	desc = "yummy"
 	icon = 'icons/obj/food.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/food_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/food_righthand.dmi',
+		)
 	icon_state = null
 	center_of_mass = list("x"=16, "y"=16)
 	w_class = ITEM_SIZE_SMALL
@@ -714,6 +718,11 @@
 	name = "egg"
 	desc = "An egg."
 	icon_state = "egg"
+	item_state = "egg"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/food_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/food_righthand.dmi',
+		)
 	filling_color = "#FDFFD1"
 	volume = 10
 	center_of_mass = list("x"=16, "y"=13)
@@ -806,6 +815,7 @@
 	name = "fried egg"
 	desc = "A fried egg with a touch of salt and pepper."
 	icon_state = "friedegg"
+	item_state = "egg"
 	filling_color = "#FFDF78"
 	bitesize = 1
 	center_of_mass = list("x"=16, "y"=14)
@@ -982,6 +992,7 @@
 	name = "brainburger"
 	desc = "A strange looking burger. It looks almost sentient."
 	icon_state = "brainburger"
+	item_state = "burger"
 	filling_color = "#F2B6EA"
 	center_of_mass = list("x"=15, "y"=11)
 	preloaded_reagents = list("protein" = 6, "alkysine" = 6)
@@ -998,6 +1009,7 @@
 	name = "'burger'"
 	desc = "A bloody burger."
 	icon_state = "hburger"
+	item_state = "burger"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=11)
 	preloaded_reagents = list("protein" = 6)
@@ -1007,6 +1019,7 @@
 	name = "cheeseburger"
 	desc = "The cheese adds a good flavor."
 	icon_state = "cheeseburger"
+	item_state = "burger"
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_desc = list("cheese" = 2, "bun" = 2)
 	nutriment_amt = 2
@@ -1018,6 +1031,7 @@
 	name = "burger"
 	desc = "The cornerstone of every nutritious breakfast."
 	icon_state = "hburger"
+	item_state = "burger"
 	filling_color = "#D63C3C"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=11)
@@ -1031,6 +1045,7 @@
 	name = "fillet -o- carp sandwich"
 	desc = "Almost like a carp is yelling somewhere... Give me back that fillet -o- carp, give me that carp."
 	icon_state = "fishburger"
+	item_state = "burger"
 	filling_color = "#FFDEFE"
 	bitesize = 3
 	center_of_mass = list("x"=16, "y"=10)
@@ -1042,6 +1057,7 @@
 	name = "tofu burger"
 	desc = "What.. is that meat?"
 	icon_state = "tofuburger"
+	item_state = "burger"
 	filling_color = "#FFFEE0"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=10)
@@ -1054,6 +1070,7 @@
 	name = "roburger"
 	desc = "The lettuce is the only organic component. Beep."
 	icon_state = "roburger"
+	item_state = "burger"
 	filling_color = "#CCCCCC"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=11)
@@ -1070,6 +1087,7 @@
 	name = "roburger"
 	desc = "This massive patty looks like poison. Beep."
 	icon_state = "roburger"
+	item_state = "burger"
 	filling_color = "#CCCCCC"
 	bitesize = 0.1
 	volume = 100
@@ -1081,6 +1099,7 @@
 	name = "xenoburger"
 	desc = "Smells caustic. Tastes like heresy."
 	icon_state = "xburger"
+	item_state = "burger"
 	filling_color = "#43DE18"
 	center_of_mass = list("x"=16, "y"=11)
 	preloaded_reagents = list("protein" = 8)
@@ -1091,6 +1110,7 @@
 	name = "clown burger"
 	desc = "This tastes funny..."
 	icon_state = "clownburger"
+	item_state = "burger"
 	filling_color = "#FF00FF"
 	bitesize = 2
 	center_of_mass = list("x"=17, "y"=12)
@@ -1101,6 +1121,7 @@
 	name = "mime burger"
 	desc = "Its taste defies language."
 	icon_state = "mimeburger"
+	item_state = "burger"
 	filling_color = "#FFFFFF"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=11)
@@ -1111,6 +1132,7 @@
 	name = "kampfer burger"
 	desc = "Tasty but it's a bit of a struggle to get it down"
 	icon_state = "kampferburger"
+	item_state = "burger"
 	bitesize = 1
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_desc = list("bun" = 2)
@@ -1124,6 +1146,7 @@
 	name = "panzer burger"
 	desc = "Surprisingly heavy but seems to be made up of mostly shell"
 	icon_state = "panzerburger"
+	item_state = "burger"
 	bitesize = 3
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_desc = list("bun" = 2)
@@ -1137,6 +1160,7 @@
 	name = "jager burger"
 	desc = "The hunter becomes the hunted"
 	icon_state = "jagerburger"
+	item_state = "burger"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_desc = list("bun" = 2)
@@ -1150,6 +1174,7 @@
 	name = "seuche burger"
 	desc = "The Burger that anti vaxxers love"
 	icon_state = "seucheburger"
+	item_state = "burger"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_desc = list("bun" = 2)
@@ -1163,6 +1188,7 @@
 	name = "big roach burger"
 	desc = "Delicious finally some good food"
 	icon_state = "bigroachburger"
+	item_state = "burger"
 	bitesize = 3
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_desc = list("bun" = 2)
@@ -1176,6 +1202,7 @@
 	name = "fuhrer burger"
 	desc = "Its inability to take criticism makes this  one of the worst tasting burgers in existence"
 	icon_state = "fuhrerburger"
+	item_state = "burger"
 	bitesize = 3
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_desc = list("bun" = 2)
@@ -1189,6 +1216,7 @@
 	name = "kaiser burger"
 	desc = "The rare experience for your taste buds"
 	icon_state = "kaiserburger"
+	item_state = "burger"
 	bitesize = 3
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_desc = list("bun" = 2)
@@ -1202,6 +1230,7 @@
 	name = "worm burger"
 	desc = "Ew, are they alive?"
 	icon_state = "wburger"
+	item_state = "burger"
 	filling_color = "#D63C3C"
 	bitesize = 4
 	center_of_mass = list("x"=16, "y"=11)
@@ -1223,6 +1252,7 @@
 	name = "flesh burger"
 	desc = "It is writhing around..."
 	icon_state = "gburger"
+	item_state = "burger"
 	filling_color = "#D63C3C"
 	bitesize = 4
 	center_of_mass = list("x"=16, "y"=11)
@@ -2057,6 +2087,7 @@
 	name = "spell burger"
 	desc = "This is absolutely Ei Nath."
 	icon_state = "spellburger"
+	item_state = "burger"
 	filling_color = "#D505FF"
 	bitesize = 2
 	nutriment_desc = list("magic" = 3, "buns" = 3)
@@ -2067,6 +2098,7 @@
 	name = "big bite burger"
 	desc = "Forget the Big Mac. THIS is the future! It has big \"R\" stamped on it's bun."
 	icon_state = "bigbiteburger"
+	item_state = "burger"
 	filling_color = "#E3D681"
 	bitesize = 3
 	center_of_mass = list("x"=16, "y"=11)
@@ -2251,6 +2283,7 @@
 	name = "jelly burger"
 	desc = "Culinary curiousity or undiscovered delight?"
 	icon_state = "jellyburger"
+	item_state = "burger"
 	filling_color = "#B572AB"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=11)
