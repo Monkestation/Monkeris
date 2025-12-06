@@ -9,6 +9,10 @@
 /obj/item/tool
 	name = "tool"
 	icon = 'icons/obj/tools.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/tools_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/tools_righthand.dmi',
+		)
 	slot_flags = SLOT_BELT
 	force = WEAPON_FORCE_NORMAL
 	throwforce = WEAPON_FORCE_NORMAL

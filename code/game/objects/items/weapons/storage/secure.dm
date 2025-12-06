@@ -147,6 +147,10 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "secure"
 	item_state = "sec-case"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/briefcase_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/briefcase_righthand.dmi',
+		)
 	desc = "A large briefcase with a digital locking system."
 	force = WEAPON_FORCE_NORMAL
 	throw_speed = 1

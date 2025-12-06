@@ -11,6 +11,7 @@
 	name = "\improper Space Cola"
 	desc = "Cola. in space."
 	icon_state = "cola"
+	item_state = "cola"
 	center_of_mass = list("x"=16, "y"=10)
 	preloaded_reagents = list("cola" = 30)
 

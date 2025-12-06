@@ -69,6 +69,10 @@
 	description_info = "Won't penetrate thick materials"
 	icon_state = "syringegun"
 	item_state = "syringegun"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/medical_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/medical_righthand.dmi',
+		)
 	w_class = ITEM_SIZE_NORMAL
 	force = 7
 	matter = list(MATERIAL_PLASTIC = 8, MATERIAL_GLASS = 2)

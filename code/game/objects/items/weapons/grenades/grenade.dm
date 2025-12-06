@@ -6,6 +6,10 @@
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "grenade"
 	item_state = "grenade"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/bombs_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/bombs_righthand.dmi',
+		)
 	throw_speed = 4
 	throw_range = 20
 	flags = CONDUCT

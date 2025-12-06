@@ -247,7 +247,11 @@
 	name = "inflatable barrier box"
 	desc = "Contains inflatable walls and doors."
 	icon_state = "inf_box"
-	item_state = "syringe_kit"
+	item_state = "lockbox"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/briefcase_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/briefcase_righthand.dmi',
+		)
 	w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 28
 	can_hold = list(/obj/item/inflatable)

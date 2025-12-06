@@ -5,6 +5,10 @@
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "plastic-explosive0"
 	item_state = "plasticx"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/bombs_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/bombs_righthand.dmi',
+		)
 	flags = NOBLUDGEON
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_COVERT = 2)

@@ -3,6 +3,10 @@
 	icon = 'icons/obj/assemblies/new_assemblies.dmi'
 	icon_state = "holder"
 	item_state = "assembly"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
 	flags = CONDUCT | PROXMOVE
 	throwforce = 5
 	w_class = ITEM_SIZE_SMALL

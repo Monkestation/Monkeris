@@ -174,6 +174,10 @@
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	item_state = "syringe_kit"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/medical_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/medical_righthand.dmi',
+		)
 	matter = list(MATERIAL_STEEL = 2)
 	throwforce = 5
 	w_class = ITEM_SIZE_SMALL

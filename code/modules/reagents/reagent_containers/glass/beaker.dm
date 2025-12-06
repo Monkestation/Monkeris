@@ -193,6 +193,10 @@
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "bucket"
 	item_state = "bucket"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/custodial_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/custodial_righthand.dmi',
+		)
 	matter = list(MATERIAL_PLASTIC = 2)
 	w_class = ITEM_SIZE_NORMAL
 	amount_per_transfer_from_this = 20

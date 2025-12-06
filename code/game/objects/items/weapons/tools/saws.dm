@@ -31,6 +31,11 @@
 	name = "circular saw"
 	desc = "For heavy duty cutting."
 	icon_state = "saw"
+	item_state = "saw"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/medical_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/medical_righthand.dmi',
+		)
 	hitsound = WORKSOUND_CIRCULAR_SAW
 	worksound = WORKSOUND_CIRCULAR_SAW
 	force = WEAPON_FORCE_DANGEROUS * 1.15
@@ -46,6 +51,7 @@
 	name = "advanced circular saw"
 	desc = "You think you can cut anything with it."
 	icon_state = "advanced_saw"
+	item_state = "advanced_saw"
 	force = WEAPON_FORCE_ROBUST
 	armor_divisor = ARMOR_PEN_DEEP
 	matter = list(MATERIAL_STEEL = 6, MATERIAL_PLASTEEL = 1, MATERIAL_PLASTIC = 2)

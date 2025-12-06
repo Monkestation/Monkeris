@@ -413,6 +413,10 @@
 	desc = "Box of stuff used to implant death alarms."
 	illustration = "implant"
 	item_state = "syringe_kit"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/medical_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/medical_righthand.dmi',
+		)
 	rarity_value = 50
 	prespawned_content_amount = 6
 	prespawned_content_type = /obj/item/implantcase/death_alarm

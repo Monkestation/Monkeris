@@ -383,6 +383,10 @@
 	name = "space beer"
 	desc = "Contains only water, malt and hops."
 	icon_state = "beer"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/food_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/food_righthand.dmi',
+		)
 	center_of_mass = list("x"=16, "y"=12)
 	preloaded_reagents = list("beer" = 30)
 	spawn_tags = SPAWN_TAG_BOOZE

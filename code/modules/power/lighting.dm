@@ -687,6 +687,10 @@
 	icon_state = "lbulb"
 	base_state = "lbulb"
 	item_state = "contvapour"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/medical_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/medical_righthand.dmi',
+		)
 	matter = list(MATERIAL_GLASS = 1)
 	brightness_range = 5
 	brightness_power = 2
