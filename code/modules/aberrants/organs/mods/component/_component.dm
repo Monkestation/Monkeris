@@ -41,13 +41,13 @@
 	. = ..()
 
 /datum/component/modification/organ/check_item(obj/item/I, mob/living/user)
-	..()
+	if(..() == FALSE)//hero . saves me from actually fixing the nightmare inheritance of this code
+		return FALSE
 
 	if(istype(I, /obj/item/organ))
 		var/obj/item/organ/O = I
 
 		var/organ_nature = modifications[ORGAN_NATURE] ? modifications[ORGAN_NATURE] : O.nature
-
 		if(LAZYFIND(apply_to_qualities, organ_nature))
 			return TRUE
 
