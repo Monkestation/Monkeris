@@ -3362,7 +3362,7 @@
 	icon = 'icons/obj/food.dmi'
 	icon_state = "pizzabox1"
 	item_state = "pizzabox"
-	tem_icons = list(
+	item_icons = list(
 		slot_l_hand_str = 'icons/mob/inhands/misc/food_lefthand.dmi',
 		slot_r_hand_str = 'icons/mob/inhands/misc/food_righthand.dmi',
 		)
