@@ -130,6 +130,10 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "mace"
 	item_state = "mace"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/batons_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/batons_righthand.dmi',
+		)
 	w_class = ITEM_SIZE_NORMAL
 	armor_divisor = ARMOR_PEN_HALF
 	force = WEAPON_FORCE_ROBUST
@@ -155,8 +159,7 @@
 	name = "baseball bat"
 	desc = "HOME RUN!"
 	icon_state = "woodbat0"
-	wielded_icon = "woodbat1"
-	item_state = "woodbat0"
+	item_state = "baseball_bat"
 	force = WEAPON_FORCE_DANGEROUS
 	armor_divisor = ARMOR_PEN_MODERATE
 	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")

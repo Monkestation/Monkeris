@@ -28,6 +28,10 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "hm_spikeclub"
 	item_state = "hm_spikeclub"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/batons_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/batons_righthand.dmi',
+		)
 	matter = list(MATERIAL_WOOD = 2, MATERIAL_STEEL = 2)
 	force = WEAPON_FORCE_PAINFUL
 	throwforce = WEAPON_FORCE_PAINFUL

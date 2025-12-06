@@ -4,7 +4,11 @@
 	desc = "A stun baton for incapacitating people with."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "stunbaton"
-	item_state = "baton"
+	item_state = "stunbaton"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/batons_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/batons_righthand.dmi',
+		)
 	slot_flags = SLOT_BELT
 	description_info = "Highly effective against uninsulated people. High change to disarm when aimed at arms."
 	description_antag = "Can be sabotaged by inserting plasma into its battery cell. Upon being turned on it will blow"
@@ -68,6 +72,11 @@
 		set_light(1.5, 1)
 	else
 		set_light(0)
+
+/obj/item/melee/baton/set_status(s)
+	..()
+	item_state = initial(item_state) + (status ? "_active" : "")
+	update_wear_icon()
 
 /obj/item/melee/baton/examine(mob/user, extra_description = "")
 	if(get_dist(user, src) < 2)
@@ -201,7 +210,7 @@
 	name = "stunprod"
 	desc = "An improvised stun baton."
 	icon_state = "stunprod"
-	item_state = "prod"
+	item_state = "stunprod"
 	force = WEAPON_FORCE_NORMAL
 	throwforce = WEAPON_FORCE_NORMAL
 	stunforce = 0
@@ -228,9 +237,3 @@
 	structure_damage_factor = STRUCTURE_DAMAGE_NORMAL
 	matter = list(MATERIAL_STEEL = 15, MATERIAL_PLASTEEL = 5)
 	starting_cell = /obj/item/cell/medium/excelsior
-
-//excelsior baton has 2 inhand sprites
-/obj/item/melee/baton/excelbaton/set_status(s)
-	..()
-	item_state = initial(item_state) + (status ? "_active" : "")
-	update_wear_icon()
