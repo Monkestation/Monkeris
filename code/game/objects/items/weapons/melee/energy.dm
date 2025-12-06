@@ -63,6 +63,10 @@
 	name = "energy axe"
 	desc = "A battle axe with some kind of red energy crystal. Pretty sharp."
 	icon_state = "axe0"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/axes_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/axes_righthand.dmi',
+		)
 	active_force = WEAPON_FORCE_GODLIKE
 	active_throwforce = 50
 	active_w_class = ITEM_SIZE_HUGE

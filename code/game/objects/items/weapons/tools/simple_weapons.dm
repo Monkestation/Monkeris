@@ -67,7 +67,10 @@
 	desc = "A heavy plasteel blade affixed to a welded metal shaft, for close up carnage."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "makeshift_axe"
-	item_state = "makeshift_axe"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/axes_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/axes_righthand.dmi',
+		)
 	wielded_icon = "makeshift_axe_wielded"
 	matter = list(MATERIAL_STEEL = 3, MATERIAL_PLASTEEL = 3)
 	worksound = WORKSOUND_HARD_SLASH
@@ -94,6 +97,10 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "fireaxe0"
 	wielded_icon = "fireaxe1"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/axes_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/axes_righthand.dmi',
+		)
 	sharp = TRUE
 	edge = TRUE
 	armor_divisor = ARMOR_PEN_DEEP
