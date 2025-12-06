@@ -4,6 +4,10 @@
 	throwforce = WEAPON_FORCE_NORMAL
 	w_class = ITEM_SIZE_NORMAL
 	icon = 'icons/obj/stack/material.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/sheets_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/sheets_righthand.dmi',
+		)
 	icon_state = "unknown"
 	throw_speed = 3
 	throw_range = 3
@@ -95,6 +99,7 @@
 /obj/item/stack/material/iron
 	name = "iron"
 	icon_state = "sheet-iron"
+	item_state = "sheet-metal"
 	default_type = MATERIAL_IRON
 	price_tag = 2
 	novariants = FALSE
@@ -124,6 +129,7 @@
 /obj/item/stack/material/diamond
 	name = "diamond"
 	icon_state = "sheet-diamond"
+	item_state = "sheet-diamond"
 	default_type = MATERIAL_DIAMOND
 	price_tag = 100
 	novariants = FALSE
@@ -141,6 +147,7 @@
 /obj/item/stack/material/uranium
 	name = MATERIAL_URANIUM
 	icon_state = "sheet-uranium"
+	item_state = "sheet-uranium"
 	default_type = MATERIAL_URANIUM
 	price_tag = 50
 	novariants = FALSE
@@ -158,6 +165,7 @@
 /obj/item/stack/material/plasma
 	name = "solid plasma"
 	icon_state = "sheet-plasma"
+	item_state = "sheet-plasma"
 	default_type = MATERIAL_PLASMA
 	price_tag = 30
 	novariants = FALSE
@@ -175,6 +183,7 @@
 /obj/item/stack/material/plastic
 	name = "plastic"
 	icon_state = "sheet-plastic"
+	item_state = "sheet-plastic"
 	default_type = MATERIAL_PLASTIC
 	price_tag = 2
 	novariants = FALSE
@@ -191,6 +200,7 @@
 /obj/item/stack/material/gold
 	name = "gold"
 	icon_state = "sheet-gold"
+	item_state = "sheet-gold"
 	default_type = MATERIAL_GOLD
 	price_tag = 50
 	novariants = FALSE
@@ -208,6 +218,7 @@
 /obj/item/stack/material/silver
 	name = MATERIAL_SILVER
 	icon_state = "sheet-silver"
+	item_state = "sheet-silver"
 	default_type = MATERIAL_SILVER
 	price_tag = 40
 	novariants = FALSE
@@ -226,6 +237,7 @@
 /obj/item/stack/material/platinum
 	name = "platinum"
 	icon_state = "sheet-platinum"
+	item_state = "sheet-plastitanium"
 	default_type = MATERIAL_PLATINUM
 	price_tag = 80
 	novariants = FALSE
@@ -244,6 +256,7 @@
 /obj/item/stack/material/mhydrogen
 	name = "metallic hydrogen"
 	icon_state = "sheet-hydrogen"
+	item_state = "sheet-adamantine"
 	default_type = MATERIAL_MHYDROGEN
 	price_tag = 50
 	novariants = FALSE
@@ -256,6 +269,7 @@
 /obj/item/stack/material/tritium
 	name = "tritium"
 	icon_state = "sheet-silver"
+	item_state = "sheet-adamantine"
 	default_type = MATERIAL_TRITIUM
 	apply_colour = 1
 	price_tag = 50
@@ -298,7 +312,7 @@
 /obj/item/stack/material/plasteel
 	name = "plasteel"
 	icon_state = "sheet-plasteel"
-	item_state = "sheet-metal"
+	item_state = "sheet-plasteel"
 	default_type = MATERIAL_PLASTEEL
 	price_tag = 30
 	novariants = FALSE
@@ -315,6 +329,7 @@
 /obj/item/stack/material/wood
 	name = "wooden plank"
 	icon_state = "sheet-wood"
+	item_state = "sheet-wood"
 	default_type = MATERIAL_WOOD
 	price_tag = 20
 	novariants = FALSE
@@ -338,6 +353,7 @@
 /obj/item/stack/material/cardboard
 	name = "cardboard"
 	icon_state = "sheet-card"
+	item_state = "sheet-card"
 	default_type = MATERIAL_CARDBOARD
 	price_tag = 5
 	rarity_value = 6.66
@@ -363,6 +379,7 @@
 /obj/item/stack/material/glass
 	name = MATERIAL_GLASS
 	icon_state = "sheet-glass"
+	item_state = "sheet-glass"
 	default_type = MATERIAL_GLASS
 	price_tag = 2
 	novariants = FALSE
@@ -379,6 +396,7 @@
 /obj/item/stack/material/glass/reinforced
 	name = "reinforced glass"
 	icon_state = "sheet-rglass"
+	item_state = "sheet-rglass"
 	default_type = MATERIAL_RGLASS
 	novariants = FALSE
 
@@ -387,6 +405,7 @@
 	desc = "This sheet is special plasma-glass alloy designed to withstand large temperatures"
 	singular_name = "borosilicate glass sheet"
 	icon_state = "sheet-plasmaglass"
+	item_state = "sheet-pglass"
 	default_type = MATERIAL_PLASMAGLASS
 	price_tag = 10
 	novariants = FALSE
@@ -402,6 +421,7 @@
 	desc = "This sheet is special plasma-glass alloy designed to withstand large temperatures. It is reinforced with few rods."
 	singular_name = "reinforced borosilicate glass sheet"
 	icon_state = "sheet-plasmarglass"
+	item_state = "sheet-prglass"
 	default_type = MATERIAL_RPLASMAGLASS
 	price_tag = 12
 	novariants = FALSE
