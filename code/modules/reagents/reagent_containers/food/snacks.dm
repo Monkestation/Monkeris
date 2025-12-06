@@ -6,10 +6,6 @@
 	name = "snack"
 	desc = "yummy"
 	icon = 'icons/obj/food.dmi'
-	item_icons = list(
-		slot_l_hand_str = 'icons/mob/inhands/misc/food_lefthand.dmi',
-		slot_r_hand_str = 'icons/mob/inhands/misc/food_righthand.dmi',
-		)
 	icon_state = null
 	center_of_mass = list("x"=16, "y"=16)
 	w_class = ITEM_SIZE_SMALL
@@ -445,6 +441,7 @@
 	name = "shokoloud bar"
 	desc = "A bar of dark chocolate. Strangely polarizing."
 	icon_state = "shokoloud"
+	item_state = "candy"
 	trash = /obj/item/trash/shokoloud
 	open = FALSE
 	filling_color = "#7D5F46"
@@ -472,6 +469,7 @@
 	name = "chips"
 	desc = "Commander Riker's What-The-Crisps"
 	icon_state = "chips"
+	item_state = "chips"
 	trash = /obj/item/trash/chips
 	filling_color = "#E8C31E"
 	bitesize = 1
@@ -498,6 +496,7 @@
 	name = "chocolate bar"
 	desc = "Such a sweet, fattening food."
 	icon_state = "chocolatebar"
+	item_state = "candy"
 	filling_color = "#7D5F46"
 	bitesize = 2
 	center_of_mass = list("x"=15, "y"=15)
@@ -512,6 +511,7 @@
 	name = "chocolate egg"
 	desc = "Such a sweet, fattening food."
 	icon_state = "chocolateegg"
+	item_state = "egg4"
 	filling_color = "#7D5F46"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=13)
@@ -905,6 +905,7 @@
 	desc = "A raw meatball."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "meatball_raw"
+	item_state = "meatball"
 	bitesize = 3
 	center_of_mass = list("x"=16, "y"=15)
 	preloaded_reagents = list("protein" = 2)
@@ -920,6 +921,7 @@
 	name = "meatball"
 	desc = "A great meal all round."
 	icon_state = "meatball"
+	item_state = "meatball"
 	filling_color = "#DB0000"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=16)
@@ -1437,6 +1439,7 @@
 /obj/item/reagent_containers/food/snacks/meatpie
 	name = "meat-pie"
 	icon_state = "meatpie"
+	item_state = "pie"
 	desc = "An old barber recipe, very delicious!"
 	trash = /obj/item/trash/plate
 	filling_color = "#948051"
@@ -1449,6 +1452,7 @@
 /obj/item/reagent_containers/food/snacks/tofupie
 	name = "tofu-pie"
 	icon_state = "meatpie"
+	item_state = "pie"
 	desc = "A delicious tofu pie."
 	trash = /obj/item/trash/plate
 	filling_color = "#FFFEE0"
@@ -1463,6 +1467,7 @@
 	name = "amanita pie"
 	desc = "Sweet and tasty poison pie."
 	icon_state = "amanita_pie"
+	item_state = "pie"
 	filling_color = "#FFCCCC"
 	bitesize = 3
 	center_of_mass = list("x"=17, "y"=9)
@@ -1476,6 +1481,7 @@
 	name = "plump pie"
 	desc = "I bet you love stuff made out of plump helmets!"
 	icon_state = "plump_pie"
+	item_state = "pie"
 	filling_color = "#B8279B"
 	bitesize = 2
 	center_of_mass = list("x"=17, "y"=9)
@@ -1495,6 +1501,7 @@
 /obj/item/reagent_containers/food/snacks/xemeatpie
 	name = "xeno-pie"
 	icon_state = "xenomeatpie"
+	item_state = "pie"
 	desc = "A delicious meatpie. Probably heretical."
 	trash = /obj/item/trash/plate
 	filling_color = "#43DE18"
@@ -1567,6 +1574,7 @@
 	name = "popcorn"
 	desc = "Now let's find some cinema."
 	icon_state = "popcorn"
+	item_state = "ice_tea_can"
 	trash = /obj/item/trash/popcorn
 	var/unpopped = 0
 	filling_color = "#FFFAD4"
@@ -1580,6 +1588,7 @@
 /obj/item/reagent_containers/food/snacks/sosjerky
 	name = "scaredy's private reserve beef jerky"
 	icon_state = "sosjerky"
+	item_state = "candy"
 	desc = "Beef jerky made from the finest space cows."
 	trash = /obj/item/trash/sosjerky
 	filling_color = "#631212"
@@ -1593,6 +1602,7 @@
 /obj/item/reagent_containers/food/snacks/no_raisin
 	name = "4no raisins"
 	icon_state = "4no_raisins"
+	item_state = "candy"
 	desc = "Best raisins in the universe. Not sure why."
 	trash = /obj/item/trash/raisins
 	filling_color = "#343834"
@@ -1616,6 +1626,7 @@
 /obj/item/reagent_containers/food/snacks/cheesiehonkers
 	name = "cheesie honkers"
 	icon_state = "cheesie_honkers"
+	item_state = "chips"
 	desc = "Bite sized cheesie snacks that will honk all over your mouth"
 	trash = /obj/item/trash/cheesie
 	filling_color = "#FFA305"
@@ -1631,6 +1642,7 @@
 /obj/item/reagent_containers/food/snacks/wok
 	name = "wok"
 	icon_state = "wok"
+	item_state = "cola"
 	desc = "An extra spicy snack originating from Shimatengoku."
 	filling_color = "#FF5D05"
 	bitesize = 2
@@ -2448,6 +2460,7 @@
 	name = "apple pie"
 	desc = "A pie containing sweet sweet love... or apple."
 	icon_state = "applepie"
+	item_state = "pie"
 	filling_color = "#E0EDC5"
 	bitesize = 3
 	center_of_mass = list("x"=16, "y"=13)
@@ -2460,6 +2473,7 @@
 	name = "cherry pie"
 	desc = "Taste so good, make a grown man cry."
 	icon_state = "cherrypie"
+	item_state = "pie"
 	filling_color = "#FF525A"
 	bitesize = 3
 	center_of_mass = list("x"=16, "y"=11)
@@ -2684,6 +2698,7 @@
 	desc = "A can of stew meat complete with tab on top for easy opening."
 	description_info = "Crush inhand to open it, heat it, and once it's warm, the bicaridine and kelotane are activated."
 	icon_state = "ration_can"
+	item_state = "sodawater"
 	trash = /obj/item/trash/mre_can
 	filling_color = "#948051"
 	nutriment_desc = list("heartiness" = 1, "meat" = 3)
@@ -2722,6 +2737,7 @@
 	desc = "Some brand of non-melting military chocolate."
 	description_info = "Willy was a madman to get away with adding Serotrotium to chocolate, but he did it anyways. What a lad."
 	icon_state = "mre_candy"
+	item_state = "candy"
 	trash = /obj/item/trash/mre_candy
 	preloaded_reagents = list("sugar" = 3, "serotrotium" = 2)
 	open = FALSE
@@ -3202,6 +3218,7 @@
 	name = "pumpkin pie"
 	desc = "A delicious treat for the autumn months."
 	icon_state = "pumpkinpie"
+	item_state = "pie"
 	slice_path = /obj/item/reagent_containers/food/snacks/pumpkinpieslice
 	slices_num = 5
 	filling_color = "#F5B951"
@@ -3344,6 +3361,12 @@
 	desc = "A box suited for pizzas."
 	icon = 'icons/obj/food.dmi'
 	icon_state = "pizzabox1"
+	item_state = "pizzabox"
+	tem_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/food_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/food_righthand.dmi',
+		)
+
 
 	var/open = 0 // Is the box open?
 	var/ismessy = 0 // Fancy mess on the lid
@@ -3745,6 +3768,7 @@
 	name = "\improper LiquidFood ration"
 	desc = "A pre-packaged, grey slurry of all the essential nutrients needed for a spacefarer on the go. Should this be crunchy?"
 	icon_state = "liquidfood"
+	item_state = "coffee"
 	trash = /obj/item/trash/liquidfood
 	filling_color = "#A8A8A8"
 	bitesize = 4
