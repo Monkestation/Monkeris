@@ -273,7 +273,7 @@
 				extra_description += offer_message
 
 	if(watermark && user.stats.getStat(STAT_MEC) > STAT_LEVEL_EXPERT)
-		extra_description += span_notice("You notice signs of [watermark] on [src.name]")
+		extra_description += span_notice("\n Looking closely at \the [src.name], you notice signs of [watermark].")
 
 	..(user, extra_description)
 

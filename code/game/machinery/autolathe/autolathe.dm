@@ -91,10 +91,10 @@
 	var/uses_stat = FALSE
 
 	///If this autolathe should watermark objects they create
-	var/watermarking_enabled = TRUE
+	var/watermark_enabled = TRUE
 	///define associated with this autolathe, placed on objects it creates
-	var/given_watermark
-	///If true, watermark will be determined dynamically on updateparts() by the quality of the autolathe's manipulator
+	var/given_watermark = WATERMARK_TIERONE
+	///If true, watermark will be determined dynamically on refreshparts() by the quality of the autolathe's manipulator
 	var/stock_watermarks = TRUE
 
 /obj/machinery/autolathe/Initialize()
@@ -939,7 +939,7 @@
 				new_watermark = WATERMARK_TIERTHREE
 			if(4 to 6)
 				new_watermark = WATERMARK_TIERFOUR
-		watermark = new_watermark
+		given_watermark = new_watermark
 
 	var/las_rating = 0
 	var/las_amount = 0
