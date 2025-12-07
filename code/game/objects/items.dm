@@ -272,6 +272,9 @@
 				offer_message = copytext(offer_message, 1, LAZYLEN(offer_message) - 1)
 				extra_description += offer_message
 
+	if(watermark && user.stats.getStat(STAT_MEC) > STAT_LEVEL_EXPERT)
+		extra_description += span_notice("You notice signs of [watermark] on [src.name]")
+
 	..(user, extra_description)
 
 /obj/item/attack_hand(mob/user as mob)
