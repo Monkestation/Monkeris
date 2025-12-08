@@ -185,6 +185,7 @@
 /datum/design/autolathe/gun/boltgun
 	name = "Excelsior .30 \"Kardashev-Mosin\""
 	build_path = /obj/item/gun/projectile/automatic/modular/bolt/excel
+	minimum_quality = 2
 
 /datum/design/autolathe/gun/boltgun/ui_icon()
 	var/obj/build_type = build_path
