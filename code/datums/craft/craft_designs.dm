@@ -396,7 +396,7 @@ Based on /datum/design of \code\datums\autolathe\autolathe_datums.dm
 /datum/design/makeshift/bayonet_cheap
 	name = "cheap integrated bayonet"
 	build_path = /obj/item/part/gun/modular/bayonet/steel
-	minimum_quality = -1
+	quality = -1
 
 /datum/design/makeshift/bayonet
 	name = "integrated bayonet"
