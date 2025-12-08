@@ -1,0 +1,1264 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ar" = (
+/obj/item/stack/cable_coil,
+/obj/structure/table/standard,
+/obj/spawner/pack/tech_loot,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"aJ" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/floor/tiled/dark/airless,
+/area/space)
+"aL" = (
+/obj/structure/table/standard,
+/obj/structure/barricade,
+/turf/floor/tiled/airless,
+/area/space)
+"bF" = (
+/obj/machinery/power/terminal{
+	dir = 1
+	},
+/obj/item/tool/wrench,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"cy" = (
+/obj/effect/decal/cleanable/blood,
+/turf/floor/tiled/white/bluecorner/airless,
+/area/space)
+"cN" = (
+/obj/structure/table/standard,
+/obj/spawner/firstaid/low_chance,
+/obj/spawner/firstaid,
+/obj/spawner/medical/low_chance,
+/obj/spawner/medical_lowcost,
+/obj/spawner/medical_lowcost,
+/obj/spawner/medical_lowcost,
+/obj/spawner/medical/low_chance,
+/turf/floor/tiled/white/bluecorner/airless,
+/area/space)
+"cT" = (
+/obj/structure/sign/signnew/explosives,
+/turf/wall/reinforced,
+/area/space)
+"dU" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/spawner/medical_lowcost,
+/turf/floor/tiled/white/bluecorner/airless,
+/area/space)
+"dW" = (
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/blood,
+/mob/living/simple_animal/hostile/hivebot,
+/turf/floor/tiled/white/bluecorner/airless,
+/area/space)
+"eo" = (
+/obj/structure/salvageable/autolathe,
+/turf/floor/tiled/airless,
+/area/space)
+"eC" = (
+/turf/floor/tiled/airless,
+/area/space)
+"eD" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/floor/tiled/airless,
+/area/space)
+"eX" = (
+/mob/living/simple_animal/hostile/hivebot,
+/turf/floor/tiled/airless,
+/area/space)
+"eZ" = (
+/obj/structure/bed/chair/shuttle{
+	dir = 4
+	},
+/turf/floor/tiled/dark/airless,
+/area/space)
+"fh" = (
+/obj/structure/girder,
+/turf/floor/plating/under/airless,
+/area/space)
+"fp" = (
+/obj/item/storage/wallet/random,
+/obj/spawner/closet/maintloot,
+/turf/floor/tiled/airless,
+/area/space)
+"ga" = (
+/obj/machinery/door/firedoor,
+/obj/item/trash/material/metal,
+/turf/floor/tiled/airless,
+/area/space)
+"gu" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 8
+	},
+/turf/floor/asteroid/cave,
+/area/space)
+"gG" = (
+/obj/item/storage/toolbox/electrical{
+	pixel_x = -3;
+	pixel_y = 8
+	},
+/obj/effect/decal/cleanable/cobweb,
+/obj/structure/table/standard,
+/obj/item/cell/medium/high,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"gK" = (
+/obj/structure/salvageable/data,
+/turf/floor/plating/under/airless,
+/area/space)
+"gM" = (
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"hC" = (
+/mob/living/simple_animal/hostile/hivebot,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"hI" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/shuttle/engine/heater{
+	dir = 8
+	},
+/turf/floor/asteroid/cave,
+/area/space)
+"hJ" = (
+/obj/effect/damagedfloor,
+/obj/effect/damagedfloor,
+/mob/living/simple_animal/hostile/hivebot,
+/turf/floor/tiled/airless,
+/area/space)
+"hN" = (
+/obj/item/storage/toolbox/mechanical{
+	pixel_y = 4
+	},
+/obj/item/clothing/head/welding{
+	pixel_x = -2;
+	pixel_y = 1
+	},
+/obj/structure/table/standard,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"hX" = (
+/obj/effect/damagedfloor,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"jm" = (
+/obj/effect/damagedfloor,
+/obj/effect/damagedfloor,
+/turf/floor/tiled/airless,
+/area/space)
+"jy" = (
+/mob/living/simple_animal/hostile/hivebot/range,
+/turf/floor/tiled/airless,
+/area/space)
+"jX" = (
+/obj/machinery/light/small,
+/obj/effect/damagedfloor,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"kG" = (
+/obj/spawner/ammo/lowcost,
+/obj/spawner/ammo/lowcost,
+/obj/spawner/ammo/lowcost,
+/obj/structure/closet/crate,
+/obj/spawner/ammo/low_chance,
+/obj/spawner/ammo/low_chance,
+/turf/floor/tiled/airless,
+/area/space)
+"lz" = (
+/obj/machinery/optable,
+/obj/landmark/corpse/skeleton/fortress,
+/obj/effect/decal/cleanable/blood,
+/turf/floor/tiled/white/bluecorner/airless,
+/area/space)
+"lA" = (
+/obj/machinery/conveyor/southeast,
+/turf/floor/tiled/airless,
+/area/space)
+"lZ" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/reagent_containers/syringe,
+/turf/floor/tiled/white/bluecorner/airless,
+/area/space)
+"ma" = (
+/turf/floor/plating/under/airless,
+/area/space)
+"mn" = (
+/obj/item/material/shard,
+/turf/floor/asteroid/cave,
+/area/space)
+"mu" = (
+/obj/item/phone{
+	pixel_x = -3;
+	pixel_y = 3
+	},
+/obj/structure/table/standard,
+/turf/floor/tiled/dark/airless,
+/area/space)
+"nh" = (
+/obj/landmark/corpse/skeleton/fortress,
+/obj/effect/decal/cleanable/blood,
+/obj/spawner/gun/energy_cheap,
+/turf/floor/tiled/white/bluecorner/airless,
+/area/space)
+"np" = (
+/mob/living/simple_animal/hostile/hivebot,
+/turf/floor/asteroid/cave,
+/area/space)
+"nI" = (
+/obj/machinery/door/airlock/external{
+	name = "E.V.A Access"
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"oH" = (
+/obj/structure/closet/secure_closet/rare_loot,
+/obj/machinery/door/window/brigdoor,
+/turf/floor/reinforced/airless,
+/area/space)
+"pj" = (
+/obj/effect/decal/cleanable/blood,
+/obj/structure/bed/chair/shuttle{
+	dir = 4
+	},
+/turf/floor/tiled/dark/airless,
+/area/space)
+"pk" = (
+/turf/wall/reinforced,
+/area/space)
+"pv" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/floor/asteroid/cave,
+/area/space)
+"rk" = (
+/turf/wall/low/with_glass/reinforced,
+/turf/floor/plating,
+/area/space)
+"rJ" = (
+/obj/machinery/door/airlock/medical{
+	name = "Medbay Storage"
+	},
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"sq" = (
+/obj/machinery/door/airlock/external,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"th" = (
+/obj/effect/damagedfloor,
+/mob/living/simple_animal/hostile/hivebot/range,
+/turf/floor/tiled/airless,
+/area/space)
+"tU" = (
+/obj/structure/table/rack,
+/obj/spawner/lowkeyrandom,
+/obj/spawner/tank,
+/obj/spawner/tank,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"uf" = (
+/obj/spawner/closet/maintloot,
+/turf/floor/tiled/airless,
+/area/space)
+"uh" = (
+/obj/machinery/door/airlock/engineering{
+	name = "Engineering"
+	},
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"uo" = (
+/obj/item/clothing/gloves/latex,
+/obj/item/clothing/mask/surgical,
+/obj/item/clothing/suit/storage/surgical_apron,
+/obj/structure/table/standard,
+/turf/floor/tiled/white/bluecorner/airless,
+/area/space)
+"uv" = (
+/obj/effect/damagedfloor,
+/obj/spawner/scrap,
+/turf/floor/tiled/airless,
+/area/space)
+"ux" = (
+/obj/structure/salvageable/computer,
+/turf/floor/tiled/dark/airless,
+/area/space)
+"uF" = (
+/obj/effect/damagedfloor,
+/mob/living/simple_animal/hostile/hivebot,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"uI" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"uV" = (
+/obj/machinery/computer{
+	dir = 8
+	},
+/turf/floor/tiled/dark/airless,
+/area/space)
+"uX" = (
+/obj/machinery/conveyor/south,
+/obj/item/ammo_casing/rocket/scrap,
+/turf/floor/tiled/airless,
+/area/space)
+"vd" = (
+/obj/effect/damagedfloor,
+/turf/floor/tiled/airless,
+/area/space)
+"vf" = (
+/obj/spawner/junk,
+/turf/mineral/random,
+/area/space)
+"vK" = (
+/turf/wall/low,
+/area/space)
+"wl" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/tiled/airless,
+/area/space)
+"wZ" = (
+/obj/structure/table/rack/shelf,
+/obj/item/ammo_casing/rocket/thermo,
+/obj/spawner/ammo/lowcost,
+/turf/floor/tiled/airless,
+/area/space)
+"xa" = (
+/obj/machinery/door/airlock{
+	name = "Restroom"
+	},
+/turf/floor/tiled/airless,
+/area/space)
+"xF" = (
+/obj/effect/decal/cleanable/blood,
+/turf/floor/tiled/airless,
+/area/space)
+"yx" = (
+/obj/item/material/shard,
+/obj/effect/damagedfloor,
+/turf/floor/tiled/airless,
+/area/space)
+"zc" = (
+/obj/machinery/door/airlock/external{
+	name = "E.V.A Access"
+	},
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"zj" = (
+/obj/structure/salvageable/machine,
+/turf/floor/tiled/airless,
+/area/space)
+"zO" = (
+/obj/structure/table/standard,
+/turf/floor/tiled/airless,
+/area/space)
+"Aq" = (
+/obj/effect/floor_decal/asteroid,
+/turf/floor/asteroid/cave,
+/area/space)
+"AW" = (
+/obj/item/tool/wrench,
+/obj/structure/table/standard,
+/obj/spawner/gun_parts,
+/obj/spawner/gun_parts,
+/obj/spawner/gun_parts,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"Bs" = (
+/obj/landmark/corpse/skeleton/fortress,
+/obj/effect/decal/cleanable/blood,
+/obj/spawner/ammo/lowcost,
+/turf/floor/tiled/airless,
+/area/space)
+"Bu" = (
+/obj/structure/salvageable/autolathe,
+/turf/floor/tiled/cafe,
+/area/space)
+"Cd" = (
+/obj/spawner/gun/cheap,
+/turf/floor/tiled/airless,
+/area/space)
+"Co" = (
+/obj/spawner/closet/maintloot,
+/obj/effect/damagedfloor,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"CH" = (
+/obj/structure/lattice,
+/turf/floor/asteroid/cave,
+/area/space)
+"Dn" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/blood,
+/turf/floor/tiled/airless,
+/area/space)
+"Dt" = (
+/obj/structure/closet/emcloset,
+/obj/effect/damagedfloor,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"DM" = (
+/obj/landmark/corpse/skeleton/fortress,
+/obj/effect/decal/cleanable/blood,
+/turf/floor/tiled/white/bluecorner/airless,
+/area/space)
+"Ek" = (
+/obj/machinery/door/airlock{
+	name = "Cabin 2"
+	},
+/turf/floor/wood,
+/area/space)
+"Fa" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/effect/damagedfloor,
+/turf/floor/tiled/airless,
+/area/space)
+"Fg" = (
+/obj/effect/damagedfloor,
+/mob/living/simple_animal/hostile/hivebot,
+/turf/floor/tiled/airless,
+/area/space)
+"Fs" = (
+/obj/item/mine/old/armed,
+/obj/item/trash/material/metal,
+/turf/floor/tiled/airless,
+/area/space)
+"FO" = (
+/obj/machinery/door/firedoor,
+/turf/wall/low/with_glass/reinforced,
+/turf/floor/plating,
+/area/space)
+"FW" = (
+/obj/structure/toilet{
+	pixel_y = 16
+	},
+/obj/structure/sink{
+	dir = 8;
+	pixel_x = 11
+	},
+/turf/floor/tiled/airless,
+/area/space)
+"GI" = (
+/obj/effect/damagedfloor,
+/obj/effect/damagedfloor,
+/obj/machinery/conveyor/east,
+/turf/floor/tiled/airless,
+/area/space)
+"Hc" = (
+/obj/machinery/door/airlock/command{
+	name = "Bridge"
+	},
+/obj/machinery/door/firedoor,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"HL" = (
+/obj/item/storage/belt/utility,
+/obj/structure/table/rack,
+/obj/effect/damagedfloor,
+/obj/spawner/pack/tech_loot,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"Ie" = (
+/obj/effect/decal/cleanable/cobweb,
+/obj/machinery/door/window/brigdoor,
+/obj/structure/closet/random/milsupply,
+/turf/floor/reinforced/airless,
+/area/space)
+"Jy" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/girder,
+/obj/item/stack/rods,
+/obj/item/stack/cable_coil/cut,
+/obj/spawner/techpart/low_chance,
+/obj/spawner/techpart,
+/obj/spawner/techpart/low_chance,
+/turf/floor/asteroid/cave,
+/area/space)
+"JY" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/table/rack/shelf,
+/obj/spawner/ammo/lowcost,
+/obj/spawner/ammo/lowcost,
+/obj/spawner/ammo,
+/obj/spawner/ammo/low_chance,
+/obj/spawner/ammo/low_chance,
+/obj/spawner/ammo/shotgun/low_chance,
+/obj/spawner/ammo/low_chance,
+/obj/spawner/ammo/low_chance,
+/obj/spawner/ammo/lowcost,
+/turf/floor/reinforced/airless,
+/area/space)
+"Kw" = (
+/obj/effect/damagedfloor,
+/obj/structure/salvageable/computer,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"KJ" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/glass{
+	name = "Crew Quarters"
+	},
+/turf/floor/tiled/airless,
+/area/space)
+"KR" = (
+/obj/effect/damagedfloor,
+/turf/floor/plating/under/airless,
+/area/space)
+"Lz" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/shuttle/engine/heater{
+	dir = 8
+	},
+/turf/floor/exoplanet/barren,
+/area/space)
+"LF" = (
+/obj/structure/bed,
+/obj/item/bedsheet/captain,
+/obj/landmark/corpse/skeleton/fortress,
+/obj/spawner/gun/cheap,
+/obj/effect/decal/cleanable/blood,
+/turf/floor/wood,
+/area/space)
+"LG" = (
+/obj/spawner/closet/maintloot,
+/obj/item/ammo_casing/rocket/scrap,
+/turf/floor/tiled/airless,
+/area/space)
+"Mg" = (
+/obj/machinery/power/apc{
+	cell_type = null;
+	pixel_x = 28
+	},
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"Mv" = (
+/mob/living/simple_animal/hostile/hivebot/range,
+/turf/floor/tiled/dark/airless,
+/area/space)
+"MW" = (
+/obj/structure/bed/chair/office/dark{
+	dir = 1
+	},
+/obj/landmark/corpse/skeleton/fortress,
+/obj/effect/decal/cleanable/blood,
+/turf/floor/tiled/airless,
+/area/space)
+"Oc" = (
+/turf/mineral/random,
+/area/space)
+"Ot" = (
+/obj/structure/table/rack/shelf,
+/obj/item/ammo_casing/rocket/scrap,
+/obj/spawner/ammo/lowcost,
+/turf/floor/tiled/airless,
+/area/space)
+"OL" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 8
+	},
+/turf/floor/exoplanet/barren,
+/area/space)
+"PL" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/girder,
+/turf/floor/asteroid/cave,
+/area/space)
+"Qh" = (
+/obj/machinery/door/airlock{
+	name = "Cabin 1"
+	},
+/turf/floor/wood,
+/area/space)
+"Ql" = (
+/obj/structure/lattice,
+/obj/structure/girder,
+/turf/floor/asteroid/cave,
+/area/space)
+"QT" = (
+/obj/machinery/shower{
+	pixel_y = 15
+	},
+/obj/item/soap,
+/obj/structure/curtain,
+/turf/floor/tiled/airless,
+/area/space)
+"Ro" = (
+/obj/landmark/corpse/skeleton/fortress,
+/obj/effect/decal/cleanable/blood,
+/turf/floor/tiled/dark/airless,
+/area/space)
+"RC" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/lattice,
+/turf/floor/asteroid/cave,
+/area/space)
+"RE" = (
+/obj/machinery/conveyor/east,
+/obj/item/ammo_casing/rocket/scrap,
+/turf/floor/tiled/airless,
+/area/space)
+"RK" = (
+/obj/spawner/gun/energy_cheap,
+/turf/floor/tiled/dark/airless,
+/area/space)
+"Tl" = (
+/obj/structure/salvageable/machine,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"Tm" = (
+/obj/structure/grille,
+/obj/item/stack/rods,
+/obj/spawner/techpart/low_chance,
+/obj/spawner/techpart,
+/obj/spawner/techpart/low_chance,
+/turf/floor/asteroid/cave,
+/area/space)
+"Tx" = (
+/obj/effect/damagedfloor,
+/obj/spawner/gun_parts,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"TC" = (
+/obj/item/material/shard,
+/turf/wall/low,
+/area/space)
+"TI" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/damagedfloor,
+/obj/machinery/conveyor/east,
+/turf/floor/tiled/airless,
+/area/space)
+"Up" = (
+/obj/machinery/door/airlock/glass_medical{
+	name = "Medbay"
+	},
+/obj/machinery/door/firedoor,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"UM" = (
+/obj/machinery/sleeper/sarcophagus/random{
+	dir = 8
+	},
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"US" = (
+/obj/effect/damagedfloor,
+/obj/structure/salvageable/machine,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"Vy" = (
+/turf/floor/asteroid/cave,
+/area/space)
+"Vz" = (
+/obj/structure/closet/crate,
+/obj/item/storage/box/lights/bulbs,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"Wu" = (
+/obj/structure/girder,
+/turf/floor/asteroid/cave,
+/area/space)
+"WZ" = (
+/obj/structure/bed,
+/obj/item/bedsheet/captain,
+/turf/floor/wood,
+/area/space)
+"Xt" = (
+/obj/spawner/scrap,
+/turf/floor/plating/under/airless,
+/area/space)
+"XM" = (
+/obj/structure/closet/crate,
+/obj/item/tool/shovel,
+/obj/item/tool/pickaxe,
+/obj/item/storage/box/lights/mixed,
+/turf/floor/tiled/techmaint/airless,
+/area/space)
+"Yn" = (
+/obj/effect/decal/cleanable/blood,
+/obj/spawner/medical_lowcost,
+/turf/floor/tiled/white/bluecorner/airless,
+/area/space)
+"Yo" = (
+/obj/effect/damagedfloor,
+/obj/structure/girder,
+/turf/floor/plating/under/airless,
+/area/space)
+"Yu" = (
+/obj/spawner/scrap,
+/turf/floor/tiled/airless,
+/area/space)
+"YF" = (
+/obj/item/folder/blue{
+	pixel_x = 6;
+	pixel_y = 5
+	},
+/obj/item/pen{
+	pixel_x = 5;
+	pixel_y = 3
+	},
+/obj/machinery/recharger,
+/obj/structure/table/standard,
+/obj/spawner/powercell/medium,
+/obj/spawner/powercell/medium,
+/turf/floor/tiled/dark/airless,
+/area/space)
+"Zd" = (
+/obj/machinery/conveyor/east,
+/turf/floor/tiled/airless,
+/area/space)
+"Ze" = (
+/obj/structure/bed/chair/office/dark{
+	dir = 4
+	},
+/obj/landmark/corpse/skeleton/fortress,
+/obj/effect/decal/cleanable/blood,
+/turf/floor/tiled/airless,
+/area/space)
+"ZO" = (
+/obj/spawner/scrap/dense,
+/turf/floor/tiled/airless,
+/area/space)
+"ZR" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/machinery/computer{
+	dir = 8
+	},
+/turf/floor/tiled/airless,
+/area/space)
+
+(1,1,1) = {"
+Oc
+Oc
+Oc
+Aq
+Vy
+Vy
+gu
+pk
+Vy
+pk
+OL
+OL
+pk
+Vy
+Vy
+Vy
+Vy
+"}
+(2,1,1) = {"
+Oc
+Oc
+np
+Vy
+Vy
+pv
+hI
+pk
+pk
+pk
+Lz
+Lz
+pk
+gu
+gu
+pk
+Aq
+"}
+(3,1,1) = {"
+Oc
+Aq
+Vy
+CH
+ma
+Xt
+Kw
+gK
+pk
+Tl
+bF
+Tl
+pk
+hI
+hI
+pk
+Vy
+"}
+(4,1,1) = {"
+Aq
+Vy
+CH
+CH
+ma
+uF
+hX
+gM
+uh
+Mg
+gM
+gM
+uI
+Tl
+Vz
+pk
+Vy
+"}
+(5,1,1) = {"
+Vy
+Ql
+Xt
+hX
+US
+hN
+pk
+pk
+pk
+pk
+pk
+ar
+gM
+gM
+XM
+pk
+Vy
+"}
+(6,1,1) = {"
+Vy
+pk
+pk
+gM
+pk
+pk
+pk
+Ie
+JY
+oH
+pk
+pk
+pk
+uh
+pk
+pk
+Vy
+"}
+(7,1,1) = {"
+pk
+pk
+pk
+eC
+vd
+Hc
+aJ
+RK
+Ro
+Mv
+aJ
+Hc
+eD
+eC
+uf
+pk
+pk
+"}
+(8,1,1) = {"
+pk
+QT
+pk
+eC
+fp
+pk
+YF
+eZ
+pj
+pj
+mu
+pk
+uf
+eC
+eC
+zO
+pk
+"}
+(9,1,1) = {"
+pk
+FW
+xa
+vd
+pk
+pk
+FO
+ux
+uV
+uV
+FO
+pk
+pk
+rJ
+pk
+pk
+pk
+"}
+(10,1,1) = {"
+pk
+pk
+pk
+Fa
+pk
+LG
+FO
+FO
+FO
+FO
+FO
+uf
+pk
+dU
+lz
+cN
+pk
+"}
+(11,1,1) = {"
+rk
+LF
+Ek
+eC
+KJ
+eC
+eC
+aL
+Dn
+Cd
+eC
+eC
+Up
+dW
+lZ
+uo
+rk
+"}
+(12,1,1) = {"
+pk
+pk
+pk
+vd
+ga
+jy
+xF
+aL
+Bs
+xF
+eX
+eC
+Up
+nh
+Yn
+DM
+pk
+"}
+(13,1,1) = {"
+fh
+WZ
+Qh
+vd
+pk
+uf
+pk
+rk
+pk
+TC
+pk
+uf
+pk
+cy
+UM
+UM
+rk
+"}
+(14,1,1) = {"
+CH
+ma
+pk
+zc
+pk
+pk
+pk
+Vy
+mn
+Vy
+pk
+pk
+pk
+nI
+pk
+pk
+pk
+"}
+(15,1,1) = {"
+Vy
+CH
+pk
+hX
+AW
+pk
+Vy
+Vy
+Aq
+Vy
+Vy
+pk
+gG
+gM
+pk
+Dt
+pk
+"}
+(16,1,1) = {"
+CH
+ma
+Tx
+hC
+US
+TC
+mn
+Oc
+Oc
+Aq
+Vy
+rk
+Co
+gM
+sq
+gM
+sq
+"}
+(17,1,1) = {"
+fh
+pk
+pk
+hX
+tU
+pk
+Vy
+Aq
+Oc
+Vy
+Vy
+pk
+HL
+jX
+pk
+pk
+pk
+"}
+(18,1,1) = {"
+pk
+Bu
+pk
+nI
+pk
+pk
+pk
+Vy
+Aq
+Vy
+pk
+pk
+pk
+zc
+pk
+eo
+pk
+"}
+(19,1,1) = {"
+pk
+Zd
+eC
+eC
+Yu
+ZO
+pk
+Vy
+Vy
+Vy
+pk
+RC
+ma
+wl
+uv
+TI
+pk
+"}
+(20,1,1) = {"
+vK
+zj
+MW
+xF
+eC
+Yu
+rk
+Vy
+Aq
+Vy
+PL
+KR
+eC
+th
+vd
+zj
+TC
+"}
+(21,1,1) = {"
+pk
+RE
+eC
+Fs
+Ot
+eC
+pk
+Vy
+Oc
+Oc
+Vy
+Fg
+jm
+KR
+hJ
+GI
+pk
+"}
+(22,1,1) = {"
+pk
+zj
+eC
+xF
+wZ
+eC
+pk
+Aq
+Oc
+vf
+Oc
+Vy
+vd
+CH
+vd
+Yu
+pk
+"}
+(23,1,1) = {"
+pk
+Zd
+xF
+Ze
+eC
+eC
+pk
+Vy
+Vy
+Oc
+Aq
+CH
+Vy
+CH
+ma
+vd
+pk
+"}
+(24,1,1) = {"
+rk
+RE
+pk
+ZR
+cT
+kG
+TC
+Vy
+Vy
+Aq
+Vy
+Ql
+Vy
+Vy
+CH
+yx
+vK
+"}
+(25,1,1) = {"
+pk
+lA
+uX
+Jy
+pk
+zj
+pk
+mn
+Vy
+Oc
+Oc
+pk
+CH
+Vy
+CH
+eC
+pk
+"}
+(26,1,1) = {"
+pk
+pk
+pk
+Tm
+pk
+pk
+pk
+Vy
+Oc
+Oc
+Oc
+Oc
+Oc
+Aq
+Vy
+Yo
+pk
+"}
+(27,1,1) = {"
+Vy
+pk
+pk
+Wu
+pk
+pk
+Vy
+Aq
+Oc
+Oc
+Oc
+Oc
+Oc
+Oc
+Vy
+CH
+Vy
+"}

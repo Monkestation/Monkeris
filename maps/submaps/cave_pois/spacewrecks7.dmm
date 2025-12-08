@@ -1,0 +1,1112 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"am" = (
+/obj/effect/decal/cleanable/blood,
+/turf/floor/tiled/steel/brown_perforated,
+/area/space)
+"ao" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/tiled/steel/brown_perforated,
+/area/space)
+"aF" = (
+/obj/structure/bed/chair/shuttle{
+	dir = 8
+	},
+/turf/floor/tiled,
+/area/space)
+"dg" = (
+/obj/machinery/suit_storage_unit/standard_unit,
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/tiled,
+/area/space)
+"dY" = (
+/obj/structure/closet/crate/internals,
+/obj/item/clothing/mask/breath{
+	pixel_x = -3;
+	pixel_y = 3
+	},
+/obj/item/clothing/mask/breath,
+/obj/effect/decal/cleanable/cobweb,
+/obj/item/gun/projectile/mandella,
+/obj/item/clothing/suit/storage/greatcoat/german_overcoat,
+/obj/item/tank/emergency_oxygen,
+/obj/item/tank/emergency_oxygen,
+/obj/item/ammo_magazine/cspistol,
+/turf/floor/tiled/techmaint,
+/area/space)
+"eQ" = (
+/obj/machinery/vending/boozeomat,
+/turf/wall/reinforced,
+/area/space)
+"eZ" = (
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/greenglow,
+/obj/structure/bed/chair/shuttle,
+/turf/floor/tiled,
+/area/space)
+"fh" = (
+/obj/structure/dispenser/oxygen,
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/tiled,
+/area/space)
+"ft" = (
+/obj/structure/closet/emcloset,
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/tiled,
+/area/space)
+"ge" = (
+/obj/structure/closet/crate/bin,
+/obj/effect/decal/cleanable/cobweb,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/gun/projectile/selfload,
+/obj/item/ammo_magazine/hpistol,
+/turf/floor/tiled,
+/area/space)
+"gl" = (
+/obj/structure/ore_box,
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/tiled/techmaint,
+/area/space)
+"ib" = (
+/obj/effect/decal/cleanable/blood,
+/turf/floor/tiled,
+/area/space)
+"iP" = (
+/turf/wall/reinforced,
+/area/space)
+"jk" = (
+/obj/machinery/door/airlock/external{
+	name = "NTMS-037 Mining Airlock"
+	},
+/turf/floor/tiled,
+/area/space)
+"jY" = (
+/obj/structure/table/standard,
+/obj/item/tool/wrench,
+/obj/effect/decal/cleanable/cobweb,
+/obj/structure/extinguisher_cabinet{
+	pixel_x = 27
+	},
+/obj/structure/extinguisher_cabinet{
+	pixel_x = 27
+	},
+/turf/floor/tiled,
+/area/space)
+"kN" = (
+/obj/structure/table/standard,
+/obj/effect/decal/cleanable/cobweb,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/folder/yellow{
+	pixel_x = -4;
+	pixel_y = 6
+	},
+/obj/item/paper/crumpled/bloody{
+	info = "We struck gold, literally. We found some good rocks out near Centurai-II rich with the stuff. Kae said he and Milos found something out while prospecting, some sort of glowing cube. It's jammed in there good, so we're anchoring until we sort this out...";
+	pixel_x = 4;
+	pixel_y = 4
+	},
+/turf/floor/tiled,
+/area/space)
+"kQ" = (
+/obj/machinery/door/airlock{
+	name = "NTMS-037 Lockers"
+	},
+/turf/floor/tiled/techmaint,
+/area/space)
+"mt" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/plating,
+/area/space)
+"nu" = (
+/obj/structure/reagent_dispensers/fueltank,
+/obj/item/tool/weldingtool,
+/turf/floor/plating,
+/area/space)
+"nz" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/cobweb,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/floor/wood,
+/area/space)
+"oA" = (
+/obj/machinery/conveyor{
+	id = "NTMSLoad2";
+	name = "on ramp"
+	},
+/obj/machinery/door/airlock/external{
+	name = "External Freight Airlock"
+	},
+/turf/floor/tiled/techmaint,
+/area/space)
+"pE" = (
+/obj/item/tool/wrench,
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/tiled/techmaint,
+/area/space)
+"qi" = (
+/obj/machinery/door/airlock/external{
+	name = "NTMS-037 Cargo Bay"
+	},
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/greenglow,
+/turf/floor/tiled/techmaint,
+/area/space)
+"ri" = (
+/obj/machinery/door/airlock/engineering{
+	name = "NTMS-037 Engine Room"
+	},
+/turf/floor/tiled/techmaint,
+/area/space)
+"rw" = (
+/obj/machinery/recharger,
+/obj/item/stack/cable_coil,
+/obj/effect/decal/cleanable/cobweb,
+/obj/effect/decal/cleanable/blood,
+/obj/structure/table/standard,
+/obj/spawner/powercell/medium,
+/turf/floor/plating,
+/area/space)
+"rx" = (
+/obj/structure/closet/secure_closet/freezer{
+	locked = 0;
+	name = "fridge"
+	},
+/obj/item/reagent_containers/food/drinks/bottle/small/beer{
+	pixel_x = -3;
+	pixel_y = 3
+	},
+/obj/item/reagent_containers/food/drinks/bottle/small/beer,
+/turf/floor/tiled,
+/area/space)
+"sh" = (
+/obj/effect/decal/cleanable/blood,
+/mob/living/simple_animal/hostile/alien/drone,
+/turf/floor/tiled,
+/area/space)
+"sP" = (
+/turf/wall/low/with_glass/reinforced,
+/turf/floor/plating,
+/area/space)
+"sZ" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/status_display{
+	pixel_x = 32;
+	pixel_y = -32
+	},
+/turf/floor/tiled,
+/area/space)
+"tD" = (
+/obj/structure/closet/crate,
+/obj/item/storage/box/lights/bulbs,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/extinguisher_cabinet{
+	pixel_x = 27
+	},
+/turf/floor/tiled/techmaint,
+/area/space)
+"tN" = (
+/obj/machinery/door/airlock{
+	name = "Bunk B"
+	},
+/turf/floor/tiled/techmaint,
+/area/space)
+"ue" = (
+/obj/item/clothing/head/armor/faceshield/altyn/black,
+/obj/item/clothing/suit/storage/vest,
+/obj/spawner/gun/normal,
+/obj/structure/closet,
+/turf/floor/tiled,
+/area/space)
+"ul" = (
+/obj/machinery/suit_storage_unit/standard_unit,
+/turf/floor/tiled,
+/area/space)
+"uV" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/greenglow,
+/turf/floor/tiled,
+/area/space)
+"vm" = (
+/obj/effect/decal/cleanable/blood,
+/obj/machinery/status_display{
+	pixel_x = 32;
+	pixel_y = -32
+	},
+/turf/floor/tiled/techmaint,
+/area/space)
+"vp" = (
+/obj/machinery/door/airlock{
+	name = "NTMS-037 Saloon"
+	},
+/turf/floor/tiled/techmaint,
+/area/space)
+"wc" = (
+/obj/machinery/computer{
+	dir = 1
+	},
+/obj/item/stack/cable_coil/cut,
+/turf/floor/tiled,
+/area/space)
+"wA" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/table/gamblingtable,
+/obj/item/storage/fancy/cigarettes/homeless,
+/obj/item/flame/lighter/random,
+/turf/floor/wood,
+/area/space)
+"xB" = (
+/obj/structure/closet/crate,
+/obj/item/tool/shovel,
+/obj/item/tool/pickaxe,
+/obj/item/storage/box/lights/mixed,
+/turf/floor/tiled/techmaint,
+/area/space)
+"xM" = (
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/tiled/techmaint,
+/area/space)
+"yd" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 4
+	},
+/turf/floor/plating,
+/area/space)
+"yh" = (
+/obj/machinery/door/airlock/command{
+	name = "NTMS-037 Ship Control"
+	},
+/turf/floor/tiled/techmaint,
+/area/space)
+"yx" = (
+/obj/effect/decal/cleanable/greenglow,
+/obj/spawner/closet/maintloot,
+/turf/floor/tiled,
+/area/space)
+"zJ" = (
+/obj/structure/closet/emcloset,
+/obj/effect/decal/cleanable/cobweb,
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/tiled,
+/area/space)
+"AE" = (
+/obj/structure/ore_box,
+/obj/effect/decal/cleanable/cobweb,
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/tiled/techmaint,
+/area/space)
+"AX" = (
+/turf/floor/tiled/steel/brown_perforated,
+/area/space)
+"Bh" = (
+/obj/effect/decal/cleanable/blood,
+/turf/floor/tiled/techmaint,
+/area/space)
+"Bx" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/greenglow,
+/turf/floor/tiled/techmaint,
+/area/space)
+"BM" = (
+/obj/structure/bed/chair/shuttle,
+/turf/floor/tiled,
+/area/space)
+"Cn" = (
+/obj/structure/reagent_dispensers/watertank,
+/obj/item/reagent_containers/glass/bucket,
+/obj/item/mop,
+/obj/item/storage/bag/trash{
+	pixel_x = 6
+	},
+/obj/effect/decal/cleanable/blood,
+/turf/floor/plating,
+/area/space)
+"Df" = (
+/obj/machinery/door/airlock/external{
+	name = "NTMS-037 Mining Airlock"
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/tiled,
+/area/space)
+"DA" = (
+/obj/machinery/status_display{
+	pixel_x = 32;
+	pixel_y = 32
+	},
+/obj/item/stack/rods,
+/turf/floor/tiled,
+/area/space)
+"DC" = (
+/obj/machinery/door/airlock/command{
+	name = "NTMS-037 Captain's Quarters"
+	},
+/turf/floor/tiled/techmaint,
+/area/space)
+"EM" = (
+/obj/structure/table/standard,
+/obj/item/storage/toolbox/electrical{
+	pixel_x = -3;
+	pixel_y = 8
+	},
+/obj/machinery/status_display{
+	pixel_y = 32
+	},
+/obj/spawner/toolbox,
+/obj/spawner/toolbox,
+/turf/floor/tiled,
+/area/space)
+"Fv" = (
+/obj/machinery/conveyor{
+	dir = 1;
+	id = "NTMSLoad";
+	name = "off ramp"
+	},
+/obj/machinery/door/airlock/external{
+	name = "External Freight Airlock"
+	},
+/turf/floor/tiled/techmaint,
+/area/space)
+"FA" = (
+/obj/structure/bed,
+/obj/item/bedsheet/brown,
+/obj/effect/decal/cleanable/greenglow,
+/turf/floor/wood,
+/area/space)
+"FR" = (
+/obj/structure/table/rack,
+/obj/item/storage/belt/utility,
+/obj/machinery/light/small,
+/turf/floor/tiled,
+/area/space)
+"FZ" = (
+/obj/machinery/washing_machine,
+/turf/floor/tiled,
+/area/space)
+"Gf" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/blood,
+/obj/machinery/light/small,
+/obj/machinery/power/apc{
+	cell_type = null;
+	name = "South APC";
+	pixel_y = -28
+	},
+/turf/floor/plating,
+/area/space)
+"Gp" = (
+/obj/structure/table/standard,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/storage/box/donkpockets{
+	pixel_x = -6;
+	pixel_y = 4
+	},
+/obj/item/storage/box/donkpockets{
+	pixel_x = -6;
+	pixel_y = 8
+	},
+/obj/item/reagent_containers/food/condiment/enzyme{
+	layer = 5;
+	pixel_x = 12;
+	pixel_y = 6
+	},
+/turf/floor/tiled,
+/area/space)
+"GC" = (
+/obj/structure/table/standard,
+/obj/item/storage/toolbox/mechanical{
+	pixel_y = 4
+	},
+/obj/item/clothing/head/welding{
+	pixel_x = -2;
+	pixel_y = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/plating,
+/area/space)
+"GH" = (
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/tiled/steel/brown_perforated,
+/area/space)
+"GR" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/plating,
+/area/space)
+"Hi" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/door/airlock/external{
+	name = "NTMS-037 Port Airlock"
+	},
+/turf/floor/tiled,
+/area/space)
+"HZ" = (
+/obj/structure/table/standard,
+/obj/spawner/gun/normal,
+/turf/floor/tiled,
+/area/space)
+"IJ" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/greenglow,
+/turf/floor/plating,
+/area/space)
+"IQ" = (
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/obj/effect/decal/cleanable/greenglow,
+/turf/floor/plating,
+/area/space)
+"Jk" = (
+/obj/structure/table/rack,
+/obj/item/storage/toolbox/emergency,
+/turf/floor/tiled/techmaint,
+/area/space)
+"Jt" = (
+/obj/structure/table/standard,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/storage/toolbox/mechanical{
+	pixel_y = 6
+	},
+/turf/floor/tiled,
+/area/space)
+"JW" = (
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/plating,
+/area/space)
+"Ke" = (
+/obj/structure/bed/chair/shuttle{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/greenglow,
+/turf/floor/tiled,
+/area/space)
+"Ky" = (
+/obj/effect/decal/cleanable/blood,
+/turf/floor/plating,
+/area/space)
+"KA" = (
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/tiled,
+/area/space)
+"KI" = (
+/turf/floor/wood,
+/area/space)
+"Ll" = (
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/cobweb,
+/obj/structure/table/standard,
+/turf/floor/tiled,
+/area/space)
+"Lp" = (
+/turf/floor/tiled,
+/area/space)
+"Mc" = (
+/obj/machinery/door/airlock{
+	name = "Bunk A"
+	},
+/turf/floor/tiled/techmaint,
+/area/space)
+"MO" = (
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/cobweb,
+/obj/structure/extinguisher_cabinet{
+	pixel_x = -27
+	},
+/turf/floor/plating,
+/area/space)
+"MY" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/wood,
+/area/space)
+"Nl" = (
+/obj/effect/decal/cleanable/blood,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/floor/tiled,
+/area/space)
+"NL" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/greenglow,
+/turf/floor/tiled/steel/brown_perforated,
+/area/space)
+"OB" = (
+/turf/floor/carpet,
+/area/space)
+"OO" = (
+/obj/structure/shuttle/engine/heater{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/floor/plating,
+/area/space)
+"Pa" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/tiled/techmaint,
+/area/space)
+"PY" = (
+/obj/machinery/door/airlock/external{
+	id_tag = "ntms_exterior";
+	name = "NTMS-037 Mining Airlock"
+	},
+/turf/floor/tiled,
+/area/space)
+"Rd" = (
+/obj/machinery/status_display{
+	pixel_y = 32
+	},
+/obj/item/gun/energy/captain,
+/obj/structure/closet,
+/turf/floor/carpet,
+/area/space)
+"Rq" = (
+/obj/machinery/power/smes/buildable{
+	charge = 0
+	},
+/obj/effect/decal/cleanable/cobweb,
+/turf/floor/plating,
+/area/space)
+"RI" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/greenglow,
+/obj/structure/salvageable/autolathe,
+/turf/floor/tiled/techmaint,
+/area/space)
+"Se" = (
+/obj/structure/table/standard,
+/obj/machinery/recharger,
+/obj/spawner/powercell/medium,
+/obj/spawner/powercell/small,
+/turf/floor/tiled,
+/area/space)
+"SD" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/tiled,
+/area/space)
+"Tq" = (
+/obj/effect/decal/cleanable/greenglow,
+/turf/floor/tiled,
+/area/space)
+"TB" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/computer{
+	dir = 1
+	},
+/turf/floor/tiled,
+/area/space)
+"TX" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/external{
+	name = "External Freight Airlock"
+	},
+/obj/effect/decal/cleanable/greenglow,
+/turf/floor/tiled/techmaint,
+/area/space)
+"UU" = (
+/obj/machinery/door/airlock/external{
+	id_tag = "ntms_exterior";
+	name = "NTMS-037 Mining Airlock"
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/tiled,
+/area/space)
+"Vn" = (
+/obj/structure/table/standard,
+/obj/item/tool/crowbar,
+/obj/item/storage/fancy/cigar,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/floor/carpet,
+/area/space)
+"Vs" = (
+/obj/machinery/computer{
+	dir = 4
+	},
+/turf/floor/tiled,
+/area/space)
+"VD" = (
+/turf/floor/exoplanet/barren,
+/area/space)
+"VM" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/floor/tiled,
+/area/space)
+"Wo" = (
+/obj/structure/bed,
+/obj/item/bedsheet/brown,
+/turf/floor/wood,
+/area/space)
+"WG" = (
+/obj/effect/decal/cleanable/greenglow,
+/turf/floor/plating,
+/area/space)
+"Xi" = (
+/obj/structure/table/rack,
+/obj/item/storage/box/lights/mixed,
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/tiled/techmaint,
+/area/space)
+"Xu" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/greenglow,
+/obj/machinery/autolathe_disk_cloner,
+/obj/machinery/light/small,
+/turf/floor/tiled/techmaint,
+/area/space)
+"Ye" = (
+/obj/structure/bed,
+/obj/item/bedsheet/captain,
+/turf/floor/wood,
+/area/space)
+"Yi" = (
+/obj/effect/decal/cleanable/greenglow,
+/turf/floor/tiled/techmaint,
+/area/space)
+"Yq" = (
+/obj/structure/table/standard,
+/obj/machinery/microwave{
+	pixel_y = 5
+	},
+/turf/floor/tiled,
+/area/space)
+"YF" = (
+/obj/structure/table/standard,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/storage/ration_pack,
+/obj/item/storage/ration_pack,
+/turf/floor/wood,
+/area/space)
+"YO" = (
+/obj/machinery/power/terminal{
+	dir = 1
+	},
+/obj/machinery/power/port_gen/pacman{
+	anchored = 1
+	},
+/obj/item/tool/wrench,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/greenglow,
+/turf/floor/plating,
+/area/space)
+"Zb" = (
+/obj/machinery/computer{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/floor/tiled,
+/area/space)
+"ZT" = (
+/obj/structure/bed/chair/comfy/brown{
+	color = "#c45c57";
+	dir = 1
+	},
+/turf/floor/carpet,
+/area/space)
+
+(1,1,1) = {"
+VD
+VD
+VD
+VD
+iP
+iP
+UU
+PY
+iP
+iP
+VD
+VD
+VD
+VD
+VD
+VD
+"}
+(2,1,1) = {"
+VD
+iP
+iP
+sP
+iP
+zJ
+JW
+IJ
+ft
+iP
+sP
+iP
+sP
+sP
+VD
+VD
+"}
+(3,1,1) = {"
+iP
+iP
+MO
+GR
+iP
+iP
+jk
+Df
+iP
+iP
+kN
+Vs
+Zb
+sP
+sP
+VD
+"}
+(4,1,1) = {"
+iP
+SD
+IJ
+JW
+Hi
+am
+ao
+AX
+GH
+yh
+ib
+Ke
+aF
+HZ
+sP
+sP
+"}
+(5,1,1) = {"
+iP
+Hi
+iP
+sP
+iP
+EM
+am
+NL
+FR
+iP
+VM
+SD
+sh
+eZ
+TB
+sP
+"}
+(6,1,1) = {"
+VD
+VD
+VD
+VD
+sP
+dg
+AX
+ao
+ul
+iP
+Se
+DA
+uV
+BM
+wc
+iP
+"}
+(7,1,1) = {"
+VD
+VD
+VD
+VD
+sP
+jY
+NL
+am
+fh
+iP
+iP
+Ll
+ib
+Lp
+Jt
+sP
+"}
+(8,1,1) = {"
+VD
+VD
+VD
+VD
+iP
+iP
+iP
+qi
+iP
+iP
+iP
+iP
+iP
+yh
+iP
+iP
+"}
+(9,1,1) = {"
+VD
+VD
+VD
+VD
+VD
+iP
+dY
+Bx
+Jk
+Xi
+iP
+nz
+KI
+uV
+Yq
+sP
+"}
+(10,1,1) = {"
+VD
+VD
+VD
+VD
+VD
+oA
+Pa
+xM
+Yi
+Pa
+eQ
+MY
+wA
+ib
+Gp
+iP
+"}
+(11,1,1) = {"
+VD
+VD
+VD
+VD
+VD
+TX
+Yi
+gl
+pE
+Bh
+vp
+ib
+Tq
+sZ
+rx
+sP
+"}
+(12,1,1) = {"
+VD
+VD
+VD
+VD
+VD
+Fv
+Pa
+xB
+vm
+RI
+iP
+ge
+KA
+YF
+iP
+iP
+"}
+(13,1,1) = {"
+VD
+VD
+VD
+VD
+VD
+iP
+Bh
+Pa
+Xu
+iP
+iP
+iP
+kQ
+iP
+iP
+VD
+"}
+(14,1,1) = {"
+VD
+VD
+VD
+VD
+VD
+sP
+AE
+Bh
+tD
+iP
+Wo
+Mc
+Tq
+ue
+sP
+VD
+"}
+(15,1,1) = {"
+VD
+VD
+VD
+VD
+VD
+iP
+iP
+ri
+iP
+iP
+iP
+iP
+Nl
+yx
+iP
+VD
+"}
+(16,1,1) = {"
+VD
+VD
+VD
+VD
+VD
+iP
+rw
+Ky
+GC
+iP
+FA
+tN
+ib
+FZ
+sP
+VD
+"}
+(17,1,1) = {"
+VD
+VD
+VD
+VD
+VD
+sP
+IQ
+Ky
+Cn
+iP
+iP
+iP
+DC
+iP
+iP
+VD
+"}
+(18,1,1) = {"
+VD
+VD
+VD
+VD
+VD
+sP
+WG
+mt
+Gf
+iP
+Vn
+ZT
+KI
+sP
+VD
+VD
+"}
+(19,1,1) = {"
+VD
+VD
+VD
+VD
+VD
+iP
+Rq
+YO
+nu
+iP
+Rd
+OB
+Ye
+sP
+VD
+VD
+"}
+(20,1,1) = {"
+VD
+VD
+VD
+VD
+VD
+iP
+iP
+sP
+sP
+iP
+iP
+sP
+sP
+iP
+VD
+VD
+"}
+(21,1,1) = {"
+VD
+VD
+VD
+VD
+VD
+iP
+OO
+OO
+OO
+iP
+OO
+OO
+OO
+iP
+VD
+VD
+"}
+(22,1,1) = {"
+VD
+VD
+VD
+VD
+VD
+iP
+yd
+yd
+yd
+iP
+yd
+yd
+yd
+iP
+VD
+VD
+"}
