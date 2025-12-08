@@ -208,7 +208,7 @@
 	reload_sound = 'sound/weapons/guns/interact/rifle_load.ogg'
 	price_tag = 800
 	sharp = TRUE //no bayonet here
-	spawn_blacklisted = FALSE
+	spawn_blacklisted = TRUE
 	spawn_tags = SPAWN_TAG_GUN_HANDMADE
 	saw_off = TRUE // yeah, we are getting the ghetto sawn off too
 	sawn = /obj/item/gun/projectile/boltgun/obrez/handmade
@@ -223,6 +223,7 @@
 	gripvars = list(/obj/item/part/gun/modular/grip/wood)
 	mechanismvar = /obj/item/part/gun/modular/mechanism/boltgun/junk
 	barrelvars = list(/obj/item/part/gun/modular/barrel/lrifle/steel, /obj/item/part/gun/modular/barrel/srifle/steel, /obj/item/part/gun/modular/barrel/clrifle/steel)
+	spawn_blacklisted = TRUE
 
 //// OBREZ ////
 
