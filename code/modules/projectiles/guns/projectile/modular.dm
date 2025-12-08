@@ -282,7 +282,7 @@
 	if(zoom)
 		var/currentzoom = zoom_factors.Find(active_zoom_factor)
 		var/extra_damage
-		if(scope_damage_adds[currentzoom])
+		if(LAZYLEN(scope_damage_adds) && scope_damage_adds[currentzoom])
 			extra_damage = scope_damage_adds[currentzoom]
 		damage_multiplier += extra_damage
 
