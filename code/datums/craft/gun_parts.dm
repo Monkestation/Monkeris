@@ -309,7 +309,7 @@ semi accepts weird caliber - +1 points
 	part_itemstring = TRUE
 
 /obj/item/part/gun/modular/grip/New(location, quality = 0)
-	..(quality)
+	..(quality = quality)
 	I.weapon_upgrades[GUN_UPGRADE_DEFINE_GRIP] = type_of_grip
 	I.weapon_upgrades[GUN_UPGRADE_OFFSET] = -15 // Without a grip the gun shoots funny, players are legally allowed to not use a grip
 	I.gun_loc_tag = PART_GRIP
@@ -651,7 +651,7 @@ semi accepts weird caliber - +1 points
 	var/basemove
 
 /obj/item/part/gun/modular/barrel/New(location, quality = 0)
-	..(quality)
+	..(quality = quality)
 	I.weapon_upgrades[GUN_UPGRADE_DEFINE_CALIBER] = caliber
 	if(!isnull(speed))
 		I.weapon_upgrades[GUN_UPGRADE_STEPDELAY_MULT] = speed
