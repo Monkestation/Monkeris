@@ -24,7 +24,7 @@
 
 	serial_type = "FS"
 
-	required_parts = list(/obj/item/part/gun/modular/mechanism/autorifle = 0, /obj/item/part/gun/modular/barrel = 0, /obj/item/part/gun/modular/grip = 0, /obj/item/part/gun/modular/stock = -1)
+	required_parts = list(/obj/item/part/gun/modular/mechanism/autorifle = 0, /obj/item/part/gun/modular/barrel = 0, /obj/item/part/gun/modular/grip = 0, /obj/item/part/gun/modular/stock = -1, /obj/item/part/gun/modular/sights = -1,  /obj/item/part/gun/modular/bayonet = -1)
 
 /obj/item/gun/projectile/automatic/modular/ak/get_initial_name()
 	var/stock_type = (PARTMOD_FOLDING_STOCK & spriteTags) ? "AR" : "Car"
