@@ -75,7 +75,7 @@
 	if(grip_type)
 		switch(grip_type)
 			if("wood")
-				return "Excelsior AR [caliber] \"Robin\""
+				return "Excelsior SMG [caliber] \"Robin\""
 			if("black")
 				return "BM SMG [caliber] \"Sokol\""
 			if("rubber")
