@@ -8,6 +8,7 @@
 	desc = "An excellent fully automatic Heavy SMG. Rifled to take a larger caliber than a typical submachine gun, but unlike \
 			other heavy SMGs makes use of increased caliber to achieve excellent damage capabilities. \
 			Suffers a bit less from poor recoil control and ineffective armor penetration."
+	//new .dmi location, inside the projectile/modular file.
 	icon = 'icons/obj/guns/projectile/modular/drozd.dmi'
 
 	//copy these stats from base gun
@@ -21,6 +22,10 @@
 	gun_tags = list(GUN_SILENCABLE)
 
 	serial_type = "Excelsior"
+
+	//need this if the og gun has it, in this case, do not add.
+	//auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
+	//auto_eject = TRUE
 
 	// Spawns in gun part loot
 	spawn_blacklisted = FALSE
@@ -37,10 +42,6 @@
 	unload_sound = 'sound/weapons/guns/interact/smg_magout.ogg'
 	reload_sound = 'sound/weapons/guns/interact/smg_magin.ogg'
 	cocked_sound = 'sound/weapons/guns/interact/smg_cock.ogg'
-
-	//need this if the og gun has it, in this case, do not add.
-	//auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
-	//auto_eject = TRUE
 
 	//these vars contains information about the gun's sprite
 	spriteTags = PARTMOD_SLIDE //this gun has a slide, meaning that sprites have a "-e" variant with the slide pulled back
