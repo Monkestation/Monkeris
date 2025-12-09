@@ -41,7 +41,8 @@
 	. = ..()
 
 /datum/component/modification/organ/check_item(obj/item/I, mob/living/user)
-	if(..() == FALSE)//hero . saves me from actually fixing the nightmare inheritance of this code
+	. = ..()
+	if(!.)//hero . saves me from actually fixing the nightmare inheritance of this code
 		return FALSE
 
 	if(istype(I, /obj/item/organ))
