@@ -77,13 +77,13 @@
 			if("wood")
 				return "Excelsior AR [caliber] \"Robin\""
 			if("black")
-				return "BM AR [caliber] \"Sokol\""
+				return "BM SMG [caliber] \"Sokol\""
 			if("rubber")
-				return "FS AR [caliber] \"Sparrow\""
+				return "FS SMG [caliber] \"Sparrow\""
 			if("excelsior")
 				return "Excelsior SMG [caliber] \"Drozd\""
 			if("serbian")
-				return "SA AR [caliber] \"Sova\""
+				return "SA SMG [caliber] \"Sova\""
 			if("makeshift")
 				return "MS SMG [caliber] \"Cage\""
 	else
