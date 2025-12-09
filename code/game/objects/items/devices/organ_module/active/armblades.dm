@@ -5,6 +5,11 @@
 	desc = "A mechanical blade deployed from your arm. The favourite hidden weapon of many criminal types."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "armblade"
+	item_state = "armblade"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/swords_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/swords_righthand.dmi',
+		)
 	worksound = WORKSOUND_HARD_SLASH
 	force = WEAPON_FORCE_BRUTAL
 	throwforce = WEAPON_FORCE_WEAK
@@ -26,6 +31,11 @@
 
 /obj/item/tool/armblade/claws
 	icon_state = "wolverine"
+	item_state = "wolverine"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/swords_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/swords_righthand.dmi',
+		)
 	name = "claws"
 	desc = "A set of claws deployed from the tips of your fingers. Great for cutting people into ribbons."
 
@@ -62,7 +72,11 @@
 
 /obj/item/tool/armblade/wristshank
 	icon_state = "wristshank"
-	item_state = null
+	item_state = "wristshank"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/swords_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/swords_righthand.dmi',
+		)
 	name = "wristshank"
 	desc = "A stubby blade deployed from your wrist. Get shanking."
 	icon = 'icons/obj/surgery.dmi'

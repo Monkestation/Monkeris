@@ -277,6 +277,10 @@
 	icon_state = "staff"
 	item_state = "staff"
 	wielded_icon = "staff_wielded"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/polearms_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/polearms_righthand.dmi',
+		)
 	tool_qualities = list(QUALITY_HAMMERING = 5)
 	matter = list(MATERIAL_STEEL = 3)
 	extended_reach = TRUE
