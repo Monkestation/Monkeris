@@ -124,6 +124,11 @@ Based on /datum/design of \code\datums\autolathe\autolathe_datums.dm
 	category = "SMG mechanisms"
 	build_path = /obj/item/part/gun/modular/mechanism/smg
 
+/datum/design/makeshift/mechanism/smg
+	name = "high-caliber SMG mechanism"
+	category = "SMG mechanisms"
+	build_path = /obj/item/part/gun/modular/mechanism/smg/highcaliber
+
 // cheap mechanisms
 
 /datum/design/makeshift/mechanism/pistol/steel
