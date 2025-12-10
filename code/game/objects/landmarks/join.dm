@@ -48,6 +48,14 @@ GLOBAL_LIST_EMPTY(spawntypes)
 	spawn_datum_type = /datum/spawnpoint/cryo/starboard
 	disallow_job = list("Robot")
 
+/obj/landmark/join/late/cryo/foward
+	name = "Foward Cryogenic Storage"
+	icon_state = "player-blue-cluster"
+	join_tag = "foward_late_cryo"
+	message = "has completed cryogenic revival"
+	spawn_datum_type = /datum/spawnpoint/cryo/foward
+	disallow_job = list("Robot")
+
 /obj/landmark/join/late/dormitory
 	name = "Dormitory"
 	icon_state = "player-blue-cluster"
