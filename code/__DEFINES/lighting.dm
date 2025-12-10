@@ -46,3 +46,7 @@
 	GLOB.dview_mob.see_invisible = invis_flags; \
 	output = view(range, GLOB.dview_mob); \
 	GLOB.dview_mob.loc = null;
+
+// I DONT KNOW ABOUT THIS
+/// The amount of lumcount on a tile for it to be considered dark (used to determine reading and nyctophobia)
+#define LIGHTING_TILE_IS_DARK 0.2

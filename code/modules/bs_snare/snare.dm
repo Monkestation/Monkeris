@@ -20,7 +20,7 @@
 		silk_id = input_id
 		return
 
-	/*if(istype(I, /obj/item/card/id))
+	/*if(isidcard(I))
 		var/obj/item/card/id/ID = I
 		if(locking_access in ID.GetAccess())
 			toggle_lock()
