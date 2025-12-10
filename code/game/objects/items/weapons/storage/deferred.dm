@@ -372,7 +372,7 @@
 	/obj/item/ammo_magazine/msmg = 4,
 	/obj/item/ammo_magazine/ammobox/magnum = 1,
 	/obj/item/clothing/mask/gas = 1,
-	/obj/item/gun/projectile/automatic/drozd = 1,
+	/obj/item/gun/projectile/automatic/modular/drozd/finished = 1,
 	/obj/item/clothing/suit/armor/gzhel = 1,
 	/obj/item/clothing/shoes/workboots/proletariat = 1
 	)
