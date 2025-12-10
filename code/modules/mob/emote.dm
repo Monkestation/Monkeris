@@ -15,7 +15,10 @@
 	else
 		input = message
 	if(input)
-		message = "<B>[src]</B> [input]"
+		if (input[1] == "'s")
+			message = "<B>[src]</B>[input]"
+		else
+			message = "<B>[src]</B> [input]"
 	else
 		return
 
@@ -83,4 +86,4 @@
 	for (var/mob/O in messagemobs_neardead)
 		if(runechat_prefs_check(O, EMOTE_MESSAGE) && (get_turf(O) in messageturfs))
 			O.create_chat_message(src, raw_message = message, runechat_flags = EMOTE_MESSAGE)
-		O.show_message("<B>[message]</B>", type)
+		O.show_message("[FOLLOW_LINK(O, src)] <B>[message]</B>", type)

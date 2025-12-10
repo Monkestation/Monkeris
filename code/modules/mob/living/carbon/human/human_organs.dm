@@ -171,7 +171,7 @@
 		. += organ
 
 /mob/living/carbon/human/proc/random_organ_by_process(organ_process)
-	if(organ_list_by_process(organ_process).len)
+	if(length(organ_list_by_process(organ_process)))
 		return pick(organ_list_by_process(organ_process))
 	return	FALSE
 

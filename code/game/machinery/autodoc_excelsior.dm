@@ -210,7 +210,6 @@
 	update_icon()
 
 /obj/machinery/excelsior_autodoc/update_icon()
-
 	cut_overlays()
 
 	if(panel_open)
@@ -226,7 +225,11 @@
 		overlays += comrade
 		overlays += cover_state
 		if(cover_moving)
-			sleep (15)
+			sleep(1.5 SECONDS)
+			if (!occupant)
+				// we died during those 1.5 seconds
+				screen_state = image(icon, "screen_idle")
+				return
 			if(cover_closed)
 				cover_state = image(icon, "closed")
 				cover_state.layer = 4.5

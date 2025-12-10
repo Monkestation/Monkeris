@@ -9,9 +9,10 @@
 #define PRESSURE_TANK_VOLUME 150	//L
 #define PUMP_MAX_FLOW_RATE 90		//L/s - 4 m/s using a 15 cm by 15 cm inlet
 
-#define DISPOSALS_OFF "Off"
-#define DISPOSALS_CHARGING "Pressurizing"
-#define DISPOSALS_CHARGED "Ready"
+#define DISPOSALS_DOUBLEOFF -1
+#define DISPOSALS_OFF 0
+#define DISPOSALS_CHARGING 1
+#define DISPOSALS_CHARGED 2
 
 /obj/machinery/disposal
 	name = "disposal unit"
@@ -263,10 +264,22 @@
 		ui.set_autoupdate(TRUE)
 		ui.open()
 
+/obj/machinery/disposal/proc/mode_to_text()
+	. = "Unknown mode ([mode])"
+	switch(mode)
+		if(DISPOSALS_DOUBLEOFF)
+			. = "Off?"
+		if(DISPOSALS_OFF)
+			. = "Off"
+		if(DISPOSALS_CHARGING)
+			. = "Charging..."
+		if(DISPOSALS_CHARGED)
+			. = "Charged"
+
 /obj/machinery/disposal/ui_data(mob/user)
 	var/list/data = list(
 		"isai" = isAI(user),
-		"mode" = mode,
+		"mode" = mode_to_text(mode),
 		"handle" = flush,
 		"panel" = panel_open,
 		"eject" = length(contents) ? TRUE : FALSE,
@@ -320,7 +333,7 @@
 		return
 
 	// 	check for items in disposal - occupied light
-	if(contents.len > 0)
+	if(length(contents) > 0)
 		overlays += image('icons/obj/pipes/disposal.dmi', "dispover-full")
 
 	// charging and ready light
@@ -1426,9 +1439,9 @@
 	src.add_fingerprint(user)
 
 	var/list/usable_qualities = list()
-	if(mode<=0)
+	if(mode <= DISPOSALS_OFF)
 		usable_qualities.Add(QUALITY_SCREW_DRIVING)
-	if(mode==-1)
+	if(mode == DISPOSALS_DOUBLEOFF)
 		usable_qualities.Add(QUALITY_WELDING)
 
 
@@ -1436,21 +1449,21 @@
 	switch(tool_type)
 
 		if(QUALITY_SCREW_DRIVING)
-			if(mode<=0)
+			if(mode <= DISPOSALS_OFF)
 				var/used_sound = mode ? 'sound/machines/Custom_screwdriverclose.ogg' : 'sound/machines/Custom_screwdriveropen.ogg'
 				if(I.use_tool(user, src, WORKTIME_NEAR_INSTANT, tool_type, FAILCHANCE_EASY, required_stat = STAT_MEC, instant_finish_tier = 30, forced_sound = used_sound))
-					if(mode==0) // It's off but still not unscrewed
-						mode=-1 // Set it to doubleoff l0l
+					if(mode == DISPOSALS_OFF) // It's off but still not unscrewed
+						mode = DISPOSALS_DOUBLEOFF // Set it to doubleoff l0l
 						to_chat(user, "You remove the screws around the power connection.")
 						return
-					else if(mode==-1)
-						mode=0
+					else if(mode == DISPOSALS_DOUBLEOFF)
+						mode = DISPOSALS_OFF
 						to_chat(user, "You attach the screws around the power connection.")
 						return
 			return
 
 		if(QUALITY_WELDING)
-			if(mode==-1)
+			if(mode == DISPOSALS_DOUBLEOFF)
 				if(I.use_tool(user, src, WORKTIME_NORMAL, tool_type, FAILCHANCE_EASY, required_stat = STAT_MEC))
 					to_chat(user, "You sliced the floorweld off the disposal outlet.")
 					var/obj/structure/disposalconstruct/C = new (src.loc)

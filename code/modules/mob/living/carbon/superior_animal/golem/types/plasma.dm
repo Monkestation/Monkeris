@@ -46,7 +46,7 @@
 		spawn(det_time)
 			// Plasma ball on location
 			visible_message(span_danger("\The [src] explodes into a ball of burning plasma!"))
-			for(var/turf/floor/target_tile as anything in RANGE_TURFS(2, loc))
+			for(var/turf/floor/target_tile as anything in RANGE_TURFS(2, get_turf(src)))
 				new /obj/effect/decal/cleanable/liquid_fuel(target_tile, 2, 1)
 				target_tile.hotspot_expose((T20C * 2) + 380, 500)  // From flamethrower code
 			. = ..()

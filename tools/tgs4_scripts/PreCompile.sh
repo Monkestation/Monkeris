@@ -69,6 +69,42 @@ cd ..
 # get dependencies for extools
 apt-get install -y cmake build-essential gcc-multilib g++-multilib cmake wget
 
+# update byond-tracy
+if [ ! -d "byond-tracy" ]; then
+	echo "Cloning byond-tracy..."
+	git clone https://github.com/ParadiseSS13/byond-tracy
+	cd byond-tracy
+
+else
+	echo "Fetching byond-tracy..."
+	cd byond-tracy
+	git fetch
+fi
+
+echo "Deploying byond-tracy..."
+git pull
+gcc -D_FILE_OFFSET_BITS=64 -std=c11 -m32 -shared -fPIC -Ofast -s -DNDEBUG prof.c -pthread -o libprof.so
+BASE="/opt/ss13-instances"
+
+for inst in "$BASE"/*; do
+    [ -d "$inst" ] || continue
+
+    DEST="$inst/Configuration/CodeModifications"
+    [ -d "$DEST" ] || continue
+
+    TARGET="$DEST/libprof.so"
+
+    if lsof "$TARGET" >/dev/null 2>&1; then
+        echo "Skipping $inst (libprof.so in use)"
+        continue
+    fi
+
+    cp libprof.so "$TARGET"
+    echo "Deployed to: $inst"
+done
+cd ..
+
+
 # update extools
 if [ ! -d "extools" ]; then
 	echo "Cloning extools..."

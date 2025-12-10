@@ -70,6 +70,9 @@
 	action_button_proc = initial(action_button_proc)
 	action_button_is_hands_free = initial(action_button_is_hands_free)
 
+	var/mob/living/carbon/human/owner = find_owner_recursively()
+	if (QDELETED(owner))
+		return
 	for(var/process in organ_efficiency)
 		owner.internal_organs_by_efficiency[process] -= src
 

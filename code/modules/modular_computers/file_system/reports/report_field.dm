@@ -1,14 +1,24 @@
 /datum/report_field
-	var/datum/computer_file/report/owner //The report to which this field belongs.
-	var/name = "generic field"     //The name the field will be labeled with.
-	var/value                      //Only used internally.
-	var/can_edit = 1               //Whether the field gives the user the option to edit it.
-	var/required = 0               //Whether the field is required to submit the report.
-	var/ID                         //A unique (per report) id; don't set manually.
-	var/needs_big_box = 0          //Suggests that the output won't look good in-line. Useful in nanoui logic.
-	var/ignore_value = 0           //Suggests that the value should not be displayed.
-	var/list/access_edit = list(list())  //The access required to edit the field.
-	var/list/access = list(list())       //The access required to view the field.
+	/// The report to which this field belongs.
+	var/datum/computer_file/report/owner
+	/// The name the field will be labeled with.
+	var/name = "generic field"
+	/// Only used internally.
+	var/value
+	/// Whether the field gives the user the option to edit it.
+	var/can_edit = 1
+	/// Whether the field is required to submit the report.
+	var/required = 0
+	/// A unique (per report) id; don't set manually.
+	var/ID
+	/// Suggests that the output won't look good in-line. Useful in nanoui logic.
+	var/needs_big_box = 0
+	/// Suggests that the value should not be displayed.
+	var/ignore_value = 0
+	/// The access required to edit the field.
+	var/list/access_edit = list(list())
+	/// The access required to view the field.
+	var/list/access = list(list())
 
 /datum/report_field/New(datum/computer_file/report/report)
 	owner = report
@@ -18,7 +28,7 @@
 	owner = null
 	. = ..()
 
-//Access stuff. Can be given access constants or lists. See report access procs for documentation.
+/// Access stuff. Can be given access constants or lists. See report access procs for documentation.
 /datum/report_field/proc/set_access(access, access_edit, override = 1)
 	if(access)
 		if(!islist(access))
@@ -37,24 +47,24 @@
 		return
 	return has_access_pattern(access_edit, given_access)
 
-//Assumes the old and new fields are of the same type. Override if the field stores information differently.
+/// Assumes the old and new fields are of the same type. Override if the field stores information differently.
 /datum/report_field/proc/copy_value(datum/report_field/old_field)
 	value = old_field.value
 	access = old_field.access
 	access_edit = old_field.access_edit
 
-//Gives the user prompts to fill out the field.
+/// Gives the user prompts to fill out the field.
 /datum/report_field/proc/ask_value(mob/user)
 
-//Sanitizes and sets the value from input.
+/// Sanitizes and sets the value from input.
 /datum/report_field/proc/set_value(given_value)
 	value = given_value
 
-//Exports the contents of the field into html for viewing.
+/// Exports the contents of the field into html for viewing.
 /datum/report_field/proc/get_value()
 	return value
 
-//In case the name needs to be displayed dynamically.
+/// In case the name needs to be displayed dynamically.
 /datum/report_field/proc/display_name()
 	return name
 
@@ -62,12 +72,12 @@
 Basic field subtypes.
 */
 
-//For information between fields.
+/// For information between fields.
 /datum/report_field/instruction
 	can_edit = 0
 	ignore_value = 1
 
-//Basic text field, for short strings.
+/// Basic text field, for short strings.
 /datum/report_field/simple_text
 	value = ""
 
@@ -79,7 +89,7 @@ Basic field subtypes.
 	var/input = input(user, "[display_name()]:", "Form Input", get_value()) as null|text
 	set_value(input)
 
-//Inteded for sizable text blocks.
+/// Inteded for sizable text blocks.
 /datum/report_field/pencode_text
 	value = ""
 	needs_big_box = 1
@@ -94,7 +104,7 @@ Basic field subtypes.
 /datum/report_field/pencode_text/ask_value(mob/user)
 	set_value(input(user, "[display_name()] (You may use HTML paper formatting tags):", "Form Input", replacetext(html_decode(value), "\[br\]", "\n")) as null|message)
 
-//Uses hh:mm format for times.
+/// Uses hh:mm format for times.
 /datum/report_field/time
 	value = "00:00"
 
@@ -104,7 +114,7 @@ Basic field subtypes.
 /datum/report_field/time/ask_value(mob/user)
 	set_value(input(user, "[display_name()] (time as hh:mm):", "Form Input", get_value()) as null|text)
 
-//Uses YYYY-MM-DD format for dates.
+/// Uses YYYY-MM-DD format for dates.
 /datum/report_field/date/New()
 	..()
 	value = stationdate2text()
@@ -115,7 +125,7 @@ Basic field subtypes.
 /datum/report_field/date/ask_value(mob/user)
 	set_value(input(user, "[display_name()] (date as YYYY-MM-DD):", "Form Input", get_value()) as null|text)
 
-//Will prompt for numbers.
+/// Will prompt for numbers.
 /datum/report_field/number
 	value = 0
 
@@ -134,6 +144,9 @@ Basic field subtypes.
 		to_chat(user, span_warning("Your ID is missing."))
 		return
 	var/datum/money_account/used_account = get_account(held_card.associated_account_number)
+	if(!used_account)
+		to_chat(user, span_warning("Your account does not exist."))
+		return
 	var/datum/transaction/T_post = new(-input_value, used_account.owner_name, "Bounty Edited", "Bounty board system")
 	if(T_post.apply_to(used_account)) //Charges the new money
 		to_chat(user, span_warning("Bounty modified. Your previous funds have been refunded."))
@@ -152,7 +165,7 @@ Basic field subtypes.
 /datum/report_field/number/ask_value(mob/user)
 	set_value(input(user, "[display_name()]:", "Form Input", get_value()) as null|num)
 
-//Gives a list of choices to pick one from.
+/// Gives a list of choices to pick one from.
 /datum/report_field/options/proc/get_options()
 
 /datum/report_field/options/set_value(given_value)
@@ -162,14 +175,14 @@ Basic field subtypes.
 /datum/report_field/options/ask_value(mob/user)
 	set_value(input(user, "[display_name()] (select one):", "Form Input", get_value()) as null|anything in get_options())
 
-//Yes or no field.
+/// Yes or no field.
 /datum/report_field/options/yes_no
 	value = "No"
 
 /datum/report_field/options/yes_no/get_options()
 	return list("Yes", "No")
 
-//Signature field; ask_value will obtain the user's signature.
+/// Signature field; ask_value will obtain the user's signature.
 /datum/report_field/signature/get_value()
 	return "<font face=\"Times New Roman\"><i>[value]</i></font>"
 

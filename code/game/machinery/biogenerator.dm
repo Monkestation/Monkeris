@@ -209,7 +209,11 @@
 
 	if(cost > points)
 		menustat = "nopoints"
-		return 0
+		return FALSE
+
+	if(recipe["reagent"] && !beaker)
+		to_chat(usr, span_notice("You need to insert a beaker!"))
+		return FALSE
 
 	processing = 1
 	update_icon()
@@ -227,7 +231,7 @@
 	processing = 0
 	menustat = "complete"
 	update_icon()
-	return 1
+	return TRUE
 
 /obj/machinery/biogenerator/Topic(href, href_list)
 	if(stat & BROKEN) return
