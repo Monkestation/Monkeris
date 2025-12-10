@@ -7,6 +7,10 @@
 	is_nanoforge = TRUE
 	low_quality_print = FALSE
 	circuit = /obj/item/electronics/circuitboard/nanoforge
+
+	stock_watermarks = FALSE
+	given_watermark = WATERMARK_TECHNO
+
 	var/list/tags_to_spawn = list(SPAWN_DESIGN)
 	var/list/nano_disks = list()
 
