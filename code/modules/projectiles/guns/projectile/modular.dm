@@ -98,7 +98,6 @@
 	// Determine base using the current stock status
 	var/iconstring = initial(icon_state)
 	itemstring = (PARTMOD_FRAME_SPRITE & spriteTags) ? ("_" + iconstring) : ("_" + grip_type)
-
 	// Define "-" tags
 	var/dashTag = ""
 	if((PARTMOD_FOLDING_STOCK & spriteTags) && (PARTMOD_FOLDING_STOCK & statusTags))
@@ -128,12 +127,19 @@
 	if(wielded)
 		itemstring += "_doble" // Traditions are to be followed
 
+	//Killing the coder responsible for this entire situation
+	if((PARTMOD_BAYONET & spriteTags))
+		itemstring += "_bynt"
+
 	// Finally, we add the dashTag to the itemstring
 	itemstring += dashTag
 
 	icon_state = iconstring
 	wielded_item_state = itemstring // Hacky solution to a hacky system. Reere forgive us. V3 will fix this.
 	set_item_state(itemstring)
+
+	if(ismob(loc))//finally, update our holder's inhands
+		astype(loc, /mob)?.update_icon()
 
 /obj/item/gun/projectile/automatic/modular/set_item_state(state, hands = TRUE, back = TRUE, onsuit = TRUE) // TODO: check why a billion procs call set_item_state with no state provided
 	if(!state)

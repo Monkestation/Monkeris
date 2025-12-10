@@ -17,6 +17,8 @@
 	cocked_sound = 'sound/weapons/guns/interact/ltrifle_cock.ogg'
 	init_recoil = RIFLE_RECOIL(1) // Default is 0.8 to 0.7 on most AKs, we will reduce this value with relevant gun parts
 
+	spriteTagBans = PARTMOD_BAYONET
+
 	spawn_blacklisted = FALSE // Spawns in gun part loot
 	spawn_tags = SPAWN_TAG_GUN_PART
 
