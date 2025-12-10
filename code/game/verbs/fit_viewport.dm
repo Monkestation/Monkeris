@@ -2,6 +2,7 @@
 	set name = "Fit Viewport"
 	set category = "OOC"
 	set desc = "Fit the width of the map window to match the viewport"
+	set waitfor = FALSE
 
 	// Fetch aspect ratio
 	var/view_size = getviewsize(view)
@@ -15,9 +16,11 @@
 	if (text2num(map_size[1]) == desired_width)
 		// Nothing to do
 		return
-
 	var/split_size = splittext(sizes["mainwindow.split.size"], "x")
 	var/split_width = text2num(split_size[1])
+
+	// Avoid auto-resizing the statpanel and chat into nothing.
+	desired_width = min(desired_width, split_width - 300)
 
 	// Calculate and apply a best estimate
 	// +4 pixels are for the width of the splitter's handle
@@ -42,4 +45,13 @@
 			delta = -delta/2
 
 		pct += delta
-		winset(src, "mainwindow.mainvsplit", "splitter=[pct]")
+		winset(src, "mainwindow.split", "splitter=[pct]")
+
+/// Attempt to automatically fit the viewport, assuming the user wants it
+/client/proc/attempt_auto_fit_viewport()
+	if (get_preference_value(/datum/client_preference/auto_fit_viewport) != GLOB.PREF_YES)
+		return
+	if(fully_created)
+		fit_viewport()
+	else //Delayed to avoid wingets from Login calls.
+		addtimer(CALLBACK(src, VERB_REF(fit_viewport), 1 SECONDS))

@@ -122,7 +122,7 @@
 
 /turf/Enter(atom/movable/O, atom/oldloc)
 	ASSERT(O)
-	if(movement_disabled && ismob(usr) && usr.ckey != movement_disabled_exception)
+	if(GLOB.movement_disabled && ismob(usr) && usr.ckey != GLOB.movement_disabled_exception)
 		to_chat(usr, span_warning("Movement is admin-disabled.")) //This is to identify lag problems
 		return
 
