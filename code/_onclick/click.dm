@@ -79,7 +79,9 @@
 		build_click(src, client.buildmode, params, A)
 		return
 
+
 	var/list/modifiers = params2list(params)
+
 	if(modifiers["shift"] && modifiers["ctrl"])
 		CtrlShiftClickOn(A, params)
 		return 1
