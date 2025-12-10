@@ -138,8 +138,7 @@
 	wielded_item_state = itemstring // Hacky solution to a hacky system. Reere forgive us. V3 will fix this.
 	set_item_state(itemstring)
 
-	if(ismob(loc))//finally, update our holder's inhands
-		astype(loc, /mob)?.update_icon()
+	update_wear_icon()//finally, update our holder's inhands
 
 /obj/item/gun/projectile/automatic/modular/set_item_state(state, hands = TRUE, back = TRUE, onsuit = TRUE) // TODO: check why a billion procs call set_item_state with no state provided
 	if(!state)
