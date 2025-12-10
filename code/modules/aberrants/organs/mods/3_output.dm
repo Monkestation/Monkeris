@@ -81,12 +81,11 @@
 
 	for(var/quality in output_selection)
 		var/datum/reagent/hormone/H
-		var/effect = initial(H.name)
 		if(ispath(quality, /datum/reagent/hormone))
 			H = quality
-
-		new_output_qualities |= initial(H.name)
-		new_output_qualities[effect] = quality
+			var/effect = initial(H.name)
+			new_output_qualities |= effect
+			new_output_qualities[effect] = quality
 
 	O.output_qualities = new_output_qualities
 	..()
