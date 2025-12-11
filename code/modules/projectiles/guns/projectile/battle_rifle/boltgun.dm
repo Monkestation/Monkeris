@@ -44,6 +44,7 @@
 	resultvars = list(/obj/item/gun/projectile/boltgun, /obj/item/gun/projectile/boltgun/serbian)
 	mechanismvar = /obj/item/part/gun/modular/mechanism/boltgun
 	barrelvars = list(/obj/item/part/gun/modular/barrel/lrifle/steel)
+	spawn_blacklisted = TRUE
 
 /obj/item/gun/projectile/boltgun/update_icon()
 	..()
