@@ -26,6 +26,9 @@
 	rarity_value = 10
 	spawn_tags = SPAWN_TAG_KNIFE
 
+	//if used on a modgun, it'll create a visible bayonet
+	modular_overlay = "bayonet"
+
 /obj/item/tool/knife/New()
 	..()
 	var/datum/component/item_upgrade/I = AddComponent(/datum/component/item_upgrade)

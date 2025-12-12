@@ -91,6 +91,7 @@
 	reset_action_buttons()
 	overridedatum?.cycle() // then use an assignment sort
 	name = get_initial_name()
+	generate_guntags()
 
 /obj/item/gun/projectile/automatic/modular/update_icon() // V2
 	cut_overlays() // This is where the fun begins
@@ -119,6 +120,10 @@
 
 			if(gun_part.part_itemstring && !(PARTMOD_FRAME_SPRITE & spriteTags)) // Part also wants to modify itemstring, and is allowed to
 				itemstring = "_" + gun_part.part_overlay + itemstring // Add their overlay name
+
+	for(var/obj/item/ourupgrade in item_upgrades)//find any non-gunpart item_upgrades with visuals to supply
+		if(ourupgrade.modular_overlay)
+			overlays += ourupgrade.modular_overlay + dashTag
 
 	if (ammo_magazine) // Warning! If a sprite is missing from the DMI despite being possible to insert ingame, it might have unforeseen consequences (no magazine showing up)
 		itemstring += "_full"

@@ -279,6 +279,7 @@
 	desc = "Scope that can be attachet to avarage gun."
 	matter = list(MATERIAL_GLASS = 2, MATERIAL_PLASTEEL = 2)
 	icon_state = "Watchman"
+	modular_overlay = "scope_small"
 
 /obj/item/gun_upgrade/scope/watchman/New()
 	..()
@@ -296,6 +297,7 @@
 	matter = list(MATERIAL_PLASMAGLASS = 3, MATERIAL_PLASTEEL = 3)
 	icon_state = "Killer"
 	spawn_blacklisted = TRUE
+	modular_overlay = "scope_big"
 
 /obj/item/gun_upgrade/scope/killer/New()
 	..()
