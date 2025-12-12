@@ -121,7 +121,7 @@ GLOBAL_LIST_INIT(chameleon_key_to_path, list(
 	gloves = /obj/item/clothing/gloves/thick,
 	mask = /obj/item/clothing/mask/smokable/cigarette,
 	glasses = /obj/item/clothing/glasses/sunglasses,
-	gun = /obj/item/gun/projectile/boltgun/serbian,
+	gun = /obj/item/gun/projectile/automatic/modular/bolt/serbian/finished,
 	headset = /obj/item/device/radio/headset)
 
 	var/list/loadout_2 = list(

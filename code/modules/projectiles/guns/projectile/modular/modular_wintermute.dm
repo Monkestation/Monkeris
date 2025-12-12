@@ -22,12 +22,12 @@
 	gun_tags = list(GUN_SILENCABLE)
 	serial_type = "FS"
 
-	spriteTagBans = PARTMOD_FOLDING_STOCK // Folding stock does not modify handheld sprite
+	spriteTagBans = PARTMOD_FOLDING_STOCK | PARTMOD_BAYONET// Folding stock does not modify handheld sprite
 
 	damage_multiplier = 1.1 // Higher-end and not fully modular, justifies increasing the default multiplier without balance concerns (you can't combo it with a crazy mechanism)
 	init_recoil = RIFLE_RECOIL(1) // Mechanism increases by 25%
 
-	required_parts = list(/obj/item/part/gun/modular/mechanism/autorifle/determined = 0, /obj/item/part/gun/modular/barrel = 0, /obj/item/part/gun/modular/grip = 0, /obj/item/part/gun/modular/stock = 0)
+	required_parts = list(/obj/item/part/gun/modular/mechanism/autorifle/determined = 0, /obj/item/part/gun/modular/barrel = 0, /obj/item/part/gun/modular/grip = 0, /obj/item/part/gun/modular/stock = 0, /obj/item/part/gun/modular/sights = -1, /obj/item/part/gun/modular/bayonet = -1)
 
 /obj/item/gun/projectile/automatic/modular/wintermute/get_initial_name()
 	if(grip_type)

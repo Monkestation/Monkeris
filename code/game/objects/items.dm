@@ -142,6 +142,9 @@
 	var/list/item_upgrades = list()
 	var/max_upgrades = 3
 
+	///if set, this upgrade should add the associated sprite id to a modgun's sprite
+	var/modular_overlay
+
 	var/can_use_lying = 0
 
 	var/chameleon_type
