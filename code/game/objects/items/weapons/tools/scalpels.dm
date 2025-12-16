@@ -2,6 +2,11 @@
 	name = "scalpel"
 	desc = "Cut, cut, and once more cut."
 	icon_state = "scalpel_t3"
+	item_state = "scalpel_t3"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/medical_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/medical_righthand.dmi',
+		)
 	flags = CONDUCT
 	force = WEAPON_FORCE_PAINFUL
 	armor_divisor = ARMOR_PEN_SHALLOW
@@ -22,6 +27,7 @@
 	name = "advanced scalpel"
 	desc = "Made of more expensive materials, sharper and generally more reliable."
 	icon_state = "scalpel_t4"
+	item_state = "scalpel_t4"
 	matter = list(MATERIAL_STEEL = 5, MATERIAL_PLASTEEL = 1)
 	tool_qualities = list(QUALITY_CUTTING = 40, QUALITY_WIRE_CUTTING = 10)
 	degradation = 0.12
@@ -32,6 +38,7 @@
 	name = "laser scalpel"
 	desc = "A scalpel which uses a directed laser to slice instead of a blade, for more precise surgery while also cauterizing as it cuts."
 	icon_state = "scalpel_t5"
+	item_state = "scalpel_t5"
 	damtype = "fire"
 	force = WEAPON_FORCE_DANGEROUS
 	armor_divisor = ARMOR_PEN_MODERATE

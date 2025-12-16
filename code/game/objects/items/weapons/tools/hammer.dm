@@ -28,6 +28,10 @@
 	desc = "Used for applying excessive blunt force to a surface. Powered edition."
 	icon_state = "powered_hammer"
 	item_state = "powered_hammer"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/hammers_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/hammers_righthand.dmi',
+		)
 	structure_damage_factor = STRUCTURE_DAMAGE_BREACHING
 	armor_divisor = ARMOR_PEN_HALF
 	force = WEAPON_FORCE_BRUTAL
@@ -45,6 +49,10 @@
 	desc = "With this in your hands, every problem looks like a nail."
 	icon_state = "sledgehammer"
 	item_state = "sledgehammer"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/hammers_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/hammers_righthand.dmi',
+		)
 	wielded_icon = "sledgehammer_wielded"
 	structure_damage_factor = STRUCTURE_DAMAGE_BREACHING
 	armor_divisor = ARMOR_PEN_MODERATE
@@ -62,6 +70,10 @@
 	desc = "Used for applying excessive blunt force to a problem, now with even more force."
 	icon_state = "sledgehammer_advanced"
 	item_state = "sledgehammer_advanced"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/hammers_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/hammers_righthand.dmi',
+		)
 	wielded_icon = "sledgehammer_advanced_wielded"
 	structure_damage_factor = STRUCTURE_DAMAGE_POWERFUL
 	armor_divisor = ARMOR_PEN_HALF
@@ -76,6 +88,10 @@
 	desc = "A large steel chunk welded to a long handle which resembles a sledgehammer. Extremely heavy."
 	icon_state = "homewrecker0"
 	item_state = "homewrecker"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/hammers_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/hammers_righthand.dmi',
+		)
 	wielded_icon = "homewrecker1"
 	structure_damage_factor = STRUCTURE_DAMAGE_HEAVY
 	armor_divisor = ARMOR_PEN_SHALLOW
@@ -93,6 +109,10 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "iron_hammer"
 	item_state = "iron_hammer"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/hammers_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/hammers_righthand.dmi',
+		)
 	wielded_icon = "iron_hammer_wielded"
 	armor_divisor = ARMOR_PEN_HALF
 	force = WEAPON_FORCE_ROBUST
@@ -106,6 +126,10 @@
 	desc = "A sledgehammer model produced by One Star, used for applying immeasurable blunt force to anything in your way. Capable of breaching even the toughtest obstacles, and cracking the most resilient skulls."
 	icon_state = "onehammer"
 	item_state = "onehammer"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/hammers_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/hammers_righthand.dmi',
+		)
 	wielded_icon = "onehammer_on"
 	structure_damage_factor = STRUCTURE_DAMAGE_DESTRUCTIVE
 	armor_divisor = ARMOR_PEN_HALF
@@ -130,6 +154,10 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "mace"
 	item_state = "mace"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/batons_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/batons_righthand.dmi',
+		)
 	w_class = ITEM_SIZE_NORMAL
 	armor_divisor = ARMOR_PEN_HALF
 	force = WEAPON_FORCE_ROBUST
@@ -155,8 +183,7 @@
 	name = "baseball bat"
 	desc = "HOME RUN!"
 	icon_state = "woodbat0"
-	wielded_icon = "woodbat1"
-	item_state = "woodbat0"
+	item_state = "baseball_bat"
 	force = WEAPON_FORCE_DANGEROUS
 	armor_divisor = ARMOR_PEN_MODERATE
 	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")
@@ -178,6 +205,10 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "chargehammer"
 	item_state = "chargehammer"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/hammers_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/hammers_righthand.dmi',
+		)
 	w_class = ITEM_SIZE_HUGE
 	switched_on_force = WEAPON_FORCE_BRUTAL
 	armor_divisor = ARMOR_PEN_EXTREME
@@ -246,6 +277,10 @@
 	icon_state = "staff"
 	item_state = "staff"
 	wielded_icon = "staff_wielded"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/polearms_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/polearms_righthand.dmi',
+		)
 	tool_qualities = list(QUALITY_HAMMERING = 5)
 	matter = list(MATERIAL_STEEL = 3)
 	extended_reach = TRUE

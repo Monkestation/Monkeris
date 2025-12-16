@@ -63,6 +63,10 @@
 	name = "energy axe"
 	desc = "A battle axe with some kind of red energy crystal. Pretty sharp."
 	icon_state = "axe0"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/axes_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/axes_righthand.dmi',
+		)
 	active_force = WEAPON_FORCE_GODLIKE
 	active_throwforce = 50
 	active_w_class = ITEM_SIZE_HUGE
@@ -95,6 +99,10 @@
 	name = "energy sword"
 	desc = "A tight and compact hilt featuring a side switch for deploying a highly precise, deadly, and concentrated beam of light. Used by assassins, honor guards, and rich men, this sword of light strikes fear into even the coldest of mercenaries."
 	icon_state = "sword0"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/swords_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/swords_righthand.dmi',
+		)
 	active_force = WEAPON_FORCE_LETHAL // Go forth and slay, padawan
 	active_throwforce = WEAPON_FORCE_LETHAL
 	no_double_tact = TRUE
@@ -190,6 +198,10 @@
 	desc = "A concentrated beam of energy in the shape of a blade. Very stylish... and lethal."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "blade"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/swords_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/swords_righthand.dmi',
+		)
 	force = WEAPON_FORCE_BRUTAL //Normal attacks deal very high damage - about the same as The Sword of Truth
 	armor_divisor = ARMOR_PEN_MASSIVE
 	damtype = BURN

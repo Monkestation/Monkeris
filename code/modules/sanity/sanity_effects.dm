@@ -13,7 +13,9 @@
 /datum/sanity/proc/effect_sound()
 	var/sound/S = pick_sound()
 	if(islist(S))
-		to_chat(owner,span_danger(astype(S, /list)[2]))
+		var/list/soundarr = S
+		if(length(soundarr) > 1)
+			to_chat(owner,span_danger("[soundarr[2]]"))
 		S = astype(S,/list)[1]
 	owner.playsound_local(owner, S, 50, 0, 8, null, 8)
 

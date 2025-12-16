@@ -45,11 +45,13 @@
 		if(eotp)
 			eotp.power += 10
 	the_broken = null
-	for(var/mob/living/carbon/human/hive_minded in the_hiveminded)
+	for(var/mob/living/carbon/human/hive_minded as anything in the_hiveminded)
 		to_chat(hive_minded, span_danger("Your connection with the [src] is cut off. The knowledge is painfully removed from you!"))
 		GLOB.krabin_linked -= hive_minded
 		hive_minded.adjustBrainLoss(25)
 		hive_minded.Weaken(5, TRUE)
+		if (!hive_minded.stats)
+			continue
 		for(var/stat in stats_buff)
 			hive_minded.stats.removeTempStat(stat, "von-crabbin")
 			hive_minded.stats.changeStat(stat, -30)  // hard to adapt back to normality

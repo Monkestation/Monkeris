@@ -163,6 +163,7 @@
 	name = "red paint"
 	desc = "Do red tools really work faster, or is the effect purely psychological?"
 	icon_state = "paint_red"
+	item_state = "paintcan"
 	rarity_value = 20
 	spawn_tags = SPAWN_TAG_TOOL_UPGRADE_RARE
 	matter = list(MATERIAL_STEEL = 3, MATERIAL_PLASTIC = 1)
@@ -688,6 +689,7 @@
 	name = "BSL \"Randomizer\" tool polish"
 	desc = "This unidentified tar-like liquid warps and bends reality around it. Applying it to a tool may have unexpected results."
 	icon_state = "randomizer"
+	item_state = "paintcan"
 	matter = list(MATERIAL_PLASMA = 4, MATERIAL_URANIUM = 4)
 	rarity_value = 80
 	spawn_tags = SPAWN_TAG_TOOL_UPGRADE_RARE

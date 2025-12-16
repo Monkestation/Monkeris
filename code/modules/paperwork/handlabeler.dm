@@ -3,7 +3,11 @@
 	desc = "Device that could be used to label just about anything, including ammo magazines."
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "labeler0"
-	item_state = "flight"
+	item_state = "analyzer"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
 	matter = list(MATERIAL_PLASTIC = 2)
 	var/label = null
 	var/labels_left = 30

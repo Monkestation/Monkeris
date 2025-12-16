@@ -207,14 +207,14 @@
 
 /obj/randomcatcher/proc/get_item(type, with_aditional_object=FALSE)
 	new type(src, with_aditional_object)
-	if(contents.len)
+	if(length(contents))
 		. = pick(contents)
 	else
 		return
 
 /obj/randomcatcher/proc/get_items(type, with_aditional_object=FALSE)
 	new type(src, with_aditional_object)
-	if(contents.len)
+	if(length(contents))
 		return contents
 	else
 		return

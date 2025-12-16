@@ -255,7 +255,7 @@
 
 	if(vital && !(owner.status_flags & REBUILDING_ORGANS) && owner.stat != DEAD)
 		if(user)
-			admin_attack_log(user, owner, "Removed a vital organ ([src])", "Had a a vital organ ([src]) removed.", "removed a vital organ ([src]) from")
+			admin_attack_log(user, owner, "Removed a vital organ ([src])", "Had a vital organ ([src]) removed.", "removed a vital organ ([src]) from")
 		owner.death()
 
 	if(LAZYLEN(item_upgrades))
@@ -273,7 +273,7 @@
 /obj/item/organ/proc/replaced(obj/item/organ/external/affected)
 	parent = affected
 	forceMove(parent)
-	if(parent.owner)
+	if(parent?.owner)
 		replaced_mob(parent.owner)
 
 
@@ -327,3 +327,15 @@
 
 /obj/item/organ/proc/is_usable()
 	return !(status & (ORGAN_CUT_AWAY|ORGAN_DEAD))
+
+
+/obj/item/organ/proc/find_owner_recursively()
+	var/obj/item/organ/O = src
+
+	while (O)
+		if (O.owner)
+			return O.owner
+
+		O = O.parent
+
+	return null

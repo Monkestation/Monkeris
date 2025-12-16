@@ -236,13 +236,13 @@
 
 //Stunned machines can't do anything
 //Amount must be a number in seconds
-/obj/machinery/hivemind_machine/proc/stun(amount)
+/obj/machinery/hivemind_machine/proc/stun(time)
 	set_light(0)
 	stat |= EMPED
 	can_regenerate = FALSE
 	update_icon()
-	if(amount)
-		addtimer(CALLBACK(src, PROC_REF(unstun)), amount SECONDS)
+	if(time && !QDELETED(src))
+		addtimer(CALLBACK(src, PROC_REF(unstun)), time)
 
 
 /obj/machinery/hivemind_machine/proc/unstun()
@@ -300,13 +300,13 @@
 	switch(severity)
 		if(1)
 			take_damage(60)
-			stun(20)
+			stun(20 SECONDS)
 		if(2)
 			take_damage(30)
-			stun(8)
+			stun(8 SECONDS)
 		if(3)
 			take_damage(15)
-			stun(3)
+			stun(3 SECONDS)
 	..()
 
 

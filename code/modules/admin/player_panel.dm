@@ -92,7 +92,7 @@
 					body += "<a href='byond://?_src_=holder;[HrefToken()];manup="+ref+"'>MAN_UP</a> - "
 					body += "<a href='byond://?_src_=holder;[HrefToken()];viewlogs="+ref+"'>LOGS</a> - "
 					body += "<a href='byond://?_src_=holder;[HrefToken()];paralyze="+ref+"'>PARA</a> - "
-					body += "<a href='byond://?_src_=holder;[HrefToken()];adminobservejump="+ref+"'>JMP</a><br>"
+					body += "<a href='byond://?_src_=holder;[HrefToken()];adminplayerobservefollow="+ref+"'>FLW</a> - "
 					if(antagonist > 1)
 						body += "<font size='2'><a href='byond://?_src_=holder;[HrefToken()];check_antagonist=1'><font color='red'><b>Antagonist</b></font></a></font>";
 					else if(antagonist > 0)

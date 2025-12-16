@@ -9,7 +9,11 @@ LINEN BINS
 	desc = "A surprisingly soft linen bedsheet."
 	icon = 'icons/obj/bedsheets.dmi'
 	icon_state = "sheet"
-	item_state = "bedsheet"
+	item_state = "sheet"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/bedsheet_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/bedsheet_righthand.dmi',
+		)
 	layer = 4
 	throwforce = WEAPON_FORCE_HARMLESS
 	throw_speed = 1
@@ -154,54 +158,121 @@ LINEN BINS
 	else
 		icon_state = initial(icon_state)
 
-/obj/item/bedsheet/blue
-	icon_state = "sheetblue"
-
-/obj/item/bedsheet/green
-	icon_state = "sheetgreen"
-
-/obj/item/bedsheet/orange
-	icon_state = "sheetorange"
-
-/obj/item/bedsheet/purple
-	icon_state = "sheetpurple"
-
-/obj/item/bedsheet/rainbow
-	icon_state = "sheetrainbow"
+/obj/item/bedsheet/grey
+	icon_state = "sheetgrey"
+	item_state = "sheetgrey"
 
 /obj/item/bedsheet/red
 	icon_state = "sheetred"
+	item_state = "sheetred"
+
+/obj/item/bedsheet/orange
+	icon_state = "sheetorange"
+	item_state = "sheetorange"
 
 /obj/item/bedsheet/yellow
 	icon_state = "sheetyellow"
+	item_state = "sheetyellow"
 
-/obj/item/bedsheet/mime
-	icon_state = "sheetmime"
+/obj/item/bedsheet/green
+	icon_state = "sheetgreen"
+	item_state = "sheetgreen"
 
-/obj/item/bedsheet/clown
-	icon_state = "sheetclown"
+/obj/item/bedsheet/blue
+	icon_state = "sheetblue"
+	item_state = "sheetblue"
 
-/obj/item/bedsheet/captain
-	icon_state = "sheetcaptain"
-
-/obj/item/bedsheet/rd
-	icon_state = "sheetrd"
-
-/obj/item/bedsheet/medical
-	icon_state = "sheetmedical"
-
-/obj/item/bedsheet/hos
-	icon_state = "sheethos"
-
-/obj/item/bedsheet/hop
-	icon_state = "sheethop"
-
-/obj/item/bedsheet/ce
-	icon_state = "sheetce"
+/obj/item/bedsheet/purple
+	icon_state = "sheetpurple"
+	item_state = "sheetpurple"
 
 /obj/item/bedsheet/brown
 	icon_state = "sheetbrown"
+	item_state = "sheetbrown"
 
+/obj/item/bedsheet/black
+	icon_state = "sheetblack"
+	item_state = "sheetblack"
+
+/obj/item/bedsheet/rainbow
+	icon_state = "sheetrainbow"
+	item_state = "sheetrainbow"
+
+/obj/item/bedsheet/clown
+	icon_state = "sheetclown"
+	item_state = "sheetclown"
+
+/obj/item/bedsheet/mime
+	icon_state = "sheetmime"
+	item_state = "sheetmime"
+
+/obj/item/bedsheet/chap
+	icon_state = "sheetchap"
+	item_state = "sheetchap"
+
+/obj/item/bedsheet/medical
+	icon_state = "sheetmedical"
+	item_state = "sheetmedical"
+
+/obj/item/bedsheet/rd
+	icon_state = "sheetrd"
+	item_state = "sheetrd"
+
+/obj/item/bedsheet/cmo
+	icon_state = "sheetcmo"
+	item_state = "sheetcmo"
+
+/obj/item/bedsheet/hos
+	icon_state = "sheethos"
+	item_state = "sheethos"
+
+/obj/item/bedsheet/ce
+	icon_state = "sheetce"
+	item_state = "sheetce"
+
+/obj/item/bedsheet/hop
+	icon_state = "sheethop"
+	item_state = "sheethop"
+
+/obj/item/bedsheet/captain
+	icon_state = "sheetcaptain"
+	item_state = "sheetcaptain"
+
+/obj/item/bedsheet/ian
+	icon_state = "sheetian"
+	item_state = "sheetian"
+
+/obj/item/bedsheet/nt
+	icon_state = "sheetNT"
+	item_state = "sheetNT"
+
+/obj/item/bedsheet/cm
+	icon_state = "sheetcentcom"
+	item_state = "sheetcentcom"
+
+/obj/item/bedsheet/syndie
+	icon_state = "sheetsyndie"
+	item_state = "sheetsyndie"
+
+/obj/item/bedsheet/cult
+	icon_state = "sheetcult"
+	item_state = "sheetcult"
+
+/obj/item/bedsheet/wizard
+	icon_state = "sheetwiz"
+	item_state = "sheetwiz"
+
+/obj/item/bedsheet/qm
+	icon_state = "sheetqm"
+	item_state = "sheetqm"
+
+/obj/item/bedsheet/usa
+	icon_state = "sheetUSA"
+	item_state = "sheetUSA"
+
+/obj/item/bedsheet/cosmos
+	icon_state = "sheetcosmos"
+	item_state = "sheetcosmos"
 
 /obj/structure/bedsheetbin
 	name = "linen bin"

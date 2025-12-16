@@ -35,8 +35,26 @@
 	name = "lantern"
 	icon_state = "lantern"
 	item_state = "lantern"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/mining_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/mining_righthand.dmi',
+		)
 	desc = "A mining lantern."
 	brightness_on = 4			// luminosity when on
+
+/obj/item/device/lighting/toggleable/lantern/turn_on(mob/user)
+	.=..()
+	if(.)
+		playsound(loc, 'sound/effects/Custom_flashlight.ogg', 50, 1)
+		START_PROCESSING(SSobj, src)
+		item_state = "[initial(item_state)]_on"
+		update_wear_icon()
+
+/obj/item/device/lighting/toggleable/lantern/turn_off(mob/user)
+	playsound(loc, 'sound/effects/Custom_flashlight.ogg', 50, 1)
+	item_state = initial(item_state)
+	update_wear_icon()
+	..()
 
 
 /*****************************Pickaxe********************************/

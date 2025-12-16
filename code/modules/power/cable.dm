@@ -29,7 +29,8 @@ var/list/possible_cable_coil_colours = list(
 		"Blue" = COLOR_BLUE,
 		"Orange" = COLOR_ORANGE,
 		"Cyan" = COLOR_CYAN,
-		"Red" = COLOR_RED
+		"Red" = COLOR_RED,
+		"White" = COLOR_WHITE
 	)
 
 /obj/structure/cable
@@ -509,6 +510,10 @@ var/list/possible_cable_coil_colours = list(
 	name = "cable coil"
 	icon = 'icons/obj/power.dmi'
 	icon_state = "coil"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/tools_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/tools_righthand.dmi',
+		)
 	amount = MAXCOIL
 	max_amount = MAXCOIL
 	color = COLOR_RED

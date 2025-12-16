@@ -76,6 +76,10 @@
 	icon_state = "nt_halberd"
 	item_state = "nt_halberd"
 	wielded_icon = "nt_halberd_wielded"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/polearms_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/polearms_righthand.dmi',
+		)
 	force = WEAPON_FORCE_BRUTAL
 	hitsound = 'sound/weapons/melee/heavystab.ogg'
 	armor_divisor = ARMOR_PEN_MASSIVE
@@ -151,6 +155,10 @@
 	icon_state = "nt_spear"
 	item_state = "nt_spear"
 	wielded_icon = "nt_spear_wielded"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/polearms_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/polearms_righthand.dmi',
+		)
 	force = 26
 	force_wielded_multiplier = 1.08
 	var/tipbroken = FALSE
@@ -328,6 +336,10 @@
 	desc = "A saintly-looking sword forged to do God\'s distant work."
 	icon_state = "nt_shortsword"
 	item_state = "nt_shortsword"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/swords_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/swords_righthand.dmi',
+		)
 	force = WEAPON_FORCE_DANGEROUS
 	throwforce = WEAPON_FORCE_WEAK
 	armor_divisor = ARMOR_PEN_DEEP
@@ -352,6 +364,10 @@
 	singular_name = "NT Verutum"
 	plural_name = "NT Veruta"
 	wielded_icon = "nt_verutum_wielded"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/polearms_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/polearms_righthand.dmi',
+		)
 	force = 20
 	force_wielded_multiplier = 1.08
 

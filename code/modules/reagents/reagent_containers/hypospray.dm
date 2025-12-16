@@ -91,6 +91,10 @@
 	slot_flags = SLOT_EARS
 	icon_state = "autoinjector"
 	item_state = "autoinjector"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/medical_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/medical_righthand.dmi',
+		)
 	amount_per_transfer_from_this = 5
 	matter = list(MATERIAL_STEEL = 1, MATERIAL_PLASTIC = 1)
 	reagent_flags = REFILLABLE | DRAINABLE | AMOUNT_VISIBLE

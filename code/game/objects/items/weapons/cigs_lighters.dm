@@ -550,7 +550,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	desc = "A cheap-as-free lighter."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "lighter-g"
-	item_state = "lighter-g"
+	item_state = "zippo"
 	w_class = ITEM_SIZE_TINY
 	throwforce = 4
 	flags = CONDUCT
@@ -570,7 +570,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	name = "\improper syndicate lighter"
 	desc = "A zippo specifically designed for syndicate officers. Obviously no longer in production."
 	icon_state = "syndicate_lighter"
-	item_state = "syndicate_lighter"
+	item_state = "zippo"
 
 
 /obj/item/flame/lighter/random

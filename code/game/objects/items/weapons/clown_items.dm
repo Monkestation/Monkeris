@@ -26,6 +26,10 @@
 	description_antag = "Can throw it to delay IH if trying to escape, or to get rid of evidence"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "soap"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/custodial_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/custodial_righthand.dmi',
+		)
 	w_class = ITEM_SIZE_SMALL
 	throwforce = 0
 	throw_speed = 4

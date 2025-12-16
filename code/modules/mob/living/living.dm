@@ -140,6 +140,8 @@ default behaviour is:
 
 /proc/swap_density_check(mob/swapper, mob/swapee)
 	var/turf/T = get_turf(swapper)
+	if (!T)
+		return FALSE
 	if(T.density)
 		return TRUE
 	for(var/atom/movable/A in T)

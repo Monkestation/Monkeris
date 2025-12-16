@@ -264,7 +264,7 @@
 			to_chat(usr, "[ma2html(src, usr)][span_warning("You don't have that much money!")]")
 			return
 		playsound(src, 'sound/machines/chime.ogg', 50, 1)
-		src.visible_message("[ma2html(src, hearers(get_turf(src)))] \The [src] chimes.")
+		src.visible_message("<img src='\ref[src]'> \The [src] chimes.", push_appearance = src)
 		transaction_paid = 1
 
 		//transfer the money
@@ -289,5 +289,5 @@
 	else
 		usr.visible_message(span_info("\The [usr] swipes a card through \the [src]."))
 		playsound(src, 'sound/machines/chime.ogg', 50, 1)
-		src.visible_message("[ma2html(src, hearers(get_turf(src)))] \The [src] chimes.")
+		src.visible_message("<img src='\ref[src]'> \The [src] chimes.", push_appearance = src)
 		transaction_paid = 1

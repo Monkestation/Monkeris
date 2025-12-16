@@ -55,7 +55,7 @@ var/list/cached_space = list()
 	if (!T || !A)
 		return
 
-	if(istype(A, /mob/observer/eye/aiEye))
+	if(isAIEye(A))
 		return
 
 	var/obj/effect/overmap/M = map_sectors["[T.z]"]

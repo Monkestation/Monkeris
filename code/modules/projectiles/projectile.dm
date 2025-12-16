@@ -242,7 +242,7 @@
 		recoil = aimer.recoil
 		recoil -= projectile_accuracy
 
-		if(ishuman(user))
+		if(ishuman(user) && user.client)
 			var/mob/living/carbon/human/H = user
 			if(H.can_multiz_pb && (!isturf(target)))
 				loc = get_turf(H.client.eye)

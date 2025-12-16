@@ -5,6 +5,10 @@
 	name = "trash"
 	desc = "This is rubbish."
 	icon = 'icons/obj/trash.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/food_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/food_righthand.dmi',
+		)
 	w_class = ITEM_SIZE_SMALL
 	rarity_value = 20
 	spawn_tags = SPAWN_TAG_JUNK
@@ -17,30 +21,37 @@
 /obj/item/trash/raisins
 	name = "\improper 4no raisins"
 	icon_state= "4no_raisins"
+	item_state = "candy"
 
 /obj/item/trash/shokoloud
 	name = "Shokoloud chocolate bar"
 	icon_state = "shokoloud"
+	item_state = "candy"
 
 /obj/item/trash/cheesie
 	name = "\improper Cheesie Honkers"
 	icon_state = "cheesie_honkers"
+	item_state = "chips"
 
 /obj/item/trash/chips
 	name = "chips"
 	icon_state = "chips"
+	item_state = "chips"
 
 /obj/item/trash/popcorn
 	name = "popcorn"
 	icon_state = "popcorn"
+	item_state = "ice_tea_can"
 
 /obj/item/trash/sosjerky
 	name = "Scaredy's Private Reserve Beef Jerky"
 	icon_state = "sosjerky"
+	item_state = "candy"
 
 /obj/item/trash/wok
 	name = "Wok"
 	icon_state = "wok"
+	item_state = "cola"
 
 /obj/item/trash/waffles
 	name = "waffles"
@@ -69,6 +80,7 @@
 /obj/item/trash/liquidfood
 	name = "\improper \"LiquidFood\" ration"
 	icon_state = "liquidfood"
+	item_state = "coffee"
 
 /obj/item/trash/tastybread
 	name = "bread tube"
@@ -77,18 +89,22 @@
 /obj/item/trash/mre
 	name = "mre"
 	icon_state = "mre_trash"
+	item_state = "space-up"
 
 /obj/item/trash/mre_paste
 	name = "nutrient paste"
 	icon_state = "paste_trash"
+	item_state = "sodawater"
 
 /obj/item/trash/mre_candy
 	name = "candy"
 	icon_state = "mre_candy_trash"
+	item_state = "candy"
 
 /obj/item/trash/mre_can
 	name = "ration can"
 	icon_state = "ration_can_trash"
+	item_state = "sodawater"
 
 /obj/item/trash/gym_ticket
 	name = "expired electronic ticket"

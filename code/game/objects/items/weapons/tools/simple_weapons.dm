@@ -10,6 +10,10 @@
 	force = WEAPON_FORCE_PAINFUL
 	throwforce = WEAPON_FORCE_WEAK
 	item_state = "beer"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/food_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/food_righthand.dmi',
+		)
 	attack_verb = list("stabbed", "slashed", "attacked")
 	sharp = TRUE
 	edge = FALSE
@@ -24,6 +28,10 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "hm_spikeclub"
 	item_state = "hm_spikeclub"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/batons_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/batons_righthand.dmi',
+		)
 	matter = list(MATERIAL_WOOD = 2, MATERIAL_STEEL = 2)
 	force = WEAPON_FORCE_PAINFUL
 	throwforce = WEAPON_FORCE_PAINFUL
@@ -41,6 +49,10 @@
 	desc = "A very sharp axe blade upon a short fibremetal handle. It has a long history of chopping things, but now it is used for chopping wood."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "hatchet"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/hydroponics_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/hydroponics_righthand.dmi',
+		)
 	matter = list(MATERIAL_STEEL = 4, MATERIAL_PLASTIC = 3)
 	worksound = WORKSOUND_HARD_SLASH
 	force = WEAPON_FORCE_PAINFUL
@@ -59,7 +71,10 @@
 	desc = "A heavy plasteel blade affixed to a welded metal shaft, for close up carnage."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "makeshift_axe"
-	item_state = "makeshift_axe"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/axes_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/axes_righthand.dmi',
+		)
 	wielded_icon = "makeshift_axe_wielded"
 	matter = list(MATERIAL_STEEL = 3, MATERIAL_PLASTEEL = 3)
 	worksound = WORKSOUND_HARD_SLASH
@@ -86,6 +101,10 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "fireaxe0"
 	wielded_icon = "fireaxe1"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/axes_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/axes_righthand.dmi',
+		)
 	sharp = TRUE
 	edge = TRUE
 	armor_divisor = ARMOR_PEN_DEEP
@@ -114,6 +133,10 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "hoe"
 	item_state = "hoe"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/hydroponics_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/hydroponics_righthand.dmi',
+		)
 	matter = list(MATERIAL_PLASTEEL = 2, MATERIAL_PLASTIC = 2)
 	force = WEAPON_FORCE_WEAK
 	throwforce = WEAPON_FORCE_WEAK
@@ -127,6 +150,11 @@
 	desc = "A sharp and curved blade on a long fibremetal handle, this tool makes it easy to reap what you sow."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "scythe0"
+	item_state = "scythe0"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/polearms_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/polearms_righthand.dmi',
+		)
 	matter = list(MATERIAL_PLASTEEL = 7, MATERIAL_PLASTIC = 3)
 	sharp = TRUE
 	edge = TRUE
@@ -148,6 +176,10 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "claymore"
 	item_state = "claymore"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/swords_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/swords_righthand.dmi',
+		)
 	matter = list(MATERIAL_PLASTEEL = 15, MATERIAL_PLASTIC = 5)
 	sharp = TRUE
 	edge = TRUE

@@ -4,6 +4,10 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "hm_hammer"
 	item_state = "hm_hammer"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/hammers_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/hammers_righthand.dmi',
+		)
 	force = WEAPON_FORCE_PAINFUL
 	throwforce = WEAPON_FORCE_PAINFUL
 	w_class = ITEM_SIZE_BULKY

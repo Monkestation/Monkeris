@@ -17,6 +17,10 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "baton"
 	item_state = "classic_baton"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/axes_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/axes_righthand.dmi',
+		)
 	slot_flags = SLOT_BELT
 	force = WEAPON_FORCE_PAINFUL
 	structure_damage_factor = STRUCTURE_DAMAGE_BLUNT
@@ -41,6 +45,10 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "telebaton_0"
 	item_state = "telebaton_0"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/batons_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/batons_righthand.dmi',
+		)
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
 	force = 3
