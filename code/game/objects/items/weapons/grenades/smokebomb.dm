@@ -2,7 +2,7 @@
 	name = "FS SG \"Reynolds\""
 	desc = "Smoke grenade, used to create a cloud of smoke providing cover and hiding movement."
 	icon_state = "smokegrenade"
-	item_state = "smokegrenade"
+	item_state = "smoke"
 	det_time = 20
 	matter = list(MATERIAL_STEEL = 3, MATERIAL_SILVER = 1)
 	var/datum/effect/effect/system/smoke_spread/bad/smoke

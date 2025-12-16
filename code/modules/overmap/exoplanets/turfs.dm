@@ -44,7 +44,7 @@
 	else
 		..()*/
 
-/turf/floor/exoplanet/explosion_act(target_power, explosion_handler/handler)
+/turf/floor/exoplanet/explosion_act(target_power, datum/explosion_handler/handler)
 	if(target_power > health)
 		ChangeTurf(get_base_turf_by_area(src))
 	. = ..()

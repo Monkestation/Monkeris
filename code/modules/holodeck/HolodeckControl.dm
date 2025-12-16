@@ -159,7 +159,7 @@
 	emergencyShutdown()
 	. = ..()
 
-/obj/machinery/computer/HolodeckControl/explosion_act(target_power, explosion_handler/handler)
+/obj/machinery/computer/HolodeckControl/explosion_act(target_power, datum/explosion_handler/handler)
 	emergencyShutdown()
 	. = ..()
 

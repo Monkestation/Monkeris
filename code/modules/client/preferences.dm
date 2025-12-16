@@ -202,7 +202,7 @@
 	character.f_style = f_style
 
 	// Build mob body from prefs
-	if (preview_should_rebuild_organs)
+	if (preview_should_rebuild_organs || !is_preview_copy)
 		character.rebuild_organs(src)
 
 	character.eyes_color = eyes_color
@@ -229,7 +229,7 @@
 
 	character.backpack_setup = new(backpack, backpack_metadata["[backpack]"])
 
-	if (preview_should_rebuild_organs)
+	if (preview_should_rebuild_organs || !is_preview_copy)
 		character.force_update_limbs()
 		character.update_mutations(0)
 		character.update_implants(0)

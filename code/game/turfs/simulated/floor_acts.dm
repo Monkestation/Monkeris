@@ -1,5 +1,5 @@
 
-/turf/floor/explosion_act(target_power, explosion_handler/handler)
+/turf/floor/explosion_act(target_power, datum/explosion_handler/handler)
 	var/absorbed_damage = 0
 	var/obj/effect/shield/turf_shield = getEffectShield()
 

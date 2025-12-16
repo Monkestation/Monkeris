@@ -8,6 +8,10 @@
 	throwforce = WEAPON_FORCE_NORMAL
 	icon_state = "pickaxe"
 	item_state = "pickaxe"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/mining_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/mining_righthand.dmi',
+		)
 	w_class = ITEM_SIZE_BULKY
 	matter = list(MATERIAL_STEEL = 6)
 	tool_qualities = list(QUALITY_EXCAVATION = 10, QUALITY_PRYING = 20) //So it still shares its switch off quality despite not yet being used.
@@ -49,7 +53,7 @@
 	name = "One Star pickaxe"
 	desc = "A standard One Star basic tool. There used energy technologies what makes it enough powerful and cheap at the same time."
 	icon_state = "one_star_pickaxe"
-	item_state = "pickaxe"
+	item_state = "dpickaxe"
 	matter = list(MATERIAL_STEEL = 4, MATERIAL_PLATINUM = 2, MATERIAL_DIAMOND = 2)
 	origin_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 2, TECH_POWER = 3)
 	switched_on_force = WEAPON_FORCE_ROBUST
@@ -103,7 +107,7 @@
 	name = "mining drill" // Can dig sand as well!
 	desc = "Yours is the drill that will pierce through the rock walls."
 	icon_state = "handdrill"
-	item_state = "jackhammer"
+	item_state = "handdrill"
 	tool_qualities = list(QUALITY_EXCAVATION = 10, QUALITY_DRILLING = 10)
 	switched_off_qualities = list(QUALITY_EXCAVATION = 10, QUALITY_DRILLING = 10)
 	switched_on_qualities = list(QUALITY_DIGGING = 55, QUALITY_DRILLING = 10)
@@ -119,6 +123,7 @@
 	name = "One Star mining drill"
 	desc = "Yours is the drill that will pierce through the worker, metaphorically."
 	icon_state = "one_star_drill"
+	item_state = "diamonddrill"
 	tool_qualities = list(QUALITY_EXCAVATION = 10, QUALITY_DRILLING = 10)
 	switched_off_qualities = list(QUALITY_EXCAVATION = 10, QUALITY_DRILLING = 10)
 	switched_on_qualities = list(QUALITY_DIGGING = 60, QUALITY_DRILLING = 10)
@@ -137,7 +142,7 @@
 	name = "diamond-point mining drill"
 	desc = "Yours is the drill that will pierce the heavens!"
 	icon_state = "diamonddrill"
-	item_state = "jackhammer"
+	item_state = "diamonddrill"
 	force = WEAPON_FORCE_DANGEROUS * 1.15
 	tool_qualities = list(QUALITY_EXCAVATION = 10, QUALITY_DRILLING = 20)
 	switched_off_qualities = list(QUALITY_EXCAVATION = 10, QUALITY_DRILLING = 20)
@@ -161,7 +166,7 @@
 	name = "hand pickaxe"
 	desc = "A smaller, more precise version of the pickaxe, used for archeology excavation."
 	icon_state = "pick_hand"
-	item_state = "syringe_0"
+	item_state = "spickaxe"
 	force = WEAPON_FORCE_PAINFUL //It's smaller
 	tool_qualities = list(QUALITY_EXCAVATION = 30, QUALITY_PRYING = 15)
 	switched_off_qualities = list(QUALITY_EXCAVATION = 30, QUALITY_PRYING = 15)

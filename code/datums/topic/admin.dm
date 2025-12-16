@@ -8,7 +8,7 @@
 	//These can be combined, for example with: list(R_MOD|R_MENTOR, R_ADMIN) which would require you to have either R_MOD or R_MENTOR, as well as R_ADMIN
 
 /datum/admin_topic/proc/TryRun(list/input, datum/admins/owner)
-	if(require_perms.len)
+	if(length(require_perms))
 		for(var/i in require_perms)
 			if(!check_rights(i, TRUE))
 				return FALSE

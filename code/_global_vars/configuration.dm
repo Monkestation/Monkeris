@@ -9,3 +9,4 @@ GLOBAL_VAR_INIT(dooc_allowed, TRUE)
 GLOBAL_VAR_INIT(dsay_allowed, TRUE)
 GLOBAL_VAR_INIT(enter_allowed, TRUE)
 
+GLOBAL_VAR_INIT(diagonal_movement, FALSE)

@@ -338,7 +338,7 @@ the value of stock parts increases with the rating.
 		var/path_value = cached_values[path] || get_spawn_value(path)
 		if(path_value == spawn_value)
 			things += path
-	if(!things.len)
+	if(!length(things))
 		return
 	return pick(things)
 
@@ -379,8 +379,8 @@ the value of stock parts increases with the rating.
 
 	// Get paths for all required tags at once
 	for(var/tag in tags)
-		if(candidates.len == 0)
-			candidates = all_spawn_by_tag[tag].Copy()
+		if(!length(candidates))
+			candidates = astype(all_spawn_by_tag[tag], /list).Copy()
 		else
 			candidates &= all_spawn_by_tag[tag]  // Intersection
 

@@ -26,7 +26,7 @@
 	set name = "Message Lobby"
 	set category = "Admin"
 
-	if(!check_rights(R_ADMIN, 0, usr)) return
+	if(!check_rights(R_ADMIN)) return
 
 	var/msg = input(src, "Enter the message. Leave blank to cancel.", "Lobby Message")
 	if(msg)

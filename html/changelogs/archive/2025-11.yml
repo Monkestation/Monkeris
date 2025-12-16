@@ -101,3 +101,17 @@
   - bugfix: Viewing turf on statpanel should no longer scream about invalid resource.
   - bugfix: Fixed browser windows not being able to get UI scaling prefs if the client
       doesn't exist yet, is fine.
+2025-11-26:
+  Snack-Max:
+  - rscadd: Ported hair from Monke Main to Eris
+  Sun-Soaked:
+  - code_imp: removes a bunch of ghastly local repathings/re-definitions of /mob and
+      it's subtypes and moves the vars under them into their appropriate define files
+2025-11-30:
+  flleeppyy:
+  - code_imp: Game compiles on 516.1673
+  - code_imp: Vent pumps no longer hibernate
+  - bugfix: borked augments
+  - bugfix: check_momentum timer spam
+  - bugfix: empty notices from perks with no lose/gain_text
+  - admin: admins can now toggle diagonal movement via Server verb tab

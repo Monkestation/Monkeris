@@ -200,8 +200,8 @@
 //default item on-mob icons
 #define INV_HEAD_DEF_ICON 'icons/inventory/head/mob.dmi'
 #define INV_BACK_DEF_ICON 'icons/inventory/back/mob.dmi'
-#define INV_L_HAND_DEF_ICON 'icons/mob/items/lefthand.dmi'
-#define INV_R_HAND_DEF_ICON 'icons/mob/items/righthand.dmi'
+#define INV_L_HAND_DEF_ICON 'icons/mob/inhands/lefthand.dmi'
+#define INV_R_HAND_DEF_ICON 'icons/mob/inhands/righthand.dmi'
 #define INV_W_UNIFORM_DEF_ICON 'icons/inventory/uniform/mob.dmi'
 #define INV_ACCESSORIES_DEF_ICON 'icons/inventory/accessory/mob.dmi'
 #define INV_SUIT_DEF_ICON 'icons/inventory/suit/mob.dmi'

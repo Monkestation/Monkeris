@@ -4,6 +4,10 @@
 	name = "fruit"
 	icon = 'icons/obj/hydroponics_products.dmi'
 	icon_state = "blank"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/plants_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/plants_righthand.dmi',
+	)
 	desc = "Nutritious! Probably."
 	slot_flags = SLOT_HOLSTER
 	spawn_frequency = 0

@@ -42,7 +42,12 @@
 #define RUST_G (__rust_g || __detect_rust_g())
 #endif
 
+// Handle 515 call() -> call_ext() changes
+#if DM_VERSION >= 515
 #define RUSTG_CALL call_ext
+#else
+#define RUSTG_CALL call
+#endif
 
 /// Gets the version of rust_g
 /proc/rustg_get_version() return RUSTG_CALL(RUST_G, "get_version")()
@@ -133,6 +138,39 @@
  */
 #define rustg_dmi_icon_states(fname) RUSTG_CALL(RUST_G, "dmi_icon_states")(fname)
 
+/**
+ * The below functions involve dmi metadata represented in the following format:
+ * list(
+ *     "width": number,
+ *     "height": number,
+ *     "states": list([STATE_DATA], ...)
+ * )
+ *
+ * STATE_DATA format:
+ * list(
+ *     "name": string,
+ *     "dirs": 1 | 4 | 8,
+ *     "delays"?: list(number, ...),
+ *     "rewind"?: TRUE | FALSE,
+ *     "movement"?: TRUE | FALSE,
+ *     "loop"?: number
+ * )
+ */
+
+/**
+ * Get the dmi metadata of the file located at `fname`.
+ * Returns a list in the metadata format listed above, or an error message.
+ */
+#define rustg_dmi_read_metadata(fname) json_decode(RUSTG_CALL(RUST_G, "dmi_read_metadata")(fname))
+/**
+ * Inject dmi metadata into a png file located at `path`.
+ * `metadata` must be a json_encode'd list in the metadata format listed above.
+ */
+#define rustg_dmi_inject_metadata(path, metadata) RUSTG_CALL(RUST_G, "dmi_inject_metadata")(path, metadata)
+
+#define rustg_create_qr_code_png(path, data) RUSTG_CALL(RUST_G, "create_qr_code_png")(path, data)
+#define rustg_create_qr_code_svg(data) RUSTG_CALL(RUST_G, "create_qr_code_svg")(data)
+
 #define rustg_file_read(fname) RUSTG_CALL(RUST_G, "file_read")(fname)
 #define rustg_file_exists(fname) (RUSTG_CALL(RUST_G, "file_exists")(fname) == "true")
 #define rustg_file_write(text, fname) RUSTG_CALL(RUST_G, "file_write")(text, fname)
@@ -193,6 +231,9 @@
 #define rustg_http_request_blocking(method, url, body, headers, options) RUSTG_CALL(RUST_G, "http_request_blocking")(method, url, body, headers, options)
 #define rustg_http_request_async(method, url, body, headers, options) RUSTG_CALL(RUST_G, "http_request_async")(method, url, body, headers, options)
 #define rustg_http_check_request(req_id) RUSTG_CALL(RUST_G, "http_check_request")(req_id)
+/// This is basically just `rustg_http_request_async` if you don't care about the response.
+/// This will either return "ok" or an error, as this does not create a job.
+#define rustg_http_request_fire_and_forget(method, url, body, headers, options) RUSTG_CALL(RUST_G, "http_request_fire_and_forget")(method, url, body, headers, options)
 
 /// Generates a spritesheet at: [file_path][spritesheet_name]_[size_id].[png or dmi]
 /// The resulting spritesheet arranges icons in a random order, with the position being denoted in the "sprites" return value.
@@ -220,9 +261,15 @@
 /// )
 /// TRANSFORM_OBJECT format:
 /// list("type" = RUSTG_ICONFORGE_BLEND_COLOR, "color" = "#ff0000", "blend_mode" = ICON_MULTIPLY)
-/// list("type" = RUSTG_ICONFORGE_BLEND_ICON, "icon" = [SPRITE_OBJECT], "blend_mode" = ICON_OVERLAY)
+/// list("type" = RUSTG_ICONFORGE_BLEND_ICON, "icon" = [SPRITE_OBJECT], "blend_mode" = ICON_OVERLAY, "x" = 1, "y" = 1) // offsets optional
 /// list("type" = RUSTG_ICONFORGE_SCALE, "width" = 32, "height" = 32)
 /// list("type" = RUSTG_ICONFORGE_CROP, "x1" = 1, "y1" = 1, "x2" = 32, "y2" = 32) // (BYOND icons index from 1,1 to the upper bound, inclusive)
+/// list("type" = RUSTG_ICONFORGE_MAP_COLORS, "rr" = 0.5, "rg" = 0.5, "rb" = 0.5, "ra" = 1, "gr" = 1, "gg" = 1, "gb" = 1, "ga" = 1, ...) // alpha arguments and rgba0 optional
+/// list("type" = RUSTG_ICONFORGE_FLIP, "dir" = SOUTH)
+/// list("type" = RUSTG_ICONFORGE_TURN, "angle" = 90.0)
+/// list("type" = RUSTG_ICONFORGE_SHIFT, "dir" = EAST, "offset" = 10, "wrap" = FALSE)
+/// list("type" = RUSTG_ICONFORGE_SWAP_COLOR, "src_color" = "#ff0000", "dst_color" = "#00ff00") // alpha bits supported
+/// list("type" = RUSTG_ICONFORGE_DRAW_BOX, "color" = "#ff0000", "x1" = 1, "y1" = 1, "x2" = 32, "y2" = 32) // alpha bits supported. color can be null/omitted for transparency. x2 and y2 will default to x1 and y1 if omitted
 ///
 /// Returns a SpritesheetResult as JSON, containing fields:
 /// list(
@@ -236,6 +283,21 @@
 #define rustg_iconforge_generate(file_path, spritesheet_name, sprites, hash_icons, generate_dmi, flatten) RUSTG_CALL(RUST_G, "iconforge_generate")(file_path, spritesheet_name, sprites, "[hash_icons]", "[generate_dmi]", "[flatten]")
 /// Returns a job_id for use with rustg_iconforge_check()
 #define rustg_iconforge_generate_async(file_path, spritesheet_name, sprites, hash_icons, generate_dmi, flatten) RUSTG_CALL(RUST_G, "iconforge_generate_async")(file_path, spritesheet_name, sprites, "[hash_icons]", "[generate_dmi]", "[flatten]")
+/// Creates a single DMI or PNG using 'sprites' as a list of icon states / images.
+/// This function is intended for generating icons with only a few states that have little in common with each other, and only one size.
+/// For icons with a large number of states, potentially variable sizes, that re-use sets of transforms more than once, or that benefit from caching, use rustg_iconforge_generate.
+/// sprites - follows the same format as rustg_iconforge_generate.
+/// file_path - the full relative path at which the PNG or DMI will be written. It must be a full filepath such as tmp/my_icon.dmi or my_icon.png
+/// flatten - boolean (0 or 1) determines if the DMI output will be flattened to a single frame/dir if unscoped (null/0 dir or frame values).
+///
+/// Returns a HeadlessResult, decoded to a BYOND list (always, it's not possible for this to panic unless rustg itself has an issue) containing the following fields:
+/// list(
+///     "file_path" = "tmp/my_icon.dmi" // [whatever you input returned back to you, null if there was a fatal error]
+///     "width" = 32 // the width, which is determined by the first entry of 'sprites', null if there was a fatal error
+///     "height" = 32 // the height, which is determined by the first entry of 'sprites', null if there was a fatal error
+///     "error" = "[A string, null if there were no errors.]"
+/// )
+#define rustg_iconforge_generate_headless(file_path, sprites, flatten) json_decode(RUSTG_CALL(RUST_G, "iconforge_generate_headless")(file_path, sprites, "[flatten]"))
 /// Returns the status of an async job_id, or its result if it is completed. See RUSTG_JOB DEFINEs.
 #define rustg_iconforge_check(job_id) RUSTG_CALL(RUST_G, "iconforge_check")("[job_id]")
 /// Clears all cached DMIs and images, freeing up memory.
@@ -256,7 +318,7 @@
 /// Provided a /datum/greyscale_config typepath, JSON string containing the greyscale config, and path to a DMI file containing the base icons,
 /// Loads that config into memory for later use by rustg_iconforge_gags(). The config_path is the unique identifier used later.
 /// JSON Config schema: https://hackmd.io/@tgstation/GAGS-Layer-Types
-/// Unsupported features: color_matrix layer type, 'or' blend_mode. May not have BYOND parity with animated icons or varying dirs between layers.
+/// Adding dirs or frames (via blending larger icons) to icons with more than 1 dir or 1 frame is not supported.
 /// Returns "OK" if successful, otherwise, returns a string containing the error.
 #define rustg_iconforge_load_gags_config(config_path, config_json, config_icon_path) RUSTG_CALL(RUST_G, "iconforge_load_gags_config")("[config_path]", config_json, config_icon_path)
 /// Given a config_path (previously loaded by rustg_iconforge_load_gags_config), and a string of hex colors formatted as "#ff00ff#ffaa00"
@@ -272,6 +334,12 @@
 #define RUSTG_ICONFORGE_BLEND_ICON "BlendIcon"
 #define RUSTG_ICONFORGE_CROP "Crop"
 #define RUSTG_ICONFORGE_SCALE "Scale"
+#define RUSTG_ICONFORGE_MAP_COLORS "MapColors"
+#define RUSTG_ICONFORGE_FLIP "Flip"
+#define RUSTG_ICONFORGE_TURN "Turn"
+#define RUSTG_ICONFORGE_SHIFT "Shift"
+#define RUSTG_ICONFORGE_SWAP_COLOR "SwapColor"
+#define RUSTG_ICONFORGE_DRAW_BOX "DrawBox"
 
 #define RUSTG_JOB_NO_RESULTS_YET "NO RESULTS YET"
 #define RUSTG_JOB_NO_SUCH_JOB "NO SUCH JOB"
@@ -428,8 +496,9 @@
 #define rustg_url_encode(text) RUSTG_CALL(RUST_G, "url_encode")("[text]")
 #define rustg_url_decode(text) RUSTG_CALL(RUST_G, "url_decode")(text)
 
-#ifdef RUSTG_OVERRIDE_BUILTINS
+// RUSTG_OVERRIDE_BUILTINS is not used since the file APIs don't work well over Linux.
+// #ifdef RUSTG_OVERRIDE_BUILTINS
 	#define url_encode(text) rustg_url_encode(text)
 	#define url_decode(text) rustg_url_decode(text)
-#endif
+// #endif
 

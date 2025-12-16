@@ -275,6 +275,10 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper_bin1"
 	item_state = "sheet-metal"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/sheets_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/sheets_righthand.dmi',
+		)
 	bad_type = /obj/item/form_printer
 
 /obj/item/form_printer/attack(mob/living/carbon/M, mob/living/carbon/user)

@@ -52,7 +52,7 @@
 	return
 
 
-/obj/effect/accelerated_particle/explosion_act(target_power, explosion_handler/handler)
+/obj/effect/accelerated_particle/explosion_act(target_power, datum/explosion_handler/handler)
 	qdel(src)
 	return 0
 

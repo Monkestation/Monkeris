@@ -39,7 +39,14 @@ SUBSYSTEM_DEF(statpanels)
 		if (!SSticker.HasRoundStarted())
 			global_ready_data += list(list("Players Ready: [SSticker.totalPlayersReady]"))
 			if(SSticker.state != GAME_STATE_SETTING_UP)
-				global_ready_data += list(list("Time To Start: [DisplayTimeText(SSticker.GetTimeLeft())]"))
+				var/time_remaining = SSticker.GetTimeLeft()
+				if(time_remaining > 0)
+					. += "Time To Start: [DisplayTimeText(round(time_remaining))]s"
+				else if(time_remaining == -1)
+					. += "Time To Start: DELAYED"
+				else
+					. += "Time To Start: SOON"
+				global_ready_data += list(list("Time To Start: [DisplayTimeText(time_remaining)]"))
 			private_ready_data += list(
 				list("-------------------"),
 				list("Admins Ready: [SSticker.total_admins_ready] / [length(GLOB.admins)]"),

@@ -158,7 +158,7 @@
 	..()
 	disrupt()
 
-/obj/item/implant/carrion_spider/holographic/explosion_act(target_power, explosion_handler/handler)
+/obj/item/implant/carrion_spider/holographic/explosion_act(target_power, datum/explosion_handler/handler)
 	. = ..()
 	if(QDELETED(src))
 		return

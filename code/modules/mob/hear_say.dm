@@ -52,9 +52,9 @@
 					nverb = "[verb] ([language.shorthand])"
 				if(GLOB.PREF_OFF)//Regular output
 					nverb = verb
-			on_hear_say("<span class='game say'>[language.display_icon(src) ? language.get_icon() : ""][span_name("[speaker_name]")][alt_name] [track][language.format_message(message, nverb)]</span>")
+			on_hear_say("<span class='game say'>[track] [language.display_icon(src) ? language.get_icon() : ""][span_name("[speaker_name]")][alt_name] [language.format_message(message, nverb)]</span>")
 	else
-		on_hear_say("<span class='game say'>[span_name("[speaker_name]")][alt_name] [track][verb], [span_message("<span class='body'>\"[message]\"")]</span></span>")
+		on_hear_say("<span class='game say'>[track] [span_name("[speaker_name]")][alt_name] [verb], [span_message("<span class='body'>\"[message]\"")]</span></span>")
 	// Create map text prior to modifying message for goonchat
 	if (client?.prefs.RC_enabled && !(stat == UNCONSCIOUS || stat == HARDCRIT) && (ismob(speaker) || client.prefs.RC_see_chat_non_mob) && !isdeaf(src))
 		if (italics)

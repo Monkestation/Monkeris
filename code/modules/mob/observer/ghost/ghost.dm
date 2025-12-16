@@ -230,21 +230,27 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/observer/ghost/verb/reenter_corpse()
 	set category = "Ghost"
 	set name = "Re-enter Corpse"
-	if(!client)	return
-
-	if(!(mind && mind.current && can_reenter_corpse))
+	if(!client)
+		return
+	if(!mind || QDELETED(mind.current))
 		to_chat(src, span_warning("You have no body."))
 		return
-	if(mind.current.key && copytext(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any clients
-		to_chat(usr, span_warning("Another consciousness is in your body... it is resisting you."))
+	if(!can_reenter_corpse)
+		to_chat(src, span_warning("You cannot re-enter your body."))
+		return
+	if(mind.current.key && mind.current.key[1] != "@") //makes sure we don't accidentally kick any clients
+		to_chat(usr, span_warning("Another consciousness is in your body...It is resisting you."))
 		return
 	client.destroy_UI()
-	stop_following()
-	mind.current.ajourn=0
-	mind.current.key = key
+	SSnano.user_transferred(src, mind.current) // Transfer NanoUIs.
+	SStgui.on_transfer(src, mind.current) // Transfer TUIs.
+	stop_following(no_message = TRUE)
+	mind.current.PossessByPlayer(key)
 	mind.current.teleop = null
 	if(!admin_ghosted)
 		announce_ghost_joinleave(mind, 0, "They now occupy their body again.")
+	if(mind.current.stat == DEAD)
+		to_chat(src, span_warning("To leave your body again use the Ghost verb."))
 	mind.current.client.init_verbs()
 	return 1
 
@@ -289,13 +295,18 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		M.antagHUD = 1
 		to_chat(src, span_blue("<B>AntagHUD Enabled</B>"))
 
-/mob/observer/ghost/proc/dead_tele(A in SSmapping.ghostteleportlocs)
+/mob/observer/ghost/proc/dead_tele()
 	set category = "Ghost"
 	set name = "Teleport"
 	set desc= "Teleport to a location"
 	if(!isghost(usr))
 		to_chat(usr, "Not when you're not dead!")
 		return
+
+	var/A = tgui_input_list(src, "Teleport to a location", "Teleport", SSmapping.ghostteleportlocs)
+	if (!A)
+		return
+
 	remove_verb(usr, /mob/observer/ghost/proc/dead_tele)
 	spawn(30)
 		add_verb(usr, /mob/observer/ghost/proc/dead_tele)
@@ -334,8 +345,10 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	for(var/mob/M in sortNames(SSmobs.mob_list | SShumans.mob_list))
 		if(M.ckey && !isnewplayer(M))
 			player_controlled_mobs.Add(M)
-
-	ManualFollow(input("Follow and haunt a player", "Follow player") as anything in player_controlled_mobs)
+	var/mob/to_follow = tgui_input_list(usr, "Follow and haunt a player", "Follow player", player_controlled_mobs)
+	if(!to_follow)
+		return
+	ManualFollow(to_follow)
 
 /mob/observer/ghost/verb/follow_mob(input in getmobs()) ////// Follow mobs on list
 	set category = "Ghost"
@@ -350,6 +363,10 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/observer/ghost/proc/ManualFollow(atom/movable/target)
 	if(!target || target == following || target == src)
 		return
+	if(isclient(target))
+		target = astype(target, /client)?.mob
+	if(!target)
+		return
 
 	stop_following()
 	following = target
@@ -360,9 +377,10 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	to_chat(src, span_notice("Now following \the [following]"))
 	move_to_turf(following, following.loc, following.loc)
 
-/mob/observer/ghost/proc/stop_following()
+/mob/observer/ghost/proc/stop_following(no_message = FALSE)
 	if(following)
-		to_chat(src, span_notice("No longer following \the [following]"))
+		if (!no_message)
+			to_chat(src, span_notice("No longer following \the [following]"))
 		GLOB.moved_event.unregister(following, src)
 		GLOB.dir_set_event.unregister(following, src)
 		GLOB.destroyed_event.unregister(following, src)
@@ -667,7 +685,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
     return 0
 
 /mob/observer/ghost/can_admin_interact()
-	return check_rights(R_ADMIN, 0, src)
+	return check_rights(R_ADMIN)
 
 /mob/observer/ghost/verb/toggle_ghostsee()
 	set name = "Toggle Ghost Vision"
@@ -747,15 +765,15 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/extra_ghost_link(atom/ghost)
 	if(client && eyeobj)
-		return "|<a href='byond://?src=\ref[ghost];track=\ref[eyeobj]'>eye</a>"
+		return "|[FOLLOW_LINK(ghost, eyeobj)]"
 
 /mob/observer/ghost/extra_ghost_link(atom/ghost)
 	if(mind && mind.current)
-		return "|<a href='byond://?src=\ref[ghost];track=\ref[mind.current]'>body</a>"
+		return "|<a href='byond://?src=\ref[ghost];follow=\ref[mind.current]'>(BODY)</a>"
 
 /proc/ghost_follow_link(atom/target, atom/ghost)
 	if((!target) || (!ghost)) return
-	. = "<a href='byond://?src=\ref[ghost];track=\ref[target]'>(F)</a>"
+	. = "[FOLLOW_LINK(ghost, target)]"
 	. += target.extra_ghost_link(ghost)
 
 

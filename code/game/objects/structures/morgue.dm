@@ -42,7 +42,7 @@
 			icon_state = "morgue1"
 	return
 
-/obj/structure/morque/explosion_act(target_power, explosion_handler/handler)
+/obj/structure/morque/explosion_act(target_power, datum/explosion_handler/handler)
 	if(target_power > health)
 		for(var/atom/movable/A as mob|obj in src)
 			A.forceMove(loc)
@@ -308,7 +308,7 @@
 			icon_state = "crema1"
 	return
 
-/obj/structure/crematorium/explosion_act(target_power, explosion_handler/handler)
+/obj/structure/crematorium/explosion_act(target_power, datum/explosion_handler/handler)
 	if(target_power > health)
 		for(var/atom/movable/A as mob|obj in src)
 			A.forceMove(loc)

@@ -12,7 +12,7 @@
 		pipe_image = null
 	. = ..()
 
-/obj/machinery/atmospherics/explosion_act(target_power, explosion_handler/handler)
+/obj/machinery/atmospherics/explosion_act(target_power, datum/explosion_handler/handler)
 	for(var/atom/movable/A in src) //ventcrawling is serious business
 		A.explosion_act(target_power, handler)
 	. = ..()

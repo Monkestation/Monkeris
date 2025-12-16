@@ -159,7 +159,7 @@ GLOBAL_LIST_EMPTY(explosion_watcher_list)
 
 	channels = list("Science" = 1)
 
-/obj/item/device/radio/beacon/explosion_watcher/explosion_act(target_power, explosion_handler/handler)
+/obj/item/device/radio/beacon/explosion_watcher/explosion_act(target_power, datum/explosion_handler/handler)
 	return 0
 
 
@@ -198,6 +198,10 @@ GLOBAL_LIST_EMPTY(explosion_watcher_list)
 	name = "science tool"
 	icon_state = "science"
 	item_state = "sciencetool"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/tools_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/tools_righthand.dmi',
+		)
 	desc = "A hand-held device capable of extracting usefull data from various sources, such as paper reports and slime cores."
 	flags = CONDUCT
 	slot_flags = SLOT_BELT

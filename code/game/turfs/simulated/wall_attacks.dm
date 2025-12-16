@@ -43,7 +43,7 @@
 		return
 
 	if(isnull(deconstruction_steps_left))
-		deconstruction_steps_left = is_reinforced ? 5 : 1
+		deconstruction_steps_left = is_reinforced || window_type ? 5 : 1
 
 	// Most qualities available to try at all times
 	var/list/usable_qualities = list(QUALITY_WELDING, QUALITY_HAMMERING, QUALITY_WIRE_CUTTING, QUALITY_PRYING, QUALITY_BOLT_TURNING)
@@ -54,7 +54,17 @@
 	var/tool_type = I.get_tool_type(user, usable_qualities, src)
 	switch(tool_type)
 		if(QUALITY_BOLT_TURNING) // deconstruction_steps_left == 5
-			if(isnull(deconstruction_steps_left) || deconstruction_steps_left == 5) // Starting deconstruction
+			if(window_type)
+				if(isnull(deconstruction_steps_left) || deconstruction_steps_left == 5) // starting window deconstruction
+					if(I.use_tool(user, src, WORKTIME_NORMAL, tool_type, FAILCHANCE_NORMAL, required_stat = STAT_MEC))
+						deconstruction_steps_left = 4
+						to_chat(user, span_notice("You remove the bolts securing the window in place."))
+				else if(deconstruction_steps_left == 4) // Reversing deconstruction
+					if(I.use_tool(user, src, WORKTIME_NORMAL, tool_type, FAILCHANCE_EASY, required_stat = STAT_MEC))
+						deconstruction_steps_left = null
+						update_icon()
+						to_chat(user, span_notice("You screw the bolts holding the window into place."))
+			else if(isnull(deconstruction_steps_left) || deconstruction_steps_left == 5) // Starting deconstruction
 				if(I.use_tool(user, src, WORKTIME_NORMAL, tool_type, FAILCHANCE_NORMAL, required_stat = STAT_MEC))
 					deconstruction_steps_left = 4 // Non-null value indicates that special overlay should be added on update_icon()
 					update_icon()
@@ -69,7 +79,7 @@
 			return
 
 		if(QUALITY_PRYING) // deconstruction_steps_left == 4
-			if(window_type)
+			if(window_type && deconstruction_steps_left == 4)
 				if(I.use_tool(user, src, WORKTIME_NORMAL, tool_type, FAILCHANCE_NORMAL, required_stat = STAT_MEC))
 					var/material/glass/window_material = get_material_by_name(window_type)
 					window_material.place_sheet(src, 6)

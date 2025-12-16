@@ -1,6 +1,0 @@
-author: Sun-Soaked
-delete-after: true
-changes:
-  - code_imp: removes a bunch of ghastly local repathings/re-definitions of /mob
-      and it's subtypes and moves the vars under them into their appropriate 
-      define files

@@ -201,7 +201,7 @@
 
 	updateDialog()
 
-/obj/machinery/shield_gen/explosion_act(target_power, explosion_handler/handler)
+/obj/machinery/shield_gen/explosion_act(target_power, datum/explosion_handler/handler)
 	if(active)
 		toggle()
 	return ..()

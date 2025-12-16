@@ -22,6 +22,11 @@
 	name = "armor part"
 	desc = "Spare part of armor."
 	icon_state = "armor_part"
+	item_state = "armor"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/clothing_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/clothing_righthand.dmi',
+		)
 	spawn_tags = SPAWN_TAG_PART_ARMOR
 	matter = list(MATERIAL_PLASTIC = 10, MATERIAL_STEEL = 10)
 

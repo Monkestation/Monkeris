@@ -596,7 +596,7 @@
 /obj/structure/window/reinforced/crescent/attackby()
 	return
 
-/obj/structure/window/reinforced/crescent/explosion_act(target_power, explosion_handler/handler)
+/obj/structure/window/reinforced/crescent/explosion_act(target_power, datum/explosion_handler/handler)
 	return target_power
 
 /obj/structure/window/reinforced/crescent/hitby()

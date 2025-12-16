@@ -37,6 +37,8 @@ GLOBAL_VAR_INIT(refid_filter, TYPEID(filter(type="angular_blur")))
 
 #define isEye(A) istype(A, /mob/observer/eye)
 
+#define isAIEye(A) istype(A, /mob/observer/eye/aiEye)
+
 #define isangel(A) istype(A, /mob/observer/eye/angel)
 
 #define isnewplayer(A) istype(A, /mob/new_player)

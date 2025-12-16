@@ -27,16 +27,21 @@ note dizziness decrements automatically in the mob's Life() proc.
 	is_dizzy = 1
 	while(dizziness > 100)
 		if(client)
-			var/amplitude = dizziness*(sin(dizziness * 0.044 * world.time) + 1) / 70
-			client.pixel_x = amplitude * sin(0.008 * dizziness * world.time)
-			client.pixel_y = amplitude * cos(0.008 * dizziness * world.time)
+			var/amplitude = dizziness * (sin(dizziness * 0.044 * world.time) + 1) / 70
+			var/iforgor = 0.004
+			if(resting)
+				iforgor *= 1.5
+				dizziness -= 2
 
+			var/target_x = amplitude * sin(iforgor * dizziness * world.time)
+			var/target_y = amplitude * cos(iforgor * dizziness * world.time)
+			animate(client, pixel_x = target_x, pixel_y = target_y, time = 1, easing = QUAD_EASING | EASE_OUT)
 		sleep(1)
 	//endwhile - reset the pixel offsets to zero
 	is_dizzy = 0
 	if(client)
-		client.pixel_x = 0
-		client.pixel_y = 0
+		animate(client, pixel_x = 0, pixel_y = 0, time = 2, easing = QUAD_EASING | EASE_OUT)
+
 
 // jitteriness - copy+paste of dizziness
 /mob/proc/make_jittery(amount)
@@ -193,46 +198,46 @@ note dizziness decrements automatically in the mob's Life() proc.
 	// And animate the attack!
 	animate(I, alpha = 175, pixel_x = 0, pixel_y = 0, pixel_z = 0, time = 3)
 
-//Shakes the mob's camera
-//Strength is not recommended to set higher than 4, and even then its a bit wierd
-/proc/shake_camera(mob/M, duration, strength = 1, taper = 0.25)
-	if(!M || !M.client || M.shakecamera || M.stat || isEye(M) || isAI(M))
+#define TILES_PER_SECOND 0.7
+///Shake the camera of the person viewing the mob SO REAL!
+///Takes the mob to shake, the time span to shake for, and the amount of tiles we're allowed to shake by in tiles
+///Duration isn't taken as a strict limit, since we don't trust our coders to not make things feel shitty. So it's more like a soft cap.
+/proc/shake_camera(mob/M, duration, strength=1)
+	if(!M || !M.client || duration < 1)
 		return
+	var/client/C = M.client
+	var/oldx = C.pixel_x
+	var/oldy = C.pixel_y
+	var/max = strength*world.icon_size
+	var/min = -(strength*world.icon_size)
 
-	M.shakecamera = 1
-	spawn(2)
-		if(!M.client)
-			return
+	//How much time to allot for each pixel moved
+	var/time_scalar = (1 / world.icon_size) * TILES_PER_SECOND
+	var/last_x = oldx
+	var/last_y = oldy
 
-		var/atom/oldeye=M.client.eye
-		var/aiEyeFlag = 0
-		if(istype(oldeye, /mob/observer/eye/aiEye))
-			aiEyeFlag = 1
+	var/time_spent = 0
+	while(time_spent < duration)
+		//Get a random pos in our box
+		var/x_pos = rand(min, max) + oldx
+		var/y_pos = rand(min, max) + oldy
 
-		var/x
-		for(x=0; x<duration; x++)
-			if(aiEyeFlag)
-				M.client.eye = locate(dd_range(1,oldeye.loc.x+rand(-strength,strength),world.maxx),dd_range(1,oldeye.loc.y+rand(-strength,strength),world.maxy),oldeye.loc.z)
-			else
-				M.client.eye = locate(dd_range(1,M.loc.x+rand(-strength,strength),world.maxx),dd_range(1,M.loc.y+rand(-strength,strength),world.maxy),M.loc.z)
-			sleep(1)
+		//We take the smaller of our two distances so things still have the propencity to feel somewhat jerky
+		var/time = round(max(min(abs(last_x - x_pos), abs(last_y - y_pos)) * time_scalar, 1))
 
-		//Taper code added by nanako.
-		//Will make the strength falloff after the duration.
-		//This helps to reduce jarring effects of major screenshaking suddenly returning to stability
-		//Recommended taper values are 0.05-0.1
-		if (taper > 0)
-			while (strength > 0)
-				strength -= taper
-				if(aiEyeFlag)
-					M.client.eye = locate(dd_range(1,oldeye.loc.x+rand(-strength,strength),world.maxx),dd_range(1,oldeye.loc.y+rand(-strength,strength),world.maxy),oldeye.loc.z)
-				else
-					M.client.eye = locate(dd_range(1,M.loc.x+rand(-strength,strength),world.maxx),dd_range(1,M.loc.y+rand(-strength,strength),world.maxy),M.loc.z)
-				sleep(1)
+		if (time_spent == 0)
+			animate(C, pixel_x=x_pos, pixel_y=y_pos, time=time)
+		else
+			animate(pixel_x=x_pos, pixel_y=y_pos, time=time)
 
-		M.client.eye=oldeye
-		M.shakecamera = 0
+		last_x = x_pos
+		last_y = y_pos
+		//We go based on time spent, so there is a chance we'll overshoot our duration. Don't care
+		time_spent += time
 
+	animate(pixel_x=oldx, pixel_y=oldy, time=3)
+
+#undef TILES_PER_SECOND
 
 //Deprecated, use SpinAnimation when possible
 /mob/proc/spin(spintime, speed)

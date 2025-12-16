@@ -46,7 +46,7 @@ var/global/floorIsLava = 0
  */
 /proc/message_mentorTicket(msg, important = FALSE)
 	for(var/client/C in GLOB.admins)
-		if(check_rights(R_ADMIN | R_MENTOR, 0, C.mob))
+		if(check_rights_for(R_ADMIN | R_MENTOR))
 			to_chat(C, msg)
 			if(important || (C.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == GLOB.PREF_HEAR))
 				sound_to(C, 'sound/effects/adminhelp.ogg')
@@ -54,7 +54,7 @@ var/global/floorIsLava = 0
 /proc/admin_notice(message, rights)
 	var/list/mob_list = SSmobs.mob_list | SShumans.mob_list
 	for(var/mob/M in mob_list)
-		if(check_rights(rights, 0, M))
+		if(check_rights_for(M, rights))
 			to_chat(M, message)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
@@ -133,7 +133,7 @@ var/global/floorIsLava = 0
 		<a href='byond://?src=\ref[src];[HrefToken()];subtlemessage=\ref[M]'>SM</a> -
 		<a href='byond://?src=\ref[src];[HrefToken()];manup=\ref[M]'>MAN_UP</a> -
 		<a href='byond://?src=\ref[src];[HrefToken()];paralyze=\ref[M]'>PARA</a> -
-		[ADMIN_JMP(M)] -
+		[ADMIN_JMP_NOPNOG(M)] -
 		<a href='byond://?src=\ref[src];[HrefToken()];viewlogs=\ref[M]'>LOGS</a>\] <br>
 		<b>Mob type</b> = [M.type]<br><br>
 		<A href='byond://?src=\ref[src];[HrefToken()];boot2=\ref[M]'>Kick</A> |
@@ -694,6 +694,21 @@ var/global/floorIsLava = 0
 	GLOB.dooc_allowed = !( GLOB.dooc_allowed )
 	log_admin("[key_name(usr)] toggled Dead OOC.")
 	message_admins("[key_name_admin(usr)] toggled Dead OOC.", 1)
+
+/datum/admins/proc/togglediagonalmovement()
+	set category = "Server"
+	set desc="Toggle Diagonal Movement."
+	set name="Toggle Diagonal Movement"
+
+	if(!check_rights(R_ADMIN))
+		return
+
+	GLOB.diagonal_movement = !( GLOB.diagonal_movement )
+	for (var/client/client in GLOB.clients)
+		client.CAN_MOVE_DIAGONALLY = GLOB.diagonal_movement
+	log_admin("[key_name(usr)] toggled diagonal movement ([(GLOB.diagonal_movement ? "ON" : "OFF")]).")
+	message_admins("[key_name_admin(usr)] toggled diagonal movement ([(GLOB.diagonal_movement ? "ON" : "OFF")]).")
+
 
 /datum/admins/proc/startnow()
 	set category = "Server"

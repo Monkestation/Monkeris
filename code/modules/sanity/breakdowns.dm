@@ -196,12 +196,14 @@
 						"[holder.owner] bites [G.his] own limbs uncontrollably!"
 					))))
 					var/list/obj/item/organ/external/parts = holder.owner.get_damageable_organs()
-					if(parts.len)
+					if(length(parts))
 						holder.owner.damage_through_armor(rand(2,4), def_zone = pick(parts))
 
 /datum/breakdown/negative/selfharm/occur()
 	spawn(delay)
-		++holder?.owner.suppress_communication
+		if(ishuman(holder?.owner))
+			var/mob/living/carbon/human/tobreakdown = holder.owner
+			++tobreakdown.suppress_communication
 	return ..()
 
 /datum/breakdown/negative/selfharm/conclude()
@@ -240,9 +242,11 @@
 
 /datum/breakdown/negative/hysteric/occur()
 	spawn(delay)
-		holder?.owner.SetWeakened(4)
-		holder?.owner.SetStunned(4)
-		++holder?.owner.suppress_communication
+		if(ishuman(holder?.owner))
+			var/mob/living/carbon/human/tobreakdown = holder.owner
+			tobreakdown.SetWeakened(4)
+			tobreakdown.SetStunned(4)
+			++tobreakdown.suppress_communication
 	return ..()
 
 /datum/breakdown/negative/hysteric/conclude()
@@ -305,7 +309,7 @@
 	for(var/datum/component/fabric/F in GLOB.fabric_list)
 		if(F.parent == holder.owner)
 			continue
-		add_image(F.fabric_image)
+		add_image(null, F.fabric_image)
 	++holder.owner.language_blackout
 	return ..()
 
