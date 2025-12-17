@@ -181,7 +181,7 @@
 	name = "designated marksman crate"
 	desc = "A crate containing six \"Kovacs\" battle rifles, and plenty of mags."
 	icon_state = "serbcrate_deferred_green"
-	initial_contents = list(/obj/item/gun/projectile/kovacs = 6,
+	initial_contents = list(/obj/item/gun/projectile/automatic/modular/batrifle/serbian = 6,
 	/obj/item/ammo_magazine/lrifle = 18)
 
 /obj/item/storage/deferred/crate/grenadier
@@ -401,7 +401,7 @@
 	initial_contents = list(
 	/obj/item/clothing/gloves/thick = 1,
 	/obj/item/clothing/under/excelsior = 1,
-	/obj/item/gun/projectile/automatic/vintorez = 1,
+	/obj/item/gun/projectile/automatic/modular/batrifle/vintorez = 1,
 	/obj/item/ammo_magazine/srifle = 5,
 	/obj/item/clothing/suit/armor/gzhel = 1,
 	/obj/item/clothing/mask/gas = 1,

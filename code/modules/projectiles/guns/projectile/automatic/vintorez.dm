@@ -25,7 +25,7 @@
 		SEMI_AUTO_300,
 		BURST_2_ROUND
 		)
-	gun_parts = list(/obj/item/part/gun/frame/vintorez = 1, /obj/item/part/gun/modular/grip/excel = 1, /obj/item/part/gun/modular/mechanism/autorifle/marksman = 1, /obj/item/part/gun/modular/barrel/srifle = 1)
+	gun_parts = list(/obj/item/part/gun/frame/vintorez = 1, /obj/item/part/gun/modular/grip/excel = 1, /obj/item/part/gun/modular/mechanism/autorifle/tactical/marksman = 1, /obj/item/part/gun/modular/barrel/srifle = 1)
 	serial_type = "Excelsior"
 
 
@@ -58,7 +58,8 @@
 	name = "Vintorez frame"
 	desc = "A Vintorez rifle frame. Accurate and damaging."
 	icon_state = "frame_vintorez"
-	resultvars = list(/obj/item/gun/projectile/automatic/vintorez)
+	resultvars = list(/obj/item/gun/projectile/automatic/modular/batrifle/vintorez)
 	gripvars = list(/obj/item/part/gun/modular/grip/excel)
-	mechanismvar = /obj/item/part/gun/modular/mechanism/autorifle/marksman
+	mechanismvar = /obj/item/part/gun/modular/mechanism/autorifle/tactical/marksman
 	barrelvars = list(/obj/item/part/gun/modular/barrel/srifle)
+

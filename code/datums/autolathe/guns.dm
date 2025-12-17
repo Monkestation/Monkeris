@@ -144,7 +144,7 @@
 
 /datum/design/autolathe/gun/vintorez
 	name = "Excelsior .20 \"Vintorez\""
-	build_path = /obj/item/gun/projectile/automatic/vintorez
+	build_path = /obj/item/gun/projectile/automatic/modular/batrifle/vintorez
 	minimum_quality = 2
 
 /datum/design/autolathe/gun/z8
@@ -159,7 +159,7 @@
 
 /datum/design/autolathe/gun/kovacs
 	name = "SA BR .20 \"Kovacs\""
-	build_path = /obj/item/gun/projectile/kovacs
+	build_path = /obj/item/gun/projectile/automatic/modular/batrifle/serbian
 
 /datum/design/autolathe/gun/boltgun_fs
 	name = "FS BR .20 \"Kadmin\""
@@ -218,7 +218,7 @@
 
 /datum/design/autolathe/gun/sts35
 	name = "OR SDF AR .30 \"STS-35\""
-	build_path = /obj/item/gun/projectile/automatic/sts35
+	build_path = /obj/item/gun/projectile/automatic/modular/batrifle/sts35
 	minimum_quality = 2
 
 // Heavy
