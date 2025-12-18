@@ -19,7 +19,7 @@
 	var/corporation
 	var/heat = 0
 
-	//if set, this object was constructed by a lathe. the information stored in the define tells us which lathe it was
+	///if set, this object was constructed by a lathe. the information stored in the define tells us which lathe it was
 	var/watermark
 
 
