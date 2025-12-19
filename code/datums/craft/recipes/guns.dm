@@ -25,7 +25,7 @@
 
 /datum/craft_recipe/gun/handmaderifle
 	name = "HM BR \"Riose\""
-	result = /obj/item/gun/projectile/boltgun/handmade
+	result = /obj/item/gun/projectile/automatic/modular/bolt/handmade/finished
 	steps = list(
 		list(CRAFT_MATERIAL, 13, MATERIAL_STEEL),
 		list(CRAFT_MATERIAL, 5, MATERIAL_WOOD),

@@ -39,7 +39,7 @@
 	name = "bolt-action rifle frame"
 	desc = "A bolt-action rifle frame. For hunting or endless trench warfare."
 	icon_state = "frame_serbrifle"
-	result = /obj/item/gun/projectile/boltgun
+	result = /obj/item/gun/projectile/automatic/modular/bolt/serbian
 	gripvars = list(/obj/item/part/gun/modular/grip/excel, /obj/item/part/gun/modular/grip/wood)
 	resultvars = list(/obj/item/gun/projectile/boltgun, /obj/item/gun/projectile/boltgun/serbian)
 	mechanismvar = /obj/item/part/gun/modular/mechanism/boltgun
@@ -131,7 +131,6 @@
 	init_recoil = RIFLE_RECOIL(1.7)
 	matter = list(MATERIAL_STEEL = 20, MATERIAL_WOOD = 10)
 	wielded_item_state = "_doble_wood"
-	spawn_blacklisted = FALSE
 	gun_parts = list(/obj/item/stack/material/steel = 16)
 	sawn = /obj/item/gun/projectile/boltgun/obrez/serbian
 	gun_parts = list(/obj/item/part/gun/frame/boltgun = 1, /obj/item/part/gun/modular/grip/wood = 1, /obj/item/part/gun/modular/mechanism/boltgun = 1, /obj/item/part/gun/modular/barrel/lrifle/steel = 1)
@@ -158,7 +157,6 @@
 	matter = list(MATERIAL_STEEL = 25, MATERIAL_PLASTIC = 15)
 	wielded_item_state = "_doble_ih_scope"
 	sharp = FALSE
-	spawn_blacklisted = TRUE
 	saw_off = FALSE
 	gun_parts = list(/obj/item/part/gun/frame/kadmin = 1, /obj/item/part/gun/modular/grip/rubber = 1, /obj/item/part/gun/modular/mechanism/boltgun = 1, /obj/item/part/gun/modular/barrel/srifle/steel = 1)
 	price_tag = 1200
@@ -176,7 +174,6 @@
 	init_recoil = RIFLE_RECOIL(2)
 	zoom_factors = list(0.5) //like the xbow
 	wielded_item_state = "_doble_arisaka"
-	spawn_blacklisted = FALSE
 	gun_parts = list(/obj/item/part/gun/frame/kadmin = 1, /obj/item/part/gun/modular/grip/wood = 1, /obj/item/part/gun/modular/mechanism/boltgun = 1, /obj/item/part/gun/modular/barrel/srifle/steel = 1)
 	price_tag = 1000
 
@@ -184,7 +181,7 @@
 	name = "Kadmin frame"
 	desc = "A Kadmin bolt-action rifle frame. For hunting or endless coastal warfare."
 	icon_state = "frame_weebrifle"
-	result = /obj/item/gun/projectile/boltgun/fs
+	result = /obj/item/gun/projectile/automatic/modular/bolt/fs
 	resultvars = list(/obj/item/gun/projectile/boltgun/fs, /obj/item/gun/projectile/boltgun/fs/civilian)
 	gripvars = list(/obj/item/part/gun/modular/grip/rubber, /obj/item/part/gun/modular/grip/wood)
 	mechanismvar = /obj/item/part/gun/modular/mechanism/boltgun
@@ -208,7 +205,6 @@
 	reload_sound = 'sound/weapons/guns/interact/rifle_load.ogg'
 	price_tag = 800
 	sharp = TRUE //no bayonet here
-	spawn_blacklisted = FALSE
 	spawn_tags = SPAWN_TAG_GUN_HANDMADE
 	saw_off = TRUE // yeah, we are getting the ghetto sawn off too
 	sawn = /obj/item/gun/projectile/boltgun/obrez/handmade
@@ -223,6 +219,7 @@
 	gripvars = list(/obj/item/part/gun/modular/grip/wood)
 	mechanismvar = /obj/item/part/gun/modular/mechanism/boltgun/junk
 	barrelvars = list(/obj/item/part/gun/modular/barrel/lrifle/steel, /obj/item/part/gun/modular/barrel/srifle/steel, /obj/item/part/gun/modular/barrel/clrifle/steel)
+	spawn_blacklisted = TRUE
 
 //// OBREZ ////
 

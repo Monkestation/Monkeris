@@ -17238,8 +17238,8 @@
 /area/eris/engineering/atmos/storage)
 "aSw" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/boltgun/fs,
-/obj/item/gun/projectile/boltgun/fs,
+/obj/item/gun/projectile/automatic/modular/bolt/fs,
+/obj/item/gun/projectile/automatic/modular/bolt/fs,
 /obj/machinery/door/blast/shutters/glass{
 	id = "Armoury";
 	name = "Armoury showcase"
