@@ -12,6 +12,7 @@
 
 	log_admin("ADMIN: [key_name(src)] : [msg]")
 
+	SSplexora.relay_admin_say(src, html_decode(msg))
 	msg = emoji_parse(msg)
 
 	if(findtext(msg, "@") || findtext(msg, "#"))
@@ -49,9 +50,33 @@
 
 	if (!msg)
 		return
+	SSplexora.relay_mentor_say(src, html_decode(msg))
 
 	var/sender_name = key_name(usr, 1)
 	if(check_rights(R_ADMIN, 0))
 		sender_name = span_admin("[sender_name]")
 	for(var/client/C in GLOB.admins)
 		to_chat(C, "<span class='mod_channel'> MOD: [span_name("[sender_name]")]): <span class='message linkify'>[msg]</span></span>")
+
+// Checks a given message to see if any of the words contain an active mentor's ckey with an @ before it
+/proc/check_mentor_pings(message)
+	var/list/msglist = splittext(message, " ")
+	var/list/mentors_to_ping = list()
+
+	var/i = 0
+	for(var/word in msglist)
+		i++
+		if(!length(word))
+			continue
+		if(word[1] != "@")
+			continue
+		var/ckey_check = ckey(copytext(word, 2))
+		var/client/client_check = GLOB.directory[ckey_check]
+		// if(client_check?.mentor_datum?.check_for_rights(R_MENTOR))
+		if(client_check?.holder?.check_for_exact_rights(R_MENTOR))
+			msglist[i] = "<u>[word]</u>"
+			mentors_to_ping[ckey_check] = client_check
+
+	if(length(mentors_to_ping))
+		mentors_to_ping[ASAY_LINK_PINGED_ADMINS_INDEX] = jointext(msglist, " ")
+		return mentors_to_ping
