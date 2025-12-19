@@ -1,0 +1,16 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer circle (background) -->
+  <circle cx="200" cy="200" r="200" fill="#666666"/>
+  
+  <!-- Eye white (sclera) -->
+  <ellipse cx="200" cy="220" rx="180" ry="110" fill="#f5f5f5"/>
+  
+  <!-- Iris -->
+  <ellipse cx="200" cy="220" rx="85" ry="85" fill="#333333"/>
+  
+  <!-- Highlight on iris -->
+  <circle cx="230" cy="190" r="18" fill="#cccccc"/>
+  
+  <!-- Pupil -->
+  <ellipse cx="190" cy="230" rx="35" ry="40" fill="#111111"/>
+</svg>

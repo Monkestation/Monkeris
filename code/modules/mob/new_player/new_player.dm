@@ -204,7 +204,7 @@
 		var/datum/body_modification/mod = client.prefs.get_modification(BP_BRAIN)
 		if(istype(mod, /datum/body_modification/limb/amputation))
 			if(alert(src,"Are you sure you wish to spawn without a brain? This will likely cause you to do die immediately. \
-			              If not, go to the Augmentation section of Setup Character and change the \"brain\" slot from Removed to the desired kind of brain.", \
+						  If not, go to the Augmentation section of Setup Character and change the \"brain\" slot from Removed to the desired kind of brain.", \
 						  "Player Setup", "Yes", "No") == "No")
 				return FALSE
 
@@ -212,7 +212,7 @@
 		mod = client.prefs.get_modification(BP_EYES)
 		if(istype(mod, /datum/body_modification/limb/amputation))
 			if(alert(src,"Are you sure you wish to spawn without eyes? It will likely be difficult to see without them. \
-			              If not, go to the Augmentation section of Setup Character and change the \"eyes\" slot from Removed to the desired kind of eyes.", \
+						  If not, go to the Augmentation section of Setup Character and change the \"eyes\" slot from Removed to the desired kind of eyes.", \
 						  "Player Setup", "Yes", "No") == "No")
 				return FALSE
 
@@ -375,34 +375,61 @@
 	qdel(src)
 
 /mob/new_player/proc/LateChoices()
-	var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name
+    var/datum/new_player/late_choices/LC = new()
+    LC.ui_interact(src)
 
-	var/dat = ""
-	dat += "<b>Welcome, [name].<br></b>"
-	dat += "Round Duration: <B>[DisplayTimeText(world.time - SSticker.round_start_time)]</B><BR>"
+/datum/new_player/late_choices/ui_interact(mob/user, datum/tgui/ui)
+    ui = SStgui.try_update_ui(user, src, ui)
+    if(!ui)
+        ui = new(user, src, "LateJoin", "Late Join")
+        ui.open()
 
-	if(evacuation_controller.has_evacuated()) //In case Nanotrasen decides reposess CentCom's shuttles.
-		dat += "<font color='red'><b>The vessel has been evacuated.</b></font><br>"
-	else if(evacuation_controller.is_evacuating())
-		if(evacuation_controller.emergency_evacuation) // Emergency shuttle is past the point of no recall
-			dat += "<font color='red'>The vessel is currently undergoing evacuation procedures.</font><br>"
-		else                                           // Crew transfer initiated
-			dat += "<font color='red'>The vessel is currently undergoing crew transfer procedures.</font><br>"
+/datum/new_player/late_choices/ui_data(mob/user)
+    var/list/data = list()
+    var/mob/new_player/player = user
 
-	dat += "Choose from the following open/valid positions:<br>"
-	for(var/datum/job/job in SSjob.occupations)
-		if(job && IsJobAvailable(job.title))
-			if(job.is_restricted(client.prefs))
-				continue
-			var/active = 0
-			// Only players with the job assigned and AFK for less than 10 minutes count as active
-			for(var/mob/M in GLOB.player_list) if(M.mind && M.client && M.mind.assigned_role == job.title && M.client.inactivity <= 10 * 60 * 10)
-				active++
-			dat += "<a href='byond://?src=[REF(src)];SelectedJob=[job.title]'>[job.title] ([job.current_positions]) (Active: [active])</a><br>"
+    data["name"] = player.client.prefs.be_random_name ? "friend" : player.client.prefs.real_name
+    data["roundDuration"] = DisplayTimeText(world.time - SSticker.round_start_time)
 
-	dat += "</center>"
-	src << browse(HTML_SKELETON_TITLE("Late join", dat), "window=latechoices;size=400x640;can_close=1")
+    // Evacuation status
+    data["evacuated"] = evacuation_controller.has_evacuated()
+    data["evacuating"] = evacuation_controller.is_evacuating()
+    data["emergencyEvac"] = evacuation_controller.emergency_evacuation
 
+    // Available jobs
+    var/list/jobs = list()
+
+    for(var/datum/job/job in SSjob.occupations)
+        if(job && player.IsJobAvailable(job.title) && !job.is_restricted(player.client.prefs))
+            var/active = 0
+            // Count active players in this role
+            for(var/mob/M in GLOB.player_list)
+                if(M.mind && M.client && M.mind.assigned_role == job.title && M.client.inactivity <= 10 * 60 * 10)
+                    active++
+
+            jobs += list(list(
+                "title" = job.title,
+                "positions" = job.current_positions,
+                "active" = active
+            ))
+
+    data["jobs"] = jobs
+    return data
+
+/datum/new_player/late_choices/ui_act(action, params, datum/tgui/ui)
+    . = ..()
+    if(.)
+        return
+
+    var/mob/new_player/player = ui.user
+    switch(action)
+        if("select_job")
+            var/job_title = params["title"]
+            if(player.IsJobAvailable(job_title))
+                player.AttemptLateSpawn(job_title, player.client.prefs.spawnpoint)
+                return TRUE
+/datum/new_player/late_choices/ui_state(mob/user)
+	return GLOB.always_state
 
 /mob/new_player/proc/create_character()
 	spawning = 1
