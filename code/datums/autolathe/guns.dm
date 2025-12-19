@@ -129,7 +129,7 @@
 
 /datum/design/autolathe/gun/drozd
 	name = "Excelsior .40 \"Drozd\""
-	build_path = /obj/item/gun/projectile/automatic/drozd
+	build_path = /obj/item/gun/projectile/automatic/modular/drozd/finished
 	minimum_quality = 1
 
 /datum/design/autolathe/gun/slaught_o_matic //alledgedly a handgun, but practically an SMG
