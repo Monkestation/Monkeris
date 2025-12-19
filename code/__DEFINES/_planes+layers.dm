@@ -179,6 +179,8 @@ What is the naming convention for planes or layers?
 
 #define RUNECHAT_PLANE 9930
 
+#define BALLOON_CHAT_PLANE 9935
+
 #define CINEMATIC_PLANE 9950
 #define CINEMATIC_LAYER 22
 

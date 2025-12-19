@@ -166,6 +166,7 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 	/client/proc/investigate_show,
 	/client/proc/admin_memo,
 	/client/proc/admin_ghost,
+	/client/proc/library_control,
 	/client/proc/invisimin,
 	/datum/verbs/menu/Admin/verb/playerpanel, /* It isn't /datum/admin but it fits no less */
 	/client/proc/cmd_admin_check_player_exp, /* shows players by playtime */
@@ -959,3 +960,14 @@ GLOBAL_PROTECT(admin_verbs_possess)
 									GLOB.custom_kits -= kit_of_choice
 			else
 				groundhog_day = FALSE
+
+/client/proc/library_control()
+	set name = "Library Management"
+	set category = "Admin"
+	if(!check_rights(R_BAN))
+		return
+
+	if(!holder.library_manager)
+		holder.library_manager = new()
+	holder.library_manager.ui_interact(usr)
+	// SSblackbox.record_feedback("tally", "admin_verb", 1, "Library Management") // If you are copy-pasting this, ensure the 4th parameter is unique to the new proc!
