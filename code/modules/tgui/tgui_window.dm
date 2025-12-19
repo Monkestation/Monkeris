@@ -25,6 +25,19 @@
 	var/initial_inline_html
 	var/initial_inline_js
 	var/initial_inline_css
+	var/mouse_event_macro_set = FALSE
+
+	/**
+	 * Static list used to map in macros that will then emit execute events to the tgui window
+	 * A small disclaimer though I'm no tech wiz: I don't think it's possible to map in right or middle
+	 * clicks in the current state, as they're keywords rather than modifiers.
+	 */
+	var/static/list/byondToTguiEventMap = list(
+		"MouseDown" = "byond/mousedown",
+		"MouseUp" = "byond/mouseup",
+		"Ctrl" = "byond/ctrldown",
+		"Ctrl+UP" = "byond/ctrlup",
+	)
 
 	var/list/oversized_payloads = list()
 
@@ -65,10 +78,12 @@
 		inline_html = "",
 		inline_js = "",
 		inline_css = "")
+#ifdef EXTENDED_DEBUG_LOGGING
 	log_tgui(client,
 		context = "[id]/initialize",
 		window = src)
-	if(!client)
+#endif
+	if(QDELETED(client))
 		return
 	src.initial_fancy = fancy
 	src.initial_assets = assets
@@ -119,7 +134,7 @@
 	// Detect whether the control is a browser
 	is_browser = winexists(client, id) == "BROWSER"
 	// Instruct the client to signal UI when the window is closed.
-	if(!is_browser)
+	if(!is_browser && !QDELETED(client)) // monkestation: extra anti-runtime checks
 		winset(client, id, "on-close=\"uiclose [id]\"")
 
 /**
@@ -222,17 +237,23 @@
 /datum/tgui_window/proc/close(can_be_suspended = TRUE)
 	if(!client)
 		return
+	if(mouse_event_macro_set)
+		remove_mouse_macro()
 	if(can_be_suspended && can_be_suspended())
+#ifdef EXTENDED_DEBUG_LOGGING
 		log_tgui(client,
 			context = "[id]/close (suspending)",
 			window = src)
+#endif
 		visible = FALSE
 		status = TGUI_WINDOW_READY
 		send_message("suspend")
 		return
+#ifdef EXTENDED_DEBUG_LOGGING
 	log_tgui(client,
 		context = "[id]/close",
 		window = src)
+#endif
 	release_lock()
 	visible = FALSE
 	status = TGUI_WINDOW_CLOSED
@@ -307,7 +328,6 @@
 		var/datum/asset/spritesheet_batched/spritesheet = asset
 		send_message("asset/stylesheet", spritesheet.css_filename())
 	send_raw_message(asset.get_serialized_url_mappings())
-
 /**
  * private
  *
@@ -397,6 +417,35 @@
 /datum/tgui_window/vv_edit_var(var_name, var_value)
 	return var_name != NAMEOF(src, id) && ..()
 
+
+/datum/tgui_window/proc/set_mouse_macro()
+	if(mouse_event_macro_set)
+		return
+
+	for(var/mouseMacro in byondToTguiEventMap)
+		var/command_template = ".output CONTROL PAYLOAD"
+		var/event_message = TGUI_CREATE_MESSAGE(byondToTguiEventMap[mouseMacro], null)
+		var target_control = is_browser \
+			? "[id]:update" \
+			: "[id].browser:update"
+		var/with_id = replacetext(command_template, "CONTROL", target_control)
+		var/full_command = replacetext(with_id, "PAYLOAD", event_message)
+
+		var/list/params = list()
+		params["parent"] = "default" //Technically this is external to tgui but whatever
+		params["name"] = mouseMacro
+		params["command"] = full_command
+
+		winset(client, "[mouseMacro]Window[id]Macro", params)
+	mouse_event_macro_set = TRUE
+
+/datum/tgui_window/proc/remove_mouse_macro()
+	if(!mouse_event_macro_set)
+		stack_trace("Unsetting mouse macro on tgui window that has none")
+	for(var/mouseMacro in byondToTguiEventMap)
+		winset(client, null, "[mouseMacro]Window[id]Macro.parent=null")
+	mouse_event_macro_set = FALSE
+
 /datum/tgui_window/proc/create_oversized_payload(payload_id, message_type, chunk_count)
 	if(oversized_payloads[payload_id])
 		stack_trace("Attempted to create oversized tgui payload with duplicate ID.")
@@ -414,7 +463,7 @@
 		return
 	var/list/chunks = payload["chunks"]
 	chunks += chunk
-	if(length(chunks) >= payload["count"])
+	if(chunks.len >= payload["count"])
 		deltimer(payload["timeout"])
 		var/message_type = payload["type"]
 		var/final_payload = chunks.Join()

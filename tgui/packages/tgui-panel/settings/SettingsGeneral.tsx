@@ -114,7 +114,7 @@ export function SettingsGeneral(props) {
                 <Input
                   width={'100%'}
                   value={fontFamily}
-                  onChange={(e, value) =>
+                  onChange={(value) =>
                     dispatch(
                       updateSettings({
                         fontFamily: value,
@@ -163,7 +163,8 @@ export function SettingsGeneral(props) {
             maxValue={5}
             value={lineHeight}
             format={(value) => toFixed(value, 2)}
-            onDrag={(e, value) =>
+            tickWhileDragging
+            onChange={(value) =>
               dispatch(
                 updateSettings({
                   lineHeight: value,
