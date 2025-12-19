@@ -9,6 +9,8 @@ GLOBAL_LIST_INIT(admin_verbs_fun, list(
 	/client/proc/hivemind_panel,
 	/client/proc/drop_bomb,
 	/client/proc/make_sound,
+	/client/proc/spawn_liquid,
+	/client/proc/spawn_pollution,
 	/client/proc/object_talk,
 	/client/proc/manage_custom_kits,
 	/datum/admins/proc/add_tts_seed,
