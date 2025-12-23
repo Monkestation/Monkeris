@@ -7,6 +7,7 @@
 #define MUTE_ADMINHELP (1<<3)
 #define MUTE_DEADCHAT (1<<4)
 #define MUTE_TTS (1<<5)
+#define MUTE_INTERNET_REQUEST (1<<6)
 #define MUTE_ALL (~0)
 
 // Number of identical messages required to get the spam-prevention auto-mute thing to trigger warnings and automutes.
@@ -71,6 +72,8 @@
 
 #define ADMIN_FULLMONTY_NONAME(user) "[ADMIN_QUE(user)] [ADMIN_PP(user)] [ADMIN_VV(user)] [ADMIN_SM(user)] [ADMIN_FLW(user)] [ADMIN_TP(user)] [ADMIN_SC(user)]"
 #define ADMIN_FULLMONTY(user) "[key_name_admin(user)] [ADMIN_FULLMONTY_NONAME(user)]"
+/// Displays "(PLAY)" in the chat, when clicked it tries to play internet sounds from the request.
+#define ADMIN_PLAY_INTERNET(text) "(<A href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];play_internet=[url_encode(text)]'>PLAY</a>)"
 
 // NO PARENTHESIS
 #define ADMIN_QUE_NOP(user) "<(a href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];adminmoreinfo=[REF(user)]'>?</a>)"

@@ -115,3 +115,13 @@
   - bugfix: smartfridge non-existence shit check
   - bugfix: use get turf for src when pairing/making a new wormhole
   - bugfix: turf not existing in density check
+2025-12-17:
+  flleeppyy:
+  - code_imp: update rust-g
+2025-12-19:
+  Sun-Soaked:
+  - bugfix: organs are now properly restored by rejuvenation
+  - bugfix: you can no longer stack biotech modifications beyond their limit
+  - bugfix: hormone output organoids now work again
+  flleeppyy:
+  - admin: Added request manager

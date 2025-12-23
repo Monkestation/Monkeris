@@ -56,7 +56,7 @@ Exclude =
 Edit =
 
 Name = Badmin
-Include = @ POSSESS POLL BUILD SERVER FUN
+Include = @ POSSESS POLL BUILD SERVER FUN SOUND
 Exclude =
 Edit =
 

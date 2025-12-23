@@ -226,6 +226,8 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	initialize_commandbar_spy()
 
+	GLOB.requests.client_login(src)
+
 	//preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum)
 	prefs = SScharacter_setup.preferences_datums[ckey]
 	if(!prefs)
@@ -517,6 +519,8 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		tooltips = new /datum/tooltip(src)
 
 	Master.UpdateTickRate()
+
+	fully_created = TRUE
 
 	//////////////
 	//DISCONNECT//
@@ -1103,6 +1107,19 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	init_verbs()
 
+/// Attempts to make the client orbit the given object, for administrative purposes.
+/// If they are not an observer, will try to aghost them.
+/client/proc/admin_follow(atom/movable/target)
+	var/can_ghost = TRUE
+
+	if (!isobserver(mob))
+		can_ghost = admin_ghost()
+
+	if(!can_ghost)
+		return FALSE
+
+	astype(mob, /mob/observer/ghost).ManualFollow(target)
+
 // /client/verb/enable_fullscreen()
 // 	set hidden = TRUE
 // 	winset(usr, "mainwindow", "titlebar=false")
@@ -1117,6 +1134,17 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 // 	winset(usr, "mainwindow", "menu=menu")
 // 	winset(usr, "mainwindow", "is-maximized=false")
 // 	fit_viewport()
+
+/client/verb/stop_client_sounds()
+	set name = "Stop Sounds"
+	set category = "OOC"
+	set desc = "Stop Current Sounds"
+	SEND_SOUND(usr, sound(null))
+	tgui_panel?.stop_music()
+	// media_player?.stop()
+	// GLOB.lobby_media.remove_listener(mob)
+	SSblackbox.record_feedback("nested tally", "preferences_verb", 1, list("Stop Self Sounds"))
+
 
 /client/verb/toggle_fullscreen()
 	set name = "Toogle Fullscreen"
@@ -1133,7 +1161,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		winset(usr, "mainwindow", "titlebar=true")
 		winset(usr, "mainwindow", "menu=menu")
 		winset(usr, "mainwindow", "is-maximized=false")
-	fit_viewport()
+	attempt_auto_fit_viewport()
 
 /// Handles any "fluff" or supplementary procedures related to an admin logout event. Should not have anything critically related cleaning up an admin's logout.
 /client/proc/handle_admin_logout()
