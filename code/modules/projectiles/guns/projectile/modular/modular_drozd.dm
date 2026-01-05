@@ -2,7 +2,7 @@
 //comments can be removed later/when it's merged
 
 /obj/item/gun/projectile/automatic/modular/drozd // Frame
-	///only put the base name of the gun here. Other info will be filled in by parts.
+	//only put the base name of the gun here. Other info will be filled in by parts.
 	name = "\"Drozd\""
 	//remove any information about the specific caliber of the gun. Stat qualities (like dmg, recoil mod) are fine.
 	desc = "An excellent fully automatic Heavy SMG. Rifled to take a larger caliber than a typical submachine gun, but unlike \
