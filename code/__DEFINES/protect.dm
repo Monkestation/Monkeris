@@ -9,12 +9,6 @@
 }\
 ##Path/CanProcCall(procname){\
 	return FALSE;\
-}\
-##Path/Read(savefile/savefile){\
-	qdel(src);\
-}\
-##Path/Write(savefile/savefile){\
-	return;\
 }
 #else
 #define GENERAL_PROTECT_DATUM(Path)
