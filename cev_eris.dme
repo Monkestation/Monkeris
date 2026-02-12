@@ -2722,6 +2722,7 @@
 #include "code\modules\recycling\disposal-construction.dm"
 #include "code\modules\recycling\disposal.dm"
 #include "code\modules\recycling\sortingmachinery.dm"
+#include "code\modules\relays\relays.dm"
 #include "code\modules\requests\request.dm"
 #include "code\modules\requests\request_manager.dm"
 #include "code\modules\research\debug.dm"
