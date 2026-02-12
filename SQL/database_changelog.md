@@ -2,14 +2,30 @@ Any time you make a change to the schema files, remember to increment the databa
 
 Make sure to also update `DB_MAJOR_VERSION` and `DB_MINOR_VERSION`, which can be found in `code/__DEFINES/subsystem.dm`.
 
-The latest database version is 3.3; The query to update the schema revision table is:
+The latest database version is 3.4; The query to update the schema revision table is:
 
 ```sql
-INSERT INTO `schema_revision` (`major`, `minor`) VALUES (3, 3);
+INSERT INTO `schema_revision` (`major`, `minor`) VALUES (3, 4);
 ```
 
 
 In any query remember to add a prefix to the table names if you use one.
+-----------------------------------------------------
+Version 3.4 25 November 2025, by Flleeppyy
+Add `discord_links` table for Discord linking
+
+```sql
+
+CREATE TABLE `discord_links` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`ckey` VARCHAR(32) NOT NULL,
+	`discord_id` BIGINT(20) DEFAULT NULL,
+	`timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`one_time_token` VARCHAR(100) NOT NULL,
+  	`valid` BOOLEAN NOT NULL DEFAULT FALSE,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+```
 -----------------------------------------------------
 Version 3.3 5 November 2025, by Flleeppyy
 Alter `library` table to add , add `library_action` table.

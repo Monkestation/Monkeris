@@ -16,7 +16,7 @@
  *
  * make sure you add an update to the schema_version stable in the db changelog
  */
-#define DB_MINOR_VERSION 3
+#define DB_MINOR_VERSION 4
 
 
 //! ## Timing subsystem
@@ -111,6 +111,7 @@
 #define INIT_ORDER_CHUNKS 95
 #define INIT_ORDER_DBCORE 85
 #define INIT_ORDER_SERVER_MAINT 83
+#define INIT_ORDER_PLEXORA 82
 #define INIT_ORDER_EXPLOSIONS 80
 #define INIT_ORDER_STATPANELS 70
 #define INIT_ORDER_SKYBOX 40

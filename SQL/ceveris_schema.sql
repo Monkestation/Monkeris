@@ -478,6 +478,22 @@ DELIMITER ;
 
 
 --
+-- Table structure for table `discord_links`
+--
+DROP TABLE IF EXISTS `discord_links`;
+CREATE TABLE `discord_links` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`ckey` VARCHAR(32) NOT NULL,
+	`discord_id` BIGINT(20) DEFAULT NULL,
+	`timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`one_time_token` VARCHAR(100) NOT NULL,
+  	`valid` BOOLEAN NOT NULL DEFAULT FALSE,
+	PRIMARY KEY (`id`) USING BTREE,
+	UNIQUE INDEX `ckey` (`ckey`) USING BTREE
+) ENGINE=InnoDB;
+
+
+--
 -- Table structure for table `round`
 --
 DROP TABLE IF EXISTS `round`;

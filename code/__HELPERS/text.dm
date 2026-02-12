@@ -14,10 +14,12 @@ GLOBAL_LIST_INIT(alphabet_upper, list("A","B","C","D","E","F","G","H","I","J","K
 GLOBAL_LIST_INIT(numerals, list("1","2","3","4","5","6","7","8","9","0"))
 GLOBAL_LIST_INIT(space, list(" "))
 GLOBAL_LIST_INIT(binary, list("0","1"))
+
 /proc/random_string(length, list/characters)
 	. = ""
-	for(var/i=1, i<=length, i++)
+	for(var/i in 1 to length)
 		. += pick(characters)
+
 
 /*
  * SQL sanitization

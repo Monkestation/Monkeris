@@ -963,6 +963,36 @@ GLOBAL_PROTECT(admin_verbs_possess)
 			else
 				groundhog_day = FALSE
 
+/// Returns this client's stealthed ckey
+/client/proc/getStealthKey()
+	return GLOB.stealthminID[ckey]
+
+/// Takes a stealthed ckey as input, returns the true key it represents
+/proc/findTrueKey(stealth_key)
+	if(!stealth_key)
+		return
+	for(var/potentialKey in GLOB.stealthminID)
+		if(GLOB.stealthminID[potentialKey] == stealth_key)
+			return potentialKey
+
+/// Hands back a stealth ckey to use, guarenteed to be unique
+/proc/generateStealthCkey()
+	var/guess = rand(0, 1000)
+	var/text_guess
+	var/valid_found = FALSE
+	while(valid_found == FALSE)
+		valid_found = TRUE
+		text_guess = "@[num2text(guess)]"
+		// We take a guess at some number, and if it's not in the existing stealthmin list we exit
+		for(var/key in GLOB.stealthminID)
+			// If it is in the list tho, we up one number, and redo the loop
+			if(GLOB.stealthminID[key] == text_guess)
+				guess += 1
+				valid_found = FALSE
+				break
+
+	return
+
 /client/proc/library_control()
 	set name = "Library Management"
 	set category = "Admin"
