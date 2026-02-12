@@ -143,7 +143,8 @@ const CodeContent = (props: any) => {
           maxValue={100}
           value={code}
           width="80px"
-          onDrag={(value: number) => act('adjust', { code: -code + value })}
+          tickWhileDragging
+          onChange={(value: number) => act('adjust', { code: -code + value })}
         />
         <Button icon="forward" onClick={() => act('adjust', { code: 1 })} />
         <Button

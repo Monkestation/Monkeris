@@ -194,10 +194,6 @@
 	update_openspace()
 	return ..()
 
-/// Generate a tag for this atom
-/atom/proc/GenerateTag()
-	return
-
 /atom/proc/reveal_blood()
 	return
 
