@@ -131,10 +131,10 @@
 			i.addResponse(src, msg) // Add this response to their open tickets.
 		return
 	if(type == "Mentorhelp")
-		if(check_rights(R_ADMIN|R_MENTOR, 0, C.mob)) //Is the person being pm'd an admin? If so we check if the pm'er has open tickets
+		if(check_rights_for(C, R_ADMIN|R_MENTOR)) //Is the person being pm'd an admin? If so we check if the pm'er has open tickets
 			tickets = SSmentor_tickets.checkForTicket(src)
 	else // Ahelp
-		if(check_rights(R_ADMIN, 0, C.mob)) //Is the person being pm'd an admin? If so we check if the pm'er has open tickets
+		if(check_rights_for(C, R_ADMIN)) //Is the person being pm'd an admin? If so we check if the pm'er has open tickets
 			tickets = SStickets.checkForTicket(src)
 
 	if(tickets)
