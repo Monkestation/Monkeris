@@ -84,7 +84,7 @@
 	return ..()
 
 /obj/item/tank/jetpack/examine(mob/user, extra_description = "")
-	extra_description += "The pressure gauge reads: [span_notice(get_gas().return_pressure())] kPa"
+	extra_description += "The pressure gauge reads: [span_notice("[get_gas().return_pressure()]")] kPa"
 	if(air_contents.total_moles < 5)
 		extra_description += span_danger("\nThe gauge on \the [src] indicates you are almost out of gas!")
 		playsound(user, 'sound/effects/alert.ogg', 50, 1)

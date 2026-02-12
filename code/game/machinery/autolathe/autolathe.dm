@@ -542,10 +542,7 @@
 	if(!eating && istype(user))
 		eating = user.get_active_held_item()
 
-	if(!istype(eating))
-		return FALSE
-
-	if(stat)
+	if(QDELETED(eating) || !istype(eating) || stat)
 		return FALSE
 
 	if(!Adjacent(user) && !Adjacent(eating))

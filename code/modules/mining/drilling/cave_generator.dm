@@ -208,7 +208,9 @@
 
 	// Get pool of points of interest for current seismic level
 	var/list/datum/map_template/cave_pois/pool = list()
-	for(var/datum/map_template/cave_pois/cave_poi_tmpl in pool_pois)
+	if (!length(pool_pois))
+		stack_trace("pool_pois is of 0 length!")
+	for(var/datum/map_template/cave_pois/cave_poi_tmpl as anything in pool_pois)
 		if(cave_poi_tmpl.min_seismic_lvl >= seismic_lvl)
 			pool += cave_poi_tmpl.type
 			pool[cave_poi_tmpl.type] = cave_poi_tmpl.spawn_prob

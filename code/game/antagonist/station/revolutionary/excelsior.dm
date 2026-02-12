@@ -37,8 +37,8 @@
 
 /datum/antagonist/excelsior/create_antagonist(datum/mind/target, datum/faction/new_faction, doequip = TRUE, announce = TRUE, update = TRUE, check = TRUE)
 	. = ..()
-	BITSET(owner.current.hud_updateflag, EXCELSIOR_HUD)
+	BITSET(owner.current?.hud_updateflag, EXCELSIOR_HUD)
 
 /datum/antagonist/excelsior/remove_antagonist()
-	BITSET(owner.current.hud_updateflag, EXCELSIOR_HUD)
+	BITSET(owner.current?.hud_updateflag, EXCELSIOR_HUD)
 	. = ..()

@@ -157,42 +157,30 @@ GLOBAL_LIST_INIT(modulo_angle_to_dir, list(NORTH,NORTHEAST,EAST,SOUTHEAST,SOUTH,
 		if (BLEND_SUBTRACT) return ICON_SUBTRACT
 		else                return ICON_OVERLAY
 
-// Converts a rights bitfield into a string
-/proc/rights2text(rights, seperator="", prefix = "+")
-	seperator += prefix
-	if(rights & R_BUILD)
-		. += "[seperator]BUILDMODE"
-	if(rights & R_ADMIN)
-		. += "[seperator]ADMIN"
-	if(rights & R_BAN)
-		. += "[seperator]BAN"
-	if(rights & R_FUN)
-		. += "[seperator]FUN"
-	if(rights & R_SERVER)
-		. += "[seperator]SERVER"
-	if(rights & R_DEBUG)
-		. += "[seperator]DEBUG"
-	if(rights & R_POSSESS)
-		. += "[seperator]POSSESS"
-	if(rights & R_PERMISSIONS)
-		. += "[seperator]PERMISSIONS"
-	// if(rights & R_STEALTH)
-	// 	. += "[seperator]STEALTH"
-	// if(rights & R_POLL)
-	// 	. += "[seperator]POLL"
-	if(rights & R_VAREDIT)
-		. += "[seperator]VAREDIT"
-	if(rights & R_SOUND)
-		. += "[seperator]SOUND"
-	if(rights & R_SPAWN)
-		. += "[seperator]SPAWN"
-	if(rights & R_AUTOADMIN)
-		. += "[seperator]AUTOLOGIN"
-	if(rights & R_DBRANKS)
-		. += "[seperator]DBRANKS"
-	if(!.)
-		. = "NONE"
-	return .
+/proc/rights2text(rights, separator = "+", prefix = "+")
+	. = list()
+
+#define ADD_RIGHT(flag, name) if(rights & flag) {. += "[prefix][name]";}
+	ADD_RIGHT(R_FUN, "FUN")
+	ADD_RIGHT(R_SERVER, "SERVER")
+	ADD_RIGHT(R_DEBUG, "DEBUG")
+	ADD_RIGHT(R_BUILD, "BUILD")
+	ADD_RIGHT(R_PERMISSIONS, "PERMISSIONS")
+	ADD_RIGHT(R_MENTOR, "MENTOR")
+	ADD_RIGHT(R_ADMIN, "ADMIN")
+	ADD_RIGHT(R_BAN, "BAN")
+	ADD_RIGHT(R_SPAWN, "SPAWN")
+	ADD_RIGHT(R_POSSESS, "POSSESS")
+	ADD_RIGHT(R_VAREDIT, "VAREDIT")
+	ADD_RIGHT(R_AUTOADMIN, "AUTOADMIN")
+	ADD_RIGHT(R_DBRANKS, "DBRANKS")
+	ADD_RIGHT(R_SOUND, "SOUND")
+#undef ADD_RIGHT
+
+	if(!length(.))
+		return "NONE"
+
+	return astype(., /list).Join(separator)
 
 // heat2color functions. Adapted from: http://www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code/
 /proc/heat2color(temp)

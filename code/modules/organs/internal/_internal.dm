@@ -70,6 +70,9 @@
 	action_button_proc = initial(action_button_proc)
 	action_button_is_hands_free = initial(action_button_is_hands_free)
 
+	var/mob/living/carbon/human/owner = find_owner_recursively()
+	if (QDELETED(owner))
+		return
 	for(var/process in organ_efficiency)
 		owner.internal_organs_by_efficiency[process] -= src
 
@@ -410,6 +413,7 @@
 	current_blood = initial(current_blood)
 	for(var/woundtype in wounddatums)
 		remove_wound(wounddatums[woundtype])
+	handle_organ_eff()//makes sure the organ is properly re-added to internal_organs_by_efficiency
 
 // Store these so we can properly restore them when installing/removing mods
 /obj/item/organ/internal/proc/initialize_organ_efficiencies()

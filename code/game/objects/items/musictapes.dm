@@ -4,6 +4,10 @@
 	icon = 'icons/obj/casettes.dmi'
 	icon_state = "1"
 	item_state = "card-id"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/idcards_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/idcards_lefthand.dmi',
+		)
 	w_class = ITEM_SIZE_TINY
 
 	var/songlist //string reference to the name of a songlist attached to this song

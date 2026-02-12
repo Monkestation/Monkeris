@@ -9,8 +9,8 @@
 	worlds tumultous at best."
 	num_alternate_languages = 2
 	name_language = null // Use the first-name last-name generator rather than a language scrambler
-	min_age = 17
-	max_age = 110
+	min_age = AGE_MIN
+	max_age = AGE_MAX
 	remains_type = /obj/item/remains/human
 
 	spawn_flags = CAN_JOIN

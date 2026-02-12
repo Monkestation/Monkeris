@@ -56,7 +56,7 @@
 	s.start()
 
 /obj/machinery/shield_gen/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/card/id))
+	if(isidcard(I))
 		var/obj/item/card/id/C = I
 		if(access_captain in C.access || access_security in C.access || access_engine in C.access)
 			src.locked = !src.locked

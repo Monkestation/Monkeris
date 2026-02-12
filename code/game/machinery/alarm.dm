@@ -836,7 +836,7 @@
 
 	switch(buildstage)
 		if(2)
-			if (istype(I, /obj/item/card/id) || istype(I, /obj/item/modular_computer))// trying to unlock the interface with an ID card
+			if (isidcard(I) || istype(I, /obj/item/modular_computer))// trying to unlock the interface with an ID card
 				toggle_lock(user)
 			return
 

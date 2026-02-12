@@ -5,7 +5,7 @@
 	set name = "Say"
 	set category = "IC"
 
-	if(say_disabled)	//This is here to try to identify lag problems
+	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, span_red("Speech is currently admin-disabled."))
 		return
 
@@ -25,7 +25,7 @@
 	set name = "Emote"
 	set category = "IC"
 
-	if(say_disabled)	//This is here to try to identify lag problems
+	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, span_red("Speech is currently admin-disabled."))
 		return
 
@@ -50,7 +50,7 @@
 	var/client/the_client = client || canon_client
 	if (!the_client)
 		return
-	if(say_disabled)	//This is here to try to identify lag problems
+	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, span_danger("Speech is currently admin-disabled."))
 		return
 	if(the_client && !the_client.holder && !GLOB.dsay_allowed)

@@ -3057,7 +3057,7 @@
 	},
 /area/wizard_station)
 "mr" = (
-/obj/machinery/librarycomp,
+/obj/machinery/computer/libraryconsole,
 /obj/structure/table/woodentable,
 /turf/floor/dummy{
 	dir = 8;
@@ -5290,7 +5290,7 @@
 /turf/space,
 /area/space)
 "By" = (
-/obj/item/contraband/poster/placed{
+/obj/structure/sign/poster{
 	icon_state = "bsposter50";
 	pixel_x = -32
 	},

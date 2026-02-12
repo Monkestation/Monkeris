@@ -1,3 +1,18 @@
+// A reasonable number of maximum overlays an object needs
+// If you think you need more, rethink it
+#define MAX_ATOM_OVERLAYS 250
+
+/// Checks if an atom has reached the overlay limit, and make a loud error if it does.
+#define VALIDATE_OVERLAY_LIMIT(changed_on) \
+	if(length(changed_on.overlays) >= MAX_ATOM_OVERLAYS) { \
+		var/text_lays = overlays2text(changed_on.overlays); \
+		stack_trace("Too many overlays on [changed_on.type] - [length(changed_on.overlays)], refusing to update and cutting.\
+			\n What follows is a printout of all existing overlays at the time of the overflow \n[text_lays]"); \
+		changed_on.overlays.Cut(); \
+		changed_on.add_overlay(mutable_appearance('icons/testing/greyscale_error.dmi')); \
+	} \
+
+
 //To be called by things that are potentially many layers deep
 //This recurses up the hierarchy until it finds an atom whose parent is a turf
 /atom/proc/get_toplevel_atom()
@@ -36,11 +51,43 @@
 	else
 		overlays.Add(overlay)
 
+
+/atom/proc/copy_overlays(atom/other, cut_old) //copys our_overlays from another atom
+	if(!other)
+		if(cut_old)
+			cut_overlays()
+		return
+
+	var/list/cached_other = other.overlays.Copy()
+	if(cut_old)
+		if(cached_other)
+			overlays = cached_other
+		else
+			overlays = null
+		VALIDATE_OVERLAY_LIMIT(src)
+	else if(cached_other)
+		overlays += cached_other
+		VALIDATE_OVERLAY_LIMIT(src)
+
 /atom/proc/in_maintenance()
 	var/area/A = get_area(src)
 	if (A && A.is_maintenance)
 		return TRUE
 	return FALSE
+
+/// Converts an overlay list into text for debug printing
+/// Of note: overlays aren't actually mutable appearances, they're just appearances
+/// Don't have access to that type tho, so this is the best you're gonna get
+/proc/overlays2text(list/overlays)
+	var/list/unique_overlays = list()
+	// As anything because we're basically doing type coerrsion, rather then actually filtering for mutable apperances
+	for(var/mutable_appearance/overlay as anything in overlays)
+		var/key = "[overlay.icon]-[overlay.icon_state]-[overlay.dir]"
+		unique_overlays[key] += 1
+	var/list/output_text = list()
+	for(var/key in unique_overlays)
+		output_text += "([key]) = [unique_overlays[key]]"
+	return output_text.Join("\n")
 
 ///Returns a chosen path that is the closest to a list of matches
 /proc/pick_closest_path(value, list/matches = get_fancy_list_of_atom_types())

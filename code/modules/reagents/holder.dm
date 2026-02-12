@@ -421,7 +421,7 @@
 		remove_any(amount) //If we don't do this, then only the spill amount above is removed, and someone can keep splashing with the same beaker endlessly
 
 /datum/reagents/proc/trans_id_to(atom/target, id, amount = 1, ignore_isinjectable = FALSE)
-	if (!target || !target.reagents || !target.simulated)
+	if (!target || (isatom(target) && !target.reagents) || !target.simulated)
 		return
 
 	amount = min(amount, get_reagent_amount(id))

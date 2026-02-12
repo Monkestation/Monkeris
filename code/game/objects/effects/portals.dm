@@ -160,7 +160,7 @@ var/list/portal_cache = list()
 
 	//There's no wormhole in the target tile yet. We shall make one
 	if (!partner)
-		partner = new /obj/effect/portal/wormhole(T, lifetime, loc)
+		partner = new /obj/effect/portal/wormhole(T, lifetime, get_turf(src))
 
 
 

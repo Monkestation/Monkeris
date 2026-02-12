@@ -205,6 +205,7 @@
 	load_important_notices()
 	LoadMOTD()
 	LoadChatFilter()
+	LoadRelays()
 	if(CONFIG_GET(flag/load_jobs_from_txt))
 		validate_job_config()
 	if(CONFIG_GET(flag/usewhitelist))
@@ -597,3 +598,20 @@
 	to_chat(target, "[do_final_top_separator ? "<hr class='solid'>" : ""][final_notices]")
 
 	return TRUE
+
+/datum/controller/configuration/proc/LoadRelays()
+	var/config_path = "[directory]/relays.toml"
+	if(!fexists(file(config_path)))
+		log_config("relays.toml does not exist.")
+		return
+
+	var/list/result = rustg_raw_read_toml_file(config_path)
+	if(!result["success"])
+		log_config("Notify Server Operators: The relay config (relays.toml) is not configured correctly! [result["content"]]")
+		return
+
+	var/list/content = json_decode(result["content"])
+	if(!length(content))
+		return
+
+	GLOB.relay_config = content["relay"]

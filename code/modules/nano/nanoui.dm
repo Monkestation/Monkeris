@@ -468,6 +468,8 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/focus()
+	if (!user || !user.client)
+		return
 	winset(user, window_id, "focus=true")
 	winset(user, "mapwindow.map", "focus=true") // return keyboard focus to map
 

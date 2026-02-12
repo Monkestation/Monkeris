@@ -297,6 +297,10 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 /proc/adminscrub(text, limit = MAX_MESSAGE_LEN)
 	return html_encode(STRIP_HTML_SIMPLE(text, limit))
 
+/// Runs STRIP_HTML_FULL and sanitize.
+/proc/strip_html_full(text, limit = MAX_MESSAGE_LEN)
+	return sanitize(STRIP_HTML_FULL(text, limit))
+
 /**
  * Used to get a properly sanitized input in a larger box. Works very similarly to stripped_input.
  *

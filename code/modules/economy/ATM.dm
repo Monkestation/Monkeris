@@ -412,7 +412,7 @@ log transactions
 						to_chat(usr, span_red("[icon2html(src, usr)] The ATM card reader rejected your ID because this machine has been sabotaged!"))
 					else
 						var/obj/item/I = usr.get_active_held_item()
-						if (istype(I, /obj/item/card/id))
+						if (isidcard(I))
 							usr.drop_item()
 							I.loc = src
 							held_card = I

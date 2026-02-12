@@ -303,6 +303,10 @@
 /obj/item/holo/esword
 	desc = "May the force be within you. Sorta."
 	icon_state = "sword0"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/swords_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/swords_righthand.dmi',
+		)
 	force = 3
 	throw_speed = 1
 	throw_range = 5

@@ -16,9 +16,6 @@ GLOBAL_LIST_INIT(admin_verbs_fun, list(
 	/client/proc/cinematic,
 	/client/proc/cmd_admin_dress,
 	/client/proc/roll_dices,
-	/client/proc/play_sound,
-	/client/proc/play_local_sound,
-	/client/proc/play_server_sound,
 	/client/proc/respawn_character,
 	/client/proc/cmd_admin_gib_self,
 	/client/proc/everyone_random,
@@ -47,6 +44,7 @@ GLOBAL_LIST_INIT(admin_verbs_server, list(
 	/client/proc/reload_admins,
 	/client/proc/reload_mentors,
 	/client/proc/reload_whitelist,
+	/client/proc/requests,
 	/client/proc/reestablish_db_connection, /*reattempt a connection to the database*/
 	/client/proc/toggle_random_events))
 
@@ -119,11 +117,6 @@ GLOBAL_LIST_INIT(admin_verbs_debug_extra, list(
 	/datum/admins/proc/show_contractor_panel,
 	// /client/proc/print_jobban_old,
 	// /client/proc/print_jobban_old_filter,
-	/client/proc/break_all_air_groups,
-	/client/proc/regroup_all_air_groups,
-	/client/proc/kill_pipe_processing,
-	/client/proc/kill_air_processing,
-	/client/proc/disable_communication,
 	/client/proc/disable_movement,
 	/client/proc/Zone_Info,
 	/client/proc/Test_ZAS_Connection,
@@ -150,6 +143,14 @@ GLOBAL_LIST_INIT(admin_verbs_mod, list(
 	/client/proc/cmd_mod_say,
 	/client/proc/debug_variables))
 
+GLOBAL_LIST_INIT(admin_verbs_sounds, list(
+	/client/proc/play_sound,
+	/client/proc/play_local_sound,
+	/client/proc/play_direct_mob_sound,
+	/client/proc/play_web_sound,
+	// /client/proc/set_round_end_sound,
+	/client/proc/play_server_sound))
+
 GLOBAL_LIST_INIT(admin_verbs_admin, list(
 	/client/proc/cmd_dev_bst,
 	/client/proc/dsay,
@@ -165,6 +166,7 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 	/client/proc/investigate_show,
 	/client/proc/admin_memo,
 	/client/proc/admin_ghost,
+	/client/proc/library_control,
 	/client/proc/invisimin,
 	/datum/verbs/menu/Admin/verb/playerpanel, /* It isn't /datum/admin but it fits no less */
 	/client/proc/cmd_admin_check_player_exp, /* shows players by playtime */
@@ -272,6 +274,10 @@ GLOBAL_PROTECT(admin_verbs_possess)
 			add_verb(src, GLOB.admin_verbs_debug)
 		if(rights & R_PERMISSIONS)
 			add_verb(src, GLOB.admin_verbs_permissions)
+		if(rights & R_SOUND)
+			add_verb(src, GLOB.admin_verbs_sounds)
+			if(CONFIG_GET(string/invoke_youtubedl))
+				add_verb(src, /client/proc/play_web_sound)
 
 		control_freak = 0 // enable profiler
 
@@ -954,3 +960,14 @@ GLOBAL_PROTECT(admin_verbs_possess)
 									GLOB.custom_kits -= kit_of_choice
 			else
 				groundhog_day = FALSE
+
+/client/proc/library_control()
+	set name = "Library Management"
+	set category = "Admin"
+	if(!check_rights(R_BAN))
+		return
+
+	if(!holder.library_manager)
+		holder.library_manager = new()
+	holder.library_manager.ui_interact(usr)
+	// SSblackbox.record_feedback("tally", "admin_verb", 1, "Library Management") // If you are copy-pasting this, ensure the 4th parameter is unique to the new proc!

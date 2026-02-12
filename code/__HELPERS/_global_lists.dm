@@ -308,18 +308,6 @@ GLOBAL_LIST_INIT(scary_sounds, list(
 		if(S.spawn_flags & IS_WHITELISTED)
 			GLOB.whitelisted_species += S.name
 
-	//Posters
-	paths = subtypesof(/datum/poster) - /datum/poster/wanted - /datum/poster/asters
-	for(var/T in paths)
-		var/datum/poster/poster = new T
-		GLOB.poster_designs += poster
-
-	// Aster posters
-	paths = subtypesof(/datum/poster/asters) - /datum/poster/wanted
-	for(var/T in paths)
-		var/datum/poster/asters/poster = new T
-		GLOB.poster_designs_asters += poster
-
 	paths = subtypesof(/datum/hud)
 	for(var/T in paths)
 		var/datum/hud/C = new T

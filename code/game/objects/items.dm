@@ -170,6 +170,7 @@
 	master = null
 	if(ismob(loc))
 		var/mob/m = loc
+		unwield(m)
 		m.u_equip(src)
 		remove_hud_actions(m)
 		loc = null

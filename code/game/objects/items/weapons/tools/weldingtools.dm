@@ -25,12 +25,15 @@
 
 	heat = 2250
 
+
 /obj/item/tool/weldingtool/turn_on(mob/user)
 	.=..()
 	if(.)
 		playsound(loc, 'sound/items/welderactivate.ogg', 50, 1)
 		damtype = BURN
 		START_PROCESSING(SSobj, src)
+		item_state = "[initial(item_state)]_on"
+		update_wear_icon()
 
 /obj/item/tool/weldingtool/turn_off(mob/user)
 	item_state = initial(item_state)

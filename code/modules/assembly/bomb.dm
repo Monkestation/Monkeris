@@ -2,6 +2,10 @@
 	name = "bomb"
 	icon = 'icons/obj/tank.dmi'
 	item_state = "assembly"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
 	throwforce = WEAPON_FORCE_NORMAL
 	w_class = ITEM_SIZE_NORMAL
 	throw_speed = 2

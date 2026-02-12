@@ -63,6 +63,10 @@
 	icon = 'icons/obj/stack/items.dmi'
 	icon_state = "knife"
 	item_state = "knife"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/swords_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/swords_righthand.dmi',
+		)
 	singular_name = "throwing knife"
 	flags = CONDUCT
 	sharp = TRUE

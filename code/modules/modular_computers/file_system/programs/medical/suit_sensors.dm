@@ -98,7 +98,8 @@
 	var/list/crewmembers = list()
 	for(var/z_level in GLOB.maps_data.station_levels)
 		crewmembers += crew_repository.health_data(z_level)
-	sortNames(crewmembers)
+	if (length(crewmembers))
+		sortTim(crewmembers, GLOBAL_PROC_REF(cmp_assoc_list_name))
 	//now lets get problematic crewmembers in separate list so they could be shown first
 	var/list/crewmembers_problematic = list()
 	var/list/crewmembers_goodbois = list()

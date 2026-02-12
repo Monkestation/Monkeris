@@ -199,7 +199,7 @@
 	if(module)
 		module.organ_removed(src, owner)
 
-	if(!(owner.status_flags & REBUILDING_ORGANS))
+	if(!(owner?.status_flags & REBUILDING_ORGANS))
 		release_restraints()
 
 		var/obj/item/dropped = null

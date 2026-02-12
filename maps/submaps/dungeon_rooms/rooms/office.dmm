@@ -448,8 +448,8 @@
 /obj/item/paper_bin,
 /obj/item/pen,
 /obj/effect/decal/cleanable/blood/drip,
-/obj/item/gun/projectile/handmade_pistol,
 /obj/item/ammo_casing/pistol/scrap,
+/obj/item/gun/projectile/type_90,
 /turf/floor/tiled/dark/brown_perforated,
 /area/crawler)
 
