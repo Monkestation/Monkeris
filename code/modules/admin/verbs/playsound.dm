@@ -1,6 +1,5 @@
 var/list/sounds_cache = list()
 
-#warn test Play Sound
 /client/proc/play_sound(S as sound)
 	set category = "Fun"
 	set name = "Play Global Sound"
@@ -37,7 +36,6 @@ var/list/sounds_cache = list()
 
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Global Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-#warn test Play Local Sound
 /client/proc/play_local_sound(S as sound)
 	set category = "Admin.Fun"
 	set name = "Play Local Sound"
@@ -49,7 +47,6 @@ var/list/sounds_cache = list()
 	playsound(get_turf(src.mob), S, 50, FALSE, FALSE)
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Local Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-#warn test Play Direct Mob Sound
 /client/proc/play_direct_mob_sound(S as sound, mob/M)
 	set category = "Admin.Fun"
 	set name = "Play Direct Mob Sound"
@@ -165,7 +162,6 @@ var/list/sounds_cache = list()
 
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Internet Sound")
 
-#warn test Play Internet Sound
 /client/proc/play_web_sound()
 	set category = "Admin.Fun"
 	set name = "Play Internet Sound"
