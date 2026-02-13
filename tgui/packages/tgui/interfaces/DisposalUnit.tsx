@@ -6,6 +6,7 @@ import {
   Section,
   Stack,
 } from 'tgui-core/components';
+import { BooleanLike } from 'tgui-core/react';
 
 import { Window } from '../layouts';
 
@@ -17,11 +18,11 @@ const MODE2COLOR = {
 };
 
 type DisposalUnitData = {
-  isai: boolean;
+  isai: BooleanLike;
   mode: string;
-  panel: boolean;
-  eject: boolean;
-  handle: boolean;
+  panel: BooleanLike;
+  eject: BooleanLike;
+  handle: BooleanLike;
   pressure: number;
 };
 

@@ -27,65 +27,58 @@
 	if(..(user))
 		return
 	src.add_fingerprint(usr)
-	var/header = {"<style type="text/css">
-				a.green:link
-				{
-					color:#00CC00;
-				}
-				a.green:visited
-				{
-					color:#00CC00;
-				}
-				a.green:hover
-				{
-					color:#00CC00;
-				}
-				a.green:active
-				{
-					color:#00CC00;
-				}
-				a.red:link
-				{
-					color:#FF0000;
-				}
-				a.red:visited
-				{
-					color:#FF0000;
-				}
-				a.red:hover
-				{
-					color:#FF0000;
-				}
-				a.red:active
-				{
-					color:#FF0000;
-				}
-			</style"}
-	var/dat = {"
-		<center><h1>Area Air Control</h1></center>
-		<font color="red">[status]</font><br>
-		<a href="byond://?src=\ref[src];scan=1">Scan</a>
-		<table border="1" width="90%">"}
-	for(var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber in connectedscrubbers)
-		dat += {"
-				<tr>
-					<td>
-						[scrubber.name]<br>
-						Pressure: [round(scrubber.air_contents.return_pressure(), 0.01)] kPa<br>
-						Flow Rate: [round(scrubber.last_flow_rate,0.1)] L/s<br>
-					</td>
-					<td width="150">
-						<a class="green" href="byond://?src=\ref[src];scrub=\ref[scrubber];toggle=1">Turn On</a>
-						<a class="red" href="byond://?src=\ref[src];scrub=\ref[scrubber];toggle=0">Turn Off</a><br>
-						Load: [round(scrubber.last_power_draw)] W
-					</td>
-				</tr>"}
+	ui_interact(user)
 
-	dat += {"
-			</table><br>
-			<i>[zone]</i>"}
-	user << browse(HTML_SKELETON_INTERNAL(header, dat), "window=miningshuttle;size=400x400")
+/obj/machinery/computer/area_atmos/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "AreaAtmos", "Area Air Control")
+		ui.open()
+
+/obj/machinery/computer/area_atmos/ui_state(mob/user)
+	return GLOB.default_state
+
+/obj/machinery/computer/area_atmos/ui_data(mob/user)
+	var/list/data = list()
+
+	data["status"] = status
+	data["zone"] = zone
+
+	var/list/scrubber_data = list()
+	for(var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber in connectedscrubbers)
+		scrubber_data += list(list(
+			"name" = scrubber.name,
+			"pressure" = round(scrubber.air_contents.return_pressure(), 0.01),
+			"flow_rate" = round(scrubber.last_flow_rate, 0.1),
+			"power_draw" = round(scrubber.last_power_draw),
+			"ref" = "\ref[scrubber]"
+		))
+
+	data["scrubbers"] = scrubber_data
+
+	// Clear status after displaying
 	status = ""
+
+	return data
+
+/obj/machinery/computer/area_atmos/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+	. = ..()
+	if(.)
+		return TRUE
+
+	// Map TGUI actions to existing Topic parameters
+	var/list/href_list = list()
+
+	switch(action)
+		if("scan")
+			href_list["scan"] = "1"
+		if("toggle_scrubber")
+			href_list["scrub"] = params["ref"]
+			href_list["toggle"] = params["state"]
+
+	// Call existing Topic method
+	Topic("", href_list)
+	return TRUE
 
 /obj/machinery/computer/area_atmos/Topic(href, href_list)
 	if(..())
