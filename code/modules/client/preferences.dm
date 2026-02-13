@@ -14,7 +14,7 @@
 
 	var/db_flags
 
-	var/save_load_cooldown
+	COOLDOWN_DECLARE(save_load_cooldown)
 
 	var/list/exp = list()
 
@@ -129,10 +129,10 @@
 	return 1
 
 /datum/preferences/proc/check_cooldown()
-	if(save_load_cooldown != world.time && (save_load_cooldown + PREF_SAVELOAD_COOLDOWN > world.time))
+	if(!COOLDOWN_FINISHED(src, save_load_cooldown))
 		return FALSE
 
-	save_load_cooldown = world.time
+	COOLDOWN_START(src, save_load_cooldown, PREF_SAVELOAD_COOLDOWN)
 	return TRUE
 
 
