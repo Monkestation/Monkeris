@@ -80,7 +80,7 @@ semi accepts weird caliber - +1 points
 	// Bonuses from forging/type or maluses from printing
 	var/cheap = FALSE // Set this to true for cheap variants
 
-/obj/item/part/gun/modular/New(location)
+/obj/item/part/gun/modular/New(location, quality = 0)
 	..()
 	I = AddComponent(/datum/component/item_upgrade)
 	if(interactions)
@@ -93,6 +93,9 @@ semi accepts weird caliber - +1 points
 	I.removable = MOD_INTEGRAL // Will get unique removal handling when we get there, until then works by disassembling the frame
 	I.removal_time = WORKTIME_SLOW
 	I.removal_difficulty = FAILCHANCE_NORMAL
+
+	if(quality)
+		set_quality(quality)
 
 /obj/item/part/gun/modular/set_quality(quality = 0)
 	old_quality = CLAMP(quality, -2, max_quality) // Some parts, such as One Star will permit +3 parts
@@ -306,7 +309,7 @@ semi accepts weird caliber - +1 points
 	part_itemstring = TRUE
 
 /obj/item/part/gun/modular/grip/New(location, quality = 0)
-	..(quality)
+	..(quality = quality)
 	I.weapon_upgrades[GUN_UPGRADE_DEFINE_GRIP] = type_of_grip
 	I.weapon_upgrades[GUN_UPGRADE_OFFSET] = -15 // Without a grip the gun shoots funny, players are legally allowed to not use a grip
 	I.gun_loc_tag = PART_GRIP
@@ -391,7 +394,7 @@ semi accepts weird caliber - +1 points
 
 
 /obj/item/part/gun/modular/mechanism/New(location, quality = 0)
-	..(quality)
+	..(quality = quality)
 	I.weapon_upgrades[GUN_UPGRADE_FIREMODES] = bonus_firemodes
 	I.weapon_upgrades[GUN_UPGRADE_DEFINE_MAG_WELL] = mag_well
 	I.weapon_upgrades[GUN_UPGRADE_DEFINE_OK_CALIBERS] = accepted_calibers
@@ -659,7 +662,7 @@ semi accepts weird caliber - +1 points
 	var/basemove
 
 /obj/item/part/gun/modular/barrel/New(location, quality = 0)
-	..(quality)
+	..(quality = quality)
 	I.weapon_upgrades[GUN_UPGRADE_DEFINE_CALIBER] = caliber
 	if(!isnull(speed))
 		I.weapon_upgrades[GUN_UPGRADE_STEPDELAY_MULT] = speed
