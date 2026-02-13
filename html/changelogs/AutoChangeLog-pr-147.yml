@@ -1,9 +1,0 @@
-author: flleeppyy
-delete-after: true
-changes:
-  - rscadd: new and improved library
-  - rscadd: balloon alerts
-  - refactor: posters have been refactored!
-  - server: updated DB schema for library
-  - rscadd: min/max age defines for characters
-  - admin: Added a new library management verb
