@@ -460,6 +460,17 @@ semi accepts weird caliber - +1 points
 	icon_state = "mechanism_smg"
 	mag_well = MAG_WELL_SMG
 
+//You'll need to define new parts for each 'unique' element of your gun
+//like, in this case, the drozd being an SMG gun which fires .40 rounds.
+//these parts can also be used to handle part of the unique statlines of weapons.
+/obj/item/part/gun/modular/mechanism/smg/highcaliber
+	name = "High-Caliber SMG mechanism"
+	desc = "All the bits that makes the bullet go bang, in a speedy package. \
+	This large-bore version is designed to fire higher caliber bullets, at a cost to penetrative power."
+	accepted_calibers = list(CAL_MAGNUM)
+	divisor_bonus = -0.5//this is where the drozd's pen mod has gone
+	bonus_firemodes = list(FULL_AUTO_300)//ditto for specific firemodes
+
 /obj/item/part/gun/modular/mechanism/autorifle
 	name = "generic self-loading mechanism"
 	desc = "All the bits that makes the bullet go bang, for all the military hardware you know and love."

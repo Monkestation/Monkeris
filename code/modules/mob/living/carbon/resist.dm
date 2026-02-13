@@ -68,7 +68,7 @@
 			if(GRAB_PASSIVE)
 				qdel(G)
 			if(GRAB_AGGRESSIVE)
-				if(prob(max(60 + ((stats?.getStat(STAT_ROB)) - G.assailant?.stats.getStat(STAT_ROB) ** 0.8), 1))) // same scaling as cooldown increase and if you manage to be THAT BAD, 1% for luck
+				if(prob(max(60 + ((stats?.getStat(STAT_ROB)) - clamp(G.assailant?.stats.getStat(STAT_ROB), 0, INFINITY) ** 0.8), 1))) // same scaling as cooldown increase and if you manage to be THAT BAD, 1% for luck
 					visible_message(span_warning("[src] has broken free of [G.assailant]'s grip!"))
 					qdel(G)
 			if(GRAB_NECK)

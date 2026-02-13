@@ -18,7 +18,7 @@
 	if(!S)					return 0
 	S.cd = "/"
 
-	S["version"] >> savefile_version
+	DIRECT_INPUT(S["version"], savefile_version)
 	player_setup.load_preferences(S)
 	loaded_preferences = S
 	return 1
@@ -34,7 +34,7 @@
 	if(!S)					return 0
 	S.cd = "/"
 
-	S["version"] << SAVEFILE_VERSION_MAX
+	WRITE_FILE(S["version"], SAVEFILE_VERSION_MAX)
 	player_setup.save_preferences(S)
 	loaded_preferences = S
 	return 1

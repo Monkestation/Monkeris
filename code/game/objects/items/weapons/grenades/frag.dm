@@ -2,7 +2,7 @@
 	name = "NT DFG \"Pomme\""
 	desc = "A military-grade defensive fragmentation grenade, designed to be thrown from cover."
 	icon_state = "frag"
-	item_state = "fraggrenade"
+	item_state = "grenade"
 	matter = list(MATERIAL_STEEL = 3, MATERIAL_PLASTEEL = 2, MATERIAL_PLASMA = 1)
 
 	var/fragment_type = /obj/item/projectile/bullet/pellet/fragment
@@ -52,7 +52,7 @@
 	name = "FS SG \"Hornet\""
 	desc = "A high-grade Frozen Star sting grenade, for use against unruly crowds."
 	icon_state = "sting_ih"
-	item_state = "fraggrenade"
+	item_state = "grenade"
 	fragment_type = /obj/item/projectile/bullet/pellet/fragment/rubber
 	num_fragments = 25
 	fragment_damage = 5
@@ -64,7 +64,7 @@
 	name = "AG SG \"Mosquito\""
 	desc = "A standard-issue Asters Guild sting grenade, for use against unruly crowds."
 	icon_state = "sting_ag"
-	item_state = "fraggrenade"
+	item_state = "grenade"
 	fragment_type = /obj/item/projectile/bullet/pellet/fragment/rubber/weak
 	num_fragments = 25
 	fragment_damage = 10
@@ -76,7 +76,7 @@
 	name = "SA WPG \"Sabac \""
 	desc = "A modernized incendiary hailing popular use within assault troops of all kinds. Use with care, highly flammable."
 	icon_state = "white_phos"
-	item_state = "fraggrenade"
+	item_state = "smoke"
 	fragment_type = /obj/item/projectile/bullet/pellet/fragment/ember
 	num_fragments = 10
 	fragment_damage = 5

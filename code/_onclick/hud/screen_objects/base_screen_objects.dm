@@ -152,7 +152,7 @@
 
 /atom/movable/screen/item_action/top_bar/update_icon()
 	..()
-	if(!ismob(owner.loc))
+	if(!owner || !ismob(owner.loc))
 		return
 
 	var/mob/living/M = owner.loc

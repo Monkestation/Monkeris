@@ -320,10 +320,19 @@ This function restores all organs.
 		organs_by_name[BP_L_ARM],
 	)
 
-/mob/living/carbon/human/apply_damage(damage = 0, damagetype = BRUTE, def_zone, armor_divisor = 1, wounding_multiplier = 1, sharp = FALSE, edge = FALSE, obj/used_weapon)
-	//visible_message("Hit debug. [damage] | [damagetype] | [def_zone] | [blocked] | [sharp] | [used_weapon]")
+/mob/living/carbon/human/apply_damage(
+	damage = 0,
+	damagetype = BRUTE,
+	def_zone,
+	armor_divisor = 1,
+	wounding_multiplier = 1,
+	sharp = FALSE,
+	edge = FALSE,
+	obj/used_weapon,
+	spread_damage = FALSE
+)
 
-	//Handle other types of damage
+	// Handle non-BRUTE/BURN damage first
 	if(damagetype != BRUTE && damagetype != BURN)
 		if(damagetype == HALLOSS && !(species && (species.flags & NO_PAIN)))
 			if(!stat && (damage > 25 && prob(20)) || (damage > 50 && prob(60)))
@@ -332,6 +341,8 @@ This function restores all organs.
 		if(damagetype == PSY)
 			sanity.onPsyDamage(damage)
 			var/obj/item/organ/brain = random_organ_by_process(BP_BRAIN)
+			if(!brain)
+				return FALSE
 			brain.take_damage(damage, PSY, armor_divisor, wounding_multiplier)
 			return TRUE
 
@@ -339,27 +350,42 @@ This function restores all organs.
 			damage /= 2
 
 		. = ..(damage, damagetype, def_zone)
-	else	//Handle BRUTE and BURN damage
+	else
+		//Handle BRUTE and BURN damage
 		handle_suit_punctures(damagetype, damage, def_zone)
-
 		switch(damagetype)
 			if(BRUTE)
-				damage = damage*species.brute_mod
+				damage *= species.brute_mod
 			if(BURN)
-				damage = damage*species.burn_mod
+				damage *= species.burn_mod
+
+	// spread damage hanzling
+	if(spread_damage)
+		var/list/external_parts = organs.Copy()
+
+		if(external_parts.len)
+			var/part_damage = damage / external_parts.len
+			for(var/obj/item/organ/external/E in external_parts)
+				E.take_damage(part_damage, damagetype, armor_divisor, wounding_multiplier, sharp, edge, used_weapon)
+			UpdateDamageIcon()
+			sanity.onDamage(damage)
+			updatehealth()
+			BITSET(hud_updateflag, HEALTH_HUD)
+			return TRUE
+
+	// normal single zone handling
 	var/obj/item/organ/external/organ
 	if(isorgan(def_zone))
 		organ = def_zone
 	else
 		if(!def_zone)
-			if(!(damagetype == TOX)) // global application
+			if(!(damagetype == TOX))
 				def_zone = ran_zone(def_zone)
 		organ = get_organ(check_zone(def_zone))
 
 	if(!organ)
 		return FALSE
 
-	//Wounding multiplier is handled in the organ itself
 	damageoverlaytemp = 20
 	if(!def_zone) // only Tox should be able to do this
 		for(var/obj/item/organ/internal/tohit in internal_organs)
@@ -367,12 +393,12 @@ This function restores all organs.
 		UpdateDamageIcon()
 	else if(organ.take_damage(damage, damagetype, armor_divisor, wounding_multiplier, sharp, edge, used_weapon))
 		UpdateDamageIcon()
-	sanity.onDamage(damage)
 
-	// Will set our damageoverlay icon to the next level, which will then be set back to the normal level the next mob.Life().
+	sanity.onDamage(damage)
 	updatehealth()
 	BITSET(hud_updateflag, HEALTH_HUD)
 	return TRUE
+
 
 
 //Falling procs

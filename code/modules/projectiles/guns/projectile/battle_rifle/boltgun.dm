@@ -39,7 +39,7 @@
 	name = "bolt-action rifle frame"
 	desc = "A bolt-action rifle frame. For hunting or endless trench warfare."
 	icon_state = "frame_serbrifle"
-	result = /obj/item/gun/projectile/boltgun
+	result = /obj/item/gun/projectile/automatic/modular/bolt/serbian
 	gripvars = list(/obj/item/part/gun/modular/grip/excel, /obj/item/part/gun/modular/grip/wood)
 	resultvars = list(/obj/item/gun/projectile/boltgun, /obj/item/gun/projectile/boltgun/serbian)
 	mechanismvar = /obj/item/part/gun/modular/mechanism/boltgun
@@ -182,7 +182,7 @@
 	name = "Kadmin frame"
 	desc = "A Kadmin bolt-action rifle frame. For hunting or endless coastal warfare."
 	icon_state = "frame_weebrifle"
-	result = /obj/item/gun/projectile/boltgun/fs
+	result = /obj/item/gun/projectile/automatic/modular/bolt/fs
 	resultvars = list(/obj/item/gun/projectile/boltgun/fs, /obj/item/gun/projectile/boltgun/fs/civilian)
 	gripvars = list(/obj/item/part/gun/modular/grip/rubber, /obj/item/part/gun/modular/grip/wood)
 	mechanismvar = /obj/item/part/gun/modular/mechanism/boltgun

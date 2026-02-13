@@ -7,6 +7,10 @@
 	icon = 'icons/obj/karl_mining.dmi'
 	icon_state = "karl_axe"
 	item_state = "karl_axe"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/mining_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/mining_righthand.dmi',
+		)
 	w_class = ITEM_SIZE_BULKY
 	price_tag = 2500
 	matter = list(MATERIAL_STEEL = 6)

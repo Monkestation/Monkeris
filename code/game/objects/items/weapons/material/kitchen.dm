@@ -1,5 +1,9 @@
 /obj/item/material/kitchen
 	icon = 'icons/obj/kitchen.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/kitchen_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/kitchen_righthand.dmi',
+		)
 	bad_type = /obj/item/material/kitchen
 
 /*

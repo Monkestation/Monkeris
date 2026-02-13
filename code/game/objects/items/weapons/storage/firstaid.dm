@@ -12,6 +12,11 @@
 	name = "first-aid kit"
 	desc = "An emergency medical kit for those serious boo-boos."
 	icon_state = "firstaid"
+	item_state = "firstaid"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/medical_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/medical_righthand.dmi',
+		)
 	throw_speed = 2
 	throw_range = 8
 	rarity_value = 10
@@ -115,7 +120,7 @@
 	name = "combat medical kit"
 	desc = "Contains advanced medical treatments."
 	icon_state = "bezerk"
-	item_state = "firstaid-advanced"
+	item_state = "firstaid-bezerk"
 	rarity_value = 100
 	prespawned_content_amount = 1
 	prespawned_content_type = /obj/item/stack/medical/splint
@@ -218,6 +223,10 @@
 	icon_state = "pill_canister"
 	icon = 'icons/obj/chemical.dmi'
 	item_state = "contsolid"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/medical_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/medical_righthand.dmi',
+		)
 	w_class = ITEM_SIZE_SMALL
 	can_hold = list(/obj/item/reagent_containers/pill,
 		/obj/item/dice,

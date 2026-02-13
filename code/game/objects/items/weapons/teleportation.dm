@@ -12,6 +12,10 @@
 	icon = 'icons/obj/device.dmi'
 	icon_state = "hand_tele"
 	item_state = "electronic"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
 	throwforce = WEAPON_FORCE_HARMLESS
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 3
@@ -145,6 +149,10 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "telespear"
 	item_state = "telespear"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/batons_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/batons_righthand.dmi',
+		)
 	slot_flags = SLOT_BACK
 	spawn_frequency = 4
 	rarity_value = 100

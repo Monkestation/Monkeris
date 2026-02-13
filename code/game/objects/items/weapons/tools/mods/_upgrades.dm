@@ -317,6 +317,9 @@
 	T.prefixes |= prefix
 
 /datum/component/item_upgrade/proc/apply_values_gun(obj/item/gun/G)
+	//duplicates certain upgrades from tool behavior
+	if(weapon_upgrades[UPGRADE_MAXUPGRADES])
+		G.max_upgrades += (weapon_upgrades[UPGRADE_MAXUPGRADES])
 	if(weapon_upgrades[GUN_UPGRADE_DAMAGEMOD_PLUS])
 		G.damage_multiplier += weapon_upgrades[GUN_UPGRADE_DAMAGEMOD_PLUS]
 	if(weapon_upgrades[GUN_UPGRADE_DAMAGE_MULT])

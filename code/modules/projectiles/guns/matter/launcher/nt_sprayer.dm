@@ -17,6 +17,7 @@
 
 /obj/item/arrow
 	var/recoil = 2  // Light recoil, it's just some cleaning stuff
+	var/wounding_mult = 0
 
 /obj/item/arrow/neotheo
 	icon = 'icons/obj/projectiles.dmi'
@@ -41,3 +42,6 @@
 	reagents.add_reagent("water", 2)
 
 	qdel(src)
+
+/obj/item/arrow/proc/get_total_damage()
+	return 0

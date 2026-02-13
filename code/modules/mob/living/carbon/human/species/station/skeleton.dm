@@ -9,7 +9,7 @@
 	damage_mask = null
 	blood_mask = null
 
-	min_age = 18
+	min_age = AGE_MIN
 	max_age = 110
 
 	eyes = null

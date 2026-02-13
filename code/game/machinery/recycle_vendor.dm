@@ -94,21 +94,19 @@
 		qdel(I)
 		return TRUE
 
-	if(istype(I, /obj/item/card/id))
+	if(isidcard(I))
 		to_chat(user, span_warning("[src] is cash-only."))
 		return
 
 	if(sales_paused || !user.unEquip(I))
 		return
 
-	if(I.contents.len)
+	if(length(I.contents))
 		if(istype(I, /obj/item/storage/deferred))
-			var/obj/item/storage/deferred/fillinsides
-			fillinsides.populate_contents()
+			astype(I, /obj/item/storage/deferred).populate_contents()
 		var/success = TRUE
 		if(istype(I, /obj/item/storage/secure))
-			var/obj/item/storage/secure/lockable = I
-			if(lockable.locked)
+			if(astype(I, /obj/item/storage/secure/).locked)
 				to_chat(user, (span_warning("[I] is locked.")))
 				success = FALSE
 		if(success && istype(I, /obj/item/storage))
@@ -560,7 +558,7 @@
 				if(PakKash && !QDELING(PakKash))
 					PakKash.forceMove(get_turf(src))
 					visible_message("[PakKash] falls out of [src].", "You hear a mute impact with the floor alongside quiet clinking.")
-	if(istype(I, /obj/item/card/id))
+	if(isidcard(I))
 		visible_message(span_info("\The [usr] swipes \the [I] through \the [src]."))
 		var/obj/item/card/id/swiped = I
 		if(!required_access)

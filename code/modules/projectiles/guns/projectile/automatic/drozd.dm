@@ -51,3 +51,4 @@
 	gripvars = list(/obj/item/part/gun/modular/grip/excel)
 	mechanismvar = /obj/item/part/gun/modular/mechanism/smg
 	barrelvars = list(/obj/item/part/gun/modular/barrel/magnum)
+	spawn_blacklisted = TRUE

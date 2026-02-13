@@ -478,7 +478,7 @@ GLOBAL_VAR_INIT(GLOBAL_INSIGHT_MOD, 1)
 	for(var/datum/breakdown/B in breakdowns)
 		possible_results -= B.type
 
-	while(possible_results.len)
+	while(length(possible_results))
 		var/breakdown_type = pick(possible_results)
 		var/datum/breakdown/B = new breakdown_type(src)
 

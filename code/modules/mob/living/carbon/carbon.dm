@@ -439,7 +439,7 @@
 		if(isnull(organoption))
 			return
 		if (organoption == "Add Organ")
-			var/new_organ = input("Please choose an organ to add.","Organ",null) as null|anything in typesof(/obj/item/organ)-/obj/item/organ
+			var/new_organ = tgui_input_list(usr, "Please choose an organ to add.","Organ", typesof(/obj/item/organ)-/obj/item/organ)
 			if(!new_organ) return
 
 			if(locate(new_organ) in src.internal_organs)
@@ -448,7 +448,7 @@
 
 			new new_organ(src)
 		if (organoption == "Remove Organ")
-			var/obj/item/organ/rem_organ = input("Please choose an organ to remove.","Organ",null) as null|anything in src.internal_organs
+			var/obj/item/organ/rem_organ = tgui_input_list(usr, "Please choose an organ to remove.", "Organ",  src.internal_organs)
 
 			if(!(locate(rem_organ) in src.internal_organs))
 				to_chat(usr, "Mob does not have that organ.")

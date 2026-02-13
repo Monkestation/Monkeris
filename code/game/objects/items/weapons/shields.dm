@@ -47,6 +47,10 @@
 	var/shield_integrity = 100
 	slowdown_blocking = SHIELD_BLOCKING_SLOWDOWN
 	style = STYLE_NEG_HIGH
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/shields_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/shields_righthand.dmi',
+		)
 
 /obj/item/shield/examine(mob/user, extra_description = "")
 	switch(get_block_chance(user))

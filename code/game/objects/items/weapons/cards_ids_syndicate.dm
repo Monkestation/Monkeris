@@ -19,7 +19,7 @@
 
 /obj/item/card/id/syndicate/afterattack(obj/item/O as obj, mob/user as mob, proximity)
 	if(!proximity) return
-	if(istype(O, /obj/item/card/id))
+	if(isidcard(O))
 		var/obj/item/card/id/I = O
 		src.access |= I.access
 		if(player_is_antag(user.mind))

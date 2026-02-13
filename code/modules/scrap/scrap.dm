@@ -109,39 +109,67 @@ GLOBAL_LIST_EMPTY(scrap_base_cache)
 	if(loot_generated)
 		return
 	loot_generated = TRUE
+
 	if(!big_item)
 		make_big_loot()
 
 	var/amt = rand(loot_min, loot_max)
-	var/list/junk_tags = list(SPAWN_JUNK,SPAWN_CLEANABLE,SPAWN_MATERIAL_JUNK)
+	var/list/junk_tags = list(SPAWN_JUNK, SPAWN_CLEANABLE, SPAWN_MATERIAL_JUNK)
+
 	for(var/x in 1 to amt)
 		var/rare = FALSE
 		var/rare_items_amt = rand(1,2)
 		if((x > amt-rare_items_amt) && prob(rare_item_chance))
 			rare = TRUE
+
 		var/list/loot_tags_copy = loot_tags.Copy()
 		if(rare)
 			loot_tags_copy -= junk_tags
 			loot_tags_copy |= list(pickweight(rare_loot))
+
 		var/list/true_loot_tags = list()
-		var/tags_amt = max(round(loot_tags_copy.len/3),1)
+		var/tags_amt = max(round(loot_tags_copy.len/3), 1)
 		for(var/y in 1 to tags_amt)
 			true_loot_tags += pickweight_n_take(loot_tags_copy)
-		var/list/candidates = SSspawn_data.valid_candidates(true_loot_tags, restricted_tags - rare_loot, FALSE, null, null, TRUE)
+
+		var/list/candidates
+		var/top_price_limit = null
+
 		if(SPAWN_ITEM in true_loot_tags)
-			var/top_price = CHEAP_ITEM_PRICE
-			true_loot_tags = list()
-			var/list/tags = SSspawn_data.lowkeyrandom_tags.Copy()
-			var/new_tags_amt = max(round(tags.len*0.10),1)
-			for(var/i in 1 to new_tags_amt)
-				true_loot_tags += pick_n_take(tags)
+			top_price_limit = CHEAP_ITEM_PRICE
 			if(rare)
-				top_price = CHEAP_ITEM_PRICE * 1.5
+				top_price_limit = CHEAP_ITEM_PRICE * 1.5
 				true_loot_tags -= junk_tags
 				true_loot_tags |= list(pickweight(rare_loot))
-			candidates = SSspawn_data.valid_candidates(true_loot_tags, restricted_tags - rare_loot, FALSE, 1, top_price, TRUE, list(/obj/item/stash_spawner))
+
+			candidates = SSspawn_data.valid_candidates(
+				true_loot_tags,
+				restricted_tags - rare_loot,
+				FALSE,
+				1,
+				top_price_limit,
+				FALSE,
+				list(/obj/item/stash_spawner)
+			)
+		else
+			candidates = SSspawn_data.valid_candidates(
+				true_loot_tags,
+				restricted_tags - rare_loot,
+				FALSE,
+				null,
+				null,
+				FALSE
+			)
+
+		if(!candidates.len)
+			continue
+
 		var/loot_path = SSspawn_data.pick_spawn(candidates)
+		if(!loot_path)
+			continue
+
 		new loot_path(src)
+
 		var/list/aditional_objects = SSspawn_data.all_accompanying_obj_by_path[loot_path]
 		if(islist(aditional_objects) && aditional_objects.len)
 			for(var/thing in aditional_objects)
@@ -150,11 +178,11 @@ GLOBAL_LIST_EMPTY(scrap_base_cache)
 					continue
 				new thing(src)
 
-	for(var/obj/item/loot in contents)
+	for(var/obj/item/loot_item in contents)
 		if(prob(prob_make_old))
-			loot.make_old()
-		if(istype(loot, /obj/item/reagent_containers/food/snacks))
-			var/obj/item/reagent_containers/food/snacks/S = loot
+			loot_item.make_old()
+		if(istype(loot_item, /obj/item/reagent_containers/food/snacks))
+			var/obj/item/reagent_containers/food/snacks/S = loot_item
 			S.junk_food = TRUE
 			if(prob(20))
 				S.reagents.add_reagent("toxin", rand(2, 15))

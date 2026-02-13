@@ -8,8 +8,8 @@ var/list/holder_mob_icon_cache = list()
 	slot_flags = 0
 	//sprite_sheets = list("Vox" = 'icons/mob/species/vox/head.dmi')
 	item_icons = list(
-		slot_l_hand_str = 'icons/mob/items/lefthand_holder.dmi',
-		slot_r_hand_str = 'icons/mob/items/righthand_holder.dmi',
+		slot_l_hand_str = 'icons/mob/inhands/misc/pets_held_lh.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/pets_held_rh.dmi',
 	)
 	origin_tech = null
 	spawn_blacklisted = TRUE
