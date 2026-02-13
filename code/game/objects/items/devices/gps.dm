@@ -6,6 +6,7 @@
 	desc = "Pinpoints your location using the ship navigation system."
 	icon = 'icons/obj/telescience.dmi'
 	icon_state = "gps-c"
+	item_state = "electronic"
 	//item_state = "locator"
 
 	w_class = ITEM_SIZE_SMALL

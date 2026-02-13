@@ -111,7 +111,7 @@
 				continue
 	if(istype(object, /obj/item/organ/internal/vital/brain))
 		var/obj/item/organ/internal/vital/brain/B = object
-		if(B.brainmob && B.brainmob.mind)
+		if(B?.brainmob?.persistent_client)
 			var/mob/M = B.brainmob.persistent_client.mob
 			to_chat(M, span_notice("Your remains have been dissolved and reused. Your crew respawn time is reduced by [(BIOREACTOR_RESPAWN_BONUS)/600] minutes."))
 			playsound(M, 'sound/effects/magic/Blind.ogg') //Play this sound to a player whenever their respawn time gets reduced

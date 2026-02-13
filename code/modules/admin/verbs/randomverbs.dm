@@ -562,7 +562,7 @@ Contractors and the like can also be revived with the previous role mostly intac
 	if(mob)
 		mob.parallax.update()
 	log_admin("[key_name(usr)] changed their view range to [view].")
-	//message_admins(span_blue("[key_name_admin(usr)] changed their view range to [view]."), 1)	//why? removed by order of XSI
+	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Change View Range", "[view]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 //allows us to call the emergency shuttle
 /client/proc/admin_call_shuttle()

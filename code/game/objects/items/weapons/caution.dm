@@ -3,6 +3,10 @@
 	name = "wet floor sign"
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "caution"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/custodial_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/custodial_righthand.dmi',
+		)
 	force = WEAPON_FORCE_HARMLESS
 	throwforce = WEAPON_FORCE_HARMLESS
 	throw_speed = 1

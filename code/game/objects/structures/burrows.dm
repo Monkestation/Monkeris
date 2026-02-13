@@ -723,7 +723,7 @@
 		extra_description += span_warning("You can see something move behind the cracks. You should weld them shut before it breaks through.")
 	..(user, extra_description)
 
-/obj/structure/burrow/explosion_act(target_power, explosion_handler/handler)
+/obj/structure/burrow/explosion_act(target_power, datum/explosion_handler/handler)
 	. = ..()
 	if(QDELETED(src))
 		return 0

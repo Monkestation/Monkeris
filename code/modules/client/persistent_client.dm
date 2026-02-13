@@ -15,6 +15,9 @@ GLOBAL_LIST_EMPTY_TYPED(persistent_clients, /datum/persistent_client)
 	/// Build number of BYOND this client was last using.
 	var/byond_build
 
+	/// Discord linking details for this player.
+	var/datum/discord_details/discord_details
+
 	/// Action datums assigned to this player
 	var/list/datum/action/player_actions = list()
 	/// Tracks client action logging

@@ -211,7 +211,7 @@ Proc for attack log creation, because really why not
 	if (progbar)
 		qdel(progbar)
 
-/proc/do_after(mob/user, delay, atom/target, needhand = 1, progress = 1, incapacitation_flags = INCAPACITATION_DEFAULT, immobile = 1, unique = FALSE)
+/proc/do_after(mob/user, delay, atom/target, needhand = 1, progress = 1, incapacitation_flags = INCAPACITATION_DEFAULT, immobile = 1, unique = FALSE, datum/callback/extra_checks)
 	if(!user)
 		return 0
 
@@ -260,20 +260,22 @@ Proc for attack log creation, because really why not
 
 		if(immobile)
 			if(user.loc != original_loc)
-				. = 0
+				. = FALSE
 				break
 
-		if(target_loc)
-			//if user is the target & immobile is not enabled we can safely ignore their loc changing
-			//otherwise, death to progbar
-			if(!target || (target != user && target_loc != target.loc))
-				. = 0
-				break
+		//if user is the target & immobile is not enabled we can safely ignore their loc changing
+		//otherwise, death to progbar
+		if(target_loc && (!target || (target != user && target_loc != target.loc)))
+			. = FALSE
+			break
 
 		if(needhand)
 			if(user.get_active_held_item() != holding)
-				. = 0
+				. = FALSE
 				break
+		if (extra_checks && !extra_checks.Invoke())
+			. = FALSE
+			break
 
 	if (progbar)
 		qdel(progbar)

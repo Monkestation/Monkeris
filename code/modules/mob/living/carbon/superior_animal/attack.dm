@@ -7,7 +7,8 @@
 
 	var/damage
 
-	if(attackdamage) // this allows damage to be overridden, for special cases like the end of the platinum golem's charge
+	// attackdamage is actulaly params passed from Clickon which is a string, that is not useful to us, so only check if this is a number
+	if(isnum(attackdamage)) // this allows damage to be overridden, for special cases like the end of the platinum golem's charge
 		damage = attackdamage
 	else
 		damage = rand(melee_damage_lower, melee_damage_upper)

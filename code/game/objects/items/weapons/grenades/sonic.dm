@@ -2,6 +2,11 @@
 	name = "SG \"Loudmouth\""
 	desc = "A power cell wired into a short circuit to reproduce a noise similar to the leading roaches."
 	icon_state = "screamer"
+	item_state = "hailer"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
 	matter = list(MATERIAL_STEEL = 3, MATERIAL_PLASTIC = 2)
 
 /obj/item/grenade/sonic/prime()

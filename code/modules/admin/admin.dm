@@ -46,7 +46,7 @@ var/global/floorIsLava = 0
  */
 /proc/message_mentorTicket(msg, important = FALSE)
 	for(var/client/C in GLOB.admins)
-		if(check_rights(R_ADMIN | R_MENTOR, 0, C.mob))
+		if(check_rights_for(R_ADMIN | R_MENTOR))
 			to_chat(C, msg)
 			if(important || (C.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == GLOB.PREF_HEAR))
 				sound_to(C, 'sound/effects/adminhelp.ogg')
@@ -54,7 +54,7 @@ var/global/floorIsLava = 0
 /proc/admin_notice(message, rights)
 	var/list/mob_list = SSmobs.mob_list | SShumans.mob_list
 	for(var/mob/M in mob_list)
-		if(check_rights(rights, 0, M))
+		if(check_rights_for(M, rights))
 			to_chat(M, message)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
@@ -133,7 +133,7 @@ var/global/floorIsLava = 0
 		<a href='byond://?src=\ref[src];[HrefToken()];subtlemessage=\ref[M]'>SM</a> -
 		<a href='byond://?src=\ref[src];[HrefToken()];manup=\ref[M]'>MAN_UP</a> -
 		<a href='byond://?src=\ref[src];[HrefToken()];paralyze=\ref[M]'>PARA</a> -
-		[ADMIN_JMP(M)] -
+		[ADMIN_JMP_NOPNOG(M)] -
 		<a href='byond://?src=\ref[src];[HrefToken()];viewlogs=\ref[M]'>LOGS</a>\] <br>
 		<b>Mob type</b> = [M.type]<br><br>
 		<A href='byond://?src=\ref[src];[HrefToken()];boot2=\ref[M]'>Kick</A> |
@@ -558,8 +558,8 @@ var/global/floorIsLava = 0
 				if(!usr.client.is_localhost())
 					if(alert(usr, "Are you sure you want to restart the server?","This server is live", "Restart", "Cancel") != "Restart")
 						return FALSE
-				// SSplexora.restart_requester = usr
-				// SSplexora.restart_type = PLEXORA_SHUTDOWN_NORMAL
+				SSplexora.restart_requester = usr
+				SSplexora.restart_type = PLEXORA_SHUTDOWN_NORMAL
 				SSticker.Reboot(init_by, "admin reboot - by [usr.key] [usr.client.holder.fakekey ? "(stealth)" : ""]", 10)
 			if("Regular Restart (with delay)")
 				var/delay = input("What delay should the restart have (in seconds)?", "Restart Delay", 5) as num|null
@@ -568,22 +568,23 @@ var/global/floorIsLava = 0
 				if(!usr.client.is_localhost())
 					if(alert(usr,"Are you sure you want to restart the server?","This server is live", "Restart", "Cancel") != "Restart")
 						return FALSE
-				// SSplexora.restart_requester = usr
-				// SSplexora.restart_type = PLEXORA_SHUTDOWN_NORMAL
+				SSplexora.restart_requester = usr
+				SSplexora.restart_type = PLEXORA_SHUTDOWN_NORMAL
 				SSticker.Reboot(init_by, "admin reboot - by [usr.key] [usr.client.holder.fakekey ? "(stealth)" : ""]", delay * 10)
 			if("Hard Restart (No Delay, No Feedback Reason)")
-				// SSplexora.restart_type = PLEXORA_SHUTDOWN_HARD
-				// SSplexora.restart_requester = usr
+				SSplexora.restart_type = PLEXORA_SHUTDOWN_HARD
+				SSplexora.restart_requester = usr
 				to_chat(world, "World reboot - [init_by]")
 				world.Reboot()
 			if("Hardest Restart (No actions, just reboot)")
-				// SSplexora.restart_type = PLEXORA_SHUTDOWN_HARDEST
-				// SSplexora.restart_requester = usr
+				SSplexora.restart_type = PLEXORA_SHUTDOWN_HARDEST
+				SSplexora.restart_requester = usr
 				to_chat(world, "Hard world reboot - [init_by]")
 				world.Reboot(fast_track = TRUE)
 			if("Server Restart (Kill and restart DD)")
-				// SSplexora.restart_type = PLEXORA_SHUTDOWN_KILLDD
-				// SSplexora.restart_requester = usr
+				SSplexora.restart_type = PLEXORA_SHUTDOWN_KILLDD
+				SSplexora.restart_requester = usr
+				SSplexora.notify_shutdown(PLEXORA_SHUTDOWN_KILLDD)
 				to_chat(world, "Server restart - [init_by]")
 				world.TgsEndProcess()
 

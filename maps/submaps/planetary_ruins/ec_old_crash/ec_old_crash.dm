@@ -50,9 +50,13 @@
 /obj/item/disk/astrodata
 	name = "astronomical data disk"
 	desc = "A disk with a wealth of astronomical data recorded. Astrophysicists at the EC Observatory would love to see this."
-	icon = 'icons/obj/cloning.dmi'
-	icon_state = "datadisk0"
+	icon = 'icons/obj/discs.dmi'
+	icon_state = "data-blue"
 	item_state = "card-id"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/idcards_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/idcards_lefthand.dmi',
+		)
 	w_class = ITEM_SIZE_SMALL
 	spawn_blacklisted = TRUE
 

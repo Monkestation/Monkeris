@@ -19,6 +19,7 @@
 	var/used_now = FALSE
 	var/auto_init = TRUE
 	var/initialized = FALSE
+	/// If this has a positive value, it will drain that value of sanity from those in view of this atom.
 	var/sanity_damage = 0
 
 	/// Last name used to calculate a color for the chatmessage overlays
@@ -474,7 +475,7 @@
  * overlays and other visual stuff as much as possible , since they cause massive time delays
  * in explosion processing.
  */
-/atom/proc/explosion_act(target_power, explosion_handler/handler)
+/atom/proc/explosion_act(target_power, datum/explosion_handler/handler)
 	return 0
 
 /atom/proc/emag_act(remaining_charges, mob/user, emag_source)

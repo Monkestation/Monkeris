@@ -75,7 +75,7 @@
 /turf/floor/tiled/derelict,
 /area/crawler)
 "p" = (
-/turf/wall/low/onestar,
+/turf/wall/low/with_glass/onestar/reinf,
 /area/crawler)
 "q" = (
 /turf/floor/tiled/dark/brown_platform,

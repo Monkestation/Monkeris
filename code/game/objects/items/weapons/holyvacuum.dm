@@ -3,6 +3,10 @@
 	name = "\"Tersus\" vacuum cleaner"
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "vacuum"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/custodial_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/custodial_righthand.dmi',
+		)
 	force = WEAPON_FORCE_WEAK
 	throwforce = WEAPON_FORCE_WEAK
 	throw_speed = 5

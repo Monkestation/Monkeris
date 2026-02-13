@@ -174,7 +174,7 @@
 		return
 	..(duration, drop_items, doblind, doblurry)
 
-/mob/living/carbon/human/explosion_act(target_power, explosion_handler/handle)
+/mob/living/carbon/human/explosion_act(target_power, datum/explosion_handler/handle)
 	var/BombDamage = target_power - (getarmor(null, ARMOR_BOMB) + mob_bomb_defense)
 	var/obj/item/rig/hardsuitChad = back
 	if(back && istype(hardsuitChad))
@@ -1068,7 +1068,7 @@ var/list/rank_prefix = list(\
 			var/obj/item/implant/core_implant/C = new I.implant_type
 			C.install(src)
 			C.activate()
-			if(mind)
+			if(mind && mind.assigned_job)
 				C.install_default_modules_by_job(mind.assigned_job)
 				C.access.Add(mind.assigned_job.cruciform_access)
 				C.security_clearance = mind.assigned_job.security_clearance
@@ -1100,9 +1100,10 @@ var/list/rank_prefix = list(\
 				var/obj/item/implant/core_implant/C = new I.implant_type
 				C.install(src)
 				C.activate()
-				C.install_default_modules_by_job(mind.assigned_job)
-				C.access.Add(mind.assigned_job.cruciform_access)
-				C.security_clearance = mind.assigned_job.security_clearance
+				if(mind && mind.assigned_job)
+					C.install_default_modules_by_job(mind.assigned_job)
+					C.access.Add(mind.assigned_job.cruciform_access)
+					C.security_clearance = mind.assigned_job.security_clearance
 
 	for(var/obj/item/organ/internal/carrion/C in organs_to_readd)
 		C.replaced(get_organ(C.parent_organ_base))
@@ -1117,6 +1118,8 @@ var/list/rank_prefix = list(\
 	if(C)
 		C.install(src)
 		C.activate()
+		if (!mind || !mind.assigned_job)
+			return
 		C.install_default_modules_by_job(mind.assigned_job)
 		C.access |= mind.assigned_job.cruciform_access
 		C.security_clearance = mind.assigned_job.security_clearance
@@ -1359,7 +1362,31 @@ var/list/rank_prefix = list(\
 				return
 		to_chat(src, span_notice("You can see [above]."))
 	else
-		to_chat(src, span_notice("You can't do it right now."))
+		to_chat(src, span_notice("You can't do this right now."))
+	return
+
+/mob/living/carbon/human/verb/lookdown()
+	set name = "Look down"
+	set desc = "If you want to know what's below."
+	set category = "IC"
+
+	// /mob/living/handle_vision has vision not reset if the user has the machine var referencing something
+	// which it will always have since it is very poorly handled in its dereferencing SPCR - 2022
+	machine = null
+	if(!is_physically_disabled())
+		var/turf/below = GetBelow(src)
+		if(shadow)
+			if(client.eye == shadow)
+				reset_view(0)
+				return
+			if(below.is_hole)
+				to_chat(src, span_notice("You look down."))
+				if(client)
+					reset_view(shadow)
+				return
+		to_chat(src, span_notice("You can see [below]."))
+	else
+		to_chat(src, span_notice("You can't do this right now."))
 	return
 
 /mob/living/carbon/human/should_have_process(organ_check)

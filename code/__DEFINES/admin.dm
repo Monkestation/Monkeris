@@ -7,6 +7,7 @@
 #define MUTE_ADMINHELP (1<<3)
 #define MUTE_DEADCHAT (1<<4)
 #define MUTE_TTS (1<<5)
+#define MUTE_INTERNET_REQUEST (1<<6)
 #define MUTE_ALL (~0)
 
 // Number of identical messages required to get the spam-prevention auto-mute thing to trigger warnings and automutes.
@@ -31,7 +32,7 @@
 /// When passed in as the duration for ban_panel, will make the ban default to permanent
 #define BAN_PANEL_PERMANENT "permanent"
 
-// Admin permissions.
+// Admin permissions. Make sure to update rights2text when you're done.
 #define R_NONE 			 NONE
 #define R_FUN           (1<<0)
 #define R_SERVER        (1<<1)
@@ -71,6 +72,41 @@
 
 #define ADMIN_FULLMONTY_NONAME(user) "[ADMIN_QUE(user)] [ADMIN_PP(user)] [ADMIN_VV(user)] [ADMIN_SM(user)] [ADMIN_FLW(user)] [ADMIN_TP(user)] [ADMIN_SC(user)]"
 #define ADMIN_FULLMONTY(user) "[key_name_admin(user)] [ADMIN_FULLMONTY_NONAME(user)]"
+/// Displays "(PLAY)" in the chat, when clicked it tries to play internet sounds from the request.
+#define ADMIN_PLAY_INTERNET(text) "(<A href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];play_internet=[url_encode(text)]'>PLAY</a>)"
+
+// NO PARENTHESIS
+#define ADMIN_QUE_NOP(user) "<(a href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];adminmoreinfo=[REF(user)]'>?</a>)"
+#define ADMIN_FLW_NOP(user) "<a href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];adminplayerobservefollow=[REF(user)]'>FLW</a>"
+#define ADMIN_PP_NOP(user) "<a href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];adminplayeropts=[REF(user)]'>PP</a>"
+#define ADMIN_SM_NOP(user) "<a href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];subtlemessage=[REF(user)]'>SM</a>"
+#define ADMIN_SC_NOP(user) "<A href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];adminspawncookie=\ref[src]'>SC</a>"
+#define ADMIN_VV_NOP(atom) "<a href='byond://?_src_=vars;[HrefToken(forceGlobal = TRUE)];Vars=[REF(atom)]'>VV</a>"
+#define ADMIN_TP_NOP(user) "<a href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];traitor=[REF(user)]'>TP</a>"
+#define ADMIN_TAG_NOP(datum) "<A href='byond://?src=[REF(src)];[HrefToken(forceGlobal = TRUE)];tag_datum=[REF(datum)]'>TAG</a>"
+#define ADMIN_JMP_NOP(src) "<a href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>"
+
+// NO PARENTHESIS NO GLOBAL
+#define ADMIN_QUE_NOPNOG(user) "<a href='byond://?_src_=holder;[HrefToken()];adminmoreinfo=[REF(user)]'>?</a>"
+#define ADMIN_FLW_NOPNOG(user) "<a href='byond://?_src_=holder;[HrefToken()];adminplayerobservefollow=[REF(user)]'>FLW</a>"
+#define ADMIN_PP_NOPNOG(user) "<a href='byond://?_src_=holder;[HrefToken()];adminplayeropts=[REF(user)]'>PP</a>"
+#define ADMIN_SM_NOPNOG(user) "<a href='byond://?_src_=holder;[HrefToken()];subtlemessage=[REF(user)]'>SM</a>"
+#define ADMIN_SC_NOPNOG(user) "<A href='byond://?_src_=holder;[HrefToken()];adminspawncookie=\ref[src]'>SC</a>"
+#define ADMIN_VV_NOPNOG(atom) "<a href='byond://?_src_=vars;[HrefToken()];Vars=[REF(atom)]'>VV</a>"
+#define ADMIN_TP_NOPNOG(user) "<a href='byond://?_src_=holder;[HrefToken()];traitor=[REF(user)]'>TP</a>"
+#define ADMIN_TAG_NOPNOG(datum) "<A href='byond://?src=[REF(src)];[HrefToken()];tag_datum=[REF(datum)]'>TAG</a>"
+#define ADMIN_JMP_NOPNOG(src) "<a href='byond://?_src_=holder;[HrefToken()];adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>"
+
+// NO GLOBALS
+#define ADMIN_QUE_NOG(user) "(<a href='byond://?_src_=holder;[HrefToken()];adminmoreinfo=[REF(user)]'>?</a>)"
+#define ADMIN_FLW_NOG(user) "(<a href='byond://?_src_=holder;[HrefToken()];adminplayerobservefollow=[REF(user)]'>FLW</a>)"
+#define ADMIN_PP_NOG(user) "(<a href='byond://?_src_=holder;[HrefToken()];adminplayeropts=[REF(user)]'>PP</a>)"
+#define ADMIN_SM_NOG(user) "(<a href='byond://?_src_=holder;[HrefToken()];subtlemessage=[REF(user)]'>SM</a>)"
+#define ADMIN_SC_NOG(user) "(<A href='byond://?_src_=holder;[HrefToken()];adminspawncookie=\ref[src]'>SC</a>)"
+#define ADMIN_VV_NOG(atom) "(<a href='byond://?_src_=vars;[HrefToken()];Vars=[REF(atom)]'>VV</a>)"
+#define ADMIN_TP_NOG(user) "(<a href='byond://?_src_=holder;[HrefToken()];traitor=[REF(user)]'>TP</a>)"
+#define ADMIN_TAG_NOG(datum) "(<A href='byond://?src=[REF(src)];[HrefToken()];tag_datum=[REF(datum)]'>TAG</a>)"
+#define ADMIN_JMP_NOG(src) "(<a href='byond://?_src_=holder;[HrefToken()];adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)"
 
 /// for [/proc/check_asay_links], if there are any actionable refs in the asay message, this index in the return list contains the new message text to be printed
 #define ASAY_LINK_NEW_MESSAGE_INDEX "!asay_new_message"

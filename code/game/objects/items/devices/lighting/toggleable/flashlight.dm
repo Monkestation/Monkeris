@@ -20,6 +20,10 @@
 
 	description_info = "Can be used on other people's eyes to check for brain damage, and if they're drugged or have the x-ray mutation"
 	description_antag = "Can be used to flash people on harm intent, provided they do not have any protection"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
 
 /obj/item/device/lighting/toggleable/flashlight/Destroy()
 	QDEL_NULL(light_spot)

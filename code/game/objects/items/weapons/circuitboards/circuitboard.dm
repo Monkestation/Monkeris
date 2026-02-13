@@ -15,6 +15,10 @@
 	icon = 'icons/obj/module.dmi'
 	icon_state = "id_mod"
 	item_state = "electronic"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
 	origin_tech = list(TECH_DATA = 2)
 	matter = list(MATERIAL_PLASTIC = 2, MATERIAL_STEEL = 2)
 	matter_reagents = list("silicon" = 10)
@@ -43,7 +47,7 @@
 
 //Called when a computer is deconstructed to produce a circuitboard.
 //Only used by computers, as other machines store their circuitboard instance.
-/obj/item/electronics/circuitboard/proc/deconstruct(obj/machinery/M)
+/obj/item/electronics/circuitboard/proc/_deconstruct(obj/machinery/M)
 	if (istype(M, build_path))
 		return TRUE
 	return FALSE

@@ -8,7 +8,7 @@
 	//These can be combined, for example with: list(R_MOD|R_MENTOR, R_ADMIN) which would require you to have either R_MOD or R_MENTOR, as well as R_ADMIN
 
 /datum/admin_topic/proc/TryRun(list/input, datum/admins/owner)
-	if(require_perms.len)
+	if(length(require_perms))
 		for(var/i in require_perms)
 			if(!check_rights(i, TRUE))
 				return FALSE
@@ -119,35 +119,35 @@
 	keyword = "editrightsbrowser"
 	require_perms = list(R_PERMISSIONS)
 
-/datum/admin_topic/editrightsbrowser/Run(list/href_list)
+/datum/admin_topic/editrightsbrowser/Run(list/input)
 	usr.client.edit_admin_permissions(0)
 
 /datum/admin_topic/editrightsbrowserlog
 	keyword = "editrightsbrowserlog"
 	require_perms = list(R_PERMISSIONS)
 
-/datum/admin_topic/editrightsbrowserlog/Run(list/href_list)
-	usr.client.edit_admin_permissions(1, href_list["editrightstarget"], href_list["editrightsoperation"], href_list["editrightspage"])
+/datum/admin_topic/editrightsbrowserlog/Run(list/input)
+	usr.client.edit_admin_permissions(1, input["editrightstarget"], input["editrightsoperation"], input["editrightspage"])
 
 /datum/admin_topic/editrightsbrowsermanage
 	keyword = "editrightsbrowsermanage"
 	require_perms = list(R_PERMISSIONS)
 
-/datum/admin_topic/editrightsbrowsermanage/Run(list/href_list)
-	if(href_list["editrightschange"])
-		usr.client.holder.change_admin_rank(ckey(href_list["editrightschange"]), href_list["editrightschange"], TRUE)
-	else if(href_list["editrightsremove"])
-		usr.client.holder.remove_admin(ckey(href_list["editrightsremove"]), href_list["editrightsremove"], TRUE)
-	else if(href_list["editrightsremoverank"])
-		usr.client.holder.remove_rank(href_list["editrightsremoverank"])
+/datum/admin_topic/editrightsbrowsermanage/Run(list/input)
+	if(input["editrightschange"])
+		usr.client.holder.change_admin_rank(ckey(input["editrightschange"]), input["editrightschange"], TRUE)
+	else if(input["editrightsremove"])
+		usr.client.holder.remove_admin(ckey(input["editrightsremove"]), input["editrightsremove"], TRUE)
+	else if(input["editrightsremoverank"])
+		usr.client.holder.remove_rank(input["editrightsremoverank"])
 	usr.client.edit_admin_permissions(2)
 
 /datum/admin_topic/editrights
 	keyword = "editrights"
 	require_perms = list(R_PERMISSIONS)
 
-/datum/admin_topic/editrights/Run(list/href_list)
-	usr.client.holder.edit_rights_topic(href_list)
+/datum/admin_topic/editrights/Run(list/input)
+	usr.client.holder.edit_rights_topic(input)
 
 /datum/admin_topic/simplemake
 	keyword = "simplemake"
@@ -1112,3 +1112,14 @@
 			source.admincaster_screen = 1
 			source.access_news_network()
 
+
+/datum/admin_topic/play_internet
+	keyword = "play_internet"
+	require_perms = list(R_SOUND)
+
+/datum/admin_topic/play_internet/Run(list/input)
+	var/link_url = input["play_internet"]
+	if(!link_url)
+		return
+
+	web_sound(usr, link_url)

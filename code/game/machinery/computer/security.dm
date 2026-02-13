@@ -40,7 +40,7 @@
 	return
 
 /obj/machinery/computer/secure_data/attackby(obj/item/O as obj, user as mob)
-	if(istype(O, /obj/item/card/id) && !scan)
+	if(isidcard(O) && !scan)
 		usr.drop_item()
 		O.loc = src
 		scan = O
@@ -256,7 +256,7 @@ What a mess.*/
 					scan = null
 				else
 					var/obj/item/I = usr.get_active_held_item()
-					if (istype(I, /obj/item/card/id) && usr.unEquip(I))
+					if (isidcard(I) && usr.unEquip(I))
 						I.loc = src
 						scan = I
 
@@ -280,7 +280,7 @@ What a mess.*/
 					var/mob/living/silicon/robot/R = usr
 					src.rank = "[R.modtype] [R.braintype]"
 					src.screen = 1
-				else if (istype(scan, /obj/item/card/id))
+				else if (isidcard(scan))
 					active1 = null
 					active2 = null
 					if(check_access(scan))
@@ -409,7 +409,7 @@ What a mess.*/
 						spawn(30)
 							playsound(loc, 'sound/items/poster_being_created.ogg', 100, 1)
 							if((istype(active1, /datum/data/record) && data_core.general.Find(active1)))//make sure the record still exists.
-								new /obj/item/contraband/poster/wanted(src.loc, active1.fields["photo_front"], wanted_name, default_description)
+								new /obj/item/poster/wanted(src.loc, active1.fields["photo_front"], wanted_name, default_description)
 							printing = 0
 //RECORD DELETE
 			if ("Delete All Records")

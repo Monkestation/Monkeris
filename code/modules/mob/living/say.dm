@@ -302,7 +302,7 @@ var/list/channel_to_radio_key = new
 				listening |= M
 				continue
 			var/turf/listenerTurf = get_turf(M)
-			if(DIST_EUCLIDIAN(T.x , T.y, listenerTurf.x, listenerTurf.y) <= message_range)
+			if(listenerTurf && DIST_EUCLIDIAN(T.x , T.y, listenerTurf.x, listenerTurf.y) <= message_range)
 				listening |= M
 			else
 				listening_falloff |= M

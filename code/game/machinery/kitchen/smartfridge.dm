@@ -438,6 +438,9 @@
 	if(href_list["vend"])
 		var/index = text2num(href_list["vend"])
 		var/amount = text2num(href_list["amount"])
+		if (index > length(item_quants))
+			to_chat(usr, span_warning("You tried to reach into a corner of the fridge to grab something, but it disintegrated before your eyes."))
+			return
 		var/K = item_quants[index]
 		var/count = item_quants[K]
 

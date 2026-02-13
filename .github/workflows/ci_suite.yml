@@ -61,18 +61,53 @@ jobs:
           pip install -r tools/requirements.txt
           bash tools/ci/install_node.sh
           bash tools/ci/install_spaceman_dmm.sh dreamchecker
-      - name: Run Linters
+          tools/bootstrap/python -c ''
+      - name: Give Linters A Go
+        id: linter-setup
+        run: ":"
+
+      - name: Check File Directories
+        if: steps.linter-setup.conclusion == 'success' && !cancelled()
+        run: bash tools/ci/check_filedirs.sh cev_eris.dme
+
+      - name: Check Changelogs
+        if: steps.linter-setup.conclusion == 'success' && !cancelled()
+        run: bash tools/ci/check_changelogs.sh
+
+      - name: Run Grep Checks
+        if: steps.linter-setup.conclusion == 'success' && !cancelled()
+        run: bash tools/ci/check_grep.sh
+
+      - name: Check unescaped brackets
+        if: steps.linter-setup.conclusion == 'success' && !cancelled()
+        run: tools/bootstrap/python tools/catch_unescaped_brackets.py
+
+      - name: Check Miscellaneous Files
+        if: steps.linter-setup.conclusion == 'success' && !cancelled()
+        run: bash tools/ci/check_misc.sh
+
+      - name: Run TGUI Checks
+        if: steps.linter-setup.conclusion == 'success' && !cancelled()
+        run: tools/build/build --ci lint tgui-test
+
+      - name: Ticked File Enforcement
+        if: steps.linter-setup.conclusion == 'success' && !cancelled()
         run: |
-          bash tools/ci/check_filedirs.sh cev_eris.dme
-          bash tools/ci/check_changelogs.sh
-          bash tools/ci/check_grep.sh
-          bash tools/ci/check_misc.sh
-          tools/build/build --ci lint tgui-test
           python -m tools.ticked_file_enforcement.ticked_file_enforcement < tools/ticked_file_enforcement/schemas/cev_eris_dme.json
           python -m tools.ticked_file_enforcement.ticked_file_enforcement < tools/ticked_file_enforcement/schemas/unit_tests.json
-          python -m tools.mapmerge2.dmm_test
-          ~/dreamchecker 2>&1 | bash tools/ci/annotate_dm.sh
-          ./DMCompiler_linux-x64/DMCompiler cev_eris.dme --suppress-unimplemented --define=CIBUILDING | bash tools/ci/annotate_od.sh
+
+      - name: Run Map Checks
+        if: steps.linter-setup.conclusion == 'success' && !cancelled()
+        run: python -m tools.mapmerge2.dmm_test
+
+      - name: Run DreamChecker
+        if: steps.linter-setup.conclusion == 'success' && !cancelled()
+        run: ~/dreamchecker 2>&1 | bash tools/ci/annotate_dm.sh
+
+      - name: Run OpenDream
+        if: steps.linter-setup.conclusion == 'success' && !cancelled()
+        run: ./DMCompiler_linux-x64/DMCompiler cev_eris.dme --suppress-unimplemented --define=CIBUILDING | bash tools/ci/annotate_od.sh
+
 
   compile_all_maps:
     if: "!contains(github.event.head_commit.message, '[ci skip]')"

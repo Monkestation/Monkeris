@@ -126,5 +126,5 @@
 
 	var/htmlicon = icon2html(holder_atom, listening)
 	for(var/mob/M in listening)
-		to_chat(M, "[] <b>[htmlicon]</b> reverberates, \blue\"[msg]\"")
+		to_chat(M, "<b>[htmlicon]</b> reverberates, \blue\"[msg]\"")
 	last_talk_time = world.time

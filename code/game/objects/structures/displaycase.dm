@@ -12,7 +12,7 @@
 	var/occupied = 1
 	var/destroyed = 0
 
-/obj/structure/displaycase/explosion_act(target_power, explosion_handler/handler)
+/obj/structure/displaycase/explosion_act(target_power, datum/explosion_handler/handler)
 	var/absorbed = take_damage(target_power)
 	return absorbed
 

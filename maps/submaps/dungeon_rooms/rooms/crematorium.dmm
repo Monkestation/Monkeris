@@ -34,7 +34,7 @@
 /turf/floor/tiled/derelict,
 /area/crawler)
 "j" = (
-/turf/wall/low/onestar,
+/turf/wall/low/with_glass/onestar/reinf,
 /area/crawler)
 "k" = (
 /turf/floor/tiled/derelict,

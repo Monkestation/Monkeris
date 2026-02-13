@@ -146,7 +146,7 @@ The "dust" will damage the hull of the station causin minor hull breaches.
 	return
 
 
-/obj/effect/space_dust/explosion_act(target_power,  explosion_handler/handle)
+/obj/effect/space_dust/explosion_act(target_power,  datum/explosion_handler/handle)
 	qdel(src)
 	return 0
 

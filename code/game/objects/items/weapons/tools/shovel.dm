@@ -32,6 +32,10 @@
 	desc = "A small tool ofter used for simple gardening task such as digging soil and moving dirt."
 	icon_state = "spade"
 	item_state = "spade"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/hydroponics_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/hydroponics_righthand.dmi',
+		)
 	force = WEAPON_FORCE_NORMAL
 	throwforce = WEAPON_FORCE_HARMLESS
 	w_class = ITEM_SIZE_SMALL

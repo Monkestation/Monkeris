@@ -332,7 +332,7 @@
 					var/mob/pilot = thing
 					pilot.emp_act(severity)
 */
-/mob/living/exosuit/explosion_act(target_power, explosion_handler/handler)
+/mob/living/exosuit/explosion_act(target_power, datum/explosion_handler/handler)
 	var/damage = target_power - (getarmor(body, ARMOR_BOMB) + getarmor(arms, ARMOR_BOMB) + getarmor(legs, ARMOR_BOMB) + getarmor(head, ARMOR_BOMB))/4 // Now uses the average armor of all components
 	var/split = round(damage/4)
 	var/blocked = 0

@@ -37,3 +37,6 @@
 	logger.Log(LOG_CATEGORY_SUSPICIOUS_LOGIN, text)
 	if(access_log_mirror)
 		log_access(text)
+
+/proc/log_mentor(text)
+	GLOB.mentorlog.Add(text)
