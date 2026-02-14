@@ -58,7 +58,8 @@
 	name = "STS-35 frame"
 	desc = "An STS-35 frame. The finest in kraut space magic."
 	icon_state = "frame_orrifle"
-	resultvars = list(/obj/item/gun/projectile/automatic/sts35)
+	resultvars = list(/obj/item/gun/projectile/automatic/modular/batrifle/sts35)
 	gripvars = list(/obj/item/part/gun/modular/grip/black)
 	mechanismvar = /obj/item/part/gun/modular/mechanism/autorifle/determined
 	barrelvars = list(/obj/item/part/gun/modular/barrel/lrifle)
+	spawn_blacklisted = TRUE

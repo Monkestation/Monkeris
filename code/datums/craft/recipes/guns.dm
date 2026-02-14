@@ -118,6 +118,18 @@
 		list(QUALITY_ADHESIVE, 15, 70)
 	)
 
+/datum/craft_recipe/gun/ballpoint
+	name = "MS BR \"Ballpoint\""
+	result = /obj/item/gun/projectile/automatic/modular/batrifle/makeshift
+	steps = list(
+		list(CRAFT_MATERIAL, 10, MATERIAL_STEEL),
+		list(CRAFT_MATERIAL, 5, MATERIAL_WOOD),
+		list(QUALITY_SCREW_DRIVING, 10),
+		list(CRAFT_MATERIAL, 5, MATERIAL_PLASTIC),
+		list(QUALITY_HAMMERING, 10),
+		list(QUALITY_ADHESIVE, 15, 70)
+	)
+
 /datum/craft_recipe/gun/luty
 	name = "HM SMG .35 Auto \"Luty\""
 	result = /obj/item/gun/projectile/automatic/luty

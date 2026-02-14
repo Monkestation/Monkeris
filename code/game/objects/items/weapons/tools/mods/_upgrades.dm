@@ -194,16 +194,17 @@
 				if(!check)
 					to_chat(user, span_warning("The barrel does not fit the mechanism! The gun fits the following calibers: [english_list(MG.good_calibers, "None are suitable!", " and ", ", ", ".")]"))
 					return FALSE
-		// Caliber check for mechanism
-		if(istype(parent, /obj/item/part/gun/modular/mechanism))
+
+		// barrel check based on accepted_calibers
+		var/obj/item/part/gun/modular/ourpart = parent
+		if(LAZYLEN(ourpart.accepted_calibers))
 			if(MG.caliber)
-				var/obj/item/part/gun/modular/mechanism/M = parent
 				var/check = FALSE
-				for(var/i in M.accepted_calibers)
+				for(var/i in ourpart.accepted_calibers)
 					if(MG.caliber == i)
 						check = TRUE
 				if(!check)
-					to_chat(user, span_warning("The mechanism does not fit the barrel! The mechanism fits the following calibers: [english_list(M.accepted_calibers, "None are suitable!", " and ", ", ", ".")]"))
+					to_chat(user, span_warning("The [src] does not support this barrel! This part fits the following calibers: [english_list(ourpart.accepted_calibers, "None are suitable!", " and ", ", ", ".")]"))
 					return FALSE
 		// Checking if part is accepted
 		for(var/partPath in MG.required_parts)
@@ -403,7 +404,6 @@
 	if(weapon_upgrades[GUN_UPGRADE_RECOILBUILDUP])
 		G.recoil = G.recoil.modifyRating(_recoil_buildup = weapon_upgrades[GUN_UPGRADE_RECOILBUILDUP])
 
-
 	if(weapon_upgrades[GUN_UPGRADE_DNALOCK])
 		G.dna_compare_samples = TRUE
 		if(G.dna_lock_sample == "not_set")
@@ -445,6 +445,8 @@
 				M.verbs += /obj/item/gun/projectile/automatic/modular/proc/quick_fold // Grant the verb for folding stocks
 			if(weapon_upgrades[GUN_UPGRADE_BAYONET] && !(PARTMOD_BAYONET & M.spriteTagBans))
 				M.spriteTags |= PARTMOD_BAYONET
+			if(weapon_upgrades[GUN_UPGRADE_SILENCER] && !(PARTMOD_SILENCER & M.spriteTagBans))
+				M.spriteTags |= PARTMOD_SILENCER
 			if(weapon_upgrades[GUN_UPGRADE_DEFINE_GRIP])
 				M.grip_type = weapon_upgrades[GUN_UPGRADE_DEFINE_GRIP]
 			if(weapon_upgrades[GUN_UPGRADE_DEFINE_LOADER])

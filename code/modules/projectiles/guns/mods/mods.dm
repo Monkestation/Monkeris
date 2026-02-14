@@ -39,6 +39,8 @@
 	icon_state = "silencer"
 	rarity_value = 20
 
+	//if used on a modgun, it'll create a visible silencer
+	modular_overlay = "silencer_small"
 
 /obj/item/gun_upgrade/muzzle/silencer/New()
 	..()

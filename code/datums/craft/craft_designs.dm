@@ -195,13 +195,13 @@ Based on /datum/design of \code\datums\autolathe\autolathe_datums.dm
 /datum/design/makeshift/mechanism/autorifle/sharpshooter
 	name = "sharpshooter self-loading mechanism"
 	category = "self-loading mechanisms"
-	build_path = /obj/item/part/gun/modular/mechanism/autorifle/sharpshooter
+	build_path = /obj/item/part/gun/modular/mechanism/autorifle/tactical/sharpshooter
 	minimum_quality = 2
 
 /datum/design/makeshift/mechanism/autorifle/marksman
 	name = "marksman self-loading mechanism"
 	category = "self-loading mechanisms"
-	build_path = /obj/item/part/gun/modular/mechanism/autorifle/marksman
+	build_path = /obj/item/part/gun/modular/mechanism/autorifle/tactical/marksman
 	minimum_quality = 2
 
 //bolt-action mechanisms
