@@ -66,7 +66,7 @@
 	damage_multiplier = 1.3
 	penetration_multiplier = 0.25
 	init_recoil = RIFLE_RECOIL(1)
-
+	serial_type = "OR"
 
 //An inferior FS copy of the STS-35, sometimes seen in the hands of IH forces.
 /obj/item/gun/projectile/automatic/modular/batrifle/fs
@@ -74,6 +74,8 @@
 			Originally based on a design out of oberth, it lacks some of the refinement of the Republic's design."
 	gun_parts = list(/obj/item/part/gun/modular/mechanism/autorifle/tactical/sustain = 0, /obj/item/part/gun/modular/barrel/lrifle = 0, /obj/item/part/gun/modular/grip/rubber = 0, /obj/item/part/gun/modular/stock = 0)
 	init_recoil = RIFLE_RECOIL(1)
+	spawn_tags = SPAWN_TAG_FS_PROJECTILE
+	serial_type = "FS"
 
 //The classic and extremely dangerous long-range assassination option fielded by excelsior agents.
 /obj/item/gun/projectile/automatic/modular/batrifle/vintorez
@@ -84,6 +86,7 @@
 	penetration_multiplier = 0.35
 	damage_multiplier = 1.25
 	init_recoil = RIFLE_RECOIL(0.65)
+	serial_type = "Excelsior"
 
 //A cheap hand-made rifle. Has improved damage over the makeshift ak, but slow firerate and poor recoil control.
 /obj/item/gun/projectile/automatic/modular/batrifle/makeshift

@@ -28,7 +28,6 @@
 	gun_parts = list(/obj/item/part/gun/frame/kovacs = 1, /obj/item/part/gun/modular/grip/serb = 1, /obj/item/part/gun/modular/mechanism/autorifle/tactical/sharpshooter = 1, /obj/item/part/gun/modular/barrel/lrifle = 1)
 	serial_type = "SA"
 
-
 /obj/item/gun/projectile/kovacs/update_icon()
 	..()
 
