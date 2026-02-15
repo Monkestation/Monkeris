@@ -14,3 +14,22 @@
   - server: updated DB schema for library
   - rscadd: min/max age defines for characters
   - admin: Added a new library management verb
+2026-02-14:
+  Sun-Soaked:
+  - bugfix: modgun parts now improve max upgrade number as intended
+  - bugfix: modguns now properly regenerate their gunmod slots when scopes and bayonets
+      are removed.
+  - bugfix: certain modguns now have working inhands.
+  - bugfix: the ui no longer freaks out when you scope in on a gun which didn't spawn
+      with a scope
+  - bugfix: modguns no longer fail to clear their scope when it is removed
+  - bugfix: modular bolt-action rifles now actually appear ingame
+  - bugfix: innate gun part quality on modular guns now once again works
+  - rscadd: The crafting station can now produce bolt-action mechanisms, bayonets,
+      and scopes.
+  - rscadd: Scopes & Bayonets are now attachable to all rifle-sized modular weapons
+  - rscadd: adds a system to let non-gunpart mods apply visuals when applied to modguns
+  - rscadd: Modguns now have unique oldification behavior
+  Sun-Soaked, blackwolf602:
+  - rscadd: The Drozd is now a modular weapon.
+  - rscadd: The Drozd now has 2handing sprites.

@@ -91,6 +91,7 @@
 	reset_action_buttons()
 	overridedatum?.cycle() // then use an assignment sort
 	name = get_initial_name()
+	generate_guntags()
 
 /obj/item/gun/projectile/automatic/modular/update_icon() // V2
 	cut_overlays() // This is where the fun begins
@@ -98,7 +99,6 @@
 	// Determine base using the current stock status
 	var/iconstring = initial(icon_state)
 	itemstring = (PARTMOD_FRAME_SPRITE & spriteTags) ? ("_" + iconstring) : ("_" + grip_type)
-
 	// Define "-" tags
 	var/dashTag = ""
 	if((PARTMOD_FOLDING_STOCK & spriteTags) && (PARTMOD_FOLDING_STOCK & statusTags))
@@ -121,6 +121,10 @@
 			if(gun_part.part_itemstring && !(PARTMOD_FRAME_SPRITE & spriteTags)) // Part also wants to modify itemstring, and is allowed to
 				itemstring = "_" + gun_part.part_overlay + itemstring // Add their overlay name
 
+	for(var/obj/item/ourupgrade in item_upgrades)//find any non-gunpart item_upgrades with visuals to supply
+		if(ourupgrade.modular_overlay)
+			overlays += ourupgrade.modular_overlay + dashTag
+
 	if (ammo_magazine) // Warning! If a sprite is missing from the DMI despite being possible to insert ingame, it might have unforeseen consequences (no magazine showing up)
 		itemstring += "_full"
 		overlays += "mag_[ammo_magazine.mag_well][caliber]" + dashTag
@@ -128,12 +132,18 @@
 	if(wielded)
 		itemstring += "_doble" // Traditions are to be followed
 
+	//Killing the coder responsible for this entire situation
+	if((PARTMOD_BAYONET & spriteTags))
+		itemstring += "_bynt"
+
 	// Finally, we add the dashTag to the itemstring
 	itemstring += dashTag
 
 	icon_state = iconstring
 	wielded_item_state = itemstring // Hacky solution to a hacky system. Reere forgive us. V3 will fix this.
 	set_item_state(itemstring)
+
+	update_wear_icon()//finally, update our holder's inhands
 
 /obj/item/gun/projectile/automatic/modular/set_item_state(state, hands = TRUE, back = TRUE, onsuit = TRUE) // TODO: check why a billion procs call set_item_state with no state provided
 	if(!state)
@@ -282,7 +292,7 @@
 	if(zoom)
 		var/currentzoom = zoom_factors.Find(active_zoom_factor)
 		var/extra_damage
-		if(scope_damage_adds[currentzoom])
+		if(LAZYLEN(scope_damage_adds) && scope_damage_adds[currentzoom])
 			extra_damage = scope_damage_adds[currentzoom]
 		damage_multiplier += extra_damage
 

@@ -316,6 +316,9 @@
 	T.prefixes |= prefix
 
 /datum/component/item_upgrade/proc/apply_values_gun(obj/item/gun/G)
+	//duplicates certain upgrades from tool behavior
+	if(weapon_upgrades[UPGRADE_MAXUPGRADES])
+		G.max_upgrades += (weapon_upgrades[UPGRADE_MAXUPGRADES])
 	if(weapon_upgrades[GUN_UPGRADE_DAMAGEMOD_PLUS])
 		G.damage_multiplier += weapon_upgrades[GUN_UPGRADE_DAMAGEMOD_PLUS]
 	if(weapon_upgrades[GUN_UPGRADE_DAMAGE_MULT])
@@ -440,6 +443,8 @@
 			if(weapon_upgrades[GUN_UPGRADE_DEFINE_STOCK] && !(PARTMOD_FOLDING_STOCK & M.spriteTagBans))
 				M.spriteTags |= PARTMOD_FOLDING_STOCK // Adds the stock to the spriteTags
 				M.verbs += /obj/item/gun/projectile/automatic/modular/proc/quick_fold // Grant the verb for folding stocks
+			if(weapon_upgrades[GUN_UPGRADE_BAYONET] && !(PARTMOD_BAYONET & M.spriteTagBans))
+				M.spriteTags |= PARTMOD_BAYONET
 			if(weapon_upgrades[GUN_UPGRADE_DEFINE_GRIP])
 				M.grip_type = weapon_upgrades[GUN_UPGRADE_DEFINE_GRIP]
 			if(weapon_upgrades[GUN_UPGRADE_DEFINE_LOADER])

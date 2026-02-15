@@ -22,6 +22,7 @@
 	bad_type = /obj/item/gun/projectile/automatic/modular/mk58
 	gun_tags = list(GUN_SILENCABLE)
 	spriteTags = PARTMOD_SLIDE | PARTMOD_FRAME_SPRITE
+	spriteTagBans = PARTMOD_FOLDING_STOCK | PARTMOD_BAYONET
 
 	serial_type = "NT"
 

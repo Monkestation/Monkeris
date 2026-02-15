@@ -124,6 +124,11 @@ Based on /datum/design of \code\datums\autolathe\autolathe_datums.dm
 	category = "SMG mechanisms"
 	build_path = /obj/item/part/gun/modular/mechanism/smg
 
+/datum/design/makeshift/mechanism/smg
+	name = "high-caliber SMG mechanism"
+	category = "SMG mechanisms"
+	build_path = /obj/item/part/gun/modular/mechanism/smg/highcaliber
+
 // cheap mechanisms
 
 /datum/design/makeshift/mechanism/pistol/steel
@@ -198,6 +203,27 @@ Based on /datum/design of \code\datums\autolathe\autolathe_datums.dm
 	category = "self-loading mechanisms"
 	build_path = /obj/item/part/gun/modular/mechanism/autorifle/marksman
 	minimum_quality = 2
+
+//bolt-action mechanisms
+
+/datum/design/makeshift/mechanism/boltaction/junk
+	name = "handmade manual-action mechanism"
+	category = "bolt-action mechanisms"
+	build_path = /obj/item/part/gun/modular/mechanism/boltgun/junk
+	minimum_quality = 0
+
+/datum/design/makeshift/mechanism/boltaction
+	name = "manual-action mechanism"
+	category = "bolt-action mechanisms"
+	build_path = /obj/item/part/gun/modular/mechanism/boltgun
+	minimum_quality = 2
+
+/datum/design/makeshift/mechanism/boltaction/heavy
+	name = "heavy manual-action mechanism"
+	category = "bolt-action mechanisms"
+	build_path = /obj/item/part/gun/modular/mechanism/boltgun/heavy
+	minimum_quality = 3
+
 
 // .35
 
@@ -371,3 +397,28 @@ Based on /datum/design of \code\datums\autolathe\autolathe_datums.dm
 	minimum_quality = 0
 	// I dunno, it kinda meant to be affordable and a comodity since all amor you make with it is medicore.
 	// Probably could be changed to +1 but the average vaga would need to upgrade the lath at least with t2
+
+/datum/design/makeshift/bayonet_cheap
+	name = "cheap integrated bayonet"
+	build_path = /obj/item/part/gun/modular/bayonet/steel
+	quality = -1
+
+/datum/design/makeshift/bayonet
+	name = "integrated bayonet"
+	build_path = /obj/item/part/gun/modular/bayonet
+	minimum_quality = 0
+
+/datum/design/makeshift/scope
+	name = "small scope"
+	build_path = /obj/item/part/gun/modular/sights/scopesmall
+	minimum_quality = 1 //scopes have high skill input bc. they're challenging to make
+
+/datum/design/makeshift/scope/big
+	name = "large scope"
+	build_path = /obj/item/part/gun/modular/sights/scopebig
+	minimum_quality = 2
+
+/datum/design/makeshift/scope/custom
+	name = "adjustable sniper scope"
+	build_path = /obj/item/part/gun/modular/sights/customizable/scopeheavy
+	minimum_quality = 3

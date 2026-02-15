@@ -421,6 +421,18 @@
 				break
 			QDEL_NULL(trash_mod)
 
+/obj/item/gun/projectile/automatic/modular/make_old(low_quality_oldification)
+	.=..()
+	for(var/part_path in required_parts)
+		var/downgrade
+		if(prob(80))
+			downgrade = -1
+		else if(prob(25))
+			downgrade = -2
+		var/obj/item/part/gun/modular/gun_part = locate(part_path) in contents
+		if(gun_part && downgrade)
+			gun_part.set_quality(min(gun_part.old_quality + downgrade))
+
 /obj/item/ammo_casing/make_old(low_quality_oldification)
 	if(!low_quality_oldification)// reducing the materials otherwise is infeasible due to BYOND's
 		if(prob(90)) // incapability of restoring the initial value of a list typed var
