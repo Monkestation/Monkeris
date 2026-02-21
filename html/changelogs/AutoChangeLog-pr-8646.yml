@@ -1,0 +1,5 @@
+author: chickenish
+delete-after: true
+changes:
+  - code_imp: byond:// calls standard
+  - code_imp: null closing browse windows standard
