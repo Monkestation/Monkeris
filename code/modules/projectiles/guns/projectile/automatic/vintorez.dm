@@ -27,7 +27,7 @@
 		)
 	gun_parts = list(/obj/item/part/gun/frame/vintorez = 1, /obj/item/part/gun/modular/grip/excel = 1, /obj/item/part/gun/modular/mechanism/autorifle/tactical/marksman = 1, /obj/item/part/gun/modular/barrel/srifle = 1)
 	serial_type = "Excelsior"
-
+	spawn_blacklisted = TRUE
 
 /obj/item/gun/projectile/automatic/vintorez/update_icon()
 	..()
