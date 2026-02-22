@@ -17,7 +17,6 @@ import factionMoebius from '../assets/64px-Moebius.png';
 import factionTechnomancers from '../assets/64px-Technomancers.png';
 import { Window } from '../layouts';
 
-
 type LateJoinData = {
   playerName: string;
   roundDuration: string;
@@ -54,11 +53,13 @@ const DEPARTMENT_LOGOS: Record<string, string> = {
   'CEV Eris Command': factionCEVCommand,
   'Technomancer League': factionTechnomancers,
   'CEV Eris Civilian': factionCEVCivilians,
-
 };
 
 // Department color scheme - backgrounds and accents
-const DEPARTMENT_COLORS: Record<string, { bg: string; accent: string; button: string }> = {
+const DEPARTMENT_COLORS: Record<
+  string,
+  { bg: string; accent: string; button: string }
+> = {
   'CEV Eris Command': {
     bg: 'rgba(74, 144, 226, 0.25)',
     accent: 'rgba(74, 144, 226, 0.8)',
@@ -99,12 +100,12 @@ const DEPARTMENT_COLORS: Record<string, { bg: string; accent: string; button: st
     accent: 'rgba(149, 165, 166, 0.8)',
     button: 'rgba(149, 165, 166, 0.15)',
   },
-  'Offship': {
+  Offship: {
     bg: 'rgba(139, 69, 19, 0.25)',
     accent: 'rgba(139, 69, 19, 0.8)',
     button: 'rgba(139, 69, 19, 0.15)',
   },
-  'Silicon': {
+  Silicon: {
     bg: 'rgba(52, 152, 219, 0.25)',
     accent: 'rgba(52, 152, 219, 0.8)',
     button: 'rgba(52, 152, 219, 0.15)',
