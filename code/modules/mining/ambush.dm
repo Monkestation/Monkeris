@@ -129,6 +129,7 @@
 		if(!istype(burrow_turf)) // Try again with a smaller circle
 			radius--
 			continue
+		break
 	if(!istype(burrow_turf))  // Something wrong is happening
 		log_and_message_admins("Ambush controller failed to create a new burrow around ([ambush_loc.x], [ambush_loc.y], [ambush_loc.z]).")
 		return
