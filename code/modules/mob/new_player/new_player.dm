@@ -227,7 +227,11 @@
 				tgui_alert(src, "The server is full!", "Oh No!")
 				return TRUE
 
-		LateChoices()
+		// Detect if we should use TGUI or legacy browser
+		if(use_tgui_latejoin())
+			ui_interact(src)
+		else
+			LateChoices()  // Use legacy fallback
 
 	if(href_list["manifest"])
 		show_manifest(src, nano_state = GLOB.interactive_state)
@@ -312,6 +316,9 @@
 		return FALSE
 	if(jobban_isbanned(src.ckey,rank))
 		return FALSE
+	// Check setup restrictions (e.g., Church jobs require specific setup options)
+	if(client && client.prefs && job.is_restricted(client.prefs))
+		return FALSE
 	return TRUE
 
 /mob/new_player/proc/AttemptLateSpawn(rank, spawning_at)
@@ -373,6 +380,167 @@
 	log_manifest(character.mind.key, character.mind, character, latejoin = TRUE)
 
 	qdel(src)
+
+// TGUI Detection - check if we should use TGUI or fallback to legacy browser
+/mob/new_player/proc/use_tgui_latejoin()
+	// Check if client exists
+	if(!client)
+		return FALSE
+
+	// Check if TGUI subsystem exists
+	if(!SStgui)
+		return FALSE
+
+	// Try to get a window from the pool to verify availability
+	var/datum/tgui_window/window = SStgui.request_pooled_window(src)
+	if(!window)
+		// Pool exhausted or unavailable - use fallback
+		to_chat(src, span_warning("TGUI window pool exhausted, using legacy interface."))
+		return FALSE
+
+	// Return window to pool (we were just checking)
+	window.release_lock()
+
+	return TRUE
+
+// TGUI Interface - modern UI for job selection
+/mob/new_player/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "LateJoin")
+		ui.set_autoupdate(FALSE) // Disable autoupdate to prevent dexterity checks
+		ui.open()
+
+/mob/new_player/ui_state(mob/user)
+	return GLOB.always_state  // No distance/access restrictions for new players
+
+/mob/new_player/ui_status(mob/user, datum/ui_state/state)
+	// Always allow interaction for new_player, skip all checks
+	return UI_INTERACTIVE
+
+/mob/new_player/ui_data(mob/user)
+	var/list/data = list()
+
+	// Player info
+	data["playerName"] = client.prefs.be_random_name ? "friend" : client.prefs.real_name
+
+	// Round info
+	data["roundDuration"] = DisplayTimeText(world.time - SSticker.round_start_time)
+
+	// Evacuation status
+	data["isEvacuating"] = evacuation_controller.is_evacuating()
+	data["isEvacuated"] = evacuation_controller.has_evacuated()
+
+	// Build job list grouped by department
+	var/list/departments = list()
+
+	for(var/datum/department/dept in SSjob.departments)
+		var/list/dept_data = list(
+			"name" = dept.name,
+			"jobs" = list()
+		)
+
+		for(var/datum/job/job in dept.jobs)
+			// Count active players
+			var/active = 0
+			for(var/mob/M in GLOB.player_list)
+				if(M.mind && M.client && M.mind.assigned_role == job.title)
+					if(M.client.inactivity <= 10 MINUTES)
+						active++
+
+			// Check availability (including experience requirements)
+			var/is_available = IsJobAvailable(job.title)
+
+			var/list/job_data = list(
+				"title" = job.title,
+				"currentPositions" = job.current_positions,
+				"totalPositions" = job.total_positions,  // -1 = unlimited
+				"activePlayers" = active,
+				"expRequired" = job.exp_requirements,
+				"expType" = job.exp_required_type,
+				"department" = job.department,
+				"available" = is_available,
+				"description" = job.description,
+				"supervisors" = job.supervisors,
+			)
+
+			dept_data["jobs"] += list(job_data)
+
+		if(length(dept_data["jobs"]))
+			departments += list(dept_data)
+
+	data["departments"] = departments
+
+	return data
+
+/mob/new_player/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+	// Don't call parent - we don't need the default checks for new_player
+	// Parent would check UI_INTERACTIVE status which may fail for new_player
+
+	switch(action)
+		if("select_job")
+			var/job_title = params["job"]
+			if(!job_title)
+				return FALSE
+
+			// Basic validation checks (copied from AttemptLateSpawn)
+			if(!SSticker.IsRoundInProgress())
+				to_chat(src, span_red("The round is either not ready, or has already finished..."))
+				return TRUE
+
+			if(!GLOB.enter_allowed)
+				to_chat(src, span_notice("There is an administrative lock on entering the game!"))
+				return TRUE
+
+			if(!IsJobAvailable(job_title))
+				to_chat(src, span_warning("[job_title] is not available. Please try another."))
+				return TRUE
+
+			// Spawn the character
+			spawning = 1
+			close_spawn_windows()
+
+			SSjob.AssignRole(src, job_title, 1)
+			var/datum/job/job = src.mind.assigned_job
+			var/mob/living/character = create_character()
+
+			GLOB.joined_player_list += character.ckey
+
+			// Handle AI special case
+			if(job_title == "AI")
+				character = character.AIize(move=0)
+				SSticker.minds += character.mind
+				var/obj/structure/AIcore/deactivated/C = empty_playable_ai_cores[1]
+				empty_playable_ai_cores -= C
+				character.forceMove(C.loc)
+				AnnounceArrival(character, job_title, "has been downloaded to the empty core in \the [character.loc.loc]")
+				log_manifest(character.mind.key, character.mind, character, latejoin = TRUE)
+				qdel(C)
+				qdel(src)
+				return TRUE
+
+			// Normal spawn
+			var/datum/spawnpoint/spawnpoint = SSjob.get_spawnpoint_for(character.client, job_title, late = TRUE)
+			spawnpoint.put_mob(character)
+			character = SSjob.EquipRank(character, job_title)
+			character.lastarea = get_area(loc)
+
+			if(SSjob.ShouldCreateRecords(job.title))
+				if(character.mind.assigned_role != "Robot")
+					CreateModularRecord(character)
+					data_core.manifest_inject(character)
+
+			AnnounceArrival(character, character.mind.assigned_role, spawnpoint.message)
+			log_manifest(character.mind.key, character.mind, character, latejoin = TRUE)
+
+			qdel(src)
+			return TRUE
+
+		if("close")
+			ui.close()
+			return TRUE
+
+	return FALSE
 
 /mob/new_player/proc/LateChoices()
 	var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name
