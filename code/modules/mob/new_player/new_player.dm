@@ -324,14 +324,18 @@
 /mob/new_player/proc/AttemptLateSpawn(rank, spawning_at)
 	if(src != usr)
 		return FALSE
+	return LateSpawn(rank)
+
+// Shared late spawn logic (used by both legacy Topic and TGUI)
+/mob/new_player/proc/LateSpawn(rank)
 	if(!SSticker.IsRoundInProgress())
-		to_chat(usr, span_red("The round is either not ready, or has already finished..."))
+		to_chat(src, span_red("The round is either not ready, or has already finished..."))
 		return FALSE
 	if(!GLOB.enter_allowed)
-		to_chat(usr, span_notice("There is an administrative lock on entering the game!"))
+		to_chat(src, span_notice("There is an administrative lock on entering the game!"))
 		return FALSE
 	if(!IsJobAvailable(rank))
-		src << alert("[rank] is not available. Please try another.")
+		to_chat(src, span_warning("[rank] is not available. Please try another."))
 		return FALSE
 
 	spawning = 1
@@ -483,57 +487,8 @@
 			if(!job_title)
 				return FALSE
 
-			// Basic validation checks (copied from AttemptLateSpawn)
-			if(!SSticker.IsRoundInProgress())
-				to_chat(src, span_red("The round is either not ready, or has already finished..."))
-				return TRUE
-
-			if(!GLOB.enter_allowed)
-				to_chat(src, span_notice("There is an administrative lock on entering the game!"))
-				return TRUE
-
-			if(!IsJobAvailable(job_title))
-				to_chat(src, span_warning("[job_title] is not available. Please try another."))
-				return TRUE
-
-			// Spawn the character
-			spawning = 1
-			close_spawn_windows()
-
-			SSjob.AssignRole(src, job_title, 1)
-			var/datum/job/job = src.mind.assigned_job
-			var/mob/living/character = create_character()
-
-			GLOB.joined_player_list += character.ckey
-
-			// Handle AI special case
-			if(job_title == "AI")
-				character = character.AIize(move=0)
-				SSticker.minds += character.mind
-				var/obj/structure/AIcore/deactivated/C = empty_playable_ai_cores[1]
-				empty_playable_ai_cores -= C
-				character.forceMove(C.loc)
-				AnnounceArrival(character, job_title, "has been downloaded to the empty core in \the [character.loc.loc]")
-				log_manifest(character.mind.key, character.mind, character, latejoin = TRUE)
-				qdel(C)
-				qdel(src)
-				return TRUE
-
-			// Normal spawn
-			var/datum/spawnpoint/spawnpoint = SSjob.get_spawnpoint_for(character.client, job_title, late = TRUE)
-			spawnpoint.put_mob(character)
-			character = SSjob.EquipRank(character, job_title)
-			character.lastarea = get_area(loc)
-
-			if(SSjob.ShouldCreateRecords(job.title))
-				if(character.mind.assigned_role != "Robot")
-					CreateModularRecord(character)
-					data_core.manifest_inject(character)
-
-			AnnounceArrival(character, character.mind.assigned_role, spawnpoint.message)
-			log_manifest(character.mind.key, character.mind, character, latejoin = TRUE)
-
-			qdel(src)
+			// Use shared spawn logic
+			LateSpawn(job_title)
 			return TRUE
 
 		if("close")

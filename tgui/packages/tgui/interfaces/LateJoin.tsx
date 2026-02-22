@@ -8,7 +8,15 @@ import {
   Stack,
 } from 'tgui-core/components';
 
+import factionCEVCommand from '../assets/50px-Command.png';
+import factionNeotheology from '../assets/54px-NeoTheology.png';
+import factionCEVCivilians from '../assets/54px-Ship.png';
+import factionGuild from '../assets/64px-Guild.png';
+import factionIronhammer from '../assets/64px-Ironhammer.png';
+import factionMoebius from '../assets/64px-Moebius.png';
+import factionTechnomancers from '../assets/64px-Technomancers.png';
 import { Window } from '../layouts';
+
 
 type LateJoinData = {
   playerName: string;
@@ -36,6 +44,19 @@ type Job = {
   supervisors: string;
 };
 
+// Department logos
+const DEPARTMENT_LOGOS: Record<string, string> = {
+  'Ironhammer Mercenary Company': factionIronhammer,
+  'Moebius Labs: Medical Division': factionMoebius,
+  'Moebius Labs: Research Division': factionMoebius,
+  'Asters Merchant Guild': factionGuild,
+  'Church of NeoTheology': factionNeotheology,
+  'CEV Eris Command': factionCEVCommand,
+  'Technomancer League': factionTechnomancers,
+  'CEV Eris Civilian': factionCEVCivilians,
+
+};
+
 // Department color scheme - backgrounds and accents
 const DEPARTMENT_COLORS: Record<string, { bg: string; accent: string; button: string }> = {
   'CEV Eris Command': {
@@ -54,9 +75,9 @@ const DEPARTMENT_COLORS: Record<string, { bg: string; accent: string; button: st
     button: 'rgba(243, 156, 18, 0.15)',
   },
   'Moebius Labs: Medical Division': {
-    bg: 'rgba(80, 200, 120, 0.25)',
-    accent: 'rgba(80, 200, 120, 0.8)',
-    button: 'rgba(80, 200, 120, 0.15)',
+    bg: 'rgba(100, 200, 255, 0.25)',
+    accent: 'rgba(100, 200, 255, 0.8)',
+    button: 'rgba(100, 200, 255, 0.15)',
   },
   'Moebius Labs: Research Division': {
     bg: 'rgba(155, 89, 182, 0.25)',
@@ -164,16 +185,42 @@ export const LateJoin = (props: any) => {
                               padding: '0.5em',
                             }}
                           >
-                            <Box
+                            <Flex
                               mb={1}
+                              align="center"
                               style={{
                                 borderBottom: `2px solid ${deptColors.accent}`,
                                 paddingBottom: '4px',
-                                fontWeight: 'bold',
+                                minHeight: '40px',
                               }}
                             >
-                              {dept.name}
-                            </Box>
+                              <Flex.Item
+                                grow={1}
+                                style={{
+                                  fontWeight: 'bold',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                {dept.name}
+                              </Flex.Item>
+                              {DEPARTMENT_LOGOS[dept.name] ? (
+                                <Flex.Item>
+                                  <img
+                                    src={DEPARTMENT_LOGOS[dept.name]}
+                                    style={{
+                                      width: '32px',
+                                      height: '32px',
+                                      objectFit: 'contain',
+                                      opacity: 0.8,
+                                    }}
+                                    alt={dept.name}
+                                  />
+                                </Flex.Item>
+                              ) : (
+                                <Flex.Item style={{ width: '32px' }} />
+                              )}
+                            </Flex>
                             <Stack vertical>
                               {dept.jobs.map((job) => {
                                 const isAvailable = job.available;
