@@ -41,6 +41,7 @@
 	else
 		output += "<a href='byond://?src=[REF(src)];manifest=1'>View the Crew Manifest</A><br><br>"
 		output += "<p><a href='byond://?src=[REF(src)];late_join=1'>Join Game!</A></p>"
+		output += "<p><a href='byond://?src=[REF(src)];late_join_legacy=1'>Join Game! (Legacy UI)</A></p>"
 
 	output += "<p><a href='byond://?src=[REF(src)];observe=1'>Observe</A></p>"
 
@@ -172,7 +173,9 @@
 
 			return 1
 
-	if(href_list["late_join"])
+	if(href_list["late_join"] || href_list["late_join_legacy"])
+		var/force_legacy = href_list["late_join_legacy"] ? TRUE : FALSE
+
 		if(!SSticker.IsRoundInProgress())
 			to_chat(usr, span_red("The round is either not ready, or has already finished..."))
 			return
@@ -227,11 +230,13 @@
 				tgui_alert(src, "The server is full!", "Oh No!")
 				return TRUE
 
-		// Detect if we should use TGUI or legacy browser
-		if(use_tgui_latejoin())
-			ui_interact(src)
+		// Choose UI based on button clicked or auto-detection
+		if(force_legacy)
+			LateChoices()  // Force legacy UI
+		else if(use_tgui_latejoin())
+			ui_interact(src)  // Try TGUI first
 		else
-			LateChoices()  // Use legacy fallback
+			LateChoices()  // Fallback to legacy
 
 	if(href_list["manifest"])
 		show_manifest(src, nano_state = GLOB.interactive_state)
