@@ -178,6 +178,19 @@ var/list/restricted_camera_networks = list(NETWORK_MERCENARY, "Secret")
 //AUTOLATHE
 #define SANITIZE_LATHE_COST(n) round(n * mat_efficiency, 0.01)
 
+//AUTOLATHE WATERMARKS
+//stock tier watermarks (four and five share a tier)
+#define WATERMARK_TIERONE "extensive fabrication defects"
+#define WATERMARK_TIERTWO "lathe-machined components"
+#define WATERMARK_TIERTHREE "high-precision lathe machining"
+#define WATERMARK_TIERFOUR "unnaturally-perfect printed components"
+
+//unique watermarks(for faction benches)
+#define WATERMARK_ARTIST "subtle hand-lathed imperfections" //this could eventually be used to spot counterfeits
+#define WATERMARK_ORGANFAB "biomechanical protein extrusion"
+#define WATERMARK_BIO_NT "regular biomass deposition"
+#define WATERMARK_TECHNO "compressed matter foaming"
+
 //EOTP
 #define ARMAMENTS "Armaments"
 #define ALERT "Antag Alert"
@@ -186,3 +199,4 @@ var/list/restricted_camera_networks = list(NETWORK_MERCENARY, "Secret")
 #define STAT_BUFF "Stat Buff"
 #define MATERIAL_REWARD "Materials"
 #define ENERGY_REWARD "Energy"
+

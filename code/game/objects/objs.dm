@@ -20,6 +20,8 @@
 	/// The vertical pixel offset applied when the object is anchored on a tile with table
 	/// Ignored when set to 0 - to avoid shifting directional wall-mounted objects above tables
 	var/anchored_tabletop_offset = 0
+	///if set, this object was constructed by a lathe. the information stored in the define tells us which lathe it was
+	var/watermark
 
 /obj/Initialize(mapload)
 	. = ..()

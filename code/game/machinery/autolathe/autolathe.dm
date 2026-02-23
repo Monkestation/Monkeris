@@ -90,6 +90,13 @@
 	var/list/saved_designs = list()
 	var/uses_stat = FALSE
 
+	///If this autolathe should watermark objects they create
+	var/watermark_enabled = TRUE
+	///define associated with this autolathe, placed on objects it creates
+	var/given_watermark = WATERMARK_TIERONE
+	///If true, watermark will be determined dynamically on refreshparts() by the quality of the autolathe's manipulator
+	var/stock_watermarks = TRUE
+
 /obj/machinery/autolathe/Initialize()
 	. = ..()
 	wires = new(src)
@@ -918,6 +925,18 @@
 		man_amount++
 	man_rating -= man_amount
 	max_quality = man_rating
+
+	//if stock-based watermark is enabled, scale watermark on manip pwr
+	if(watermark_enabled && stock_watermarks)
+		var/new_watermark = WATERMARK_TIERONE
+		switch(man_rating)
+			if(2)
+				new_watermark = WATERMARK_TIERTWO
+			if(3)
+				new_watermark = WATERMARK_TIERTHREE
+			if(4 to 6)
+				new_watermark = WATERMARK_TIERFOUR
+		given_watermark = new_watermark
 
 	var/las_rating = 0
 	var/las_amount = 0
