@@ -1,0 +1,8 @@
+author: blackwolf602
+delete-after: true
+changes:
+  - rscadd: kampfer suit
+  - rscadd: jager suit
+  - rscadd: fuhrer suit
+  - balance: reduces spiders legs to crab meat from 3 to 1 when cut. (I set it 
+      too high originally)
