@@ -11288,7 +11288,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/structure/dispenser,
+/obj/structure/tank_dispenser,
 /turf/floor/tiled/dark/gray_platform,
 /area/eris/maintenance/junk)
 "aBF" = (
@@ -12577,7 +12577,7 @@
 /turf/floor/tiled/dark/danger,
 /area/eris/engineering/atmos)
 "aFg" = (
-/obj/structure/dispenser/plasma,
+/obj/structure/tank_dispenser/plasma,
 /obj/structure/sign/faction/technomancers{
 	pixel_y = 32
 	},
@@ -30172,7 +30172,7 @@
 /turf/floor/tiled/steel,
 /area/eris/command/teleporter)
 "bwg" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_dispenser/oxygen,
 /turf/floor/tiled/steel,
 /area/eris/command/teleporter)
 "bwh" = (
@@ -47218,7 +47218,7 @@
 /turf/floor/tiled/white/gray_platform,
 /area/eris/rnd/mixing)
 "ckT" = (
-/obj/structure/dispenser,
+/obj/structure/tank_dispenser,
 /obj/item/device/radio/intercom{
 	dir = 4;
 	pixel_x = -22
@@ -51642,7 +51642,7 @@
 /turf/open,
 /area/eris/quartermaster/storage)
 "cwQ" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_dispenser/oxygen,
 /obj/machinery/firealarm{
 	pixel_y = 28
 	},
@@ -52076,7 +52076,7 @@
 /turf/floor/tiled/steel/gray_perforated,
 /area/eris/hallway/side/cryo)
 "cxO" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_dispenser/oxygen,
 /turf/floor/tiled/techmaint,
 /area/eris/maintenance/oldtele)
 "cxP" = (
@@ -53276,7 +53276,7 @@
 /turf/open,
 /area/eris/quartermaster/storage)
 "cAJ" = (
-/obj/structure/dispenser,
+/obj/structure/tank_dispenser,
 /turf/floor/tiled/steel/danger,
 /area/eris/quartermaster/storage)
 "cAK" = (
@@ -57169,7 +57169,7 @@
 /turf/floor/plating/under,
 /area/eris/maintenance/section2deck2starboard)
 "cKH" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_dispenser/oxygen,
 /obj/structure/sign/faction/technomancers{
 	pixel_y = 32
 	},
@@ -57409,7 +57409,7 @@
 /turf/wall/low/with_glass/smart,
 /area/eris/hallway/main/section4)
 "cLp" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_dispenser/oxygen,
 /turf/floor/tiled/steel/gray_platform,
 /area/eris/hallway/main/section4)
 "cLq" = (
@@ -68870,7 +68870,7 @@
 /turf/floor/plating/under,
 /area/eris/maintenance/section2deck2starboard)
 "dnz" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_dispenser/oxygen,
 /turf/floor/tiled/white/gray_platform,
 /area/eris/medical/medeva)
 "dnA" = (
@@ -72055,7 +72055,7 @@
 /turf/floor/tiled/white/brown_perforated,
 /area/eris/medical/medbay/uppercor)
 "dvp" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_dispenser/oxygen,
 /obj/machinery/status_display{
 	pixel_x = -32
 	},
@@ -83271,7 +83271,7 @@
 /turf/floor/tiled/steel/gray_platform,
 /area/eris/hallway/side/section3starboard)
 "dZg" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_dispenser/oxygen,
 /turf/floor/tiled/steel/gray_platform,
 /area/eris/hallway/side/section3starboard)
 "dZh" = (
@@ -83434,7 +83434,7 @@
 /turf/floor/tiled/steel,
 /area/eris/hallway/side/section3starboard)
 "dZE" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_dispenser/oxygen,
 /turf/floor/tiled/steel/gray_platform,
 /area/eris/crew_quarters/pubeva)
 "dZF" = (
@@ -88923,7 +88923,7 @@
 	},
 /area/shuttle/research/station)
 "enw" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_dispenser/oxygen,
 /turf/shuttle/floor/science{
 	icon_state = "10,5"
 	},
@@ -96693,7 +96693,7 @@
 /turf/floor/tiled/steel/techfloor,
 /area/eris/engineering/propulsion/right)
 "eKM" = (
-/obj/structure/dispenser,
+/obj/structure/tank_dispenser,
 /turf/shuttle/floor/mining{
 	icon_state = "5,21"
 	},

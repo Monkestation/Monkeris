@@ -2150,7 +2150,7 @@
 /turf/floor/tiled,
 /area/map_template/hydrobase/station/processing)
 "fu" = (
-/obj/structure/dispenser/oxygen,
+/obj/structure/tank_dispenser/oxygen,
 /obj/structure/catwalk,
 /turf/floor/alium,
 /area/map_template/hydrobase/station/processing)

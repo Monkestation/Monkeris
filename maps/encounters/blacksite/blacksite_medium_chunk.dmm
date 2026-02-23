@@ -839,7 +839,7 @@
 /turf/template_noop,
 /area/template_noop)
 "rN" = (
-/obj/structure/dispenser,
+/obj/structure/tank_dispenser,
 /turf/floor/tiled/dark/brown_perforated,
 /area/outpost/blacksite/medium)
 "rQ" = (
