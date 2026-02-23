@@ -318,6 +318,11 @@
 	sound_env = SMALL_SOFTFLOOR
 	area_light_color = COLOR_LIGHTING_CREW_SOFT
 
+/area/eris/command/comm
+	name = "\improper Command - Comms Officer's Office"
+	icon_state = "head_quarters"
+	sound_env = SMALL_SOFTFLOOR
+
 /area/eris/command/meo
 	name = "\improper Research - MEO's Office"
 	icon_state = "head_quarters"
