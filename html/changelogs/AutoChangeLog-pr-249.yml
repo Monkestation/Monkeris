@@ -1,0 +1,8 @@
+author: Sun-Soaked
+delete-after: true
+changes:
+  - rscadd: The ballpoint, a makeshift semi-automatic rifle
+  - rscadd: Modular versions of the STS-35, Kovacs, and Vintorez battle rifles
+  - rscadd: Modgun silencers
+  - rscadd: The MK58 now has silencer sprites
+  - rscadd: The drozd and MK58 now have bayonet sprites
