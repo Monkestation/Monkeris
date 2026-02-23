@@ -4,11 +4,6 @@ GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 #ifdef USE_CUSTOM_ERROR_HANDLER
 #define ERROR_USEFUL_LEN 2
 
-var/regex/stack_workaround = regex("[WORKAROUND_IDENTIFIER](.+?)[WORKAROUND_IDENTIFIER]")
-var/list/error_last_seen = list()
-var/list/error_cooldown = list() /* Error_cooldown items will either be positive(cooldown time) or negative(silenced error)
-											If negative, starts at -1, and goes down by 1 each time that error gets skipped*/
-
 /world/Error(exception/E, datum/e_src)
 	GLOB.total_runtimes++
 
@@ -26,11 +21,16 @@ var/list/error_cooldown = list() /* Error_cooldown items will either be positive
 
 	else if(copytext(E.name, 1, 18) == "Out of resources!")//18 == length() of that string + 1
 		log_world("BYOND out of memory. Restarting ([E?.file]:[E?.line])")
+		// SSplexora.notify_shutdown(PLEXORA_SHUTDOWN_KILLDD)
 		TgsEndProcess()
 		. = ..()
 		Reboot(reason = 1)
 		return
 
+	var/static/regex/stack_workaround = regex("[WORKAROUND_IDENTIFIER](.+?)[WORKAROUND_IDENTIFIER]")
+	var/static/list/error_last_seen = list()
+	var/static/list/error_cooldown = list() /* Error_cooldown items will either be positive(cooldown time) or negative(silenced error)
+												If negative, starts at -1, and goes down by 1 each time that error gets skipped*/
 
 	if(!error_last_seen) // A runtime is occurring too early in start-up initialization
 		return ..()
@@ -38,7 +38,7 @@ var/list/error_cooldown = list() /* Error_cooldown items will either be positive
 	if(!islist(error_last_seen))
 		return ..() //how the fuck?
 
-	if(stack_workaround?.Find(E.name))
+	if(stack_workaround.Find(E.name))
 		var/list/data = json_decode(stack_workaround.group[1])
 		E.file = data[1]
 		E.line = data[2]
@@ -90,7 +90,7 @@ var/list/error_cooldown = list() /* Error_cooldown items will either be positive
 			error_cooldown[erroruid] = 0
 			if(skipcount > 0)
 				SEND_TEXT(world.log, "\[[time_stamp()]] Skipped [skipcount] runtimes in [E.file],[E.line].")
-				GLOB.error_cache.logError(E, skipCount = skipcount)
+				GLOB.error_cache.log_error(E, skip_count = skipcount)
 
 	error_last_seen[erroruid] = world.time
 	error_cooldown[erroruid] = cooldown
@@ -139,7 +139,7 @@ var/list/error_cooldown = list() /* Error_cooldown items will either be positive
 	if(silencing)
 		desclines += "  (This error will now be silenced for [DisplayTimeText(configured_error_silence_time)])"
 	if(GLOB.error_cache)
-		GLOB.error_cache.logError(E, desclines)
+		GLOB.error_cache.log_error(E, desclines)
 
 	var/main_line = "\[[time_stamp()]] Runtime in [E.file],[E.line]: [E]"
 	SEND_TEXT(world.log, main_line)
@@ -162,6 +162,7 @@ var/list/error_cooldown = list() /* Error_cooldown items will either be positive
 		"name" = "[E.name]",
 		"desc" = "[E.desc]"
 	))
+	send_to_glitchtip(E)
 #endif
 
 #undef ERROR_USEFUL_LEN

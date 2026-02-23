@@ -386,6 +386,11 @@ CONFIG_ERRORS_RUNTIME
 ##How long to wait between messaging admins about occurences of a unique error
 #ERROR_MSG_DELAY 50
 
+## Error reporting
+# Your Sentry/Glitchtip DSN url
+#GLITCHTIP_DSN
+# Environment this is running in, "production", "development" and "testing" are most common
+#GLITCHTIP_ENVIRONMENT development
 
 ## Uncomment to allow admins with +DEBUG to start the byond-tracy profiler during the round.
 #ALLOW_TRACY_START

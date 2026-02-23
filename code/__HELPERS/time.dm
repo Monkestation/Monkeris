@@ -42,6 +42,11 @@ var/next_station_date_change = 1 DAYS
 	var/time_string = time2text(world.timeofday, format)
 	return show_ds ? "[time_string]:[world.timeofday % 10]" : time_string
 
+/proc/time_stamp_metric()
+	var/date_portion = time2text(world.timeofday, "YYYY-MM-DD")
+	var/time_portion = time2text(world.timeofday, "hh:mm:ss")
+	return "[date_portion]T[time_portion]"
+
 //Returns the world time in english
 /proc/worldtime2text(time = world.time, timeshift = 1)
 	if(!roundstart_hour) roundstart_hour = rand(0, 23)
