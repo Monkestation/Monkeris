@@ -597,6 +597,15 @@
 /obj/item/clothing/suit/radiation
 	rarity_value = 36.1111
 
+/obj/item/clothing/suit/storage/toggle/robe/kampfer
+	rarity_value = 18.3333
+
+/obj/item/clothing/suit/storage/toggle/robe/jager
+	rarity_value = 18.3333
+
+/obj/item/clothing/suit/storage/toggle/robe/fuhrer
+	rarity_value = 18.3333
+
 /obj/item/clothing/mask/chameleon
 	rarity_value = 50
 
