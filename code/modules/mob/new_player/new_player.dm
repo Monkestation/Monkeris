@@ -9,6 +9,8 @@
 	var/totalPlayers = 0
 	var/totalPlayersReady = 0
 	var/datum/browser/panel
+	/// Track if we've shown the Ctrl+Click tip
+	var/shown_ctrl_tip = FALSE
 	universal_speak = 1
 
 	invisibility = 101
@@ -40,8 +42,7 @@
 
 	else
 		output += "<a href='byond://?src=[REF(src)];manifest=1'>View the Crew Manifest</A><br><br>"
-		output += "<p><a href='byond://?src=[REF(src)];late_join=1'>Join Game!</A></p>"
-		output += "<p><a href='byond://?src=[REF(src)];late_join_legacy=1'>Join Game! (Legacy UI)</A></p>"
+		output += "<p><a href='byond://?src=[REF(src)];late_join=1' onclick='var e = window.event || event; if(e && e.ctrlKey) { window.location=\"byond://?src=[REF(src)];late_join=1;force_legacy=1\"; return false; } return true;'>Join Game!</A> "
 
 	output += "<p><a href='byond://?src=[REF(src)];observe=1'>Observe</A></p>"
 
@@ -173,8 +174,9 @@
 
 			return 1
 
-	if(href_list["late_join"] || href_list["late_join_legacy"])
-		var/force_legacy = href_list["late_join_legacy"] ? TRUE : FALSE
+	if(href_list["late_join"])
+		// Ctrl+Click forces legacy UI
+		var/force_legacy = href_list["force_legacy"] ? TRUE : FALSE
 
 		if(!SSticker.IsRoundInProgress())
 			to_chat(usr, span_red("The round is either not ready, or has already finished..."))
@@ -231,9 +233,11 @@
 				return TRUE
 
 		// Choose UI based on button clicked or auto-detection
-		if(force_legacy)
-			LateChoices()  // Force legacy UI
-		else if(use_tgui_latejoin())
+		if(!force_legacy && use_tgui_latejoin())
+			// Show tip once about Ctrl+Click
+			if(!shown_ctrl_tip)
+				shown_ctrl_tip = TRUE
+				to_chat(src, span_notice("Tip: You can use Ctrl+Click on 'Join Game!' to open the legacy interface, if TGUI menu does not show."))
 			ui_interact(src)  // Try TGUI first
 		else
 			LateChoices()  // Fallback to legacy
