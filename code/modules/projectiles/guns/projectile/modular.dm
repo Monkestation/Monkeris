@@ -91,6 +91,7 @@
 	reset_action_buttons()
 	overridedatum?.cycle() // then use an assignment sort
 	name = get_initial_name()
+	silencer_check()
 	generate_guntags()
 
 /obj/item/gun/projectile/automatic/modular/update_icon() // V2
@@ -112,7 +113,9 @@
 	for(var/part_path in required_parts)
 		var/obj/item/part/gun/modular/gun_part = locate(part_path) in contents
 		if(gun_part && gun_part.part_overlay) // Safety check
-
+			if(istype(gun_part, /obj/item/part/gun/modular/barrel))
+				if((PARTMOD_SILENCER & spriteTags) && (PARTMOD_SILENCER_HIDES_BARREL & spriteTags))
+					continue //no barrel sprite if silencer hides it
 			if(gun_part.needs_grip_type) // Will be replaced with a more modular system once V3 comes
 				overlays += gun_part.part_overlay + "_" + grip_type + dashTag
 			else
@@ -295,4 +298,20 @@
 		if(LAZYLEN(scope_damage_adds) && scope_damage_adds[currentzoom])
 			extra_damage = scope_damage_adds[currentzoom]
 		damage_multiplier += extra_damage
+
+///checks if we currently have a barrel and a silencer. If we have a silencer and no barrel, drop our silencer.
+/obj/item/gun/projectile/automatic/modular/proc/silencer_check()
+	var/check
+	var/obj/item/part/gun/modular/silencer/oursilencer
+
+	for(var/part_path in required_parts)//look in our contents for our barrel & silencer
+		var/obj/item/part/gun/modular/gun_part = locate(part_path) in contents
+		if(istype(gun_part, /obj/item/part/gun/modular/silencer))//we have a silencer!
+			oursilencer = gun_part
+		if(istype(gun_part, /obj/item/part/gun/modular/barrel))//we have a barrel!
+			check = TRUE
+
+	if(oursilencer && !check)//if we have a silencer, did we also find a barrel?
+		SEND_SIGNAL_OLD(oursilencer, COMSIG_REMOVE, src)//if not, get outta here
+
 

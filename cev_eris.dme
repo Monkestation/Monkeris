@@ -2631,6 +2631,7 @@
 #include "code\modules\projectiles\guns\projectile\battle_rifle\levergun.dm"
 #include "code\modules\projectiles\guns\projectile\modular\interactions.dm"
 #include "code\modules\projectiles\guns\projectile\modular\modular_AK.dm"
+#include "code\modules\projectiles\guns\projectile\modular\modular_batrifle.dm"
 #include "code\modules\projectiles\guns\projectile\modular\modular_bolt.dm"
 #include "code\modules\projectiles\guns\projectile\modular\modular_drozd.dm"
 #include "code\modules\projectiles\guns\projectile\modular\modular_MK58.dm"

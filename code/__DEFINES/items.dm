@@ -41,6 +41,8 @@
 #define PARTMOD_SLIDE 2
 #define PARTMOD_FRAME_SPRITE 4 // Defines whether grips or frames determine the inhands, TODO: remove this when V3 comes
 #define PARTMOD_BAYONET 8
+#define PARTMOD_SILENCER 16
+#define PARTMOD_SILENCER_HIDES_BARREL 32 //If placed in spritetags, silencer overrides gun barrel sprite
 
 //Weapon upgrade defines
 
