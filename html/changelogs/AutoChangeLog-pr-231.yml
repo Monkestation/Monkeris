@@ -1,0 +1,7 @@
+author: Sun-Soaked
+delete-after: true
+changes:
+  - rscadd: items produced in a lathe now get a 'watermark' string that shows 
+      they were lathe-made and contains some information about the lathe they 
+      came from. Players can see the information stored in a watermark with 
+      sufficiently high MEC.
