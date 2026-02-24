@@ -62,7 +62,7 @@
 	//-Stock: When extended, increases the stability/handling of the gun when two-handed.
 	//-Sights: Allows the gun to scope in.
 	//-Bayonet: Increases the melee damage guns do.
-	required_parts = list(/obj/item/part/gun/modular/mechanism/smg/highcaliber = 0, /obj/item/part/gun/modular/barrel/magnum = 0, /obj/item/part/gun/modular/grip/excel = 0)
+	required_parts = list(/obj/item/part/gun/modular/mechanism/smg/highcaliber = 0, /obj/item/part/gun/modular/barrel/magnum = 0, /obj/item/part/gun/modular/grip/excel = 0, /obj/item/part/gun/modular/bayonet = -1)
 
 
 //Each gun will eventually need grip sprite variants (changes overall gun skin) For EACH grip type.
