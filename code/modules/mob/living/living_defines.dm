@@ -117,7 +117,7 @@
 	 */
 	var/list/butcher_results
 	///Whether this animal has a chance for complications when butchered. Set up complications under the butchery_fail() proc
-	var/butcher_hazard = FALSE
+	var/butchery_hazard = FALSE
 
 	spawn_frequency = 10
 	bad_type = /mob/living

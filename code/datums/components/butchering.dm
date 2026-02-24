@@ -16,8 +16,6 @@
 		RegisterSignal(parent, COMSIG_IATTACK, PROC_REF(onItemAttack))
 		RegisterSignal(parent, COMSIG_APPVAL, PROC_REF(onStatusChange))
 
-///datum/component/butchering/proc/onItemAttack(obj/item/source, mob/living/m, mob/living/user)
-///datum/component/butchering/proc/onItemAttack(atom/A, mob/living/user, params)
 ///checks if we can butcher, and intercepts the attack chain if we successfully do so
 /datum/component/butchering/proc/onItemAttack(atom/target, mob/living/user, params)
 	SIGNAL_HANDLER
@@ -101,7 +99,7 @@
 
 	//try to invoke a hazard effect on the butcher
 	if(meat.butchery_hazard && prob(hazard_chance))
-		butcher.visible_message(span_danger("While cutting up \the [src], [user]'s hand slips..."), span_danger("While cutting up \the [src], your hand slips..."))
+		butcher.visible_message(span_danger("While cutting up \the [src], [butcher]'s hand slips..."), span_danger("While cutting up \the [src], your hand slips..."))
 		meat.butchery_fail(butcher)
 
 	//let's finish up.
