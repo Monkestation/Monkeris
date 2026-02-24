@@ -3,10 +3,10 @@
 	desc = "A deformed mess of a roach that is covered in metallic outcrops and formations. It seems to have a production center on its thorax."
 	icon_state = "naniteroach"
 
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat/kraftwerk = 35,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kraftwerk = 35,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kraftwerk = 25,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kraftwerk = 25)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat/kraftwerk = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kraftwerk = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kraftwerk = BUTCHER_DIFFICULT,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kraftwerk = BUTCHER_DIFFICULT)
 	turns_per_move = 1
 	maxHealth = 30
 	health = 30

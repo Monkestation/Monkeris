@@ -16,10 +16,10 @@
 	attacktext = list("slashed", "rended", "diced")
 
 
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat/jager = 35,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/jager = 35,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/jager = 25,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/jager = 25)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat/jager = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/jager = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/jager = BUTCHER_DIFFICULT,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/jager = BUTCHER_DIFFICULT)
 	rarity_value = 11.25
 
 	// Armor related variables - jager jacket

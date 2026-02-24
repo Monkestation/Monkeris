@@ -7,8 +7,8 @@
 	turns_per_move = 1
 	maxHealth = 5
 	health = 5
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/hugemushroomslice = 45, \
-							/obj/item/reagent_containers/food/snacks/hugemushroomslice = 35)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/hugemushroomslice = BUTCHER_NORMAL, \
+							/obj/item/reagent_containers/food/snacks/hugemushroomslice = BUTCHER_NORMAL)
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "whacks"

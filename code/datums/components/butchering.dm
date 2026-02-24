@@ -37,7 +37,10 @@
 ///handles the use tool containing our butchering action. needed since signal_handler procs hate do afters
 /datum/component/butchering/proc/startButcher(obj/item/source, mob/living/meat, mob/living/user)
 	to_chat(user, span_notice("You begin to butcher \the [meat]..."))
-	if(source.use_tool(user, meat, WORKTIME_NORMAL, QUALITY_CUTTING, FAILCHANCE_NORMAL, required_stat = STAT_BIO))
+	var/needed_quality = QUALITY_CUTTING
+	if(!source.has_quality(QUALITY_CUTTING))
+		needed_quality = null
+	if(source.use_tool(user, meat, WORKTIME_NORMAL, needed_quality, FAILCHANCE_NORMAL, required_stat = STAT_BIO))
 		on_butchering(user, meat, source)
 /**
  * Handles a user butchering a target
@@ -45,6 +48,7 @@
  * Arguments:
  * - [butcher][/mob/living]: The mob doing the butchering
  * - [meat][/mob/living]: The mob being butchered
+ * - [source][/obj/item]: The item holding our component, expressly typed
  */
 /datum/component/butchering/proc/on_butchering(mob/living/butcher, mob/living/meat, obj/item/source)
 	//our final items to spawn

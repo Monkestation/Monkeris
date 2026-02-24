@@ -6,10 +6,10 @@
 	speak_chance = 0
 	turns_per_move = 5
 
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/carp = 35, \
-							/obj/item/reagent_containers/food/snacks/meat/carp = 35,\
-							/obj/item/reagent_containers/food/snacks/meat/carp = 25,\
-							/obj/item/reagent_containers/food/snacks/meat/carp = 25)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/carp = BUTCHER_DIFFICULT, \
+							/obj/item/reagent_containers/food/snacks/meat/carp = BUTCHER_DIFFICULT,\
+							/obj/item/reagent_containers/food/snacks/meat/carp = BUTCHER_DIFFICULT,\
+							/obj/item/reagent_containers/food/snacks/meat/carp = BUTCHER_CHALLENGING)
 	response_help = "pets the"
 	response_disarm = "gently pushes aside the"
 	response_harm = "hits the"

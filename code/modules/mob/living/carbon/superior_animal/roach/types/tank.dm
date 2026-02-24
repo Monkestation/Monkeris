@@ -9,11 +9,11 @@
 	mob_size = MOB_SMALL * 1.5 // 15
 	density = TRUE
 	//beefy boy
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat/panzer = 45,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/panzer = 35,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/panzer = 35,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/panzer = 25,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/panzer = 25)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat/panzer = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/panzer = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/panzer = BUTCHER_DIFFICULT,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/panzer = BUTCHER_DIFFICULT,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/panzer = BUTCHER_DIFFICULT)
 	rarity_value = 22.5
 
 	attacktext = list("slammed into", "pounded into", "crushed")

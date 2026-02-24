@@ -13,8 +13,8 @@
 	turns_per_move = 4
 	turns_since_move = 0
 
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat/kampfer = 45,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kampfer = 35)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat/kampfer = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kampfer = BUTCHER_NORMAL)
 
 	maxHealth = 10
 	health = 10

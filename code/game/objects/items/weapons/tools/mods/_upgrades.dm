@@ -301,7 +301,7 @@
 	if(tool_upgrades[UPGRADE_SHARP])
 		T.sharp = tool_upgrades[UPGRADE_SHARP]
 		if(!T.GetComponent(/datum/component/butchering))
-			AddComponent(/datum/component/butchering, FALSE, FALSE)
+			T.AddComponent(/datum/component/butchering, FALSE, FALSE)
 	if(tool_upgrades[UPGRADE_COLOR])
 		T.color = tool_upgrades[UPGRADE_COLOR]
 	if(tool_upgrades[UPGRADE_ITEMFLAGPLUS])

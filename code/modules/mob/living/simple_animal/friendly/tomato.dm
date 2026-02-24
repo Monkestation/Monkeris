@@ -8,9 +8,9 @@
 	turns_per_move = 5
 	maxHealth = 15
 	health = 15
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/tomatomeat = 35, \
-							/obj/item/reagent_containers/food/snacks/tomatomeat = 35,\
-							/obj/item/reagent_containers/food/snacks/tomatomeat = 25)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/tomatomeat = BUTCHER_NORMAL, \
+							/obj/item/reagent_containers/food/snacks/tomatomeat = BUTCHER_DIFFICULT,\
+							/obj/item/reagent_containers/food/snacks/tomatomeat = BUTCHER_DIFFICULT)
 	response_help  = "prods"
 	response_disarm = "pushes aside"
 	response_harm   = "smacks"

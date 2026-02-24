@@ -255,3 +255,15 @@ GLOBAL_REAL_VAR(list/voice_type2sound = list(
 
 ///Managed global that is a reference to the real global
 GLOBAL_LIST_INIT(voice_type2sound_ref, voice_type2sound)
+
+//butchering defines
+//defines for base success chance
+#define BUTCHER_IMPOSSIBLE 5
+#define BUTCHER_VERY_HARD 10
+#define BUTCHER_HARD 25
+#define BUTCHER_CHALLENGING 35
+#define BUTCHER_DIFFICULT 45
+#define BUTCHER_NORMAL 55
+#define BUTCHER_EASY 65
+#define BUTCHER_VERY_EASY 80
+#define BUTCHER_EFFORTLESS 100//still technically possible to fail with terrible tool + 0 bio, so not 'zero'

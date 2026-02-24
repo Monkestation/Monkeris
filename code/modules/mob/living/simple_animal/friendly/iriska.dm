@@ -11,12 +11,12 @@
 	speak_emote = list("purrs.", "meows.")
 	emote_see = list("shakes her head.", "shivers.")
 	speak_chance = 0.75
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/cat/iriska = 50, \
-							/obj/item/reagent_containers/food/snacks/meat/cat/iriska = 50,\
-							/obj/item/reagent_containers/food/snacks/meat/cat/iriska = 50,\
-							/obj/item/reagent_containers/food/snacks/meat/cat/iriska = 35,\
-							/obj/item/reagent_containers/food/snacks/meat/cat/iriska = 35,\
-							/obj/item/reagent_containers/food/snacks/meat/cat/iriska = 25)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/cat/iriska = BUTCHER_EASY, \
+							/obj/item/reagent_containers/food/snacks/meat/cat/iriska = BUTCHER_EASY,\
+							/obj/item/reagent_containers/food/snacks/meat/cat/iriska = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat/cat/iriska = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat/cat/iriska = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat/cat/iriska = BUTCHER_DIFFICULT)
 	response_help = "pets"
 	response_disarm = "rubs"
 	response_harm = "makes terrible mistake by kicking"

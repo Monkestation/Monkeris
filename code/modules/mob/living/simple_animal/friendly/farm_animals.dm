@@ -8,11 +8,11 @@
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat = 50, \
-							/obj/item/reagent_containers/food/snacks/meat = 35,\
-							/obj/item/reagent_containers/food/snacks/meat = 35,\
-							/obj/item/reagent_containers/food/snacks/meat = 25,\
-							/obj/item/reagent_containers/food/snacks/meat = 25)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat = BUTCHER_EASY, \
+							/obj/item/reagent_containers/food/snacks/meat = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat = BUTCHER_DIFFICULT,\
+							/obj/item/reagent_containers/food/snacks/meat = BUTCHER_DIFFICULT)
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
@@ -95,13 +95,13 @@
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat = 50, \
-							/obj/item/reagent_containers/food/snacks/meat = 50,\
-							/obj/item/reagent_containers/food/snacks/meat = 35,\
-							/obj/item/reagent_containers/food/snacks/meat = 35,\
-							/obj/item/reagent_containers/food/snacks/meat = 35,\
-							/obj/item/reagent_containers/food/snacks/meat = 25,\
-							/obj/item/reagent_containers/food/snacks/meat = 25)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat = BUTCHER_EASY, \
+							/obj/item/reagent_containers/food/snacks/meat = BUTCHER_EASY,\
+							/obj/item/reagent_containers/food/snacks/meat = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat = BUTCHER_DIFFICULT,\
+							/obj/item/reagent_containers/food/snacks/meat = BUTCHER_DIFFICULT)
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
@@ -159,7 +159,7 @@
 	emote_see = list("pecks at the ground","flaps its tiny wings","cheeps")
 	speak_chance = 2
 	turns_per_move = 2
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/chicken = 35)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/chicken = BUTCHER_CHALLENGING)
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
@@ -199,11 +199,11 @@ var/global/chicken_count = 0
 	emote_see = list("pecks at the ground","flaps its wings viciously")
 	speak_chance = 2
 	turns_per_move = 3
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/chicken = 35, \
-							/obj/item/reagent_containers/food/snacks/meat/chicken = 35,\
-							/obj/item/reagent_containers/food/snacks/meat/chicken = 35,\
-							/obj/item/reagent_containers/food/snacks/meat/chicken = 25,\
-							/obj/item/reagent_containers/food/snacks/meat/chicken = 25)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/chicken = BUTCHER_NORMAL, \
+							/obj/item/reagent_containers/food/snacks/meat/chicken = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat/chicken = BUTCHER_DIFFICULT,\
+							/obj/item/reagent_containers/food/snacks/meat/chicken = BUTCHER_DIFFICULT,\
+							/obj/item/reagent_containers/food/snacks/meat/chicken = BUTCHER_DIFFICULT)
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"

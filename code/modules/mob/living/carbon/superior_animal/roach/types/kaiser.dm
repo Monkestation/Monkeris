@@ -33,20 +33,20 @@ Has ability of every roach.
 	blattedin_revives_left = 0
 
 	//big enough to feed a whole clan of vagabonds
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = 50,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = 50,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = 50,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = 50,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = 50,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = 35,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = 35,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = 35,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = 35,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = 25,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = 25,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = 25,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = 25,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = 25)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = BUTCHER_VERY_EASY,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = BUTCHER_EASY,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = BUTCHER_EASY,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = BUTCHER_EASY,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = BUTCHER_DIFFICULT,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = BUTCHER_DIFFICULT,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = BUTCHER_DIFFICULT,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = BUTCHER_DIFFICULT,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = BUTCHER_DIFFICULT)
 	sanity_damage = 3
 
 	ranged = 1 // RUN, COWARD!

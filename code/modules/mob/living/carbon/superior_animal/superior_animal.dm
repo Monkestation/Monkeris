@@ -13,6 +13,9 @@
 	// AI activation for players is handled in sanity , if it has sanity damage it activates AI.
 	sanity_damage = 0.5
 
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat = BUTCHER_DIFFICULT,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat = BUTCHER_DIFFICULT)
 	var/icon_living
 	var/icon_dead
 	var/icon_rest //resting/unconscious animation
@@ -54,10 +57,6 @@
 	var/attack_sound = 'sound/weapons/spiderlunge.ogg'
 	var/attack_sound_chance = 33
 	var/attack_sound_volume = 20
-
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat = 35,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat = 35,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat = 35)
 
 	var/melee_damage_lower = 0
 	var/melee_damage_upper = 10

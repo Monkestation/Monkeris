@@ -16,9 +16,9 @@
 	poison_per_bite = 3
 	var/atom/cocoon_target
 	poison_type = "aranecolmin"
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/spider/nurse = 35,\
-							/obj/item/reagent_containers/food/snacks/meat/spider/nurse = 35,\
-							/obj/item/reagent_containers/food/snacks/meat/spider/nurse = 35)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/spider/nurse = BUTCHER_NORMAL,\
+							/obj/item/reagent_containers/food/snacks/meat/spider/nurse = BUTCHER_DIFFICULT,\
+							/obj/item/reagent_containers/food/snacks/meat/spider/nurse = BUTCHER_DIFFICULT)
 	move_to_delay = 4
 	rarity_value = 75
 	var/fed = 0
