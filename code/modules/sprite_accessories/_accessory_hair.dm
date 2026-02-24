@@ -762,3 +762,39 @@
 	name = "Halfshaved alt"
 	icon_state = "halfshaved_alt"
 
+/datum/sprite_accessory/hair/longundercut
+	name = "Long Undercut"
+	icon_state = "long_undercut"
+
+/datum/sprite_accessory/hair/beachwave
+	name = "Beach Wave"
+	icon_state = "beachwave"
+
+/datum/sprite_accessory/hair/fortuneteller
+	name = "Fortune Teller"
+	icon_state = "hair_fortuneteller"
+
+/datum/sprite_accessory/hair/halfshaven
+	name = "Half Shave"
+	icon_state = "hair_halfshave"
+
+/datum/sprite_accessory/hair/manbun
+	name = "Man Bun"
+	icon_state = "hair_manbun"
+
+/datum/sprite_accessory/hair/mermaid
+	name = "Mermaid"
+	icon_state = "hair_mermaid"
+
+/datum/sprite_accessory/hair/shrinepriestess
+	name = "Shrine Priestess"
+	icon_state = "shrine_priestess"
+
+/datum/sprite_accessory/hair/unkemptedcurls
+	name = "Unkempted Curls"
+	icon_state = "unkempted_curls"
+
+/datum/sprite_accessory/hair/alpaca
+	name = "Alpaca"
+	icon_state = "alpaca"
+
