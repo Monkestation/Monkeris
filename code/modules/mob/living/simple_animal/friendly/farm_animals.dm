@@ -8,8 +8,11 @@
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
-	meat_type = /obj/item/reagent_containers/food/snacks/meat
-	meat_amount = 4
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat = 50, \
+							/obj/item/reagent_containers/food/snacks/meat = 35,\
+							/obj/item/reagent_containers/food/snacks/meat = 35,\
+							/obj/item/reagent_containers/food/snacks/meat = 25,\
+							/obj/item/reagent_containers/food/snacks/meat = 25)
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
@@ -92,8 +95,13 @@
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
-	meat_type = /obj/item/reagent_containers/food/snacks/meat
-	meat_amount = 6
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat = 50, \
+							/obj/item/reagent_containers/food/snacks/meat = 50,\
+							/obj/item/reagent_containers/food/snacks/meat = 35,\
+							/obj/item/reagent_containers/food/snacks/meat = 35,\
+							/obj/item/reagent_containers/food/snacks/meat = 35,\
+							/obj/item/reagent_containers/food/snacks/meat = 25,\
+							/obj/item/reagent_containers/food/snacks/meat = 25)
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
@@ -151,8 +159,7 @@
 	emote_see = list("pecks at the ground","flaps its tiny wings","cheeps")
 	speak_chance = 2
 	turns_per_move = 2
-	meat_type = /obj/item/reagent_containers/food/snacks/meat
-	meat_amount = 1
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/chicken = 35)
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
@@ -192,8 +199,11 @@ var/global/chicken_count = 0
 	emote_see = list("pecks at the ground","flaps its wings viciously")
 	speak_chance = 2
 	turns_per_move = 3
-	meat_type = /obj/item/reagent_containers/food/snacks/meat/chicken
-	meat_amount = 4
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/chicken = 35, \
+							/obj/item/reagent_containers/food/snacks/meat/chicken = 35,\
+							/obj/item/reagent_containers/food/snacks/meat/chicken = 35,\
+							/obj/item/reagent_containers/food/snacks/meat/chicken = 25,\
+							/obj/item/reagent_containers/food/snacks/meat/chicken = 25)
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"

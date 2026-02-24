@@ -3,7 +3,15 @@
 	desc = "A bigger, angrier cousin of the space carp."
 	icon = 'icons/mob/spaceshark.dmi'
 	icon_state = "shark"
-	meat_amount = 10
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/carp = 50, \
+							/obj/item/reagent_containers/food/snacks/meat/carp = 50,\
+							/obj/item/reagent_containers/food/snacks/meat/carp = 50,\
+							/obj/item/reagent_containers/food/snacks/meat/carp = 35,\
+							/obj/item/reagent_containers/food/snacks/meat/carp = 35,\
+							/obj/item/reagent_containers/food/snacks/meat/carp = 35,\
+							/obj/item/reagent_containers/food/snacks/meat/carp = 25,\
+							/obj/item/reagent_containers/food/snacks/meat/carp = 25,\
+							/obj/item/reagent_containers/food/snacks/meat/carp = 25)
 	turns_per_move = 2
 	move_to_delay = 2
 	speed = 0

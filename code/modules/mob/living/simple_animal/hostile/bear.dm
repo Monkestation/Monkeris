@@ -9,7 +9,10 @@
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
-	meat_type = /obj/item/reagent_containers/food/snacks/meat/bearmeat
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/bearmeat = 35,\
+						/obj/item/reagent_containers/food/snacks/meat/bearmeat = 35,\
+						/obj/item/reagent_containers/food/snacks/meat/bearmeat = 25,\
+						/obj/item/reagent_containers/food/snacks/meat/bearmeat = 25)
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "pokes"

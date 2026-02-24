@@ -43,8 +43,7 @@
 	can_pull_size = ITEM_SIZE_TINY
 	can_pull_mobs = MOB_PULL_NONE
 
-	meat_type = /obj/item/reagent_containers/food/snacks/meat
-	meat_amount = 1
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat = 35)
 
 	can_burrow = TRUE
 

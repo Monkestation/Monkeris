@@ -4,7 +4,10 @@
 	icon_state = "bluespaceroach"
 	maxHealth = 25
 	health = 25
-	meat_type = /obj/item/bluespace_crystal
+	butcher_results = list(/obj/item/bluespace_crystal = 35,\
+							/obj/item/bluespace_crystal = 15,\
+							/obj/item/bluespace_crystal = 15,\
+							/obj/item/bluespace_crystal = 15)
 	melee_damage_lower = 4
 	melee_damage_upper = 11
 	armor_divisor = ARMOR_PEN_MAX // Hits through armor

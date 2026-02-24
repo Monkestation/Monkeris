@@ -55,8 +55,9 @@
 	var/attack_sound_chance = 33
 	var/attack_sound_volume = 20
 
-	var/meat_type = /obj/item/reagent_containers/food/snacks/meat/roachmeat
-	var/meat_amount = 3
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat = 35,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat = 35,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat = 35)
 
 	var/melee_damage_lower = 0
 	var/melee_damage_upper = 10

@@ -31,6 +31,20 @@
 	desc = "Tastes like... well, you know."
 	price_tag = 25
 
+/obj/item/reagent_containers/food/snacks/meat/cat
+	name = "gato"
+	desc = "Meat harvested from a small feline creature, tough and stringy but high in protein. Mostly eaten during famine or other times of desperation."
+	filling_color = "#b84529"
+	preloaded_reagents = list("protein" = 10)
+
+/obj/item/reagent_containers/food/snacks/meat/cat/iriska
+	name = "well-marbled gato"
+	desc = "Meat harvested from a small feline creature. Unlike most cat meat, this is marbled almost like high-quality pork. It's owner must have been extremely pampered."
+	filling_color = "#e19e8b"
+	preloaded_reagents = list("protein" = 6)//mostly fat
+	slice_path = /obj/item/reagent_containers/food/snacks/rawbacon
+	slices_num = 4
+
 /obj/item/reagent_containers/food/snacks/meat/pork
 	name = "porcine meat"
 	desc = "A raw slab of meat from pig or otherwise porcine animal, which you hopefully slaughtered without cruelty." // Always remember to pray Bismillah before, keep it halal.

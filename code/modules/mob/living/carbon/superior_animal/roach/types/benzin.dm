@@ -7,8 +7,9 @@
 	maxHealth = 25
 	health = 25
 	melee_damage_upper = 3
-	meat_type = /obj/item/reagent_containers/food/snacks/meat/roachmeat/benzin
-	meat_amount = 3
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat/benzin = 35,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/benzin = 35,\
+							/obj/item/reagent_containers/food/snacks/meat/roachmeat/benzin = 35)
 	rarity_value = 15
 
 

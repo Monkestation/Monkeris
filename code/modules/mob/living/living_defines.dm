@@ -110,6 +110,15 @@
 	var/can_multiz_pb = FALSE
 	var/is_watching = FALSE
 
+	/**
+	 * possible drops from this mob when butchering. If set to null, butchery is disabled
+	 * stored like [typepath] = [base chance of getting it](which should be expressed as a number)
+	 * for multiple copies of a single item(such as 3 possible meat slices from 1 creature), add more instances to the list.
+	 */
+	var/list/butcher_results
+	///Whether this animal has a chance for complications when butchered. Set up complications under the butchery_fail() proc
+	var/butcher_hazard = FALSE
+
 	spawn_frequency = 10
 	bad_type = /mob/living
 

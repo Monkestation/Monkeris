@@ -7,7 +7,7 @@
 	bubble_icon = "alien"
 	speak_chance = 0
 	turns_per_move = 3
-	meat_type = /obj/item/reagent_containers/food/snacks/meat
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat = 35)
 	response_help = "pets the"
 	response_disarm = "gently pushes aside the"
 	response_harm = "hits the"

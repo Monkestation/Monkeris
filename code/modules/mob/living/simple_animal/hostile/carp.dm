@@ -5,7 +5,11 @@
 	icon_gib = "carp_gib"
 	speak_chance = 0
 	turns_per_move = 5
-	meat_type = /obj/item/reagent_containers/food/snacks/meat/carp
+
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/carp = 35, \
+							/obj/item/reagent_containers/food/snacks/meat/carp = 35,\
+							/obj/item/reagent_containers/food/snacks/meat/carp = 25,\
+							/obj/item/reagent_containers/food/snacks/meat/carp = 25)
 	response_help = "pets the"
 	response_disarm = "gently pushes aside the"
 	response_harm = "hits the"

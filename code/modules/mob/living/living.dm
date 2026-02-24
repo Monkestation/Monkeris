@@ -951,3 +951,15 @@ default behaviour is:
 		exp_list[mind.assigned_role] = minutes
 
 	return exp_list
+
+///WIP: negative effect that may be triggered by butchering the mob, especially with low stats
+/mob/living/proc/butchery_fail(mob/butcher)
+	return
+	//fuhrer will release a final scream, triggering nearby burrows
+	//benzins will explode
+	//kraftwerk will create a bunch of nanite swarms
+	//unbekannt blinks you randomly and creates a bunch of bluespace entropy
+	//the farty one (name forgot) will create a cloud
+	//other roaches get blattedin in your eyes/face...unless you're wearing face protection, in which case you're fine
+	//spiders will do the same but with their toxins
+	//non toxic animals will just temporarily blind you

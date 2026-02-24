@@ -405,6 +405,7 @@
 #include "code\datums\autolathe\security.dm"
 #include "code\datums\autolathe\tools.dm"
 #include "code\datums\changelog\changelog.dm"
+#include "code\datums\components\butchering.dm"
 #include "code\datums\components\_component.dm"
 #include "code\datums\components\clothing_sanity_protection.dm"
 #include "code\datums\components\fabric.dm"

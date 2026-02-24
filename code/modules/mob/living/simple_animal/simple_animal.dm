@@ -28,8 +28,6 @@
 	var/turns_per_move = 1
 	var/turns_since_move = 0
 	universal_speak = 0		//No, just no.
-	var/meat_amount = 0
-	var/meat_type
 	var/stop_automated_movement = FALSE //Use this to temporarely stop random movement or to if you write special movement code for animals.
 	var/wander = TRUE	// Does the mob wander around when idle?
 	var/stop_automated_movement_when_pulled = TRUE //When set to 1 this stops the animal from moving when someone is pulling it.
@@ -435,10 +433,6 @@
 	else if(istype(O, /obj/item/reagent_containers) || istype(O, /obj/item/stack/medical))
 		..()
 
-	else if(meat_type && (stat == DEAD))	//if the animal has a meat, and if it is dead.
-		if(QUALITY_CUTTING in O.tool_qualities)
-			if(O.use_tool(user, src, WORKTIME_NORMAL, QUALITY_CUTTING, FAILCHANCE_NORMAL, required_stat = STAT_BIO))
-				harvest(user)
 	else
 		O.attack(src, user, user.targeted_organ)
 
@@ -508,21 +502,6 @@
 /mob/living/simple_animal/put_in_hands(obj/item/W) // No hands.
 	W.loc = get_turf(src)
 	return 1
-
-// Harvest an animal's delicious byproducts
-/mob/living/simple_animal/proc/harvest(mob/user)
-	var/actual_meat_amount = max(1,(meat_amount/2))
-	if(meat_type && actual_meat_amount>0 && (stat == DEAD))
-		for(var/i=0;i<actual_meat_amount;i++)
-			var/obj/item/meat = new meat_type(get_turf(src))
-			meat.name = "[src.name] [meat.name]"
-		if(issmall(src))
-			user.visible_message(span_danger("[user] chops up \the [src]!"))
-			new/obj/effect/decal/cleanable/blood/splatter(get_turf(src))
-			qdel(src)
-		else
-			user.visible_message(span_danger("[user] butchers \the [src] messily!"))
-			gib()
 
 //Code to handle finding and nomming nearby food items
 /mob/living/simple_animal/proc/handle_foodscanning()
