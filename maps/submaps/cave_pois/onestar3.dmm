@@ -354,7 +354,7 @@
 /turf/floor/tiled/derelict/white_big_edges/airless,
 /area/asteroid/cave)
 "jf" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/carbon/superior_animal/stalker,
 /turf/floor/tiled/derelict/white_red_edges/airless,
 /area/asteroid/cave)
 "nf" = (
@@ -592,7 +592,7 @@ xe
 bh
 bh
 bh
-aH
+aR
 bh
 FJ
 ag
@@ -715,7 +715,7 @@ in
 aj
 ch
 ch
-Vr
+ch
 aG
 ch
 Vr
@@ -768,7 +768,7 @@ in
 in
 ak
 ch
-ch
+jf
 ch
 ak
 ch
@@ -795,7 +795,7 @@ in
 ah
 ag
 ch
-jf
+ch
 ch
 aG
 aR
@@ -1017,7 +1017,7 @@ aZ
 aG
 av
 av
-ba
+aR
 aR
 ba
 aK

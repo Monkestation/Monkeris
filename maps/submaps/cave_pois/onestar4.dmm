@@ -91,7 +91,7 @@
 /turf/floor/asteroid/cave,
 /area/asteroid/cave)
 "av" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/carbon/superior_animal/stalker,
 /turf/floor/tiled/derelict/airless,
 /area/asteroid/cave)
 "aw" = (
@@ -222,6 +222,7 @@
 /area/asteroid/cave)
 "aX" = (
 /obj/spawner/junk,
+/obj/effect/decal/cleanable/blood,
 /turf/floor/tiled/derelict/airless,
 /area/asteroid/cave)
 "aY" = (
@@ -385,10 +386,28 @@
 /obj/spawner/medical/low_chance,
 /turf/floor/tiled/derelict/airless,
 /area/asteroid/cave)
+"jY" = (
+/obj/spawner/soda,
+/obj/spawner/soda,
+/obj/landmark/corpse/skeleton,
+/obj/effect/decal/cleanable/blood,
+/turf/floor/tiled/derelict/airless,
+/area/asteroid/cave)
+"kC" = (
+/obj/structure/table/onestar,
+/obj/spawner/medical/low_chance,
+/obj/spawner/medical/low_chance,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
 "mY" = (
 /obj/landmark/corpse/skeleton,
 /obj/effect/decal/cleanable/blood,
 /turf/floor/tiled/derelict/airless,
+/area/asteroid/cave)
+"ou" = (
+/obj/structure/table/onestar,
+/obj/spawner/medical/low_chance,
+/turf/floor/tiled/derelict/white_small_edges/airless,
 /area/asteroid/cave)
 "ph" = (
 /obj/structure/bed/chair/custom/onestar{
@@ -417,6 +436,11 @@
 /obj/machinery/power/os_turret/laser,
 /turf/floor/tiled/derelict/airless,
 /area/asteroid/cave)
+"wo" = (
+/obj/structure/table/onestar,
+/obj/spawner/medical,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
 "wz" = (
 /turf/floor/tiled/derelict/white_big_edges/airless,
 /area/asteroid/cave)
@@ -441,8 +465,8 @@
 /turf/floor/tiled/derelict/white_big_edges/airless,
 /area/asteroid/cave)
 "IF" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
-/turf/floor/tiled/derelict/white_small_edges/airless,
+/mob/living/simple_animal/hostile/roomba/boomba,
+/turf/floor/tiled/derelict/airless,
 /area/asteroid/cave)
 "Lk" = (
 /obj/structure/sign/derelict1{
@@ -608,8 +632,8 @@ Vj
 Vj
 ac
 ag
-br
-aQ
+sM
+jY
 aQ
 ag
 wz
@@ -662,7 +686,7 @@ Vj
 ab
 ac
 ag
-IF
+ae
 br
 ae
 ag
@@ -689,7 +713,7 @@ Vj
 ab
 ac
 ag
-ae
+ou
 av
 ae
 ag
@@ -716,7 +740,7 @@ Vj
 ab
 ac
 ag
-ae
+wo
 br
 ae
 ag
@@ -753,7 +777,7 @@ wz
 xQ
 ag
 bj
-ae
+fO
 ae
 aP
 aG
@@ -797,7 +821,7 @@ ab
 ab
 ac
 ag
-aP
+kC
 br
 ae
 ag
@@ -824,7 +848,7 @@ Vj
 ab
 ac
 ag
-ae
+aP
 aY
 aP
 ag
@@ -1015,7 +1039,7 @@ ac
 ag
 ac
 ac
-br
+IF
 ag
 bb
 be

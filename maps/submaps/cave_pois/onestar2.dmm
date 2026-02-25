@@ -224,7 +224,7 @@
 /obj/structure/sign/derelict1{
 	pixel_x = 32
 	},
-/obj/structure/salvageable/os/power,
+/obj/machinery/constructable_frame/machine_frame/vertical,
 /turf/floor/tiled/derelict/airless,
 /area/asteroid/cave)
 "jG" = (
