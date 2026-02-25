@@ -55,8 +55,8 @@
 		return TOPIC_REFRESH
 	return ..()
 
-/datum/category_item/player_setup_item/relations/update_setup(savefile/preferences, savefile/character)
-	if(preferences["version"] < 18)
+/datum/category_item/player_setup_item/relations/update_setup(pref_version, savefile/character)
+	if(pref_version < 18)
 		// Remove old relation types
 		for(var/i in pref.relations)
 			var/f = FALSE

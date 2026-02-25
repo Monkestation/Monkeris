@@ -287,8 +287,8 @@ GLOBAL_LIST_EMPTY(gear_datums)
 		return TOPIC_REFRESH
 	return ..()
 
-/datum/category_item/player_setup_item/loadout/update_setup(savefile/preferences, savefile/character)
-	if(preferences["version"] < 14)
+/datum/category_item/player_setup_item/loadout/update_setup(pref_version, savefile/character)
+	if(pref_version < 14)
 		var/list/old_gear = character["gear"]
 		if(istype(old_gear)) // During updates data isn't sanitized yet, we have to do manual checks
 			if(!istype(pref.gear_list)) pref.gear_list = list()
@@ -296,7 +296,7 @@ GLOBAL_LIST_EMPTY(gear_datums)
 			pref.gear_list[1] = old_gear
 		return 1
 
-	if(preferences["version"] < 15)
+	if(pref_version < 15)
 		if(istype(pref.gear_list))
 			// Checks if the key of the pref.gear_list is a list.
 			// If not the key is replaced with the corresponding value.

@@ -14,6 +14,8 @@
 		return 0
 	if(!fexists(path))		return 0
 	debug_world_log("LOADING PREFS FOR [usr]/[usr?.ckey] - PATH: [path]")
+	if(loaded_preferences)	del(loaded_preferences)
+	if(loaded_character)	del(loaded_character)
 	var/savefile/S = new /savefile(path)
 	if(!S)					return 0
 	S.cd = "/"
@@ -30,13 +32,15 @@
 			to_chat(client, span_warning("You're attempting to save your preferences a little too fast. Wait half a second, then try again."))
 		return 0
 	debug_world_log("SAVING PREFS FOR [usr]/[usr?.ckey] - PATH: [path]")
+	if(loaded_preferences)	del(loaded_preferences)
+	if(loaded_character)	del(loaded_character)
 	var/savefile/S = new /savefile(path)
 	if(!S)					return 0
 	S.cd = "/"
 
 	WRITE_FILE(S["version"], SAVEFILE_VERSION_MAX)
 	player_setup.save_preferences(S)
-	loaded_preferences = S
+	del(S)
 	return 1
 
 /datum/preferences/proc/load_character(slot)
@@ -49,6 +53,8 @@
 	if(!fexists(path))		return 0
 
 	debug_world_log("LOADING CHARACTER FOR [usr]/[usr?.ckey] - PATH: [path]")
+	if(loaded_preferences)	del(loaded_preferences)
+	if(loaded_character)	del(loaded_character)
 	var/savefile/S = new /savefile(path)
 	if(!S)					return 0
 	S.cd = "/"
@@ -80,23 +86,25 @@
 			to_chat(client, span_warning("You're attempting to save your character a little too fast. Wait half a second, then try again."))
 		return 0
 	debug_world_log("SAVING CHARACTER FOR [usr]/[usr?.ckey] - PATH: [path]")
+	if(loaded_preferences)	del(loaded_preferences)
+	if(loaded_character)	del(loaded_character)
 	var/savefile/S = new /savefile(path)
 	if(!S)					return 0
 	S.cd = GLOB.maps_data.character_save_path(default_slot)
 
 	S["version"] << SAVEFILE_VERSION_MAX
 	player_setup.save_character(S)
-	loaded_character = S
-	return S
+	del(S)
+	return 1
 
 /datum/preferences/proc/sanitize_preferences()
 	player_setup.sanitize_setup()
 	return 1
 
-/datum/preferences/proc/update_setup(savefile/preferences, savefile/character)
-	if(!preferences || !character)
+/datum/preferences/proc/update_setup(pref_version, savefile/character)
+	if(!character)
 		return 0
-	return player_setup.update_setup(preferences, character)
+	return player_setup.update_setup(pref_version, character)
 
 #undef SAVEFILE_VERSION_MAX
 #undef SAVEFILE_VERSION_MIN
