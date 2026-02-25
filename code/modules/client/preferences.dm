@@ -232,11 +232,12 @@
 	character.backpack_setup = new(backpack, backpack_metadata["[backpack]"])
 
 	if (preview_should_rebuild_organs || !is_preview_copy)
+		character.force_update_limbs()
 		character.update_mutations(0)
 		character.update_implants(0)
 		preview_should_rebuild_organs = FALSE
 
-	character.force_update_limbs()
+	character.update_body(0)
 	character.update_underwear(0)
 
 	character.update_hair(0)
