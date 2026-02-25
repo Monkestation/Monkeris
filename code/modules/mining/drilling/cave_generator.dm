@@ -9,8 +9,8 @@
 #define CAVE_VEINS_MAXIMUM 20
 #define CAVE_VEINS_SIZE 2 //size factor for veins generated with RNG
 #define CAVE_VEINS_SIZE_FORCED 2 //size factor for veins forced to generate because RNG didn't generate any of that mineral type
-#define CAVE_COOLDOWN 30 SECONDS // 5 MINUTES
-#define CAVE_COLLAPSE 10 SECONDS // 3 MINUTES
+#define CAVE_COOLDOWN 5 MINUTES
+#define CAVE_COLLAPSE 3 MINUTES
 
 #define POI_SIZE_SMALL 1 //several of these smaller pois are allowed to spawn
 #define POI_SIZE_LARGE 2 //only one of these larger pois are allowed to spawn
