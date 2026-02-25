@@ -101,6 +101,8 @@ nanoui is used to open and update nano browser uis
 	add_common_assets()
 
 	var/datum/asset/nanoui = get_asset_datum(/datum/asset/simple/directories/nanoui)
+	if (!user?.client)
+		return
 	if (nanoui.send(user.client))
 		to_chat(user, span_warning("Currently sending <b>all</b> nanoui assets, please wait!"))
 		user.client.browse_queue_flush() // stall loading nanoui until assets actualy gets sent
@@ -466,6 +468,8 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/focus()
+	if (!user || !user.client)
+		return
 	winset(user, window_id, "focus=true")
 	winset(user, "mapwindow.map", "focus=true") // return keyboard focus to map
 

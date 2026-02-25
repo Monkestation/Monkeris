@@ -2,6 +2,7 @@
 	name = "Asters \"Munchkin 5000\""
 	desc = "A fuel powered monster of a tool. Its welding attachment is capable of welding things without an eye-damaging flash, so no eye protection is required."
 	icon_state = "omnitool"
+	item_state = "omnitool"
 	w_class = ITEM_SIZE_NORMAL
 	worksound = WORKSOUND_DRIVER_TOOL
 	switched_on_qualities = list(QUALITY_SCREW_DRIVING = 50, QUALITY_BOLT_TURNING = 50, QUALITY_DRILLING = 20, QUALITY_WELDING = 30, QUALITY_CAUTERIZING = 10)
@@ -16,10 +17,30 @@
 	rarity_value = 96
 	spawn_tags = SPAWN_TAG_TOOL_ADVANCED
 
+/obj/item/tool/omnitool/turn_on(mob/user)
+	.=..()
+	if(.)
+		playsound(loc, 'sound/items/welderactivate.ogg', 50, 1)
+		damtype = BURN
+		START_PROCESSING(SSobj, src)
+		item_state = "[initial(item_state)]_on"
+		update_wear_icon()
+
+/obj/item/tool/omnitool/turn_off(mob/user)
+	item_state = initial(item_state)
+	playsound(loc, 'sound/items/welderdeactivate.ogg', 50, 1)
+	..()
+	damtype = initial(damtype)
+
 /obj/item/tool/medmultitool
 	name = "One Star medmultitool"
 	desc = "A compact One Star medical multitool. It has all surgery tools."
 	icon_state = "medmulti"
+	item_state = "medmulti"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/medical_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/medical_righthand.dmi',
+		)
 	matter = list(MATERIAL_STEEL = 3, MATERIAL_GLASS = 2, MATERIAL_PLATINUM = 2)
 	flags = CONDUCT
 	origin_tech = list(TECH_MATERIAL = 3, TECH_BIO = 4)
@@ -57,6 +78,11 @@
 	desc = "A jury-rigged implant, holding cobbled-together tools. For those who are more interested in tool carrying than scared of tetanus."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "multitool_improvised"
+	item_state = "toolbox_blue"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/toolbox_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/toolbox_righthand.dmi',
+		)
 	force = WEAPON_FORCE_PAINFUL
 	switched_on_force = WEAPON_FORCE_PAINFUL * 0.8
 	worksound = WORKSOUND_DRIVER_TOOL

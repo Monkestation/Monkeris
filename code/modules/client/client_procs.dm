@@ -122,6 +122,14 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 /client/proc/_Topic(datum/hsrc, href, list/href_list)
 	return hsrc.Topic(href, href_list)
 
+/client/proc/is_localhost()
+	var/static/localhost_addresses = list(
+		"127.0.0.1",
+		"::1",
+		null,
+	)
+	return address in localhost_addresses
+
 /*
  * Call back proc that should be checked in all paths where a client can send messages
  *
@@ -199,6 +207,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	GLOB.clients += src
 	GLOB.directory[ckey] = src
+
 	var/reconnecting = FALSE
 	if(GLOB.persistent_clients_by_ckey[ckey])
 		reconnecting = TRUE
@@ -217,28 +226,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	initialize_commandbar_spy()
 
-	var/connecting_admin = FALSE //because de-admined admins connecting should be treated like admins.
-	//Admin Authorisation
-	var/datum/admins/admin_datum = GLOB.admin_datums[ckey]
-	if (!isnull(admin_datum))
-		admin_datum.associate(src)
-		connecting_admin = TRUE
-	// if(CONFIG_GET(flag/autoadmin))
-	// 	if(!GLOB.admin_datums[ckey])
-	// 		var/datum/admin_rank/autorank
-	// 		for(var/datum/admin_rank/R in GLOB.GLOB.admin_ranks)
-	// 			if(R.name == CONFIG_GET(string/autoadmin_rank))
-	// 				autorank = R
-	// 				break
-	// 		if(!autorank)
-	// 			to_chat(world, "Autoadmin rank not found")
-	// 		else
-	// 			new /datum/admins(autorank, ckey)
-	if(CONFIG_GET(flag/enable_localhost_rank) && !connecting_admin)
-		var/localhost_addresses = list("127.0.0.1", "::1")
-		if(isnull(address) || (address in localhost_addresses))
-			var/datum/admins/localhost_rank = new("!localhost!", R_EVERYTHING, ckey)
-			localhost_rank.associate(src)
+	GLOB.requests.client_login(src)
 
 	//preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum)
 	prefs = SScharacter_setup.preferences_datums[ckey]
@@ -293,9 +281,31 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 					message_admins(span_danger("<B>[message_type]: </B></span><span class='notice'>Connecting player [key_name_admin(src)] has the same [matches] as [joined_player_ckey](no longer logged in)<b>[in_round]</b>. "))
 					log_admin_private("[message_type]: Connecting player [key_name(src)] has the same [matches] as [joined_player_ckey](no longer logged in)[in_round].")
 
-
-
 	. = ..() //calls mob.Login()
+
+	// Admin Verbs need the client's mob to exist. Must be after ..()
+	var/connecting_admin = FALSE //because de-admined admins connecting should be treated like admins.
+	//Admin Authorization
+	var/datum/admins/admin_datum = GLOB.admin_datums[ckey]
+	if (!isnull(admin_datum))
+		admin_datum.associate(src)
+		connecting_admin = TRUE
+	else if(GLOB.deadmins[ckey])
+		add_verb(src, /client/proc/readmin)
+		connecting_admin = TRUE
+	if(CONFIG_GET(flag/autoadmin))
+		if(!GLOB.admin_datums[ckey])
+			var/list/autoadmin_ranks = ranks_from_rank_name(CONFIG_GET(string/autoadmin_rank))
+			if (autoadmin_ranks.len == 0)
+				to_chat(world, "Autoadmin rank not found")
+			else
+				new /datum/admins(autoadmin_ranks, ckey)
+
+	if(CONFIG_GET(flag/enable_localhost_rank) && !connecting_admin && is_localhost())
+		var/datum/admin_rank/localhost_rank = new("!localhost!", R_EVERYTHING, R_DBRANKS, R_EVERYTHING) //+EVERYTHING -DBRANKS *EVERYTHING
+		new /datum/admins(list(localhost_rank), ckey, 1, 1)
+
+	// This is where I would put my mentors datum. IF I HAD ONE!!!!
 
 	if (byond_version >= 512)
 		if (!byond_build || byond_build < 1386)
@@ -316,6 +326,16 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 				return
 
 	to_chat_immediate(src, span_red("If the title screen is black, resources are still downloading. Please be patient until the title screen appears."))
+
+	src << browse(file('html/statbrowser.html'), "window=statbrowser")
+	// addtimer(CALLBACK(src, PROC_REF(check_panel_loaded)), 30 SECONDS)
+
+	INVOKE_ASYNC(src, PROC_REF(acquire_dpi))
+	// Initialize tgui panel
+	tgui_panel.initialize()
+
+	tgui_say.initialize()
+
 	if(alert_mob_dupe_login && !holder)
 		var/dupe_login_message = "Your ComputerID has already logged in with another key this round, please log out of this one NOW or risk being banned!"
 		if (alert_admin_multikey)
@@ -326,10 +346,10 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 			alert(mob, dupe_login_message) //players get banned if they don't see this message, do not convert to tgui_alert (or even tg_alert) please.
 			to_chat_immediate(mob, span_danger(dupe_login_message))
 
-
 	connection_time = world.time
 	connection_realtime = world.realtime
 	connection_timeofday = world.timeofday
+	winset(src, null, "command=\".configure graphics-hwmode on\"")
 	var/breaking_version = CONFIG_GET(number/client_error_version)
 	var/breaking_build = CONFIG_GET(number/client_error_build)
 	var/warn_version = CONFIG_GET(number/client_warn_version)
@@ -362,20 +382,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 			to_chat(src, "Visit <a href=\"https://secure.byond.com/download\">BYOND's website</a> to get the latest version of BYOND.")
 
 
-	src << browse(file('html/statbrowser.html'), "window=statbrowser")
 	// addtimer(CALLBACK(src, PROC_REF(check_panel_loaded)), 30 SECONDS)
-
-	connection_time = world.time
-	connection_realtime = world.realtime
-	connection_timeofday = world.timeofday
-	winset(src, null, "command=\".configure graphics-hwmode on\"")
-
-	INVOKE_ASYNC(src, PROC_REF(acquire_dpi))
-
-	// Initialize tgui panel
-	tgui_panel.initialize()
-
-	tgui_say.initialize()
 
 	/* byond err version check here (configurable) */
 
@@ -392,6 +399,8 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	if( (world.address == address || !address) && !host )
 		host = key
 		world.update_status()
+
+	CAN_MOVE_DIAGONALLY = GLOB.diagonal_movement
 
 	if(holder)
 		add_admin_verbs()
@@ -510,6 +519,8 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		tooltips = new /datum/tooltip(src)
 
 	Master.UpdateTickRate()
+
+	fully_created = TRUE
 
 	//////////////
 	//DISCONNECT//
@@ -1096,6 +1107,19 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	init_verbs()
 
+/// Attempts to make the client orbit the given object, for administrative purposes.
+/// If they are not an observer, will try to aghost them.
+/client/proc/admin_follow(atom/movable/target)
+	var/can_ghost = TRUE
+
+	if (!isobserver(mob))
+		can_ghost = admin_ghost()
+
+	if(!can_ghost)
+		return FALSE
+
+	astype(mob, /mob/observer/ghost).ManualFollow(target)
+
 // /client/verb/enable_fullscreen()
 // 	set hidden = TRUE
 // 	winset(usr, "mainwindow", "titlebar=false")
@@ -1110,6 +1134,17 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 // 	winset(usr, "mainwindow", "menu=menu")
 // 	winset(usr, "mainwindow", "is-maximized=false")
 // 	fit_viewport()
+
+/client/verb/stop_client_sounds()
+	set name = "Stop Sounds"
+	set category = "OOC"
+	set desc = "Stop Current Sounds"
+	SEND_SOUND(usr, sound(null))
+	tgui_panel?.stop_music()
+	// media_player?.stop()
+	// GLOB.lobby_media.remove_listener(mob)
+	SSblackbox.record_feedback("nested tally", "preferences_verb", 1, list("Stop Self Sounds"))
+
 
 /client/verb/toggle_fullscreen()
 	set name = "Toogle Fullscreen"
@@ -1126,7 +1161,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		winset(usr, "mainwindow", "titlebar=true")
 		winset(usr, "mainwindow", "menu=menu")
 		winset(usr, "mainwindow", "is-maximized=false")
-	fit_viewport()
+	attempt_auto_fit_viewport()
 
 /// Handles any "fluff" or supplementary procedures related to an admin logout event. Should not have anything critically related cleaning up an admin's logout.
 /client/proc/handle_admin_logout()

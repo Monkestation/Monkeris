@@ -76,11 +76,13 @@ semi accepts weird caliber - +1 points
 	var/old_quality = 0
 	var/max_quality = 2
 	var/interactions
+	///if defined, this gunpart can only be placed on an item with barrels of this caliber
+	var/list/accepted_calibers = list()
 
 	// Bonuses from forging/type or maluses from printing
 	var/cheap = FALSE // Set this to true for cheap variants
 
-/obj/item/part/gun/modular/New(location)
+/obj/item/part/gun/modular/New(location, quality = 0)
 	..()
 	I = AddComponent(/datum/component/item_upgrade)
 	if(interactions)
@@ -93,6 +95,9 @@ semi accepts weird caliber - +1 points
 	I.removable = MOD_INTEGRAL // Will get unique removal handling when we get there, until then works by disassembling the frame
 	I.removal_time = WORKTIME_SLOW
 	I.removal_difficulty = FAILCHANCE_NORMAL
+
+	if(quality)
+		set_quality(quality)
 
 /obj/item/part/gun/modular/set_quality(quality = 0)
 	old_quality = CLAMP(quality, -2, max_quality) // Some parts, such as One Star will permit +3 parts
@@ -306,7 +311,7 @@ semi accepts weird caliber - +1 points
 	part_itemstring = TRUE
 
 /obj/item/part/gun/modular/grip/New(location, quality = 0)
-	..(quality)
+	..(quality = quality)
 	I.weapon_upgrades[GUN_UPGRADE_DEFINE_GRIP] = type_of_grip
 	I.weapon_upgrades[GUN_UPGRADE_OFFSET] = -15 // Without a grip the gun shoots funny, players are legally allowed to not use a grip
 	I.gun_loc_tag = PART_GRIP
@@ -368,6 +373,7 @@ semi accepts weird caliber - +1 points
 	type_of_grip = "makeshift"
 
 //Mechanisms
+//Target point total for generally accessible: +4
 /obj/item/part/gun/modular/mechanism
 	name = "generic mechanism"
 	desc = "All the bits that makes the bullet go bang."
@@ -377,7 +383,8 @@ semi accepts weird caliber - +1 points
 	matter = list(MATERIAL_PLASTEEL = 5)
 	price_tag = 100
 	rarity_value = 6
-	var/list/accepted_calibers = list(CAL_PISTOL, CAL_MAGNUM, CAL_SRIFLE, CAL_CLRIFLE, CAL_LRIFLE, CAL_SHOTGUN)
+
+	accepted_calibers = list(CAL_PISTOL, CAL_MAGNUM, CAL_SRIFLE, CAL_CLRIFLE, CAL_LRIFLE, CAL_SHOTGUN)
 	var/loader = MAGAZINE
 	var/mag_well = MAG_WELL_GENERIC
 	var/divisor_bonus = 0
@@ -389,9 +396,8 @@ semi accepts weird caliber - +1 points
 	var/no_internal_mag = FALSE
 
 
-
 /obj/item/part/gun/modular/mechanism/New(location, quality = 0)
-	..(quality)
+	..(quality = quality)
 	I.weapon_upgrades[GUN_UPGRADE_FIREMODES] = bonus_firemodes
 	I.weapon_upgrades[GUN_UPGRADE_DEFINE_MAG_WELL] = mag_well
 	I.weapon_upgrades[GUN_UPGRADE_DEFINE_OK_CALIBERS] = accepted_calibers
@@ -453,6 +459,17 @@ semi accepts weird caliber - +1 points
 	desc = "All the bits that makes the bullet go bang, in a speedy package."
 	icon_state = "mechanism_smg"
 	mag_well = MAG_WELL_SMG
+
+//You'll need to define new parts for each 'unique' element of your gun
+//like, in this case, the drozd being an SMG gun which fires .40 rounds.
+//these parts can also be used to handle part of the unique statlines of weapons.
+/obj/item/part/gun/modular/mechanism/smg/highcaliber
+	name = "High-Caliber SMG mechanism"
+	desc = "All the bits that makes the bullet go bang, in a speedy package. \
+	This large-bore version is designed to fire higher caliber bullets, at a cost to penetrative power."
+	accepted_calibers = list(CAL_MAGNUM)
+	divisor_bonus = -0.5//this is where the drozd's pen mod has gone
+	bonus_firemodes = list(FULL_AUTO_300)//ditto for specific firemodes
 
 /obj/item/part/gun/modular/mechanism/autorifle
 	name = "generic self-loading mechanism"
@@ -523,8 +540,41 @@ semi accepts weird caliber - +1 points
 	desc = "All the bits that makes the bullet go bang, for all the military hardware you know and love. \
 			Offers 300 RPM fully automatic fire. Provides slightly improved damage output at the cost of fire control. Supports drum magazines."
 
+//this base version is used to separate out tactical mechanisms, to lock batrifles to this type specifically
+/obj/item/part/gun/modular/mechanism/autorifle/tactical
+	name = "tactical self-loading mechanism"
+	desc = "All the bits that makes the bullet go bang."
+	icon_state = "mechanism_machinegun"
+	matter = list(MATERIAL_PLASTEEL = 16)
+	mag_well = MAG_WELL_RIFLE|MAG_WELL_RIFLE_L|MAG_WELL_IH
+	bad_type = /obj/item/part/gun/modular/mechanism/autorifle/tactical
+
+// Makeshift - Poor recoil control with some middling stat buffs. +3 points
+/obj/item/part/gun/modular/mechanism/autorifle/tactical/makeshift
+	name = "improvised tactical mechanism"
+	desc = "All the bits that makes the bullet go bang. Constructed from scrap and spare parts."
+	icon_state = "mechanism_machinegun"
+	matter = list(MATERIAL_STEEL = 10)
+	mag_well = MAG_WELL_RIFLE|MAG_WELL_RIFLE_L|MAG_WELL_IH
+	accepted_calibers = list(CAL_SRIFLE, CAL_LRIFLE)
+	recoil_bonus = 1.25 // -2 points
+	damage_bonus = 0.2 // +4 points
+	divisor_bonus = 0.1 //+1 points
+	spawn_blacklisted = FALSE
+
+//A less-intense version of the commando mechanism.
+/obj/item/part/gun/modular/mechanism/autorifle/tactical/sustain
+	name = "sustaining self-loading mechanism"
+	desc = "All the bits that makes the bullet go bang. Allows for automatic fire with decent handling, at the cost of barrel velocity."
+	icon_state = "mechanism_machinegun"
+	recoil_bonus = 0.9 // + 1
+	damage_bonus = -0.2 // - 4
+	divisor_bonus = 0
+	bonus_firemodes = list(BURST_2_ROUND, FULL_AUTO_300)// + 7
+	spawn_blacklisted = FALSE
+
 // Sharpshooter - Massively increased damage and moderately increased penetration at the cost of heavy recoil. Total point value: +4
-/obj/item/part/gun/modular/mechanism/autorifle/sharpshooter
+/obj/item/part/gun/modular/mechanism/autorifle/tactical/sharpshooter
 	name = "sharpshooter self-loading mechanism"
 	desc = "All the bits that makes the bullet go bang, for all the military hardware you know and love. \
 			Powerful semiauto mechanism, effective at maximizing the firepower of each bullet. Hard to control."
@@ -534,19 +584,34 @@ semi accepts weird caliber - +1 points
 	recoil_bonus = 2 // -4 points
 	damage_bonus = 0.3 // +6 points
 	divisor_bonus = 0.2 // +2 points
+	spawn_blacklisted = FALSE
 
 // Marksman - Allows dual fire, and has both improved damage at the cost of penetration. Total point value: +4
-/obj/item/part/gun/modular/mechanism/autorifle/marksman
+/obj/item/part/gun/modular/mechanism/autorifle/tactical/marksman
 	name = "marksman self-loading mechanism"
 	desc = "All the bits that makes the bullet go bang, for all the military hardware you know and love. \
 			Accurate mechanism with a 2-fire burst, for designated marksman rifles. Lacks penetration."
 	icon_state = "mechanism_autorifle"
-	accepted_calibers = list(CAL_SRIFLE, CAL_LRIFLE)
-	mag_well = MAG_WELL_RIFLE|MAG_WELL_RIFLE_L
 	recoil_bonus = 1.25 // -1.5 points
 	damage_bonus = 0.2 // +4 points
 	divisor_bonus = -0.25 // -2.5 points, encourages use of .20 to make up for it
 	bonus_firemodes = list(BURST_2_ROUND) // +4 points
+	spawn_blacklisted = FALSE
+
+// Commando - Enables high-rpm automatic fire with good handling, at the expense of damage and penetration.
+// Has somewhat mediocre performance outside of it's originally-intended frame (The STS-35).
+/obj/item/part/gun/modular/mechanism/autorifle/tactical/commando
+	name = "commando self-loading mechanism"
+	desc = "All the bits that makes the bullet go bang, for all the military hardware you know and love. \
+			An unusual mechanism that combines fully automatic fire with effective handling for longer ranges, \
+			originally custom-made for a particular hybrid battle rifle, it suffers from very low exit pressure outside of its intended design."
+	icon_state = "mechanism_autorifle"
+	recoil_bonus = -0.8
+	damage_bonus = -0.3
+	divisor_bonus = -0.25
+	bonus_firemodes = list(BURST_3_ROUND, FULL_AUTO_400)
+	spawn_blacklisted = FALSE
+
 
 /obj/item/part/gun/modular/mechanism/machinegun
 	name = "machine gun mechanism"
@@ -648,7 +713,7 @@ semi accepts weird caliber - +1 points
 	var/basemove
 
 /obj/item/part/gun/modular/barrel/New(location, quality = 0)
-	..(quality)
+	..(quality = quality)
 	I.weapon_upgrades[GUN_UPGRADE_DEFINE_CALIBER] = caliber
 	if(!isnull(speed))
 		I.weapon_upgrades[GUN_UPGRADE_STEPDELAY_MULT] = speed
@@ -841,8 +906,8 @@ semi accepts weird caliber - +1 points
 	onehandpenalty = 2.4
 
 /obj/item/part/gun/modular/sights
-	name = "ironsights"
-	desc = "A set of sights for aiming through."
+	name = "iron sights"
+	desc = "A set of metal sights for aiming through."
 	var/list/scopes = list()
 	interactions = /datum/guninteraction/zoomed
 	var/scopeaccuracy
@@ -932,3 +997,53 @@ semi accepts weird caliber - +1 points
 	desc = "A bayonet designed for a firmer attachment, applied during assembly. This one's made from cheap steel."
 	matter = list(MATERIAL_STEEL = 2)
 	damagedone = 3
+
+//normal silencer, buyable from beacon & findable in maint
+/obj/item/part/gun/modular/silencer
+	name = "compact silencer"
+	desc = "A screw-on cylinder which reduces the flash and noise of gunfire when attached to a firearm's barrel. \
+	Impedes the flow of gas out of the firearm, which slightly decreases firing recoil and reduces muzzle velocity."
+	matter = list(MATERIAL_STEEL = 10, MATERIAL_PLASTEEL)
+	var/muzzleflash_effect = 0.8
+	var/damage_reduction = -0.1
+	var/recoil_mult = 0.9
+	icon = 'icons/obj/guns/mods.dmi'
+	icon_state = "silencer"
+	part_overlay = "silencer_small"
+	accepted_calibers = list(CAL_357, CAL_PISTOL, CAL_MAGNUM, CAL_SRIFLE, CAL_CLRIFLE, CAL_LRIFLE)
+
+/obj/item/part/gun/modular/silencer/New(location, var/quality = 0)
+	..(quality)
+	I.weapon_upgrades = list(
+		GUN_UPGRADE_SILENCER = TRUE,
+		GUN_UPGRADE_MUZZLEFLASH = muzzleflash_effect,
+		GUN_UPGRADE_RECOIL = recoil_mult
+		)
+	I.weapon_upgrades[GUN_UPGRADE_DAMAGEMOD_PLUS] = damage_reduction
+	I.gun_loc_tag = GUN_MUZZLE
+
+//advanced silencer, only findable on specific pre-silenced weapons/from certain sources
+/obj/item/part/gun/modular/silencer/advanced
+	name = "advanced silencer"
+	desc = "A screw-on cylinder which reduces the flash and noise of gunfire when attached to a firearm's barrel. \
+	The interior of this silencer is designed with topography that mitigates the downsides of silencing & reduces muzzle flash even further."
+	matter = list(MATERIAL_PLASTEEL = 15)
+	muzzleflash_effect = 0.5
+	damage_reduction = -0.05
+	recoil_mult = 0.9
+	icon_state = "silencer_adv"
+	part_overlay = "silencer_advanced"
+	spawn_blacklisted = TRUE
+
+//made through crafting using an aural dampener toolmod & a normal compact silencer
+/obj/item/part/gun/modular/silencer/ultrasound
+	name = "ultrasound silencer"
+	desc = "A thin, elegant silencer which works by shifting the firing sound of the weapon into ultrasonic frequencies. \
+	This more gentle technique is less impeding to escaping gas, giving it little to no effect on muzzle velocity, flash, or recoil."
+	matter = list(MATERIAL_PLASTEEL = 10, MATERIAL_PLATINUM = 3)
+	muzzleflash_effect = 1
+	damage_reduction = 0
+	recoil_mult = 0
+	icon_state = "silencer_aural"
+	part_overlay = "silencer_aural"
+	spawn_blacklisted = TRUE

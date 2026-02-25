@@ -3,6 +3,10 @@
 	desc = "Special mechanical module made to store, sort, and apply standard machine parts."
 	icon_state = "RPED"
 	item_state = "RPED"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
 	w_class = ITEM_SIZE_HUGE
 	can_hold = list(/obj/item/stock_parts)
 	storage_slots = 50
@@ -17,7 +21,7 @@
 
 /obj/item/storage/part_replacer/debugparts
 	bad_type = /obj/item/storage/part_replacer/debugparts
-	
+
 /obj/item/storage/part_replacer/debugparts/populate_contents()
 	new /obj/item/stock_parts/capacitor/debug(src)
 	new /obj/item/stock_parts/capacitor/debug(src)

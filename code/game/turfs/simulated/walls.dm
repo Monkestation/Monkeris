@@ -42,8 +42,8 @@
 	else
 		update_icon()
 
-/turf/wall/LateInitialize()
-	update_connections()
+/turf/wall/LateInitialize(mapload_arg)
+	update_connections(mapload_arg)
 	if(window_prespawned_material)
 		create_window(window_prespawned_material)
 	else
@@ -58,8 +58,8 @@
 // Admin deleting the object will not call this, hence producing no girder or shards
 /turf/wall/proc/dismantle_wall(mob/user)
 	for(var/obj/O in contents) //Eject contents!
-		if(istype(O,/obj/item/contraband/poster))
-			var/obj/item/contraband/poster/P = O
+		if(istype(O,/obj/structure/sign/poster))
+			var/obj/structure/sign/poster/P = O
 			P.roll_and_drop(src)
 		else
 			O.loc = src
@@ -337,7 +337,7 @@
 		update_icon()
 
 
-/turf/wall/explosion_act(target_power, explosion_handler/handler)
+/turf/wall/explosion_act(target_power, datum/explosion_handler/handler)
 	if(!is_simulated)
 		return 0
 	var/absorbed = take_damage(target_power)

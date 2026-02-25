@@ -16,10 +16,9 @@
 
 /turf/wall/low/onestar // Standard dungeon low wall, only comes in one flavor
 	name = "One Star low wall"
-	icon_state = "onestar_low_smart"
+	icon_state = "onestar_low"
 	wall_style = "minimalistic" // No overlays at all
 	wall_type = "onestar_low"
-	window_prespawned_material = "smart"
 
 /turf/wall/low/frontier // Fancy downstream low wall, does not spawn in the wild yet
 	icon_state = "frontier_low_smart"
@@ -51,6 +50,31 @@
 /turf/wall/low/with_glass/smart_plasma
 	icon_state = "eris_low_smart_plasma"
 	window_prespawned_material = "smart_plasma" // MATERIAL_RPLASMAGLASS if near space, MATERIAL_PLASMAGLASS otherwise
+
+
+//onestar wall variants
+/turf/wall/low/with_glass/onestar
+	wall_style = "minimalistic" // No overlays at all
+	wall_type = "onestar_low"
+	icon_state = "onestar_low_glass"
+	window_prespawned_material = MATERIAL_GLASS
+
+/turf/wall/low/with_glass/onestar/reinf
+	icon_state = "onestar_low_reinf_glass"
+	window_prespawned_material = MATERIAL_RGLASS
+
+/turf/wall/low/with_glass/onestar/plasma
+	icon_state = "onestar_low_plasma_glass"
+	window_prespawned_material = MATERIAL_PLASMAGLASS
+
+/turf/wall/low/with_glass/onestar/rplasma
+	icon_state = "onestar_low_plasma_reinf_glass"
+	window_prespawned_material = MATERIAL_RPLASMAGLASS
+
+/turf/wall/low/with_glass/onestar/smart
+	icon_state = "onestar_smart"
+	window_prespawned_material = "smart"
+
 
 /turf/wall/low/dismantle_wall(mob/user)
 	if(window_type)

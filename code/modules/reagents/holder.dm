@@ -215,6 +215,10 @@
 	update_total()
 	amount = min(amount, get_free_space())
 
+	if(ispath(id, /datum/reagent))
+		var/datum/reagent/reagent = id
+		id = initial(reagent.id)
+
 	for(var/datum/reagent/current in reagent_list)
 		if(current.id == id)
 			current.volume += amount
@@ -249,6 +253,10 @@
 /datum/reagents/proc/remove_reagent(id, amount, safety = FALSE)
 	if(!isnum(amount))
 		return 0
+	if(ispath(id, /datum/reagent))
+		var/datum/reagent/reagent = id
+		id = initial(reagent.id)
+
 	for(var/datum/reagent/current in reagent_list)
 		if(current.id == id)
 			current.volume -= amount // It can go negative, but it doesn't matter
@@ -261,6 +269,10 @@
 	return 0
 
 /datum/reagents/proc/del_reagent(id)
+	if(ispath(id, /datum/reagent))
+		var/datum/reagent/reagent = id
+		id = initial(reagent.id)
+
 	for(var/datum/reagent/current in reagent_list)
 		if (current.id == id)
 			reagent_list -= current
@@ -274,6 +286,10 @@
 			return 0
 
 /datum/reagents/proc/has_reagent(id, amount = 0)
+	if(ispath(id, /datum/reagent))
+		var/datum/reagent/reagent = id
+		id = initial(reagent.id)
+
 	for(var/datum/reagent/current in reagent_list)
 		if(current.id == id)
 			if(current.volume >= amount)
@@ -345,6 +361,28 @@
 	return english_list(data)
 
 /* Holder-to-holder and similar procs */
+
+/datum/reagents/proc/remove_all_type(reagent_type, amount, strict = 0, safety = 1) // Removes all reagent of X type. @strict set to 1 determines whether the childs of the type are included.
+	if(!isnum(amount))
+		return 1
+	var/list/cached_reagents = reagent_list
+	var/has_removed_reagent = 0
+
+	for(var/datum/reagent/R as anything in cached_reagents)
+		var/matches = 0
+		// Switch between how we check the reagent type
+		if(strict)
+			if(R.type == reagent_type)
+				matches = 1
+		else
+			if(istype(R, reagent_type))
+				matches = 1
+		// We found a match, proceed to remove the reagent.	Keep looping, we might find other reagents of the same type.
+		if(matches)
+			// Have our other proc handle removement
+			has_removed_reagent = remove_reagent(R.type, amount, safety)
+
+	return has_removed_reagent
 
 /datum/reagents/proc/remove_any(amount = 1) // Removes up to [amount] of reagents from [src]. Returns actual amount removed.
 	amount = min(amount, total_volume)
@@ -421,7 +459,7 @@
 		remove_any(amount) //If we don't do this, then only the spill amount above is removed, and someone can keep splashing with the same beaker endlessly
 
 /datum/reagents/proc/trans_id_to(atom/target, id, amount = 1, ignore_isinjectable = FALSE)
-	if (!target || !target.reagents || !target.simulated)
+	if (!target || (isatom(target) && !target.reagents) || !target.simulated)
 		return
 
 	amount = min(amount, get_reagent_amount(id))
@@ -618,3 +656,12 @@
 
 /atom/proc/create_reagents(max_vol)
 	reagents = new /datum/reagents(max_vol, src)
+
+/datum/reagent/proc/add_to_member(obj/effect/abstract/liquid_turf/adder)
+	return
+
+/datum/reagent/proc/remove_from_member(obj/effect/abstract/liquid_turf/remover)
+	return
+
+/datum/reagent/proc/evaporate(turf/exposed_turf, reac_volume)
+	return

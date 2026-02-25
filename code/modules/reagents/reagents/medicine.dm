@@ -356,7 +356,10 @@
 /datum/reagent/medicine/alkysine/affect_blood(mob/living/carbon/M, alien, effect_multiplier)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/internal/vital/brain/B = H.internal_organs_by_efficiency[BP_BRAIN]
+		var/list/brains = H.internal_organs_by_efficiency[BP_BRAIN]
+		if(!length(brains))
+			return
+		var/obj/item/organ/internal/vital/brain/B = pick(brains)
 		if(!BP_IS_ROBOTIC(B) && prob(75))
 			M.add_chemical_effect(CE_PAINKILLER, 10)
 			M.add_chemical_effect(CE_BRAINHEAL, 1)

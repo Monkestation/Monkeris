@@ -1,0 +1,53 @@
+2026-02-12:
+  flleeppyy:
+  - rscadd: Added relay chooser (Named "Internet Routing Relays" at the top of the
+      window) ported from IrisStation
+2026-02-13:
+  dwasint:
+  - rscadd: Liquids
+  - rscadd: Pollution
+  flleeppyy:
+  - rscadd: Plexora
+  - rscadd: new and improved library
+  - rscadd: balloon alerts
+  - refactor: posters have been refactored!
+  - server: updated DB schema for library
+  - rscadd: min/max age defines for characters
+  - admin: Added a new library management verb
+2026-02-14:
+  Sun-Soaked:
+  - bugfix: modgun parts now improve max upgrade number as intended
+  - bugfix: modguns now properly regenerate their gunmod slots when scopes and bayonets
+      are removed.
+  - bugfix: certain modguns now have working inhands.
+  - bugfix: the ui no longer freaks out when you scope in on a gun which didn't spawn
+      with a scope
+  - bugfix: modguns no longer fail to clear their scope when it is removed
+  - bugfix: modular bolt-action rifles now actually appear ingame
+  - bugfix: innate gun part quality on modular guns now once again works
+  - rscadd: The crafting station can now produce bolt-action mechanisms, bayonets,
+      and scopes.
+  - rscadd: Scopes & Bayonets are now attachable to all rifle-sized modular weapons
+  - rscadd: adds a system to let non-gunpart mods apply visuals when applied to modguns
+  - rscadd: Modguns now have unique oldification behavior
+  Sun-Soaked, blackwolf602:
+  - rscadd: The Drozd is now a modular weapon.
+  - rscadd: The Drozd now has 2handing sprites.
+2026-02-24:
+  Sun-Soaked:
+  - bugfix: you can now click fuel intakes again
+  - rscadd: The ballpoint, a makeshift semi-automatic rifle
+  - rscadd: Modular versions of the STS-35, Kovacs, and Vintorez battle rifles
+  - rscadd: Modgun silencers
+  - rscadd: The MK58 now has silencer sprites
+  - rscadd: The drozd and MK58 now have bayonet sprites
+  - rscadd: items produced in a lathe now get a 'watermark' string that shows they
+      were lathe-made and contains some information about the lathe they came from.
+      Players can see the information stored in a watermark with sufficiently high
+      MEC.
+  blackwolf602:
+  - rscadd: kampfer suit
+  - rscadd: jager suit
+  - rscadd: fuhrer suit
+  - balance: reduces spiders legs to crab meat from 3 to 1 when cut. (I set it too
+      high originally)

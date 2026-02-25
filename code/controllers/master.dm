@@ -240,6 +240,7 @@ GLOBAL_REAL(Master, /datum/controller/master)
 
 			rustg_time_reset(SS_INIT_TIMER_KEY)
 			log_game("Initializing [subsystem.name] subsystem...")
+			world.name = "[get_default_world_name(FALSE)] - [subsystem.order_string()] Initializing [subsystem.name] subsystem..."
 			subsystem.Initialize()
 
 			CHECK_TICK
@@ -258,9 +259,12 @@ GLOBAL_REAL(Master, /datum/controller/master)
 	var/msg_fancy = "Initializations complete within [get_colored_thresh_text("[time] second[time == 1 ? "" : "s"]!", time, 200 SECONDS / 10)]!"
 	msg = "Initializations complete within [time] second[time == 1 ? "" : "s"]!"
 
+	world.name = get_default_world_name()
+
 	to_chat(world, span_boldannounce(msg_fancy))
 	log_world(msg)
 
+	SSplexora.serverinitdone(time)
 
 	if (tgs_prime)
 		world.TgsInitializationComplete()
@@ -304,8 +308,10 @@ GLOBAL_REAL(Master, /datum/controller/master)
 	if (rtn >= MC_LOOP_RTN_GRACEFUL_EXIT || processing < 0)
 		return //this was suppose to happen.
 	//loop ended, restart the mc
-	log_game("MC crashed or runtimed, restarting")
-	message_admins("MC crashed or runtimed, restarting")
+	var/msg = "MC crashed or runtimed, restarting"
+	log_game(msg)
+	message_admins(msg)
+	SSplexora.mc_alert(msg)
 	var/rtn2 = Recreate_MC()
 	if (rtn2 <= 0)
 		log_game("Failed to recreate MC (Error code: [rtn2]), it's up to the failsafe now")

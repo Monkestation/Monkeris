@@ -231,7 +231,7 @@ Like for example singulo act and whatever.
 
 // Explosions
 
-/obj/effect/shield/explosion_act(target_power, explosion_handler/handler)
+/obj/effect/shield/explosion_act(target_power, datum/explosion_handler/handler)
 	if(!ignoreExAct && !isInactive())
 		return take_damage(target_power, SHIELD_DAMTYPE_PHYSICAL, src)
 

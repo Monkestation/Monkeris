@@ -397,7 +397,7 @@
 		visible_message(span_warning("\The [src.name] breaks!"))
 	update_icon()
 
-/obj/machinery/door/explosion_act(target_power, explosion_handler/handler)
+/obj/machinery/door/explosion_act(target_power, datum/explosion_handler/handler)
 	var/absorbed = take_damage(target_power)
 	//message_admins("Door block absorbed [absorbed] damage , whilst having a health pool of [health] out of a maximum of [maxHealth]")
 	return absorbed

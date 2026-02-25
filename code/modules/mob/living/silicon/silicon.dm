@@ -3,6 +3,7 @@
 	voice_name = "synthesized voice"
 	bad_type = /mob/living/silicon
 	tts_seed = "Robot_1"
+	bubble_icon = "robot"
 	var/syndicate = 0
 	var/const/MAIN_CHANNEL = "Main Frequency"
 	/// Default channel on which to state laws
@@ -43,6 +44,11 @@
 	mob_classification = CLASSIFICATION_SYNTHETIC
 
 	injury_type = INJURY_TYPE_UNLIVING // Has no soft vitals, but also contains delicate electronics
+
+	///a datum containing our silicon's laws
+	var/datum/ai_laws/laws = null
+	///additional radio channels to state laws over
+	var/list/additional_law_channels = list("State" = "")
 
 /mob/living/silicon/Initialize()
 	GLOB.silicon_mob_list |= src
@@ -210,7 +216,7 @@
 /mob/living/silicon/binarycheck()
 	return 1
 
-/mob/living/silicon/explosion_act(target_power, explosion_handler/handler)
+/mob/living/silicon/explosion_act(target_power, datum/explosion_handler/handler)
 	adjustBruteLoss(target_power/2)
 	adjustFireLoss(target_power/2)
 	updatehealth()

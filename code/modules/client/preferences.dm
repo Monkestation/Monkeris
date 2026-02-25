@@ -174,7 +174,7 @@
 	character.set_species(species)
 	var/random_first = random_first_name(gender, species)
 	var/random_last = random_last_name(gender, species)
-	var/random_full = real_first_name + " " + real_last_name
+	var/random_full = real_first_name + (real_last_name ? " " + real_last_name : real_last_name)
 
 	if(be_random_name)
 		real_first_name = random_first
@@ -202,7 +202,7 @@
 	character.f_style = f_style
 
 	// Build mob body from prefs
-	if (preview_should_rebuild_organs)
+	if (preview_should_rebuild_organs || !is_preview_copy)
 		character.rebuild_organs(src)
 
 	character.eyes_color = eyes_color
@@ -229,7 +229,7 @@
 
 	character.backpack_setup = new(backpack, backpack_metadata["[backpack]"])
 
-	if (preview_should_rebuild_organs)
+	if (preview_should_rebuild_organs || !is_preview_copy)
 		character.force_update_limbs()
 		character.update_mutations(0)
 		character.update_implants(0)

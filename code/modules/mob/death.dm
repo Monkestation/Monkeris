@@ -19,7 +19,8 @@
 		animation.icon = 'icons/mob/mob.dmi'
 		animation.master = src
 		flick(anim, animation)
-	addtimer(CALLBACK(src, PROC_REF(check_delete), animation), 15)
+	if (!QDELETED(src))
+		addtimer(CALLBACK(src, PROC_REF(check_delete), animation), 15)
 
 /mob/proc/check_delete(atom/movable/overlay/animation)
 	if(animation)	qdel(animation)

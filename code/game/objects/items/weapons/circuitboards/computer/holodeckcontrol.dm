@@ -22,7 +22,7 @@
 			HC.emagged 			= 1
 			HC.safety_disabled	= 1
 
-/obj/item/electronics/circuitboard/holodeckcontrol/deconstruct(obj/machinery/computer/HolodeckControl/HC)
+/obj/item/electronics/circuitboard/holodeckcontrol/_deconstruct(obj/machinery/computer/HolodeckControl/HC)
 	if (..(HC))
 		linkedholodeck_area		= HC.linkedholodeck_area
 		supported_programs		= HC.supported_programs.Copy()

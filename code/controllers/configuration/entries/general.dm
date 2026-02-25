@@ -300,6 +300,9 @@
 // log emotes
 /datum/config_entry/flag/log_emote
 
+///Log Music Requests
+/datum/config_entry/flag/log_internet_request
+
 /// log telecomms messages
 /datum/config_entry/flag/log_telecomms
 
@@ -373,6 +376,15 @@
 /*     ADMIN     */
 /*****************/
 
+/// if autoadmin is enabled
+/datum/config_entry/flag/autoadmin
+	protection = CONFIG_ENTRY_LOCKED
+
+/// the rank given to autoadmins
+/datum/config_entry/string/autoadmin_rank
+	default = "Game Master"
+	protection = CONFIG_ENTRY_LOCKED
+
 /// allows admins with relevant permissions to have their own ooc colour
 /datum/config_entry/flag/allow_admin_ooccolor
 
@@ -384,10 +396,6 @@
 
 /// Forid admins from possessing scringularaitirtiys
 /datum/config_entry/flag/forbid_singulo_possession
-
-/// Gives the !localhost! rank to any client connecting from 127.0.0.1 or ::1
-/datum/config_entry/flag/enable_localhost_rank
-	protection = CONFIG_ENTRY_LOCKED
 
 /// Defines whether the server uses the legacy admin system with admins.txt or the SQL system
 /datum/config_entry/flag/admin_legacy_system
@@ -514,16 +522,10 @@
 
 /datum/config_entry/flag/emojis
 
-/datum/config_entry/flag/paper_input
-
 /// If true, submaps loaded automatically can be rotated.
 /datum/config_entry/flag/random_submap_orientation
 
 /datum/config_entry/flag/use_overmap
-
-
-/// Path to the python2 executable on the system.
-/datum/config_entry/string/python_path
 
 /**
  * motd.txt
@@ -535,6 +537,16 @@
 
 /datum/config_entry/flag/config_errors_runtime
 	default = FALSE
+
+/datum/config_entry/string/invoke_youtubedl
+	protection = CONFIG_ENTRY_LOCKED | CONFIG_ENTRY_HIDDEN
+
+/datum/config_entry/flag/request_internet_sound
+
+
+/datum/config_entry/string/request_internet_allowed
+	protection = CONFIG_ENTRY_LOCKED
+
 /*****************/
 /*  URLS & Lang  */
 /*****************/

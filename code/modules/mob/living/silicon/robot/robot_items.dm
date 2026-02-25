@@ -264,6 +264,7 @@
 
 	//n_name = copytext(n_name, 1, 32)
 	if(( get_dist(user,paper) <= 1  && user.stat == 0))
+		log_paper("[key_name(user)] renamed [paper.name] to [n_name]")
 		paper.name = "paper[(n_name ? text("- '[n_name]'") : null)]"
 	add_fingerprint(user)
 	return
@@ -275,6 +276,10 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper_bin1"
 	item_state = "sheet-metal"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/sheets_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/sheets_righthand.dmi',
+		)
 	bad_type = /obj/item/form_printer
 
 /obj/item/form_printer/attack(mob/living/carbon/M, mob/living/carbon/user)

@@ -122,7 +122,7 @@
 /turf/floor/tiled/dark/brown_perforated,
 /area/crawler)
 "C" = (
-/turf/wall/low/onestar,
+/turf/wall/low/with_glass/onestar/reinf,
 /area/crawler)
 "H" = (
 /obj/structure/table/onestar,

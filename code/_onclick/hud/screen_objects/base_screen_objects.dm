@@ -152,7 +152,7 @@
 
 /atom/movable/screen/item_action/top_bar/update_icon()
 	..()
-	if(!ismob(owner.loc))
+	if(!owner || !ismob(owner.loc))
 		return
 
 	var/mob/living/M = owner.loc
@@ -240,7 +240,9 @@
 	logger.Log(
 		LOG_CATEGORY_TARGET_ZONE_SWITCH,
 		"[key_name(src)] manually changed selected zone (UI)",
-		data = selecting
+		data = list(
+			"selecting" = selecting
+		)
 	)
 	set_selected_zone(selecting)
 	return TRUE

@@ -242,7 +242,7 @@
 		recoil = aimer.recoil
 		recoil -= projectile_accuracy
 
-		if(ishuman(user))
+		if(ishuman(user) && user.client)
 			var/mob/living/carbon/human/H = user
 			if(H.can_multiz_pb && (!isturf(target)))
 				loc = get_turf(H.client.eye)
@@ -484,7 +484,7 @@
 	return TRUE
 
 
-/obj/item/projectile/explosion_act(target_power, explosion_handler/handler)
+/obj/item/projectile/explosion_act(target_power, datum/explosion_handler/handler)
 	return 0
 
 /obj/item/projectile/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)

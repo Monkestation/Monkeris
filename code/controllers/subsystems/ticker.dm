@@ -52,6 +52,7 @@ SUBSYSTEM_DEF(ticker)
 
 	var/quoted = FALSE
 	var/round_start_time = 0
+	var/real_round_start_time = 0
 	var/round_end_announced = 0 // Spam Prevention. Announce round end only once.
 
 	/// ID of round reboot timer, if it exists
@@ -287,6 +288,9 @@ SUBSYSTEM_DEF(ticker)
 
 	callHook("roundstart")
 
+	round_start_time = world.time //otherwise round_start_time would be 0 for the signals
+	real_round_start_time = REALTIMEOFDAY
+
 	// no, block the main thread.
 	GLOB.storyteller.set_up()
 	to_chat(world, span_notice("<B>Welcome to [station_name()], enjoy your stay!</B>"))
@@ -297,7 +301,6 @@ SUBSYSTEM_DEF(ticker)
 		N.new_player_panel_proc()
 
 	CHECK_TICK
-	setup_codespeak()
 	generate_contracts(min(6 + round(minds.len / 5), 12))
 	generate_excel_contracts(min(6 + round(minds.len / 5), 12))
 	excel_check()
@@ -313,6 +316,8 @@ SUBSYSTEM_DEF(ticker)
 		send2adminchat("Round has started with no admins online.")
 
 	round_start_time = world.time //otherwise round_start_time would be 0 for the signals
+	SEND_SIGNAL(src, COMSIG_TICKER_ROUND_STARTING, world.time)
+
 
 	PostSetup()
 	return TRUE
@@ -627,6 +632,7 @@ SUBSYSTEM_DEF(ticker)
 		log_game("[i]s[total_antagonists[i]].")
 
 	sleep(5 SECONDS)
+	SSplexora.roundended()
 	callHook("roundend")
 	ready_for_reboot = TRUE
 	standard_reboot()

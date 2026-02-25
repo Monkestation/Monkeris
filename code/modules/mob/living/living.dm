@@ -140,6 +140,8 @@ default behaviour is:
 
 /proc/swap_density_check(mob/swapper, mob/swapee)
 	var/turf/T = get_turf(swapper)
+	if (!T)
+		return FALSE
 	if(T.density)
 		return TRUE
 	for(var/atom/movable/A in T)
@@ -885,6 +887,7 @@ default behaviour is:
 		SSmobs.mob_living_by_zlevel[registered_z] -= src	// STOP_PROCESSING() doesn't remove the mob from this list
 	QDEL_NULL(stats)
 	QDEL_NULL(static_overlay)
+	blocking_item = null
 	return ..()
 
 /mob/living/proc/vomit()

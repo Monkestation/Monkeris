@@ -39,11 +39,14 @@
 	var/image/wet_overlay = null
 	var/obj/landmark/loot_biomes/biome
 
-
-
 	#ifdef ZASDBG
 	var/list/ZAS_debug_overlays
 	#endif
+	var/obj/effect/abstract/liquid_turf/liquids
+	var/liquid_height = 0
+	var/turf_height = 0
+	/// Pollution of this turf
+	var/datum/pollution/pollution
 
 /turf/New()
 	..()
@@ -53,7 +56,6 @@
 /turf/Initialize(mapload, ...)
 	if(opacity)
 		has_opaque_atom = TRUE
-	GLOB.turfs += src
 
 	// TODO: Check which areas are on the ship, but marked improperly, and remove this code
 	var/area/A = loc
@@ -63,7 +65,6 @@
 	. = ..() // Calls /atom/proc/Initialize()
 
 /turf/Destroy()
-	GLOB.turfs -= src
 	updateVisibility(src)
 	..()
 	return QDEL_HINT_IWILLGC
@@ -75,6 +76,12 @@
 	return FALSE
 
 /turf/proc/can_build_cable(mob/user) // , floors override that
+	return FALSE
+
+/turf/proc/multiz_turf_del(turf/T, dir)
+	return FALSE
+
+/turf/proc/multiz_turf_new(turf/T, dir)
 	return FALSE
 
 /turf/attackby(obj/item/I, mob/user, params)
@@ -118,7 +125,7 @@
 
 /turf/Enter(atom/movable/O, atom/oldloc)
 	ASSERT(O)
-	if(movement_disabled && ismob(usr) && usr.ckey != movement_disabled_exception)
+	if(GLOB.movement_disabled && ismob(usr) && usr.ckey != GLOB.movement_disabled_exception)
 		to_chat(usr, span_warning("Movement is admin-disabled.")) //This is to identify lag problems
 		return
 

@@ -1,4 +1,10 @@
 /mob/living/carbon/human
+	name = "unknown"
+	real_name = "unknown"
+	voice_name = "unknown"
+	icon = 'icons/mob/human.dmi'
+	icon_state = "body_m_s"
+
 	var/first_name
 	var/last_name
 
@@ -83,8 +89,6 @@
 	var/gunshot_residue
 	/// Are you trying not to hurt your opponent?
 	var/holding_back
-	/// ready to block melee attacks?
-	var/blocking = FALSE
 
 	mob_bump_flag = HUMAN
 	mob_push_flags = ~HEAVY
@@ -134,3 +138,15 @@
 	/// Direction of run-up
 	var/momentum_dir = 0
 	var/momentum_reduction_timer
+
+	///a timestamp of the last time this mob used codespeak
+	var/codespeak_cooldown
+
+	///used to define which mob hud elements are visible over this mob (i.e. health readout, excel status, etc.)
+	var/list/hud_list[10]
+	/// To check if we've need to roll for damage on movement while an item is imbedded in us.
+	var/embedded_flag
+	/// This is very not good, but it's much much better than calling get_rig() every update_lying_buckled_and_verb_status() call.
+	var/obj/item/rig/wearing_rig
+	/// This is not very good either, because I've copied it. Sorry.
+	var/using_scope

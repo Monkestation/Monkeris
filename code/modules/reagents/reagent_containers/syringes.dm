@@ -13,6 +13,10 @@
 	description_antag = "People tend to place full trust into paramedics or doctors when they get scanned beforehand and told they're damaged, followed by a injection of what usually is healing chemicals."
 	item_state = "syringe"
 	icon_state = "0"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/medical_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/medical_righthand.dmi',
+		)
 	matter = list(MATERIAL_GLASS = 1, MATERIAL_STEEL = 1)
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = null

@@ -328,7 +328,7 @@ var/bomb_set
 	security_state.set_security_level(previous_level)
 	update_icon()
 
-/obj/machinery/nuclearbomb/explosion_act(target_power, explosion_handler/handler)
+/obj/machinery/nuclearbomb/explosion_act(target_power, datum/explosion_handler/handler)
 	return 0
 
 #define NUKERANGE 80
@@ -394,6 +394,10 @@ if(!N.lighthack)
 	icon = 'icons/obj/discs.dmi'
 	icon_state = "nuclear"
 	item_state = "card-id"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/idcards_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/idcards_lefthand.dmi',
+		)
 	w_class = ITEM_SIZE_TINY
 
 /obj/item/disk/nuclear/touch_map_edge()

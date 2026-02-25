@@ -6,9 +6,9 @@
 
 
 	if(isghost(src) || stats.getPerk(PERK_CODESPEAK_COP))
-		message = cop_codes.find_message(message) ? "[message] ([cop_codes.find_message(message)])" : message
+		message = GLOB.cop_codes.find_message(message) ? "[message] ([GLOB.cop_codes.find_message(message)])" : message
 	if(isghost(src) || stats.getPerk(PERK_CODESPEAK_SERB))
-		message = serb_codes.find_message(message) ? "[message] ([serb_codes.find_message(message)])" : message
+		message = GLOB.serb_codes.find_message(message) ? "[message] ([GLOB.serb_codes.find_message(message)])" : message
 
 	var/speaker_name = speaker.name
 	if(ishuman(speaker))
@@ -52,9 +52,9 @@
 					nverb = "[verb] ([language.shorthand])"
 				if(GLOB.PREF_OFF)//Regular output
 					nverb = verb
-			on_hear_say("<span class='game say'>[language.display_icon(src) ? language.get_icon() : ""][span_name("[speaker_name]")][alt_name] [track][language.format_message(message, nverb)]</span>")
+			on_hear_say("<span class='game say'>[track] [language.display_icon(src) ? language.get_icon() : ""][span_name("[speaker_name]")][alt_name] [language.format_message(message, nverb)]</span>")
 	else
-		on_hear_say("<span class='game say'>[span_name("[speaker_name]")][alt_name] [track][verb], [span_message("<span class='body'>\"[message]\"")]</span></span>")
+		on_hear_say("<span class='game say'>[track] [span_name("[speaker_name]")][alt_name] [verb], [span_message("<span class='body'>\"[message]\"")]</span></span>")
 	// Create map text prior to modifying message for goonchat
 	if (client?.prefs.RC_enabled && !(stat == UNCONSCIOUS || stat == HARDCRIT) && (ismob(speaker) || client.prefs.RC_see_chat_non_mob) && !isdeaf(src))
 		if (italics)
@@ -79,11 +79,11 @@
 		return
 
 	if(isghost(src) || stats.getPerk(PERK_CODESPEAK_COP))
-		var/found = cop_codes.find_message_radio(message)
+		var/found = GLOB.cop_codes.find_message_radio(message)
 		if(found)
 			message = "[message] ([found])"
 	if(isghost(src) || stats.getPerk(PERK_CODESPEAK_SERB))
-		var/found = serb_codes.find_message_radio(message)
+		var/found = GLOB.serb_codes.find_message_radio(message)
 		if(found)
 			message = "[message] ([found])"
 
@@ -182,7 +182,7 @@
 	if(. != speaker.real_name && !isAI(speaker))
 	 //Announce computer and various stuff that broadcasts doesn't use it's real name but AI's can't pretend to be other mobs.
 		. = "[speaker.real_name] ([.])"
-	return "[.] [ghost_follow_link(speaker, src)]"
+	return "[ghost_follow_link(speaker, src)] [.]"
 
 /proc/say_timestamp()
 	return "<span class='say_quote'>\[[stationtime2text()]\]</span>"

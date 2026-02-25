@@ -108,7 +108,7 @@
 	src.add_fingerprint(user)
 	return
 
-/obj/machinery/bodyscanner/explosion_act(target_power, explosion_handler/handler)
+/obj/machinery/bodyscanner/explosion_act(target_power, datum/explosion_handler/handler)
 	if(target_power > health)
 		for(var/atom/movable/A in src)
 			A.forceMove(loc)

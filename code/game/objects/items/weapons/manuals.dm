@@ -2,6 +2,7 @@
 
 /obj/item/book/manual
 	icon = 'icons/obj/library.dmi'
+	icon_state = "scrapbook"
 	due_date = 0 // Game time in 1/10th seconds
 	unique = TRUE   // FALSE - Normal book, TRUE - Should not be treated as normal book, unable to be copied, unable to be modified
 
@@ -9,10 +10,10 @@
 /obj/item/book/manual/chef_recipes
 	name = "Bradhaanata Cooking Guide"
 	icon_state = "cooked_book"
-	author = "Jordan Damnsey"
-	title = "Bradhaanata cooking guide"
+	starting_author = "Jordan Damnsey"
+	starting_title = "Bradhaanata cooking guide"
 
-	dat = {"<html>
+	starting_content = {"<html>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -69,10 +70,10 @@
 /obj/item/book/manual/barman_recipes
 	name = "Barman Recipes"
 	icon_state = "barbook"
-	author = "Sir John Rose"
-	title = "Barman Recipes"
+	starting_author = "Sir John Rose"
+	starting_title = "Barman Recipes"
 
-	dat = {"<html>
+	starting_content = {"<html>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -125,10 +126,10 @@
 	name = "Fission Mailed: Nuclear Sabotage 101"
 	desc = "An information manual for Syndicate operatives on the usage of nuclear devices to destroy Nanotrasen facilities, a throwback to the past."
 	icon_state = "book_nuclear"
-	author = "Syndicate"
-	title = "Fission Mailed: Nuclear Sabotage 101"
+	starting_author = "Syndicate"
+	starting_title = "Fission Mailed: Nuclear Sabotage 101"
 
-	dat = {"<html>
+	starting_content = {"<html>
 				<head>
 				<style>
 				h1 {font-size: 21px; margin: 15px 0px 5px;}
@@ -180,13 +181,13 @@
 	bad_type = /obj/item/book/manual/wiki
 
 /obj/item/book/manual/wiki/attack_self()
-	if(!dat)
+	if(!starting_content)
 		initialize_wikibook()
 	return ..()
 
 /obj/item/book/manual/wiki/proc/initialize_wikibook()
 	if(CONFIG_GET(string/wikiurl))
-		dat = {"
+		starting_content = {"
 			<html><head>
 			<style>
 				iframe {
@@ -211,58 +212,58 @@
 /obj/item/book/manual/wiki/engineering_guide
 	name = "Engineering Textbook"
 	icon_state = "book_engineering"
-	author = "Engineering Encyclopedia"
-	title = "Engineering Textbook"
+	starting_author = "Engineering Encyclopedia"
+	starting_title = "Engineering Textbook"
 	page_link = "Guide_to_Engineering"
 
 /obj/item/book/manual/wiki/engineering_construction
 	name = "Station Repairs and Construction"
 	icon_state = "book_construction"
-	author = "Engineering Encyclopedia"
-	title = "Station Repairs and Construction"
+	starting_author = "Engineering Encyclopedia"
+	starting_title = "Station Repairs and Construction"
 	page_link = "Guide_to_Construction"
 
 /obj/item/book/manual/wiki/engineering_atmos
 	name = "Pipes and You: Getting To Know Your Scary Tools"
 	icon_state = "book_atmos"
-	author = "Maria Crash, Senior Atmospherics Technician"
-	title = "Pipes and You: Getting To Know Your Scary Tools"
+	starting_author = "Maria Crash, Senior Atmospherics Technician"
+	starting_title = "Pipes and You: Getting To Know Your Scary Tools"
 	page_link = "Guide_to_Atmospherics"
 
 /obj/item/book/manual/wiki/engineering_hacking
 	name = "Hacking"
 	icon_state = "book_hacking"
-	author = "Engineering Encyclopedia"
-	title = "Hacking"
+	starting_author = "Engineering Encyclopedia"
+	starting_title = "Hacking"
 	page_link = "Guide_to_Hacking"
 
 /obj/item/book/manual/wiki/engineering_singularity
 	name = "Singularity Safety in Special Circumstances"
 	icon_state = "book_singularity"
-	author = "Engineering Encyclopedia"
-	title = "Singularity Safety in Special Circumstances"
+	starting_author = "Engineering Encyclopedia"
+	starting_title = "Singularity Safety in Special Circumstances"
 	page_link = "Guide_to_Singularity"
 
 /obj/item/book/manual/wiki/engineering_supermatter
 	name = "Supermatter Engine Operating Manual"
 	icon_state = "book_supermatter"
-	author = "Central Engineering Division"
-	title = "Supermatter Engine Operating Manual"
+	starting_author = "Central Engineering Division"
+	starting_title = "Supermatter Engine Operating Manual"
 	page_link = "Guide_to_Supermatter"
 
 //science
 /obj/item/book/manual/wiki/science_research
 	name = "Research and Development 101"
 	icon_state = "book_rnd"
-	author = "Dr. L. Ight"
-	title = "Research and Development 101"
+	starting_author = "Dr. L. Ight"
+	starting_title = "Research and Development 101"
 	page_link = "Guide_to_Research_and_Development"
 
 /obj/item/book/manual/wiki/science_robotics
 	name = "Cyborgs for Dummies"
 	icon_state = "book_borg"
-	author = "XISC"
-	title = "Cyborgs for Dummies"
+	starting_author = "XISC"
+	starting_title = "Cyborgs for Dummies"
 	page_link = "Guide_to_Robotics"
 
 //security
@@ -270,15 +271,15 @@
 	name = "Ironhammer Paragraphs"
 	desc = "A set of corporate guidelines for keeping order on privately-owned space assets."
 	icon_state = "book_ironparagraphs"
-	author = "Ironhammer Security"
-	title = "Ironhammer Paragraphs"
+	starting_author = "Ironhammer Security"
+	starting_title = "Ironhammer Paragraphs"
 	page_link = "Agreement"
 
 /obj/item/book/manual/wiki/security_detective
 	name = "The Film Noir: Proper Procedures for Investigations"
 	icon_state = "book_forensics"
-	author = "The Company"
-	title = "The Film Noir: Proper Procedures for Investigations"
+	starting_author = "The Company"
+	starting_title = "The Film Noir: Proper Procedures for Investigations"
 	page_link = "Guide_to_Forensics"
 
 //medical
@@ -286,36 +287,36 @@
 	name = "Medical Diagnostics Manual"
 	desc = "First, do no harm. A detailed medical practitioner's guide."
 	icon_state = "book_medical"
-	author = "Medical Journal, volume 1"
-	title = "Medical Diagnostics Manual"
+	starting_author = "Medical Journal, volume 1"
+	starting_title = "Medical Diagnostics Manual"
 	page_link = "Guide_to_Medical"
 
 /obj/item/book/manual/wiki/medical_chemistry
 	name = "Chemistry Textbook"
 	icon_state = "book"//TODO: Add icon
-	author = "Medical Journal, volume 2"
-	title = "Chemistry"
+	starting_author = "Medical Journal, volume 2"
+	starting_title = "Chemistry"
 	page_link = "Guide_to_Chemistry"
 
 //neotheology
 /obj/item/book/manual/wiki/neotheology_cloning //TODO: Completely change this to be NT-oriented.
 	name = "Cloning Rituals"
 	icon_state = "book"//TODO: Add icon
-	author = "The Church"
-	title = "Cloning Rituals"
+	starting_author = "The Church"
+	starting_title = "Cloning Rituals"
 	page_link = "Guide_to_Cloning"
 
 //service
 /obj/item/book/manual/wiki/barman_recipes
 	name = "Barman Recipes"
 	icon_state = "book"
-	author = "Sir John Rose"
-	title = "Barman Recipes"
+	starting_author = "Sir John Rose"
+	starting_title = "Barman Recipes"
 	page_link = "Guide_to_Food_and_Drinks"
 
 /obj/item/book/manual/wiki/chef_recipes
 	name = "Bradhaanata Cooking Guide"
 	icon_state = "cooked_book"
-	author = "Jordan Damnsey"
-	title = "Bradhaanata cooking guide"
+	starting_author = "Jordan Damnsey"
+	starting_title = "Bradhaanata cooking guide"
 	page_link = "Guide_to_Food_and_Drinks"

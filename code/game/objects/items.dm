@@ -32,7 +32,10 @@
 	var/forced_broad_strike = FALSE
 	/// Wielded spears can hit alive things one tile further.
 	var/extended_reach = FALSE
-	/// All weapons that are ITEM_SIZE_BULKY or bigger have double tact, meaning you have to click twice.
+	/**
+	 * All weapons that are ITEM_SIZE_BULKY or bigger have double tact, meaning you have to wind up to launch an attack.
+	 * This var keeps track of whether a double_tact item is currently raised and prepared to attack normally.
+	 */
 	var/ready = FALSE
 	/// For when you,  for some inconceivable reason, want a bulky item to not have double tact
 	var/no_double_tact = FALSE
@@ -93,6 +96,8 @@
 	var/slowdown = 0
 	/// How much holding an item slows you down.
 	var/slowdown_hold
+	/// How much this item slows you down while being used to block attacks.
+	var/slowdown_blocking = ITEM_BLOCKING_SLOWDOWN
 
 	/// Ref to the armor datum
 	var/datum/armor/armor
@@ -137,10 +142,18 @@
 	var/list/item_upgrades = list()
 	var/max_upgrades = 3
 
+	///if set, this item should add the associated sprite id to a modgun's sprite when used as an upgrade
+	var/modular_overlay
+
 	var/can_use_lying = 0
 
 	var/chameleon_type
 
+	/**
+	 * Vis Effect for double tact. Placed here so it can be properly tracked by
+	 * the different double_tact procs no matter where they're called
+	 */
+	var/obj/effect/effect/melee/alert/tact_visual
 
 /obj/item/Initialize()
 	if(islist(armor))
@@ -151,6 +164,7 @@
 		error("Invalid type [armor.type] found in .armor during /obj Initialize()")
 	if(chameleon_type)
 		verbs.Add(/obj/item/proc/set_chameleon_appearance)
+	tact_visual = new /obj/effect/effect/melee/alert
 	. = ..()
 
 /obj/item/Destroy(force)
@@ -159,6 +173,7 @@
 	master = null
 	if(ismob(loc))
 		var/mob/m = loc
+		unwield(m)
 		m.u_equip(src)
 		remove_hud_actions(m)
 		loc = null
@@ -166,6 +181,7 @@
 	QDEL_NULL(hidden_uplink)
 	blood_overlay = null
 	QDEL_NULL(action)
+	QDEL_NULL(tact_visual)
 	if(hud_actions)
 		for(var/action in hud_actions)
 			qdel(action)
@@ -181,7 +197,7 @@
 	if(health <= 0)
 		qdel(src)
 
-/obj/item/explosion_act(target_power, explosion_handler/handler)
+/obj/item/explosion_act(target_power, datum/explosion_handler/handler)
 	take_damage(target_power)
 	return 0
 
@@ -259,6 +275,9 @@
 			if(has_offers)
 				offer_message = copytext(offer_message, 1, LAZYLEN(offer_message) - 1)
 				extra_description += offer_message
+
+	if(watermark && user.stats.getStat(STAT_MEC) > STAT_LEVEL_EXPERT)
+		extra_description += span_notice("\n Looking closely at \the [src.name], you notice signs of [watermark].")
 
 	..(user, extra_description)
 

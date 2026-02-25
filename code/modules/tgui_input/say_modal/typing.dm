@@ -56,14 +56,37 @@
 	client.stop_typing()
 
 /// Overrides for overlay creation
-/mob/living/create_typing_indicator()
-	if(hud_typing || typing || stat != CONSCIOUS)
+/mob/living/create_thinking_indicator()
+	// !HAS_TRAIT(src, TRAIT_THINKING_IN_CHARACTER)
+	if(active_thinking_indicator || active_typing_indicator || stat != CONSCIOUS || !thinking_in_character)
 		return FALSE
-	set_typing_indicator(TRUE)
+	var/bubble_icon = client?.tgui_say?.initial_channel == LOOC_CHANNEL ? "looc" : src.bubble_icon
+	active_thinking_indicator = mutable_appearance('icons/mob/talk.dmi', "[bubble_icon]3", TYPING_LAYER)
+	overlays += active_thinking_indicator
+	// play_fov_effect(src, 6, "talk", ignore_self = TRUE)
+
+/mob/living/remove_thinking_indicator()
+	if(!active_thinking_indicator)
+		return FALSE
+	overlays -= active_thinking_indicator
+	active_thinking_indicator = null
+
+/mob/living/create_typing_indicator()
+	if(active_typing_indicator || active_thinking_indicator || stat != CONSCIOUS || !thinking_in_character)
+		return FALSE
+	var/bubble_icon = client?.tgui_say?.initial_channel == LOOC_CHANNEL ? "looc" : src.bubble_icon
+	active_typing_indicator = mutable_appearance('icons/mob/talk.dmi', "[bubble_icon]0", TYPING_LAYER)
+	add_overlay(active_typing_indicator)
+	// play_fov_effect(src, 6, "talk", ignore_self = TRUE)
 
 /mob/living/remove_typing_indicator()
-	set_typing_indicator(FALSE)
+	if(!active_typing_indicator)
+		return FALSE
+	overlays.Remove(active_typing_indicator)
+	active_typing_indicator = null
 
 /mob/living/remove_all_indicators()
+	thinking_in_character = FALSE
 	remove_typing_indicator()
+	remove_thinking_indicator()
 

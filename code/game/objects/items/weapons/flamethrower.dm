@@ -4,6 +4,10 @@
 	icon = 'icons/obj/flamethrower.dmi'
 	icon_state = "flamethrowerbase"
 	item_state = "flamethrower_0"
+	item_icons = list(
+		slot_l_hand_str =  'icons/mob/inhands/lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/righthand.dmi',
+		)
 	flags = CONDUCT | NOBLUDGEON
 	force = WEAPON_FORCE_NORMAL
 	throwforce = WEAPON_FORCE_NORMAL

@@ -22,10 +22,11 @@
 	bad_type = /obj/item/gun/projectile/automatic/modular/mk58
 	gun_tags = list(GUN_SILENCABLE)
 	spriteTags = PARTMOD_SLIDE | PARTMOD_FRAME_SPRITE
+	spriteTagBans = PARTMOD_FOLDING_STOCK | PARTMOD_BAYONET
 
 	serial_type = "NT"
 
-	required_parts = list(/obj/item/part/gun/modular/barrel/pistol = 0, /obj/item/part/gun/modular/mechanism/pistol = 0, /obj/item/part/gun/modular/grip = 0)
+	required_parts = list(/obj/item/part/gun/modular/barrel/pistol = 0, /obj/item/part/gun/modular/mechanism/pistol = 0, /obj/item/part/gun/modular/grip = 0, /obj/item/part/gun/modular/silencer = -1, /obj/item/part/gun/modular/bayonet = -1)
 
 /obj/item/gun/projectile/automatic/modular/mk58/get_initial_name()
 	if(grip_type)

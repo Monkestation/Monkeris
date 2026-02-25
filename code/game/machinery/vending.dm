@@ -296,7 +296,7 @@
 	if(amount > 50)
 		malfunction()
 
-/obj/machinery/vending/explosion_act(target_power, explosion_handler/handler)
+/obj/machinery/vending/explosion_act(target_power, datum/explosion_handler/handler)
 	// Blocks 60% at most
 	return round(take_damage(target_power) * 0.6)
 
@@ -1021,7 +1021,7 @@
 
 
 /obj/machinery/vending/snack
-	name = "Getmore Chocolate Corp"
+	name = "hacked Getmore Chocolate Corp"
 	desc = "A snack machine courtesy of the Getmore Chocolate Corporation."
 	product_slogans = "Try our new nougat bar!;Twice the calories for half the price!"
 	product_ads = "The healthiest!;Award-winning chocolate bars!;Mmm! So good!;Oh my god it's so juicy!;Have a snack.;Snacks are good for you!;Have some more Getmore!;Best quality snacks straight from mars.;We love chocolate!;Try our new jerky!"
@@ -1032,6 +1032,18 @@
 	prices = list(/obj/item/reagent_containers/food/snacks/shokoloud = 40,/obj/item/reagent_containers/food/drinks/dry_ramen = 45,/obj/item/reagent_containers/food/snacks/chips = 40,
 					/obj/item/reagent_containers/food/snacks/sosjerky = 45,/obj/item/reagent_containers/food/snacks/no_raisin = 40,/obj/item/reagent_containers/food/snacks/spacetwinkie = 40,
 					/obj/item/reagent_containers/food/snacks/cheesiehonkers = 40, /obj/item/reagent_containers/food/snacks/tastybread = 50)
+	vendor_department = DEPARTMENT_CIVILIAN
+
+/obj/machinery/vending/snack/flavorless //For public areas
+	name = "Getmore Chocolate Corp"
+	desc = "A snack machine courtesy of the Getmore Chocolate Corporation."
+	product_slogans = "Try our new nougat bar!;Twice the calories for half the price!"
+	product_ads = "The healthiest!;Award-winning chocolate bars!;Mmm! So good!;Oh my god it's so juicy!;Have a snack.;Snacks are good for you!;Have some more Getmore!;Best quality snacks straight from mars.;We love chocolate!;Try our new jerky!"
+	icon_state = "snack"
+	products = list(/obj/item/reagent_containers/food/drinks/dry_ramen = 10,/obj/item/reagent_containers/food/snacks/chips =10,
+					/obj/item/reagent_containers/food/snacks/sosjerky = 10,/obj/item/reagent_containers/food/snacks/no_raisin = 10,/obj/item/reagent_containers/food/snacks/spacetwinkie = 10)
+	prices = list(/obj/item/reagent_containers/food/drinks/dry_ramen = 45,/obj/item/reagent_containers/food/snacks/chips = 40,
+					/obj/item/reagent_containers/food/snacks/sosjerky = 45,/obj/item/reagent_containers/food/snacks/no_raisin = 40,/obj/item/reagent_containers/food/snacks/spacetwinkie = 40)
 	vendor_department = DEPARTMENT_CIVILIAN
 
 /obj/machinery/vending/weapon_machine
@@ -1627,9 +1639,9 @@
 					/obj/item/storage/deferred/crate/uniform_black = 4,
 					/obj/item/storage/deferred/crate/uniform_flak  = 2,
 					/obj/item/storage/deferred/crate/uniform_light = 2,
-					/obj/item/gun/projectile/kovacs = 2,
+					/obj/item/gun/projectile/automatic/modular/batrifle/serbian = 2,
 					/obj/item/ammo_magazine/lrifle = 6,
-					/obj/item/gun/projectile/boltgun/serbian = 10,
+					/obj/item/gun/projectile/automatic/modular/bolt/serbian/finished = 10,
 					/obj/item/ammo_magazine/sllrifle = 20,
 					/obj/item/ammo_magazine/ammobox/lrifle_small = 30,
 					/obj/item/storage/ration_pack = 10,
@@ -1646,10 +1658,10 @@
 					/obj/item/storage/deferred/crate/uniform_black = 2000,
 					/obj/item/storage/deferred/crate/uniform_flak  = 2200,
 					/obj/item/storage/deferred/crate/uniform_light = 1800,
-					/obj/item/gun/projectile/kovacs = 3000,
+					/obj/item/gun/projectile/automatic/modular/batrifle/serbian = 3000,
 					/obj/item/ammo_magazine/ammobox/lrifle_small = 400,
 					/obj/item/ammo_magazine/srifle = 300,
-					/obj/item/gun/projectile/boltgun/serbian = 1000,
+					/obj/item/gun/projectile/automatic/modular/bolt/serbian/finished = 1000,
 					/obj/item/ammo_magazine/sllrifle = 100,
 					/obj/item/storage/ration_pack = 800,
 					/obj/item/clothing/mask/balaclava = 100,
@@ -1682,7 +1694,7 @@
 					/obj/item/gun/projectile/automatic/modular/ak/frozen_star = 4,
 					/obj/item/gun/projectile/automatic/z8 = 4,
 					/obj/item/gun/projectile/shotgun/pump/regulator = 4,
-					/obj/item/gun/projectile/boltgun/fs/civilian = 4,
+					/obj/item/gun/projectile/automatic/modular/bolt/fs/civilian = 4,
 					/obj/item/storage/deferred/crate/clown_crime = 2,
 					/obj/item/storage/deferred/crate/clown_crime/wolf = 2,
 					/obj/item/storage/deferred/crate/clown_crime/hoxton = 2,
@@ -1711,7 +1723,7 @@
 					/obj/item/gun/projectile/automatic/modular/ak/frozen_star = 3200,
 					/obj/item/gun/projectile/automatic/z8 = 3500,
 					/obj/item/gun/projectile/shotgun/pump/regulator = 2400,
-					/obj/item/gun/projectile/boltgun/fs/civilian = 2000,
+					/obj/item/gun/projectile/automatic/modular/bolt/fs/civilian = 2000,
 					/obj/item/storage/deferred/crate/clown_crime = 1800,
 					/obj/item/storage/deferred/crate/clown_crime/wolf = 1800,
 					/obj/item/storage/deferred/crate/clown_crime/hoxton = 1800,

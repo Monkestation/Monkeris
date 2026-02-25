@@ -112,3 +112,6 @@
 
 	spawn_frequency = 10
 	bad_type = /mob/living
+
+	///used to keep track of the craft menu associated with this mob
+	var/datum/nano_module/craft/CM

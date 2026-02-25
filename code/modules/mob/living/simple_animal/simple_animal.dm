@@ -127,7 +127,7 @@
 	else
 		create_reagents(20)
 
-/mob/living/simple_animal/Move(NewLoc, direct)
+/mob/living/simple_animal/Move()
 	. = ..()
 	if(.)
 		if(src.nutrition && src.stat != DEAD)
@@ -494,7 +494,7 @@
 			var/mob/living/exosuit/M = _target_mob
 			if(length(M.pilots))
 				return FALSE
-		else if(!L.stat || L.health <= (ishuman(L) ? CONFIG_GET(number/health_threshold_crit) : TRUE))
+		else if(L.stat != DEAD && (!L.stat || L.health <= (ishuman(L) ? CONFIG_GET(number/health_threshold_crit) : TRUE)))
 			return FALSE
 
 	if(istype(_target_mob, /obj/machinery/bot))

@@ -152,7 +152,7 @@ var/list/mydirs = list(NORTH, SOUTH, EAST, WEST, SOUTHWEST, NORTHWEST, NORTHEAST
 		return
 	if(isliving(target_mob))
 		var/mob/living/L = target_mob
-		L.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+		L.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext, block_handled = FALSE)
 		return L
 	if(istype(target_mob,/mob/living/exosuit))
 		var/mob/living/exosuit/M = target_mob

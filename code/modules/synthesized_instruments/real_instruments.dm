@@ -265,6 +265,10 @@
 /obj/item/device/synthesized_instrument
 	var/datum/real_instrument/real_instrument
 	icon = 'icons/obj/musician.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/instruments_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/instruments_righthand.dmi',
+		)
 	var/datum/instrument/instruments = list()
 	var/path = /datum/instrument
 	var/sound_player = /datum/sound_player

@@ -108,7 +108,7 @@
 			for(var/obj/item/grab/g in get_both_hands(src)) //countering a grab
 
 				if(g.counter_timer>0 && g.affecting == M) //were we grabbed by src in a span of 3 seconds?
-					if(prob(max(30 + H.stats.getStat(STAT_ROB) - stats.getStat(STAT_ROB) ** 0.7, 1))) // Harder between low rob, easier between high rob wrestlers
+					if(prob(max(30 + H.stats.getStat(STAT_ROB) - clamp(stats.getStat(STAT_ROB), 0, INFINITY) ** 0.7, 1))) // Harder between low rob, easier between high rob wrestlers
 						var/obj/item/grab/G = new /obj/item/grab(M, src)
 						if(!G)	//the grab will delete itself in New if affecting is anchored
 							return
@@ -213,8 +213,9 @@
 			real_damage *= damage_multiplier
 			real_damage = max(1, real_damage)
 
-			//Try to reduce damage by blocking
-			if(blocking)
+			//Try to reduce damage by blocking. Only effects non-shield blocking items.
+			//Shield items instead defer to shield behavior in \objects\items\shields.dm
+			if(blocking && !istype(blocking_item, /obj/item/shield))
 				if(istype(get_active_held_item(), /obj/item/grab))//we are blocking with a human shield! We redirect the attack. You know, because grab doesn't exist as an item.
 					var/obj/item/grab/G = get_active_held_item()
 					grab_redirect_attack(M, G)
@@ -294,7 +295,7 @@
 /mob/living/carbon/human/proc/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, inrange, params)
 	return
 
-/mob/living/carbon/human/attack_generic(mob/user, damage, attack_message, wallbreaker = FALSE, is_sharp = FALSE, is_edge = FALSE, wounding = 1)
+/mob/living/carbon/human/attack_generic(mob/user, damage, attack_message, wallbreaker = FALSE, is_sharp = FALSE, is_edge = FALSE, wounding = 1, block_handled = TRUE)
 
 	if(!damage || !istype(user))
 		return
@@ -311,6 +312,13 @@
 		penetration = L.armor_divisor
 	var/dam_zone = pick(organs_by_name)
 	var/obj/item/organ/external/affecting = get_organ(ran_zone(dam_zone))
+
+	//band-aid handling for generic mob attacks without special shield behavior
+	//(such as roaches, simplemobs)
+	if(!block_handled && has_shield() && blocking)
+		if(check_shields(damage, null, user, def_zone = affecting, attack_text = "[user]"))
+			return
+
 	var/dam = damage_through_armor(damage, BRUTE, affecting, ARMOR_MELEE, penetration, sharp=is_sharp, edge=is_edge, wounding_multiplier = wounding)
 	if(dam > 0 && !isnull(affecting))
 		affecting.add_autopsy_data("[attack_message] by \a [user]", dam)

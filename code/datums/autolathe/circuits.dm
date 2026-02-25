@@ -44,6 +44,10 @@
 	name = "navigation console"
 	build_path = /obj/item/electronics/circuitboard/nav
 
+/datum/design/autolathe/circuit/libraryconsole
+	name = "navigation console"
+	build_path = /obj/item/electronics/circuitboard/libraryconsole
+
 /datum/design/autolathe/circuit/jtb
 	name = "junk tractor beam control console"
 	build_path = /obj/item/electronics/circuitboard/jtb

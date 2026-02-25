@@ -39,6 +39,15 @@
 
 	var/obj/item/tank/internal //Human/Monkey
 
+	///the amount of dizziness our mob is experiencing
+	var/dizziness = 0
+	///is our mob currently dizzy?
+	var/is_dizzy = 0
+
+	///is our mob currently jittery?
+	var/is_jittery = 0
+	///how jittery this mob is
+	var/jitteriness = 0
 
 	bad_type = /mob/living/carbon
 	//TODO: move to brain

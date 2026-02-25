@@ -222,7 +222,7 @@
 /obj/item/packageWrap
 	name = "package wrapper"
 	icon = 'icons/obj/items.dmi'
-	icon_state = "deliveryPaper"
+	icon_state = "deliverypaper"
 	w_class = ITEM_SIZE_NORMAL
 	spawn_tags = SPAWN_TAG_ITEM_UTILITY
 	rarity_value = 50
@@ -332,6 +332,7 @@
 	name = "destination tagger"
 	desc = "Used to set the destination of properly wrapped packages."
 	icon_state = "dest_tagger"
+	item_state = "electronic"
 	matter = list(MATERIAL_PLASTIC = 2, MATERIAL_GLASS = 1)
 	rarity_value = 50
 	var/currTag = 0

@@ -5,7 +5,7 @@
 	set name = "Say"
 	set category = "IC"
 
-	if(say_disabled)	//This is here to try to identify lag problems
+	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, span_red("Speech is currently admin-disabled."))
 		return
 
@@ -16,11 +16,7 @@
 			return
 
 	if(!message)
-		set_typing_indicator(TRUE)
-		hud_typing = TRUE
 		message = input("", "say (text)") as text
-		hud_typing = FALSE
-		set_typing_indicator(FALSE)
 	if(message)
 		say(message)
 
@@ -29,7 +25,7 @@
 	set name = "Emote"
 	set category = "IC"
 
-	if(say_disabled)	//This is here to try to identify lag problems
+	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, span_red("Speech is currently admin-disabled."))
 		return
 
@@ -40,11 +36,7 @@
 			return
 
 	if(!message)
-		set_typing_indicator(TRUE)
-		hud_typing = TRUE
 		message = input("", "me (text)") as text
-		hud_typing = FALSE
-		set_typing_indicator(FALSE)
 	if(message)
 		message = sanitize(message)
 		if(use_me)
@@ -52,14 +44,16 @@
 		else
 			emote(message)
 
-
 /mob/proc/say_dead(message)
 	var/name = real_name
 	var/alt_name = ""
-	if(say_disabled)	//This is here to try to identify lag problems
+	var/client/the_client = client || canon_client
+	if (!the_client)
+		return
+	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, span_danger("Speech is currently admin-disabled."))
 		return
-	if(src.client && !src.client.holder && !GLOB.dsay_allowed)
+	if(the_client && !the_client.holder && !GLOB.dsay_allowed)
 		to_chat(src, span_danger("Deadchat is globally muted."))
 		return
 
@@ -71,7 +65,7 @@
 		to_chat(src, span_danger("You are muted from deadchat."))
 		return
 
-	if (src.client && src.client.handle_spam_prevention(message, MUTE_DEADCHAT))
+	if (the_client && the_client.handle_spam_prevention(message, MUTE_DEADCHAT))
 		return
 
 	if (mind?.name)
@@ -93,7 +87,7 @@
 	for(var/mob/M in GLOB.player_list)
 		if(M == src)
 			continue
-		if(SSticker.current_state != GAME_STATE_FINISHED && (M.see_invisible < invisibility))
+		if(SSticker.current_state != GAME_STATE_FINISHED && (M.see_invisible < invisibility || !isdead(M)))
 			continue
 		if (M.client.prefs.RC_enabled)
 			M.create_chat_message(src, /datum/language/common, message)
@@ -144,6 +138,17 @@
 		return verb_exclaim
 	else
 		return verb_say
+
+
+/mob/proc/say_quote_old(message, datum/language/speaking = null)
+	var/verb = "says"
+	var/ending = copytext(message, length(message))
+	if(ending=="!")
+		verb=pick("exclaims", "shouts", "yells")
+	else if(ending=="?")
+		verb="asks"
+
+	return verb
 
 /atom/movable/proc/say_quote(input, list/spans=list(speech_span), list/message_mods = list())
 	if(!input)

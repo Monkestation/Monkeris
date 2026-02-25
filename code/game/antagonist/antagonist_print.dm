@@ -2,13 +2,14 @@
 	if(!owner || !owner.current)
 		return
 
-	var/text
+	var/text = ""
 
-	if (objectives.len)
+	if(length(objectives))
 		text = "<b>Your [role_text] current objectives:</b>"
-
-	if(faction)
+	else if(faction)
 		text = "<b>Your [faction.name] faction current objectives:</b>"
+	else
+		text = "<b>Your current objectives:</b>"
 
 	text += print_objectives(FALSE)
 
@@ -97,7 +98,8 @@
 				text += "<br><font color='red'><B>The [role_text] has failed.</B></font>"
 			else
 				text += "<br><font color='green'><B>The [role_text] was successful!</B></font>"
-
+	if(!length(text))
+		return "<br><b>No objectives available</b>"
 	return text
 
 /datum/antagonist/proc/print_player()

@@ -1,0 +1,127 @@
+2025-12-08:
+  Sun-Soaked:
+  - tweak: reduces screenshake from dizziness by 50%
+2025-12-10:
+  Sun-Soaked:
+  - balance: Adds 1 additional deconstruction step to windows, bringing their total
+      to 2
+  - code_imp: adds missing paths for onestar variants of windows
+  - bugfix: fixes type 90 spawns in 2 OS dungeon rooms
+  - bugfix: OS windows should now spawn in properly
+  blackwolf602:
+  - rscadd: in_hand sprites for toolbox hammer
+  - rscadd: in_hand sprites for baseball bat
+  - rscadd: in_hand sprites for active baton
+  - rscadd: in_hand sprites for active prod
+  - rscadd: in_hand sprites for pizza box
+  - rscadd: in_hand sprites for destination tagger
+  - rscadd: in_hand sprites for mining drill
+  - rscadd: in_hand sprites for one star mining drill
+  - rscadd: in_hand sprites for diamond mining drill
+  - rscadd: in_hand sprites for red paint
+  - rscadd: in_hand sprites for improvised multitool implant
+  - rscadd: in_hand sprites for megaphone
+  - rscadd: in_hand briefcase sprites
+  - rscadd: in_hand sprites for armor parts
+  - rscadd: in_hand sprites for mre spoon
+  - rscadd: in_hand sprites for tactical combat medkit
+  - rscadd: in_hand sprites for ammobox
+  - rscadd: in_hand sprites for bedsheets
+  - rscadd: in_hand sprites for camera
+  - rscadd: in_hand sprites for oddity
+  - rscadd: in_hand sprites for egg
+  - rscadd: in_hand sprites for burgers
+  - rscadd: in_hand sprites for smoke grenade
+  - rscadd: more color sprites for bedsheets and direction
+  - rscadd: assigned in_hand sprites for brutepacks
+  - rscadd: assigned in_hand sprites for ointment
+  - rscadd: assigned in_hand sprites for chocolate eggs
+  - rscadd: assigned in_hand sprites to various foods
+  - rscadd: assigned in_hand sprites for manuals
+  - rscadd: slight change of in_hand sprites for wire cutters
+  - rscadd: sprites for delivery paper
+  - rscadd: more in_hand cable coil sprites
+  - rscadd: new inhand sprites for syringes
+  - rscadd: in_hand sheet sprites for majority of each materials
+  - rscadd: in_hand sprite animations for on welders and omnitool
+  - rscadd: direction for in_hand sprites for hatchet
+  - refactor: separated in_hand dmi to there own respect categories
+  - bugfix: in_hand toy crossbow sprites named wrong
+  - bugfix: in_hand surgical drill sprites named wrong
+  - bugfix: in_hand scalpel sprites named wrong
+  - bugfix: in_hand mask sprites named wrong
+  - bugfix: in_hand radio sprites named wrong
+  - bugfix: in_hand yellow air canister sprites named wrong
+  - bugfix: in_hand electric screw driver sprites named wrong
+  - bugfix: in_hand wire cutter sprites named wrong
+  - bugfix: in_hand one star combi sprites named wrong
+  - bugfix: in_hand latex sprites named wrong
+  - bugfix: in_hand lighter sprites named wrong
+  - bugfix: in_hand syndicate zippo named wrong
+  - bugfix: in_hand nt_frag named wrong
+  - bugfix: astronomical data disk had no assigned sprites
+  - bugfix: color correction for the in_hand sprite for screwdriver
+  - bugfix: color correction for the in_hand sprite for spade
+  - bugfix: color correction for the in_hand sprite for brutepack
+  - bugfix: color correction for the in_hand sprite for ointment
+  - bugfix: color correction for the in_hand sprite for surgical medkit
+  - bugfix: in_hand sprite for improvised_screwdriver position
+  - bugfix: in_hand sprite for spoon position
+  - bugfix: in_hand sprite for buckler
+  - bugfix: in_hand sprite for nt buckler
+  - bugfix: in_hand sprite for bluespace trashbag
+  - bugfix: in_hand sprite for fork position
+  - bugfix: in_hand sprite for knife position
+  - bugfix: in_hand sprite for minihoe position
+  - bugfix: in_hand sprite for spade position
+  - bugfix: in_hand sprite for holy vacuum position
+  - bugfix: in_hand sprite for hammer position
+  - bugfix: in_hand sprite for balloon position
+  - bugfix: in_hand sprite for filled balloon position
+  - bugfix: in_hand sprites for homewrecker
+  - bugfix: in_hand sprite for latex balloon
+  - bugfix: lantern in_hand now lights and makes sound
+  - bugfix: grenades assigned to non existent sprites
+2025-12-16:
+  flleeppyy:
+  - bugfix: emotes starting with colons having a space like "Persons Name 's balls
+      explode"
+  - rscadd: Emotes now have follow links
+  - bugfix: Moved track links for some hear says to the beginning of the message
+  - bugfix: extra_ghost_link and similar procs
+  - bugfix: shield generator message having a space sometimes
+  - rscadd: add NOP (No parenthesis) and NOG (No global hreftoken) variants of admin
+      defines
+  - bugfix: JMP not working in player panel with "FLW" instead
+  - bugfix: suit sensors sorting.
+  - bugfix: lazy fix english_list input.len
+  - rscadd: lookdown verb
+  - code_imp: use tgui_input_list for Teleport and Modify Organs
+  - rscadd: find_owner_recursively proc to internal organs
+  - bugfix: some rights checks
+  - code_imp: addtimer for shake_camera
+  - bugfix: eftpos icon not showing
+  - bugfix: add_image being called incorrectly
+  - bugfix: species being null on get_blood_data
+  - bugfix: biogen - check if there's actually a beaker before trying to dispense
+      reagents
+  - rscadd: add tracy to precompile script
+  - bugfix: fix gun ui data for arrows.
+  - rscadd: update rights2text proc
+  - code_imp: update getviewsize proc
+  - bugfix: check for null stats on hive_minded mobs on von-krabin
+  - bugfix: qdelled obj being passed to addtimer  for hivemind stuns
+  - bugfix: default_can_use_topic view check
+  - bugfix: smartfridge non-existence shit check
+  - bugfix: use get turf for src when pairing/making a new wormhole
+  - bugfix: turf not existing in density check
+2025-12-17:
+  flleeppyy:
+  - code_imp: update rust-g
+2025-12-19:
+  Sun-Soaked:
+  - bugfix: organs are now properly restored by rejuvenation
+  - bugfix: you can no longer stack biotech modifications beyond their limit
+  - bugfix: hormone output organoids now work again
+  flleeppyy:
+  - admin: Added request manager

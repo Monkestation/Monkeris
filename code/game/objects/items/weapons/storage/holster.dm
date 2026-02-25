@@ -344,7 +344,7 @@
 				break
 
 	if(!holster_handled)
-		to_chat(H, span_notice(!H.get_active_held_item() ? "You don't have any occupied pouch holsters." : "All your pouch holsters are occupied."))
+		to_chat(H, span_notice("[(!H.get_active_held_item() ? "You don't have any occupied pouch holsters." : "All your pouch holsters are occupied.")]"))
 		return FALSE
 	else
 		return TRUE

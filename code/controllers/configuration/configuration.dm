@@ -159,6 +159,32 @@
 		CRASH("/datum/controller/configuration/Load() called more than once!")
 	configuration_errors ||= list()
 	InitEntries()
+	var/list/default_files = list("example", "names", ".gitignore")
+	var/trip = FALSE
+	// if there's no files in the config directory, just copy everything from the example folder.
+	for (var/f in flist("[directory]/"))
+		if(f in default_files)
+			continue
+
+		if(copytext(f, -1) == "/")
+			continue
+
+		trip = TRUE
+		break
+
+	if (!trip)
+		log_config("Config directory empty, copying from examples.")
+		for(var/f in flist("[directory]/example/"))
+			if(copytext(f, -1) == "/")
+				continue
+			fcopy("[directory]/example/[f]", "[directory]/[f]")
+
+	var/list/required_files = list("admin.txt", "admin_ranks.txt", "config.txt")
+	for(var/file in required_files)
+		if (!fexists("[directory]/[file]") && fexists("[directory]/example/[file]"))
+			log_config("Missing required [file] file, copying from examples.")
+			fcopy("[directory]/example/[file]", "[directory]/[file]")
+
 	if(fexists("[directory]/config.txt") && LoadEntries("config.txt") <= 1)
 		var/list/legacy_configs = list("game_options.txt", "dbconfig.txt", "comms.txt")
 		for(var/I in legacy_configs)
@@ -167,13 +193,19 @@
 				for(var/J in legacy_configs)
 					LoadEntries(J)
 				break
+
+	// this technically doesn't need to exist anymore because we have example configs
+	// but that is a whole discussion topic to have with devs. but also considering nobody besides me
+	// is really maintaining on this codebase, i will say, I don't care - chen
 	if (fexists("[directory]/dev_overrides.txt"))
 		LoadEntries("dev_overrides.txt")
+	// TODO: (oh yay more tech debt) Add EZDB to the codebase.
 	// if (fexists("[directory]/ezdb.txt"))
 	// 	LoadEntries("ezdb.txt")
 	load_important_notices()
 	LoadMOTD()
 	LoadChatFilter()
+	LoadRelays()
 	if(CONFIG_GET(flag/load_jobs_from_txt))
 		validate_job_config()
 	if(CONFIG_GET(flag/usewhitelist))
@@ -566,3 +598,20 @@
 	to_chat(target, "[do_final_top_separator ? "<hr class='solid'>" : ""][final_notices]")
 
 	return TRUE
+
+/datum/controller/configuration/proc/LoadRelays()
+	var/config_path = "[directory]/relays.toml"
+	if(!fexists(file(config_path)))
+		log_config("relays.toml does not exist.")
+		return
+
+	var/list/result = rustg_raw_read_toml_file(config_path)
+	if(!result["success"])
+		log_config("Notify Server Operators: The relay config (relays.toml) is not configured correctly! [result["content"]]")
+		return
+
+	var/list/content = json_decode(result["content"])
+	if(!length(content))
+		return
+
+	GLOB.relay_config = content["relay"]

@@ -673,19 +673,19 @@
 	var/color
 
 	if (integrity <= 15)
-		prefix = "--CRITICAL WARNING!--"
+		prefix = "--CRITICAL WARNING!-- "
 		color = "crimson"
 	else if (integrity <= 25)
-		prefix = "Danger!"
+		prefix = "Danger! "
 		color = "red"
 	else if (integrity <= 50)
-		prefix = "Warning!"
+		prefix = "Warning! "
 		color = "orange"
 	else
 		prefix = null
 		color = "yellow"
 
-	priority_announce("[prefix] Shield integrity at [round(integrity)]%", "Shield Status Report", color_override = color)
+	priority_announce("[prefix]Shield integrity at [round(integrity)]%", "Shield Status Report", color_override = color)
 
 
 //This proc keeps an internal log of shield impacts, activations, deactivations, and a vague log of config changes

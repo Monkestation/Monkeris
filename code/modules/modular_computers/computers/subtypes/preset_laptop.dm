@@ -89,7 +89,6 @@
 	hard_drive.store_file(new/datum/computer_file/program/email_client())
 	hard_drive.store_file(new/datum/computer_file/program/email_administration())
 	hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
-	hard_drive.store_file(new/datum/computer_file/program/library())
 	hard_drive.store_file(new/datum/computer_file/program/camera_monitor/hacked())
 	hard_drive.store_file(new/datum/computer_file/program/records())
 	hard_drive.store_file(new/datum/computer_file/program/comm())

@@ -27,6 +27,8 @@ GLOBAL_VAR_INIT(refid_filter, TYPEID(filter(type="angular_blur")))
 
 #define ismob(A) istype(A, /mob)
 
+#define isdead(M) (ismob(M) && !istype(M, /mob/living))
+
 #define isclient(A) istype(A, /client)
 
 #define isobserver(A) istype(A, /mob/observer)
@@ -34,6 +36,8 @@ GLOBAL_VAR_INIT(refid_filter, TYPEID(filter(type="angular_blur")))
 #define isghost(A) istype(A, /mob/observer/ghost)
 
 #define isEye(A) istype(A, /mob/observer/eye)
+
+#define isAIEye(A) istype(A, /mob/observer/eye/aiEye)
 
 #define isangel(A) istype(A, /mob/observer/eye/angel)
 
@@ -115,6 +119,8 @@ GLOBAL_VAR_INIT(refid_filter, TYPEID(filter(type="angular_blur")))
 
 #define isProjectile(A) (istype(A, /obj/item/projectile))
 
+#define isidcard(I) (istype(I, /obj/item/card/id))
+
 // Assembly specific checks
 #define isassembly(A) (istype(A, /obj/item/device/assembly))
 
@@ -127,3 +133,15 @@ GLOBAL_VAR_INIT(refid_filter, TYPEID(filter(type="angular_blur")))
 #define issignaler(A) (istype(A, /obj/item/device/assembly/signaler))
 
 #define istimer(A) (istype(A, /obj/item/device/assembly/timer))
+
+// Turfs
+#define isclosedturf(A) (A.layer == CLOSED_TURF_LAYER)
+
+// Book things
+GLOBAL_LIST_INIT(book_types, typecacheof(list(
+	/obj/item/book,
+	// This really should just be a fucking book child (/obj/item/book/bible) like cmon
+	///obj/item/oddity/common/book_bible
+)))
+
+#define isbook(O) (is_type_in_typecache(O, GLOB.book_types))

@@ -8,7 +8,10 @@
 	desc = "You wear this on your back and put items into it."
 	icon = 'icons/obj/storage/backpack.dmi'
 	icon_state = "backpack"
-	contained_sprite = TRUE
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/backpack_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/backpack_righthand.dmi',
+		)
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
 	max_w_class = ITEM_SIZE_BULKY
