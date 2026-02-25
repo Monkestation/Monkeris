@@ -205,7 +205,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 		mob_species = GLOB.all_species[pref.species]
 		if(new_s_tone && CanUseTopic(user))
-			pref.s_tone = 35 - max(min(round(new_s_tone), 220), 1)
+			pref.s_tone = 35 - max(min(round(new_s_tone), 225), 1)
+			pref.preview_should_rebuild_organs = TRUE
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["skin_color"])
