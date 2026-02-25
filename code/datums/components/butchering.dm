@@ -68,7 +68,7 @@
 		meat.gib()
 
 	//for getting the dialogue hinting at relative power
-	var/msgpowr = toolpowr * (max((bio / 35), 0.25))
+	var/msgpowr = toolpowr * (max((bio / BUTCHER_BIO_DIVISOR), 0.25))
 	switch(msgpowr)
 		if(0 to 0.8)//go get an actual knife you gross-ass roundstart vagabond
 			butcher.visible_message(span_bolddanger("[butcher] can't get anywhere with this tool! Instead, they rip \the [meat] to shreds like an animal!"))
@@ -86,7 +86,7 @@
 		//get the base percentage of awarding this result
 		var/difficulty = meat.butcher_results[result]
 		//takes difficulty and multiplies it by tool and bio stat to get final chance
-		var/trueprob = clamp((difficulty * toolpowr) * max((bio / 35), 0.25), 1, 100)
+		var/trueprob = clamp((difficulty * toolpowr) * max((bio / BUTCHER_BIO_DIVISOR), 0.25), 1, 100)
 		if(prob(trueprob))
 			butchered += result
 		else

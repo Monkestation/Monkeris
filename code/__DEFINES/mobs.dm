@@ -267,3 +267,7 @@ GLOBAL_LIST_INIT(voice_type2sound_ref, voice_type2sound)
 #define BUTCHER_EASY 65
 #define BUTCHER_VERY_EASY 80
 #define BUTCHER_EFFORTLESS 100//still technically possible to fail with terrible tool + 0 bio, so not 'zero'
+
+//divisor for BIO effect on butchering
+//values of bio above this will improve butchering chances, values below will dmg it
+#define BUTCHER_BIO_DIVISOR 28
