@@ -89,7 +89,7 @@
 	if(length(text)==1)
 		text=uppertext(text)
 	else
-		var/cap = copytext(text,1,2)
+		var/cap = text[1]
 		cap = uppertext(cap)
 		cap += copytext(text,2,length(text)+1)
 		text=cap
@@ -126,5 +126,5 @@
 
 	var/htmlicon = icon2html(holder_atom, listening)
 	for(var/mob/M in listening)
-		to_chat(M, "[] <b>[htmlicon]</b> reverberates, \blue\"[msg]\"")
+		to_chat(M, "<b>[htmlicon]</b> reverberates, \blue\"[msg]\"")
 	last_talk_time = world.time

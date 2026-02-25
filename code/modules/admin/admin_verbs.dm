@@ -9,6 +9,8 @@ GLOBAL_LIST_INIT(admin_verbs_fun, list(
 	/client/proc/hivemind_panel,
 	/client/proc/drop_bomb,
 	/client/proc/make_sound,
+	/client/proc/spawn_liquid,
+	/client/proc/spawn_pollution,
 	/client/proc/object_talk,
 	/client/proc/manage_custom_kits,
 	/datum/admins/proc/add_tts_seed,
@@ -16,9 +18,6 @@ GLOBAL_LIST_INIT(admin_verbs_fun, list(
 	/client/proc/cinematic,
 	/client/proc/cmd_admin_dress,
 	/client/proc/roll_dices,
-	/client/proc/play_sound,
-	/client/proc/play_local_sound,
-	/client/proc/play_server_sound,
 	/client/proc/respawn_character,
 	/client/proc/cmd_admin_gib_self,
 	/client/proc/everyone_random,
@@ -47,6 +46,7 @@ GLOBAL_LIST_INIT(admin_verbs_server, list(
 	/client/proc/reload_admins,
 	/client/proc/reload_mentors,
 	/client/proc/reload_whitelist,
+	/client/proc/requests,
 	/client/proc/reestablish_db_connection, /*reattempt a connection to the database*/
 	/client/proc/toggle_random_events))
 
@@ -58,6 +58,7 @@ GLOBAL_LIST_INIT(admin_verbs_debug, list(
 	/client/proc/restart_controller,
 	/client/proc/debug_antagonist_template,
 	/client/proc/cmd_display_init_log,
+	/client/proc/cmd_display_init_costs,
 	/client/proc/kill_air,
 	/datum/admins/proc/spawn_fruit,
 	/datum/admins/proc/spawn_plant,
@@ -118,11 +119,6 @@ GLOBAL_LIST_INIT(admin_verbs_debug_extra, list(
 	/datum/admins/proc/show_contractor_panel,
 	// /client/proc/print_jobban_old,
 	// /client/proc/print_jobban_old_filter,
-	/client/proc/break_all_air_groups,
-	/client/proc/regroup_all_air_groups,
-	/client/proc/kill_pipe_processing,
-	/client/proc/kill_air_processing,
-	/client/proc/disable_communication,
 	/client/proc/disable_movement,
 	/client/proc/Zone_Info,
 	/client/proc/Test_ZAS_Connection,
@@ -149,6 +145,14 @@ GLOBAL_LIST_INIT(admin_verbs_mod, list(
 	/client/proc/cmd_mod_say,
 	/client/proc/debug_variables))
 
+GLOBAL_LIST_INIT(admin_verbs_sounds, list(
+	/client/proc/play_sound,
+	/client/proc/play_local_sound,
+	/client/proc/play_direct_mob_sound,
+	/client/proc/play_web_sound,
+	// /client/proc/set_round_end_sound,
+	/client/proc/play_server_sound))
+
 GLOBAL_LIST_INIT(admin_verbs_admin, list(
 	/client/proc/cmd_dev_bst,
 	/client/proc/dsay,
@@ -164,6 +168,7 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 	/client/proc/investigate_show,
 	/client/proc/admin_memo,
 	/client/proc/admin_ghost,
+	/client/proc/library_control,
 	/client/proc/invisimin,
 	/datum/verbs/menu/Admin/verb/playerpanel, /* It isn't /datum/admin but it fits no less */
 	/client/proc/cmd_admin_check_player_exp, /* shows players by playtime */
@@ -195,6 +200,7 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 	/datum/admins/proc/togglelooc,
 	/datum/admins/proc/toggledsay,
 	/datum/admins/proc/toggleoocdead,
+	/datum/admins/proc/togglediagonalmovement,
 	/datum/admins/proc/toggleenter,
 	/datum/admins/proc/toggleAI,
 	/datum/admins/proc/toggleguests,
@@ -270,6 +276,10 @@ GLOBAL_PROTECT(admin_verbs_possess)
 			add_verb(src, GLOB.admin_verbs_debug)
 		if(rights & R_PERMISSIONS)
 			add_verb(src, GLOB.admin_verbs_permissions)
+		if(rights & R_SOUND)
+			add_verb(src, GLOB.admin_verbs_sounds)
+			if(CONFIG_GET(string/invoke_youtubedl))
+				add_verb(src, /client/proc/play_web_sound)
 
 		control_freak = 0 // enable profiler
 
@@ -353,7 +363,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 
 	if(usr.client.holder)
 		usr.client.holder.player_panel_new()
-		SSblackbox.record_feedback("tally", "admin_verb", 1, "Player Panel New") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		BLACKBOX_LOG_ADMIN_VERB("Player Panel New")
 
 /client/proc/storyteller_panel()
 	set name = "Storyteller Panel"
@@ -367,7 +377,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	if(!check_rights(R_BAN))
 		return
 	holder.ban_panel()
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Banning Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	BLACKBOX_LOG_ADMIN_VERB("Banning Panel")
 
 /client/proc/unban_panel()
 	set name = "Unbanning Panel"
@@ -375,7 +385,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	if(!check_rights(R_BAN))
 		return
 	holder.unban_panel()
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Unbanning Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	BLACKBOX_LOG_ADMIN_VERB("Unbanning Panel")
 
 //game panel, allows to change game-mode etc
 /client/proc/game_panel()
@@ -383,7 +393,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	set category = "Admin"
 	if(holder)
 		holder.Game()
-		SSblackbox.record_feedback("tally", "admin_verb", 1, "Game Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		BLACKBOX_LOG_ADMIN_VERB("Game Panel")
 
 
 /client/proc/secrets()
@@ -391,7 +401,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	set category = "Admin"
 	if (holder)
 		holder.Secrets()
-		SSblackbox.record_feedback("tally", "admin_verb", 1, "Unbanning Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		BLACKBOX_LOG_ADMIN_VERB("Unbanning Panel")
 
 
 
@@ -425,7 +435,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 				zone.add(turf)
 
 	log_and_message_admins("[src] fixed the air.")
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Fix air") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	BLACKBOX_LOG_ADMIN_VERB("Fix air")
 
 
 
@@ -620,7 +630,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	to_chat(src, span_interface("You are now a normal player."))
 	log_admin("[src] deadminned themselves.")
 	message_admins("[src] deadminned themselves.")
-	// SSblackbox.record_feedback("tally", "admin_verb", 1, "Deadmin")
+	BLACKBOX_LOG_ADMIN_VERB("Deadmin")
 
 /client/proc/readmin()
 	set name = "Readmin"
@@ -645,7 +655,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	to_chat(src, span_interface("You are now an admin."), confidential = TRUE)
 	message_admins("[src] re-adminned themselves.")
 	log_admin("[src] re-adminned themselves.")
-	// SSblackbox.record_feedback("tally", "admin_verb", 1, "Readmin")
+	BLACKBOX_LOG_ADMIN_VERB("Readmin")
 
 /client/proc/toggle_log_hrefs()
 	set name = "Toggle href logging"
@@ -893,7 +903,7 @@ GLOBAL_PROTECT(admin_verbs_possess)
 							for(var/i in 2 to LAZYLEN(GLOB.custom_kits[kit_of_choice]))
 								var/item_path = GLOB.custom_kits[kit_of_choice][i]
 								new item_path(storage)
-						log_and_message_admins("[ckey] spawned custom kit at [admin_jump_link(location, src)]")
+						log_and_message_admins("[ckey] spawned custom kit at [ADMIN_COORDJMP(location)]")
 			if("Create or edit")
 				var/do_what_exactly = alert(user, "What do?", "[header]", "Create", "Edit", "Cancel")
 				switch(do_what_exactly)
@@ -952,3 +962,44 @@ GLOBAL_PROTECT(admin_verbs_possess)
 									GLOB.custom_kits -= kit_of_choice
 			else
 				groundhog_day = FALSE
+
+/// Returns this client's stealthed ckey
+/client/proc/getStealthKey()
+	return GLOB.stealthminID[ckey]
+
+/// Takes a stealthed ckey as input, returns the true key it represents
+/proc/findTrueKey(stealth_key)
+	if(!stealth_key)
+		return
+	for(var/potentialKey in GLOB.stealthminID)
+		if(GLOB.stealthminID[potentialKey] == stealth_key)
+			return potentialKey
+
+/// Hands back a stealth ckey to use, guarenteed to be unique
+/proc/generateStealthCkey()
+	var/guess = rand(0, 1000)
+	var/text_guess
+	var/valid_found = FALSE
+	while(valid_found == FALSE)
+		valid_found = TRUE
+		text_guess = "@[num2text(guess)]"
+		// We take a guess at some number, and if it's not in the existing stealthmin list we exit
+		for(var/key in GLOB.stealthminID)
+			// If it is in the list tho, we up one number, and redo the loop
+			if(GLOB.stealthminID[key] == text_guess)
+				guess += 1
+				valid_found = FALSE
+				break
+
+	return
+
+/client/proc/library_control()
+	set name = "Library Management"
+	set category = "Admin"
+	if(!check_rights(R_BAN))
+		return
+
+	if(!holder.library_manager)
+		holder.library_manager = new()
+	holder.library_manager.ui_interact(usr)
+	// SSblackbox.record_feedback("tally", "admin_verb", 1, "Library Management") // If you are copy-pasting this, ensure the 4th parameter is unique to the new proc!

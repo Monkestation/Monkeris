@@ -128,20 +128,6 @@
 		/datum/computer_file/program/records
 	)
 
-/obj/item/computer_hardware/hard_drive/portable/advanced/setup/library
-	name = "libraric setup disk"
-	desc = "A removable disk used to store large amounts of data.\nThis one contains all the files necessary to set up a library console."
-	default_files = list(
-		/datum/computer_file/program/email_client,
-		/datum/computer_file/program/chatclient,
-		/datum/computer_file/program/wordprocessor,
-		/datum/computer_file/program/newsbrowser,
-		/datum/computer_file/program/nttransfer,
-		/datum/computer_file/program/camera_monitor,
-		/datum/computer_file/program/records,
-		/datum/computer_file/program/library
-	)
-
 /obj/item/computer_hardware/hard_drive/portable/advanced/setup/trade
 	name = "trade setup disk"
 	desc = "A removable disk used to store large amounts of data.\nThis one contains all the files necessary to set up a trade console."

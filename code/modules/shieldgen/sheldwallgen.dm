@@ -224,7 +224,7 @@
 				src.anchored = FALSE
 				return
 
-	if(istype(I, /obj/item/card/id) || istype(I, /obj/item/modular_computer))
+	if(isidcard(I) || istype(I, /obj/item/modular_computer))
 		if (src.allowed(user))
 			src.locked = !src.locked
 			to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")

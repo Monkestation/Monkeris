@@ -7,7 +7,7 @@
 	icon_keyboard = "med_key"
 	icon_screen = "crew"
 	circuit = /obj/item/electronics/circuitboard/operating
-	var/mob/living/carbon/human/victim
+	var/mob/living/carbon/victim
 	var/obj/machinery/optable/table
 
 /obj/machinery/computer/operating/New()
@@ -24,7 +24,6 @@
 		return
 	interact(user)
 
-
 /obj/machinery/computer/operating/interact(mob/user)
 	if ( (get_dist(src, user) > 1 ) || (stat & (BROKEN|NOPOWER)) )
 		if (!issilicon(user))
@@ -38,29 +37,41 @@
 	if(table && (table.check_victim()))
 		victim = table.victim
 		var/internal_health
+		var/age_text = "N/A"
+		var/pulse_text = "N/A"
+		var/blood_type_text = "N/A"
+		var/organ_health_text = "N/A"
+
 		if(ishuman(victim))
+			var/mob/living/carbon/human/H = victim
 			var/organ_health
 			var/organ_damage
-			for(var/obj/item/organ/external/E in victim.organs)
+			for(var/obj/item/organ/external/E in H.organs)
 				organ_health += E.total_internal_health
 				organ_damage += E.severity_internal_wounds
 			internal_health = organ_health ? round((1 - (organ_damage / organ_health)) * 100) : 100
+			organ_health_text = "[internal_health]%"
+			age_text = "[H.age]"
+			pulse_text = "[H.get_pulse(GETPULSE_TOOL)]"
+			blood_type_text = "[H.b_type]"
+
 		var/tox_content = victim.chem_effects[CE_TOXIN] + victim.chem_effects[CE_ALCOHOL_TOXIC]
+
 		dat += {"
 				<B>Patient Information:</B><BR>
 				<BR>
 				<B>Name:</B> [victim.real_name]<BR>
-				<B>Age:</B> [victim.age]<BR>
-				<B>Blood Type:</B> [victim.b_type]<BR>
+				<B>Age:</B> [age_text]<BR>
+				<B>Blood Type:</B> [blood_type_text]<BR>
 				<BR>
 				<B>Critical Health:</B> [victim.health]%<BR>
-				<B>Organ Health:</B> [internal_health]%<BR>
+				<B>Organ Health:</B> [organ_health_text]<BR>
 				<B>Brute Damage:</B> [victim.getBruteLoss()]<BR>
 				<B>Toxin Content:</B> [tox_content ? tox_content : "0"]<BR>
 				<B>Fire Damage:</B> [victim.getFireLoss()]<BR>
 				<B>Suffocation Damage:</B> [victim.getOxyLoss()]<BR>
 				<B>Patient Status:</B> [victim.stat ? "Non-Responsive" : "Stable"]<BR>
-				<B>Heartbeat rate:</B> [victim.get_pulse(GETPULSE_TOOL)]<BR>
+				<B>Heartbeat rate:</B> [pulse_text]<BR>
 				"}
 	else
 		victim = null

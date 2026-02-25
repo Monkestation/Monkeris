@@ -201,6 +201,10 @@
 		if(istype(O))
 			O.set_quality(min(quality, machine_rating))
 
+	if(fabricator && fabricator.watermark_enabled && fabricator.given_watermark)
+		var/obj/ourobj = A
+		if(istype(ourobj))
+			ourobj.watermark = fabricator.given_watermark
 	return A
 
 /datum/design/autolathe

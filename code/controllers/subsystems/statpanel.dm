@@ -2,6 +2,7 @@ SUBSYSTEM_DEF(statpanels)
 	name = "Stat Panels"
 	wait = 4
 	init_order = INIT_ORDER_STATPANELS
+	init_stage = INITSTAGE_EARLY
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY | RUNLEVEL_INIT
 	priority = INIT_ORDER_STATPANELS
 	var/list/currentrun = list()
@@ -17,21 +18,35 @@ SUBSYSTEM_DEF(statpanels)
 
 /datum/controller/subsystem/statpanels/fire(resumed = FALSE)
 	if(!resumed)
+		var/real_round_time = REALTIMEOFDAY - SSticker.real_round_start_time
 		var/list/private_ready_data = list()
 		var/list/global_ready_data = list()
 		var/list/global_data = list(
 			list("Storyteller: [master_storyteller ? master_storyteller : "Being democratically elected"]"),
 			list("Round ID: [GLOB.round_id ? GLOB.round_id : "NULL"]"),
 			list("Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")]"),
-			list("Round Time: [gameTimestamp()]"),
-			list("Ship Time: [stationtime2text()]"),
-			list("Time Dilation: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)"),
+			list("[SSticker.HasRoundStarted() ? "Round" : "Lobby"] Time: [gameTimestamp()]"),
 		)
+
+		if(SSticker.HasRoundStarted())
+			global_data += list(list("Real Round Time: [time2text(real_round_time, "hh:mm:ss", 0)]"))
+			global_data += list(list("Ship Time: [stationtime2text()]"))
+
+
+		global_data += list(list("Time Dilation: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)"))
 
 		global_data += list(list("Players: [LAZYLEN(GLOB.clients)]"))
 		if (!SSticker.HasRoundStarted())
 			global_ready_data += list(list("Players Ready: [SSticker.totalPlayersReady]"))
-			global_ready_data += list(list("Time To Start: [DisplayTimeText(SSticker.GetTimeLeft())]"))
+			if(SSticker.state != GAME_STATE_SETTING_UP)
+				var/time_remaining = SSticker.GetTimeLeft()
+				if(time_remaining > 0)
+					. += "Time To Start: [DisplayTimeText(round(time_remaining))]s"
+				else if(time_remaining == -1)
+					. += "Time To Start: DELAYED"
+				else
+					. += "Time To Start: SOON"
+				global_ready_data += list(list("Time To Start: [DisplayTimeText(time_remaining)]"))
 			private_ready_data += list(
 				list("-------------------"),
 				list("Admins Ready: [SSticker.total_admins_ready] / [length(GLOB.admins)]"),
@@ -143,13 +158,9 @@ SUBSYSTEM_DEF(statpanels)
 						continue
 					if(turf_content in overrides)
 						continue
-					if(LAZYLEN(turfitems) < 30) // Only create images for the first 30 items on the turf, for performance reasons
-						if(!("\ref[turf_content]" in cached_images))
-							target << browse_rsc(getFlatIcon(turf_content, no_anim = TRUE), "\ref[turf_content].png")
-							cached_images += "\ref[turf_content]"
-						turfitems[++turfitems.len] = list("[turf_content.name]", "\ref[turf_content]", "\ref[turf_content].png")
 					else
-						turfitems[++turfitems.len] = list("[turf_content.name]", "\ref[turf_content]")
+						// This works but we need to figure out caching later
+						turfitems += list(list("[turf_content.name]", "[ma2html(turf_content, target_mob)]"))
 				turfitems = url_encode(json_encode(turfitems))
 				target << output("[turfitems];", "statbrowser:update_listedturf")
 		if(MC_TICK_CHECK)

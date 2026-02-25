@@ -33,7 +33,7 @@
 			message_mode = null
 		return radio.talk_into(src,message,message_mode,verb,speaking, speech_volume)
 
-/mob/living/silicon/say_quote(text)
+/mob/living/silicon/say_quote_old(text)
 	var/ending = copytext(text, length(text))
 
 	if (ending == "?")

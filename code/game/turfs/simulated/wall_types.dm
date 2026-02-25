@@ -79,7 +79,7 @@
 	icon = 'icons/turf/shuttlepulsar.dmi'
 	icon_state = "pulsarwall1"
 
-/obj/structure/shuttle_part/explosion_act(target_power, explosion_handler/handler)
+/obj/structure/shuttle_part/explosion_act(target_power, datum/explosion_handler/handler)
 	// full block
 	return target_power
 

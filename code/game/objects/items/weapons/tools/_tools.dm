@@ -9,6 +9,10 @@
 /obj/item/tool
 	name = "tool"
 	icon = 'icons/obj/tools.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/tools_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/tools_righthand.dmi',
+		)
 	slot_flags = SLOT_BELT
 	force = WEAPON_FORCE_NORMAL
 	throwforce = WEAPON_FORCE_NORMAL
@@ -401,12 +405,10 @@
 
 	//The we handle the doafter for the tool usage
 	if(time_to_finish)
-		target.used_now = TRUE
 
-		if(!do_after(user, time_to_finish, target))
+		if(!do_after(user, time_to_finish, target, unique = TRUE))
 			//If the doafter fails
 			to_chat(user, span_warning("You need to stand still to finish the task properly!"))
-			target.used_now = FALSE
 			time_spent = world.time - start_time //We failed, spent only part of the time working
 			if(T)
 				T.consume_resources(time_spent, user)

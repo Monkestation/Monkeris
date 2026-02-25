@@ -188,6 +188,10 @@
 	icon = 'icons/obj/hydroponics_machines.dmi'
 	icon_state = "plantbgone"
 	item_state = "plantbgone"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/hydroponics_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/hydroponics_righthand.dmi',
+		)
 	volume = 100
 	preloaded_reagents = list("plantbgone" = 100)
 

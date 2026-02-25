@@ -9,7 +9,7 @@
 	var/health = 15
 
 //similar to weeds, but only barfed out by nurses manually
-/obj/effect/spider/explosion_act(target_power, explosion_handler/handler)
+/obj/effect/spider/explosion_act(target_power, datum/explosion_handler/handler)
 	qdel(src)
 	return 0
 

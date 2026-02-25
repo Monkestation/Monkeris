@@ -136,8 +136,9 @@
 			update_plane()
 		else if(!is_origin_turf)
 			update_plane()
-			//for(var/atom/movable/thing in contents)
-			//	SEND_SIGNAL(thing, COMSIG_MOVABLE_Z_CHANGED,get_z(origin),get_z(destination))
+			for(var/atom/movable/thing in contents)
+				SEND_SIGNAL(thing, COMSIG_MOVABLE_Z_CHANGED,get_z(origin),get_z(destination))
+
 	else if(destination)
 		update_plane()
 
@@ -157,6 +158,8 @@
 	GLOB.moved_event.raise_event(src, origin, null)
 	return TRUE
 
+/atom/movable/proc/moveToNullspace()
+	return DoMove(null)
 
 /// called when src is thrown into hit_atom
 /atom/movable/proc/throw_impact(atom/hit_atom, speed)

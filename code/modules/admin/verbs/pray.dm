@@ -2,7 +2,7 @@
 	set category = "IC"
 	set name = "Pray"
 
-	if(say_disabled)	//This is here to try to identify lag problems
+	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, span_red("Speech is currently admin-disabled."))
 		return
 
@@ -33,5 +33,5 @@
 	log_prayer("[src.key]/([src.name]): [msg]")
 
 	//log_admin("HELP: [key_name(src)]: [msg]")
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Prayer") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	BLACKBOX_LOG_ADMIN_VERB("Prayer")
 

@@ -85,7 +85,7 @@ var/global/use_preloader = FALSE
 				if(!key_len)
 					key_len = length(key)
 				else
-					throw EXCEPTION("Inconsistant key length in DMM")
+					CRASH("Inconsistant key length in DMM")
 			if(!measureOnly)
 				grid_models[key] = localRegex.group[2]
 
@@ -93,7 +93,7 @@ var/global/use_preloader = FALSE
 		else if(localRegex.group[3]) // Coords
 			if(!key_len)
 				testing("[localRegex.group[3]]")
-				throw EXCEPTION("Coords before model definition in DMM - [dmm_file]")
+				CRASH("Coords before model definition in DMM - [dmm_file]")
 
 			var/xcrdStart = text2num(localRegex.group[3]) + x_offset - 1
 			//position of the currently processed square
@@ -220,7 +220,7 @@ var/global/use_preloader = FALSE
 								var/no_afterchange = no_changeturf || zexpansion
 								if(!no_afterchange || (key_list[i][j] != space_key))
 									if(!grid_models[key_list[i][j]])
-										throw EXCEPTION("Undefined model key in DMM: [dmm_file], [key_list[i][j]]")
+										CRASH("Undefined model key in DMM: [dmm_file], [key_list[i][j]]")
 									parse_grid(grid_models[key_list[i][j]], key_list[i][j], xcrd, ycrd, zcrd, no_afterchange, orientation)
 								#ifdef TESTING
 								else

@@ -3,6 +3,10 @@
 	siemens_coefficient = 0.9
 	item_flags = DRAG_AND_DROP_UNEQUIP
 	bad_type = /obj/item/clothing
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/clothing_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/clothing_righthand.dmi',
+		)
 	rarity_value = 5
 	spawn_frequency = 10
 	spawn_tags = SPAWN_TAG_CLOTHING
@@ -297,7 +301,6 @@
 	slot_flags = SLOT_EARS
 	matter = list(MATERIAL_STEEL = 1, MATERIAL_PLASTIC = 1)
 
-
 ///////////////////////////////////////////////////////////////////////
 //Glasses
 /*
@@ -366,8 +369,8 @@ BLIND     // can't see anything
 	name = "head"
 	icon = 'icons/inventory/head/icon.dmi'
 	item_icons = list(
-		slot_l_hand_str = 'icons/mob/items/lefthand_hats.dmi',
-		slot_r_hand_str = 'icons/mob/items/righthand_hats.dmi',
+		slot_l_hand_str = 'icons/mob/inhands/equipment/hats_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/hats_righthand.dmi',
 		)
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
@@ -596,10 +599,6 @@ BLIND     // can't see anything
 //Under clothing
 /obj/item/clothing/under
 	icon = 'icons/inventory/uniform/icon.dmi'
-	item_icons = list(
-		slot_l_hand_str = 'icons/mob/items/lefthand_uniforms.dmi',
-		slot_r_hand_str = 'icons/mob/items/righthand_uniforms.dmi',
-		)
 	name = "jumpsuit"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	permeability_coefficient = 0.90

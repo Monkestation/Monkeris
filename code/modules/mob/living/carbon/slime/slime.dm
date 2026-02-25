@@ -66,6 +66,11 @@
 	var/core_removal_stage = 0 //For removing cores.
 
 	injury_type = INJURY_TYPE_HOMOGENOUS
+	bubble_icon = "slime"
+	verb_say = "blorbles"
+	verb_ask = "inquisitively blorbles"
+	verb_exclaim = "loudly blorbles"
+	verb_yell = "loudly blorbles"
 
 /mob/living/carbon/slime/New(location, colour="grey")
 
@@ -180,7 +185,7 @@
 	powerlevel = 0 // oh no, the power!
 	..()
 
-/mob/living/carbon/slime/explosion_act(target_power, explosion_handler/handler)
+/mob/living/carbon/slime/explosion_act(target_power, datum/explosion_handler/handler)
 	adjustBruteLoss(round(target_power))
 	adjustFireLoss(round(target_power))
 	updatehealth()

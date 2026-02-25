@@ -167,7 +167,7 @@
 	if(health <= 0)
 		qdel(src)
 
-/obj/machinery/explosion_act(target_power, explosion_handler/handler)
+/obj/machinery/explosion_act(target_power, datum/explosion_handler/handler)
 	take_damage(target_power)
 	return 0
 
@@ -389,7 +389,7 @@
 		component_parts -= I
 	if(circuit)
 		circuit.forceMove(loc)
-		circuit.deconstruct(src)
+		circuit._deconstruct(src)
 	qdel(src)
 	return 1
 

@@ -14,7 +14,7 @@
 /turf/floor/tiled/cafe,
 /area/crawler)
 "e" = (
-/turf/wall/low/onestar,
+/turf/wall/low/with_glass/onestar/reinf,
 /obj/structure/curtain/medical,
 /area/crawler)
 "f" = (
@@ -118,7 +118,7 @@
 /turf/floor/tiled/derelict,
 /area/crawler)
 "y" = (
-/turf/wall/low/onestar,
+/turf/wall/low/with_glass/onestar/reinf,
 /area/crawler)
 "z" = (
 /obj/structure/window/reinforced{

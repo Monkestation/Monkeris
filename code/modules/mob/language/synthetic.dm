@@ -21,7 +21,7 @@
 		return
 
 	var/message_start = "<i><span class='game say'>[name], [span_name("[speaker.name]")]"
-	var/message_body = "[span_message("[speaker.say_quote(message)], \"[message]\"")]</span></i>"
+	var/message_body = "[span_message("[speaker.say_quote_old(message)], \"[message]\"")]</span></i>"
 
 	for (var/mob/M in GLOB.dead_mob_list)
 		if (isangel(M))

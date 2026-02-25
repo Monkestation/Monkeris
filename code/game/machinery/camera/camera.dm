@@ -102,7 +102,7 @@
 /obj/machinery/camera/bullet_act(obj/item/projectile/P)
 	take_damage(P.get_structure_damage())
 
-/obj/machinery/camera/explosion_act(target_power, explosion_handler/handler)
+/obj/machinery/camera/explosion_act(target_power, datum/explosion_handler/handler)
 	if(invuln)
 		return 0
 	. = ..()

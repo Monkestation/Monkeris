@@ -22,8 +22,13 @@
 				tally += 0.5
 	if(stats.getPerk(PERK_FAST_WALKER))
 		tally -= 0.5
+
 	if(blocking)
-		tally += 1
+		if(blocking_item)
+			tally += blocking_item.slowdown_blocking
+		else
+			tally += 1
+
 
 	if(recoil)
 		var/obj/item/gun/GA = get_active_held_item()
@@ -128,6 +133,9 @@
 	update_momentum()
 
 /mob/living/carbon/human/proc/update_momentum()
+	if (QDELETED(src))
+		deltimer(momentum_reduction_timer)
+		return
 	if(momentum_speed)
 		momentum_reduction_timer = addtimer(CALLBACK(src, PROC_REF(calc_momentum)), 1 SECONDS, TIMER_STOPPABLE)
 	else

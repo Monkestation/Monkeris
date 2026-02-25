@@ -1,3 +1,5 @@
+#define EXTERNAL_PM_USER "IRCKEY"
+
 //allows right clicking mobs to send an admin PM to their client, forwards the selected mob's client to cmd_admin_pm
 /client/proc/cmd_admin_pm_context(mob/M as mob in SSmobs.mob_list | SShumans.mob_list)
 	set category = null
@@ -100,7 +102,7 @@
 				return
 
 	to_chat(C, "[span_pm("<span class='in'>" + create_text_tag("pm_in", "", C) + " <b>\[[recieve_pm_type] PM\]</b> <span class='name'>[key_name(src, TRUE, C.holder ? 1 : 0)]")]: <span class='message linkify'>[msg]</span></span></span>")
-	to_chat(src, "[span_pm("<span class='out'>" + create_text_tag("pm_out_alt", "PM", src) + " to <span class='name'>[get_options_bar(C, holder ? 1 : 0, holder ? 1 : 0, 1)]")]: <span class='message linkify'>[msg]</span></span></span>")
+	to_chat(src, "[span_pm("<span class='out'>" + create_text_tag("pm_out_alt", "PM", src) + " to <span class='name'>[ADMIN_FULLMONTY(src)]")]: <span class='message linkify'>[msg]</span></span></span>")
 
 	//play the recieving admin the adminhelp sound (if they have them enabled)
 	//non-admins shouldn't be able to disable this
@@ -171,3 +173,22 @@
 			continue
 		if(X.holder.rank_flags() & R_ADMIN)
 			to_chat(X, "[span_pm("<span class='other'>" + create_text_tag("pm_other", "PM:", X) + " <span class='name'>[key_name(src, X, 0)]")] to [span_name("IRC-[sender]")]: [span_message("[msg]")]</span></span>")
+
+/// Takes an argument which could be either a ckey, /client, or IRC marker, and returns a client if possible
+/// Returns [EXTERNAL_PM_USER] if an IRC marker is detected
+/// Otherwise returns null
+/proc/disambiguate_client(whom)
+	if(istype(whom, /client))
+		return whom
+
+	if(!istext(whom) || !(length(whom) >= 1))
+		return null
+
+	var/searching_ckey = whom
+	if(whom[1] == "@")
+		searching_ckey = findTrueKey(whom)
+
+	if(searching_ckey == EXTERNAL_PM_USER)
+		return EXTERNAL_PM_USER
+
+	return GLOB.directory[searching_ckey]

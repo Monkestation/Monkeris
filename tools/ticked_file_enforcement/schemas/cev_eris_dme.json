@@ -5,6 +5,7 @@
 	"excluded_files": [
 		"__HELPERS/logging/antagonists.dm",
 		"__HELPERS/russian.dm",
+		"modules/library/old_book.dm",
 		"controllers/subsystems/sanity.dm",
 		"datums/components/ai_like_control.dm",
 		"datums/craft/recipes/_todo.dm",

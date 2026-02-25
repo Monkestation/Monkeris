@@ -5,6 +5,11 @@
 	desc = "A general purpose Chef's Knife made by Asters Merchant Guild. Guaranteed to stay sharp for years to come."
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "knife"
+	item_state = "knife"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/swords_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/swords_righthand.dmi',
+		)
 	description_info = "Could be attached to a gun"
 	flags = CONDUCT
 	sharp = TRUE
@@ -25,6 +30,9 @@
 	//spawn values
 	rarity_value = 10
 	spawn_tags = SPAWN_TAG_KNIFE
+
+	//if used on a modgun, it'll create a visible bayonet
+	modular_overlay = "bayonet"
 
 /obj/item/tool/knife/New()
 	..()
@@ -71,6 +79,7 @@
 /obj/item/tool/knife/butch
 	name = "butcher's cleaver"
 	icon_state = "butch"
+	item_state = "butch"
 	desc = "A huge thing used for chopping and chopping up meat. This includes roaches and roach-by-products."
 	force = WEAPON_FORCE_DANGEROUS
 	throwforce = WEAPON_FORCE_NORMAL
@@ -332,6 +341,10 @@
 	icon_state = "spear_glass"
 	item_state = "spear_glass"
 	wielded_icon = "spear_glass_wielded"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/polearms_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/polearms_righthand.dmi',
+		)
 	flags = CONDUCT
 	sharp = TRUE
 	edge = TRUE

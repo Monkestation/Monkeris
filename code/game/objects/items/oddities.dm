@@ -59,6 +59,7 @@
 	name = "rusted lighter"
 	desc = "This zippo ligher has been rusted shut. It smells faintly of sulphur and blood."
 	icon_state = "syndicate_lighter"
+	item_state = "zippo"
 	oddity_stats = list(
 		STAT_ROB = 10,
 	)
@@ -67,6 +68,11 @@
 	name = "old id"
 	desc = "There is a story behind this name. Untold, and cruel in fate."
 	icon_state = "old_id"
+	item_state = "card-id"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/idcards_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/idcards_lefthand.dmi',
+		)
 	oddity_stats = list(
 		STAT_TGH = 10,
 	)
@@ -75,6 +81,7 @@
 	name = "observer photo"
 	desc = "Just looking at this photo sparks a primal fear in your heart."
 	icon_state = "photo_corridor"
+	item_state = "paper"
 	oddity_stats = list(
 		STAT_VIG = 10,
 	)
@@ -84,6 +91,11 @@
 	name = "broken design disk"
 	desc = "This disk is corrupted and completely unusable. It has a hand-drawn picture of some strange mechanism on it - looking at it for too long makes your head hurt."
 	icon_state = "disc"
+	item_state = "card-id"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/idcards_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/idcards_lefthand.dmi',
+		)
 	oddity_stats = list(
 		STAT_MEC = 10,
 	)
@@ -92,6 +104,7 @@
 	name = "unholy book"
 	desc = "The writings inside entail some strange ritual. Pages have been torn out or smudged to illegibility."
 	icon_state = "book_skull"
+	item_state = "necronomicon"
 	oddity_stats = list(
 		STAT_COG = 10,
 	)
@@ -100,7 +113,11 @@
 	name = "odd health scanner"
 	desc = "It's broken and stuck on some really strange readings. Was this even human?"
 	icon_state = "healthscanner"
-	item_state = "electronic"
+	item_state = "healthanalyzer"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/medical_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/medical_righthand.dmi',
+		)
 	oddity_stats = list(
 		STAT_BIO = 10,
 	)
@@ -120,6 +137,11 @@
 	name = "trustworthy towel"
 	desc = "It's always good to have one with you."
 	icon_state = "towel"
+	item_state = "sheet"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/bedsheet_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/bedsheet_righthand.dmi',
+		)
 	oddity_stats = list(
 		STAT_ROB = 6,
 		STAT_TGH = 6,
@@ -130,6 +152,7 @@
 	name = "old bible"
 	desc = "Oh, how quickly we forgot."
 	icon_state = "book_bible"
+	item_state = "bible"
 	oddity_stats = list(
 		STAT_ROB = 6,
 		STAT_VIG = 6,
@@ -139,6 +162,7 @@
 	name = "old money"
 	desc = "It's not like the organization that issued this exists anymore."
 	icon_state = "old_money"
+	item_state = "paper"
 	oddity_stats = list(
 		STAT_TGH = 6,
 		STAT_VIG = 6,
@@ -149,18 +173,19 @@
 	name = "expired mouthwash"
 	desc = "It's an old bottle of DRAGONBREATH X mouthwash. The contents have hopelessly congealed and fused to the bottle."
 	icon_state = "curly"
+	item_state = "coolant-c"
 	oddity_stats = list(
 		STAT_ROB = 4,
 		STAT_TGH = 4,
 		STAT_VIG = 4
 	)
 
-
 //Double stat, mixed
 /obj/item/oddity/common/photo_crime
 	name = "crime scene photo"
 	desc = "It is unclear whether this is a victim of suicide or murder. His face is frozen in a look of agony and terror, and you shudder to think at what his last moments might have been."
 	icon_state = "photo_crime"
+	item_state = "paper"
 	oddity_stats = list(
 		STAT_BIO = 7,
 		STAT_VIG = 7,
@@ -171,6 +196,7 @@
 	name = "surreal maint photo"
 	desc = "The corridor in this photograph looks familiar, though something seems wrong about it; it's as if everything in it was replaced with an exact replica of itself."
 	icon_state = "photo_corridor"
+	item_state = "paper"
 	oddity_stats = list(
 		STAT_MEC = 7,
 		STAT_VIG = 7,
@@ -181,6 +207,7 @@
 	name = "alien landscape photo"
 	desc = "There is some ire about the planet in this photograph."
 	icon_state = "photo_landscape"
+	item_state = "paper"
 	oddity_stats = list(
 		STAT_COG = 7,
 		STAT_VIG = 7,
@@ -191,6 +218,11 @@
 	name = "old radio"
 	desc = "Close your eyes, bring it closer and listen. You can almost hear it, in the edge of your consciousness. The World is ticking."
 	icon_state = "old_radio"
+	item_state = "radio"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
 	oddity_stats = list(
 		STAT_COG = 9,
 		STAT_VIG = 9,
@@ -213,6 +245,10 @@
 	desc = "An old Nanotrasen era PDA. These were issued to their employees all throughout the galaxy."
 	icon_state = "old_pda"
 	item_state = "electronic"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
 	oddity_stats = list(
 		STAT_COG = 6,
 		STAT_BIO = 6,
@@ -223,6 +259,7 @@
 	name = "strange blueprint"
 	desc = "There's no telling what this design is supposed to be. Whatever could be built from this likely wouldn't work."
 	icon_state = "blueprint"
+	item_state = "blueprint"
 	oddity_stats = list(
 		STAT_COG = 5,
 		STAT_MEC = 7,
@@ -233,6 +270,11 @@
 	name = "odd device"
 	desc = "Something about this gadget both disturbs and interests you. It's manufacturer's name has been mostly smudged away, but you can see a strange mechanism as their logo."
 	icon_state = "device"
+	item_state = "electronic"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
 	oddity_stats = list(
 		STAT_COG = 8,
 		STAT_MEC = 8,
@@ -245,6 +287,10 @@
 	desc = "Is this blood older then you? You can't tell, and will never know."
 	icon_state = "old_knife"
 	item_state = "knife"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/weapons/swords_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/weapons/swords_righthand.dmi',
+		)
 	structure_damage_factor = STRUCTURE_DAMAGE_BLADE
 	tool_qualities = list(QUALITY_CUTTING = 20,  QUALITY_WIRE_CUTTING = 10, QUALITY_SCREW_DRIVING = 5)
 	force = WEAPON_FORCE_DANGEROUS
@@ -275,6 +321,7 @@
 	name = "observer book"
 	desc = "This book contains detailed information on otherwise unknown cyber creatures. Who did this, how is this even possible?"
 	icon_state = "book_eyes"
+	item_state = "scrapbook"
 	oddity_stats = list(
 		STAT_ROB = 9,
 		STAT_TGH = 9,
@@ -287,6 +334,7 @@
 	name = "paper bundle"
 	desc = "Somewhere there is a truth, hidden under all of this scrap."
 	icon_state = "paper_bundle"
+	item_state = "paper"
 	oddity_stats = list(
 		STAT_BIO = 6,
 		STAT_TGH = 6,
@@ -298,6 +346,7 @@
 	name = "occult book"
 	desc = "Most of the stories in this book seem to be the writings of madmen, but at least the stories are interesting."
 	icon_state = "book_omega"
+	item_state = "ithaqua"
 	oddity_stats = list(
 		STAT_BIO = 6,
 		STAT_ROB = 6,
@@ -309,6 +358,7 @@
 	name = "torn-out page"
 	desc = "This ALMOST makes sense."
 	icon_state = "paper_crumpled"
+	item_state = "paper"
 	oddity_stats = list(
 		STAT_MEC = 6,
 		STAT_ROB = 6,
@@ -321,6 +371,7 @@
 	name = "old newspaper"
 	desc = "It contains a report on some old and strange phenomenon. Maybe it's lies, maybe it's corporate experiments gone wrong. Wait, there are two comically obvious holes for peering through!"
 	icon_state = "old_newspaper"
+	item_state = "newspaper"
 	oddity_stats = list(
 		STAT_MEC = 6,
 		STAT_COG = 6,
@@ -336,6 +387,7 @@
 	name = "collection of obscure reports"
 	desc = "Even the authors seem to be rather skeptical about their findings. The reports are not connected to each other, but their results are similar."
 	icon_state = "folder-omega" //changed from "paper_omega"
+	item_state = "newspaper"
 	oddity_stats = list(
 		STAT_MEC = 8,
 		STAT_COG = 8,
@@ -481,6 +533,11 @@
 	name = "warped radio"
 	desc = "An old radio covered in growths. You can hear nothing from it, nothing but the sound of machinery and souls begging for release."
 	icon_state = "warped_radio"
+	item_state = "radio"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
 	oddity_stats = list(
 		STAT_COG = 8,
 		STAT_VIG = 8,
@@ -491,6 +548,11 @@
 	name = "abnormal pda"
 	desc = "An old Nanotrasen era PDA covered in growths. Is the hive Nanotrasen's creation, or made by something worse?"
 	icon_state = "abnormal_pda"
+	item_state = "electronic"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
 	oddity_stats = list(
 		STAT_COG = 8,
 		STAT_MEC = 8,
@@ -501,6 +563,11 @@
 	name = "makeshift datapad"
 	desc = "A makeshift datapad covered in growths. Whatever data was stored here is now gone, part of it transferred to an unknown source, the rest simply wiped."
 	icon_state = "hivemind_core"
+	item_state = "electronic"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
 	w_class = ITEM_SIZE_NORMAL
 	random_stats = FALSE
 	oddity_stats = list(
@@ -600,7 +667,6 @@
 	icon_state = "big_shot"
 	item_state = "big_shot"
 
-
 	armor = list(
 		melee = 3,
 		bullet = 3,
@@ -626,6 +692,7 @@
 	desc = "A piece of paper with an unfinished mathematical equation."
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper_words_crumpled"
+	item_state = "paper"
 	prob_perk = 0
 	oddity_stats = list(
 		STAT_ROB = 4,
@@ -742,6 +809,12 @@
 	name = "expired anomazon dismembership card"
 	desc = "A gaudy-looking plastic card stamped with a slogan - \"All good things cost an arm and a leg!\" You have a bad feeling about this."
 	icon_state = "anomazon"
+	item_state = "silver_id"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/idcards_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/idcards_lefthand.dmi',
+		)
+
 	oddity_stats = list(
 		STAT_ROB = 7,
 		STAT_TGH = 7,
@@ -807,6 +880,11 @@
 	desc = "Remnants of circuitry salvaged from the terrifying robotic One Star beast. You hope it's disabled now and nothing more than a trophy..."
 	random_stats = FALSE
 	icon_state = "box" // I beg for a new sprite this sucks a bit but will do as a temporary thing
+	item_state = "electronic"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
 	w_class = ITEM_SIZE_NORMAL
 	oddity_stats = list(
 		STAT_VIG = 10,

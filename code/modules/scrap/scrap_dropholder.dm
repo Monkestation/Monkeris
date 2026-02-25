@@ -46,5 +46,5 @@
 /obj/effect/falling_effect/singularity_pull()
 	return
 
-/obj/effect/falling_effect/explosion_act(target_power, explosion_handler/handler)
+/obj/effect/falling_effect/explosion_act(target_power, datum/explosion_handler/handler)
 	return 0

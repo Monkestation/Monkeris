@@ -255,7 +255,7 @@ for reference:
 			explode()
 		..()
 
-/obj/machinery/deployable/barrier/explosion_act(target_power, explosion_handler/handler)
+/obj/machinery/deployable/barrier/explosion_act(target_power, datum/explosion_handler/handler)
 	return take_damage(target_power)
 
 /obj/machinery/deployable/barrier/take_damage(amount)

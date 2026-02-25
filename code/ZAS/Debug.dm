@@ -11,11 +11,11 @@
 			"invalid",
 			"mark",
 			"fullblock")) // Index 6
-			image = image(icon = 'icons/Testing/Zone.dmi', icon_state = overlay_icon_state)
+			image = image(icon = 'icons/testing/zone.dmi', icon_state = overlay_icon_state)
 			appearance_cache.Add(image.appearance)
 
 		for(var/block_direction in list(NORTH, SOUTH, WEST, EAST))
-			image = image(icon = 'icons/Testing/Zone.dmi', icon_state = "block", dir = block_direction)
+			image = image(icon = 'icons/testing/zone.dmi', icon_state = "block", dir = block_direction)
 			appearance_cache.Add(image.appearance) // Indexes 7 (NORTH) to 10 (EAST)
 
 	ZAS_debug_overlays = list()

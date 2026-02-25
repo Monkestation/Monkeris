@@ -1,8 +1,15 @@
+#define MIDNIGHT_ROLLOVER		864000	//number of deciseconds in a day
+
 //time of day but automatically adjusts to the server going into the next day within the same round.
 //for when you need a reliable time number that doesn't depend on byond time.
-#define MIDNIGHT_ROLLOVER		864000	//number of deciseconds in a day
 #define REALTIMEOFDAY (world.timeofday + (MIDNIGHT_ROLLOVER * MIDNIGHT_ROLLOVER_CHECK))
-#define MIDNIGHT_ROLLOVER_CHECK ( rollovercheck_last_timeofday != world.timeofday ? update_midnight_rollover() : midnight_rollovers )
+#define MIDNIGHT_ROLLOVER_CHECK ( GLOB.rollovercheck_last_timeofday != world.timeofday ? update_midnight_rollover() : GLOB.midnight_rollovers )
+
+///displays the current time into the round, with a lot of extra code just there for ensuring it looks okay after an entire day passes
+#define ROUND_TIME(...) ( "[STATION_TIME_PASSED() > MIDNIGHT_ROLLOVER ? "[round(STATION_TIME_PASSED()/MIDNIGHT_ROLLOVER)]:[gameTimestamp(wtime = STATION_TIME_PASSED())]" : gameTimestamp(wtime = STATION_TIME_PASSED())]" )
+
+///Returns the time that has passed since the game started
+#define STATION_TIME_PASSED(...) (world.time - SSticker.round_start_time)
 
 #define CURRENT_SHIP_YEAR (GLOB.year_integer + SHIP_YEAR_OFFSET)
 
@@ -137,3 +144,11 @@
 
 #define TimeOfGame (get_game_time())
 #define TimeOfTick (world.tick_usage*0.01*world.tick_lag)
+
+/// Until a condition is true, sleep, or until a certain amount of time has passed.
+/// Basically, UNTIL() but with a timeout.
+#define UNTIL_OR_TIMEOUT(Condition, Timeout) \
+	do { \
+		var/__end_time = REALTIMEOFDAY + (Timeout); \
+		UNTIL((Condition) || (REALTIMEOFDAY > __end_time)); \
+	} while(0)

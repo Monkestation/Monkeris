@@ -361,7 +361,7 @@
 	if (B)
 		B.evacuate()
 
-/mob/living/carbon/superior_animal/attack_generic(mob/user, damage, attack_message)
+/mob/living/carbon/superior_animal/attack_generic(mob/user, damage, attack_message, block_handled)
 
 	if(!damage || !istype(user))
 		return

@@ -21,7 +21,7 @@
 		if(volume < 5)
 			return
 		var/obj/item/book/affectedbook = O
-		affectedbook.dat = null
+		affectedbook.book_data.set_content(null, TRUE)
 		to_chat(usr, span_notice("The solution dissolves the ink on the book."))
 	return
 
@@ -199,7 +199,7 @@
 		if(volume < 5)
 			return
 		var/obj/item/book/affectedbook = O
-		affectedbook.dat = null
+		affectedbook.book_data.set_content(null, TRUE)
 		to_chat(usr, span_notice("The solution dissolves the ink on the book."))
 	return
 

@@ -234,7 +234,7 @@
 #define TWEAKABLE_COMPUTER_PART_SLOTS 8
 
  //Preference save/load cooldown. This is in deciseconds.
-#define PREF_SAVELOAD_COOLDOWN 4 //Should be sufficiently hard to achieve without a broken mouse or autoclicker while still fulfilling its intended goal.
+#define PREF_SAVELOAD_COOLDOWN 0.8 SECONDS //Should be sufficiently hard to achieve without a broken mouse or autoclicker while still fulfilling its intended goal.
 
 #define JOINTEXT(X) jointext(X, null)
 
@@ -364,9 +364,14 @@
 #define TTS_SEED_ANNOUNCER "Robot_2"
 
 
+//world/proc/shelleo
+#define SHELLEO_ERRORLEVEL 1
+#define SHELLEO_STDOUT 2
+#define SHELLEO_STDERR 3
+
 /// File path used for the "enable tracy next round" functionality
 /// The server port is appended to the end of the filename to avoid conflicts if multiple servers share the same data folder.
-#define TRACY_ENABLE_PATH	"data/enable_tracy.[world.port]"
+#define TRACY_ENABLE_PATH	"data/enable_tracy"
 /// The DLL path for byond-tracy.
 #define TRACY_DLL_PATH		(world.system_type == MS_WINDOWS ? "prof.dll" : "./libprof.so")
 

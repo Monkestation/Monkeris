@@ -211,13 +211,21 @@ Proc for attack log creation, because really why not
 	if (progbar)
 		qdel(progbar)
 
-/proc/do_after(mob/user, delay, atom/target, needhand = 1, progress = 1, incapacitation_flags = INCAPACITATION_DEFAULT, immobile = 1)
+/proc/do_after(mob/user, delay, atom/target, needhand = 1, progress = 1, incapacitation_flags = INCAPACITATION_DEFAULT, immobile = 1, unique = FALSE, datum/callback/extra_checks)
 	if(!user)
 		return 0
 
 	var/atom/target_loc
 	if(target)
 		target_loc = target.loc
+		//if unique is enabled, won't trigger if the obj is already in use
+		if(target.used_now && unique)
+			if(target != user)
+				to_chat(user, span_warning("[target.name] is already in use."))
+			//stop telling everyone you're already using their body. it's weird.
+			else
+				to_chat(user, span_warning("You are already performing an action, wait for it to end!"))
+			return 0
 
 	var/atom/original_loc = user.loc
 
@@ -235,6 +243,9 @@ Proc for attack log creation, because really why not
 	if (progress)
 		progbar = new(user, delay, progtarget)
 
+	if(target)
+		target.used_now = TRUE
+
 	var/endtime = world.time + delay
 	var/starttime = world.time
 	. = 1
@@ -249,20 +260,27 @@ Proc for attack log creation, because really why not
 
 		if(immobile)
 			if(user.loc != original_loc)
-				. = 0
+				. = FALSE
 				break
 
-		if(target_loc && (!target || target_loc != target.loc))
-			. = 0
+		//if user is the target & immobile is not enabled we can safely ignore their loc changing
+		//otherwise, death to progbar
+		if(target_loc && (!target || (target != user && target_loc != target.loc)))
+			. = FALSE
 			break
 
 		if(needhand)
 			if(user.get_active_held_item() != holding)
-				. = 0
+				. = FALSE
 				break
+		if (extra_checks && !extra_checks.Invoke())
+			. = FALSE
+			break
 
 	if (progbar)
 		qdel(progbar)
+	if(target)
+		target.used_now = FALSE
 
 //Defined at mob level for ease of use
 /mob/proc/body_part_covered(bodypart)

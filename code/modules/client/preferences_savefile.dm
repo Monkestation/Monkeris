@@ -13,11 +13,12 @@
 			to_chat(client, span_warning("You're attempting to load your preferences a little too fast. Wait half a second, then try again."))
 		return 0
 	if(!fexists(path))		return 0
+	debug_world_log("LOADING PREFS FOR [usr]/[usr?.ckey] - PATH: [path]")
 	var/savefile/S = new /savefile(path)
 	if(!S)					return 0
 	S.cd = "/"
 
-	S["version"] >> savefile_version
+	DIRECT_INPUT(S["version"], savefile_version)
 	player_setup.load_preferences(S)
 	loaded_preferences = S
 	return 1
@@ -28,11 +29,12 @@
 		if(istype(client))
 			to_chat(client, span_warning("You're attempting to save your preferences a little too fast. Wait half a second, then try again."))
 		return 0
+	debug_world_log("SAVING PREFS FOR [usr]/[usr?.ckey] - PATH: [path]")
 	var/savefile/S = new /savefile(path)
 	if(!S)					return 0
 	S.cd = "/"
 
-	S["version"] << SAVEFILE_VERSION_MAX
+	WRITE_FILE(S["version"], SAVEFILE_VERSION_MAX)
 	player_setup.save_preferences(S)
 	loaded_preferences = S
 	return 1
@@ -46,6 +48,7 @@
 
 	if(!fexists(path))		return 0
 
+	debug_world_log("LOADING CHARACTER FOR [usr]/[usr?.ckey] - PATH: [path]")
 	var/savefile/S = new /savefile(path)
 	if(!S)					return 0
 	S.cd = "/"
@@ -76,6 +79,7 @@
 		if(istype(client))
 			to_chat(client, span_warning("You're attempting to save your character a little too fast. Wait half a second, then try again."))
 		return 0
+	debug_world_log("SAVING CHARACTER FOR [usr]/[usr?.ckey] - PATH: [path]")
 	var/savefile/S = new /savefile(path)
 	if(!S)					return 0
 	S.cd = GLOB.maps_data.character_save_path(default_slot)

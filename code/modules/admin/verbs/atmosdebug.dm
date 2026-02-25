@@ -28,9 +28,9 @@
 
 	to_chat(usr, "Checking for overlapping pipes...")
 	next_turf:
-		for(var/turf/T in GLOB.turfs)
+		for(var/turf/T in world)
 			for(var/dir in GLOB.cardinal)
-				var/list/connect_types = list(1 = 0, 2 = 0, 3 = 0)
+				var/list/connect_types = list(0,0,0)
 				for(var/obj/machinery/atmospherics/pipe in T)
 					if(dir & pipe.initialize_directions)
 						for(var/connect_type in pipe.connect_types)

@@ -39,6 +39,8 @@
 	icon_state = "silencer"
 	rarity_value = 20
 
+	//if used on a modgun, it'll create a visible silencer
+	modular_overlay = "silencer_small"
 
 /obj/item/gun_upgrade/muzzle/silencer/New()
 	..()
@@ -279,6 +281,7 @@
 	desc = "Scope that can be attachet to avarage gun."
 	matter = list(MATERIAL_GLASS = 2, MATERIAL_PLASTEEL = 2)
 	icon_state = "Watchman"
+	modular_overlay = "scope_small"
 
 /obj/item/gun_upgrade/scope/watchman/New()
 	..()
@@ -296,6 +299,7 @@
 	matter = list(MATERIAL_PLASMAGLASS = 3, MATERIAL_PLASTEEL = 3)
 	icon_state = "Killer"
 	spawn_blacklisted = TRUE
+	modular_overlay = "scope_big"
 
 /obj/item/gun_upgrade/scope/killer/New()
 	..()

@@ -11,6 +11,7 @@
 	name = "creature"
 	icon = 'icons/mob/hivemind.dmi'
 	icon_state = "slicer"
+	bubble_icon = "guardian"
 	health = 20
 	maxHealth = 20
 	melee_damage_lower = 5

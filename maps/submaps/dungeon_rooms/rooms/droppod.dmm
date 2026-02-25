@@ -17,7 +17,7 @@
 /area/crawler)
 "f" = (
 /obj/structure/lattice,
-/turf/wall/low/onestar,
+/turf/wall/low/with_glass/onestar/reinf,
 /area/crawler)
 "g" = (
 /obj/crawler/crawler_wallbreaker/vertical,
@@ -98,7 +98,7 @@
 /turf/floor/tiled/derelict/white_small_edges,
 /area/crawler)
 "y" = (
-/turf/wall/low/onestar,
+/turf/wall/low/with_glass/onestar/reinf,
 /area/crawler)
 "D" = (
 /obj/structure/sign/directions/evac{
