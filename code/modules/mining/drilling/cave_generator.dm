@@ -222,11 +222,12 @@
 				small_pool[cave_poi_tmpl.type] = cave_poi_tmpl.spawn_prob
 
 	var/N_pois_small = rand(3, 4)
-	var/N_pois_large = 1
+	var/N_pois_large = rand(0, 1)
 	if(seismic_lvl <= 3)//lower levels only get a few pois
 		N_pois_small = rand(2, 3)
 	generate_pool_pois(N_pois_small, small_pool)// Place a few pois on the map
-	generate_pool_pois(N_pois_large, big_pool)
+	if(N_pois_large)
+		generate_pool_pois(N_pois_large, big_pool)
 
 //generates pois for a specific pool
 /obj/cave_generator/proc/generate_pool_pois(N_pois, var/list/pool)
