@@ -1,0 +1,1113 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"ab" = (
+/obj/structure/lattice,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"ac" = (
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"ad" = (
+/obj/structure/girder,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"ae" = (
+/obj/spawner/scrap/sparse,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"af" = (
+/obj/spawner/junk,
+/mob/living/simple_animal/hostile/roomba/slayer,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"ag" = (
+/turf/wall/untinted/onestar_reinforced,
+/area/asteroid/cave)
+"ah" = (
+/mob/living/simple_animal/hostile/carp,
+/turf/floor/tiled/derelict/white_big_edges/airless,
+/area/asteroid/cave)
+"ai" = (
+/obj/spawner/scrap/dense,
+/turf/floor/tiled/derelict/white_red_edges/airless,
+/area/asteroid/cave)
+"aj" = (
+/obj/structure/sign/derelict3,
+/turf/wall/untinted/onestar_reinforced,
+/area/asteroid/cave)
+"ak" = (
+/obj/machinery/door/airlock/sandstone{
+	name = "OneStar Airlock"
+	},
+/turf/floor/tiled/derelict/airless,
+/area/asteroid/cave)
+"al" = (
+/mob/living/simple_animal/hostile/roomba/gun_ba,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"an" = (
+/obj/structure/closet/onestar,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"ao" = (
+/obj/structure/bed/chair/custom/onestar,
+/turf/floor/tiled/derelict/white_red_edges/airless,
+/area/asteroid/cave)
+"ap" = (
+/obj/spawner/junk,
+/turf/floor/tiled/derelict/white_big_edges/airless,
+/area/asteroid/cave)
+"aq" = (
+/obj/structure/sign/derelict1,
+/turf/wall/untinted/onestar,
+/area/asteroid/cave)
+"as" = (
+/obj/structure/sign/derelict2,
+/turf/wall/untinted/onestar,
+/area/asteroid/cave)
+"au" = (
+/turf/wall/low/with_glass/reinforced,
+/area/asteroid/cave)
+"av" = (
+/obj/structure/closet/onestar/tier2/mineral,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"aw" = (
+/obj/landmark/corpse/one_star,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"ax" = (
+/obj/structure/salvageable/os/computer,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"ay" = (
+/obj/structure/salvageable/os/console_broken,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"az" = (
+/obj/structure/salvageable/os/console,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"aA" = (
+/obj/machinery/door/airlock/external{
+	icon_state = "door_locked";
+	locked = 1
+	},
+/turf/floor/tiled/derelict/white_red_edges/airless,
+/area/asteroid/cave)
+"aB" = (
+/obj/structure/bed/chair/custom/onestar/red{
+	dir = 1
+	},
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"aC" = (
+/obj/structure/closet/onestar/tier1/mineral/empty,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"aD" = (
+/obj/effect/floor_decal/industrial/loading,
+/obj/machinery/door/airlock/external{
+	icon_state = "door_locked";
+	locked = 1
+	},
+/turf/floor/tiled/techmaint_cargo/airless,
+/area/asteroid/cave)
+"aE" = (
+/obj/effect/floor_decal/industrial/loading{
+	dir = 1
+	},
+/obj/machinery/door/airlock/external{
+	icon_state = "door_locked";
+	locked = 1
+	},
+/turf/floor/tiled/techmaint_cargo/airless,
+/area/asteroid/cave)
+"aF" = (
+/obj/structure/salvageable/os/machine,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"aG" = (
+/turf/wall/untinted/onestar,
+/area/asteroid/cave)
+"aH" = (
+/obj/structure/salvageable/os/data,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"aI" = (
+/obj/structure/catwalk,
+/obj/structure/ore_box,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"aJ" = (
+/obj/structure/catwalk,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"aK" = (
+/obj/structure/closet/onestar/tier1/mineral,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"aL" = (
+/turf/mineral,
+/area/asteroid/cave)
+"aM" = (
+/obj/structure/railing{
+	dir = 1
+	},
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"aN" = (
+/obj/structure/railing{
+	dir = 1
+	},
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"aO" = (
+/obj/structure/railing{
+	dir = 1
+	},
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/structure/inflatable/wall,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"aP" = (
+/obj/structure/railing{
+	dir = 1
+	},
+/obj/structure/inflatable/wall,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"aQ" = (
+/obj/structure/inflatable/wall,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"aR" = (
+/obj/machinery/constructable_frame/machine_frame,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"aS" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/structure/inflatable/wall,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"aT" = (
+/obj/structure/catwalk,
+/obj/structure/inflatable/door,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"aU" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/structure/inflatable/wall,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"aV" = (
+/turf/mineral/random,
+/area/asteroid/cave)
+"aW" = (
+/obj/structure/inflatable/door,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"aX" = (
+/obj/structure/sign/directions/medical{
+	dir = 1;
+	icon_state = "direction_med"
+	},
+/turf/wall/untinted/onestar_reinforced,
+/area/asteroid/cave)
+"aY" = (
+/obj/structure/sign/directions/evac{
+	dir = 8;
+	icon_state = "direction_evac"
+	},
+/obj/structure/sign/directions/engineering{
+	dir = 8;
+	icon_state = "direction_eng";
+	pixel_y = 10
+	},
+/turf/wall/untinted/onestar,
+/area/asteroid/cave)
+"aZ" = (
+/obj/spawner/junk,
+/turf/floor/tiled/derelict/white_red_edges/airless,
+/area/asteroid/cave)
+"ba" = (
+/obj/spawner/structures/os,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"bb" = (
+/obj/item/gun/projectile/handmade_pistol,
+/obj/item/ammo_casing/pistol/scrap,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"bc" = (
+/obj/spawner/junk,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"bd" = (
+/obj/machinery/door/airlock/centcom{
+	icon_state = "door_locked";
+	locked = 1
+	},
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"be" = (
+/obj/machinery/door/airlock/centcom{
+	icon_state = "door_locked";
+	locked = 1
+	},
+/turf/floor/tiled/derelict/white_red_edges/airless,
+/area/asteroid/cave)
+"bf" = (
+/obj/item/remains,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"bg" = (
+/obj/machinery/door/airlock/centcom{
+	icon_state = "door_locked";
+	locked = 1
+	},
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"bh" = (
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"bi" = (
+/obj/item/storage/bag/ore,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"bj" = (
+/obj/structure/catwalk,
+/obj/item/storage/bag/ore,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"bk" = (
+/obj/structure/inflatable/door,
+/obj/structure/catwalk,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"bl" = (
+/obj/structure/lattice,
+/obj/item/tool/pickaxe/onestar,
+/obj/landmark/corpse/one_star/void,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"bI" = (
+/obj/effect/floor_decal/industrial/loading{
+	dir = 1
+	},
+/turf/floor/tiled/techmaint_cargo/airless,
+/area/asteroid/cave)
+"bJ" = (
+/obj/structure/table/onestar,
+/obj/machinery/door/blast/shutters,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"bQ" = (
+/obj/effect/floor_decal/industrial/loading,
+/turf/floor/tiled/techmaint_cargo/airless,
+/area/asteroid/cave)
+"bT" = (
+/obj/structure/bed/chair/custom/onestar{
+	dir = 8
+	},
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"bY" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/floor/tiled/techmaint_cargo/airless,
+/area/asteroid/cave)
+"cg" = (
+/obj/machinery/power/os_turret/laser,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"ch" = (
+/turf/floor/tiled/derelict/white_red_edges/airless,
+/area/asteroid/cave)
+"cI" = (
+/obj/spawner/scrap/dense,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"cN" = (
+/mob/living/simple_animal/hostile/roomba/slayer,
+/turf/floor/tiled/derelict/white_red_edges/airless,
+/area/asteroid/cave)
+"dd" = (
+/obj/structure/closet/onestar/tier1,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"fR" = (
+/obj/spawner/scrap/sparse,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"in" = (
+/turf/floor/tiled/derelict/white_big_edges/airless,
+/area/asteroid/cave)
+"jf" = (
+/mob/living/carbon/superior_animal/stalker,
+/turf/floor/tiled/derelict/white_red_edges/airless,
+/area/asteroid/cave)
+"nf" = (
+/obj/spawner/junk,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"pB" = (
+/obj/spawner/junk,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"qP" = (
+/obj/structure/catwalk,
+/mob/living/simple_animal/hostile/roomba/slayer,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"rh" = (
+/obj/spawner/scrap/dense,
+/turf/floor/tiled/derelict/white_big_edges/airless,
+/area/asteroid/cave)
+"sD" = (
+/obj/machinery/power/os_turret,
+/turf/floor/tiled/derelict/white_red_edges/airless,
+/area/asteroid/cave)
+"uZ" = (
+/obj/spawner/junk,
+/obj/structure/sign/faction/one_star{
+	pixel_x = 32
+	},
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"xe" = (
+/mob/living/simple_animal/hostile/roomba/slayer,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"xf" = (
+/mob/living/simple_animal/hostile/roomba/slayer,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"xF" = (
+/obj/machinery/power/os_turret/laser,
+/turf/floor/tiled/derelict/white_red_edges/airless,
+/area/asteroid/cave)
+"Cm" = (
+/obj/spawner/structures/os,
+/turf/floor/tiled/derelict/white_red_edges/airless,
+/area/asteroid/cave)
+"FJ" = (
+/obj/structure/salvageable/os/server,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"In" = (
+/obj/structure/sign/faction/one_star{
+	pixel_y = 32
+	},
+/obj/structure/closet/onestar/tier1,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"QQ" = (
+/obj/spawner/structures/os,
+/obj/structure/sign/faction/one_star_old{
+	pixel_y = 32
+	},
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"Rx" = (
+/mob/living/simple_animal/hostile/roomba/boomba,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"Tw" = (
+/obj/machinery/door/blast/shutters,
+/turf/wall/low/with_glass/reinforced,
+/area/asteroid/cave)
+"Vr" = (
+/mob/living/simple_animal/hostile/roomba/boomba,
+/turf/floor/tiled/derelict/white_red_edges/airless,
+/area/asteroid/cave)
+"ZH" = (
+/obj/machinery/door/blast/regular,
+/turf/wall/low/with_glass/reinforced,
+/area/asteroid/cave)
+
+(1,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ad
+ac
+ab
+ac
+ab
+aa
+aa
+aa
+aL
+aL
+aL
+aL
+aL
+aL
+aL
+aL
+"}
+(2,1,1) = {"
+aa
+aa
+aa
+ab
+ab
+aa
+ab
+ab
+ab
+ab
+ac
+ad
+ac
+ab
+aa
+aa
+aL
+aL
+aL
+aL
+aL
+aL
+aL
+aL
+aL
+"}
+(3,1,1) = {"
+aa
+aa
+ab
+ab
+ac
+ab
+ac
+pB
+ac
+ag
+ac
+ag
+ab
+ab
+aa
+aa
+ac
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+aL
+"}
+(4,1,1) = {"
+aa
+ab
+ab
+ac
+ac
+ac
+ac
+ac
+ai
+ag
+ae
+ag
+ab
+aa
+aa
+ac
+ac
+ag
+aF
+aF
+aR
+FJ
+aR
+ag
+aL
+"}
+(5,1,1) = {"
+ab
+ab
+ad
+ac
+pB
+ag
+ag
+ag
+ag
+ag
+be
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+nf
+bh
+bh
+bh
+fR
+ag
+aL
+"}
+(6,1,1) = {"
+aa
+ad
+ac
+ac
+xf
+ag
+aw
+bb
+an
+aY
+ch
+cg
+ch
+bg
+bh
+bh
+xe
+bh
+bh
+bh
+aR
+bh
+FJ
+ag
+aL
+"}
+(7,1,1) = {"
+aa
+ab
+ac
+ac
+ch
+ag
+an
+af
+dd
+aG
+ch
+ch
+ch
+aG
+In
+bh
+bh
+sD
+bh
+bh
+aH
+bh
+aR
+ag
+aL
+"}
+(8,1,1) = {"
+ab
+ad
+pB
+ch
+ai
+ag
+dd
+bc
+an
+aG
+ba
+ch
+ba
+aG
+ax
+aB
+bh
+bh
+bh
+bh
+aR
+bh
+FJ
+ag
+aL
+"}
+(9,1,1) = {"
+ab
+ag
+ag
+ag
+ag
+ag
+aG
+bd
+aG
+aq
+aR
+ch
+ba
+aG
+ay
+aB
+bh
+uZ
+ba
+al
+aH
+bh
+FJ
+ag
+aL
+"}
+(10,1,1) = {"
+ab
+ab
+ag
+ap
+rh
+ag
+aZ
+ch
+ch
+aG
+ba
+ch
+aR
+aG
+aR
+aB
+bh
+ag
+aH
+bh
+bh
+bh
+fR
+ag
+aL
+"}
+(11,1,1) = {"
+ab
+ac
+ag
+rh
+in
+aj
+ch
+ch
+ch
+aG
+ch
+Vr
+ch
+aG
+az
+aB
+bh
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+aL
+"}
+(12,1,1) = {"
+ab
+ac
+ag
+ah
+in
+aX
+ch
+ch
+ch
+aG
+ch
+ch
+ch
+aG
+QQ
+Rx
+bh
+ag
+aI
+aI
+aM
+aQ
+aL
+aL
+aL
+"}
+(13,1,1) = {"
+ab
+ac
+ak
+in
+in
+ak
+ch
+jf
+ch
+ak
+ch
+ch
+aZ
+aG
+ag
+ZH
+ZH
+ag
+aI
+aJ
+aN
+aS
+aL
+aV
+aL
+"}
+(14,1,1) = {"
+ab
+ac
+ag
+in
+ah
+ag
+ch
+ch
+ch
+aG
+aR
+ch
+aZ
+aZ
+aA
+bQ
+bY
+aD
+aJ
+aJ
+aJ
+aT
+aJ
+aW
+aa
+"}
+(15,1,1) = {"
+ab
+ac
+ag
+ap
+in
+ag
+ao
+ch
+ch
+aG
+aR
+ch
+ch
+aZ
+ag
+ag
+ag
+ag
+aJ
+qP
+aJ
+aT
+aJ
+aW
+aa
+"}
+(16,1,1) = {"
+ab
+cI
+ag
+ap
+rh
+ag
+ao
+ch
+ch
+aG
+ba
+ch
+ch
+ch
+aA
+bI
+bY
+aE
+aJ
+aJ
+aO
+aU
+aL
+aQ
+aL
+"}
+(17,1,1) = {"
+ab
+ad
+ag
+ag
+ag
+ag
+ao
+ch
+ch
+aG
+as
+Tw
+bJ
+bJ
+ag
+ZH
+ZH
+ag
+aJ
+bj
+aP
+aV
+aL
+aV
+aL
+"}
+(18,1,1) = {"
+ab
+ab
+ac
+ch
+cN
+ag
+ch
+ch
+ch
+ch
+aG
+bf
+bT
+bT
+bi
+bh
+bi
+ag
+ab
+aJ
+aQ
+aL
+aL
+aL
+aL
+"}
+(19,1,1) = {"
+ab
+ab
+ac
+ac
+ai
+au
+aZ
+ch
+ch
+ch
+aG
+bh
+xe
+bh
+bh
+bh
+aK
+ag
+aL
+bk
+aL
+aV
+aL
+aL
+aL
+"}
+(20,1,1) = {"
+aa
+ab
+aa
+ac
+ac
+au
+aZ
+aZ
+aZ
+ch
+ak
+bh
+bh
+xF
+al
+bh
+av
+ag
+aL
+ab
+bl
+aL
+aL
+aL
+aL
+"}
+(21,1,1) = {"
+aa
+ab
+aa
+aa
+ac
+au
+aZ
+aZ
+aZ
+ch
+aG
+bh
+bh
+bh
+bh
+bh
+aC
+ag
+ab
+aL
+aL
+aL
+aL
+aL
+aL
+"}
+(22,1,1) = {"
+aa
+ab
+aa
+aa
+ac
+au
+Cm
+Cm
+aZ
+aZ
+aG
+av
+av
+aR
+aR
+ba
+aK
+ag
+ab
+ab
+aL
+aL
+aL
+aL
+aL
+"}
+(23,1,1) = {"
+aa
+ac
+ab
+ab
+ab
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+aL
+aL
+aL
+aL
+aL
+aL
+aL
+"}
+(24,1,1) = {"
+aa
+ab
+aa
+aa
+aL
+aL
+aa
+aL
+aL
+aL
+aL
+aa
+ac
+ac
+ac
+ac
+aa
+aL
+aL
+aL
+aL
+aL
+aL
+aL
+aL
+"}
+(25,1,1) = {"
+aa
+aa
+aa
+aL
+aL
+aL
+aa
+aa
+aL
+aL
+aL
+aa
+aa
+ac
+aa
+aa
+aL
+aL
+aL
+aL
+aL
+aL
+aL
+aL
+aL
+"}

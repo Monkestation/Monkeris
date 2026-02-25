@@ -12,6 +12,9 @@
 #define CAVE_COOLDOWN 5 MINUTES
 #define CAVE_COLLAPSE 3 MINUTES
 
+#define POI_SIZE_SMALL 1 //several of these smaller pois are allowed to spawn
+#define POI_SIZE_LARGE 2 //only one of these larger pois are allowed to spawn
+
 // Cave generator statuses
 #define CAVE_CLOSED 0
 #define CAVE_GENERATING 1
@@ -206,17 +209,28 @@
 	pois_placed = list()
 	pois_placed_pos = list()
 
-	// Get pool of points of interest for current seismic level
-	var/list/datum/map_template/cave_pois/pool = list()
-	if (!length(pool_pois))
-		stack_trace("pool_pois is of 0 length!")
-	for(var/datum/map_template/cave_pois/cave_poi_tmpl as anything in pool_pois)
-		if(cave_poi_tmpl.min_seismic_lvl >= seismic_lvl)
-			pool += cave_poi_tmpl.type
-			pool[cave_poi_tmpl.type] = cave_poi_tmpl.spawn_prob
+	// Get pools of points of interest for current seismic_lvl
+	var/list/datum/map_template/cave_pois/small_pool = list()
+	var/list/datum/map_template/cave_pois/big_pool = list()
+	for(var/datum/map_template/cave_pois/cave_poi_tmpl in pool_pois)
+		if(cave_poi_tmpl.min_seismic_lvl <= seismic_lvl && cave_poi_tmpl.max_seismic_lvl >= seismic_lvl)
+			if(cave_poi_tmpl.size == POI_SIZE_LARGE)
+				big_pool += cave_poi_tmpl.type
+				big_pool[cave_poi_tmpl.type] = cave_poi_tmpl.spawn_prob
+			else
+				small_pool += cave_poi_tmpl.type
+				small_pool[cave_poi_tmpl.type] = cave_poi_tmpl.spawn_prob
 
-	// Place a few pois on the map
-	var/N_pois = rand(2, 4)
+	var/N_pois_small = rand(3, 4)
+	var/N_pois_large = rand(0, 1)
+	if(seismic_lvl <= 3)//lower levels only get a few pois
+		N_pois_small = rand(2, 3)
+	generate_pool_pois(N_pois_small, small_pool)// Place a few pois on the map
+	if(N_pois_large)
+		generate_pool_pois(N_pois_large, big_pool)
+
+//generates pois for a specific pool
+/obj/cave_generator/proc/generate_pool_pois(N_pois, var/list/pool)
 	for(var/i = 1 to N_pois)
 		var/poi_path = pickweight_n_take(pool)
 		var/datum/map_template/cave_pois/poi = new poi_path()
@@ -361,7 +375,7 @@
 	status = CAVE_GENERATING
 
 	spawn(0)
-		// Generate the map for the given seismic level
+		// Generate the map for the given seismic_lvl
 		generate_map(seismic_lvl)
 
 		// Place the up ladder on a free spot in the cave

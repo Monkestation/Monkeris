@@ -22,6 +22,7 @@
 /obj/spawner/junk,
 /obj/spawner/junk,
 /obj/spawner/traps/wire_splicing/low_chance,
+/obj/spawner/scrap/sparse/low_chance,
 /turf/floor/plating/under/airless,
 /area/asteroid/cave)
 "j" = (
@@ -49,6 +50,11 @@
 /obj/structure/girder,
 /turf/floor/plating/under/airless,
 /area/asteroid/cave)
+"S" = (
+/obj/spawner/junk,
+/obj/spawner/scrap/sparse/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
 
 (1,1,1) = {"
 h
@@ -65,7 +71,7 @@ k
 n
 "}
 (3,1,1) = {"
-k
+S
 f
 i
 l

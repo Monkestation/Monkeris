@@ -72,11 +72,12 @@
 	if(!check_trajectory(L, src))
 		return TURRET_NOT_TARGET
 
-	if(emagged)  // If emagged not even the dead get a rest
-		return L.stat ? TURRET_SECONDARY_TARGET : TURRET_PRIORITY_TARGET
-
 	if(L.stat == DEAD)
 		return TURRET_NOT_TARGET
+
+	//the dead can now rest (to spare the mc from processing infinite turret spam)
+	if(emagged)
+		return L.stat ? TURRET_SECONDARY_TARGET : TURRET_PRIORITY_TARGET
 
 	if(!isgolem(L))  // Only target golems
 		return TURRET_NOT_TARGET
@@ -128,6 +129,17 @@
 	var/def_zone = get_exposed_defense_zone(target)
 	//Shooting Code:
 	A.launch(target, def_zone)
+
+/obj/machinery/porta_turret/mining/rogue
+	name = "malfunctioning mining turret"
+	desc = "A fully automated anti golem platform ...wait, why is it pointing at-"
+	//rusty
+	color = "#a48e70"
+	health = 45
+	shot_delay = 10
+
+	emagged = TRUE
+	anchored = TRUE
 
 #undef TURRET_PRIORITY_TARGET
 #undef TURRET_SECONDARY_TARGET

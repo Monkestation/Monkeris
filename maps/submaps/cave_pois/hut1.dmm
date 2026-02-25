@@ -6,6 +6,8 @@
 /obj/spawner/junkfood/rotten/low_chance,
 /obj/spawner/junkfood/low_chance,
 /obj/spawner/junkfood,
+/obj/spawner/junkfood/rotten/low_chance,
+/obj/spawner/junkfood/low_chance,
 /turf/floor/tiled/dark,
 /area/asteroid/cave)
 "b" = (
@@ -15,13 +17,19 @@
 /obj/structure/table/rack,
 /obj/spawner/voidsuit,
 /obj/spawner/gun/energy_cheap/low_chance,
-/obj/spawner/gun/energy_cheap/low_chance,
+/obj/item/tank/oxygen,
+/obj/spawner/powercell/low_chance,
+/obj/spawner/powercell/low_chance,
 /turf/floor/tiled/dark,
 /area/asteroid/cave)
 "d" = (
 /obj/structure/table/marble,
 /obj/spawner/pack/tech_loot/onestar,
 /obj/spawner/booze,
+/obj/spawner/pack/tech_loot,
+/obj/spawner/pack/tech_loot,
+/obj/spawner/pack/tech_loot/low_chance,
+/obj/spawner/pack/tech_loot/low_chance,
 /turf/floor/tiled/dark,
 /area/asteroid/cave)
 "f" = (
