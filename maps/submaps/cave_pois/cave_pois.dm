@@ -1,6 +1,7 @@
 #define PROB_HIGH 15
 #define PROB_MID 10
 #define PROB_LOW 5
+#define PROB_VERY_LOW 3
 
 /datum/map_template/cave_pois
 	name = null
@@ -227,7 +228,7 @@
 	name = "onestar reeducation camp"
 	id = "cave_onestar1"
 	suffix = "onestar1.dmm"
-	spawn_prob = PROB_LOW
+	spawn_prob = PROB_VERY_LOW
 	min_seismic_lvl = 6
 	size_x = 25
 	size_y = 25
