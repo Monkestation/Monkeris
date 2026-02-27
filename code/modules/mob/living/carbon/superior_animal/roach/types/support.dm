@@ -7,9 +7,7 @@
 	health = 20
 	melee_damage_lower = 2
 	melee_damage_upper = 4
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat/seuche = BUTCHER_NORMAL,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/seuche = BUTCHER_DIFFICULT,\
-							/obj/item/reagent_containers/food/snacks/meat/roachmeat/seuche = BUTCHER_DIFFICULT)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat/seuche = list(4, BUTCHER_DIFFICULT))
 	rarity_value = 11.25
 	var/datum/reagents/gas_sac //Stores gas. Can't use the default reagents since that is now bloodstream
 

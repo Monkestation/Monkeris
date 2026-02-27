@@ -10,9 +10,7 @@
 	response_disarm = "shoves"
 	response_harm = "hits"
 	speed = -1
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/xenomeat = BUTCHER_DIFFICULT, \
-							/obj/item/reagent_containers/food/snacks/meat/xenomeat = BUTCHER_DIFFICULT,\
-							/obj/item/reagent_containers/food/snacks/meat/xenomeat = BUTCHER_CHALLENGING)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/xenomeat = list(3, BUTCHER_DIFFICULT))
 	maxHealth = 100
 	health = 100
 	harm_intent_damage = 5

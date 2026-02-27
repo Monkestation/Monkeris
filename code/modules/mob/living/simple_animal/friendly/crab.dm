@@ -8,8 +8,7 @@
 	emote_see = list("clacks")
 	speak_chance = 1
 	turns_per_move = 5
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/crab = BUTCHER_NORMAL, \
-						/obj/item/reagent_containers/food/snacks/meat/crab = BUTCHER_DIFFICULT)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/crab = list(2, BUTCHER_EASY))
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "stomps"

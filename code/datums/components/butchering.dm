@@ -5,6 +5,9 @@
 	/// Whether or not this component is compatible with blunt tools.
 	var/can_be_blunt = FALSE
 
+	// Chance of triggering an additional hazard effect when butchering an animal.
+	var/hazard_chance = BUTCHERING_HAZARD_CHANCE
+
 /datum/component/butchering/Initialize(
 	disabled = FALSE,
 	can_be_blunt = FALSE,
@@ -79,23 +82,24 @@
 		if(6.1 to 99)
 			butcher.visible_message(span_notice("[butcher] precisely dissects \the [meat]."))
 
-	// Chance of triggering an additional hazard effect when butchering an animal.
-	var/hazard_chance = 5
 	for(var/thing in meat.butcher_results)
-		var/obj/result = thing
-		//get the base percentage of awarding this result
-		var/difficulty = meat.butcher_results[result]
+		//get the assoc list to get our stored info
+		var/list/resultlist = meat.butcher_results[thing]
+		//pull out the number of drops
+		var/number = resultlist[1]
+		//pull out the base percentage of awarding this result
+		var/difficulty = resultlist[2]
 		//takes difficulty and multiplies it by tool and bio stat to get final chance
 		var/trueprob = clamp((difficulty * toolpowr) * max((bio / BUTCHER_BIO_DIVISOR), 0.25), 1, 100)
-		if(prob(trueprob))
-			butchered += result
-		else
-			mulched++
-			hazard_chance = hazard_chance + 10//chance of complications increases for each item you fail to harvest
+		for(var/result in 1 to number)
+			if(prob(trueprob))
+				butchered += thing
+			else
+				mulched++
+				hazard_chance = min(hazard_chance + 10, 100)//chance of complications increases for each item you fail to harvest
 
 	if(mulched)
-		to_chat(butcher, span_warning("You [LAZYLEN(meat.butcher_results) <= mulched ? "completely destroyed all of" : "lost some of"] the meat from \the [meat]."))
-
+		to_chat(butcher, span_warning("You [LAZYLEN(meat.butcher_results) <= mulched ? "completely destroyed all of" : "lost some of"] the harvest from \the [meat]."))
 	if(LAZYLEN(butchered))
 		for(var/reward in butchered)
 			var/obj/item/ourmeat = new reward(dropturf)
@@ -103,7 +107,7 @@
 
 	//try to invoke a hazard effect on the butcher
 	if(meat.butchery_hazard && prob(hazard_chance))
-		butcher.visible_message(span_danger("While cutting up \the [src], [butcher]'s hand slips..."), span_danger("While cutting up \the [src], your hand slips..."))
+		butcher.visible_message(span_danger("While cutting up \the [meat], [butcher]'s hand slips..."), span_danger("While cutting up \the [meat], your hand slips..."))
 		meat.butchery_fail(butcher)
 
 	//let's finish up.
