@@ -9,7 +9,7 @@
 	emote_see = list("shakes its head", "shivers")
 	speak_chance = 1
 	turns_per_move = 10
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/corgi = list(3, BUTCHER_NORMAL)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/corgi = list(3, BUTCHER_NORMAL))
 	response_help  = "pets"
 	response_disarm = "bops"
 	response_harm   = "kicks"
