@@ -154,6 +154,8 @@
 	..()
 	if (health <= 0 && stat != DEAD)
 		death()
+	else if(AI_inactive && stat != DEAD)
+		activate_ai()
 
 /mob/living/simple_animal/adjustBruteLoss(amount)
 	..()
@@ -237,9 +239,6 @@
 		handle_paralysed()
 		handle_supernatural()
 
-		process_food()
-		handle_foodscanning()
-
 		//Atmos
 		var/atmos_suitable = 1
 
@@ -294,6 +293,10 @@
 			adjustBruteLoss(unsuitable_atoms_damage)
 
 		if(!AI_inactive)
+
+			process_food()
+			handle_foodscanning()
+
 			//Speaking
 			if(!client && speak_chance)
 				if(rand(0,200) < speak_chance)

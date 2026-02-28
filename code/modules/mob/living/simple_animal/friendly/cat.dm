@@ -31,7 +31,7 @@
 /mob/living/simple_animal/cat/Life()
 	..()
 
-	if(!stasis)
+	if((!stasis && !AI_inactive) || no_stasis)
 		if (turns_since_move > 5 || (flee_target || mousetarget))
 			walk_to(src,0)
 			turns_since_move = 0
