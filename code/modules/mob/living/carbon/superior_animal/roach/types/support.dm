@@ -76,3 +76,9 @@
 	overseer?.removeHealer(src) // Healer Seuche
 	overseer?.casualties.Remove(src)
 	overseer = null
+
+/mob/living/carbon/superior_animal/roach/support/butchery_fail(mob/living/butcher)
+	butcher.visible_message(span_danger("[butcher] accidentally cuts into a sac inside \the [src], causing gas to spill into the air!"), span_userdanger("Your hands slips while cutting the [src]... a foul green smoke sprays outwards!"))
+	gas_sac.add_reagent("blattedin", 20)//makes sure it has enough gas to actually cast it
+	gas_attack()
+	return
