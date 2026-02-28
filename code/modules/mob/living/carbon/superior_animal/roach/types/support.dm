@@ -7,8 +7,7 @@
 	health = 20
 	melee_damage_lower = 2
 	melee_damage_upper = 4
-	meat_type = /obj/item/reagent_containers/food/snacks/meat/roachmeat/seuche
-	meat_amount = 3
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat/seuche = list(4, BUTCHER_DIFFICULT))
 	rarity_value = 11.25
 	var/datum/reagents/gas_sac //Stores gas. Can't use the default reagents since that is now bloodstream
 
@@ -77,3 +76,9 @@
 	overseer?.removeHealer(src) // Healer Seuche
 	overseer?.casualties.Remove(src)
 	overseer = null
+
+/mob/living/carbon/superior_animal/roach/support/butchery_fail(mob/living/butcher)
+	butcher.visible_message(span_danger("[butcher] accidentally cuts into a sac inside \the [src], causing gas to spill into the air!"), span_userdanger("Your hands slips while cutting the [src]... a foul green smoke sprays outwards!"))
+	gas_sac.add_reagent("blattedin", 20)//makes sure it has enough gas to actually cast it
+	gas_attack()
+	return

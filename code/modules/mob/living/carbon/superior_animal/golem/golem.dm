@@ -40,8 +40,7 @@
 	speak_chance = 5
 
 	see_in_dark = 10
-	meat_type = null
-	meat_amount = 0
+	butcher_results = null
 	stop_automated_movement_when_pulled = 0
 	wander = FALSE
 	viewRange = 8

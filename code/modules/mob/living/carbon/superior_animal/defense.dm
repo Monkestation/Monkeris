@@ -1,20 +1,3 @@
-/mob/living/carbon/superior_animal/proc/harvest(mob/user)
-	var/actual_meat_amount = max(1,(meat_amount/2))
-	if(meat_type && actual_meat_amount>0 && (stat == DEAD))
-		drop_embedded()
-		for(var/i=0;i<actual_meat_amount;i++)
-			var/obj/item/meat = new meat_type(get_turf(src))
-			meat.name = "[src.name] [meat.name]"
-		if(issmall(src))
-			user.visible_message(span_danger("[user] chops up \the [src]!"))
-			var/obj/effect/decal/cleanable/blood/blood_effect = new/obj/effect/decal/cleanable/blood/splatter(get_turf(src))
-			blood_effect.basecolor = bloodcolor
-			blood_effect.update_icon()
-			qdel(src)
-		else
-			user.visible_message(span_danger("[user] butchers \the [src] messily!"))
-			gib()
-
 /mob/living/carbon/superior_animal/update_lying_buckled_and_verb_status()
 	..()
 
@@ -25,12 +8,8 @@
 	updatehealth()
 
 /mob/living/carbon/superior_animal/attackby(obj/item/I, mob/living/user, params)
-	if (meat_type && (stat == DEAD) && (QUALITY_CUTTING in I.tool_qualities))
-		if (I.use_tool(user, src, WORKTIME_NORMAL, QUALITY_CUTTING, FAILCHANCE_NORMAL, required_stat = STAT_BIO))
-			harvest(user)
-	else
-		. = ..()
-		updatehealth()
+	. = ..()
+	updatehealth()
 
 /mob/living/carbon/superior_animal/resolve_item_attack(obj/item/I, mob/living/user, hit_zone)
 	//mob.attackby -> item.attack -> mob.resolve_item_attack -> item.apply_hit_effect

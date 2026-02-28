@@ -27,8 +27,7 @@
 	move_to_delay = 6
 	turns_per_move = 5
 	see_in_dark = 10
-	meat_type = null
-	meat_amount = 0
+	butcher_results = null
 	stop_automated_movement_when_pulled = 0
 
 	melee_damage_lower = 12

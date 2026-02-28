@@ -13,6 +13,9 @@
 	// AI activation for players is handled in sanity , if it has sanity damage it activates AI.
 	sanity_damage = 0.5
 
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat = list(3, BUTCHER_NORMAL))
+	butchery_hazard = TRUE
+
 	var/icon_living
 	var/icon_dead
 	var/icon_rest //resting/unconscious animation
@@ -54,9 +57,6 @@
 	var/attack_sound = 'sound/weapons/spiderlunge.ogg'
 	var/attack_sound_chance = 33
 	var/attack_sound_volume = 20
-
-	var/meat_type = /obj/item/reagent_containers/food/snacks/meat/roachmeat
-	var/meat_amount = 3
 
 	var/melee_damage_lower = 0
 	var/melee_damage_upper = 10
@@ -418,4 +418,37 @@
 		grabbing = null
 		cheap_update_lying_buckled_and_verb_status_()
 
+//generic gore spray butchering fail, only for superior mobs for now
+/mob/living/carbon/superior_animal/butchery_fail(mob/living/butcher)
+	var/mob/living/carbon/carbonbutcher
+	if(iscarbon(butcher))
+		carbonbutcher = butcher
+		//no repeat message for mouth if eyes are hit
+		var/message_sent = FALSE
+		var/mouth_protection = carbonbutcher.find_skin_protection(FACE)
+		var/eye_protection = carbonbutcher.find_skin_protection(EYES)
 
+		//get the reagent to poison people with if they fail
+		var/reagent_id = isroach(src) ? "blattedin" : null
+		if(isspider(src))
+			reagent_id = astype(src, /mob/living/carbon/superior_animal/giant_spider)?.poison_type
+
+		gibs(butcher.loc, null, /obj/effect/gibspawner/generic, fleshcolor, bloodcolor)//splatter_cache
+
+		if(!eye_protection)
+			butcher.visible_message(span_danger("[butcher] is blinded by a spray of gore from the \the [src]!"), span_userdanger("You are blinded by a spray of gore from \the [src]! [!mouth_protection ? "Some of the muck gets in your mouth!" : null]"))
+			message_sent = TRUE
+			butcher.eye_blurry = max(butcher.eye_blurry, 25)
+			butcher.eye_blind = max(butcher.eye_blind, 10)
+			if(reagent_id)
+				butcher.reagents.add_reagent(reagent_id, rand(3, 8))
+
+		else if(!mouth_protection)
+			butcher.custom_emote(2, "[pick("coughs!","splutters!", "retches.")]")//yuckers
+			if(!message_sent)
+				butcher.visible_message(span_danger("[butcher] is sprayed in the face with gore from the \the [src]!"), span_userdanger("You are sprayed with gore by \the [src]! Some of the muck gets in your mouth!"))
+			if(reagent_id)
+				butcher.reagents.add_reagent(reagent_id, rand(5, 10))
+
+		else
+			butcher.visible_message(span_danger("[butcher] is sprayed by gore from the \the [src]!"), span_danger("You sprayed with gore from \the [src]! Your [mouth_protection ? "mask shields" : "glasses shield"] you from the spray!"))

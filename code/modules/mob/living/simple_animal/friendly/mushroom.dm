@@ -7,7 +7,7 @@
 	turns_per_move = 1
 	maxHealth = 5
 	health = 5
-	meat_type = /obj/item/reagent_containers/food/snacks/hugemushroomslice
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/hugemushroomslice = list(2, BUTCHER_NORMAL))
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "whacks"

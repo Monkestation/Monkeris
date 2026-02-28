@@ -32,8 +32,8 @@ Has ability of every roach.
 
 	blattedin_revives_left = 0
 
-	meat_type = /obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser
-	meat_amount = 15
+	//big enough to feed a whole clan of vagabonds
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat/kaiser = list(14, BUTCHER_DIFFICULT))
 	sanity_damage = 3
 
 	ranged = 1 // RUN, COWARD!
