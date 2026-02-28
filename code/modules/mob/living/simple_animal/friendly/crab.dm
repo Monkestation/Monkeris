@@ -39,3 +39,4 @@
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "stomps"
+	no_stasis = TRUE

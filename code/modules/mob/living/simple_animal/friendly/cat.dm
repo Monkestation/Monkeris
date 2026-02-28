@@ -239,6 +239,7 @@
 	icon_state = "cat"
 	item_state =  "cat"
 	befriend_job = "Moebius Biolab Officer"
+	no_stasis = TRUE
 
 /mob/living/simple_animal/cat/kitten
 	name = "kitten"
@@ -265,6 +266,7 @@
 	befriend_job = "Moebius Biolab Officer"
 	sanity_damage = -2
 	var/friend_name = "Erstatz Vryroxes"
+	no_stasis = TRUE
 
 /mob/living/simple_animal/cat/kitten/New()
 	gender = pick(MALE, FEMALE)
@@ -298,6 +300,7 @@ var/cat_number = 0
 	melee_damage_upper = 15
 	attacktext = "slashed"
 	attack_sound = 'sound/weapons/bladeslice.ogg'
+	no_stasis = TRUE
 
 	var/cat_life_duration = 1 MINUTES
 

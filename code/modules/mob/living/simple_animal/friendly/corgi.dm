@@ -40,6 +40,7 @@
 	response_harm   = "kicks"
 	spawn_frequency = 0//unique
 	sanity_damage = -2 // ery cute , gives people a reason to carry him
+	no_stasis = TRUE
 
 /mob/living/simple_animal/corgi/Life()
 	..()
@@ -124,6 +125,7 @@
 	response_help  = "pets"
 	response_disarm = "bops"
 	response_harm   = "kicks"
+	no_stasis = TRUE
 	var/puppies = 0
 
 //Lisa already has a cute bow!
