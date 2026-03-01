@@ -131,12 +131,6 @@
 					to_chat(user, SPAN_NOTICE("You ignite the thermite!"))
 					thermitemelt(user)
 
-			else if(locate(/obj/effect/overlay/wallrot) in src)
-				if(I.use_tool(user, src, WORKTIME_FAST, tool_type, FAILCHANCE_NORMAL, required_stat = STAT_MEC))
-					to_chat(user, SPAN_NOTICE("You burn away the fungi."))
-					for(var/obj/effect/overlay/wallrot/wallrot in src)
-						qdel(wallrot)
-
 			else if(deconstruction_steps_left == 1) // Finishing deconstruction
 				if(I.use_tool(user, src, WORKTIME_SLOW, tool_type, FAILCHANCE_NORMAL, required_stat = STAT_MEC))
 					to_chat(user, SPAN_NOTICE("You dismantle the [src]."))
@@ -208,10 +202,6 @@
 	add_fingerprint(user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)
-	if(locate(/obj/effect/overlay/wallrot) in src)
-		to_chat(user, SPAN_DANGER("The wall crumbles under your touch!"))
-		dismantle_wall(user)
-		return
 	if(window_type)
 		if(user.a_intent == I_HURT)
 			playsound(src, 'sound/effects/glassknock.ogg', 100, 1, 10, 10)
