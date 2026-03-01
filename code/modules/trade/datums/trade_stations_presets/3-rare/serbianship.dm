@@ -19,9 +19,9 @@
 	recommendations_needed = 2
 	inventory = list(
 		"Guns" = list(
-			/obj/item/gun/projectile/boltgun/serbian = custom_good_amount_range(list(1, 10)),
+			/obj/item/gun/projectile/automatic/modular/bolt/serbian/finished = custom_good_amount_range(list(1, 10)),
 			/obj/item/gun/projectile/automatic/modular/ak/serbian_arms = custom_good_amount_range(list(1, 3)),
-			/obj/item/gun/projectile/kovacs = custom_good_amount_range(list(1, 3)),
+			/obj/item/gun/projectile/automatic/modular/batrifle/serbian = custom_good_amount_range(list(1, 3)),
 			/obj/item/ammo_magazine/sllrifle,
 			/obj/item/ammo_magazine/lrifle,
 			/obj/item/ammo_magazine/lrifle/pk = custom_good_amount_range(list(1, 2)),
@@ -65,7 +65,7 @@
 	)
 	offer_types = list(
 		/obj/item/gun/projectile/automatic/modular/ak = offer_data("AK frame", 800, 1),
-		/obj/item/part/gun/frame/kovacs = offer_data("Kovacs frame", 1400, 2),
+		/obj/item/gun/projectile/automatic/modular/batrifle = offer_data("Kovacs frame", 1400, 2),
 		/obj/item/part/gun/frame/zoric = offer_data("Zoric frame", 2000, 1),
 		/obj/item/part/gun/frame/bojevic = offer_data("Bojevic frame", 6000, 1),
 		/obj/item/part/gun/frame/pk  = offer_data("Pulemyot Kalashnikova frame", 8000, 1)

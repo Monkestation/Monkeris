@@ -1,7 +1,16 @@
 GLOBAL_LIST_EMPTY(clients)	//list of all clients
 GLOBAL_LIST_EMPTY(admins)	//list of all clients whom are admins
+GLOBAL_PROTECT(admins)
 GLOBAL_LIST_EMPTY(directory)	//list of all ckeys with associated client
+GLOBAL_LIST_EMPTY(stealthminID) //reference list with IDs that store ckeys, for stealthmins
 GLOBAL_LIST_EMPTY(deadmins) //all ckeys who have used the de-admin verb.
+
+GLOBAL_LIST_EMPTY(mentorlog)
+GLOBAL_PROTECT(mentorlog)
+GLOBAL_LIST_EMPTY(mentors) // All ckeys who have an active mentor datum and had at one point an active client
+GLOBAL_PROTECT(mentors)
+
+GLOBAL_LIST_EMPTY(dementors) // All ckeys who have used the de-mentor verb or had their mentor datum made during world start.
 
 //Since it didn't really belong in any other category, I'm putting this here
 //This is for procs to replace all the goddamn 'in world's that are chilling around the code
@@ -307,18 +316,6 @@ GLOBAL_LIST_INIT(scary_sounds, list(
 			GLOB.playable_species += S.name
 		if(S.spawn_flags & IS_WHITELISTED)
 			GLOB.whitelisted_species += S.name
-
-	//Posters
-	paths = subtypesof(/datum/poster) - /datum/poster/wanted - /datum/poster/asters
-	for(var/T in paths)
-		var/datum/poster/poster = new T
-		GLOB.poster_designs += poster
-
-	// Aster posters
-	paths = subtypesof(/datum/poster/asters) - /datum/poster/wanted
-	for(var/T in paths)
-		var/datum/poster/asters/poster = new T
-		GLOB.poster_designs_asters += poster
 
 	paths = subtypesof(/datum/hud)
 	for(var/T in paths)

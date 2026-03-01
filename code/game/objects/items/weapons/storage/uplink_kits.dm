@@ -205,7 +205,7 @@
 	w_class = ITEM_SIZE_HUGE
 
 /obj/item/storage/box/syndie_kit/sts35/populate_contents()
-	new /obj/item/gun/projectile/automatic/sts35(src)
+	new /obj/item/gun/projectile/automatic/modular/batrifle/sts35(src)
 	new /obj/item/ammo_magazine/lrifle(src)
 
 /obj/item/storage/box/syndie_kit/winchester
@@ -228,7 +228,7 @@
 	new /obj/item/gun/projectile/boltgun/levergun/shotgun(src)
 	new /obj/item/ammo_casing/shotgun/prespawned(src)
 
- /obj/item/storage/box/syndie_kit/pug
+/obj/item/storage/box/syndie_kit/pug
 	name = "pug box"
 	desc = "Pug kit with one M12 buckshot mag"
 	icon_state = "box_of_doom_big"

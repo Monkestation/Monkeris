@@ -522,8 +522,6 @@
 
 /datum/config_entry/flag/emojis
 
-/datum/config_entry/flag/paper_input
-
 /// If true, submaps loaded automatically can be rotated.
 /datum/config_entry/flag/random_submap_orientation
 

@@ -28,6 +28,9 @@
 		list("action" = "rip", "name" = "Rip OMG! designs", "icon" = "document")
 	)
 
+	given_watermark = WATERMARK_ORGANFAB
+	stock_watermarks = FALSE
+
 	var/datum/research/files
 	var/list/ripped_categories = list()		// For sanitizing categories
 

@@ -153,6 +153,33 @@
 	icon_state = "bowler"
 	body_parts_covered = 0
 
+/obj/item/clothing/head/robe/kampfer
+	name = "kampfer mask"
+	icon_state = "kampfersuit"
+	item_state = "kampfersuit"
+	desc = "Now you can eat trash in style!"
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR|HIDEFACE
+	body_parts_covered = HEAD|FACE|EYES|EARS
+	item_flags = FLEXIBLEMATERIAL
+
+/obj/item/clothing/head/robe/jager
+	name = "jager mask"
+	icon_state = "jagersuit"
+	item_state = "jagersuit"
+	desc = "Now you can eat trash in style!"
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR|HIDEFACE
+	body_parts_covered = HEAD|FACE|EYES|EARS
+	item_flags = FLEXIBLEMATERIAL
+
+/obj/item/clothing/head/robe/fuhrer
+	name = "fuhrer mask"
+	icon_state = "fuhrersuit"
+	item_state = "fuhrersuit"
+	desc = "Now you can eat trash in style!"
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR|HIDEFACE
+	body_parts_covered = HEAD|FACE|EYES|EARS
+	item_flags = FLEXIBLEMATERIAL
+
 //stylish bs12 hats
 
 /obj/item/clothing/head/bowlerhat

@@ -33,7 +33,7 @@
 		)
 	gun_parts = list(/obj/item/part/gun/frame/sts35 = 1, /obj/item/part/gun/modular/grip/black = 1, /obj/item/part/gun/modular/mechanism/autorifle/determined = 1, /obj/item/part/gun/modular/barrel/lrifle = 1)
 	serial_type = "OR"
-
+	spawn_blacklisted = TRUE
 
 /obj/item/gun/projectile/automatic/sts35/update_icon()
 	..()
@@ -58,7 +58,8 @@
 	name = "STS-35 frame"
 	desc = "An STS-35 frame. The finest in kraut space magic."
 	icon_state = "frame_orrifle"
-	resultvars = list(/obj/item/gun/projectile/automatic/sts35)
+	resultvars = list(/obj/item/gun/projectile/automatic/modular/batrifle/sts35)
 	gripvars = list(/obj/item/part/gun/modular/grip/black)
 	mechanismvar = /obj/item/part/gun/modular/mechanism/autorifle/determined
 	barrelvars = list(/obj/item/part/gun/modular/barrel/lrifle)
+	spawn_blacklisted = TRUE

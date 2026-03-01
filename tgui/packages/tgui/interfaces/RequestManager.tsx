@@ -92,7 +92,7 @@ export const RequestManager = (props) => {
                 </Button.Checkbox>
                 <Input
                   value={searchText}
-                  onInput={(ev, val) => setSearchText(val)}
+                  onChange={(val) => setSearchText(val)}
                   placeholder="Search..."
                   mr={1}
                 />

@@ -98,7 +98,6 @@ GLOBAL_VAR(restart_counter)
  * All atoms in both compiled and uncompiled maps are initialized()
  */
 /world/New()
-	log_world("Genesis over, loading world...")
 	//logs
 	href_logfile = file("[GLOB.log_directory]/hrefs.htm")
 
@@ -364,11 +363,11 @@ var/world_topic_spam_protect_time = world.timeofday
 			shutdown_logging() // See comment below.
 			QDEL_NULL(Tracy)
 			QDEL_NULL(Debugger)
-			// SSplexora.notify_shutdown(PLEXORA_SHUTDOWN_KILLDD)
+			SSplexora.notify_shutdown(PLEXORA_SHUTDOWN_KILLDD)
 			TgsEndProcess()
 			return ..()
 
-	// SSplexora.notify_shutdown()
+	SSplexora.notify_shutdown()
 	log_world("World rebooted at [time_stamp()]")
 
 	shutdown_logging() // Past this point, no logging procs can be used, at risk of data loss.

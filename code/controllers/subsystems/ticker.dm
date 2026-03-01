@@ -315,6 +315,10 @@ SUBSYSTEM_DEF(ticker)
 	if(admins_number == 0)
 		send2adminchat("Round has started with no admins online.")
 
+	round_start_time = world.time //otherwise round_start_time would be 0 for the signals
+	SEND_SIGNAL(src, COMSIG_TICKER_ROUND_STARTING, world.time)
+
+
 	PostSetup()
 	return TRUE
 
@@ -628,6 +632,7 @@ SUBSYSTEM_DEF(ticker)
 		log_game("[i]s[total_antagonists[i]].")
 
 	sleep(5 SECONDS)
+	SSplexora.roundended()
 	callHook("roundend")
 	ready_for_reboot = TRUE
 	standard_reboot()
