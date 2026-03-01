@@ -321,8 +321,7 @@
 		return
 	if(damage < 1)
 		return
-	if(locate(/obj/effect/overlay/wallrot) in src)
-		damage *= 10
+
 	. = min(health, damage)
 	health -= damage
 	if(health <= 0)
