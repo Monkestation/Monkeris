@@ -1,7 +1,6 @@
 #define PROB_HIGH 15
 #define PROB_MID 10
 #define PROB_LOW 5
-#define PROB_VERY_LOW 3
 
 /datum/map_template/cave_pois
 	name = null
@@ -68,7 +67,7 @@
 //large maint-lvl generic ruins
 /datum/map_template/cave_pois/neutral/big
 	min_seismic_lvl = 2
-	max_seismic_lvl = 5
+	max_seismic_lvl = 4
 	spawn_prob = PROB_MID
 	size_x = 25
 	size_y = 25
@@ -93,7 +92,7 @@
 /datum/map_template/cave_pois/hut
 	spawn_prob = PROB_MID
 	min_seismic_lvl = 2
-	max_seismic_lvl = 5
+	max_seismic_lvl = 4
 	size_x = 7
 	size_y = 7
 
@@ -228,7 +227,7 @@
 	name = "onestar reeducation camp"
 	id = "cave_onestar1"
 	suffix = "onestar1.dmm"
-	spawn_prob = PROB_VERY_LOW
+	spawn_prob = PROB_LOW
 	min_seismic_lvl = 6
 	size_x = 25
 	size_y = 25
