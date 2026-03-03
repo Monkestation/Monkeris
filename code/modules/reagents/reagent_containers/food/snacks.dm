@@ -77,7 +77,7 @@
 	if(cooked)
 		sanity_gain_per_bite += base_sanity_gain_per_bite * food_tier
 		message += bite_descriptor
-	if((junk_food || !cooked) && food_tier > CWG_QUALITY_GROSS)
+	if((junk_food || !cooked) && food_tier > CWJ_QUALITY_GROSS)
 		message += " However, only healthy food will help you rest."
 		return  list(sanity_gain_per_bite, span_notice(message))
 	var/table = FALSE

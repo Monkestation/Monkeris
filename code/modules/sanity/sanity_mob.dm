@@ -414,7 +414,7 @@ GLOBAL_VAR_INIT(GLOBAL_INSIGHT_MOD, 1)
 	changeLevel(snack_sanity_gain)
 	if(snack.cooked && resting && snack.taste_tag.len)
 		for(var/taste in snack.taste_tag)
-			add_rest(taste, (snack_sanity_gain * 50/snack.taste_tag.len) * floor(snack.food_tier, 0.15))
+			add_rest(taste, (snack_sanity_gain * 50/snack.taste_tag.len) * snack.food_tier
 
 /datum/sanity/proc/onSmoke(obj/item/clothing/mask/smokable/S)
 	changeLevel(SANITY_GAIN_SMOKE * S.quality_multiplier)
