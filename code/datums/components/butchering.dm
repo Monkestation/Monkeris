@@ -102,8 +102,12 @@
 		to_chat(butcher, span_warning("You [LAZYLEN(meat.butcher_results) <= mulched ? "completely destroyed all of" : "lost some of"] the harvest from \the [meat]."))
 	if(LAZYLEN(butchered))
 		for(var/reward in butchered)
-			var/obj/item/ourmeat = new reward(dropturf)
-			ourmeat.name = "[meat.name] [ourmeat.name]"
+			var/obj/item/ourdrop = new reward(dropturf)
+			ourdrop.name = "[meat.name] [ourdrop.name]"
+			if(istype(ourdrop, /obj/item/reagent_containers/food/snacks))
+				var/obj/item/reagent_containers/food/snacks/ourmeat = ourdrop
+				ourmeat.food_quality = (ourmeat.food_quality * ((bio + 15) / 15) * clamp((toolpowr / 15), 0.25, 4))
+
 
 	//try to invoke a hazard effect on the butcher
 	if(meat.butchery_hazard && prob(hazard_chance))

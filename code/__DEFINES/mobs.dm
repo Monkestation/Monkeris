@@ -272,7 +272,7 @@ GLOBAL_LIST_INIT(voice_type2sound_ref, voice_type2sound)
  * divisor for BIO effect on butchering
  * values of bio above this will improve butchering chances, values below will dmg it
  */
-#define BUTCHER_BIO_DIVISOR 28
+#define BUTCHER_BIO_DIVISOR 25
 
 /**
  * the base chance of a butchery going wrong and triggering a hazard effect
