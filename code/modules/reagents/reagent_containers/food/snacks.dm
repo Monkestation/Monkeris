@@ -68,11 +68,16 @@
 		message = "This food does not help calm your nerves."
 		return  list(0, span_warning(message))
 	var/sanity_gain_per_bite = base_sanity_gain_per_bite
-	message = "This food helps you relax."
+	if(food_tier > CWJ_QUALITY_MEH)
+		message = "This food helps you relax."
+	else if(food_tier > CWJ_QUALITY_GROSS)
+		message = "This food isn't very good, but at least it's edible."
+	else
+		message = "You're regretting putting this in your mouth."
 	if(cooked)
 		sanity_gain_per_bite += base_sanity_gain_per_bite * food_tier
 		message += bite_descriptor
-	if(junk_food || !cooked)
+	if((junk_food || !cooked) && food_tier > CWG_QUALITY_GROSS)
 		message += " However, only healthy food will help you rest."
 		return  list(sanity_gain_per_bite, span_notice(message))
 	var/table = FALSE
