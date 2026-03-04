@@ -23,7 +23,7 @@
 	)
 	var/spit_target
 	var/spit_range = 2		// For var-edits
-	var/has_brain = FALSE\
+	var/has_brain = FALSE
 	/// does this disgorger have sufficient heart efficiency?
 	var/has_heart = FALSE
 	/// does this disgorger have sufficient blood vessel efficiency?
