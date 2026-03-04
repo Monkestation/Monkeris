@@ -23,8 +23,11 @@
 	)
 	var/spit_target
 	var/spit_range = 2		// For var-edits
-	var/has_brain = FALSE
-
+	var/has_brain = FALSE\
+	/// does this disgorger have sufficient heart efficiency?
+	var/has_heart = FALSE
+	/// does this disgorger have sufficient blood vessel efficiency?
+	var/has_blood = FALSE
 	// Production
 	var/grind_rate = 8				// How many ticks between each processed item
 	var/current_tick = 0
@@ -261,7 +264,8 @@
 	var/throughput_mult = 0
 
 	has_brain = FALSE
-
+	has_heart = FALSE
+	has_blood = FALSE
 	for(var/component in component_parts)
 		if(istype(component, /obj/item/electronics/circuitboard/disgorger))
 			var/obj/item/electronics/circuitboard/disgorger/C = component
@@ -286,8 +290,12 @@
 					muscle_eff += O.organ_efficiency[eff]
 				if(OP_BLOOD_VESSEL)
 					blood_vessel_eff += O.organ_efficiency[eff]
+					if(blood_vessel_eff > 75)
+						has_blood = TRUE
 				if(OP_HEART)
 					heart_eff += O.organ_efficiency[eff]
+					if(heart_eff > 75)
+						has_heart = TRUE
 				if(BP_BRAIN)
 					has_brain = TRUE
 					brain_eff += O.organ_efficiency[eff]
@@ -335,7 +343,6 @@
 		))
 
 	throughput_mult = (heart_eff > 79) ? round((heart_eff + blood_vessel_eff) / 650, 0.05) : 0.05
-
 	capacity_mod = round((stomach_eff / 15) + carrion_chem_eff)
 	tick_reduction = round((muscle_eff / 20) + carrion_maw_eff)
 	production_mod = round(throughput_mult * ((stomach_eff / 2) + (liver_eff / 4) + (kidney_eff / 4) + (carrion_maw_eff)) / 100, 0.01)
@@ -355,6 +362,8 @@
 /obj/machinery/reagentgrinder/industrial/disgorger/nano_ui_data()
 	. = ..()
 
+	.["has_heart"] = has_heart
+	.["has_blood"] = has_blood
 	.["biomatter_counter"] = biomatter_counter
 	.["research_counter"] = research_counter
 	.["research_rate"] = round(100 / research_denominator, 1)
