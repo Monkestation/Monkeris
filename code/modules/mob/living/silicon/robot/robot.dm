@@ -416,7 +416,7 @@
 /mob/living/silicon/robot/verb/toggle_panel_lock()
 	set name = "Toggle Panel Lock"
 	set category = "Silicon Commands"
-	if(opened || !has_power)
+	if(opened || !has_power || incapacitated())
 		to_chat(src, span_warning("You are unable to interact with your panel lock."))
 		return FALSE
 	to_chat(src, span_notice("You begin [!locked ? "" : "un"]locking your panel."))
