@@ -66,7 +66,6 @@
 	RefreshParts()
 
 /obj/machinery/reagentgrinder/industrial/disgorger/examine(mob/user, extra_description = "")
-	..()
 	var/accepted
 
 	if(accepted_objects?.len)
@@ -85,6 +84,7 @@
 	if(accepted)
 		accepted = copytext(accepted, 1, length(accepted) - 1)
 		extra_description += span_notice("\n<i>Accepts [accepted].</i>")
+	..(user, extra_description)
 
 /obj/machinery/reagentgrinder/industrial/disgorger/proc/check_reagents(obj/item/I, mob/user)
 	if(!I.reagents || !I.reagents.total_volume)
@@ -328,7 +328,7 @@
 			/datum/reagent/stim = 0.5,
 			/datum/reagent/drug/psilocybin = 2
 		))
-	if(kidney_eff > 199)
+	if(kidney_eff > 150)
 		LAZYADD(accepted_reagents, list(
 			/datum/reagent/medicine/suppressital = 1,
 			/datum/reagent/medicine/methylphenidate = 1,
