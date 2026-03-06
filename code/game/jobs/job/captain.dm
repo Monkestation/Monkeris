@@ -138,3 +138,74 @@ Act as the captain's sidekick, bodyguard, and last line of defense in a crisis o
 	name = "First Officer"
 	icon_state = "player-gold"
 	join_tag = /datum/job/hop
+
+
+
+/datum/job/comm
+	title = "Communications Officer"
+	flag = COMMSOFFICER
+	department = DEPARTMENT_COMMAND
+	exp_requirements = 50 //baby role
+	exp_required_type_department = DEPARTMENT_CIVILIAN
+	exp_granted_type = EXP_TYPE_CREW
+	head_position = TRUE
+	department_flag = COMMAND
+	faction = "CEV Eris"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the captain & the first officer"
+	selection_color = "#e5e5fc"
+	req_admin_notify = 1
+	wage = WAGE_COMMAND
+	also_known_languages = list(LANGUAGE_CYRILLIC = 25, LANGUAGE_SERBIAN = 20, LANGUAGE_LATIN = 25, LANGUAGE_JIVE = 20)//mr. worldwide
+	perks = list(/datum/perk/sommelier)
+	//lvl. 2 goblin
+	ideal_character_age = 27
+	//fake head of staff = no keycard auth
+	access = list(
+		access_teleporter, access_eva, access_heads, access_heads_vault, access_tcomsat, access_eva, access_maint_tunnels, access_external_airlocks
+	)
+
+	description = "You are a junior officer serving under the Captain of the CEV Eris, enlisted to tend to the ship's Comms. <br>\
+	Your duty is to serve as command's ears- listen well, and ensure nothing escapes your hearing.  <br>\
+	Many comms officers are children of power, the spawn of wealthy, well connected peoples whetting their teeth on a relatively humble command position.<br>\
+	Others might be ambitious young crewmembers, promoted in the line of duty."
+
+	duties = "Monitor communications in every nook and cranny of the CEV Eris. <br>\
+	Sort through the chaos and find information of value to your Captain- dangers, opportunities, items of interest. Make sure he is well informed of the goings on of the ship. <br>\
+	<br>\
+	Relay the Captain's words back to the crew. You have access to their factional comms, making it easier to get their attention. <br>\
+	Make sure the Captain's will is well understood by his peons- though recognize your power is entirely provisional to theirs. <br>\
+	<br>\
+	Ensure nothing stops the (air)mail. Prevent any interruption the ship's internal communications network- divided, the crew will be good as doomed.	<br>\
+	Work together with technomancers to address any technical issues- and take matters into your own hands if the situation becomes desperate.<br>\
+	<br>\
+	Provide what limited counsel you can to the captain on various matters. You lack the experience or influence of your senior officer, but 3 heads are often better than two.<br>\
+	And, if circumstance should threaten their lives, more bodies to throw at the problem couldn't hurt."
+
+	loyalties = "As Comms officer, your first loyalty is to the Captain, who is solely responsible for your livelihood and potential future career prospects. <br>\
+		<br>\
+		Your second loyalty is to the First Officer, who wields the Captain's authority in their stead. Since the Captain rarely concerns themselves with minor details, many matters will instead pass through the FO.<br>\
+		<br>\
+		Your third loyalty is to the ship, and to its mission. Your career won't have much of a future if your first command posting goes down in flames."
+
+	//MAKE THIS
+	//outfit_type = /decl/hierarchy/outfit/job/comm
+
+	software_on_spawn = list(/datum/computer_file/program/comm,
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/reports)
+
+	stat_modifiers = list(
+		STAT_ROB = 10,
+		STAT_TGH = 10,
+		STAT_BIO = 5,
+		STAT_MEC = 20,//cuz they have to fix tcomms if all the technos are too drunk
+		STAT_VIG = 15,
+		STAT_COG = 10
+	)
+
+/obj/landmark/join/start/comms
+	name = "Communications Officer"
+	icon_state = "player-gold"
+	join_tag = /datum/job/comm

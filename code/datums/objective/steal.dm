@@ -19,6 +19,7 @@
 		"a Moebius biolab officer's jumpsuit" = /obj/item/clothing/under/rank/moebius_biolab_officer,
 		"a Ironhammer commander's jumpsuit" = /obj/item/clothing/under/rank/ih_commander,
 		"a First Officer's jumpsuit" = /obj/item/clothing/under/rank/first_officer,
+		"the Comms Officer's headset" = /obj/item/device/radio/headset/heads/comm,
 		"the hypospray" = /obj/item/reagent_containers/hypospray,
 		"the captain's pinpointer" = /obj/item/pinpointer,
 		"an ablative armor vest" = /obj/item/clothing/suit/armor/laserproof,
