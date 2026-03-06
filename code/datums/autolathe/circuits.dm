@@ -100,6 +100,10 @@
 	name = "grill"
 	build_path = /obj/item/electronics/circuitboard/cooking_with_jane/grill
 
+/datum/design/autolathe/circuit/biogenerator
+	name = "biogenerator"
+	build_path = /obj/item/electronics/circuitboard/biogenerator
+
 //Exelsior ciruits
 /datum/design/autolathe/circuit/shieldgen_excelsior
 	name = "excelsior shield wall generator"
