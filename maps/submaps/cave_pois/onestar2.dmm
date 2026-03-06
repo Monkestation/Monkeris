@@ -1,0 +1,1479 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ag" = (
+/obj/structure/girder,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"ah" = (
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"an" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/bed/chair/office/dark,
+/obj/structure/barricade,
+/obj/effect/decal/cleanable/blood/drip,
+/turf/floor/tiled/dark/brown_platform/airless,
+/area/asteroid/cave)
+"ao" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/item/remains/human,
+/turf/floor/tiled/dark/brown_platform/airless,
+/area/asteroid/cave)
+"as" = (
+/turf/floor/tiled/derelict/airless,
+/area/asteroid/cave)
+"au" = (
+/obj/structure/railing/grey{
+	dir = 8
+	},
+/obj/machinery/light/floor,
+/turf/floor/dirt/airless,
+/area/asteroid/cave)
+"ax" = (
+/obj/structure/sign/faction/one_star,
+/turf/wall/untinted/onestar,
+/area/asteroid/cave)
+"ay" = (
+/obj/structure/railing/grey,
+/obj/machinery/light/floor,
+/turf/floor/dirt/airless,
+/area/asteroid/cave)
+"aA" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"aJ" = (
+/obj/structure/noticeboard,
+/turf/wall/untinted/onestar_reinforced,
+/area/asteroid/cave)
+"aK" = (
+/obj/machinery/door/airlock/sandstone{
+	name = "OneStar Airlock"
+	},
+/turf/floor/tiled/derelict/airless,
+/area/asteroid/cave)
+"aN" = (
+/turf/floor/tiled/techmaint/airless,
+/area/asteroid/cave)
+"aQ" = (
+/obj/spawner/scrap/sparse,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"aR" = (
+/obj/effect/floor_decal/industrial/loading,
+/turf/floor/tiled/techmaint_cargo/airless,
+/area/asteroid/cave)
+"aT" = (
+/obj/effect/floor_decal/industrial/outline,
+/turf/floor/tiled/techmaint_cargo/airless,
+/area/asteroid/cave)
+"aU" = (
+/obj/structure/bed/chair/custom/onestar{
+	dir = 8
+	},
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"bb" = (
+/obj/structure/sink{
+	dir = 8;
+	pixel_x = -11
+	},
+/obj/structure/mirror{
+	dir = 8;
+	pixel_x = -28
+	},
+/turf/floor/tiled/cafe/airless,
+/area/asteroid/cave)
+"bd" = (
+/obj/machinery/light_construct{
+	dir = 8
+	},
+/turf/floor/tiled/cafe/airless,
+/area/asteroid/cave)
+"bl" = (
+/obj/structure/sign/faction/one_star_old,
+/turf/wall/untinted/onestar_reinforced,
+/area/asteroid/cave)
+"bm" = (
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"bq" = (
+/obj/spawner/scrap/sparse,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"bs" = (
+/obj/structure/closet/onestar/tier2,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"bt" = (
+/obj/structure/table/onestar,
+/obj/item/paper_bin,
+/obj/item/pen,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"bu" = (
+/obj/spawner/scrap/sparse,
+/turf/floor/tiled/derelict/white_red_edges/airless,
+/area/asteroid/cave)
+"bv" = (
+/obj/machinery/light/floor,
+/obj/item/remains/human,
+/turf/floor/tiled/dark/brown_platform/airless,
+/area/asteroid/cave)
+"by" = (
+/obj/structure/sign/derelict3{
+	pixel_y = 32
+	},
+/turf/floor/tiled/derelict/airless,
+/area/asteroid/cave)
+"bE" = (
+/turf/floor/dirt/airless,
+/area/asteroid/cave)
+"bG" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/table/onestar,
+/obj/item/stamp/denied,
+/obj/item/pen,
+/obj/spawner/oddities/low_chance,
+/turf/floor/tiled/dark/brown_perforated/airless,
+/area/asteroid/cave)
+"bN" = (
+/turf/wall/untinted/onestar,
+/area/asteroid/cave)
+"co" = (
+/obj/structure/window/reinforced{
+	dir = 6
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/table/onestar,
+/obj/item/remains/human,
+/obj/item/pen,
+/turf/floor/tiled/dark/brown_perforated/airless,
+/area/asteroid/cave)
+"cK" = (
+/mob/living/simple_animal/hostile/roomba/gun_ba,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"dO" = (
+/obj/structure/table/onestar,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/item/folder/red,
+/turf/floor/tiled/dark/techfloor/airless,
+/area/asteroid/cave)
+"dS" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/mob/living/simple_animal/hostile/roomba/boomba,
+/turf/floor/tiled/derelict/airless,
+/area/asteroid/cave)
+"eD" = (
+/obj/structure/closet/onestar/tier2/medical,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"fa" = (
+/mob/living/simple_animal/hostile/roomba/slayer,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"fy" = (
+/obj/structure/toilet{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/spawner/oddities/low_chance,
+/turf/floor/tiled/cafe/airless,
+/area/asteroid/cave)
+"fz" = (
+/obj/landmark/corpse/skeleton,
+/obj/effect/decal/cleanable/blood,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"gf" = (
+/obj/machinery/power/os_turret,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"gK" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/floor/tiled/derelict/airless,
+/area/asteroid/cave)
+"ib" = (
+/obj/structure/table/onestar,
+/turf/floor/tiled/dark/techfloor/airless,
+/area/asteroid/cave)
+"jl" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/item/paper/crumpled,
+/turf/floor/tiled/derelict/airless,
+/area/asteroid/cave)
+"ju" = (
+/obj/structure/sign/derelict1{
+	pixel_x = 32
+	},
+/obj/machinery/constructable_frame/machine_frame/vertical,
+/turf/floor/tiled/derelict/airless,
+/area/asteroid/cave)
+"jG" = (
+/obj/spawner/scrap/dense,
+/turf/floor/dirt/airless,
+/area/asteroid/cave)
+"kb" = (
+/obj/structure/window/reinforced{
+	dir = 6
+	},
+/obj/structure/table/onestar,
+/obj/item/clothing/accessory/medal/conduct,
+/obj/spawner/oddities/low_chance,
+/turf/floor/tiled/dark/brown_perforated/airless,
+/area/asteroid/cave)
+"ku" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/floor/tiled/techmaint_cargo/airless,
+/area/asteroid/cave)
+"kx" = (
+/obj/spawner/junk,
+/obj/structure/table/onestar,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"kF" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/bed/chair/office/dark{
+	dir = 8
+	},
+/obj/item/pen,
+/turf/floor/tiled/dark/brown_platform/airless,
+/area/asteroid/cave)
+"lj" = (
+/mob/living/simple_animal/hostile/roomba/boomba,
+/turf/floor/tiled/derelict/white_red_edges/airless,
+/area/asteroid/cave)
+"mJ" = (
+/obj/spawner/junk,
+/turf/floor/tiled/cafe/airless,
+/area/asteroid/cave)
+"nC" = (
+/obj/item/pen,
+/turf/floor/tiled/dark/brown_platform/airless,
+/area/asteroid/cave)
+"nF" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/floor/tiled/derelict/airless,
+/area/asteroid/cave)
+"nI" = (
+/obj/effect/floor_decal/industrial/loading{
+	dir = 1
+	},
+/turf/floor/tiled/techmaint_cargo/airless,
+/area/asteroid/cave)
+"nR" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/table/onestar,
+/obj/item/modular_computer/laptop,
+/turf/floor/tiled/dark/brown_perforated/airless,
+/area/asteroid/cave)
+"oc" = (
+/obj/effect/floor_decal/industrial/danger,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"pa" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/table/onestar,
+/obj/item/stamp/chameleon,
+/obj/spawner/oddities/low_chance,
+/turf/floor/tiled/dark/brown_perforated/airless,
+/area/asteroid/cave)
+"pb" = (
+/obj/structure/cyberplant{
+	desc = "One of those famous OneStar holoplants! Add to your Space a bit of the comfort from old Earth, by buying this blue buddy. A nuclear battery and a rugged case guarantee that your flower will survive journey to another galaxy, and variety of plant types won't let you to get bored along the way!";
+	name = "OneStar \"Iridescent\""
+	},
+/turf/floor/tiled/cafe/airless,
+/area/asteroid/cave)
+"pj" = (
+/obj/effect/decal/cleanable/blood/drip,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"pS" = (
+/obj/item/remains/human,
+/obj/item/clothing/accessory/blue,
+/turf/floor/tiled/dark/brown_platform/airless,
+/area/asteroid/cave)
+"qp" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/machinery/light/floor,
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/landmark/corpse/one_star,
+/turf/floor/tiled/dark/brown_platform/airless,
+/area/asteroid/cave)
+"qq" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/turf/floor/tiled/derelict/airless,
+/area/asteroid/cave)
+"qw" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 6
+	},
+/obj/structure/table/onestar,
+/obj/item/device/lighting/toggleable/lamp,
+/obj/spawner/oddities/low_chance,
+/turf/floor/tiled/dark/brown_perforated/airless,
+/area/asteroid/cave)
+"rb" = (
+/obj/structure/table/onestar,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"sB" = (
+/obj/structure/reagent_dispensers/water_cooler,
+/turf/floor/tiled/derelict/airless,
+/area/asteroid/cave)
+"sD" = (
+/obj/structure/window/reinforced{
+	dir = 6
+	},
+/obj/structure/bed/chair/office/dark{
+	dir = 4
+	},
+/obj/landmark/corpse/one_star,
+/turf/floor/tiled/dark/brown_platform/airless,
+/area/asteroid/cave)
+"tl" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/item/paper/crumpled,
+/turf/floor/tiled/derelict/airless,
+/area/asteroid/cave)
+"up" = (
+/obj/machinery/light_construct,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"uQ" = (
+/obj/spawner/scrap/sparse,
+/turf/floor/tiled/cafe/airless,
+/area/asteroid/cave)
+"vG" = (
+/obj/spawner/junkfood/rotten,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"vL" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/salvageable/os/console_broken{
+	dir = 4
+	},
+/turf/floor/tiled/dark/brown_platform/airless,
+/area/asteroid/cave)
+"wg" = (
+/obj/machinery/light,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"wF" = (
+/obj/spawner/junk,
+/turf/floor/dirt/airless,
+/area/asteroid/cave)
+"wI" = (
+/mob/living/simple_animal/hostile/roomba/gun_ba,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"xc" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/item/clothing/accessory/red,
+/turf/floor/tiled/dark/brown_platform/airless,
+/area/asteroid/cave)
+"xf" = (
+/obj/structure/table/onestar,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/item/folder/red,
+/turf/floor/tiled/dark/techfloor/airless,
+/area/asteroid/cave)
+"yJ" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/bed/chair/office/dark{
+	dir = 4
+	},
+/turf/floor/tiled/dark/brown_platform/airless,
+/area/asteroid/cave)
+"zc" = (
+/obj/spawner/scrap/dense,
+/turf/floor/tiled/derelict/white_red_edges/airless,
+/area/asteroid/cave)
+"zj" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/table/onestar,
+/obj/item/device/taperecorder,
+/turf/floor/tiled/dark/brown_perforated/airless,
+/area/asteroid/cave)
+"zC" = (
+/obj/structure/medical_stand,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"Ae" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/floor/tiled/dark/brown_platform/airless,
+/area/asteroid/cave)
+"Ax" = (
+/obj/structure/railing/grey{
+	dir = 8
+	},
+/turf/floor/dirt/airless,
+/area/asteroid/cave)
+"AS" = (
+/obj/effect/decal/cleanable/blood,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"Bj" = (
+/mob/living/simple_animal/hostile/roomba/slayer,
+/turf/floor/tiled/cafe/airless,
+/area/asteroid/cave)
+"BH" = (
+/obj/structure/largecrate,
+/obj/item/paper,
+/obj/item/paper,
+/obj/item/paper,
+/turf/floor/tiled/derelict/airless,
+/area/asteroid/cave)
+"BI" = (
+/obj/effect/floor_decal/industrial/warning,
+/mob/living/simple_animal/hostile/roomba/boomba,
+/turf/floor/tiled/derelict/airless,
+/area/asteroid/cave)
+"Cs" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/machinery/light/floor,
+/obj/effect/decal/cleanable/blood,
+/obj/machinery/light,
+/obj/landmark/corpse/one_star,
+/turf/floor/tiled/dark/brown_platform/airless,
+/area/asteroid/cave)
+"Dc" = (
+/mob/living/simple_animal/hostile/roomba/boomba,
+/turf/floor/tiled/derelict/airless,
+/area/asteroid/cave)
+"Ej" = (
+/obj/structure/table/onestar,
+/obj/item/phone,
+/turf/floor/tiled/dark/brown_perforated/airless,
+/area/asteroid/cave)
+"ES" = (
+/turf/wall/untinted/onestar_reinforced,
+/area/asteroid/cave)
+"Fb" = (
+/obj/machinery/light_construct{
+	dir = 1
+	},
+/turf/floor/tiled/derelict/white_red_edges/airless,
+/area/asteroid/cave)
+"Fz" = (
+/obj/effect/floor_decal/industrial/warning,
+/turf/floor/tiled/derelict/airless,
+/area/asteroid/cave)
+"FA" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/item/remains/human,
+/obj/structure/bed/chair/office/dark{
+	dir = 8
+	},
+/turf/floor/tiled/dark/brown_platform/airless,
+/area/asteroid/cave)
+"Gb" = (
+/obj/machinery/vending/coffee,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"Gt" = (
+/obj/machinery/light,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"GP" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/table/onestar,
+/obj/item/stamp/denied,
+/obj/structure/barricade,
+/obj/spawner/oddities/low_chance,
+/turf/floor/tiled/dark/brown_perforated/airless,
+/area/asteroid/cave)
+"GZ" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/table/onestar,
+/obj/item/stamp/denied,
+/turf/floor/tiled/dark/brown_perforated/airless,
+/area/asteroid/cave)
+"Hc" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/salvageable/os/console_broken{
+	dir = 8
+	},
+/turf/floor/tiled/dark/brown_perforated/airless,
+/area/asteroid/cave)
+"HY" = (
+/obj/structure/salvageable/os/computer,
+/turf/floor/tiled/dark/brown_platform/airless,
+/area/asteroid/cave)
+"It" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/table/onestar,
+/obj/item/paper_bin,
+/obj/item/pen,
+/obj/effect/decal/cleanable/blood/drip,
+/obj/item/gun/projectile/handmade_pistol,
+/obj/spawner/ammo,
+/turf/floor/tiled/dark/brown_perforated/airless,
+/area/asteroid/cave)
+"JA" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/table/onestar,
+/obj/item/device/lighting/toggleable/lamp,
+/turf/floor/tiled/dark/brown_perforated/airless,
+/area/asteroid/cave)
+"JB" = (
+/turf/mineral,
+/area/asteroid/cave)
+"Km" = (
+/turf/floor/tiled/cafe/airless,
+/area/asteroid/cave)
+"Kw" = (
+/obj/spawner/junk,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"KW" = (
+/obj/item/paper/crumpled,
+/turf/floor/tiled/derelict/airless,
+/area/asteroid/cave)
+"KX" = (
+/obj/spawner/junk/low_chance,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"La" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/table/onestar,
+/obj/item/paper_bin,
+/obj/item/pen,
+/turf/floor/tiled/dark/brown_perforated/airless,
+/area/asteroid/cave)
+"Lz" = (
+/obj/structure/railing/grey,
+/turf/floor/dirt/airless,
+/area/asteroid/cave)
+"LE" = (
+/obj/structure/closet/emcloset,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"LY" = (
+/turf/floor/tiled/dark/brown_platform/airless,
+/area/asteroid/cave)
+"ME" = (
+/obj/structure/sign/department/medbay{
+	pixel_x = 32
+	},
+/mob/living/simple_animal/hostile/roomba/slayer,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"NH" = (
+/turf/floor/tiled/derelict/white_red_edges/airless,
+/area/asteroid/cave)
+"NQ" = (
+/obj/structure/reagent_dispensers/water_cooler,
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"Oz" = (
+/obj/structure/sign/faction/one_star,
+/turf/wall/untinted/onestar_reinforced,
+/area/asteroid/cave)
+"OV" = (
+/obj/structure/sign/faction/one_star_old,
+/turf/wall/untinted/onestar,
+/area/asteroid/cave)
+"Pb" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"Pc" = (
+/obj/structure/table/onestar,
+/obj/machinery/light/floor,
+/obj/item/storage/lunchbox/rainbow,
+/turf/floor/tiled/dark/brown_perforated/airless,
+/area/asteroid/cave)
+"Qe" = (
+/obj/structure/sign/derelict2{
+	pixel_y = 32
+	},
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"Qn" = (
+/obj/structure/bed/chair/custom/onestar{
+	dir = 4
+	},
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"QE" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 6
+	},
+/obj/structure/table/onestar,
+/obj/item/paper_bin,
+/turf/floor/tiled/dark/brown_perforated/airless,
+/area/asteroid/cave)
+"Rf" = (
+/obj/structure/salvageable/os/machine{
+	dir = 8
+	},
+/turf/floor/tiled/derelict/airless,
+/area/asteroid/cave)
+"Rg" = (
+/obj/structure/toilet{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/spawner/oddities/low_chance,
+/mob/living/simple_animal/hostile/roomba/boomba,
+/turf/floor/tiled/cafe/airless,
+/area/asteroid/cave)
+"Rn" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/bed/chair/office/dark{
+	dir = 4
+	},
+/obj/machinery/light/floor,
+/turf/floor/tiled/dark/brown_platform/airless,
+/area/asteroid/cave)
+"Ss" = (
+/obj/structure/toilet{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/mob/living/simple_animal/hostile/roomba/boomba,
+/obj/spawner/oddities/low_chance,
+/turf/floor/tiled/cafe/airless,
+/area/asteroid/cave)
+"SV" = (
+/obj/structure/table/onestar,
+/obj/item/device/lighting/toggleable/lamp,
+/turf/floor/tiled/dark/brown_perforated/airless,
+/area/asteroid/cave)
+"UT" = (
+/obj/structure/lattice,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"Vu" = (
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"VG" = (
+/obj/structure/bed/chair/office/dark{
+	dir = 4
+	},
+/obj/item/lipstick/black,
+/turf/floor/tiled/dark/brown_platform/airless,
+/area/asteroid/cave)
+"VK" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 6
+	},
+/obj/structure/table/onestar,
+/obj/item/paper_bin,
+/turf/floor/tiled/dark/brown_perforated/airless,
+/area/asteroid/cave)
+"VQ" = (
+/mob/living/simple_animal/hostile/roomba/gun_ba,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"Xm" = (
+/obj/structure/table/onestar,
+/obj/item/pen/reagent/sleepy,
+/turf/floor/tiled/dark/brown_perforated/airless,
+/area/asteroid/cave)
+"XL" = (
+/obj/structure/bed/chair/comfy/beige{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"Yv" = (
+/obj/effect/floor_decal/industrial/loading{
+	dir = 1
+	},
+/obj/landmark/corpse/skeleton,
+/obj/effect/decal/cleanable/blood,
+/turf/floor/tiled/techmaint_cargo/airless,
+/area/asteroid/cave)
+"Yy" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet/medical,
+/obj/spawner/medical,
+/obj/machinery/light_construct,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"Ze" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/floor/tiled/derelict/white_small_edges/airless,
+/area/asteroid/cave)
+"Zy" = (
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+
+(1,1,1) = {"
+JB
+JB
+JB
+Zy
+Zy
+Zy
+Zy
+Zy
+Zy
+Zy
+Zy
+UT
+UT
+Zy
+Zy
+Zy
+Zy
+Zy
+Zy
+Zy
+Zy
+UT
+UT
+Zy
+Zy
+"}
+(2,1,1) = {"
+JB
+JB
+Zy
+ag
+UT
+Kw
+UT
+Zy
+Zy
+Zy
+UT
+ag
+ah
+UT
+Zy
+Zy
+Zy
+Zy
+Zy
+Zy
+Zy
+ag
+Kw
+ah
+UT
+"}
+(3,1,1) = {"
+JB
+Zy
+UT
+ES
+ES
+ES
+ES
+ES
+ES
+ES
+ES
+ES
+ah
+ah
+Zy
+Zy
+Zy
+Zy
+Zy
+Zy
+ah
+ES
+ag
+ag
+UT
+"}
+(4,1,1) = {"
+JB
+Zy
+ah
+aJ
+bv
+VG
+nF
+LY
+sD
+vL
+Pc
+ES
+Vu
+ah
+UT
+ag
+Zy
+Zy
+UT
+ah
+VQ
+ES
+aQ
+ah
+Zy
+"}
+(5,1,1) = {"
+Zy
+UT
+UT
+ES
+pa
+VK
+as
+nR
+qw
+FA
+Xm
+ES
+Vu
+Vu
+ah
+ES
+ES
+ES
+ES
+ES
+ag
+ag
+ah
+UT
+Zy
+"}
+(6,1,1) = {"
+Zy
+ah
+aQ
+bl
+as
+KW
+Dc
+BH
+Fz
+nC
+Ej
+ES
+Vu
+KX
+up
+ES
+pb
+bb
+bd
+ah
+ah
+UT
+Zy
+Zy
+Zy
+"}
+(7,1,1) = {"
+Zy
+ah
+wI
+aK
+as
+as
+as
+as
+jl
+Ae
+Rn
+ES
+Qe
+pj
+Vu
+aK
+Bj
+mJ
+Km
+ah
+UT
+UT
+Zy
+Zy
+Zy
+"}
+(8,1,1) = {"
+Zy
+ah
+Vu
+ES
+by
+as
+KW
+as
+as
+La
+Hc
+ES
+Vu
+Vu
+fa
+ES
+Km
+uQ
+Km
+ah
+ah
+ag
+Zy
+Zy
+Zy
+"}
+(9,1,1) = {"
+UT
+ah
+Kw
+ES
+bG
+QE
+as
+KW
+as
+GP
+It
+ES
+pj
+Vu
+Vu
+ES
+aK
+bN
+aK
+bN
+aK
+ES
+Zy
+Zy
+Zy
+"}
+(10,1,1) = {"
+Zy
+UT
+ah
+ES
+qp
+kF
+tl
+as
+BI
+an
+Cs
+ES
+aA
+Vu
+Vu
+ES
+Ss
+bN
+fy
+bN
+Rg
+ES
+UT
+Zy
+Zy
+"}
+(11,1,1) = {"
+Zy
+Zy
+UT
+ES
+yJ
+xc
+qq
+as
+Fz
+ao
+yJ
+ES
+Vu
+Vu
+pj
+ES
+ES
+ES
+ES
+ES
+ES
+ES
+ah
+Zy
+Zy
+"}
+(12,1,1) = {"
+Zy
+Zy
+Zy
+ES
+zj
+co
+as
+as
+KW
+JA
+GZ
+ES
+KX
+Vu
+Vu
+NQ
+Gb
+bN
+bs
+bm
+bs
+ES
+UT
+Zy
+Zy
+"}
+(13,1,1) = {"
+Zy
+Zy
+Zy
+ES
+HY
+pS
+dS
+as
+as
+as
+as
+ES
+Vu
+AS
+Vu
+vG
+oc
+aK
+bm
+cK
+bt
+ES
+Zy
+Zy
+Zy
+"}
+(14,1,1) = {"
+Zy
+Zy
+UT
+ES
+SV
+kb
+sB
+gK
+as
+ju
+Rf
+ES
+AS
+pj
+fz
+XL
+kx
+bN
+Pb
+Qn
+rb
+ES
+Zy
+Zy
+Zy
+"}
+(15,1,1) = {"
+Zy
+ag
+ag
+ES
+ES
+ES
+ES
+ES
+aK
+ES
+ES
+Oz
+Vu
+Vu
+Vu
+bN
+bN
+bN
+xf
+ib
+bN
+ES
+UT
+Zy
+Zy
+"}
+(16,1,1) = {"
+Zy
+UT
+ah
+bq
+KX
+Vu
+Ze
+Vu
+Vu
+fa
+Vu
+fz
+Vu
+fz
+pj
+aN
+aR
+ku
+ku
+aT
+aR
+ah
+ah
+UT
+Zy
+"}
+(17,1,1) = {"
+Zy
+ah
+ah
+Vu
+Vu
+Vu
+Vu
+Vu
+pj
+Vu
+pj
+Vu
+AS
+gf
+AS
+bN
+bN
+bN
+bN
+bN
+OV
+ah
+ah
+Zy
+Zy
+"}
+(18,1,1) = {"
+Zy
+Zy
+ah
+ah
+Vu
+ME
+pj
+Vu
+Vu
+pj
+AS
+KX
+fz
+pj
+Vu
+Yv
+aT
+ku
+ku
+nI
+aN
+ah
+ah
+Zy
+Zy
+"}
+(19,1,1) = {"
+Zy
+Zy
+UT
+ag
+aK
+bN
+bN
+Ax
+Ax
+Ax
+au
+ax
+Vu
+AS
+bN
+bN
+ib
+dO
+bN
+bN
+bN
+ES
+ah
+UT
+Zy
+"}
+(20,1,1) = {"
+Zy
+Zy
+ah
+bm
+cK
+zC
+bN
+bE
+bE
+bE
+bE
+ay
+fz
+Gt
+bN
+bs
+aU
+wg
+bN
+zc
+bu
+ES
+UT
+UT
+Zy
+"}
+(21,1,1) = {"
+JB
+Zy
+UT
+ah
+bm
+Yy
+bN
+bE
+bE
+bE
+bE
+Lz
+fa
+oc
+aK
+bm
+cK
+bm
+bN
+lj
+NH
+ag
+Zy
+Zy
+JB
+"}
+(22,1,1) = {"
+JB
+Zy
+Zy
+ah
+ah
+eD
+bN
+jG
+wF
+bE
+bE
+Lz
+Vu
+LE
+bN
+rb
+bt
+bs
+bN
+Fb
+ah
+UT
+Zy
+JB
+JB
+"}
+(23,1,1) = {"
+JB
+JB
+Zy
+Zy
+UT
+ES
+ES
+ES
+ES
+ES
+ES
+ES
+ES
+ES
+ES
+ES
+ES
+ES
+ES
+ah
+ah
+UT
+Zy
+JB
+JB
+"}
+(24,1,1) = {"
+JB
+JB
+Zy
+Zy
+Zy
+Zy
+ag
+ah
+Zy
+Zy
+Zy
+Zy
+UT
+ah
+ES
+aQ
+UT
+Zy
+UT
+Zy
+Zy
+Zy
+JB
+JB
+JB
+"}
+(25,1,1) = {"
+JB
+JB
+JB
+Zy
+Zy
+Zy
+UT
+UT
+Zy
+Zy
+Zy
+Zy
+Zy
+UT
+ag
+ah
+Zy
+Zy
+Zy
+Zy
+JB
+JB
+JB
+JB
+JB
+"}

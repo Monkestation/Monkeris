@@ -1,0 +1,1177 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ay" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/shuttle/floor/mining{
+	icon_state = "3,20"
+	},
+/area/asteroid/cave)
+"bU" = (
+/obj/landmark/corpse/skeleton/miner,
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/item/device/scanner/mining,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"cc" = (
+/obj/item/ammo_casing/shotgun/scrap,
+/turf/shuttle/floor/mining{
+	icon_state = "9,11"
+	},
+/area/asteroid/cave)
+"cu" = (
+/obj/structure/shuttle/engine/heater,
+/obj/structure/cable,
+/obj/structure/catwalk,
+/turf/floor/plating/under,
+/area/asteroid/cave)
+"cJ" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet,
+/obj/structure/curtain,
+/turf/shuttle/floor/mining{
+	icon_state = "7,9"
+	},
+/area/asteroid/cave)
+"dq" = (
+/obj/structure/salvageable/autolathe,
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"dD" = (
+/turf/mineral/random,
+/area/asteroid/cave)
+"dM" = (
+/mob/living/carbon/superior_animal/golem/coal,
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"dV" = (
+/obj/item/tool/wrench,
+/obj/item/storage/belt/utility,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"ec" = (
+/obj/structure/table/rack,
+/obj/spawner/material/resources,
+/obj/spawner/material/resources,
+/obj/spawner/material/resources/rare,
+/obj/spawner/material/building,
+/obj/spawner/material/building,
+/obj/spawner/material/building,
+/obj/spawner/material/resources/rare,
+/obj/spawner/material/building,
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"eh" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/shuttle/floor/mining{
+	icon_state = "8,7"
+	},
+/area/asteroid/cave)
+"eF" = (
+/mob/living/carbon/superior_animal/golem/iron,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"eI" = (
+/obj/structure/table/steel,
+/obj/machinery/recharger,
+/turf/shuttle/floor/mining{
+	icon_state = "5,12"
+	},
+/area/asteroid/cave)
+"fB" = (
+/obj/landmark/corpse/skeleton/miner,
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"fJ" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/floor/tiled/techmaint,
+/area/asteroid/cave)
+"fW" = (
+/obj/structure/salvageable/machine,
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/turf/shuttle/floor/mining{
+	icon_state = "3,20"
+	},
+/area/asteroid/cave)
+"gk" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet,
+/obj/structure/curtain,
+/obj/spawner/toy/plushie,
+/turf/shuttle/floor/mining{
+	icon_state = "6,11"
+	},
+/area/asteroid/cave)
+"gm" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/catwalk,
+/obj/spawner/tool,
+/turf/floor/plating/under,
+/area/asteroid/cave)
+"hO" = (
+/obj/item/ammo_casing/shotgun/scrap/prespawned,
+/turf/shuttle/floor/mining{
+	icon_state = "9,7"
+	},
+/area/asteroid/cave)
+"hW" = (
+/turf/wall/low/with_glass/smart,
+/area/asteroid/cave)
+"if" = (
+/turf/wall/low,
+/area/asteroid/cave)
+"iz" = (
+/turf/shuttle/floor/mining{
+	icon_state = "9,11"
+	},
+/area/asteroid/cave)
+"iB" = (
+/obj/structure/salvageable/machine,
+/turf/shuttle/floor/mining{
+	icon_state = "5,11"
+	},
+/area/asteroid/cave)
+"jj" = (
+/obj/structure/salvageable/machine,
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/structure/catwalk,
+/turf/floor/plating/under,
+/area/asteroid/cave)
+"ko" = (
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/turf/shuttle/floor/mining{
+	icon_state = "9,7"
+	},
+/area/asteroid/cave)
+"kQ" = (
+/obj/machinery/conveyor/north,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore,
+/turf/shuttle/floor/mining{
+	icon_state = "7,8"
+	},
+/area/asteroid/cave)
+"lc" = (
+/obj/item/ammo_casing/shotgun/scrap,
+/turf/shuttle/floor/mining{
+	icon_state = "9,7"
+	},
+/area/asteroid/cave)
+"lw" = (
+/obj/structure/table/steel,
+/obj/spawner/booze,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"lQ" = (
+/obj/item/tool/pickaxe,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"lT" = (
+/obj/structure/closet/random/spareparts,
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"mu" = (
+/obj/structure/salvageable/machine,
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"my" = (
+/obj/item/material/shard,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"mS" = (
+/turf/shuttle/floor/mining{
+	icon_state = "9,16"
+	},
+/area/asteroid/cave)
+"nE" = (
+/obj/structure/salvageable/machine,
+/turf/shuttle/floor/mining{
+	icon_state = "7,8"
+	},
+/area/asteroid/cave)
+"ou" = (
+/obj/item/tank/plasma,
+/obj/item/tank/plasma,
+/obj/item/tank/plasma,
+/obj/structure/table/rack,
+/obj/spawner/lowkeyrandom,
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"oV" = (
+/obj/machinery/door/airlock/mining,
+/turf/shuttle/floor/mining{
+	icon_state = "3,20"
+	},
+/area/asteroid/cave)
+"pb" = (
+/obj/structure/table/steel,
+/obj/item/paper_bin,
+/obj/item/pen,
+/turf/shuttle/floor/mining{
+	icon_state = "5,21"
+	},
+/area/asteroid/cave)
+"pv" = (
+/obj/structure/bed/chair{
+	dir = 1
+	},
+/obj/landmark/corpse/skeleton/miner,
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/spawner/gun_upgrade/low_chance,
+/obj/spawner/gun/shotgun,
+/obj/item/ammo_casing/shotgun/scrap/prespawned,
+/turf/shuttle/floor/mining{
+	icon_state = "8,7"
+	},
+/area/asteroid/cave)
+"qu" = (
+/obj/machinery/door/airlock/multi_tile/metal/mait,
+/turf/shuttle/floor/mining{
+	icon_state = "3,20"
+	},
+/area/asteroid/cave)
+"rs" = (
+/turf/shuttle/floor/mining{
+	icon_state = "8,6"
+	},
+/area/asteroid/cave)
+"rt" = (
+/obj/item/tool/karl,
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/shuttle/floor/mining{
+	icon_state = "8,11"
+	},
+/area/asteroid/cave)
+"rT" = (
+/obj/item/material/shard/shrapnel/scrap,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"rU" = (
+/obj/machinery/door/firedoor,
+/obj/effect/decal/cleanable/generic,
+/obj/item/trash/material/metal,
+/turf/shuttle/floor/mining{
+	icon_state = "8,20"
+	},
+/area/asteroid/cave)
+"so" = (
+/obj/structure/closet/random/miscellaneous,
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"sy" = (
+/obj/machinery/power/port_gen/pacman{
+	anchored = 1
+	},
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/structure/catwalk,
+/obj/item/stack/material/plasma/random,
+/turf/floor/plating/under,
+/area/asteroid/cave)
+"sB" = (
+/obj/spawner/junk/low_chance,
+/turf/shuttle/floor/mining{
+	icon_state = "3,20"
+	},
+/area/asteroid/cave)
+"sJ" = (
+/obj/structure/salvageable/computer,
+/turf/shuttle/floor/mining{
+	icon_state = "11,16"
+	},
+/area/asteroid/cave)
+"sY" = (
+/obj/structure/ore_box,
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"tJ" = (
+/obj/structure/table/standard,
+/obj/item/device/lighting/toggleable/lamp,
+/obj/spawner/lowkeyrandom,
+/turf/shuttle/floor/mining{
+	icon_state = "5,12"
+	},
+/area/asteroid/cave)
+"ua" = (
+/obj/landmark/corpse/skeleton/miner,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"vf" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/item/tool/karl,
+/turf/shuttle/floor/mining{
+	icon_state = "8,7"
+	},
+/area/asteroid/cave)
+"vk" = (
+/obj/structure/bed/chair{
+	dir = 8
+	},
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"vG" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/external,
+/turf/shuttle/floor/mining{
+	icon_state = "8,20"
+	},
+/area/asteroid/cave)
+"wP" = (
+/obj/machinery/conveyor/north,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore,
+/turf/shuttle/floor/mining{
+	icon_state = "7,8"
+	},
+/area/asteroid/cave)
+"wR" = (
+/obj/structure/table/steel,
+/obj/structure/salvageable/personal,
+/obj/machinery/mineral/processing_unit_console{
+	pixel_x = -3;
+	pixel_y = 27
+	},
+/turf/shuttle/floor/mining{
+	icon_state = "7,9"
+	},
+/area/asteroid/cave)
+"xc" = (
+/obj/spawner/closet/maintloot,
+/turf/shuttle/floor/mining{
+	icon_state = "3,20"
+	},
+/area/asteroid/cave)
+"xJ" = (
+/obj/structure/reagent_dispensers/fueltank,
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"yp" = (
+/obj/structure/salvageable/machine,
+/turf/shuttle/floor/mining{
+	icon_state = "7,7"
+	},
+/area/asteroid/cave)
+"yV" = (
+/mob/living/carbon/superior_animal/golem/silver,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"zE" = (
+/turf/shuttle/floor/mining{
+	icon_state = "8,7"
+	},
+/area/asteroid/cave)
+"zF" = (
+/turf/floor/tiled/techmaint,
+/area/asteroid/cave)
+"zZ" = (
+/obj/structure/fuel_port{
+	pixel_y = 32
+	},
+/obj/item/tank/plasma,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"Ah" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/turf/floor/plating/under,
+/area/asteroid/cave)
+"AC" = (
+/obj/structure/table/steel,
+/obj/spawner/toolbox,
+/obj/spawner/tool_upgrade/rare/low_chance,
+/obj/spawner/tool_upgrade/low_chance,
+/obj/spawner/tool_upgrade/low_chance,
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"AP" = (
+/turf/shuttle/floor/mining{
+	icon_state = "3,20"
+	},
+/area/asteroid/cave)
+"BO" = (
+/mob/living/carbon/superior_animal/golem/gold,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"Cx" = (
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/floor/plating/under,
+/area/asteroid/cave)
+"DU" = (
+/obj/machinery/door/airlock/external,
+/obj/machinery/door/firedoor,
+/turf/shuttle/floor/mining{
+	icon_state = "8,20"
+	},
+/area/asteroid/cave)
+"Es" = (
+/obj/machinery/mining/deep_drill,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"Ez" = (
+/obj/machinery/mech_recharger,
+/obj/spawner/exosuit/damaged/low_chance,
+/turf/shuttle/floor/mining{
+	icon_state = "3,20"
+	},
+/area/asteroid/cave)
+"EY" = (
+/obj/structure/shuttle/engine/propulsion,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"Gb" = (
+/obj/structure/salvageable/computer,
+/turf/shuttle/floor/mining{
+	icon_state = "8,9"
+	},
+/area/asteroid/cave)
+"HC" = (
+/obj/structure/closet/secure_closet/personal/miner,
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"Jo" = (
+/obj/item/material/shard,
+/obj/structure/salvageable/server,
+/turf/shuttle/floor/mining{
+	icon_state = "5,12"
+	},
+/area/asteroid/cave)
+"Jx" = (
+/obj/structure/closet/random/tech,
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"JT" = (
+/obj/structure/table/steel,
+/obj/spawner/booze,
+/turf/shuttle/floor/mining{
+	icon_state = "5,13"
+	},
+/area/asteroid/cave)
+"KK" = (
+/obj/structure/bed/chair{
+	dir = 8
+	},
+/turf/shuttle/floor/mining{
+	icon_state = "5,19"
+	},
+/area/asteroid/cave)
+"Lo" = (
+/obj/structure/salvageable/data,
+/turf/shuttle/floor/mining{
+	icon_state = "9,9"
+	},
+/area/asteroid/cave)
+"LM" = (
+/obj/structure/table/steel,
+/turf/shuttle/floor/mining{
+	icon_state = "5,12"
+	},
+/area/asteroid/cave)
+"Mp" = (
+/obj/effect/floor_decal/asteroid,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"NX" = (
+/obj/structure/table/rack/shelf,
+/obj/spawner/lowkeyrandom,
+/obj/spawner/lowkeyrandom,
+/obj/spawner/lowkeyrandom,
+/obj/spawner/lowkeyrandom,
+/obj/item/tool/pickaxe,
+/obj/item/tool/pickaxe,
+/obj/item/tool/pickaxe,
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"Oz" = (
+/obj/structure/table/steel,
+/obj/item/device/radio/off,
+/turf/shuttle/floor/mining{
+	icon_state = "10,7"
+	},
+/area/asteroid/cave)
+"PV" = (
+/turf/wall/reinforced,
+/area/asteroid/cave)
+"Qe" = (
+/obj/structure/closet/crate,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore,
+/obj/spawner/material/ore,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"QK" = (
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"QZ" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/catwalk,
+/obj/machinery/porta_turret/mining/rogue,
+/turf/floor/plating/under,
+/area/asteroid/cave)
+"Rr" = (
+/obj/item/material/shard/shrapnel/scrap,
+/turf/shuttle/floor/mining{
+	icon_state = "8,11"
+	},
+/area/asteroid/cave)
+"RR" = (
+/obj/item/ammo_casing/shotgun/scrap,
+/obj/machinery/porta_turret/mining/rogue,
+/turf/shuttle/floor/mining{
+	icon_state = "8,14"
+	},
+/area/asteroid/cave)
+"Sx" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"Sz" = (
+/obj/structure/table/rack,
+/obj/spawner/voidsuit/damaged/low_chance,
+/obj/spawner/voidsuit/damaged,
+/obj/spawner/voidsuit/damaged/low_chance,
+/obj/item/clothing/suit/space/void/mining,
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"SF" = (
+/obj/item/ammo_casing/shotgun/scrap,
+/mob/living/carbon/superior_animal/golem/diamond,
+/turf/shuttle/floor/mining{
+	icon_state = "8,7"
+	},
+/area/asteroid/cave)
+"Tj" = (
+/mob/living/carbon/superior_animal/golem/coal,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"Tt" = (
+/obj/item/trash/material/metal,
+/turf/shuttle/floor/mining{
+	icon_state = "8,7"
+	},
+/area/asteroid/cave)
+"UJ" = (
+/turf/wall,
+/area/asteroid/cave)
+"VE" = (
+/obj/item/tool/karl,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"Wt" = (
+/obj/item/material/shard,
+/turf/shuttle/floor/mining{
+	icon_state = "10,19"
+	},
+/area/asteroid/cave)
+"Wz" = (
+/obj/spawner/junk/low_chance,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/floor/tiled/techmaint,
+/area/asteroid/cave)
+"WE" = (
+/obj/structure/bed/chair{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/shuttle/floor/mining{
+	icon_state = "9,7"
+	},
+/area/asteroid/cave)
+"XU" = (
+/obj/landmark/corpse/skeleton/miner,
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/spawner/gun/cheap,
+/obj/spawner/gun_upgrade/low_chance,
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"XW" = (
+/turf/shuttle/floor/mining{
+	icon_state = "9,6"
+	},
+/area/asteroid/cave)
+"XX" = (
+/obj/structure/table/rack,
+/obj/spawner/tank,
+/obj/spawner/tank,
+/obj/spawner/tank,
+/obj/spawner/tank,
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"Yl" = (
+/obj/structure/table/rack,
+/obj/spawner/ammo/shotgun/low_chance,
+/obj/spawner/ammo/shotgun/low_chance,
+/obj/spawner/ammo/shotgun,
+/obj/spawner/lowkeyrandom,
+/turf/shuttle/floor/mining{
+	icon_state = "3,20"
+	},
+/area/asteroid/cave)
+"Yw" = (
+/turf/shuttle/floor/mining{
+	icon_state = "9,7"
+	},
+/area/asteroid/cave)
+"ZH" = (
+/obj/structure/table/steel,
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"ZK" = (
+/obj/structure/table/rack/shelf,
+/obj/spawner/pouch,
+/obj/spawner/pouch/low_chance,
+/obj/spawner/cloth/backpack,
+/obj/spawner/cloth/backpack,
+/obj/item/clothing/under/rank/miner,
+/obj/item/clothing/under/rank/miner,
+/obj/item/clothing/under/rank/miner,
+/turf/shuttle/floor/mining{
+	icon_state = "8,10"
+	},
+/area/asteroid/cave)
+"ZN" = (
+/obj/structure/shuttle/engine/heater,
+/turf/floor/tiled/techmaint,
+/area/asteroid/cave)
+"ZP" = (
+/obj/landmark/corpse/skeleton/miner,
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/shuttle/floor/mining{
+	icon_state = "9,7"
+	},
+/area/asteroid/cave)
+"ZU" = (
+/obj/spawner/junk/low_chance,
+/turf/floor/tiled/techmaint,
+/area/asteroid/cave)
+
+(1,1,1) = {"
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+QK
+QK
+QK
+QK
+QK
+Tj
+QK
+QK
+QK
+QK
+"}
+(2,1,1) = {"
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+Mp
+QK
+QK
+QK
+QK
+QK
+PV
+PV
+PV
+PV
+QK
+QK
+QK
+"}
+(3,1,1) = {"
+dD
+dD
+dD
+dD
+Mp
+Mp
+dD
+dD
+Mp
+QK
+QK
+QK
+QK
+QK
+QK
+PV
+PV
+ou
+lT
+PV
+PV
+QK
+QK
+"}
+(4,1,1) = {"
+dD
+dD
+dD
+dD
+Mp
+BO
+QK
+QK
+QK
+QK
+PV
+PV
+hW
+PV
+PV
+PV
+fW
+Cx
+Cx
+cu
+EY
+QK
+QK
+"}
+(5,1,1) = {"
+dD
+dD
+Mp
+Tj
+QK
+QK
+my
+QK
+QK
+UJ
+UJ
+so
+tJ
+so
+HC
+UJ
+UJ
+fJ
+ZU
+ZN
+EY
+QK
+QK
+"}
+(6,1,1) = {"
+QK
+QK
+QK
+PV
+PV
+PV
+if
+PV
+UJ
+UJ
+Yl
+AP
+AP
+sB
+AP
+sB
+oV
+ZU
+Ez
+PV
+PV
+QK
+QK
+"}
+(7,1,1) = {"
+Mp
+QK
+PV
+PV
+JT
+Jo
+eI
+LM
+iB
+UJ
+UJ
+oV
+UJ
+UJ
+cJ
+gk
+PV
+PV
+PV
+PV
+QK
+eF
+QK
+"}
+(8,1,1) = {"
+dD
+QK
+PV
+ZH
+pb
+vk
+Wt
+fB
+KK
+ec
+UJ
+ay
+XX
+UJ
+UJ
+UJ
+PV
+zZ
+Tj
+QK
+QK
+bU
+VE
+"}
+(9,1,1) = {"
+dD
+Mp
+hW
+Gb
+pv
+eh
+SF
+vf
+zE
+rs
+qu
+RR
+Tt
+rt
+DU
+Rr
+rU
+rT
+QK
+Sx
+Es
+QK
+QK
+"}
+(10,1,1) = {"
+Mp
+yV
+hW
+Lo
+WE
+hO
+Yw
+lc
+ko
+XW
+AP
+mS
+ZP
+cc
+vG
+iz
+DU
+QK
+ua
+Qe
+QK
+dV
+QK
+"}
+(11,1,1) = {"
+QK
+QK
+PV
+lw
+Oz
+sY
+XU
+dM
+sJ
+mu
+UJ
+AP
+Sz
+UJ
+UJ
+UJ
+PV
+lQ
+QK
+QK
+Tj
+Sx
+QK
+"}
+(12,1,1) = {"
+Mp
+QK
+PV
+PV
+wR
+nE
+kQ
+wP
+yp
+UJ
+UJ
+oV
+UJ
+UJ
+AC
+dq
+PV
+PV
+PV
+PV
+QK
+QK
+QK
+"}
+(13,1,1) = {"
+dD
+QK
+QK
+PV
+PV
+PV
+hW
+PV
+UJ
+UJ
+NX
+AP
+AP
+sB
+AP
+AP
+oV
+zF
+sy
+PV
+PV
+QK
+QK
+"}
+(14,1,1) = {"
+dD
+dD
+Mp
+QK
+QK
+QK
+QK
+QK
+QK
+UJ
+UJ
+ZK
+xc
+sY
+sY
+UJ
+UJ
+Wz
+QZ
+ZN
+EY
+QK
+QK
+"}
+(15,1,1) = {"
+dD
+dD
+dD
+dD
+dD
+Mp
+QK
+eF
+QK
+QK
+PV
+PV
+hW
+PV
+PV
+PV
+jj
+Ah
+gm
+ZN
+EY
+QK
+QK
+"}
+(16,1,1) = {"
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+Mp
+QK
+QK
+QK
+Tj
+QK
+PV
+PV
+xJ
+Jx
+PV
+PV
+QK
+QK
+"}
+(17,1,1) = {"
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+QK
+QK
+QK
+PV
+PV
+PV
+PV
+Tj
+QK
+QK
+"}
+(18,1,1) = {"
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+dD
+QK
+QK
+QK
+QK
+QK
+QK
+QK
+QK
+QK
+"}

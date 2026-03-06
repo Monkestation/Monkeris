@@ -29,6 +29,10 @@
 "l" = (
 /turf/floor/asteroid,
 /area/asteroid/cave)
+"u" = (
+/obj/spawner/scrap/sparse/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
 "N" = (
 /turf/wall/low/with_glass/smart,
 /area/asteroid/cave)
@@ -45,7 +49,7 @@ b
 c
 e
 f
-b
+u
 "}
 (3,1,1) = {"
 c
@@ -64,7 +68,7 @@ g
 (5,1,1) = {"
 g
 l
-b
+u
 a
 b
 "}

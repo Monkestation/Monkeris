@@ -22,6 +22,7 @@
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "Floor3"
 	is_simulated = FALSE
+	initial_flooring = null
 
 /turf/floor/dummy/airless
 	oxygen = 0
@@ -29,6 +30,27 @@
 
 /turf/floor/dummy/shuttle_ceiling
 	icon_state = "reinforced"
+
+/turf/floor/dummy/lino
+	icon_state = "lino"
+
+/turf/floor/dummy/lino/airless
+	oxygen = 0
+	nitrogen = 0
+
+/turf/floor/dummy/cult
+	icon_state = "cult"
+
+/turf/floor/dummy/cult/airless
+	oxygen = 0
+	nitrogen = 0
+
+/turf/floor/dummy/freezer
+	icon_state = "freezerfloor"
+
+/turf/floor/dummy/freezer/airless
+	oxygen = 0
+	nitrogen = 0
 
 /turf/mask
 	name = "mask"

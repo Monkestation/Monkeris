@@ -87,7 +87,7 @@
 	. = ..()
 
 	// Spawn ores
-	if(mineral)
+	if(mineral && loc)
 		var/nb_ores =  CEILING((mineral.result_amount + rand(-3, 3)) * oremult, 1)
 		for(var/i in 1 to nb_ores)
 			new mineral.ore(loc)

@@ -1,0 +1,1041 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ab" = (
+/obj/effect/floor_decal/industrial/warning,
+/turf/floor/tiled/steel/monofloor/airless,
+/area/asteroid/cave)
+"aS" = (
+/obj/spawner/material/ore/low_chance,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"bo" = (
+/obj/spawner/lowkeyrandom/low_chance,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"cQ" = (
+/obj/machinery/door/blast/regular,
+/obj/machinery/door/blast/regular,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"cX" = (
+/obj/structure/lattice,
+/obj/effect/gibspawner/robot,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"dq" = (
+/obj/structure/lattice,
+/mob/living/carbon/superior_animal/golem/coal,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"dU" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/closet/crate/secure/woodseccrate,
+/obj/spawner/tool_upgrade,
+/obj/spawner/tool_upgrade,
+/obj/spawner/tool_upgrade/rare/low_chance,
+/obj/spawner/tool_upgrade/rare/low_chance,
+/obj/spawner/tool_upgrade/low_chance,
+/obj/spawner/tool_upgrade/low_chance,
+/obj/spawner/tool/advanced/low_chance,
+/obj/spawner/toolbox,
+/obj/spawner/techpart/low_chance,
+/obj/spawner/techpart/low_chance,
+/obj/spawner/techpart/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"ek" = (
+/obj/structure/catwalk,
+/mob/living/carbon/superior_animal/golem/coal,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"fh" = (
+/obj/effect/damagedfloor,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/mob/living/carbon/superior_animal/golem/coal,
+/turf/floor/tiled/steel/monofloor/airless,
+/area/asteroid/cave)
+"fA" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/closet/crate,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/contraband/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"fS" = (
+/obj/effect/decal/cleanable/rubble,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"hL" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/closet/crate,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/medical/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/contraband/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"hQ" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/ore_box,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"iQ" = (
+/obj/effect/damagedfloor,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/turf/floor/tiled/steel/monofloor/airless,
+/area/asteroid/cave)
+"js" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/mob/living/carbon/superior_animal/golem/iron,
+/turf/floor/tiled/steel/monofloor/airless,
+/area/asteroid/cave)
+"jt" = (
+/obj/effect/damagedfloor,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"nG" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/mob/living/carbon/superior_animal/golem/coal,
+/turf/floor/tiled/steel/monofloor/airless,
+/area/asteroid/cave)
+"oq" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/closet/crate/medical,
+/obj/spawner/medical_lowcost,
+/obj/spawner/medical_lowcost,
+/obj/spawner/medical_lowcost,
+/obj/spawner/firstaid/low_chance,
+/obj/spawner/firstaid/low_chance,
+/obj/spawner/medical/low_chance,
+/obj/spawner/medical/low_chance,
+/obj/spawner/medical/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"pO" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/floor/tiled/steel/monofloor/airless,
+/area/asteroid/cave)
+"qW" = (
+/turf/wall/reinforced,
+/area/asteroid/cave)
+"rr" = (
+/mob/living/carbon/superior_animal/golem/coal,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"rU" = (
+/obj/structure/catwalk,
+/obj/structure/lattice,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"tb" = (
+/obj/effect/floor_decal/industrial/warning,
+/mob/living/simple_animal/hostile/hivebot,
+/turf/floor/tiled/steel/monofloor/airless,
+/area/asteroid/cave)
+"tw" = (
+/obj/effect/floor_decal/industrial/warning,
+/mob/living/simple_animal/hostile/hivebot/range,
+/turf/floor/tiled/steel/monofloor/airless,
+/area/asteroid/cave)
+"uq" = (
+/obj/structure/lattice,
+/obj/structure/girder,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"uB" = (
+/turf/mineral/random,
+/area/asteroid/cave)
+"uM" = (
+/mob/living/carbon/superior_animal/golem/gold,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"xE" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/closet/crate,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/contraband/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"yw" = (
+/obj/structure/catwalk,
+/obj/effect/gibspawner/robot,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"yB" = (
+/obj/structure/catwalk,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"yI" = (
+/mob/living/simple_animal/hostile/hivebot/range,
+/turf/floor/tiled/steel/monofloor/airless,
+/area/asteroid/cave)
+"zE" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/turf/floor/tiled/steel/monofloor/airless,
+/area/asteroid/cave)
+"zO" = (
+/obj/structure/lattice,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"Ay" = (
+/obj/effect/floor_decal/industrial/warning,
+/mob/living/carbon/superior_animal/golem/coal/enhanced,
+/turf/floor/tiled/steel/monofloor/airless,
+/area/asteroid/cave)
+"Bq" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/mob/living/simple_animal/hostile/hivebot,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/floor/tiled/steel/monofloor/airless,
+/area/asteroid/cave)
+"BH" = (
+/obj/structure/lattice,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"BP" = (
+/obj/effect/damagedfloor,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"Cr" = (
+/turf/wall,
+/area/asteroid/cave)
+"CM" = (
+/obj/structure/lattice,
+/obj/spawner/lowkeyrandom/low_chance,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"Dv" = (
+/obj/structure/lattice,
+/obj/structure/girder,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"Eb" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/mob/living/simple_animal/hostile/hivebot/range,
+/turf/floor/tiled/steel/monofloor/airless,
+/area/asteroid/cave)
+"Eh" = (
+/obj/effect/decal/cleanable/rubble,
+/turf/wall/reinforced,
+/area/asteroid/cave)
+"EP" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/machinery/light,
+/turf/floor/tiled/steel/monofloor/airless,
+/area/asteroid/cave)
+"Fr" = (
+/obj/structure/catwalk,
+/mob/living/carbon/superior_animal/golem/coal/enhanced,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"FW" = (
+/mob/living/carbon/superior_animal/golem/plasma,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"Hm" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/closet/crate/secure/woodseccrate,
+/obj/spawner/ammo/lowcost,
+/obj/spawner/ammo/lowcost,
+/obj/spawner/ammo,
+/obj/spawner/ammo/low_chance,
+/obj/spawner/ammo/low_chance,
+/obj/spawner/ammo/lowcost/low_chance,
+/obj/spawner/ammo/lowcost/low_chance,
+/obj/spawner/gun_parts/low_chance,
+/obj/spawner/gun_parts/low_chance,
+/obj/spawner/gun_parts/low_chance,
+/obj/spawner/gun_upgrade/low_chance,
+/obj/spawner/gun_upgrade/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"HG" = (
+/obj/machinery/door/blast/regular,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"Ij" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/largecrate,
+/obj/spawner/armor_parts/low_chance,
+/obj/spawner/armor_parts/low_chance,
+/obj/spawner/powercell/low_chance,
+/obj/spawner/powercell/low_chance,
+/obj/spawner/rig_module/low_chance,
+/obj/spawner/rig/damaged/low_chance,
+/obj/spawner/voidsuit/damaged/low_chance,
+/obj/spawner/voidsuit/damaged/low_chance,
+/obj/spawner/voidsuit/damaged/low_chance,
+/obj/spawner/powercell/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"Ji" = (
+/obj/structure/lattice,
+/obj/effect/gibspawner/robot,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"Jj" = (
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"Jt" = (
+/obj/structure/catwalk,
+/obj/structure/catwalk,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"JC" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/closet/crate,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/contraband/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"JY" = (
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"Kr" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/closet/crate,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/contraband/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/contraband/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"Lk" = (
+/obj/structure/catwalk,
+/mob/living/carbon/superior_animal/golem/iron,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"Ma" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/closet/crate,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/contraband/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/contraband/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"Mc" = (
+/obj/structure/catwalk,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"MI" = (
+/turf/floor/tiled/steel/monofloor/airless,
+/area/asteroid/cave)
+"NO" = (
+/obj/effect/damagedfloor,
+/obj/structure/ore_box,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"Oa" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/closet/crate,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"Oo" = (
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"OT" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"Pb" = (
+/obj/structure/closet/crate,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"Rg" = (
+/obj/effect/decal/cleanable/rubble,
+/turf/wall,
+/area/asteroid/cave)
+"RP" = (
+/obj/effect/damagedfloor,
+/obj/effect/floor_decal/industrial/warning,
+/turf/floor/tiled/steel/monofloor/airless,
+/area/asteroid/cave)
+"RT" = (
+/obj/effect/decal/cleanable/rubble,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"Sf" = (
+/obj/effect/damagedfloor,
+/obj/structure/girder,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"Sm" = (
+/obj/structure/girder,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"Sn" = (
+/obj/structure/catwalk,
+/mob/living/carbon/superior_animal/golem/uranium,
+/turf/floor/asteroid,
+/area/asteroid/cave)
+"So" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/ore_box,
+/obj/spawner/material/ore/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"Tf" = (
+/obj/effect/decal/cleanable/rubble,
+/obj/spawner/material/ore/low_chance,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"TC" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/closet/crate/medical,
+/obj/spawner/medical_lowcost,
+/obj/spawner/medical_lowcost,
+/obj/spawner/medical_lowcost,
+/obj/spawner/firstaid/low_chance,
+/obj/spawner/firstaid/low_chance,
+/obj/spawner/medical/low_chance,
+/obj/spawner/medical/low_chance,
+/obj/spawner/medical/low_chance,
+/obj/spawner/medical/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"VA" = (
+/obj/effect/decal/cleanable/rubble,
+/turf/mineral/random,
+/area/asteroid/cave)
+"VJ" = (
+/obj/effect/damagedfloor,
+/turf/floor/tiled/steel/monofloor/airless,
+/area/asteroid/cave)
+"Wb" = (
+/obj/structure/closet/crate{
+	opened = 1
+	},
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"Wd" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/mob/living/simple_animal/hostile/hivebot,
+/turf/floor/tiled/steel/monofloor/airless,
+/area/asteroid/cave)
+"WM" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/ore_box,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"Xp" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/closet/crate,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"XL" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/ore_box,
+/obj/spawner/material/ore/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"YW" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/closet/crate/medical,
+/obj/spawner/medical_lowcost,
+/obj/spawner/medical_lowcost,
+/obj/spawner/medical_lowcost,
+/obj/spawner/firstaid/low_chance,
+/obj/spawner/firstaid/low_chance,
+/obj/spawner/medical/low_chance,
+/obj/spawner/medical/low_chance,
+/obj/spawner/medical/low_chance,
+/obj/spawner/medical/low_chance,
+/obj/spawner/medical/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"Zr" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/ore_box,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/obj/spawner/material/ore/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+
+(1,1,1) = {"
+uB
+Pb
+Tf
+uB
+JY
+JY
+RT
+uB
+uB
+uB
+RT
+JY
+JY
+RT
+uB
+uB
+uB
+uB
+JY
+JY
+RT
+uB
+uB
+uB
+"}
+(2,1,1) = {"
+uB
+VA
+uM
+zO
+Cr
+qW
+JY
+JY
+uB
+JY
+qW
+Cr
+Cr
+qW
+JY
+uB
+RT
+JY
+qW
+Cr
+zO
+qW
+uB
+uB
+"}
+(3,1,1) = {"
+uB
+RT
+aS
+aS
+zO
+qW
+qW
+JY
+fS
+qW
+qW
+xE
+xE
+qW
+qW
+RT
+JY
+qW
+qW
+BP
+jt
+qW
+qW
+uB
+"}
+(4,1,1) = {"
+RT
+Sm
+zO
+Ji
+NO
+VJ
+Cr
+FW
+JY
+Cr
+zE
+YW
+Hm
+tb
+Cr
+rr
+JY
+Cr
+zE
+WM
+oq
+VJ
+Cr
+RT
+"}
+(5,1,1) = {"
+JY
+Cr
+VJ
+dU
+jt
+EP
+Cr
+JY
+JY
+Cr
+pO
+hQ
+Kr
+EP
+Cr
+JY
+JY
+Cr
+pO
+xE
+Ij
+ab
+Cr
+JY
+"}
+(6,1,1) = {"
+JY
+Cr
+iQ
+Zr
+JC
+ab
+Cr
+JY
+JY
+Cr
+zE
+xE
+OT
+ab
+Cr
+JY
+JY
+Cr
+zE
+OT
+hQ
+ab
+Cr
+JY
+"}
+(7,1,1) = {"
+JY
+qW
+nG
+MI
+MI
+ab
+qW
+JY
+JY
+qW
+Wd
+MI
+yI
+ab
+qW
+JY
+JY
+qW
+Wd
+MI
+MI
+tw
+qW
+JY
+"}
+(8,1,1) = {"
+JY
+qW
+qW
+HG
+HG
+qW
+qW
+JY
+JY
+qW
+qW
+HG
+HG
+qW
+qW
+JY
+JY
+qW
+qW
+HG
+HG
+qW
+qW
+JY
+"}
+(9,1,1) = {"
+Jj
+zO
+Mc
+Mc
+Mc
+Mc
+Mc
+cX
+Sn
+Jt
+Mc
+Mc
+Mc
+Mc
+Fr
+Mc
+Mc
+Mc
+Lk
+Mc
+yw
+ek
+zO
+JY
+"}
+(10,1,1) = {"
+zO
+yB
+yB
+ek
+Mc
+Mc
+Mc
+yB
+rU
+Mc
+Mc
+Lk
+Mc
+Mc
+Mc
+yw
+Mc
+Mc
+Mc
+Mc
+Mc
+yB
+yB
+BH
+"}
+(11,1,1) = {"
+JY
+qW
+qW
+HG
+HG
+qW
+qW
+JY
+JY
+qW
+qW
+cQ
+HG
+qW
+qW
+JY
+JY
+qW
+qW
+HG
+zO
+qW
+qW
+JY
+"}
+(12,1,1) = {"
+JY
+qW
+zE
+MI
+yI
+tb
+qW
+JY
+JY
+qW
+Eb
+MI
+MI
+tb
+qW
+JY
+JY
+qW
+fh
+cX
+jt
+zO
+Sf
+JY
+"}
+(13,1,1) = {"
+JY
+Cr
+zE
+Oa
+WM
+ab
+Cr
+JY
+rr
+Cr
+zE
+JC
+WM
+Ay
+Cr
+FW
+JY
+Cr
+zE
+Xp
+So
+JY
+JY
+JY
+"}
+(14,1,1) = {"
+JY
+Cr
+Bq
+TC
+fA
+EP
+Cr
+JY
+JY
+Cr
+pO
+Ij
+Ma
+RP
+Cr
+JY
+JY
+Cr
+zO
+XL
+dq
+bo
+zO
+JY
+"}
+(15,1,1) = {"
+RT
+Rg
+zE
+Ij
+Hm
+ab
+Cr
+RT
+JY
+Cr
+js
+Zr
+jt
+zO
+Cr
+JY
+RT
+uq
+JY
+CM
+Ij
+JY
+Cr
+JY
+"}
+(16,1,1) = {"
+uB
+Eh
+qW
+hL
+OT
+qW
+qW
+uB
+JY
+qW
+qW
+jt
+dU
+JY
+uq
+JY
+uB
+JY
+bo
+bo
+zO
+qW
+qW
+JY
+"}
+(17,1,1) = {"
+uB
+RT
+qW
+Cr
+Cr
+qW
+Jj
+uB
+uB
+JY
+qW
+Cr
+Dv
+JY
+JY
+uB
+uB
+uB
+RT
+Wb
+bo
+qW
+JY
+JY
+"}
+(18,1,1) = {"
+uB
+uB
+fS
+JY
+JY
+JY
+RT
+uB
+uB
+RT
+JY
+JY
+JY
+RT
+uB
+uB
+uB
+uB
+bo
+Oo
+Oo
+JY
+JY
+JY
+"}
