@@ -16,9 +16,12 @@
 	var/potency = -1
 
 
-/obj/item/reagent_containers/food/snacks/grown/New(newloc,planttype)
+/obj/item/reagent_containers/food/snacks/grown/New(newloc,planttype, quality)
 
 	..()
+	if(quality)
+		food_quality = quality
+
 	if(!dried_type)
 		dried_type = type
 	src.pixel_x = rand(-5, 5)
