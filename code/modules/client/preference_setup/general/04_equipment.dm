@@ -175,8 +175,8 @@
 
 	return ..()
 
-/datum/category_item/player_setup_item/physical/equipment/update_setup(savefile/preferences, savefile/character)
-	if(preferences["version"]  <= 16)
+/datum/category_item/player_setup_item/physical/equipment/update_setup(pref_version, savefile/character)
+	if(pref_version <= 16)
 		var/list/old_index_to_backpack_type = list(
 			/decl/backpack_outfit/nothing,
 			/decl/backpack_outfit/backsport,

@@ -181,7 +181,7 @@
 		return FALSE
 	return TRUE
 
-/datum/component/item_upgrade/proc/check_modulargun(obj/item/gun/projectile/automatic/modular/MG, mob/living/user)
+/datum/component/item_upgrade/proc/check_modulargun(obj/item/gun/projectile/modular/MG, mob/living/user)
 	if(istype(parent, /obj/item/part/gun/modular))
 		// Caliber check coming for barrels
 		if(istype(parent, /obj/item/part/gun/modular/barrel))
@@ -432,8 +432,8 @@
 		if(weapon_upgrades[GUN_UPGRADE_MAGUP])
 			P.max_shells += weapon_upgrades[GUN_UPGRADE_MAGUP]
 
-		if(istype(G, /obj/item/gun/projectile/automatic/modular))
-			var/obj/item/gun/projectile/automatic/modular/M = G
+		if(istype(G, /obj/item/gun/projectile/modular))
+			var/obj/item/gun/projectile/modular/M = G
 			if(weapon_upgrades[GUN_UPGRADE_DEFINE_MAG_WELL])
 				M.mag_well = weapon_upgrades[GUN_UPGRADE_DEFINE_MAG_WELL]
 			if(weapon_upgrades[GUN_UPGRADE_DEFINE_OK_CALIBERS])
@@ -442,7 +442,7 @@
 				M.caliber = weapon_upgrades[GUN_UPGRADE_DEFINE_CALIBER]
 			if(weapon_upgrades[GUN_UPGRADE_DEFINE_STOCK] && !(PARTMOD_FOLDING_STOCK & M.spriteTagBans))
 				M.spriteTags |= PARTMOD_FOLDING_STOCK // Adds the stock to the spriteTags
-				M.verbs += /obj/item/gun/projectile/automatic/modular/proc/quick_fold // Grant the verb for folding stocks
+				M.verbs += /obj/item/gun/projectile/modular/proc/quick_fold // Grant the verb for folding stocks
 			if(weapon_upgrades[GUN_UPGRADE_BAYONET] && !(PARTMOD_BAYONET & M.spriteTagBans))
 				M.spriteTags |= PARTMOD_BAYONET
 			if(weapon_upgrades[GUN_UPGRADE_SILENCER] && !(PARTMOD_SILENCER & M.spriteTagBans))
@@ -457,6 +457,16 @@
 				M.w_class += weapon_upgrades[GUN_UPGRADE_DEFINE_WCLASS]
 			if(weapon_upgrades[GUN_UPGRADE_SCOPE_POWER])
 				M.scope_damage_adds.Add(weapon_upgrades[GUN_UPGRADE_SCOPE_POWER])
+			if(weapon_upgrades[GUN_UPGRADE_SET_FIRESOUND])
+				M.fire_sound = weapon_upgrades[GUN_UPGRADE_SET_FIRESOUND]
+			if(weapon_upgrades[GUN_UPGRADE_SET_SILENT_FIRESOUND])
+				M.fire_sound_silenced = weapon_upgrades[GUN_UPGRADE_SET_SILENT_FIRESOUND]
+			if(weapon_upgrades[GUN_UPGRADE_SET_RELOADSOUND])
+				M.reload_sound = weapon_upgrades[GUN_UPGRADE_SET_RELOADSOUND]
+			if(weapon_upgrades[GUN_UPGRADE_SET_COCKEDSOUND])
+				M.cocked_sound = weapon_upgrades[GUN_UPGRADE_SET_COCKEDSOUND]
+			if(weapon_upgrades[GUN_UPGRADE_SET_INSERTSOUND])
+				M.bulletinsert_sound = weapon_upgrades[GUN_UPGRADE_SET_INSERTSOUND]
 
 	for(var/datum/firemode/F in G.firemodes)
 		apply_values_firemode(F)
@@ -467,9 +477,9 @@
 	if(weapon_upgrades[GUN_UPGRADE_FIREMODES])
 		for(var/FM in weapon_upgrades[GUN_UPGRADE_FIREMODES])
 			G.add_firemode(FM)
-	if(istype(G, /obj/item/gun/projectile/automatic/modular))
+	if(istype(G, /obj/item/gun/projectile/modular))
 		if(weapon_upgrades[GUN_UPGRADE_REPLACE_INTERACTIONS])
-			var/obj/item/gun/projectile/automatic/modular/interactive = G
+			var/obj/item/gun/projectile/modular/interactive = G
 			var/datum/gunoverrides/overrided = interactive.overridedatum
 			if(overrided)
 				var/datum/guninteraction/interaction = weapon_upgrades[GUN_UPGRADE_REPLACE_INTERACTIONS]
@@ -761,8 +771,8 @@
 			return TRUE
 		else
 			if(IU.removable == MOD_INTEGRAL)
-				if(istype(upgrade_loc, /obj/item/gun/projectile/automatic/modular))
-					var/obj/item/gun/projectile/automatic/modular/MG = upgrade_loc
+				if(istype(upgrade_loc, /obj/item/gun/projectile/modular))
+					var/obj/item/gun/projectile/modular/MG = upgrade_loc
 					if(MG.loaded.len || MG.ammo_magazine || MG.chambered)
 						to_chat(user, span_danger("You must unload the [upgrade_loc] before removing \the [toremove]!"))
 						return TRUE

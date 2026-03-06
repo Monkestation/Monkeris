@@ -25,7 +25,7 @@
 
 /datum/craft_recipe/gun/handmaderifle
 	name = "HM BR \"Riose\""
-	result = /obj/item/gun/projectile/automatic/modular/bolt/handmade/finished
+	result = /obj/item/gun/projectile/modular/bolt/handmade/finished
 	steps = list(
 		list(CRAFT_MATERIAL, 13, MATERIAL_STEEL),
 		list(CRAFT_MATERIAL, 5, MATERIAL_WOOD),
@@ -109,7 +109,7 @@
 
 /datum/craft_recipe/gun/kalash
 	name = "HM AR \"Sermak\""
-	result = /obj/item/gun/projectile/automatic/modular/ak/makeshift/preset
+	result = /obj/item/gun/projectile/modular/ak/makeshift/preset
 	steps = list(
 		list(CRAFT_MATERIAL, 20, MATERIAL_STEEL),
 		list(QUALITY_WELDING, 10, 20),
@@ -120,7 +120,7 @@
 
 /datum/craft_recipe/gun/ballpoint
 	name = "MS BR \"Ballpoint\""
-	result = /obj/item/gun/projectile/automatic/modular/batrifle/makeshift
+	result = /obj/item/gun/projectile/modular/batrifle/makeshift
 	steps = list(
 		list(CRAFT_MATERIAL, 10, MATERIAL_STEEL),
 		list(CRAFT_MATERIAL, 5, MATERIAL_WOOD),

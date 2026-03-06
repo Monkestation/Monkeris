@@ -29,17 +29,17 @@
 
 /datum/design/autolathe/gun/mk58
 	name = "NT HG .35 \"Mk-58 B\""
-	build_path = /obj/item/gun/projectile/automatic/modular/mk58/gray/stock
+	build_path = /obj/item/gun/projectile/modular/mk58/gray/stock
 	factions = list(FACTION_NEOTHEOLOGY)
 
 /datum/design/autolathe/gun/mk58_wood
 	name = "NT HG .35 \"Mk-58 C\""
-	build_path = /obj/item/gun/projectile/automatic/modular/mk58/gray/wood
+	build_path = /obj/item/gun/projectile/modular/mk58/gray/wood
 	factions = list(FACTION_NEOTHEOLOGY)
 
 /datum/design/autolathe/gun/mk58_army
 	name = "NT HG .35 \"Mk-58 e\""
-	build_path = /obj/item/gun/projectile/automatic/modular/mk58/black/army
+	build_path = /obj/item/gun/projectile/modular/mk58/black/army
 	factions = list(FACTION_NEOTHEOLOGY)
 
 /datum/design/autolathe/gun/colt
@@ -129,7 +129,7 @@
 
 /datum/design/autolathe/gun/drozd
 	name = "Excelsior .40 \"Drozd\""
-	build_path = /obj/item/gun/projectile/automatic/modular/drozd/finished
+	build_path = /obj/item/gun/projectile/modular/drozd/finished
 	minimum_quality = 1
 
 /datum/design/autolathe/gun/slaught_o_matic //alledgedly a handgun, but practically an SMG
@@ -144,7 +144,7 @@
 
 /datum/design/autolathe/gun/vintorez
 	name = "Excelsior .20 \"Vintorez\""
-	build_path = /obj/item/gun/projectile/automatic/modular/batrifle/vintorez
+	build_path = /obj/item/gun/projectile/modular/batrifle/vintorez
 	minimum_quality = 2
 
 /datum/design/autolathe/gun/z8
@@ -154,16 +154,16 @@
 
 /datum/design/autolathe/gun/wintermute
 	name = "FS AR .20 \"Wintermute\""
-	build_path = /obj/item/gun/projectile/automatic/modular/wintermute/finished
+	build_path = /obj/item/gun/projectile/modular/wintermute/finished
 	minimum_quality = 2
 
 /datum/design/autolathe/gun/kovacs
 	name = "SA BR .20 \"Kovacs\""
-	build_path = /obj/item/gun/projectile/automatic/modular/batrifle/serbian
+	build_path = /obj/item/gun/projectile/modular/batrifle/serbian
 
 /datum/design/autolathe/gun/boltgun_fs
 	name = "FS BR .20 \"Kadmin\""
-	build_path = /obj/item/gun/projectile/automatic/modular/bolt/fs
+	build_path = /obj/item/gun/projectile/modular/bolt/fs
 
 /datum/design/autolathe/gun/boltgun_fs/ui_icon()
 	var/obj/build_type = build_path
@@ -184,7 +184,7 @@
 
 /datum/design/autolathe/gun/boltgun
 	name = "Excelsior .30 \"Kardashev-Mosin\""
-	build_path = /obj/item/gun/projectile/automatic/modular/bolt/excel
+	build_path = /obj/item/gun/projectile/modular/bolt/excel
 	minimum_quality = 2
 
 /datum/design/autolathe/gun/boltgun/ui_icon()
@@ -193,7 +193,7 @@
 
 /datum/design/autolathe/gun/boltgun_serbian
 	name = "SA BR .30 \"Novakovic\""
-	build_path = /obj/item/gun/projectile/automatic/modular/bolt/serbian/finished
+	build_path = /obj/item/gun/projectile/modular/bolt/serbian/finished
 
 /datum/design/autolathe/gun/boltgun_serbian/ui_icon()
 	var/obj/build_type = build_path
@@ -201,31 +201,31 @@
 
 /datum/design/autolathe/gun/ak47
 	name = "Excelsior Car .30 Kalashnikov"
-	build_path = /obj/item/gun/projectile/automatic/modular/ak/excelsior
+	build_path = /obj/item/gun/projectile/modular/ak/excelsior
 	minimum_quality = 2
 
 /datum/design/autolathe/gun/ak47_fs
 	name = "FS AR .30 \"Vipr\""
-	build_path = /obj/item/gun/projectile/automatic/modular/ak/frozen_star
+	build_path = /obj/item/gun/projectile/modular/ak/frozen_star
 
 /datum/design/autolathe/gun/ak47_fs_ih
 	name = "FS AR .30 \"Venger\""
-	build_path = /obj/item/gun/projectile/automatic/modular/ak/ironhammer_securities
+	build_path = /obj/item/gun/projectile/modular/ak/ironhammer_securities
 
 /datum/design/autolathe/gun/ak47_sa
 	name = "SA AR .30 \"Krinkov\""
-	build_path = /obj/item/gun/projectile/automatic/modular/ak/serbian_arms/printed
+	build_path = /obj/item/gun/projectile/modular/ak/serbian_arms/printed
 
 /datum/design/autolathe/gun/sts35
 	name = "OR SDF AR .30 \"STS-35\""
-	build_path = /obj/item/gun/projectile/automatic/modular/batrifle/sts35
+	build_path = /obj/item/gun/projectile/modular/batrifle/sts35
 	minimum_quality = 2
 
 // Heavy
 
 /datum/design/autolathe/gun/heavysniper
 	name = "SA AMR .60 \"Hristov\""
-	build_path = /obj/item/gun/projectile/automatic/modular/bolt/sniper/finished
+	build_path = /obj/item/gun/projectile/modular/bolt/sniper/finished
 	minimum_quality = 2
 
 /datum/design/autolathe/gun/heavysniper/ui_icon()

@@ -107,7 +107,7 @@ GLOBAL_VAR_INIT(refid_filter, TYPEID(filter(type="angular_blur")))
 
 #define isgun(A) istype(A, /obj/item/gun)
 
-#define ismodulargun(A) istype(A, /obj/item/gun/projectile/automatic/modular)
+#define ismodulargun(A) istype(A, /obj/item/gun/projectile/modular)
 
 #define istool(A) istype(A, /obj/item/tool)
 
