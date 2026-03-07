@@ -102012,6 +102012,14 @@
 	},
 /turf/floor/tiled/techmaint,
 /area/eris/maintenance/section4deck5port)
+"ops" = (
+/obj/structure/table/standard,
+/obj/spawner/pack/tech_loot/low_chance,
+/obj/spawner/pack/tech_loot/low_chance,
+/obj/spawner/pack/tech_loot/low_chance,
+/obj/spawner/pack/randcredits/low_chance,
+/turf/floor/tiled/steel/techfloor_grid,
+/area/eris/maintenance/section3deck1central)
 "opu" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
@@ -102894,13 +102902,7 @@
 /turf/floor/tiled/white,
 /area/eris/medical/medbay/organs)
 "pRQ" = (
-/obj/structure/table/rack,
-/obj/spawner/pack/tech_loot/low_chance,
-/obj/spawner/pack/tech_loot/low_chance,
-/obj/spawner/pack/tech_loot/low_chance,
-/obj/spawner/pack/randcredits/low_chance,
-/turf/floor/tiled/techmaint,
-/area/eris/maintenance/section3deck1central)
+)
 "pSP" = (
 /obj/structure/catwalk,
 /obj/structure/disposalpipe/segment{
@@ -163901,7 +163903,7 @@ aLc
 aFa
 aFa
 aKQ
-xfz
+pRQ
 bBx
 csS
 aIz
@@ -295674,7 +295676,7 @@ dXi
 dXi
 dXi
 boS
-kWH
+ops
 bqM
 brW
 bfe
