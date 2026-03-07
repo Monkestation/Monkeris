@@ -53,6 +53,7 @@
 	icon_state = "cash-green"
 	rarity_value = 10
 	spawn_frequency = 2
+	spawn_blacklisted = TRUE
 
 /obj/spawner/credits/c5000
 	low_price = 1000
