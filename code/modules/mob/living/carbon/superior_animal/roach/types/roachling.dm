@@ -14,7 +14,7 @@
 
 	mob_size = MOB_SMALL * 0.8 // 8
 
-	meat_amount = 1
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat/kampfer = list(1, BUTCHER_EASY))
 
 	probability_egg_laying = 0
 	var/amount_grown = 0

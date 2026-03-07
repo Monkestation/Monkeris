@@ -3,8 +3,7 @@
 	desc = "A deformed mess of a roach that is covered in metallic outcrops and formations. It seems to have a production center on its thorax."
 	icon_state = "naniteroach"
 
-	meat_type = /obj/item/reagent_containers/food/snacks/meat/roachmeat/kraftwerk
-	meat_amount = 3
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat/kraftwerk = list(4, BUTCHER_DIFFICULT))
 	turns_per_move = 1
 	maxHealth = 30
 	health = 30
@@ -71,6 +70,11 @@
 	overseer?.removeRanged(src) // Ranged Kraftwerk
 	overseer?.casualties.Remove(src)
 	overseer = null
+
+/mob/living/carbon/superior_animal/roach/nanite/butchery_fail(mob/living/butcher)
+	butcher.visible_message(span_danger("[butcher] accidentally connects two wires! \The [src] vomits forth a swarm!"), span_userdanger("You accidentally connects two wires! With a spark, \the [src] vomits forth a swarm!"))
+	for(var/mob in 1 to rand(2,5))
+		mob = new /mob/living/simple_animal/hostile/naniteswarm(get_turf(src), src)
 
 /mob/living/simple_animal/hostile/naniteswarm
 	name = "nanite infested miniroach cluster"

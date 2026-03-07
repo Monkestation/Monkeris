@@ -165,6 +165,8 @@
 	if(chameleon_type)
 		verbs.Add(/obj/item/proc/set_chameleon_appearance)
 	tact_visual = new /obj/effect/effect/melee/alert
+	if(sharp && !isProjectile(src))//any item with sharpness on spawn gets butchering
+		AddComponent(/datum/component/butchering, FALSE, FALSE)
 	. = ..()
 
 /obj/item/Destroy(force)

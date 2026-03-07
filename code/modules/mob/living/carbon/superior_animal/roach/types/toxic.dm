@@ -3,7 +3,6 @@
 	desc = "A hulking beast of green, congealed waste. It has an enlarged salivatory gland for lobbing projectiles."
 	icon_state = "radioactiveroach"
 
-	meat_amount = 3
 	turns_per_move = 1
 	maxHealth = 40
 	health = 40

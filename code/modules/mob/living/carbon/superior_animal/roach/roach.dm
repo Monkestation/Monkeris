@@ -13,8 +13,7 @@
 	turns_per_move = 4
 	turns_since_move = 0
 
-	meat_type = /obj/item/reagent_containers/food/snacks/meat/roachmeat/kampfer
-	meat_amount = 2
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat/kampfer = list(3, BUTCHER_NORMAL))
 
 	maxHealth = 10
 	health = 10
