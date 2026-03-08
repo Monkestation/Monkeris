@@ -1,0 +1,31 @@
+2026-03-04:
+  BartDrown:
+  - bugfix: produce bag groups grown plants by name
+  - rscadd: Added Join Game TGUI menu
+  - bugfix: stat panel flickering
+  - bugfix: stat panel items not interactable
+  - bugfix: disposal unit ui fix
+  - bugfix: character preferences not saving due to file lock
+  - bugfix: character prefs not loading
+  - bugfix: skin tone not changing in character setup menu
+  Handyman, Sun-Soaked:
+  - balance: gun melee dmg is now built from grip, stock, and base, instead of just
+      coming from base
+  - bugfix: AMR no longer has infinite ammo capacity
+  - bugfix: The MK58's magazine now works consistently
+  - bugfix: dmg mod on mechanisms now works properly
+  - code_imp: modguns can now have their firing sounds set by parts
+  - code_imp: the modgun path has been changed from gun/projectile/automatic/modular
+      to gun/projectile/modular
+  Sun-Soaked:
+  - admin: tickets should now display player pms
+  - admin: tickets going stale will no longer cause new player responses to open a
+      new ticket, causing a ton of random tickets to gradually pile up and player
+      responses to be split weirdly between different tickets
+2026-03-06:
+  datlo:
+  - tweak: 'Add cyborg panel locking handling when you are too damaged : it now says
+      that you can''t'
+2026-03-07:
+  Sun-Soaked:
+  - bugfix: toggleable robes no longer cause runtimes due to missing arg setup

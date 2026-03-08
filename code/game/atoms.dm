@@ -942,6 +942,7 @@
 	if(href_list["statpanel_item_click"])
 		var/mouseparams = list2params(paramslist)
 		usr_client.Click(src, loc, null, mouseparams)
+		return TRUE // prevent NanoUI Topic chain (CouldUseTopic/set_machine) from firing
 
 /// Called after we wrench/unwrench this object
 /obj/proc/wrenched_change()

@@ -56,7 +56,7 @@
 	head = /obj/item/clothing/head/armor/steelpot
 	shoes = /obj/item/clothing/shoes/color/black
 	suit = /obj/item/clothing/suit/armor/flak/green
-	suit_store = /obj/item/gun/projectile/automatic/modular/bolt/serbian/finished
+	suit_store = /obj/item/gun/projectile/modular/bolt/serbian/finished
 	back = /obj/item/storage/backpack/satchel
 	r_pocket = /obj/item/ammo_magazine/sllrifle
 	id_slot = slot_wear_id

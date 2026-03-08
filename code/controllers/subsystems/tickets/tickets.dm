@@ -257,7 +257,8 @@ SUBSYSTEM_DEF(tickets)
 		ckey = astype(ckey, /client).ckey
 
 	for(var/datum/ticket/T in allTickets)
-		if(T.client_ckey == ckey && T.ticketState == TICKET_OPEN && (T.ticketCooldown > world.time))
+		//todo: remove the stupid staling system alltogether or do monke admin tickets god please I beg
+		if(T.client_ckey == ckey && (T.ticketState == TICKET_OPEN || T.ticketState == TICKET_STALE) && (T.ticketCooldown > world.time))
 			return T
 	return FALSE
 
