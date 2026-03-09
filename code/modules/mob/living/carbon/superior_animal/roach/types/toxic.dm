@@ -71,3 +71,9 @@
 	overseer?.removeRanged(src) // Ranged Gestrahlte
 	overseer?.casualties.Remove(src)
 	overseer = null
+
+/mob/living/carbon/superior_animal/roach/toxic/butchery_fail(mob/living/butcher)
+	..()
+	for(var/num in rand(2,5))
+		var/obj/item/projectile/roach_spit/ourspit = new /obj/item/projectile/roach_spit(src.loc)
+		ourspit.launch(src.loc, pick(SOUTH, NORTH, WEST, EAST, SOUTHEAST, SOUTHWEST, NORTHEAST, NORTHWEST))
