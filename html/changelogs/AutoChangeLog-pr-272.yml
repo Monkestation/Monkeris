@@ -1,5 +1,0 @@
-author: Sun-Soaked
-delete-after: true
-changes:
-  - bugfix: the make_young proc now has pixloc whitelisted, properly preventing 
-      it from copying loc vars

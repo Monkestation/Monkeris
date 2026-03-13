@@ -29,3 +29,7 @@
 2026-03-07:
   Sun-Soaked:
   - bugfix: toggleable robes no longer cause runtimes due to missing arg setup
+2026-03-13:
+  Sun-Soaked:
+  - bugfix: the make_young proc now has pixloc whitelisted, properly preventing it
+      from copying loc vars
