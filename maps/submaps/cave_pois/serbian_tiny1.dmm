@@ -1,0 +1,103 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"e" = (
+/obj/spawner/scrap/sparse,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"f" = (
+/obj/spawner/scrap/sparse,
+/obj/structure/lattice,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"k" = (
+/obj/structure/lattice,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"l" = (
+/obj/spawner/closet/maintloot,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"m" = (
+/obj/structure/bed,
+/obj/item/bedsheet/hos,
+/obj/spawner/booze/low_chance,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"n" = (
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"r" = (
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"v" = (
+/turf/wall/reinforced,
+/area/asteroid/cave)
+"D" = (
+/obj/structure/table/standard,
+/obj/spawner/pouch/low_chance,
+/obj/spawner/lowkeyrandom,
+/obj/spawner/junk,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"I" = (
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"L" = (
+/obj/spawner/scrap/dense,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"M" = (
+/obj/spawner/junk,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"O" = (
+/mob/living/simple_animal/hostile/bear,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"S" = (
+/obj/structure/bed,
+/obj/item/bedsheet/hos,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"V" = (
+/obj/machinery/door/airlock/maintenance_interior,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+
+(1,1,1) = {"
+I
+f
+L
+v
+v
+"}
+(2,1,1) = {"
+k
+M
+e
+l
+v
+"}
+(3,1,1) = {"
+k
+n
+O
+r
+V
+"}
+(4,1,1) = {"
+M
+D
+S
+m
+v
+"}
+(5,1,1) = {"
+e
+v
+v
+v
+v
+"}

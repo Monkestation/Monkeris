@@ -1,0 +1,78 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"g" = (
+/obj/structure/girder,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"j" = (
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"u" = (
+/obj/spawner/mob/roomba,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"C" = (
+/turf/wall/untinted/onestar_reinforced,
+/area/asteroid/cave)
+"F" = (
+/obj/structure/lattice,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"I" = (
+/obj/machinery/power/os_turret,
+/turf/floor/tiled/derelict/white_big_edges/airless,
+/area/asteroid/cave)
+"O" = (
+/obj/structure/door_assembly,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"Q" = (
+/obj/item/remains/human,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"T" = (
+/obj/structure/closet/onestar/tier1/normal,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+"W" = (
+/obj/structure/closet/onestar/tier1/special,
+/turf/floor/tiled/derelict/red_white_edges/airless,
+/area/asteroid/cave)
+
+(1,1,1) = {"
+g
+C
+O
+C
+C
+"}
+(2,1,1) = {"
+F
+j
+a
+u
+C
+"}
+(3,1,1) = {"
+C
+T
+I
+Q
+g
+"}
+(4,1,1) = {"
+g
+u
+a
+W
+C
+"}
+(5,1,1) = {"
+C
+C
+g
+C
+C
+"}
