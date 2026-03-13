@@ -64,6 +64,8 @@ GLOBAL_VAR_INIT(refid_filter, TYPEID(filter(type="angular_blur")))
 
 #define isgolem(A) istype(A, /mob/living/carbon/superior_animal/golem)
 
+#define isspider(A) istype(A, /mob/living/carbon/superior_animal/giant_spider)
+
 #define isbrain(A) istype(A, /mob/living/carbon/brain)
 
 #define ishuman(A) istype(A, /mob/living/carbon/human)

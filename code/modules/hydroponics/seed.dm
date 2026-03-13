@@ -748,7 +748,12 @@
 			if(has_mob_product)
 				product = new has_mob_product(get_turf(user),name)
 			else
-				product = new /obj/item/reagent_containers/food/snacks/grown(get_turf(user),name)
+				var/quality
+				if(user.stats.getStat(STAT_BIO))
+					quality = clamp(1 * ((user.stats.getStat(STAT_BIO) + 15) / 15), 0, 10)
+				else//nuclear farmbot nerf
+					quality = -5
+				product = new /obj/item/reagent_containers/food/snacks/grown(get_turf(user), name, quality)
 			if(get_trait(TRAIT_PRODUCT_COLOUR))
 				if(!ismob(product))
 					product.color = get_trait(TRAIT_PRODUCT_COLOUR)

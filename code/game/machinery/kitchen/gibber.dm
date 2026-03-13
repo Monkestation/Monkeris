@@ -186,17 +186,17 @@
 
 	var/meat_amount = occupant.mob_size / 2
 	var/meat_type = /obj/item/reagent_containers/food/snacks/meat
-	if(issuperioranimal(occupant))
-		var/mob/living/carbon/superior_animal/S = occupant
-		meat_type = S.meat_type
+	if(issuperioranimal(occupant) || isanimal(occupant))
+		if(occupant.butcher_results)//nab a meat from the occupant's butcher results. Otherwise use default meat
+			for(var/possiblemeat in occupant.butcher_results)
+				if(istype(possiblemeat, /obj/item/reagent_containers/food/snacks/meat))
+					meat_type = possiblemeat
+					break
 	else if(iscarbon(occupant))
 		var/mob/living/carbon/C = occupant
 		meat_type = C.species.meat_type
 		if(occupant.stats.getPerk(PERK_SURVIVOR))
 			meat_type = /obj/item/reagent_containers/food/snacks/meat/pork
-	else if(isanimal(occupant))
-		var/mob/living/simple_animal/A = occupant
-		meat_type = A.meat_type
 
 	for(var/i in 1 to meat_amount)
 		var/obj/item/reagent_containers/food/snacks/meat/new_meat = new meat_type(src)

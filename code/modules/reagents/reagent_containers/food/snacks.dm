@@ -41,8 +41,10 @@
 	if(nutriment_amt)
 		reagents.add_reagent("nutriment", nutriment_amt, nutriment_desc)
 
-/obj/item/reagent_containers/food/snacks/New()
+/obj/item/reagent_containers/food/snacks/New(loc, var/quality)
 	..()
+	if(quality)
+		food_quality = quality
 	get_food_tier()
 
 /obj/item/reagent_containers/food/snacks/proc/get_sanity_gain(mob/living/carbon/eater) //sanity_gain per bite
@@ -66,11 +68,16 @@
 		message = "This food does not help calm your nerves."
 		return  list(0, span_warning(message))
 	var/sanity_gain_per_bite = base_sanity_gain_per_bite
-	message = "This food helps you relax."
+	if(food_tier > CWJ_QUALITY_MEH)
+		message = "This food helps you relax."
+	else if(food_tier > CWJ_QUALITY_GROSS)
+		message = "This food isn't very good, but at least it's edible."
+	else
+		message = "You're regretting putting this in your mouth."
 	if(cooked)
 		sanity_gain_per_bite += base_sanity_gain_per_bite * food_tier
 		message += bite_descriptor
-	if(junk_food || !cooked)
+	if((junk_food || !cooked) && food_tier > CWJ_QUALITY_GROSS)
 		message += " However, only healthy food will help you rest."
 		return  list(sanity_gain_per_bite, span_notice(message))
 	var/table = FALSE
@@ -339,8 +346,8 @@
 			for(var/i=1 to (slices_num-slices_lost))
 				var/obj/slice = new slice_path (src.loc)
 				reagents.trans_to_obj(slice, reagents_per_slice)
-				if(istype(slice_path, /obj/item/reagent_containers/food/snacks))
-					slice_path?:food_quality = src.food_quality
+				if(istype(slice, /obj/item/reagent_containers/food/snacks))
+					slice?:food_quality = food_quality
 			qdel(src)
 			return
 
@@ -913,7 +920,7 @@
 
 /obj/item/reagent_containers/food/snacks/rawmeatball/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/material/kitchen/rollingpin))
-		new /obj/item/reagent_containers/food/snacks/patty_raw(src)
+		new /obj/item/reagent_containers/food/snacks/patty_raw(src, food_quality)
 		to_chat(user, "You flatten the raw meatball.")
 		qdel(src)
 
@@ -3562,14 +3569,14 @@
 // Dough + rolling pin = flat dough
 /obj/item/reagent_containers/food/snacks/dough/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/material/kitchen/rollingpin))
-		new /obj/item/reagent_containers/food/snacks/sliceable/flatdough(src)
+		new /obj/item/reagent_containers/food/snacks/sliceable/flatdough(src, food_quality)
 		to_chat(user, "You flatten the dough.")
 		qdel(src)
 
 // Dough slice + rolling pin = flat dough slice
 /obj/item/reagent_containers/food/snacks/doughslice/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/material/kitchen/rollingpin))
-		new /obj/item/reagent_containers/food/snacks/flatdoughslice(src)
+		new /obj/item/reagent_containers/food/snacks/flatdoughslice(src, food_quality)
 		to_chat(user, "You flatten the dough slice.")
 		qdel(src)
 
@@ -3705,8 +3712,8 @@
 
 /obj/item/reagent_containers/food/snacks/rawcutlet/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/material/kitchen/rollingpin))
-		new /obj/item/reagent_containers/food/snacks/rawmeatball(src)
-		new /obj/item/reagent_containers/food/snacks/rawmeatball(src)
+		new /obj/item/reagent_containers/food/snacks/rawmeatball(src, food_quality)
+		new /obj/item/reagent_containers/food/snacks/rawmeatball(src, food_quality)
 		to_chat(user, "You ground the sliced meat, and shape it into a ball.")
 		qdel(src)
 
@@ -3747,7 +3754,7 @@
 /obj/item/reagent_containers/food/snacks/grown/potato/attackby(obj/item/item, mob/user) //this is obsolete??
 	if(QUALITY_CUTTING in item.tool_qualities)
 		if(item.use_tool(user, src, WORKTIME_NEAR_INSTANT, QUALITY_CUTTING, FAILCHANCE_ZERO, required_stat = STAT_BIO))
-			new /obj/item/reagent_containers/food/snacks/rawsticks(src)
+			new /obj/item/reagent_containers/food/snacks/rawsticks(src, food_quality)
 			to_chat(user, "You cut the potato.")
 			qdel(src)
 	else

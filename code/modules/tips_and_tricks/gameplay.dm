@@ -61,3 +61,6 @@
 
 /tipsAndTricks/gameplay/shieldweakness
     tipText = "You can get around Shields by attacking their wielder from behind."
+
+/tipsAndTricks/gameplay/foodquality
+    tipText = "Well-made food will help you rest and recover your sanity more effectively. Crappy food will damage your sanity and contribute less to your desires."

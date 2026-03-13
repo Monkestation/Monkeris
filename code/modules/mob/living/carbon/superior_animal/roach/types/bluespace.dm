@@ -4,7 +4,7 @@
 	icon_state = "bluespaceroach"
 	maxHealth = 25
 	health = 25
-	meat_type = /obj/item/bluespace_crystal
+	butcher_results = list(/obj/item/bluespace_crystal = list(4, BUTCHER_CHALLENGING))
 	melee_damage_lower = 4
 	melee_damage_upper = 11
 	armor_divisor = ARMOR_PEN_MAX // Hits through armor
@@ -91,3 +91,11 @@
 		do_teleport(src, T)
 		return FALSE
 	. = ..()
+
+/mob/living/carbon/superior_animal/roach/bluespace/butchery_fail(mob/living/butcher)
+	visible_message(span_danger("\the [src] flickers with unearthly light! Space warps horribly!"))
+	if(loc)
+		var/blast_radius = view(5, loc)
+		for(var/mob/living/victim as anything in blast_radius)
+			var/turf/randtarg = get_random_turf_in_range(src, 8, 1)
+			go_to_bluespace(get_turf(victim), 5, TRUE, victim, randtarg)
