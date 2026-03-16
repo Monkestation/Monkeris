@@ -41,3 +41,17 @@
 	id_type = /obj/item/card/id/hop
 	pda_type = /obj/item/modular_computer/pda/heads/hop
 	backpack_contents = list(/obj/item/storage/box/ids = 1, /obj/item/tool/knife/dagger/ceremonial = 1, /obj/item/clothing/accessory/cross = 1, /obj/item/gun/projectile/avasarala, /obj/item/ammo_magazine/magnum/rubber = 1)
+
+//WIP: ADD COMMS OFFICER OUTFIT
+/decl/hierarchy/outfit/job/comm
+	name = OUTFIT_JOB_NAME("Communications Officer")
+	head = /obj/item/clothing/head/caphat/hop
+	glasses = /obj/item/clothing/glasses/sunglasses/sechud
+	uniform = /obj/item/clothing/under/rank/first_officer
+	suit = /obj/item/clothing/suit/armor/vest
+	l_ear = /obj/item/device/radio/headset/heads/hop
+	shoes = /obj/item/clothing/shoes/reinforced
+	gloves = /obj/item/clothing/gloves/thick
+	id_type = /obj/item/card/id/hop
+	pda_type = /obj/item/modular_computer/pda/heads/hop
+	backpack_contents = list(/obj/item/tool/knife/dagger/ceremonial = 1, /obj/item/gun/projectile/revolver/mateba, /obj/item/ammo_magazine/magnum/rubber = 1, /obj/item/device/encryptionkey/heads/comm = 1)
