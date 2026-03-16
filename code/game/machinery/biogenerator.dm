@@ -1,6 +1,7 @@
 /obj/machinery/biogenerator
-	name = "Biogenerator"
-	desc = ""
+	name = "Bradhaanata Food Dupe"
+	desc = "Foodmatter goes in, foodmatter comes out! Now with Real Food(tm) recipes!"
+	description_info = "Insert food scraps to generate points, which can be used to create various food items and reagents. Cooked meals can be inserted to duplicate it at cost to quality."
 	icon = 'icons/obj/biogenerator.dmi'
 	icon_state = "biogen-stand"
 	density = TRUE
@@ -17,31 +18,43 @@
 
 	var/list/recipes = list(
 		"Food",
-			list(name="Milk, 30u", cost=60, reagent="milk"),
 			list(name="Stick of butter", cost=60, path=/obj/item/reagent_containers/food/snacks/sliceable/butterstick),
 			list(name="Slab of meat", cost=50, path=/obj/item/reagent_containers/food/snacks/meat),
+			list(name="Raw meatball", cost=40, path=/obj/item/reagent_containers/food/snacks/rawmeatball),
 			list(name="Box of eggs", cost=200, path=/obj/item/storage/fancy/egg_box),
+			list(name="Dough", cost=60, path=/obj/item/reagent_containers/food/snacks/dough),
+			list(name="Spaghetti", cost=40, path=/obj/item/reagent_containers/food/snacks/spaghetti),
+			list(name="Chocolate bar", cost=40, path=/obj/item/reagent_containers/food/snacks/chocolatebar),
+
+		"Liquid Food",
+			list(name="Milk, 30u", cost=60, reagent="milk"),
+			list(name="Soy Milk 30u", cost=60, reagent="soymilk"),
+			list(name="Universal Enzyme, 30u", cost=75, reagent="enzyme"),
+			list(name="Flour, 30u", cost=60, reagent="flour"),
+			list(name="Sugar, 30u", cost=60, reagent="sugar"),
+			list(name="Salt, 30u", cost=60, reagent="sodiumchloride"),
+			list(name="Black Pepper, 30u", cost=60, reagent="blackpepper"),
+			list(name="Corn Oil, 30u", cost=60, reagent="cornoil"),
+			list(name="Soy Sauce, 30u", cost=60, reagent="soysauce"),
+			list(name="Ketchup, 30u", cost=60, reagent="ketchup"),
+			list(name="Hotsauce, 30u", cost=60, reagent="capsaicin"),
+			list(name="Coldsauce, 30u", cost=60, reagent="frostoil"),
+
+		"Junk Food",
+			list(name="LiquidFood Ration", cost=60, path=/obj/item/reagent_containers/food/snacks/liquidfood),
+			list(name="Bread Tube", cost=60, path=/obj/item/reagent_containers/food/snacks/tastybread),
+			list(name="Chips", cost=40, path=/obj/item/reagent_containers/food/snacks/chips),
+			list(name="Popcorn", cost=40, path=/obj/item/reagent_containers/food/snacks/popcorn),
+			list(name="Jerky", cost=60, path=/obj/item/reagent_containers/food/snacks/sosjerky),
+			list(name="Raisins", cost=40, path=/obj/item/reagent_containers/food/snacks/no_raisin),
+			list(name="Space Twinkie", cost=60, path=/obj/item/reagent_containers/food/snacks/spacetwinkie),
+			list(name="Cheesie Honkers", cost=60, path=/obj/item/reagent_containers/food/snacks/cheesiehonkers),
+
+
 		"Nutrient",
 			list(name="EZ-Nutrient, 30u", cost=30, reagent="eznutrient"),
 			list(name="Left4Zed, 30u", cost=60, reagent="left4zed"),
 			list(name="Robust Harvest, 30u", cost=75, reagent="robustharvest"),
-		"Leather",
-			list(name="Wallet", cost=100, path=/obj/item/storage/wallet),
-			list(name="Botanical gloves", cost=250, path=/obj/item/clothing/gloves/botanic_leather),
-			list(name="Utility belt", cost=300, path=/obj/item/storage/belt/utility),
-			list(name="Leather Satchel", cost=400, path=/obj/item/storage/backpack/satchel),
-			list(name="Leather jacket", cost=400, /obj/item/clothing/suit/storage/leather_jacket),
-			list(name="Cash Bag", cost=400, path=/obj/item/storage/bag/money),
-			list(name="Medical belt", cost=300, path=/obj/item/storage/belt/medical),
-			list(name="Tactical belt", cost=300, path=/obj/item/storage/belt/tactical),
-			list(name="EMT belt", cost=300, path=/obj/item/storage/belt/medical/emt),
-			list(name="Champion belt", cost=500, path=/obj/item/storage/belt/champion),
-		"Medicine",
-			list(name="Medical splints", cost=100, path=/obj/item/stack/medical/splint),
-			list(name="Roll of gauze", cost=100, path=/obj/item/stack/medical/bruise_pack),
-			list(name="Ointment", cost=100, path=/obj/item/stack/medical/ointment),
-			list(name="Advanced trauma kit", cost=200, path=/obj/item/stack/medical/advanced/bruise_pack),
-			list(name="Advanced burn kit", cost=200, path=/obj/item/stack/medical/advanced/ointment),
 	)
 
 

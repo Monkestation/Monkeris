@@ -52,7 +52,7 @@
 	var/las_rating = 0
 	for(var/obj/item/stock_parts/micro_laser/M in component_parts)
 		las_rating += M.rating
-	quality_mod = round(las_rating/2)
+	quality_mod = las_rating
 
 //Process how a specific oven is interacting with material
 /obj/machinery/cooking_with_jane/oven/proc/cook_checkin()

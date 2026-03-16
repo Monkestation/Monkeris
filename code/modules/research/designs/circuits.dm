@@ -308,12 +308,6 @@
 	sort_string = "JDAAA"
 	category = CAT_MISC
 
-/datum/design/research/circuit/biogenerator
-	name = "biogenerator"
-	build_path = /obj/item/electronics/circuitboard/biogenerator
-	sort_string = "KBAAA"
-	category = CAT_MEDI
-
 /datum/design/research/circuit/miningdrill
 	name = "mining drill head"
 	build_path = /obj/item/electronics/circuitboard/miningdrill
