@@ -34,10 +34,12 @@
 	max_scan_interval = 10
 	eat_from_hand = FALSE
 
-var/atom/snack = null
+	no_stasis = TRUE
 
-var/list/tolerated = list()
-var/list/despised = list()
+	var/atom/snack = null
+
+	var/list/tolerated = list()
+	var/list/despised = list()
 
 /mob/living/simple_animal/iriska/fall_asleep()
 	return
@@ -48,7 +50,7 @@ var/list/despised = list()
 /mob/living/simple_animal/iriska/Life()
 	.=..()
 
-	if(!stasis)
+	if((!stasis && !AI_inactive) || no_stasis)
 
 		seek_food()
 		react_to_mob()
