@@ -243,8 +243,6 @@
 
 
 /turf/wall/ChangeTurf(new_turf_type, force_lighting_update)
-	for(var/obj/effect/overlay/wallrot/WR in src)
-		qdel(WR)
 	for(var/obj/effect/plant/plant in range(src, 1))
 		if(plant.wall_mount == src) //shrooms drop to the floor
 			qdel(plant)
@@ -287,10 +285,6 @@
 	else
 		extra_description += span_notice("\nYou can dismantle this wall by welding.")
 
-	if(locate(/obj/effect/overlay/wallrot) in src)
-		extra_description += span_warning("\nThere is a corrosive fungus growing on it, one touch and entire wall will crumble.")
-		extra_description += span_warning("\nDirectly applying heat will remove the fungus.")
-
 	if(window_type)
 		var/material/glass/window_material = get_material_by_name(window_type)
 		if(window_material && window_material.display_name)
@@ -327,8 +321,7 @@
 		return
 	if(damage < 1)
 		return
-	if(locate(/obj/effect/overlay/wallrot) in src)
-		damage *= 10
+
 	. = min(health, damage)
 	health -= damage
 	if(health <= 0)

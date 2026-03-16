@@ -719,7 +719,6 @@
 #include "code\game\gamemodes\events\spacevine.dm"
 #include "code\game\gamemodes\events\spider_infestation.dm"
 #include "code\game\gamemodes\events\supply_pod.dm"
-#include "code\game\gamemodes\events\wallrot.dm"
 #include "code\game\gamemodes\events\weather.dm"
 #include "code\game\gamemodes\events\wormholes.dm"
 #include "code\game\gamemodes\events\hidden_events\bluespace_crystal_infestation.dm"
