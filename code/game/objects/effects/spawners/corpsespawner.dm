@@ -241,6 +241,8 @@
 		/obj/item/clothing/head/soft/tan2soft,
 		/obj/item/clothing/head/space/emergency
 		)
+	corpsepocket1 = list(/obj/spawner/pack/randcredits/low_chance)
+	corpsepocket2 = list(/obj/spawner/pack/randcredits/low_chance)
 	min_age = 40
 	max_age = 250
 	//corpseid = TRUE
