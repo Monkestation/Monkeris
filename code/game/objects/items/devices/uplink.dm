@@ -18,6 +18,8 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 
 	var/list/purchase_log = new
 	var/datum/mind/uplink_owner
+	var/datum/antagonist/source_antag = null // Specific antag datum instance that spawned this uplink
+	var/memory_entry = null // Exact memory string added when this uplink was set up, used for cleanup on removal
 	var/used_TC = 0
 
 	var/list/owner_roles = new
@@ -90,6 +92,13 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 
 
 // The hidden uplink MUST be inside an obj/item's contents.
+/obj/item/device/uplink/hidden/Destroy()
+	if(istype(loc, /obj/item))
+		var/obj/item/parent = loc
+		if(parent.hidden_uplink == src)
+			parent.hidden_uplink = null
+	return ..()
+
 /obj/item/device/uplink/hidden/New(location, datum/mind/owner, telecrystals = DEFAULT_TELECRYSTAL_AMOUNT)
 	spawn(2)
 		if(!istype(src.loc, /obj))
