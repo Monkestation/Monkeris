@@ -411,6 +411,13 @@ var/list/ai_verbs_default = list(
 	..()
 
 /mob/living/silicon/ai/Topic(href, href_list)
+	if(href_list["view_laws"] && isobserver(usr))
+		var/mob/observer/ghost/G = usr
+		var/turf/T = get_turf(src)
+		if(T)
+			G.forceMove(T)
+		laws.show_laws(G)
+		return
 	if(usr != src)
 		return
 	if(..())
