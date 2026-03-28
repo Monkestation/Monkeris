@@ -111,6 +111,10 @@
 	GLOB.current_antags.Remove(src)
 	if (!owner)
 		return //This can happen with some spamclicking
+	if(owner.current && ishuman(owner.current) && length(stat_modifiers))
+		var/mob/living/L = owner.current
+		for(var/name in stat_modifiers)
+			L.stats.changeStat(name, -stat_modifiers[name])
 	if(owner.current)
 		BITSET(owner.current.hud_updateflag, SPECIALROLE_HUD)
 

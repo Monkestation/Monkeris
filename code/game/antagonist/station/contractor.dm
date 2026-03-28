@@ -48,6 +48,19 @@
 	return TRUE
 
 
+/datum/antagonist/contractor/remove_antagonist()
+	if(owner && owner.current && ishuman(owner.current))
+		var/mob/living/L = owner.current
+		for(var/obj/item/device/uplink/U in GLOB.world_uplinks.Copy())
+			if(U.source_antag == src)
+				if(U.memory_entry)
+					owner.remove_memory(U.memory_entry)
+				qdel(U)
+		owner.remove_memory("<b>Code Phrase</b>: [syndicate_code_phrase]<BR>")
+		owner.remove_memory("<b>Code Response</b>: [syndicate_code_response]<BR>")
+		to_chat(L, span_warning("Your contract has been terminated. You are no longer an operative."))
+	return ..()
+
 /datum/antagonist/contractor/proc/give_codewords()
 	if(!owner.current)
 		return
