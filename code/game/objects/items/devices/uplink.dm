@@ -92,13 +92,6 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 
 
 // The hidden uplink MUST be inside an obj/item's contents.
-/obj/item/device/uplink/hidden/Destroy()
-	if(istype(loc, /obj/item))
-		var/obj/item/parent = loc
-		if(parent.hidden_uplink == src)
-			parent.hidden_uplink = null
-	return ..()
-
 /obj/item/device/uplink/hidden/New(location, datum/mind/owner, telecrystals = DEFAULT_TELECRYSTAL_AMOUNT)
 	spawn(2)
 		if(!istype(src.loc, /obj))
@@ -106,6 +99,13 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	..()
 	nanoui_data = list()
 	update_nano_data()
+
+/obj/item/device/uplink/hidden/Destroy()
+	if(istype(loc, /obj/item))
+		var/obj/item/parent = loc
+		if(parent.hidden_uplink == src)
+			parent.hidden_uplink = null
+	return ..()
 
 // Toggles the uplink on and off. Normally this will bypass the item's normal functions and go to the uplink menu, if activated.
 /obj/item/device/uplink/hidden/proc/toggle()
