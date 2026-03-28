@@ -51,8 +51,6 @@
 /datum/antagonist/contractor/remove_antagonist()
 	if(owner && owner.current && ishuman(owner.current))
 		var/mob/living/L = owner.current
-		for(var/name in stat_modifiers)
-			L.stats.changeStat(name, -stat_modifiers[name])
 		for(var/obj/item/device/uplink/U in GLOB.world_uplinks.Copy())
 			if(U.source_antag == src)
 				if(U.memory_entry)
