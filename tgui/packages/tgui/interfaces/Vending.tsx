@@ -1,9 +1,12 @@
+import { useState } from 'react';
+
 import { useBackend } from 'tgui/backend';
 import {
   BlockQuote,
   Box,
   Button,
   Icon,
+  Input,
   LabeledList,
   Modal,
   NoticeBox,
@@ -53,6 +56,8 @@ interface VendingData {
   markup?: number;
   speaker?: string;
   advertisement?: string;
+  needsPin: boolean;
+  pinMode: string;
 }
 
 const managing = (managingData: ErrorData) => {
@@ -255,6 +260,59 @@ const pay = (vendingProduct: VendingProductData) => {
   );
 };
 
+const pinModal = () => {
+  const { act, data } = useBackend<VendingData>();
+  const [pin, setPin] = useState('');
+
+  const submit = () => {
+    if (!pin) return;
+    act('submit_pin', { pin });
+    setPin('');
+  };
+
+  return (
+    <Modal>
+      <Stack vertical minWidth="200px">
+        <Stack.Item>
+          <Box bold fontSize="1.1em" mb={1}>
+            {data.pinMode === 'manage' ? 'Authorization Required' : 'PIN Required'}
+          </Box>
+          <Box color="label" fontSize="0.9em" mb={1}>
+            Enter the PIN for this account to continue.
+          </Box>
+          <Input
+            autoFocus
+            fluid
+            placeholder="Enter PIN"
+            value={pin}
+            onChange={(val) => setPin(val)}
+            onEnter={submit}
+          />
+        </Stack.Item>
+        <Stack.Item mt={1}>
+          <Stack>
+            <Stack.Item grow>
+              <Button fluid icon="check" disabled={!pin} onClick={submit}>
+                Confirm
+              </Button>
+            </Stack.Item>
+            <Stack.Item grow>
+              <Button
+                fluid
+                icon="ban"
+                color="red"
+                onClick={() => act('cancelpurchase')}
+              >
+                Cancel
+              </Button>
+            </Stack.Item>
+          </Stack>
+        </Stack.Item>
+      </Stack>
+    </Modal>
+  );
+};
+
 export const Vending = (props: any) => {
   const { act, data } = useBackend<VendingData>();
 
@@ -297,7 +355,8 @@ export const Vending = (props: any) => {
           </Stack.Item>
         </Stack>
       </Window.Content>
-      {(data.isVending && pay(data.vendingData)) || null}
+      {(data.needsPin && pinModal()) || null}
+      {(data.isVending && !data.needsPin && pay(data.vendingData)) || null}
     </Window>
   );
 };
