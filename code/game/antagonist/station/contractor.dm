@@ -56,7 +56,7 @@
 	to_chat(contractor_mob, "<b>Code Phrase</b>: [span_danger("[syndicate_code_phrase]")]")
 	to_chat(contractor_mob, "<b>Code Response</b>: [span_danger("[syndicate_code_response]")]")
 	contractor_mob.mind.store_memory("<b>Code Phrase</b>: [syndicate_code_phrase]")
-	contractor_mob.mind.store_memory("<b>Code Response</b>: [syndicate_code_response]")
+	contractor_mob.mind.store_memory("<b>Code Response</b>: [syndicate_code_response]<BR>")
 	to_chat(contractor_mob, "Use the code words, preferably in the order provided, during regular conversation, to identify other agents. Proceed with caution, however, as everyone is a potential foe.")
 
 

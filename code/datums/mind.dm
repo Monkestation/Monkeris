@@ -123,22 +123,54 @@
 	return output
 
 /datum/mind/proc/show_memory(mob/recipient)
-	var/output = "<B>[current.real_name]'s Memory</B><HR>"
-	output += memory
+	ui_interact(recipient)
 
+/datum/mind/ui_state()
+	return GLOB.always_state
+
+/datum/mind/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "Memory")
+		ui.open()
+
+/datum/mind/ui_data(mob/user)
+	var/list/data = list()
+	data["name"] = current ? current.real_name : name
+	data["memory"] = memory
+
+	var/list/obj_groups = list()
 	for(var/datum/antagonist/A as anything in antagonist)
 		if(!length(A.objectives))
-			break
-		if(A.faction)
-			output += "<br><b>Your [A.faction.name] faction objectives:</b>"
-		else
-			output += "<br><b>Your [A.role_text] objectives:</b>"
-		output += "[A.print_objectives(FALSE)]"
-	output += print_individualobjectives()
+			continue
+		var/list/group = list()
+		group["label"] = A.faction ? "Your [A.faction.name] faction objectives:" : "Your [A.role_text] objectives:"
+		var/list/objs = list()
+		for(var/datum/objective/O in A.objectives)
+			objs += list(list("text" = O.explanation_text))
+		group["objectives"] = objs
+		obj_groups += list(group)
+	data["objective_groups"] = obj_groups
 
-	var/datum/browser/panel = new(recipient, "memory", "Memory", 333, 333)
-	panel.set_content(output)
-	panel.open()
+	var/list/ind_objs = list()
+	var/ind_la_explanation
+	if(LAZYLEN(individual_objectives))
+		var/obj_count = 1
+		for(var/datum/individual_objective/objective in individual_objectives)
+			var/list/obj = list()
+			obj["num"] = obj_count
+			obj["name"] = objective.name
+			obj["desc"] = objective.get_description()
+			obj["limited_antag"] = objective.limited_antag ? TRUE : FALSE
+			if(objective.limited_antag)
+				obj["show_la"] = objective.show_la
+				ind_la_explanation = objective.la_explanation
+			ind_objs += list(obj)
+			obj_count++
+	data["individual_objectives"] = ind_objs
+	data["la_explanation"] = ind_la_explanation
+
+	return data
 
 /datum/mind/proc/edit_memory()
 	if(!SSticker.IsRoundInProgress())
