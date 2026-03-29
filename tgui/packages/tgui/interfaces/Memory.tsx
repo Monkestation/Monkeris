@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react';
 import { useBackend } from 'tgui/backend';
 import { Box, Divider, Section, Stack } from 'tgui-core/components';
+
 import { Window } from '../layouts';
 
 type ObjectiveGroup = {
@@ -37,13 +38,7 @@ const makeCopyToken = (value: string, color: string): string => {
   return `${COPY_SENTINEL}${idx}${COPY_SENTINEL}`;
 };
 
-const CopyToken = ({
-  value,
-  color,
-}: {
-  value: string;
-  color: string;
-}) => {
+const CopyToken = ({ value, color }: { value: string; color: string }) => {
   const [copied, setCopied] = useState(false);
 
   const handleClick = () => {
@@ -108,7 +103,8 @@ const styleMemory = (raw: string): string => {
   return raw
     .replace(
       /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g,
-      (_, email) => `<span style='color:#6ab0de'>${makeCopyToken(email, '#6ab0de')}</span>`,
+      (_, email) =>
+        `<span style='color:#6ab0de'>${makeCopyToken(email, '#6ab0de')}</span>`,
     )
     .replace(
       /((?:password|pin) is )([^\s<.,]+)/gi,
@@ -170,7 +166,9 @@ const MemoryLines = ({ html }: { html: string }) => {
         if (line.empty) {
           return <Box key={i} mb={2} />;
         }
-        const parts = line.content.split(new RegExp(`${COPY_SENTINEL}(\\d+)${COPY_SENTINEL}`));
+        const parts = line.content.split(
+          new RegExp(`${COPY_SENTINEL}(\\d+)${COPY_SENTINEL}`),
+        );
         return (
           <Box key={i} mb="2px">
             {parts.map((part, j) => {
