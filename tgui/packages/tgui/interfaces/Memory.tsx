@@ -1,8 +1,6 @@
 import { Fragment, useState } from 'react';
-
 import { useBackend } from 'tgui/backend';
 import { Box, Divider, Section, Stack } from 'tgui-core/components';
-
 import { Window } from '../layouts';
 
 type ObjectiveGroup = {
@@ -73,7 +71,6 @@ const CopyToken = ({
         borderBottom: `1px dashed ${color}`,
         userSelect: 'none',
       }}
-      title="Click to copy"
     >
       {value}
       {copied && (
@@ -110,7 +107,7 @@ const styleMemory = (raw: string): string => {
   copyTokens.length = 0;
   return raw
     .replace(
-      /([a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,})/g,
+      /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g,
       (_, email) => `<span style='color:#6ab0de'>${makeCopyToken(email, '#6ab0de')}</span>`,
     )
     .replace(
