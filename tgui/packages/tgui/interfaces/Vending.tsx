@@ -274,7 +274,9 @@ const pinModal = () => {
       <Stack vertical minWidth="200px">
         <Stack.Item>
           <Box bold fontSize="1.1em" mb={1}>
-            {data.pinMode === 'manage' ? 'Authorization Required' : 'PIN Required'}
+            {data.pinMode === 'manage'
+              ? 'Authorization Required'
+              : 'PIN Required'}
           </Box>
           <Box color="label" fontSize="0.9em" mb={1}>
             Enter the PIN for this account to continue.
