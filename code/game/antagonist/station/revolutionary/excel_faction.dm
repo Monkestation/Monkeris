@@ -51,8 +51,6 @@ var/global/was_centor_spawned = FALSE
 	return extra_text
 /datum/faction/excelsior/create_objectives()
 	objectives.Cut()
-	for (var/datum/antagonist/A in members)
-		to_chat(A.owner.current, span_notice("You may summon your required materials using the \"summon stash\" command."))
 
 	.=..()
 
