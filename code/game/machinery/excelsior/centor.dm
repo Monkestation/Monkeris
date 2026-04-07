@@ -16,6 +16,7 @@ var/global/excelsior_centor
 	var/list/obj/machinery/node/antennas_to_haven = list()
 	var/timer_set			//world.time goes here :)
 	layer = 5
+	var/dead = FALSE
 	var/cutscene = FALSE // if false = add eye overlay
 	var/damage_report_cooldown = FALSE
 	var/list/excelsior_kpks = list()
@@ -306,6 +307,8 @@ var/global/excelsior_centor
 		return FALSE	//No damage done. Used in attackby()
 	health -= amount
 	if(health <= 0)
-		die()
+		if(!dead)	// im such a good coder WOW!!!!
+			die()
+			dead = TRUE
 	return TRUE			//Actual damage delt. Used in attackby()
 

@@ -11,12 +11,11 @@ var/global/was_centor_spawned = FALSE
 	You now may carve your own destiny despite the attempts of the old greedy world to drag you back in.\n\
 	Excelsior fights for both your and our right to live without suppression of true human virtue - to create.\n\
 	We invite you to do the same - emancipate those uncapable to resist mad people ruling this world.\n\n\
-	<b>Our goal:</b> Seize control of the ship by building a redirector on the primary control bridge.\n\n\
-	<b>To reach that goal:</b> We have to call our Centor Core in unvisited location and protect it, spread chains of nodes, liberate the oppressed, spread our word of freedom, make arms and armor for our buddies.\n\n\
-	<b>Preparation:</b> You can call Centor by using your implant, it will produce nodes, KOMPAKs \n\n\
-	<b>After insertion:</b> Establish a fortified position. The People will send additional resources through the teleporter once we get the energy. Use turrets and shield generators, and of course - loyal comrades. \n\n\
-	<b>And the final part - expansion.</b> Spread nodes and ensure their connection to Centor for teleportation power. Acquire implants, prosthetics or robotic parts and rebuild them into our own implants. These can be injected into the oppressed to introduce them into our cause.\n\n\
-	<b>Beware - To prevent important technology theft, your machinery is designed to work only on target vessel: CEV \"Eris\".</b>\n\n\
+	<b>OUR GOAL:</b> Seize control of the ship by building a redirector on the primary control bridge.\n\n\
+	<b>PREPARATION:</b> Summon Centor in a hidden, it will give you KOMPAK and periodically manufacture nodes - all once you tap it.\n\n\
+	<b>BASE:</b> We'll send resources through teleporters once you build some nodes and we get a good lock-in. Use structures, and of course - loyal comrades. \n\n\
+	<b>EXPANSION:</b> Spread nodes and ensure their connection to Centor for teleportation power. Acquire implants, prosthetics or robotic parts and rebuild them into our own implants. These can be injected into the oppressed to introduce them into our cause.\n\n\
+	<b>To prevent important technology theft, your machinery is designed to work only on target vessel: CEV \"Eris\".</b>\n\n\
 	<h1>Our dreams shan't be ignored! Ever Upward!</h1>"
 
 	hud_indicator = "excelsior"
