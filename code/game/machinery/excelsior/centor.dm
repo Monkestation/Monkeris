@@ -58,7 +58,7 @@ var/global/excelsior_centor
 	start_cutscene()
 	icon_state = "static"
 	flick("deployment", src)
-	playsound(src, 'sound/machines/excelsior/centor_open.ogg', 100, 1, ignore_walls = FALSE)
+	playsound(src, 'sound/machines/excelsior/centor_open.ogg', 100, 1, ignore_walls = FALSE) // ignore_walls so antag stuff is not heard through walls
 	spawn(1 SECOND)
 		end_cutscene()
 		looking_around()
@@ -70,7 +70,7 @@ var/global/excelsior_centor
 		start_cutscene()
 		icon_state = "undeployed"
 		flick("hide", src)
-		playsound(src, 'sound/machines/excelsior/centor_close.ogg', 100, 1, ignore_walls = FALSE)	// yes you can crush my head legally speaking
+		playsound(src, 'sound/machines/excelsior/centor_close.ogg', 100, 1, ignore_walls = FALSE)
 		spawn(2 SECONDS)
 			flick("open_hatch", src)
 			icon_state = "hatch"
@@ -103,8 +103,9 @@ var/global/excelsior_centor
 
 /obj/machinery/centor/proc/die()
 	start_cutscene()
+	playsound(src, 'sound/machines/excelsior/centor_detonation.ogg', 100, 1, ignore_walls = TRUE)
 	icon_state = "death_loop"
-	sleep(5 SECONDS)
+	sleep(7 SECONDS)
 	icon_state = "death"
 	sleep(1 SECOND)
 	explosion(get_turf(src), 400, 100)
@@ -219,6 +220,7 @@ var/global/excelsior_centor
 //
 		else
 			to_chat(user, SPAN_NOTICE("You pat Centor - it understands, and goes away to give you equipment..."))
+			//to_chat(user, SPAN_NOTICE("It purrs!!!"))
 			visible_message()
 			give_me_nodes_animation()
 	else
