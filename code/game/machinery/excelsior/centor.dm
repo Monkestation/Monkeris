@@ -297,17 +297,17 @@ var/global/excelsior_centor
 	take_damage(damage*Proj.structure_damage_factor)
 
 /obj/machinery/centor/take_damage(amount)
-	if(!damage_report_cooldown)
-		talk("CENTOR :: Centor lost integrity. [pick(imgonnadie)]")
-		damage_report_cooldown = TRUE
-		spawn(1 MINUTE)
-			if(src)
-				damage_report_cooldown = FALSE
-	if(!amount)
-		return FALSE	//No damage done. Used in attackby()
-	health -= amount
-	if(health <= 0)
-		if(!dead)	// im such a good coder WOW!!!!
+	if(!dead)
+		if(!damage_report_cooldown)
+			talk("CENTOR :: Centor lost integrity. [pick(imgonnadie)]")
+			damage_report_cooldown = TRUE
+			spawn(1 MINUTE)
+				if(src)
+					damage_report_cooldown = FALSE
+		if(!amount)
+			return FALSE	//No damage done. Used in attackby()
+		health -= amount
+		if(health <= 0)
 			die()
 			dead = TRUE
 	return TRUE			//Actual damage delt. Used in attackby()
