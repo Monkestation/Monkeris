@@ -36,7 +36,7 @@
 	var/obj/machinery/node/chosen_node
 	var/obj/effect/effect/pathfinder_arrow/first/current_route
 	var/list/ihaveplacestobe = list()	//list of roads from node-to-node, combined into a long road.
-	var/obj/machinery/node/viewpath_slot
+	var/obj/machinery/node/node_here
 	var/list/errors = list()
 	//
 
@@ -202,12 +202,12 @@
 	switch(mode)
 		if(MODE_NONE)
 			return .
-		if(MODE_PATHFINDER)
+		if(MODE_PATHFINDER) // draw only those "holo arrows", which are inside the list [ihaveplacestobe]
 			for(var/i = LAZYLEN(ihaveplacestobe), i > 0, i--)
 				var/datum/excelsior_junction/route = ihaveplacestobe[i]
 				for(var/arrow in route.track)
 					. += arrow
-		if(MODE_INFLUENCE)
+		if(MODE_INFLUENCE) // "orange tiles"
 			for(var/obj/effect/effect/excelsior_influence/influence in view(loc))
 				. += influence
 
@@ -216,7 +216,7 @@
 	var/list/scanned = get_scanned_objects()
 	var/list/update_add = scanned - active_scanned
 	var/list/update_remove = active_scanned - scanned
-	var/temp_slot = viewpath_slot
+	var/temp_slot = node_here
 	var/current_route
 	var/do_reversed
 
@@ -295,27 +295,29 @@
 	set_user(null)
 	.=..()
 
+
+// All this does is reverse arrows visually when showing it on KOMPAK "INFLUENCE MODE" overlay.
+//	- Why? [pathfinder_arrow]s look in a direction where the player went while building them, but if we want to go backwards, they won't reverse themselves.
 /obj/item/centor_kpk/proc/reverse_arrow(var/curDir)
-	switch(curDir)
-		if("1-4")
-			return "8-2"
-		if("8-2")
-			return "1-4"
+	if("1-4")
+		return "8-2"
+	if("8-2")
+		return "1-4"
 
-		if("8-1")
-			return "2-4"
-		if("2-4")
-			return "8-1"
+	if("8-1")
+		return "2-4"
+	if("2-4")
+		return "8-1"
 
-		if("1-8")
-			return "4-2"
-		if("4-2")
-			return "1-8"
+	if("1-8")
+		return "4-2"
+	if("4-2")
+		return "1-8"
 
-		if("2-8")
-			return "4-1"
-		if("4-1")
-			return "2-8"
+	if("2-8")
+		return "4-1"
+	if("4-1")
+		return "2-8"
 
 
 //creates a new overlay for a scanned object
@@ -352,7 +354,7 @@
 		- new members join in and lack territorial awareness in the moment.
 		- there's screams of "Enemies at X node!!!" but none of you know where that is.
 	In-game options:
-		> You can choose to autobuild pathfinder if on same Z-level between 2 nodes
+		> You can choose to autobuild pathfinder if on same Z-level between 2 nodes				[NOT IMPLEMENTED YET AS OF 08.04.2025]
 		> Or you can manually lead the path if the first failed (only a matter of time)
 		NOTE: In the future, other entities will use the pathfinder.
 
@@ -429,7 +431,7 @@
 	if(get_dir(user, closest) in list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST))
 		throw_error("Please approach node from a straight angle.")
 		return
-	var/obj/effect/effect/pathfinder_arrow/first/arrow = new /obj/effect/effect/pathfinder_arrow/first(user.loc)
+	var/obj/effect/effect/pathfinder_arrow/first/arrow = new /obj/effect/effect/pathfinder_arrow/first(user.loc)	//TODO: You/we/I should make it visible while Build Path is working for player feedback
 	current_route = arrow
 	arrow.kpk = src
 	path_diologe = FALSE
@@ -479,7 +481,7 @@
 
 
 /obj/effect/effect/pathfinder_arrow			// # This is created by [pathifnder_arrow/first] above.
-	var/obj/effect/effect/pathfinder_arrow/first/original
+	var/obj/effect/effect/pathfinder_arrow/first/original // Exists to ask "who stores all info about you?""
 	var/counter = 1
 	var/datum/excelsior_junction/my_route
 
@@ -539,7 +541,7 @@
 	var/obj/machinery/node/first	// node chosen at start_pathfind()
 	var/obj/machinery/node/second	// and at the end_pathfind(), duh...
 
-	var/list/track = list()
+	var/list/track = list()	// track consists of
 
 
 /datum/excelsior_junction/New(obj/machinery/node/A as obj, obj/machinery/node/B as obj, list/route) // pass the info about 2 points of the path
@@ -551,13 +553,15 @@
 
 //------------------------------------------| PATHFINDER - The act of finding |------------------------------------------
 //	/obj/item/centor_kpk/build_path(usr, destination) ;*  <-- GUI
+
+// # WARNING! Despite the name of the proc build_path(), this is actually activated Find Path button IN-GAME!
 /obj/item/centor_kpk/proc/build_path(mob/user as mob, var/obj/machinery/destination)
 	var/obj/machinery/node/closest = locate(/obj/machinery/node) in orange(1, user.loc)
 	if(!closest)
 		throw_error("You need to stand next to a node")
 	else
 		ihaveplacestobe.Cut()
-		closest.sendPath(destination, list(), src)
+		closest.sendPath(end = destination, kpk = src)
 		spawn(3 SECONDS)
 			if(!ihaveplacestobe.len)
 				throw_error("No routes found, try building one.")

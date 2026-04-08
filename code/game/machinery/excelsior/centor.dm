@@ -116,8 +116,9 @@ var/global/excelsior_centor
 
 
 /obj/machinery/centor/proc/end_cutscene()
-	cutscene = FALSE
-	update_icon()
+	if(!dead)
+		cutscene = FALSE
+		update_icon()
 
 // YOUR ANIMATIONS END HERE //
 

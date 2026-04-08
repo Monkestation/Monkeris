@@ -111,10 +111,10 @@
 
 
 /obj/machinery/node/Destroy()
-	for(var/datum/excelsior_junction/route in excelsior_junctions)
-		if(route.first == src || route.second == src)
-			excelsior_junctions.Remove(route)
-			route.Destroy()
+	for(var/datum/excelsior_junction/short_road in excelsior_junctions)
+		if(short_road.first == src || short_road.second == src)
+			excelsior_junctions.Remove(short_road)
+			short_road.Destroy()
 	cleanup_influence()
 	UnregisterSignal(src, COMSIG_TURF_LEVELUPDATE)
 	for(var/obj/machinery/node/noder in neighbours)
@@ -267,7 +267,7 @@
 
 /obj/machinery/node/attack_hand(mob/user)
 //	. = ..()		// DONT uncomment, unless you wanna give it power consumption :)		(P.S. I DONT want that)
-	to_chat(user, "Node's screen blinks for a brief momnet revealing it's statistics")
+	to_chat(user, "Node's screen blinks for a brief moment revealing it's statistics")
 	to_chat(user, "Linked nodes:")
 	for(var/obj/machinery/machine in neighbours)
 		to_chat(user, "[machine.name] [dist3D(src, machine)]m away")
@@ -446,7 +446,7 @@
 	validate()
 	RegisterSignal(src, COMSIG_TURF_LEVELUPDATE, PROC_REF(validate))				// # Any tile on map built/destroyed:
 																					//	1.	Sends a COMSIG_TURF_LEVELUPDATE signal
-																					//	To every obj standing on top
+																					//	To every obj standing on top of said tile
 																					//	2.	It's up to obj to receive that signal
 																					//	3.	Marker receives that signal >> validate()
 
@@ -469,7 +469,7 @@
         return
     var/turf/my_turf = get_turf(src)
     for(var/type in excelsior_turf_whitelist)				//	...It's insides match whitelist
-        if(istype(my_turf, type))							//		Everything inside whitelist is "influence tiles"
+        if(istype(my_turf, type))							//		Every obj inside whitelist allows "influence tiles" to generate excel energy.
             active = TRUE									//		We chose it to be floors and low walls. Walls are punished we hate walls.
             if(!node.activemarkerlist.Find(src))			//		That may change because of YOU, you stinky game designer, that's why the list exists.
                 node.activemarkerlist.Add(src)
@@ -496,31 +496,46 @@
 
 
 
+// # Below you is a sendPath() proc. Here's how it works:
+//
+// # WHY?!
+// 		Proc's final purpose is to insert excelsior_junction(s) inside KPK's list called ihaveplacestobe.
+// 		We draw overlay on top of junctions inside that list.
+// 		Gameplay-wise creating holographic arrows, showing you the way to the node you chose, from the one you're standing next to (if you BUILT the path between nodes before FINDING them)
+// 1. KPK calls sendPath(),
+//
+// I. VARS:
 
-//noda.sendPath("Artem-123", list())
+// 		[end] is a node we chose on KPK using UI buttons, in code: KPK calls sendPath() --- more in [KPK.dm]
+// 		[already_checked]	makes sure we dont fucking crash the game while nodes call sendPath(), a proc, which makes nodes neighbors* call sendPath(), which makes-...
+//			* - neighbors here means if they share a excelsior_junction.
+//		[way_to_go] is a list which we add "junctions" to, we will then draw then on overlay, to lead the player where they wanted to go.
+//			- junction is a /datum/ which stores
+// II.
 
-/obj/machinery/node/proc/sendPath(var/obj/machinery/node/end, var/list/doroga, var/obj/item/centor_kpk/kpk, var/list/way_to_go = list())
-	if(src in doroga)
+/obj/machinery/node/proc/sendPath(var/obj/machinery/node/end, var/list/already_checked = list(), var/obj/item/centor_kpk/kpk, var/list/way_to_go = list())
+	if(src in already_checked)	// list of nodes (so sendPath doesnt make nodes infinitely call each other)
 		return
-	doroga.Add(src)
+	already_checked.Add(src)
 	if(src == end)
 		kpk.ihaveplacestobe = way_to_go
-		kpk.viewpath_slot = end
+		kpk.node_here = end
 		return
-	for(var/datum/excelsior_junction/route in excelsior_junctions)
-		if(route.first == src) //there's a route coming FROM us to other node
-			if(!(route in way_to_go))
-				way_to_go.Add(route)
-			route.second.sendPath(end, doroga, kpk, way_to_go) //send pathfinding signal to this other node
-		if(route.second == src) //there's a route coming TO us from other node
-			if(!(route in way_to_go))
-				way_to_go.Add(route)
-			route.first.sendPath(end, doroga, kpk, way_to_go) //send pathfinding signal to this other node
 
+// NOTE: "short_road" is just 1 picked element from the [global list] called "excelsior_junction".
+	for(var/datum/excelsior_junction/short_road in excelsior_junctions)
+		if(short_road.first == src)
+			if(!(short_road in way_to_go))
+				way_to_go.Add(short_road)
+			short_road.second.sendPath(end, already_checked, kpk, way_to_go)
+		if(short_road.second == src)
+			if(!(short_road in way_to_go))
+				way_to_go.Add(short_road)
+			short_road.first.sendPath(end, already_checked, kpk, way_to_go)
+
+// APPENDIX?
 /*
-*	Packaged Node
+*	FUN FACT: "Packaged Node" is inside [machinery_crates.dm]
 */
-
-// machinery_crates.dm
 
 
