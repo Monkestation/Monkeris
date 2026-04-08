@@ -10,9 +10,9 @@ var/global/was_centor_spawned = FALSE
 	<b>We welcome you to our ranks, fighter.</b>\n\
 	You now may carve your own destiny despite the attempts of the old greedy world to drag you back in.\n\
 	Excelsior fights for both your and our right to live without suppression of true human virtue - to create.\n\
-	We invite you to do the same - emancipate those uncapable to resist mad people ruling this world.\n\n\
+	We invite you to do the same with us - emancipate those uncapable to resist mad people ruling this world.\n\n\
 	<b>OUR GOAL:</b> Seize control of the ship by building a redirector on the primary control bridge.\n\n\
-	<b>PREPARATION:</b> Summon Centor in a hidden, it will give you KOMPAK and periodically manufacture nodes - all once you tap it.\n\n\
+	<b>PREPARATION:</b> Summon Centor in a hidden location, it will give you KOMPAK and periodically manufacture nodes - all once you tap it.\n\n\
 	<b>BASE:</b> We'll send resources through teleporters once you build some nodes and we get a good lock-in. Use structures, and of course - loyal comrades. \n\n\
 	<b>EXPANSION:</b> Spread nodes and ensure their connection to Centor for teleportation power. Acquire implants, prosthetics or robotic parts and rebuild them into our own implants. These can be injected into the oppressed to introduce them into our cause.\n\n\
 	<b>To prevent important technology theft, your machinery is designed to work only on target vessel: CEV \"Eris\".</b>\n\n\
