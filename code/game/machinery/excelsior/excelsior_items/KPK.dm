@@ -408,7 +408,7 @@
 	if(href_list["see_path"])
 		for(var/obj/machinery/node/noda in excelsior_nodes)
 			if(noda.uid == text2num(href_list["see_path"]))
-				build_path(usr, noda)
+				find_path(usr, noda)
 				viewpath_diologe = FALSE
 				mode = MODE_PATHFINDER
 				update_overlay()
@@ -550,8 +550,8 @@
 
 
 //------------------------------------------| PATHFINDER - The act of finding |------------------------------------------
-//	/obj/item/centor_kpk/build_path(usr, destination) ;*  <-- GUI
-/obj/item/centor_kpk/proc/build_path(mob/user as mob, var/obj/machinery/destination)
+//	/obj/item/centor_kpk/find_path(usr, destination) ;*  <-- GUI
+/obj/item/centor_kpk/proc/find_path(mob/user as mob, var/obj/machinery/destination)
 	var/obj/machinery/node/closest = locate(/obj/machinery/node) in orange(1, user.loc)
 	if(!closest)
 		throw_error("You need to stand next to a node")
