@@ -440,6 +440,9 @@
 
 /obj/item/centor_kpk/proc/end_pathfind(mob/user as mob)
 	var/obj/machinery/node/closest = locate(/obj/machinery/node) in orange(1, user.loc)	//TODO insert alert for the guy to come closer btw in GUI
+	if(!closest)
+		throw_error("No nodes found nearby. Approach one to finish path.")
+		return
 	for(var/datum/excelsior_junction/route in excelsior_junctions)
 		if(route.first == chosen_node || route.second == chosen_node)
 			if(route.first == closest || route.second == closest)
