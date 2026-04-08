@@ -445,6 +445,8 @@
 	if(!closest)
 		throw_error("No nodes found nearby. Approach one to finish path.")
 		return
+	if(closest == chosen_node)
+		throw_error("Cannot end path in the starting point. Try approaching different node.")
 	for(var/datum/excelsior_junction/route in excelsior_junctions)
 		if(route.first == chosen_node || route.second == chosen_node)
 			if(route.first == closest || route.second == closest)
