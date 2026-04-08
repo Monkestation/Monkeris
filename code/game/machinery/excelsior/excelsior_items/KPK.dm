@@ -410,7 +410,7 @@
 	if(href_list["see_path"])
 		for(var/obj/machinery/node/noda in excelsior_nodes)
 			if(noda.uid == text2num(href_list["see_path"]))
-				build_path(usr, noda)
+				find_path(usr, noda)
 				viewpath_diologe = FALSE
 				mode = MODE_PATHFINDER
 				update_overlay()
@@ -428,6 +428,9 @@
 //	Act of creating a path
 /obj/item/centor_kpk/proc/start_pathfind(mob/user as mob)
 	var/obj/machinery/node/closest = locate(/obj/machinery/node) in orange(1, user.loc) //TODO insert alert for the guy to come closer btw in GUI
+	if(!closest)
+		throw_error("Please approach a node to start building path from.")
+		return
 	if(get_dir(user, closest) in list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST))
 		throw_error("Please approach node from a straight angle.")
 		return
@@ -552,10 +555,8 @@
 
 
 //------------------------------------------| PATHFINDER - The act of finding |------------------------------------------
-//	/obj/item/centor_kpk/build_path(usr, destination) ;*  <-- GUI
-
-// # WARNING! Despite the name of the proc build_path(), this is actually activated Find Path button IN-GAME!
-/obj/item/centor_kpk/proc/build_path(mob/user as mob, var/obj/machinery/destination)
+//	/obj/item/centor_kpk/find_path(usr, destination) ;*  <-- GUI
+/obj/item/centor_kpk/proc/find_path(mob/user as mob, var/obj/machinery/destination)
 	var/obj/machinery/node/closest = locate(/obj/machinery/node) in orange(1, user.loc)
 	if(!closest)
 		throw_error("You need to stand next to a node")
