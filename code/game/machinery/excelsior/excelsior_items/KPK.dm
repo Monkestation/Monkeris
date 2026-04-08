@@ -426,6 +426,9 @@
 //	Act of creating a path
 /obj/item/centor_kpk/proc/start_pathfind(mob/user as mob)
 	var/obj/machinery/node/closest = locate(/obj/machinery/node) in orange(1, user.loc) //TODO insert alert for the guy to come closer btw in GUI
+	if(!closest)
+		throw_error("Please approach a node to start building path from.")
+		return
 	if(get_dir(user, closest) in list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST))
 		throw_error("Please approach node from a straight angle.")
 		return
