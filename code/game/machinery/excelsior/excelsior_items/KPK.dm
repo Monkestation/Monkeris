@@ -299,25 +299,26 @@
 // All this does is reverse arrows visually when showing it on KOMPAK "INFLUENCE MODE" overlay.
 //	- Why? [pathfinder_arrow]s look in a direction where the player went while building them, but if we want to go backwards, they won't reverse themselves.
 /obj/item/centor_kpk/proc/reverse_arrow(var/curDir)
-	if("1-4")
-		return "8-2"
-	if("8-2")
-		return "1-4"
+	switch(curDir)
+		if("1-4")
+			return "8-2"
+		if("8-2")
+			return "1-4"
 
-	if("8-1")
-		return "2-4"
-	if("2-4")
-		return "8-1"
+		if("8-1")
+			return "2-4"
+		if("2-4")
+			return "8-1"
 
-	if("1-8")
-		return "4-2"
-	if("4-2")
-		return "1-8"
+		if("1-8")
+			return "4-2"
+		if("4-2")
+			return "1-8"
 
-	if("2-8")
-		return "4-1"
-	if("4-1")
-		return "2-8"
+		if("2-8")
+			return "4-1"
+		if("4-1")
+			return "2-8"
 
 
 //creates a new overlay for a scanned object
@@ -445,6 +446,8 @@
 	if(!closest)
 		throw_error("No nodes found nearby. Approach one to finish path.")
 		return
+	if(closest == chosen_node)
+		throw_error("Cannot end path in the starting point. Try approaching different node.")
 	for(var/datum/excelsior_junction/route in excelsior_junctions)
 		if(route.first == chosen_node || route.second == chosen_node)
 			if(route.first == closest || route.second == closest)
