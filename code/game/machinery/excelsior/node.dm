@@ -2,7 +2,7 @@
 	name = "Excelsior \"Tochka\" node"
 	var/shortname = "Tochka-123"
 	icon = 'icons/obj/machines/excelsior/corenode/node.dmi'
-	desc = "Bullet resistant transmission receiver. It catches teleportation signals sent by Haven."
+	desc = "Bullet resistant transmission receiver. It provides power for your teleporters sent by Haven."
 	icon_state = "on"
 	description_info = "Nodes provide teleportation power and activate turrets in a radius. They report any non-Excelsior humans and robots in a radius."
 	description_antag = "Nodes connect to Centor and pass his orders to other nodes in a radius. Node surface coverage can be seen with Influence Mode on KOMPAK."
@@ -321,7 +321,7 @@
 
 
 
-/obj/machinery/node/proc/spread_signal(var/center)	// 	# Nodes check if they are connected to Centor, directly or not (node chain)
+/obj/machinery/node/proc/spread_signal(var/center)	// 	# Nodes check if they are connected to Centor, directly or through node chain.
 	if(core)										//	 1.	If not - connect to Centor
 		return										//	 2.	Pass "core connected" status through the chain
 	core = center
@@ -357,7 +357,7 @@
 
 
 
-// # DETECTION of non-excelsior human
+// # DETECTION of non-excelsior human/robot
 
 //		- The act of yapping itself
 
@@ -409,11 +409,10 @@
 /* [?] INFLUENCE is an invisible zone, that produces Excelsior energy for Excelsior
 		1.	NODE spawns around itself excelsior_influence in a radius, defined by EX_NODE_DISTANCE
 							[_excelsior_defines.dm]
-		2.	INFLUENCE checks the turf it stands on, if it has whitelisted turfs (floortiles & low walls)
-
+		2.	INFLUENCE checks the turf it stands on, if it has whitelisted turfs (floortiles & low walls), if not - it will be eligible for power generation.
 			- by design walls and space aren't rewarded as owning territory.
 
-		3.	CORE gives Excelsior energy
+		3.	CENTOR gives Excelsior energy if the NODE that generated energy from its INFLUENCE has connection
 */
 
 /obj/effect/effect/excelsior_influence	//zone make excel energy :)			//	# Visible on Influence Mode.
@@ -432,7 +431,7 @@
 	validate()
 	RegisterSignal(src, COMSIG_TURF_LEVELUPDATE, PROC_REF(validate))				// # Any tile on map built/destroyed:
 																					//	1.	Sends a COMSIG_TURF_LEVELUPDATE signal
-																					//	To every obj standing on top of said tile
+																					//		To every obj standing on top of said tile
 																					//	2.	It's up to obj to receive that signal
 																					//	3.	Marker receives that signal >> validate()
 
@@ -454,7 +453,7 @@
         Destroy()
         return
     var/turf/my_turf = get_turf(src)
-    for(var/type in excelsior_turf_whitelist)				//	...It's insides match whitelist
+    for(var/type in excelsior_turf_whitelist)				//	...Stuff inside it matches whitelist 												[_excelsior_defines.dm]
         if(istype(my_turf, type))							//		Every obj inside whitelist allows "influence tiles" to generate excel energy.
             active = TRUE									//		We chose it to be floors and low walls. Walls are punished we hate walls.
             if(!node.activemarkerlist.Find(src))			//		That may change because of YOU, you stinky game designer, that's why the list exists.
@@ -473,7 +472,7 @@
 	var/mob/living/intruder = O
 	if(!intruder)
 		return
-	if(!istype(intruder, /mob))												//apparently var above didnt cut out flying cigarettes somehow
+	if(!istype(intruder, /mob))
 		return
 	if(!is_excelsior(intruder))												// 	1.	If EXCELSIOR = STOP
 		if(!intruder.restrained() && !intruder.lying)						//	2.	Arrested/Unconcious/Crawling people? - don't care 					(intentional)
