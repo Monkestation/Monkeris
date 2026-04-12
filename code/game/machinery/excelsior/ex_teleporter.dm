@@ -79,14 +79,15 @@
 
 	var/list/parts_list = list(
 		// # Computer parts
-		/obj/item/stock_parts/console_screen = 1,
-		/obj/item/computer_hardware/processor_unit/adv = 25,		// exists only for redirector here consider removing
-		/obj/item/computer_hardware/hard_drive/advanced = 25,		// exists only for redirector here consider removing
-		/obj/item/stock_parts/capacitor/excelsior = 25,				//
-		/obj/item/stock_parts/scanning_module/excelsior = 25,		//
-		/obj/item/stock_parts/manipulator/excelsior = 25,			//
-		/obj/item/stock_parts/micro_laser/excelsior = 25,			//
-		/obj/item/stock_parts/matter_bin/excelsior = 25,			//
+		/obj/item/stock_parts/console_screen = list("amount" = 1, "price" = 1),
+		/obj/item/computer_hardware/processor_unit/adv = list("amount" = 1, "price" = 25),		// exists only for redirector here consider removing
+		/obj/item/computer_hardware/hard_drive/advanced = list("amount" = 1, "price" = 25),		// exists only for redirector here consider removing
+		/obj/item/stock_parts/capacitor/excelsior = list("amount" = 1, "price" = 25),			//
+		/obj/item/stock_parts/scanning_module/excelsior = list("amount" = 1, "price" = 25),		//
+		/obj/item/stock_parts/manipulator/excelsior = list("amount" = 1, "price" = 25),			//
+		/obj/item/stock_parts/micro_laser/excelsior = list("amount" = 1, "price" = 25),			//
+		/obj/item/stock_parts/matter_bin/excelsior = list("amount" = 1, "price" = 25),			//
+		/obj/item/stack/cable_coil/orange = list("amount" = 30, "price" = 30),
 		)
 	var/list/circuits = list(
 		/obj/item/electronics/circuitboard/excelsior_teleporter = 10,			//
@@ -248,7 +249,7 @@
 		order_list_p += list(
 			list(
 				"name_p" = initial(I.name),
-				"price_p" = parts_list[item],
+				"price_p" = parts_list[item]["price"],
 				"commands_p" = list("order_p" = item)
 			)
 		)
@@ -319,8 +320,9 @@
 	if(href_list["order_p"])
 		var/ordered_item = text2path(href_list["order_p"])
 		if (parts_list.Find(ordered_item))
-			var/order_energy_cost = parts_list[ordered_item]
-			send_order(ordered_item, order_energy_cost, 1, usr)
+			var/order_energy_cost = parts_list[ordered_item]["price"]
+			var/order_amount = parts_list[ordered_item]["amount"]
+			send_order(ordered_item, order_energy_cost, order_amount, usr)
 
 
 
