@@ -89,7 +89,7 @@
 
 /obj/machinery/node/assign_uid()	// this is for UI because UI wants a reference to obj :)
 	uid = rand(1, 3000)
-	for(var/node in excelsior_nodes)
+	for(var/obj/machinery/node/node in excelsior_nodes)
 		if(node.uid == uid)	//lets compare all IDs so they dont match (if they do just reroll :3)
 			assign_uid()
 
