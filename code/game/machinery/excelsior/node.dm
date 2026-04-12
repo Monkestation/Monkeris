@@ -15,7 +15,7 @@
 	layer = 5
 	var/list/obj/machinery/linked = list()
 	var/list/obj/machinery/node/neighbours = list()
-	var/obj/machinery/centor/core
+	var/obj/machinery/centor/core		// we wanna know whos our dad
 	var/damage_report_cooldown = FALSE
 
 	//var/emplacement_storage = 4
@@ -26,7 +26,7 @@
 	var/list/activemarkerlist = list()
 	var/what_is_marker = /obj/effect/effect/excelsior_influence
 
-	//# Cooldowns
+	// Intruder Reporting
 	var/list/intruder_list = list()
 	var/report_cooldown
 
@@ -82,13 +82,16 @@
 	)
 
 	var/newname = pick(namelist)
-	var/cifra = rand(100, 999)
+	var/cifra = rand(100, 999)	// cifra does nothing except goes to a name
 	name = "Excelsior \"[newname]-[cifra]\" node"
 	shortname = "[newname]-[cifra]"
 
 
-/obj/machinery/node/assign_uid()
+/obj/machinery/node/assign_uid()	// this is for UI because UI wants a reference to obj :)
 	uid = rand(1, 3000)
+	for(var/node in excelsior_nodes)
+		if(node.uid == uid)	//lets compare all IDs so they dont match (if they do just reroll :3)
+			assign_uid()
 
 
 /obj/machinery/node/Initialize(mapload, d)
@@ -185,16 +188,6 @@
 
 
 
-
-
-
-
-
-/*
-/obj/machinery/node/Process() 		// Yeah let's not do the lagfest that was debug
-	update_influence()
-*/
-
 /obj/machinery/node/attackby(obj/item/I, mob/user)
 	if(user.a_intent == I_HELP)
 		if((QUALITY_WELDING in I.tool_qualities) && (health < maxHealth))
@@ -208,13 +201,6 @@
 		//if the turret was attacked with the intention of harming it:
 		user.do_attack_animation(src)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-
-		/* Commented at the time for the lack of better sounds
-		if (take_damage(I.force * I.structure_damage_factor))
-			playsound(src, 'sound/weapons/smash.ogg', 70, 1)
-		else
-			playsound(src, 'sound/weapons/Genhit.ogg', 25, 1)
-		*/
 		take_damage(I.force * I.structure_damage_factor)
 
 	..()
@@ -532,6 +518,7 @@
 		kpk.node_here = end				// we store the last node to check if kpk should reverse_arrow()
 		return
 
+// Using a global [excelsior_junctions] list to form a list from [closest] node to [destination] --- called at [node.dm]
 	for(var/datum/excelsior_junction/short_road in excelsior_junctions)
 
 		if(short_road.first == src)
@@ -545,20 +532,6 @@
 			transmit_way_to_go.Add(way_to_go)
 			transmit_way_to_go.Add(short_road)
 			short_road.first.sendPath(end, already_checked, kpk, transmit_way_to_go)
-
-
-// :: WARNING :: HAZARDOUS CODE BELOW
-	// for(var/datum/excelsior_junction/short_road in excelsior_junctions)	// [excelsior_junctions] is a global list of all "arrow paths" built between nodes using in-game Build Path button
-	// 	if(short_road.first == src)
-	// 		if(!(short_road in way_to_go))
-	// 			way_to_go.Add(short_road)
-	// 		short_road.second.sendPath(end, already_checked, kpk, way_to_go)
-
-	// 	if(short_road.second == src)
-	// 		if(!(short_road in way_to_go))
-	// 			way_to_go.Add(short_road)
-	// 		short_road.first.sendPath(end, already_checked, kpk, way_to_go)
-// :: WARNING :: HAZARDOUS CODE ABOVE
 
 // APPENDIX?
 /*

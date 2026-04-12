@@ -59,7 +59,7 @@ var/global/excelsior_centor
 	start_cutscene()
 	icon_state = "static"
 	flick("deployment", src)
-	playsound(src, 'sound/machines/excelsior/centor_open.ogg', 100, 1, ignore_walls = FALSE) // ignore_walls so antag stuff is not heard through walls
+	playsound(src, 'sound/machines/excelsior/centor_open.ogg', 75, 1, ignore_walls = FALSE) // ignore_walls so antag stuff is not heard through walls
 	spawn(1 SECOND)
 		end_cutscene()
 		looking_around()
@@ -71,7 +71,7 @@ var/global/excelsior_centor
 		start_cutscene()
 		icon_state = "undeployed"
 		flick("hide", src)
-		playsound(src, 'sound/machines/excelsior/centor_close.ogg', 100, 1, ignore_walls = FALSE)
+		playsound(src, 'sound/machines/excelsior/centor_close.ogg', 75, 1, ignore_walls = FALSE)
 		spawn(2 SECONDS)
 			flick("open_hatch", src)
 			icon_state = "hatch"
@@ -104,6 +104,7 @@ var/global/excelsior_centor
 
 /obj/machinery/centor/proc/die()
 	if(!dead)
+		talk("CENTOR LOST :: Explosion imminent.")
 		dead = TRUE
 		start_cutscene()
 		playsound(src, 'sound/machines/excelsior/centor_detonation.ogg', 100, 1, ignore_walls = TRUE)
