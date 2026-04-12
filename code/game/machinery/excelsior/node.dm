@@ -489,17 +489,18 @@
 // 				1. You click on "some node" in Find Path
 // 				2. KPK calls sendPath(end), and puts "some node" YOU CHOSE in [end] var
 // 				2. sendPaths() call sendPath() on nodes until we run out of unchecked nodes (they are remembered in already_checked)
-//
-// I. VARS:
-
+//		---
+// 		VARS:
 // 		[end] 				is a node we chose on KPK using UI buttons
 // 		[already_checked] 	makes sure we dont fucking crash the game because proc is recursive.
 //		[way_to_go] 		is a list which we add "junctions" to, we will then draw them on overlay, to lead the player where they wanted to go.
+//		---
+//		ADDITIONAL INFO:
 //
-// II. ADDITIONAL INFO
+// 		[excelsior_junction]s contents (arrows) are invisible by default! KPK just asks to draw overlay on top of them for a silly human/whoever-else-can-hold...
+//			- KOMPAK asks to draw as overlays whatever is inside it's [ihaveplacestobe] list
 //
-//
-//
+
 
 /obj/machinery/node/proc/sendPath(var/obj/machinery/node/end, var/list/already_checked = list(), var/obj/item/centor_kpk/kpk, var/list/way_to_go = list())
 

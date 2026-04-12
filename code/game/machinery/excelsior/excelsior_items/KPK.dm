@@ -3,7 +3,7 @@
 #define MODE_INFLUENCE 3
 
 
-
+// Fun Fact: We on accident call KOMPAK a "KPK", which translated to "PDA". This may be seen in the comments during explanations.
 
 /obj/item/centor_kpk/
 	name = "\improper Excelsior KOMPAK"
@@ -18,7 +18,7 @@
 	w_class = ITEM_SIZE_SMALL
 	var/mode = MODE_NONE
 	var/code_crutch = TRUE	// TODO: DELETE IF STAGE 2 (drone update).
-								//	- This is here cuz no drones yet, but paths are fundamental design so uhm... Smeakpeek?
+								//	- This is here cuz no drones yet, but I've decided it might be good to still include it.
 	matter = list(MATERIAL_PLASTIC = 5, MATERIAL_GLASS = 1, MATERIAL_PLASMA = 2)
 
 	var/list/active_scanned = list()
@@ -32,7 +32,7 @@
 	var/turn_on_sound = 'sound/effects/Custom_flashlight.ogg'
 	var/path_diologe = FALSE								//
 	var/viewpath_diologe = FALSE							// this is UI
-	var/mappings_diologe = FALSE								//
+	var/mappings_diologe = FALSE							//
 	var/obj/machinery/node/chosen_node
 	var/obj/effect/effect/pathfinder_arrow/first/current_route
 	var/list/ihaveplacestobe = list()	//list of roads from node-to-node, combined into a long road.
@@ -45,7 +45,7 @@
 /obj/item/centor_kpk/Initialize()
 	. = ..()
 	if(code_crutch)
-		description_antag += " Each path made grants 0.25 energy gain to teleporters."		// Guh...  Т_Т
+		description_antag += " Each path made grants 0.25 energy gain to teleporters."		// Guh...  Т_Т There's no other incentive but altruism!
 
 
 /obj/item/centor_kpk/update_icon()
@@ -186,7 +186,6 @@
 	//This proc checks that the scanner is where it needs to be.
 	//In this case, this means it must be held in the hands of a mob
 
-	//This is a seperate proc so that it can be overridden later. For example to allow for scanners embedded in other things
 	if(!ismob(loc))
 		return FALSE
 
@@ -202,7 +201,7 @@
 	switch(mode)
 		if(MODE_NONE)
 			return .
-		if(MODE_PATHFINDER) // draw only those "holo arrows", which are inside the list [ihaveplacestobe]
+		if(MODE_PATHFINDER) // draw only those "holo arrows", which are inside the list [ihaveplacestobe], by default they are invisible.
 			for(var/i = LAZYLEN(ihaveplacestobe), i > 0, i--)
 				var/datum/excelsior_junction/route = ihaveplacestobe[i]
 				for(var/arrow in route.track)
@@ -305,7 +304,7 @@
 
 
 // All this does is reverse arrows visually when showing it on KOMPAK "INFLUENCE MODE" overlay.
-//	- Why? [pathfinder_arrow]s look in a direction where the player went while building them, but if we want to go backwards, they won't reverse themselves.
+//	- Why? [pathfinder_arrow]s look in a direction where the player went while building them, but if we want Find Path to go backwards, they won't reverse themselves.
 /obj/item/centor_kpk/proc/reverse_arrow(var/curDir)
 	switch(curDir)
 		if("1-4")
@@ -488,7 +487,12 @@
 
 
 
+// 	In the comments called: "invisible arrows", "arrow holos".
+// 	These things are created when you are walking after sucessfully beginning a Build Path on your KOMPAK
 
+// 	There's only two types of them:
+// 		1. /obj/effect/effect/pathfinder_arrow/first 	--- this one exists to store info about newly created second type arrows.
+// 		2. /obj/effect/effect/pathfinder_arrow
 
 /obj/effect/effect/pathfinder_arrow/first	// # This is a first spawned arrow, pointing in some direction
 	var/list/snake = list()						//	- It exists to store the list of the whole "path", nothing more
@@ -499,7 +503,7 @@
 
 
 /obj/effect/effect/pathfinder_arrow			// # This is created by [pathifnder_arrow/first] above.
-	var/obj/effect/effect/pathfinder_arrow/first/original // Exists to ask "who stores all info about you?""
+	var/obj/effect/effect/pathfinder_arrow/first/original // Exists for the question "who stores all info about your whole road snake here?""
 	var/counter = 1
 	var/datum/excelsior_junction/my_route
 
@@ -552,14 +556,13 @@
 
 /* # Path as DATA
 	- holds 2 nodes as vars
-	- list/track contains
+	- list/track contains [/obj/effect/effect/pathfinder_arrow]
 */
-/datum/excelsior_junction	// Let's write the path down somewhere once we end_...
-// get names of the nodes
+/datum/excelsior_junction	// This one is created when KOMPAK finalizes a Build Path, all invisible arrows built are stored inside this one.
 	var/obj/machinery/node/first	// node chosen at start_pathfind()
 	var/obj/machinery/node/second	// and at the end_pathfind(), duh...
 
-	var/list/track = list()	// track consists of
+	var/list/track = list()	// contains an obj stated above ^
 
 
 /datum/excelsior_junction/New(obj/machinery/node/A as obj, obj/machinery/node/B as obj, list/route) // pass the info about 2 points of the path
