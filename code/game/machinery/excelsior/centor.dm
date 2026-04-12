@@ -3,9 +3,9 @@ var/global/excelsior_centor
 /obj/machinery/centor
 	name = "Excelsior \"Centor\" core"
 	icon = 'icons/obj/machines/excelsior/corenode/centor.dmi'
-	desc = "Metallic mind, it's silent thoughts reaching far away to the Haven."
+	desc = "Metallic mind, it's silent thoughts only existing inside cryptic radio."
 	description_info = "Source of power for teleporters, but it can be shot dead."
-	description_antag = "Repairable with welding tools. Pat it to receive regularly made nodes, or receive stash with KOMPAKS - one for each member of our team."
+	description_antag = "Repairable with welding tools. Excelsior must interact with it to receive nodes, KOMPAKs and stash."
 	icon_state = "static"
 	density = TRUE
 	anchored = TRUE

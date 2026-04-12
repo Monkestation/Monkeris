@@ -5,7 +5,7 @@
 	desc = "Bullet resistant transmission receiver and spreader. Reaches for signals like antennas to Haven."
 	icon_state = "on"
 	description_info = "Node scans tiles to get teleporter power from them, activates turrets, and reports intruders to Excelsior communications."
-	description_antag = "Node radius can be seen with Influence Mode on KOMPAK. Connecting them to Centor and each other makes them work."
+	description_antag = "Repairable with welding tools. Node radius can be seen with Influence Mode on KOMPAK. Connecting them to Centor and each other makes them work."
 	anchored = TRUE
 	density = TRUE
 	circuit = /obj/item/electronics/circuitboard/excelsior_node
