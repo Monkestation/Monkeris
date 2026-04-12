@@ -530,6 +530,7 @@
 	if(src == end)						// If works - we found the node we wanted! let's send details to kpk :)
 		kpk.ihaveplacestobe = way_to_go	// kpk has [ihaveplacestobe], which is list used to draw holo arrows (overlay)
 		kpk.node_here = end				// we store the last node to check if kpk should reverse_arrow()
+		kpk.refresh_overlay()
 		return
 
 	for(var/datum/excelsior_junction/short_road in excelsior_junctions)

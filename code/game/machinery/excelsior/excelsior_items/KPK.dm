@@ -248,6 +248,12 @@
 		user_client.images -= active_scanned[O]
 		active_scanned -= O
 
+/obj/item/centor_kpk/proc/refresh_overlay()	//Regenerate all overlays from scratch. Used with pathfinder arrows
+	for(var/obj/O in active_scanned)
+		user_client.images -= active_scanned[O]
+		active_scanned -= O
+	update_overlay()
+
 /obj/item/centor_kpk/proc/check_active(var/targetstate = TRUE)
 	//First of all, check if its being turned off. This is simpler
 	if(!targetstate)
@@ -386,9 +392,8 @@
 		mappings_diologe = FALSE
 
 	if(href_list["toggle_overlay"])
-		set_enabled(!enabled)
 		mode = MODE_NONE
-		ihaveplacestobe.Cut()
+		set_enabled(!enabled)
 
 	if(href_list["influence_overlay"])
 		mode = MODE_INFLUENCE
@@ -573,11 +578,13 @@
 	else
 		ihaveplacestobe.Cut()
 		closest.sendPath(end = destination, kpk = src)
+		mode = MODE_PATHFINDER
+		set_enabled(TRUE)
 		spawn(3 SECONDS)
 			if(!ihaveplacestobe.len)
 				throw_error("No routes found, try building one.")
 				mode = MODE_NONE
-			update_overlay()
+			refresh_overlay()
 
 
 
