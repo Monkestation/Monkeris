@@ -1,7 +1,4 @@
 // # Node+Centor related [centor.dm]
-//	- KPK
-// 		[NOTHING]
-
 //	- Node
 #define EX_NODE_DISTANCE 7
 
