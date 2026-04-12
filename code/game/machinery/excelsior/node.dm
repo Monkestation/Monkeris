@@ -2,10 +2,10 @@
 	name = "Excelsior \"Tochka\" node"
 	var/shortname = "Tochka-123"
 	icon = 'icons/obj/machines/excelsior/corenode/node.dmi'
-	desc = "Bullet resistant transmission receiver. It provides power for your teleporters sent by Haven."
+	desc = "Bullet resistant transmission receiver and spreader. Reaches for signals like antennas to Haven."
 	icon_state = "on"
-	description_info = "Nodes provide teleportation power and activate turrets in a radius. They report any non-Excelsior humans and robots in a radius."
-	description_antag = "Nodes connect to Centor and pass his orders to other nodes in a radius. Node surface coverage can be seen with Influence Mode on KOMPAK."
+	description_info = "Node scans tiles to get teleporter power from them, activates turrets, and reports intruders to Excelsior communications."
+	description_antag = "Node radius can be seen with Influence Mode on KOMPAK. Connecting them to Centor and each other makes them work."
 	anchored = TRUE
 	density = TRUE
 	circuit = /obj/item/electronics/circuitboard/excelsior_node
