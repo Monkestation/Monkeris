@@ -570,7 +570,7 @@
 			if(!ihaveplacestobe.len)
 				throw_error("No routes found, try building one.")
 				mode = MODE_NONE
-				update_overlay()
+			update_overlay()
 
 
 
