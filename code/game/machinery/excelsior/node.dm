@@ -114,7 +114,7 @@
 
 
 /obj/machinery/node/Destroy()
-	for(var/datum/excelsior_junction/short_road in excelsior_junctions)
+	for(var/datum/excelsior_junction/short_road in excelsior_junctions)//Clean up connected roads
 		if(short_road.first == src || short_road.second == src)
 			excelsior_junctions.Remove(short_road)
 			short_road.Destroy()
@@ -123,12 +123,6 @@
 	for(var/obj/machinery/node/noder in neighbours)
 		noder.update_influence()
 	. = ..()
-
-
-
-
-
-
 
 	excelsior_nodes.Remove(src)
 	for(var/obj/machinery/machine in linked)
@@ -322,6 +316,9 @@
 
 
 /obj/machinery/node/proc/spread_signal(var/center)	// 	# Nodes check if they are connected to Centor, directly or not (node chain)
+	if(!center)										//	 Special case - we are trying to reset node's core
+		core = null
+		update_icon()
 	if(core)										//	 1.	If not - connect to Centor
 		return										//	 2.	Pass "core connected" status through the chain
 	core = center
