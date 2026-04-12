@@ -534,23 +534,17 @@
 
 	for(var/datum/excelsior_junction/short_road in excelsior_junctions)
 
-		if(short_road in way_to_go)
-			continue
 		if(short_road.first == src)
-		else if(short_road.second == src)
-		way_to_go.Add(short_road)
-		else
-			continue
-
-
-		if(short_road.first == src)
-			short_road.second.sendPath(end, already_checked, kpk, way_to_go)
+			var/list/transmit_way_to_go = list()
+			transmit_way_to_go.Add(way_to_go)
+			transmit_way_to_go.Add(short_road)
+			short_road.second.sendPath(end, already_checked, kpk, transmit_way_to_go)
 
 		else if(short_road.second == src)
-			short_road.first.sendPath(end, already_checked, kpk, way_to_go)
-
-		else	// ERROR
-			kpk.throw_error("REALITY COLLAPSE DETECTED: Send screenshot to Higher Circle with code \[DL-1\]")
+			var/list/transmit_way_to_go = list()
+			transmit_way_to_go.Add(way_to_go)
+			transmit_way_to_go.Add(short_road)
+			short_road.first.sendPath(end, already_checked, kpk, transmit_way_to_go)
 
 
 // :: WARNING :: HAZARDOUS CODE BELOW
