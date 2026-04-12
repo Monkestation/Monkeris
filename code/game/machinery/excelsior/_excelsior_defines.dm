@@ -1,7 +1,10 @@
 // # Node+Centor related [centor.dm]
 //	- KPK
+// 		[NOTHING]
+
 //	- Node
 #define EX_NODE_DISTANCE 7
+
 //	- Centor
 #define EX_NODE_SPAWN_COOLDOWN 3 MINUTES
 
@@ -12,7 +15,7 @@ var/global/excelsior_energy
 var/list/global/excelsior_nodes = list()
 var/list/global/excelsior_junctions = list()
 
-var/list/global/excelsior_turf_whitelist = list(	//  <<< see more at [node.dm]
+var/list/global/excelsior_turf_whitelist = list(	//  <<< see more at [node.dm] (excelsior)
 	/turf/floor,
 	/turf/wall/low
 )

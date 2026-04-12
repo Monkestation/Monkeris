@@ -9,7 +9,7 @@
 	name = "\improper Excelsior KOMPAK"
 	desc = "A lightweight PDA, that could be your grandfather if it was animated. Compatriot's second best friend."
 	description_info = "Every Excelsior agent gets one from Centor, but better not lose it."
-	description_antag = "Creates paths between nodes. Choosing a node on KPK constructs a route to it, from the closest node to chosen one."
+	description_antag = "Creates paths between nodes. Choosing a node on KOMPAK constructs a route to it, from the closest node to chosen one."
 	icon = 'icons/obj/machines/excelsior/corenode/pda.dmi'
 	icon_state = "kompak_off"
 	opacity = 0
@@ -17,7 +17,7 @@
 	anchored = FALSE
 	w_class = ITEM_SIZE_SMALL
 	var/mode = MODE_NONE
-	var/code_crutch = TRUE	// TODO: DELETE IF STAGE 2.
+	var/code_crutch = TRUE	// TODO: DELETE IF STAGE 2 (drone update).
 								//	- This is here cuz no drones yet, but paths are fundamental design so uhm... Smeakpeek?
 	matter = list(MATERIAL_PLASTIC = 5, MATERIAL_GLASS = 1, MATERIAL_PLASMA = 2)
 
@@ -30,9 +30,9 @@
 	var/active
 	var/list/objects_to_overlay = list()
 	var/turn_on_sound = 'sound/effects/Custom_flashlight.ogg'
-	var/path_diologe = FALSE
-	var/viewpath_diologe = FALSE
-	var/mappings_diologe = FALSE
+	var/path_diologe = FALSE								//
+	var/viewpath_diologe = FALSE							// this is UI
+	var/mappings_diologe = FALSE								//
 	var/obj/machinery/node/chosen_node
 	var/obj/effect/effect/pathfinder_arrow/first/current_route
 	var/list/ihaveplacestobe = list()	//list of roads from node-to-node, combined into a long road.
@@ -213,7 +213,9 @@
 
 /obj/item/centor_kpk/proc/update_overlay()
 	//get all objects in scan range
-	var/list/scanned = get_scanned_objects()
+	var/list/scanned = list()
+	scanned = get_scanned_objects()
+
 	var/list/update_add = scanned - active_scanned
 	var/list/update_remove = active_scanned - scanned
 	var/temp_slot = node_here
@@ -565,7 +567,9 @@
 /obj/item/centor_kpk/proc/find_path(mob/user as mob, var/obj/machinery/destination)
 	var/obj/machinery/node/closest = locate(/obj/machinery/node) in orange(1, user.loc)
 	if(!closest)
-		throw_error("You need to stand next to a node")
+		throw_error("You need to stand next to a node.")
+	else if(closest == destination)
+		throw_error("You are standing next to your destination, Infiltrator...")
 	else
 		ihaveplacestobe.Cut()
 		closest.sendPath(end = destination, kpk = src)

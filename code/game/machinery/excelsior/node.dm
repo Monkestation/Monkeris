@@ -496,42 +496,75 @@
 
 
 
-// # Below you is a sendPath() proc. Here's how it works:
+// # Below you is a sendPath() proc.
 //
-// # WHY?!
-// 		Proc's final purpose is to insert excelsior_junction(s) inside KPK's list called ihaveplacestobe.
-// 		We draw overlay on top of junctions inside that list.
-// 		Gameplay-wise creating holographic arrows, showing you the way to the node you chose, from the one you're standing next to (if you BUILT the path between nodes before FINDING them)
-// 1. KPK calls sendPath(),
+// 		# Why do we need it?
+// 			Code-wise Proc's final purpose is to insert [excelsior_junction(s)] inside KPK's list called [ihaveplacestobe] (KPK calls the sendPath() in it's own proc: find_path()).
+//				- [excelsior_junction] is made with KOMPAK's [Build Path] in-game button.
+//
+// 			We draw overlay on top of junctions that are inside that list.
+// 			Gameplay-wise creating holographic arrows, showing you the way to the node you chose, from the one you're standing next to (if you BUILT the path between nodes before FINDING them)
+// 				1. You click on "some node" in Find Path
+// 				2. KPK calls sendPath(end), and puts "some node" YOU CHOSE in [end] var
+// 				2. sendPaths() call sendPath() on nodes until we run out of unchecked nodes (they are remembered in already_checked)
 //
 // I. VARS:
 
-// 		[end] is a node we chose on KPK using UI buttons, in code: KPK calls sendPath() --- more in [KPK.dm]
-// 		[already_checked]	makes sure we dont fucking crash the game while nodes call sendPath(), a proc, which makes nodes neighbors* call sendPath(), which makes-...
-//			* - neighbors here means if they share a excelsior_junction.
-//		[way_to_go] is a list which we add "junctions" to, we will then draw then on overlay, to lead the player where they wanted to go.
-//			- junction is a /datum/ which stores
-// II.
+// 		[end] 				is a node we chose on KPK using UI buttons
+// 		[already_checked] 	makes sure we dont fucking crash the game because proc is recursive.
+//		[way_to_go] 		is a list which we add "junctions" to, we will then draw them on overlay, to lead the player where they wanted to go.
+//
+// II. ADDITIONAL INFO
+//
+//
+//
 
 /obj/machinery/node/proc/sendPath(var/obj/machinery/node/end, var/list/already_checked = list(), var/obj/item/centor_kpk/kpk, var/list/way_to_go = list())
-	if(src in already_checked)	// list of nodes (so sendPath doesnt make nodes infinitely call each other)
-		return
-	already_checked.Add(src)
-	if(src == end)
-		kpk.ihaveplacestobe = way_to_go
-		kpk.node_here = end
+
+	if(src in already_checked)	// Prevent infinite loop if we sendPath() previously .
 		return
 
-// NOTE: "short_road" is just 1 picked element from the [global list] called "excelsior_junction".
+	already_checked.Add(src)	// if we didn't sendPath(), make sure it knows we checked it due to [already_checked] list()
+
+//
+	if(src == end)						// If works - we found the node we wanted! let's send details to kpk :)
+		kpk.ihaveplacestobe = way_to_go	// kpk has [ihaveplacestobe], which is list used to draw holo arrows (overlay)
+		kpk.node_here = end				// we store the last node to check if kpk should reverse_arrow()
+		return
+
 	for(var/datum/excelsior_junction/short_road in excelsior_junctions)
+
+		if(short_road in way_to_go)
+			continue
 		if(short_road.first == src)
-			if(!(short_road in way_to_go))
-				way_to_go.Add(short_road)
+		else if(short_road.second == src)
+		way_to_go.Add(short_road)
+		else
+			continue
+
+
+		if(short_road.first == src)
 			short_road.second.sendPath(end, already_checked, kpk, way_to_go)
-		if(short_road.second == src)
-			if(!(short_road in way_to_go))
-				way_to_go.Add(short_road)
+
+		else if(short_road.second == src)
 			short_road.first.sendPath(end, already_checked, kpk, way_to_go)
+
+		else	// ERROR
+			kpk.throw_error("REALITY COLLAPSE DETECTED: Send screenshot to Higher Circle with code \[DL-1\]")
+
+
+// :: WARNING :: HAZARDOUS CODE BELOW
+	// for(var/datum/excelsior_junction/short_road in excelsior_junctions)	// [excelsior_junctions] is a global list of all "arrow paths" built between nodes using in-game Build Path button
+	// 	if(short_road.first == src)
+	// 		if(!(short_road in way_to_go))
+	// 			way_to_go.Add(short_road)
+	// 		short_road.second.sendPath(end, already_checked, kpk, way_to_go)
+
+	// 	if(short_road.second == src)
+	// 		if(!(short_road in way_to_go))
+	// 			way_to_go.Add(short_road)
+	// 		short_road.first.sendPath(end, already_checked, kpk, way_to_go)
+// :: WARNING :: HAZARDOUS CODE ABOVE
 
 // APPENDIX?
 /*
