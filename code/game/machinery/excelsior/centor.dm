@@ -248,7 +248,7 @@ var/global/excelsior_centor
 
 
 
-/obj/machinery/centor/nano_ui_data()		// TODO check this at the finishing line, there's test stuff
+/obj/machinery/centor/nano_ui_data()
 	var/list/data = list()
 	var/list/node_list = list()
 	for(var/obj/machinery/node/node in excelsior_nodes)
