@@ -44,7 +44,7 @@ var/global/excelsior_centor
 	"They will come for you next.",)
 
 // FLUFFY ANIMATION :3 //
-/obj/machinery/centor/proc/start_cutscene()
+/obj/machinery/centor/proc/start_cutscene()	// this stops idle animation of eye moving and stops any clicking on it.
 	cutscene = TRUE
 	update_icon()
 

@@ -291,7 +291,7 @@
 			neighbours.Add(M)
 	else
 		if(!linked.Find(M))		// > Connect to emplacements, for example.
-			linked.Add(M)		//	- If such machinery demands Node's connection to work
+			linked.Add(M)		//	- If such machinery demands Node's connection to work (sentry)
 
 
 
@@ -338,7 +338,7 @@
 	if(!is_excelsior(usr))
 		to_chat(usr, "It doesn't listen to you.")
 		return
-	to_chat(usr, "You're start packing node back into compact mode.")
+	to_chat(usr, "You've started packing up the node.")
 	if(do_after(usr, 2 SECONDS, src))
 		new /obj/item/machinery_crate/excelsior/node(loc)
 		Destroy()
@@ -403,16 +403,16 @@
  												*		   Influence		  *
  												*******************************/
 
-/* [?] INFLUENCE is an invisible zone, that produces Excelsior energy for Excelsior
-		1.	NODE spawns around itself excelsior_influence in a radius, defined by EX_NODE_DISTANCE
-							[_excelsior_defines.dm]
-		2.	INFLUENCE checks the turf it stands on, if it has whitelisted turfs (floortiles & low walls), if not - it will be eligible for power generation.
-			- by design walls and space aren't rewarded as owning territory.
+/* [?] INFLUENCE is an invisible obj called [excelsior_influence], it produces "teleporter energy" for Excelsior 	--- [ex_teleporter.dm]
+		1.	NODE spawns around itself [excelsior_influence] in a radius, defined by EX_NODE_DISTANCE 				--- [_excelsior_defines.dm]
+		2.	INFLUENCE checks the [turf] it stands on, if it has whitelisted turfs (floortiles & low walls), if not - it won't be eligible for power generation.
+			- by design walls and space is unwelcome as "territory that rewards you"
 
-		3.	CENTOR gives Excelsior energy if the NODE that generated energy from its INFLUENCE has connection
+		3. NODES connected to CENTOR (let's call it "centored" or smth), or if NODE connected to another "centored" NODE, only then does it produce teleporter energy,
+			if it's cut off from the "base" (CENTOR), it doesn't turn on sentries and doesn't give telepower.
 */
 
-/obj/effect/effect/excelsior_influence	//zone make excel energy :)			//	# Visible on Influence Mode.
+/obj/effect/effect/excelsior_influence	//zone make excel energy :)			//	# Visible on Influence Mode on centor_kpk [KPK.dm].
 	var/active = FALSE														// 	- To find the HUD code do either:
 	var/obj/machinery/node/node												//		> Search by "process_excel_hud" in
 																			//		> hud.dm [code\defines\procs][line 60~]
@@ -420,7 +420,7 @@
 
 
 
-/obj/effect/effect/excelsior_influence/New(loc, var/obj/machinery/node/creator)		// > Code 1 layer above is define_influence()
+/obj/effect/effect/excelsior_influence/New(loc, var/obj/machinery/node/creator)		// > Code one "thinking layer" above is define_influence()
 	..(loc)
 	icon = null
 	icon_state = null
@@ -450,7 +450,7 @@
         Destroy()
         return
     var/turf/my_turf = get_turf(src)
-    for(var/type in excelsior_turf_whitelist)				//	...Stuff inside it matches whitelist 												[_excelsior_defines.dm]
+    for(var/type in excelsior_turf_whitelist)				//	...Stuff inside it matches whitelist 											---	[_excelsior_defines.dm]
         if(istype(my_turf, type))							//		Every obj inside whitelist allows "influence tiles" to generate excel energy.
             active = TRUE									//		We chose it to be floors and low walls. Walls are punished we hate walls.
             if(!node.activemarkerlist.Find(src))			//		That may change because of YOU, you stinky game designer, that's why the list exists.
