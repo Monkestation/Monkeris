@@ -89,6 +89,7 @@
 	data += "<br>Moderate: [round(points[EVENT_LEVEL_MODERATE], 0.1)] / [POOL_THRESHOLD_MODERATE]   <a href='byond://?src=\ref[src];modify_points=[EVENT_LEVEL_MODERATE]'>\[ADD\]</a>"
 	data += "<br>Major: [round(points[EVENT_LEVEL_MAJOR], 0.1)] / [POOL_THRESHOLD_MAJOR]   <a href='byond://?src=\ref[src];modify_points=[EVENT_LEVEL_MAJOR]'>\[ADD\]</a>"
 	data += "<br>Roleset: [round(points[EVENT_LEVEL_ROLESET], 0.1)] / [POOL_THRESHOLD_ROLESET]   <a href='byond://?src=\ref[src];modify_points=[EVENT_LEVEL_ROLESET]'>\[ADD\]</a>"
+	data += "<br>Weather: [round(points[EVENT_LEVEL_WEATHER], 0.1)] / [POOL_THRESHOLD_WEATHER]   <a href='byond://?src=\ref[src];modify_points=[EVENT_LEVEL_WEATHER]'>\[ADD\]</a>"
 
 	data += "</td></tr></table>"
 	data += "<hr>"
@@ -131,12 +132,12 @@
 
 	//This complex block will print out all the events with various info
 	var/severity = EVENT_LEVEL_MUNDANE
-	for(var/list/L in list(event_pool_mundane, event_pool_moderate, event_pool_major, event_pool_roleset))
+	for(var/list/L in list(event_pool_mundane, event_pool_moderate, event_pool_major, event_pool_roleset, event_pool_weather))
 		data += "|[severity_to_string[severity]] events:"
 		data += "|Points: [points[severity]]"
 		data += "<ul>"
 		for (var/datum/storyevent/S in L)
-			data += "<li>[S.id] - weight: [L[S]] <a href='byond://?src=\ref[src];event=[S.id];ev_calc_weight=1'>\[UPD\]</a>"
+			data += "<li>[S.id] - weight: [L[S]] price:[GLOB.storyteller.calculate_event_cost(S, severity)] <a href='byond://?src=\ref[src];event=[S.id];ev_calc_weight=1'>\[UPD\]</a>"
 			if(!calculate_weights)
 				data += "<a href='byond://?src=\ref[src];event=[S.id];ev_set_weight=1'>\[SET\]</a>  "
 			data += "<a href='byond://?src=\ref[src];event=[S.id];ev_toggle=1'>\[[S.enabled?"ALLOWED":"FORBIDDEN"]\]</a>"

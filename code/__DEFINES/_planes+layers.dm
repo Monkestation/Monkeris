@@ -144,7 +144,7 @@ What is the naming convention for planes or layers?
 #define ABOVE_ALL_MOB_LAYER 4.5
 #define TYPING_LAYER 4.6
 
-#define SPACEVINE_LAYER 4.8
+#define SPACEVINE_LAYER 4.8	//Unused. We don't have vines anymore
 //#define FLY_LAYER 5 //For easy recordkeeping; this is a byond define
 #define GASFIRE_LAYER 5.05
 
