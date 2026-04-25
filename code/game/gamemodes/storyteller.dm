@@ -309,9 +309,11 @@ GLOBAL_VAR_INIT(chaos_level, 1) //Works as global multiplier for all storyteller
 	//If it is allowed to run, we'll deduct its cost from our appropriate point score, and schedule it for triggering
 	var/cost = calculate_event_cost(choice, event_type)
 	points[event_type] -= cost
-	to_chat(world, "<b><font color='red'>Spending [cost] points!</font></b>")
+	if(GLOB.storyteller.debug_mode)
+		message_admins("<b><font color='red'>Spending [cost] points!</font></b>")
 	schedule_event(choice, event_type)
-	to_chat(world, "<b><font color='green'>Bought [event_type] choosing [choice] for [cost] points.</font></b>")
+	if(GLOB.storyteller.debug_mode)
+		message_admins("<b><font color='green'>Bought [event_type] choosing [choice] for [cost] points.</font></b>")
 
 	return TRUE
 	//When its trigger time comes, the event will once again check if it can run

@@ -252,7 +252,7 @@
 			return FALSE
 
 //Tests if its possible for us to trigger, by compiling candidate lists but doing nothing with them
-/datum/storyevent/roleset/can_trigger(var/severity = EVENT_LEVEL_ROLESET, var/report, var/manual)
+/datum/storyevent/roleset/can_trigger(severity = EVENT_LEVEL_ROLESET, report, manual)
 	var/list/possible_candidates = list()
 	if(GLOB.outer_antag_types[role_id])
 		possible_candidates = ghost_candidates_list(role_id, FALSE, report) //We set act check to false so it doesn't ask ghosts

@@ -68,7 +68,7 @@
 
 
 //Check if we can trigger
-/datum/storyevent/proc/can_trigger(severity, report = world, manual)	//DONT FORGET TO PUT IT BACK
+/datum/storyevent/proc/can_trigger(severity, report, manual)	//Put report on "world" to see full listing of storyteller actions
 	.=TRUE
 	if (!enabled)
 		if (report) to_chat(report, span_notice("Failure: The event is disabled"))
@@ -114,9 +114,10 @@
 /datum/storyevent/proc/cancel(type, completion = 0)
 	//This proc refunds the cost of this event
 	if (GLOB.storyteller)
-		var/rafund = get_cost(type)*(1 - completion)	//DELETE IT. DEBUG
-		to_chat(world, "Refunding [rafund] points to [type]")
-		GLOB.storyteller.modify_points(rafund, type)
+		var/refund_value = get_cost(type)*(1 - completion)
+		if(GLOB.storyteller.debug_mode)
+			message_admins("Refunding [refund_value] points to [type]")
+		GLOB.storyteller.modify_points(refund_value, type)
 
 /datum/storyevent/proc/trigger_event(severity = EVENT_LEVEL_MUNDANE)
 	if (event_type)
