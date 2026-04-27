@@ -1235,7 +1235,6 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	create_message("note", key, system_ckey, message, null, null, 0, 0, null, 0, 0)
 
 /client/proc/open_filter_editor(atom/in_atom)
-	//to_chat(world, "our atom is[in_atom]")
 	if(holder)
 		holder.filteriffic = new /datum/filter_editor(in_atom)
 		holder.filteriffic.ui_interact(mob)
