@@ -104,6 +104,7 @@
 #define VV_HK_ADD_AI "add_ai"
 #define VV_HK_ARMOR_MOD "mod_obj_armor"
 #define VV_HK_ADJUST_ANIMATIONS "adjust_animations"
+#define VV_HK_EDIT_FILTERS "edit_filters"
 
 // /obj
 #define VV_HK_OSAY "osay"
