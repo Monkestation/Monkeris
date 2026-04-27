@@ -82,6 +82,7 @@
 	/// Can be possessed by ghosts if unplayed.
 	var/possession_candidate
 
+	var/eye_hazy    //Carbon
 	var/eye_blind	//Carbon
 	var/eye_blurry	//Carbon
 	var/ear_damage	//Carbon

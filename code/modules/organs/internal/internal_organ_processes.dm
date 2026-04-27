@@ -48,7 +48,7 @@
 	var/eye_efficiency = get_organ_efficiency(OP_EYES)
 
 	if(eye_efficiency < BRUISED_2_EFFICIENCY)
-		eye_blurry = 1
+		eye_blurry = min(eye_blurry + 1.5, 50)
 	if(eye_efficiency < BROKEN_2_EFFICIENCY)
 		eye_blind = 1
 	update_client_colour()
@@ -165,12 +165,12 @@
 		status_flags &= ~BLEEDOUT
 
 	if(blood_volume < 1)
-		eye_blurry = max(eye_blurry,6)
+		eye_hazy = max(eye_hazy,6)
 		adjustOxyLoss(20)
 		if(prob(15))
 			to_chat(src, span_warning("You feel extremely [pick("dizzy","woosey","faint")]."))
 	else if(blood_volume < total_blood_req)
-		eye_blurry = max(eye_blurry,6)
+		eye_blurry = max(eye_hazy,4)
 		adjustOxyLoss(4.5) // this damage threshold kills people with good airflow
 		if(prob(15))
 			to_chat(src, span_warning("You feel highly [pick("dizzy","woosey","faint")]."))
