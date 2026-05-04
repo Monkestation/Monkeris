@@ -49,18 +49,24 @@ What is the naming convention for planes or layers?
 */
 
 //Defines for atom layers and planes
-//KEEP THESE IN A NICE ACSCENDING ORDER, PLEASE
+//KEEP THESE IN A NICE ACSCENDING ORDER, PLEASE //lol
+
+//NEVER HAVE ANYTHING BELOW THIS PLANE ADJUST IF YOU NEED MORE SPACE
+#define LOWEST_EVER_PLANE -200
 
 #define CLICKCATCHER_PLANE -99
 
 #define PLANE_SPACE -95
 #define PLANE_SPACE_PARALLAX -80
 
-#define OPENSPACE_PLANE -10
+#define GRAVITY_PULSE_PLANE -11
+#define GRAVITY_PULSE_RENDER_TARGET "*GRAVPULSE_RENDER_TARGET"
+
+#define OPENSPACE_PLANE -9
 #define OVER_OPENSPACE_PLANE -8
 
-#define FLOOR_PLANE -2
-#define GAME_PLANE -1
+#define FLOOR_PLANE -5
+#define GAME_PLANE -4
 
 
 //Partial porting of bay defines, with our own values reinserted as placeholder
@@ -156,36 +162,53 @@ What is the naming convention for planes or layers?
 #define MASSIVE_OBJ_LAYER 11
 #define POINT_LAYER 12
 
-#define LIGHTING_PLANE 15
+#define LIGHTING_PLANE 100
 #define LIGHTING_LAYER 15
 
-#define ABOVE_LIGHTING_PLANE 16
+#define ABOVE_LIGHTING_PLANE 110
 #define ABOVE_LIGHTING_LAYER 16
 
-#define BYOND_LIGHTING_PLANE 17
+#define BYOND_LIGHTING_PLANE 120
 #define BYOND_LIGHTING_LAYER 17
 
 //HUD layer defines
 
-#define FULLSCREEN_PLANE 9900
+//-------------------- Rendering ---------------------
+#define RENDER_PLANE_GAME 990
+#define RENDER_PLANE_NON_GAME 995
+#define RENDER_PLANE_MASTER 999
+
+#define FULLSCREEN_PLANE 2000
+
 #define FLASH_LAYER 18
 #define FULLSCREEN_LAYER 18.1
 #define UI_DAMAGE_LAYER 18.2
 
-#define HUD_PLANE 9910
+#define HUD_PLANE 3000
 #define HUD_LAYER 19
-#define ABOVE_HUD_PLANE 9920
+#define ABOVE_HUD_PLANE 4000
 #define ABOVE_HUD_LAYER 20
 
-#define RUNECHAT_PLANE 9930
+#define RUNECHAT_PLANE 5000
 
-#define BALLOON_CHAT_PLANE 9935
+#define BALLOON_CHAT_PLANE 6000
 
-#define CINEMATIC_PLANE 9950
+#define CINEMATIC_PLANE 8000
 #define CINEMATIC_LAYER 22
 
 #define BELOW_PLATING_LEVEL 1
 #define ABOVE_PLATING_LEVEL 2
+
+
+//---------- Plane Master multi_z_flags -------------
+// Describes how different plane masters behave regarding being offset by z-levels
+/// This plane master will not offset, existing only once at the 'base' z-level
+/// Mostly used for planes that really don't need to be duplicated
+#define BLOCKS_PLANE_OFFSETTING (1<<0)
+/// This plane master will offset relays to match the highest possible rendering Z
+/// Mainly used for effects that need to render above all z's
+#define OFFSET_RELAYS_MATCH_HIGHEST (1<<1)
+
 
 /atom/proc/reset_plane_and_layer()
 	set_plane(original_plane)
