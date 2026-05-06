@@ -251,7 +251,8 @@
 	name = "Claymore mine"
 	icon_state = "claymore"
 	desc = "A directional anti-personnel mine fitted with an optical sensor trigger. A danger to anyone foolish or unaware enough to step in front of it. Disarmable with a Pulsing tool if you're skilled enough."
-	description_info = "A directional anti-personnel landmine with an optical sensor that projects forward in a cone pattern. The sensor range can be adjusted between 2 and 4 tiles using a Pulsing tool before deployment. The reinforced back casing means fragmentation only fires forward, making it significantly harder to disarm than a standard pressure mine."	description_antag = "Harder to disarm than its pressure equivalent on account of the reinforced casing. Come prepared or don't bother."
+	description_info = "A directional anti-personnel landmine with an optical sensor that projects forward in a cone pattern. The sensor range can be adjusted between 2 and 4 tiles using a Pulsing tool before deployment. The reinforced back casing means fragmentation only fires forward, making it significantly harder to disarm than a standard pressure mine."
+	description_antag = "Harder to disarm than its pressure equivalent on account of the reinforced casing. Come prepared or don't bother."
 	explosion_power = 100
 	explosion_falloff = 100
 	spawn_blacklisted = TRUE
