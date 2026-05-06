@@ -253,13 +253,14 @@
 	desc = "A directional anti-personnel mine fitted with an optical sensor trigger. A danger to anyone foolish or unaware enough to step in front of it. Disarmable with a Pulsing tool if you're skilled enough."
 	description_info = "A directional anti-personnel landmine with an optical sensor that projects forward in a cone pattern. The sensor range can be adjusted between 2 and 4 tiles using a Pulsing tool before deployment. The reinforced back casing means fragmentation only fires forward, making it significantly harder to disarm than a standard pressure mine."
 	description_antag = "Harder to disarm than its pressure equivalent on account of the reinforced casing. Come prepared or don't bother."
-	explosion_power = 100
+	explosion_power = 250
 	explosion_falloff = 100
 	spawn_blacklisted = TRUE
 	var/list/tripwires = list()
 	fragment_type = /obj/item/projectile/bullet/pellet/fragment
 	var/facing_dir = null
 	var/tripwire_range = 2
+	matter = list(MATERIAL_STEEL = 35, MATERIAL_PLASTEEL = 5)
 	w_class = ITEM_SIZE_NORMAL
 	pulse_difficulty = FAILCHANCE_HARD
 
@@ -458,7 +459,6 @@
 	description_info = "The FS DM 'Moneta' is an aged design, first produced by Frozen Star in the closing years of the Corporate Wars and adopted by Ironhammer as a standard anti-infiltration measure. A reliable if unglamorous fixture of Ironhammer kit the reinforced back casing and hardened sensor housing make it notably more resistant to disarming than the pressure mine. Disarmable and configurable with a Pulsing tool."
 	description_antag = "Harder to disarm than its pressure equivalent on account of the reinforced casing. Come prepared or don't bother."
 	icon_state = "claymore_frozenstar"
-	matter = list(MATERIAL_STEEL = 35, MATERIAL_PLASTEEL = 5)
 	matter_reagents = list("fuel" = 40)
 
 /obj/item/mine/claymore/ironhammer/update_icon()
