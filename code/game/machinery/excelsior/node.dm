@@ -480,43 +480,42 @@
 
 // # Below you is a sendPath() proc.
 //
-// 		# Why do we need it?
-// 			Code-wise Proc's final purpose is to insert [excelsior_junction(s)] inside KPK's list called [ihaveplacestobe] (KPK calls the sendPath() in it's own proc: find_path()).
-//				- [excelsior_junction] is made with KOMPAK's [Build Path] in-game button.
+// 		# What does it do?
+//			It's background thinking. Gameplay-wise it's unseen. To understand where and how this bullshit happens:
+// 				1. Go to [KPK.dm]
+//				2. press CTRL+F
+//				3. enter "#pathfinder" into the field
 //
-// 			We draw overlay on top of junctions that are inside that list.
-// 			Gameplay-wise creating holographic arrows, showing you the way to the node you chose, from the one you're standing next to (if you BUILT the path between nodes before FINDING them)
-// 				1. You click on "some node" in Find Path
-// 				2. KPK calls sendPath(end), and puts "some node" YOU CHOSE in [end] var
-// 				2. sendPaths() call sendPath() on nodes until we run out of unchecked nodes (they are remembered in already_checked)
 //		---
 // 		VARS:
-// 		[end] 				is a node we chose on KPK using UI buttons
-// 		[already_checked] 	makes sure we dont fucking crash the game because proc is recursive.
-//		[way_to_go] 		is a list which we add "junctions" to, we will then draw them on overlay, to lead the player where they wanted to go.
-//		---
-//		ADDITIONAL INFO:
-//
-// 		[excelsior_junction]s contents (arrows) are invisible by default! KPK just asks to draw overlay on top of them for a silly human/whoever-else-can-hold...
-//			- KOMPAK asks to draw as overlays whatever is inside it's [ihaveplacestobe] list
+// 		[end] 				during gameplay: it's a node we chose on KPK using UI button called > (press Z, then Find Path)
+// 		[already_checked] 	makes sure we dont fucking crash the game because proc is recursive. (Nodes call to each other sendPath proc)
+//		[way_to_go] 		is a list to which we add [datum "junctions"]. Contents are passed to proc caller's list: [ihaveplacestobe], the caller is [centor_kpk] --- [KPK.dm]
 //
 
 
 /obj/machinery/node/proc/sendPath(var/obj/machinery/node/end, var/list/already_checked = list(), var/obj/item/centor_kpk/kpk, var/list/way_to_go = list())
 
-	if(src in already_checked)	// Prevent infinite loop if we sendPath() previously .
+	if(src in already_checked)	// Prevent recursiveness of the proc from happening 2+ times by checking the funny list.
 		return
 
 	already_checked.Add(src)	// if we didn't sendPath(), make sure it knows we checked it due to [already_checked] list()
 
 //
-	if(src == end)						// If works - we found the node we wanted! let's send details to kpk :)
-		kpk.ihaveplacestobe = way_to_go	// kpk has [ihaveplacestobe], which is list used to draw holo arrows (overlay)
-		kpk.node_here = end				// we store the last node to check if kpk should reverse_arrow()
+	if(src == end)						// We are the node to show path to! WE are the destination
+		kpk.ihaveplacestobe = way_to_go	// kpk has [ihaveplacestobe] list with invis objs, on top them we draw "holo arrows" (overlay) --- [KPK.dm]
+		kpk.node_here = end				// this is for reverse_arrows() proc, we cant lie to user about direction of destination --- [KPK.dm]
 		kpk.refresh_overlay()
 		return
 
-// Using a global [excelsior_junctions] list to form a list from [closest] node to [destination] --- called at [node.dm]
+// Code-wise: We use global [excelsior_junctions] list to form another list full of [excelsior_junction] of from [closest] node to [destination]
+// Explained for meatbags:
+//	excelsior_junction is a holographic road consisting of arrows
+//	every junction created goes into the global list excelsior_junctions with an S at the end!!!
+//	Below these comments, NODE, checks global list, asks if its inside any excelsior_junction (which stores 2 nodes, any path in the world has A and B)
+//		- WHY? We need a list of JUNCTIONS leading through NODES leading to our DESTINATION
+//		- SO: we do it by sending a proc wave through that remembers what nodes it visited, until it meets the DESTINATION
+
 	for(var/datum/excelsior_junction/short_road in excelsior_junctions)
 
 		if(short_road.first == src)

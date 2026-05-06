@@ -43,8 +43,8 @@ var/global/excelsior_centor
 	"We will lose, gather up at my room.",
 	"They will come for you next.",)
 
-// FLUFFY ANIMATION :3 //
-/obj/machinery/centor/proc/start_cutscene()	// this stops idle animation of eye moving and stops any clicking on it.
+// BELOW is FLUFFY ANIMATION :3 //
+/obj/machinery/centor/proc/start_cutscene()	// Normally centor spams his eye movement while nothing happens, cutscene turns that off, update_icon cuts the eye if it appeared still
 	cutscene = TRUE
 	update_icon()
 
@@ -55,7 +55,7 @@ var/global/excelsior_centor
 	else
 		overlays.Cut()
 
-/obj/machinery/centor/proc/deploy_animation()	// pop up from the hatch
+/obj/machinery/centor/proc/deploy_animation()	// pop up from the hatch, this is sequenced with other anims
 	start_cutscene()
 	icon_state = "static"
 	flick("deployment", src)
@@ -64,7 +64,7 @@ var/global/excelsior_centor
 		end_cutscene()
 		looking_around()
 
-/obj/machinery/centor/proc/give_me_nodes_animation()
+/obj/machinery/centor/proc/give_me_nodes_animation()	// Centor gives equipment, this is what happens when we click it.
 	var/i = 0
 	var/many_nodes = contents.len + 1 SECOND
 	if(!cutscene && contents)			// !cutscene is anti-spamclick
@@ -89,13 +89,13 @@ var/global/excelsior_centor
 		return 1
 	return 0
 
-/obj/machinery/centor/proc/looking_around()
+/obj/machinery/centor/proc/looking_around()	// nothing happens, lets pretend we are alive by making an eye animation appear
 	if(!cutscene)
 		overlays += "idle_anim"
 		spawn(12) update_icon()
 
 
-/obj/machinery/centor/proc/investigating(atom/overhere)
+/obj/machinery/centor/proc/investigating(atom/overhere)	// this happens when you click on it, it looks at dir where you clicked it from when theres no contents
 	if(!cutscene)
 		start_cutscene()
 		overlays += image(icon, loc, "dirs", 5, get_dir(src, overhere))
@@ -116,7 +116,7 @@ var/global/excelsior_centor
 		Destroy()
 
 
-/obj/machinery/centor/proc/end_cutscene()
+/obj/machinery/centor/proc/end_cutscene()	// we finished animation, let's declare that for idle anims to start appearing
 	if(!dead)
 		cutscene = FALSE
 		update_icon()
@@ -168,7 +168,7 @@ var/global/excelsior_centor
 
 
 
-/obj/machinery/centor/proc/collect_tax()
+/obj/machinery/centor/proc/collect_tax() // give excel teles power if active nodes have active influence tiles
 	for(var/obj/machinery/complant_teleporter/tele in excelsior_teleporters)
 		tele.old_energy = excelsior_energy
 	for(var/obj/machinery/node/node in antennas_to_haven)

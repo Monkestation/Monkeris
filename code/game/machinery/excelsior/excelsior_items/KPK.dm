@@ -3,7 +3,7 @@
 #define MODE_INFLUENCE 3
 
 
-// Fun Fact: We on accident call KOMPAK a "KPK", which translated to "PDA". This may be seen in the comments during explanations.
+// Fun Fact: We on accident call KOMPAK a "KPK", which translated to "PDA". This may be seen in the comments during explanations and I cannot fight the urges to not write it.
 
 /obj/item/centor_kpk/
 	name = "\improper Excelsior KOMPAK"
@@ -35,8 +35,8 @@
 	var/mappings_diologe = FALSE							//
 	var/obj/machinery/node/chosen_node
 	var/obj/effect/effect/pathfinder_arrow/first/current_route
-	var/list/ihaveplacestobe = list()	//list of roads from node-to-node, combined into a long road.
-	var/obj/machinery/node/node_here
+	var/list/ihaveplacestobe = list()	//list of roads, waiting to become overlays.
+	var/obj/machinery/node/node_here	// this is needed for reverse_arrows()
 	var/list/errors = list()
 	//
 
@@ -348,28 +348,7 @@
 	I.mouse_opacity = 0
 	.=I
 
-
-/*************************************
-*				Programs			 *
-**************************************/
-
-
-
-
-/*
- PATHFINDER
-	[?] Pathfinder is created for situations when:
-		- new members join in and lack territorial awareness in the moment.
-		- there's screams of "Enemies at X node!!!" but none of you know where that is.
-	In-game options:
-		> You can choose to autobuild pathfinder if on same Z-level between 2 nodes				[NOT IMPLEMENTED YET AS OF 08.04.2025]
-		> Or you can manually lead the path if the first failed (only a matter of time)
-		NOTE: In the future, other entities will use the pathfinder.
-
-
-
-------------------------------------------| PATHFINDER - Building the path |------------------------------------------
-*/
+// GUI
 
 /obj/item/centor_kpk/Topic(href, href_list)
 	if(href_list["open_path_dio"])
@@ -434,7 +413,7 @@
 
 
 
-//	Act of creating a path
+//------------------------------------------| PATHFINDER - Build Path |------------------------------------------
 /obj/item/centor_kpk/proc/start_pathfind(mob/user as mob)
 	var/obj/machinery/node/closest = locate(/obj/machinery/node) in orange(1, user.loc) //TODO insert alert for the guy to come closer btw in GUI
 	if(!closest)
@@ -494,7 +473,7 @@
 // 		1. /obj/effect/effect/pathfinder_arrow/first 	--- this one exists to store info about newly created second type arrows.
 // 		2. /obj/effect/effect/pathfinder_arrow
 
-/obj/effect/effect/pathfinder_arrow/first	// # This is a first spawned arrow, pointing in some direction
+/obj/effect/effect/pathfinder_arrow/first	// This is a first spawned arrow, pointing in some direction
 	var/list/snake = list()						//	- It exists to store the list of the whole "path", nothing more
 	var/obj/item/centor_kpk/kpk
 
@@ -502,7 +481,7 @@
 
 
 
-/obj/effect/effect/pathfinder_arrow			// # This is created by [pathifnder_arrow/first] above.
+/obj/effect/effect/pathfinder_arrow			// This is created by [pathifnder_arrow/first] above.
 	var/obj/effect/effect/pathfinder_arrow/first/original // Exists for the question "who stores all info about your whole road snake here?""
 	var/counter = 1
 	var/datum/excelsior_junction/my_route
@@ -554,7 +533,7 @@
 
 
 
-/* # Path as DATA
+/* 	Path as DATA
 	- holds 2 nodes as vars
 	- list/track contains [/obj/effect/effect/pathfinder_arrow]
 */
@@ -562,7 +541,7 @@
 	var/obj/machinery/node/first	// node chosen at start_pathfind()
 	var/obj/machinery/node/second	// and at the end_pathfind(), duh...
 
-	var/list/track = list()	// contains an obj stated above ^
+	var/list/track = list()	// contains obj [pathfinder_arrow]
 
 
 /datum/excelsior_junction/New(obj/machinery/node/A as obj, obj/machinery/node/B as obj, list/route) // pass the info about 2 points of the path
@@ -572,14 +551,14 @@
 	excelsior_junctions.Add(src)
 
 
-//------------------------------------------| PATHFINDER - The act of finding |------------------------------------------
+//------------------------------------------| PATHFINDER - Find Path |------------------------------------------
 //	/obj/item/centor_kpk/find_path(usr, destination) ;*  <-- GUI
 /obj/item/centor_kpk/proc/find_path(mob/user as mob, var/obj/machinery/destination)
 	var/obj/machinery/node/closest = locate(/obj/machinery/node) in orange(1, user.loc)
 	if(!closest)
 		throw_error("You need to stand next to a node.")
 	else if(closest == destination)
-		throw_error("You are standing next to your destination, Infiltrator...")
+		throw_error("You are standing next to that node, Infiltrator...")
 	else
 		ihaveplacestobe.Cut()
 		closest.sendPath(end = destination, kpk = src)
@@ -591,7 +570,38 @@
 				mode = MODE_NONE
 			refresh_overlay()
 
-
+//------------------------------------------
+// #pathfinder guide
+//
+// As of today: 		Pathfinder's purpose is to lead players from one node to another
+// But for the future:	I want Excelsior' drones to use these paths to automate defenses, building, healing, fighting and whatever else drones do.
+//
+// Practical guide:
+//	HINT:
+//	1. spawn 2 [/obj/machinery/node/], or in natural gameplay: [/obj/item/machinery_crate/excelsior/node]
+//	2. spawn [centor_kpk] and open it
+//	3. press Build Path near any deployed node
+//		> start_pathfind() was called
+//		> [pathfinder_arrow/first] spawns under you
+//	4. walk around
+//		> pathfinder_arrow/proc/Uncrossed 	you walked off  [pathfinder_arrow] --- it's invisible sry... :(
+//		> pathfinder_arrow/proc/Crossed		you walked into [pathfinder_arrow]
+//		- You are building an arrow road towards another node.
+//	5. Press Finish Path near another node.
+//		> end_pathfind()
+//		> all the [pathfinder_arrow] you made go into [/datum/excelsior_junction], inside list() "track"
+//	6. Stand next to a node (var is closest) and choose opposite one (var is destination) under Find Path option
+//		- the node you chose now is [var/obj/machinery/destination]
+//		> KPK calls findPath() which makes [closest] node call sendPath()
+//		> sendPath() returns [way_to_go] list
+// 		> [way_to_go] contents go into [ihaveplacestobe]
+//			- the line: "kpk.ihaveplacestobe = way_to_go"
+//	7. KPK turns on Pathfinder and we see the arrows
+//		- set_enabled(TRUE)
+//		- mode = MODE_PATHFINDER
+// 		> update_overlay() happens *somewhere*... I dont know where.
+//
+//------------------------------------------
 
 
 
