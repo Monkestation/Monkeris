@@ -8,7 +8,6 @@
 	icon = 'icons/obj/crate.dmi'
 	icon_state = "crate"
 
-	meat_type = /obj/item/reagent_containers/food/snacks/meat/carp
 	response_help = "touches"
 	response_disarm = "pushes"
 	response_harm = "hits"

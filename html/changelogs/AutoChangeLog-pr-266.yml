@@ -1,0 +1,7 @@
+author: Mycah142
+delete-after: true
+changes:
+  - rscadd: Various first step food items to Biogen
+  - rscadd: Various reagents of the cooking variety to Biogen
+  - rscdel: Leather and Medical items from Biogen
+  - tweak: Recipe timers to reasonable tenth

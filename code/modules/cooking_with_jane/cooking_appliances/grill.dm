@@ -72,7 +72,7 @@
 	var/las_rating = 0
 	for(var/obj/item/stock_parts/micro_laser/M in component_parts)
 		las_rating += M.rating
-	quality_mod = round(las_rating/2)
+	quality_mod = las_rating
 
 	var/bin_rating = 0
 	for(var/obj/item/stock_parts/matter_bin/M in component_parts)

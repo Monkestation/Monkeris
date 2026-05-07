@@ -457,3 +457,22 @@
 			to_chat(usr, "Removed [rem_organ] from [src].")
 			rem_organ.removed()
 			qdel(rem_organ)
+
+/// checks if a location on a mob is protected from skin-contact effects. Returns null if no protection, or the protecting item if protected
+/mob/living/carbon/proc/find_skin_protection(var/protection_zone)
+	var/obj/item/protecting_item
+	var/list/protection_items
+	if(!ishuman(src))//if human, check human inventory slots
+		var/mob/living/carbon/human/ashuman = src
+		protection_items = list(ashuman.head, ashuman.glasses, ashuman.wear_mask, ashuman.wear_suit, ashuman.w_uniform, ashuman.gloves, ashuman.shoes)
+	else //otherwise just check for a mask
+		protection_items = list(src.wear_mask)
+
+	for(var/obj/item/ourcloth in protection_items)
+		if((ourcloth && ourcloth.body_parts_covered & protection_zone))
+			if(!(ourcloth.item_flags & FLEXIBLEMATERIAL) && !(ourcloth.item_flags & AIRTIGHT))//flexible non-airtight items are porous and let liquids/gas through
+				protecting_item = ourcloth.name
+				break
+	return protecting_item
+
+

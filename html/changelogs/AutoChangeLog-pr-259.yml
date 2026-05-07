@@ -1,0 +1,20 @@
+author: Sun-Soaked
+delete-after: true
+changes:
+  - rscadd: adds a system to cause potential negative effects when poorly 
+      butchering mobs, currently implemented on most superior mobs, with custom 
+      effects for Seuche and Kraftwerk roaches
+  - code_imp: butchering is now handled by the Butchering component, 
+      automatically placed on sharp items
+  - balance: the chance of successfully harvesting meat from a mob is now 
+      effected by BIO and the cutting power of the tool used
+  - balance: harvesting plants now assigns them quality based on the harvester's
+      BIO stat
+  - balance: any sharp item can now be used to butcher mobs. items with no 
+      cutting power are treated as if they have QUALITY_CUTTING 5(very weak)
+  - balance: club roles now get some bio for better butchering
+  - bugfix: several minor simplemobs now correctly drop a small amount of meat
+  - bugfix: processing foods (like cutting meat into cutlets) now properly 
+      passes on food quality
+  - rscadd: cat meat.
+  - rscadd: iriska meat.

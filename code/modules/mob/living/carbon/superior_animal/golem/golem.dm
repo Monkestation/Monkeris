@@ -40,8 +40,7 @@
 	speak_chance = 5
 
 	see_in_dark = 10
-	meat_type = null
-	meat_amount = 0
+	butcher_results = null
 	stop_automated_movement_when_pulled = 0
 	wander = FALSE
 	viewRange = 8
@@ -87,7 +86,7 @@
 	. = ..()
 
 	// Spawn ores
-	if(mineral)
+	if(mineral && loc)
 		var/nb_ores =  CEILING((mineral.result_amount + rand(-3, 3)) * oremult, 1)
 		for(var/i in 1 to nb_ores)
 			new mineral.ore(loc)

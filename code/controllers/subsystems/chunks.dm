@@ -17,7 +17,7 @@ SUBSYSTEM_DEF(chunks)
 	name = "Chunks"
 	init_order = INIT_ORDER_CHUNKS
 	flags = SS_NO_FIRE
-	var/list/datum/chunk/chunk_list_by_zlevel
+	var/list/list/datum/chunk/chunk_list_by_zlevel
 
 /datum/controller/subsystem/chunks/Initialize(timeofday)
 	chunk_list_by_zlevel = new/list(world.maxz)

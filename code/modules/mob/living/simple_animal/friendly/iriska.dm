@@ -11,8 +11,7 @@
 	speak_emote = list("purrs.", "meows.")
 	emote_see = list("shakes her head.", "shivers.")
 	speak_chance = 0.75
-	meat_amount = 6
-	meat_type = /obj/item/reagent_containers/food/snacks/meat
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/cat/iriska = list(6, BUTCHER_EASY))
 	response_help = "pets"
 	response_disarm = "rubs"
 	response_harm = "makes terrible mistake by kicking"
