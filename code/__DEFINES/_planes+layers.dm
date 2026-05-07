@@ -184,6 +184,7 @@ What is the naming convention for planes or layers?
 #define FULLSCREEN_LAYER 18.1
 #define UI_DAMAGE_LAYER 18.2
 
+#define BELOW_HUD_PLANE 2900
 #define HUD_PLANE 3000
 #define HUD_LAYER 19
 #define ABOVE_HUD_PLANE 4000
