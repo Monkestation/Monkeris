@@ -1,5 +1,5 @@
 /obj/machinery/biogenerator
-	name = "Bradhaanata Food Dupe"
+	name = "Tartarus NutriForge"
 	desc = "Foodmatter goes in, foodmatter comes out! Now with Real Food(tm) recipes!"
 	description_info = "Insert food scraps to generate points, which can be used to create various food items and reagents. Cooked meals can be inserted to duplicate it at cost to quality."
 	icon = 'icons/obj/biogenerator.dmi'
