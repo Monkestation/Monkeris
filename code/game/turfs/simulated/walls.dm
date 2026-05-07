@@ -321,10 +321,6 @@
 		return
 	if(damage < 1)
 		return
-<<<<<<< i-got-a-story-for-ya
-=======
-
->>>>>>> master
 	. = min(health, damage)
 	health -= damage
 	if(health <= 0)
