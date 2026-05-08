@@ -3,7 +3,7 @@
 #define EX_NODE_DISTANCE 7
 
 //	- Centor
-#define EX_NODE_SPAWN_COOLDOWN 3 MINUTES
+#define EX_NODE_SPAWN_COOLDOWN 10 MINUTES
 
 
 
