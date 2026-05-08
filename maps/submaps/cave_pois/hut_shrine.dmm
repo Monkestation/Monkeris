@@ -1,0 +1,169 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"b" = (
+/turf/wall/reinforced,
+/area/template_noop)
+"c" = (
+/obj/machinery/door/unpowered/simple/uranium,
+/turf/template_noop,
+/area/template_noop)
+"d" = (
+/turf/wall/frontier,
+/area/template_noop)
+"e" = (
+/obj/structure/bed/chair/wood,
+/obj/effect/decal/cleanable/cobweb,
+/obj/spawner/junk/low_chance,
+/obj/item/book/ritual/cruciform,
+/turf/floor/wood/airless,
+/area/template_noop)
+"f" = (
+/obj/item/trash/candle,
+/turf/floor/wood/airless,
+/area/template_noop)
+"g" = (
+/obj/item/trash/candle,
+/mob/living/simple_animal/hostile/roomba/boomba,
+/turf/floor/wood/airless,
+/area/template_noop)
+"h" = (
+/turf/wall/low/frontier,
+/area/template_noop)
+"i" = (
+/obj/machinery/power/nt_obelisk,
+/obj/effect/floor_decal/spline/fancy/wood/three_quarters,
+/obj/structure/sign/faction/neotheology_old{
+	pixel_y = -32
+	},
+/turf/floor/tiled/steel/bar_light,
+/area/template_noop)
+"j" = (
+/obj/spawner/credits/low_chance,
+/obj/spawner/credits/low_chance,
+/obj/spawner/junkfood/rotten/low_chance,
+/obj/spawner/junkfood/rotten/low_chance,
+/obj/spawner/junkfood/rotten/low_chance,
+/obj/structure/table/woodentable,
+/obj/spawner/oddities/low_chance,
+/obj/spawner/credits/low_chance,
+/obj/spawner/junkfood/rotten/low_chance,
+/turf/floor/carpet/bcarpet/airless,
+/area/template_noop)
+"q" = (
+/obj/structure/bed/chair/wood,
+/obj/spawner/junk/low_chance,
+/turf/floor/wood/airless,
+/area/template_noop)
+"E" = (
+/obj/spawner/credits/low_chance,
+/obj/spawner/credits/low_chance,
+/obj/spawner/junkfood/rotten,
+/obj/spawner/junkfood/rotten/low_chance,
+/obj/spawner/junkfood/rotten/low_chance,
+/obj/structure/table/woodentable,
+/obj/spawner/oddities/low_chance,
+/obj/item/book/ritual/cruciform,
+/obj/spawner/credits/low_chance,
+/obj/spawner/junkfood/rotten/low_chance,
+/turf/floor/carpet/bcarpet/airless,
+/area/template_noop)
+"I" = (
+/obj/structure/bed/chair/wood,
+/obj/spawner/junk/low_chance,
+/obj/spawner/junk/low_chance,
+/turf/floor/wood/airless,
+/area/template_noop)
+"L" = (
+/turf/floor/wood/airless,
+/area/template_noop)
+"M" = (
+/obj/spawner/credits/low_chance,
+/obj/spawner/credits/low_chance,
+/obj/spawner/junkfood/rotten/low_chance,
+/obj/spawner/junkfood/rotten/low_chance,
+/obj/spawner/junkfood/rotten/low_chance,
+/obj/spawner/credits/low_chance,
+/obj/structure/table/woodentable,
+/obj/spawner/oddities/low_chance,
+/obj/spawner/credits/low_chance,
+/obj/spawner/junkfood/rotten/low_chance,
+/turf/floor/carpet/bcarpet/airless,
+/area/template_noop)
+"R" = (
+/obj/item/trash/candle,
+/obj/item/tool/sword/nt,
+/turf/floor/wood/airless,
+/area/template_noop)
+"W" = (
+/obj/effect/decal/cleanable/graffiti/graffiti_neotheo,
+/turf/wall/reinforced,
+/area/template_noop)
+"X" = (
+/obj/structure/bed/chair/wood,
+/obj/spawner/junk/low_chance,
+/obj/item/book/ritual/cruciform,
+/turf/floor/wood/airless,
+/area/template_noop)
+
+(1,1,1) = {"
+b
+b
+d
+d
+d
+b
+b
+"}
+(2,1,1) = {"
+W
+e
+q
+f
+f
+g
+b
+"}
+(3,1,1) = {"
+d
+I
+q
+M
+h
+h
+d
+"}
+(4,1,1) = {"
+c
+L
+R
+E
+h
+i
+d
+"}
+(5,1,1) = {"
+d
+q
+X
+j
+h
+h
+d
+"}
+(6,1,1) = {"
+W
+q
+q
+f
+f
+g
+b
+"}
+(7,1,1) = {"
+b
+b
+d
+d
+d
+b
+b
+"}

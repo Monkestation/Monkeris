@@ -91,12 +91,12 @@
 								// End message
 								src.visible_message(span_warning("\The [src] finishes eating \the [eat_target], leaving only bones."))
 								// Get fed
-								fed += rand(1,tasty.meat_amount)
+								fed += rand(1,LAZYLEN(tasty.butcher_results))
 								if (isroach(tasty))
 									var/mob/living/carbon/superior_animal/roach/cannibalism = tasty
 									fed += cannibalism.fed
 								if(istype(src, /mob/living/carbon/superior_animal/roach/roachling))
-									if(tasty.meat_amount >= 6)// ate a fuhrer or kaiser
+									if(istype(tasty, /mob/living/carbon/superior_animal/roach/kaiser) || istype(tasty, /mob/living/carbon/superior_animal/roach/fuhrer))// ate a fuhrer or kaiser
 										var/mob/living/carbon/superior_animal/roach/roachling/bigboss = src
 										bigboss.big_boss = TRUE
 						clearEatTarget()

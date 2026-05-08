@@ -1,0 +1,1350 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"ab" = (
+/turf/wall/reinforced,
+/area/asteroid/cave)
+"ac" = (
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"ad" = (
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"ae" = (
+/obj/machinery/door/firedoor,
+/turf/wall/low/with_glass/reinforced,
+/area/asteroid/cave)
+"af" = (
+/obj/structure/noticeboard,
+/turf/wall/reinforced,
+/area/asteroid/cave)
+"ag" = (
+/obj/structure/noticeboard{
+	icon_state = "nboard00"
+	},
+/turf/wall/reinforced,
+/area/asteroid/cave)
+"ah" = (
+/obj/structure/sign/double/map/left,
+/turf/wall/reinforced,
+/area/asteroid/cave)
+"ai" = (
+/obj/structure/sign/double/map/right,
+/turf/wall/reinforced,
+/area/asteroid/cave)
+"aj" = (
+/obj/machinery/door/airlock/external{
+	icon_state = "door_locked";
+	locked = 1
+	},
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"ak" = (
+/obj/machinery/vending/snack{
+	name = "hacked Getmore Chocolate Corp";
+	prices = list()
+	},
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"al" = (
+/obj/structure/bed/chair/comfy/black{
+	dir = 4
+	},
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"am" = (
+/obj/structure/table/glass,
+/obj/spawner/booze/low_chance,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"an" = (
+/obj/structure/table/standard,
+/obj/machinery/chemical_dispenser/soda{
+	pixel_x = 2;
+	pixel_y = 6
+	},
+/turf/floor/tiled/white,
+/area/asteroid/cave)
+"ao" = (
+/obj/spawner/junk,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"ap" = (
+/obj/spawner/junk,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"aq" = (
+/obj/item/material/shard,
+/obj/spawner/junk,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"ar" = (
+/obj/structure/bed/chair/comfy/black,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"as" = (
+/obj/structure/table/standard,
+/obj/item/storage/box/drinkingglasses{
+	pixel_x = 1;
+	pixel_y = 4
+	},
+/obj/spawner/booze/low_chance,
+/turf/floor/tiled/white,
+/area/asteroid/cave)
+"at" = (
+/obj/structure/table/reinforced,
+/obj/machinery/microwave{
+	pixel_x = -1;
+	pixel_y = 8
+	},
+/turf/floor/tiled/white,
+/area/asteroid/cave)
+"au" = (
+/turf/floor/tiled/white,
+/area/asteroid/cave)
+"av" = (
+/obj/spawner/scrap/dense,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"aw" = (
+/obj/structure/table/reinforced,
+/obj/item/reagent_containers/food/drinks/drinkingglass{
+	pixel_x = -5;
+	pixel_y = 1
+	},
+/turf/floor/tiled/white,
+/area/asteroid/cave)
+"ax" = (
+/obj/structure/lattice,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"ay" = (
+/obj/structure/bed/chair/comfy/black{
+	dir = 1
+	},
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"az" = (
+/obj/structure/closet/secure_closet/freezer/kitchen{
+	req_access = list(150)
+	},
+/obj/spawner/booze/low_chance,
+/obj/spawner/booze/low_chance,
+/turf/floor/tiled/white,
+/area/asteroid/cave)
+"aA" = (
+/obj/structure/sink/kitchen{
+	pixel_y = 28
+	},
+/obj/spawner/junkfood/rotten/low_chance,
+/obj/spawner/booze/low_chance,
+/turf/floor/tiled/white,
+/area/asteroid/cave)
+"aB" = (
+/turf/cave_mineral,
+/area/asteroid/cave)
+"aF" = (
+/turf/floor/dummy/freezer/airless,
+/area/asteroid/cave)
+"aG" = (
+/obj/item/paper/crumpled,
+/turf/floor/dummy/freezer/airless,
+/area/asteroid/cave)
+"aH" = (
+/obj/structure/sink{
+	dir = 4;
+	icon_state = "sink";
+	pixel_x = 11;
+	pixel_y = 0
+	},
+/obj/structure/mirror/antag{
+	pixel_x = 28
+	},
+/turf/floor/dummy/freezer/airless,
+/area/asteroid/cave)
+"aI" = (
+/obj/structure/bed,
+/obj/item/bedsheet/hos,
+/obj/spawner/oddities/low_chance,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"aJ" = (
+/obj/spawner/closet/maintloot/beacon,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"aK" = (
+/obj/structure/toilet{
+	dir = 4
+	},
+/obj/item/paper/crumpled,
+/turf/floor/dummy/freezer/airless,
+/area/asteroid/cave)
+"aL" = (
+/obj/machinery/door/airlock/maintenance_interior,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"aM" = (
+/obj/machinery/shower{
+	dir = 8;
+	icon_state = "shower"
+	},
+/obj/structure/curtain/open/shower,
+/turf/floor/dummy/freezer/airless,
+/area/asteroid/cave)
+"aN" = (
+/obj/structure/toilet{
+	dir = 4
+	},
+/obj/spawner/lowkeyrandom,
+/turf/floor/dummy/freezer/airless,
+/area/asteroid/cave)
+"aO" = (
+/obj/item/soap,
+/turf/floor/dummy/freezer/airless,
+/area/asteroid/cave)
+"aP" = (
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"aQ" = (
+/obj/structure/table/rack,
+/obj/spawner/gun_parts/low_chance,
+/obj/spawner/gun_parts/low_chance,
+/obj/spawner/gun/cheap/low_chance,
+/obj/spawner/gun/normal/low_chance,
+/obj/spawner/gun/cheap,
+/obj/spawner/gun_upgrade/low_chance,
+/obj/spawner/pack/gun_loot/low_chance,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"aR" = (
+/obj/structure/computerframe{
+	anchored = 1;
+	dir = 8
+	},
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"aS" = (
+/obj/item/storage/deferred/rations,
+/obj/structure/closet,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"aT" = (
+/obj/structure/closet,
+/obj/spawner/pouch/low_chance,
+/obj/spawner/pack/cloth,
+/obj/spawner/pouch/low_chance,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"aU" = (
+/obj/item/material/shard,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"aV" = (
+/obj/structure/closet,
+/obj/item/clothing/gloves/fingerless,
+/obj/spawner/pack/cloth,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"aW" = (
+/obj/structure/table/rack,
+/obj/spawner/gun/cheap/low_chance,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"aX" = (
+/obj/structure/closet/random/milsupply,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"aY" = (
+/obj/structure/bed,
+/obj/item/bedsheet/hos,
+/obj/spawner/toy/plushie,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"aZ" = (
+/mob/living/simple_animal/hostile/bear,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"bb" = (
+/obj/machinery/door/airlock/maintenance_interior{
+	icon_state = "door_locked";
+	locked = 1
+	},
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"bc" = (
+/obj/item/material/shard,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"bd" = (
+/obj/structure/table/glass,
+/obj/structure/table/glass,
+/obj/item/material/shard,
+/obj/spawner/credits/low_chance,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"be" = (
+/obj/spawner/pack/machine,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"bf" = (
+/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/spawner/booze/low_chance,
+/obj/spawner/booze/low_chance,
+/turf/floor/tiled/white,
+/area/asteroid/cave)
+"bg" = (
+/obj/structure/table/reinforced,
+/obj/spawner/junkfood/rotten,
+/obj/spawner/booze/low_chance,
+/obj/spawner/booze/low_chance,
+/turf/floor/tiled/white,
+/area/asteroid/cave)
+"bh" = (
+/mob/living/simple_animal/hostile/bear,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"bi" = (
+/obj/structure/girder,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"bj" = (
+/mob/living/simple_animal/hostile/bear,
+/turf/floor/tiled/white,
+/area/asteroid/cave)
+"bk" = (
+/obj/spawner/scrap/sparse,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"bl" = (
+/obj/structure/closet,
+/obj/spawner/toy/plushie,
+/obj/item/clothing/gloves/security/tactical,
+/obj/spawner/pouch/low_chance,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"bm" = (
+/obj/structure/bed,
+/obj/item/bedsheet/hos,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"bn" = (
+/obj/item/paper_bin{
+	pixel_x = -3;
+	pixel_y = 7
+	},
+/obj/item/pen{
+	pixel_y = 4
+	},
+/obj/structure/table/glass,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"bo" = (
+/obj/structure/bed/chair/comfy/black{
+	dir = 8
+	},
+/mob/living/simple_animal/hostile/bear,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"bp" = (
+/obj/spawner/junkfood/rotten/low_chance,
+/obj/spawner/booze/low_chance,
+/turf/floor/tiled/white,
+/area/asteroid/cave)
+"bq" = (
+/obj/spawner/junkfood/rotten,
+/obj/spawner/booze/low_chance,
+/turf/floor/tiled/white,
+/area/asteroid/cave)
+"br" = (
+/obj/item/material/shard,
+/obj/item/material/shard,
+/obj/spawner/junk,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"bs" = (
+/obj/item/material/shard,
+/obj/item/material/shard,
+/obj/item/material/shard,
+/obj/spawner/junk,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"bt" = (
+/obj/structure/table/reinforced,
+/obj/item/tray{
+	pixel_y = 5
+	},
+/obj/spawner/junkfood/rotten/low_chance,
+/turf/floor/tiled/white,
+/area/asteroid/cave)
+"bu" = (
+/obj/spawner/junk,
+/obj/structure/lattice,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"bv" = (
+/obj/structure/sink{
+	dir = 4;
+	icon_state = "sink";
+	pixel_x = 11;
+	pixel_y = 0
+	},
+/obj/spawner/junk,
+/obj/structure/mirror/antag{
+	pixel_x = 28
+	},
+/turf/floor/dummy/freezer/airless,
+/area/asteroid/cave)
+"bw" = (
+/obj/spawner/junk,
+/turf/floor/dummy/freezer/airless,
+/area/asteroid/cave)
+"bx" = (
+/obj/spawner/junk,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"by" = (
+/obj/structure/table/rack,
+/obj/spawner/gun_parts/low_chance,
+/obj/spawner/gun_parts/low_chance,
+/obj/spawner/gun/cheap/low_chance,
+/obj/spawner/gun/shotgun/low_chance,
+/obj/spawner/gun/normal/low_chance,
+/obj/spawner/gun/normal,
+/obj/spawner/gun_upgrade/low_chance,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"bz" = (
+/obj/structure/closet,
+/obj/item/reagent_containers/food/drinks/bottle/vodka{
+	pixel_x = 6;
+	pixel_y = 7
+	},
+/obj/spawner/booze,
+/obj/spawner/booze,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"bA" = (
+/obj/structure/closet,
+/obj/item/reagent_containers/food/drinks/bottle/vodka{
+	pixel_x = 5;
+	pixel_y = 17
+	},
+/obj/item/reagent_containers/food/drinks/flask/barflask,
+/obj/spawner/booze,
+/obj/spawner/booze,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"bB" = (
+/obj/structure/closet,
+/obj/spawner/pack/gun_adjacent_loot,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"bC" = (
+/obj/structure/table/rack,
+/obj/spawner/gun_parts,
+/obj/spawner/gun_parts/low_chance,
+/obj/spawner/gun_parts/low_chance,
+/obj/spawner/gun_parts/low_chance,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"bD" = (
+/obj/structure/table/rack,
+/obj/spawner/gun/normal/low_chance,
+/obj/spawner/gun/normal/low_chance,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"bE" = (
+/obj/structure/table/rack,
+/obj/spawner/ammo/low_chance,
+/obj/spawner/ammo/low_chance,
+/obj/spawner/ammo/lowcost,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"bF" = (
+/obj/structure/table/rack,
+/obj/spawner/gun/shotgun/low_chance,
+/obj/spawner/gun_upgrade/low_chance,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"bG" = (
+/obj/structure/table/rack,
+/obj/spawner/ammo/low_chance,
+/obj/spawner/ammo/low_chance,
+/obj/spawner/ammo/low_chance,
+/obj/spawner/ammo/lowcost,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"bH" = (
+/obj/spawner/gun_parts/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"bJ" = (
+/obj/spawner/pack/machine,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"bK" = (
+/mob/living/simple_animal/hostile/bear,
+/turf/floor/dummy/freezer/airless,
+/area/asteroid/cave)
+"bL" = (
+/obj/structure/table/rack,
+/obj/spawner/pouch/low_chance,
+/obj/spawner/ammo/low_chance,
+/obj/spawner/ammo/low_chance,
+/obj/spawner/ammo/lowcost,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"bN" = (
+/obj/item/material/shard,
+/obj/item/material/shard,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"bO" = (
+/obj/structure/bed,
+/obj/item/bedsheet/hos,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"bP" = (
+/obj/item/material/shard,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"bQ" = (
+/obj/item/material/shard,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"cH" = (
+/obj/structure/table/rack,
+/obj/spawner/gun_parts/low_chance,
+/obj/spawner/ammo/low_chance,
+/obj/spawner/ammo/low_chance,
+/obj/spawner/ammo/lowcost,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"fz" = (
+/obj/structure/table/rack,
+/obj/spawner/gun_parts,
+/obj/spawner/gun_parts/low_chance,
+/obj/spawner/gun_parts/low_chance,
+/obj/spawner/gun_parts/low_chance,
+/obj/spawner/gun_parts,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"fF" = (
+/obj/structure/closet,
+/obj/spawner/pack/cloth,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"gu" = (
+/obj/structure/table/rack,
+/obj/spawner/gun_parts/low_chance,
+/obj/spawner/gun_parts/low_chance,
+/obj/spawner/gun_parts/low_chance,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"gv" = (
+/obj/structure/table/rack,
+/obj/spawner/gun_upgrade/low_chance,
+/obj/spawner/gun_upgrade/low_chance,
+/obj/spawner/gun_upgrade/low_chance,
+/obj/spawner/pack/gun_loot,
+/obj/spawner/gun_upgrade/low_chance,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"iZ" = (
+/obj/structure/bed/chair/comfy/black,
+/obj/spawner/credits/low_chance,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"ko" = (
+/obj/structure/table/rack,
+/obj/spawner/gun_parts,
+/obj/spawner/gun_parts/low_chance,
+/obj/spawner/gun_parts/low_chance,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"kZ" = (
+/obj/structure/table/glass,
+/obj/spawner/credits/low_chance,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"mq" = (
+/obj/spawner/gun_parts/low_chance,
+/obj/spawner/gun_parts/low_chance,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"rx" = (
+/obj/machinery/door/airlock/maintenance_interior{
+	icon_state = "door_locked";
+	locked = 1
+	},
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"rS" = (
+/obj/structure/table/glass,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"zY" = (
+/obj/machinery/door/airlock/maintenance_interior{
+	icon_state = "door_locked";
+	locked = 1
+	},
+/turf/floor/dummy/freezer/airless,
+/area/asteroid/cave)
+"Aj" = (
+/obj/structure/table/rack,
+/obj/spawner/gun/cheap/low_chance,
+/obj/spawner/ammo/low_chance,
+/obj/spawner/ammo/low_chance,
+/obj/spawner/ammo/low_chance,
+/obj/spawner/ammo/lowcost,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"AK" = (
+/obj/spawner/pack/machine/low_chance,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"Bo" = (
+/obj/structure/table/rack,
+/obj/spawner/gun_upgrade/low_chance,
+/obj/spawner/gun_upgrade/low_chance,
+/obj/spawner/gun_upgrade/low_chance,
+/obj/spawner/gun/normal,
+/obj/spawner/gun_upgrade/low_chance,
+/obj/spawner/pack/gun_loot/low_chance,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"Kc" = (
+/obj/structure/girder,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"My" = (
+/obj/spawner/pack/machine/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"Nf" = (
+/obj/machinery/door/airlock/maintenance_interior,
+/turf/floor/dummy/freezer/airless,
+/area/asteroid/cave)
+"RI" = (
+/obj/structure/closet,
+/obj/spawner/pouch/low_chance,
+/obj/spawner/pack/cloth,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+"TP" = (
+/obj/structure/table/rack,
+/obj/spawner/gun_upgrade/low_chance,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"Un" = (
+/obj/machinery/porta_turret{
+	use_power = 0;
+	lethal = 1
+	},
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"VA" = (
+/obj/structure/closet,
+/obj/spawner/pack/gun_adjacent_loot,
+/obj/spawner/pack/gun_adjacent_loot,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"We" = (
+/obj/structure/table/rack,
+/obj/spawner/gun/cheap/low_chance,
+/obj/spawner/gun/normal/low_chance,
+/obj/spawner/gun/cheap,
+/obj/spawner/gun_upgrade/low_chance,
+/obj/spawner/pack/gun_loot/low_chance,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"Yp" = (
+/obj/structure/closet/secure_closet/rare_loot,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"YY" = (
+/obj/item/material/shard,
+/obj/spawner/pack/machine/low_chance,
+/turf/floor/dummy/cult/airless,
+/area/asteroid/cave)
+"Zm" = (
+/obj/machinery/door/airlock/maintenance_interior,
+/turf/floor/dummy/lino/airless,
+/area/asteroid/cave)
+
+(1,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aB
+aB
+aB
+aB
+aB
+aa
+aa
+aB
+aB
+aB
+aB
+aB
+aB
+"}
+(2,1,1) = {"
+aU
+ab
+aj
+aj
+ab
+ab
+ae
+ab
+ab
+ab
+aa
+aa
+aa
+aB
+aB
+aB
+aa
+aa
+aa
+aa
+aB
+aB
+aB
+aB
+aB
+"}
+(3,1,1) = {"
+aa
+ab
+ac
+ac
+ab
+an
+bg
+au
+az
+ab
+ax
+aa
+aa
+aB
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(4,1,1) = {"
+aa
+ab
+ac
+ac
+ab
+as
+bp
+bq
+bt
+ab
+ax
+ax
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ax
+aa
+"}
+(5,1,1) = {"
+aa
+ab
+aj
+aj
+ab
+aA
+bp
+bp
+bj
+ab
+aP
+av
+bi
+ab
+ab
+ab
+ab
+Yp
+We
+by
+aQ
+bF
+ab
+ax
+ax
+"}
+(6,1,1) = {"
+aU
+ab
+ac
+ac
+ab
+bf
+at
+aw
+au
+ab
+aP
+aK
+ab
+aK
+ab
+aN
+ab
+ac
+ac
+Un
+ac
+Bo
+ab
+ax
+aa
+"}
+(7,1,1) = {"
+aa
+ae
+bP
+ac
+ab
+ab
+ab
+ab
+Zm
+ab
+aP
+Nf
+ab
+Nf
+ab
+zY
+ab
+ac
+ac
+ao
+ac
+gv
+ab
+aa
+aa
+"}
+(8,1,1) = {"
+aa
+bi
+bP
+bP
+AK
+be
+ao
+ac
+ao
+aP
+aF
+bw
+aF
+bK
+aF
+aF
+ab
+rx
+ab
+ab
+ab
+ab
+ab
+ax
+aa
+"}
+(9,1,1) = {"
+aU
+bi
+bx
+aP
+aZ
+ac
+ac
+ac
+aP
+aP
+aG
+aG
+aF
+aF
+aF
+aO
+ab
+ac
+ko
+bG
+gu
+bG
+bi
+ax
+ax
+"}
+(10,1,1) = {"
+aU
+ae
+YY
+bQ
+bx
+be
+be
+aP
+ao
+ab
+bv
+aH
+ab
+aM
+aM
+aM
+ab
+ao
+ao
+ac
+aP
+aP
+aP
+aP
+aa
+"}
+(11,1,1) = {"
+aa
+ab
+be
+bP
+My
+ao
+My
+aP
+AK
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ac
+ac
+ac
+ac
+mq
+Kc
+bk
+ax
+"}
+(12,1,1) = {"
+aa
+af
+ao
+ac
+ac
+aP
+ac
+ac
+ac
+aL
+ac
+ac
+ac
+ao
+ac
+ac
+bb
+ac
+ac
+TP
+aP
+ax
+rx
+bH
+aP
+"}
+(13,1,1) = {"
+aa
+ab
+aP
+aP
+bx
+AK
+be
+ac
+ac
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+be
+ac
+Un
+aP
+bG
+ab
+bk
+ax
+"}
+(14,1,1) = {"
+ax
+bi
+aP
+av
+ab
+ab
+ab
+ab
+Zm
+ab
+aY
+bO
+aI
+bO
+aI
+bm
+ab
+bB
+aP
+aP
+ao
+aW
+ab
+aa
+aa
+"}
+(15,1,1) = {"
+ax
+aP
+aP
+ad
+aS
+bz
+bA
+ad
+ad
+ab
+ad
+ad
+ad
+ad
+ad
+aP
+aP
+aP
+aP
+bE
+ac
+bG
+ab
+aa
+aa
+"}
+(16,1,1) = {"
+ax
+aP
+aJ
+ap
+ad
+ad
+ad
+ap
+ad
+ab
+ad
+ad
+ad
+ad
+aP
+aP
+bi
+bJ
+ac
+bC
+ao
+fz
+ae
+aa
+aa
+"}
+(17,1,1) = {"
+ax
+bi
+aJ
+ad
+al
+al
+ad
+bh
+ad
+ab
+ad
+ad
+bh
+ad
+aP
+bn
+ab
+bB
+ac
+ac
+aZ
+bG
+ab
+aa
+aB
+"}
+(18,1,1) = {"
+aa
+ag
+ad
+ad
+kZ
+am
+kZ
+ay
+ad
+Zm
+ad
+aP
+aP
+aP
+ar
+rS
+ab
+ac
+ac
+Un
+ac
+TP
+ab
+aB
+aB
+"}
+(19,1,1) = {"
+aa
+ah
+ad
+ad
+ad
+iZ
+kZ
+ad
+ad
+ab
+bk
+bx
+ad
+ad
+ad
+bo
+ab
+VA
+ac
+cH
+ac
+bL
+ae
+aa
+aB
+"}
+(20,1,1) = {"
+aa
+ai
+ad
+ad
+ad
+aR
+am
+ay
+ad
+bu
+aP
+RI
+bl
+aV
+aT
+fF
+ab
+aX
+aZ
+bD
+ac
+Aj
+ab
+aa
+aB
+"}
+(21,1,1) = {"
+aa
+ae
+ad
+bh
+ad
+ad
+bd
+ay
+bc
+ax
+bi
+ab
+ae
+ab
+ae
+ab
+ab
+ab
+ae
+ab
+ae
+ab
+ab
+aa
+aa
+"}
+(22,1,1) = {"
+aa
+ab
+ad
+ad
+ad
+ad
+bc
+br
+bc
+ax
+aa
+aa
+aa
+aa
+aa
+aB
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aB
+"}
+(23,1,1) = {"
+aa
+ab
+ak
+ad
+aq
+bc
+bc
+bs
+bk
+bi
+ax
+aa
+aa
+aa
+aa
+aB
+aB
+aa
+aa
+aa
+aa
+aa
+aa
+aB
+aB
+"}
+(24,1,1) = {"
+aa
+ab
+ab
+ae
+ab
+ae
+bi
+bi
+bi
+ax
+ax
+aa
+aa
+aa
+aB
+aB
+aB
+aB
+aB
+aa
+aa
+aB
+aB
+aB
+aB
+"}
+(25,1,1) = {"
+aa
+aa
+aU
+aa
+aU
+bN
+aU
+bN
+ax
+ax
+aa
+aa
+aa
+aB
+aB
+aB
+aB
+aB
+aB
+aB
+aa
+aa
+aB
+aB
+aB
+"}

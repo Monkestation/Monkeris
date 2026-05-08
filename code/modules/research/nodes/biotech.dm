@@ -75,8 +75,7 @@
 	required_tech_levels = list()
 	cost = 400
 
-	unlocks_designs = list(	/datum/design/research/circuit/biogenerator,
-							/datum/design/research/item/weapon/flora_gun)
+	unlocks_designs = list(/datum/design/research/item/weapon/flora_gun)
 
 /datum/technology/portable_chemistry
 	name = "Portable Chemistry"

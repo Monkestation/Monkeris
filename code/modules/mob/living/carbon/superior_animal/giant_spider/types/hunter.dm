@@ -10,6 +10,5 @@
 	melee_damage_upper = 20
 	poison_per_bite = 8
 	move_to_delay = 3
-	meat_type = /obj/item/reagent_containers/food/snacks/meat/spider/hunter
-	meat_amount = 4
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/spider/hunter = list(3, BUTCHER_NORMAL))
 	rarity_value = 75

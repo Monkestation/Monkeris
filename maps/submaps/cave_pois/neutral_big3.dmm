@@ -1,0 +1,1113 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"ad" = (
+/obj/spawner/pack/machine,
+/turf/floor/tiled/dark/danger/airless,
+/area/asteroid/cave)
+"ae" = (
+/obj/structure/girder,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"af" = (
+/obj/spawner/lowkeyrandom/low_chance,
+/obj/spawner/lowkeyrandom/low_chance,
+/turf/floor/tiled/techmaint/airless,
+/area/asteroid/cave)
+"ag" = (
+/obj/spawner/pack/machine,
+/turf/floor/tiled/techmaint/airless,
+/area/asteroid/cave)
+"ah" = (
+/obj/spawner/junkfood/rotten,
+/turf/floor/tiled/dark/danger/airless,
+/area/asteroid/cave)
+"an" = (
+/obj/spawner/scrap/sparse/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"aq" = (
+/obj/spawner/junk,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"ar" = (
+/obj/spawner/scrap/dense,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"as" = (
+/obj/spawner/junkfood/rotten,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"at" = (
+/obj/spawner/scrap/dense,
+/turf/floor/tiled/techmaint/airless,
+/area/asteroid/cave)
+"az" = (
+/obj/machinery/camera/network/engineering{
+	dir = 1
+	},
+/obj/spawner/junk,
+/turf/floor/tiled/dark/danger/airless,
+/area/asteroid/cave)
+"aA" = (
+/turf/wall/reinforced,
+/area/asteroid/cave)
+"aC" = (
+/obj/spawner/junk,
+/turf/floor/tiled/dark/danger/airless,
+/area/asteroid/cave)
+"aE" = (
+/mob/living/simple_animal/hostile/carp,
+/turf/floor/tiled/dark/danger/airless,
+/area/asteroid/cave)
+"aI" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"aJ" = (
+/obj/spawner/scrap/sparse,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"aP" = (
+/mob/living/simple_animal/hostile/bear,
+/turf/floor/tiled/techmaint/airless,
+/area/asteroid/cave)
+"aQ" = (
+/obj/structure/lattice,
+/obj/spawner/junk,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"aR" = (
+/mob/living/simple_animal/hostile/carp,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"aZ" = (
+/turf/floor/tiled/dark/danger/airless,
+/area/asteroid/cave)
+"bb" = (
+/obj/machinery/light/small,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"bd" = (
+/obj/machinery/door/firedoor,
+/turf/wall/low/with_glass/smart,
+/area/asteroid/cave)
+"bf" = (
+/mob/living/simple_animal/hostile/carp,
+/turf/floor/tiled/techmaint/airless,
+/area/asteroid/cave)
+"bg" = (
+/obj/structure/extinguisher_cabinet{
+	pixel_y = 27
+	},
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"bh" = (
+/obj/structure/railing{
+	dir = 1;
+	tag = "icon-railing0 (NORTH)"
+	},
+/obj/spawner/junkfood/rotten,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"bi" = (
+/obj/spawner/traps,
+/turf/floor/tiled/techmaint/airless,
+/area/asteroid/cave)
+"bl" = (
+/obj/structure/sign/atmos_co2{
+	pixel_y = 32
+	},
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"bn" = (
+/obj/structure/lattice,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"bo" = (
+/obj/spawner/junk/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"bp" = (
+/obj/structure/table/reinforced,
+/obj/item/stack/material/glass{
+	amount = 120
+	},
+/obj/spawner/junk,
+/turf/floor/tiled/dark/techfloor_grid/airless,
+/area/asteroid/cave)
+"bq" = (
+/obj/structure/table/reinforced,
+/obj/item/stack/material/steel{
+	amount = 120
+	},
+/obj/spawner/junk,
+/turf/floor/tiled/dark/techfloor_grid/airless,
+/area/asteroid/cave)
+"br" = (
+/obj/structure/table/reinforced,
+/obj/item/tank/emergency_oxygen{
+	pixel_x = -8
+	},
+/obj/item/tank/emergency_oxygen{
+	pixel_x = -8
+	},
+/obj/item/clothing/mask/breath{
+	pixel_x = 4
+	},
+/obj/item/clothing/mask/breath{
+	pixel_x = 4
+	},
+/obj/spawner/junk,
+/turf/floor/tiled/dark/techfloor_grid/airless,
+/area/asteroid/cave)
+"bs" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/engineering{
+	name = "Wasting Room"
+	},
+/turf/floor/tiled/dark/techfloor_grid/airless,
+/area/asteroid/cave)
+"bt" = (
+/turf/floor/tiled/techmaint/airless,
+/area/asteroid/cave)
+"bw" = (
+/obj/machinery/door/firedoor,
+/turf/wall/low/with_glass/plasma,
+/area/asteroid/cave)
+"bx" = (
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"by" = (
+/obj/structure/table/reinforced,
+/obj/item/tank/emergency_oxygen/double,
+/obj/machinery/light/small,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"bA" = (
+/obj/structure/railing{
+	dir = 8;
+	tag = "icon-railing0 (WEST)"
+	},
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"bC" = (
+/turf/cave_mineral,
+/area/asteroid/cave)
+"bK" = (
+/obj/structure/catwalk,
+/obj/structure/sign/atmos_co2{
+	pixel_y = 32
+	},
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"bS" = (
+/obj/spawner/junk/low_chance,
+/turf/floor/plating/airless,
+/area/asteroid/cave)
+"bW" = (
+/obj/machinery/door/airlock/maintenance_engineering{
+	name = "Engineering Maintenance";
+	req_access = list(10)
+	},
+/turf/floor/tiled/techmaint_cargo/airless,
+/area/asteroid/cave)
+"bX" = (
+/obj/structure/catwalk,
+/obj/structure/sign/atmos_o2{
+	pixel_x = -32
+	},
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"ca" = (
+/obj/spawner/junk/low_chance,
+/turf/floor/tiled/techmaint/airless,
+/area/asteroid/cave)
+"cc" = (
+/obj/machinery/firealarm{
+	pixel_y = 28
+	},
+/turf/floor/tiled/dark/techfloor/airless,
+/area/asteroid/cave)
+"ci" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/maintenance_engineering{
+	name = "Atmospherics Maintenance";
+	req_access = list(24)
+	},
+/turf/floor/tiled/techmaint_cargo/airless,
+/area/asteroid/cave)
+"ck" = (
+/turf/floor/tiled/dark/techfloor/airless,
+/area/asteroid/cave)
+"cn" = (
+/obj/spawner/pack/machine,
+/turf/floor/tiled/techmaint_panels/airless,
+/area/asteroid/cave)
+"cp" = (
+/obj/structure/table/rack,
+/obj/spawner/lowkeyrandom,
+/turf/floor/tiled/techmaint/airless,
+/area/asteroid/cave)
+"cv" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/floor/tiled/techmaint/airless,
+/area/asteroid/cave)
+"cz" = (
+/obj/structure/table/reinforced,
+/obj/spawner/pack/tech_loot,
+/obj/spawner/pack/tech_loot,
+/obj/spawner/pack/tech_loot,
+/obj/spawner/pack/tech_loot,
+/turf/floor/tiled/techmaint/airless,
+/area/asteroid/cave)
+"cA" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/table/reinforced,
+/obj/spawner/tank,
+/turf/floor/tiled/techmaint/airless,
+/area/asteroid/cave)
+"cE" = (
+/obj/structure/railing{
+	dir = 1;
+	tag = "icon-railing0 (NORTH)"
+	},
+/obj/spawner/powercell/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"cF" = (
+/obj/structure/railing{
+	dir = 4;
+	tag = "icon-railing0 (EAST)"
+	},
+/obj/structure/railing{
+	dir = 1;
+	tag = "icon-railing0 (NORTH)"
+	},
+/obj/spawner/traps/wire_splicing/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"cI" = (
+/obj/structure/railing,
+/obj/structure/railing{
+	dir = 8;
+	tag = "icon-railing0 (WEST)"
+	},
+/obj/structure/railing{
+	dir = 4;
+	tag = "icon-railing0 (EAST)"
+	},
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"cJ" = (
+/obj/structure/railing{
+	dir = 8;
+	tag = "icon-railing0 (WEST)"
+	},
+/obj/structure/railing,
+/obj/spawner/junk,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"cP" = (
+/obj/structure/railing{
+	dir = 4;
+	tag = "icon-railing0 (EAST)"
+	},
+/obj/spawner/traps/wire_splicing/low_chance,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"cT" = (
+/obj/structure/railing,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"cV" = (
+/obj/structure/catwalk,
+/obj/machinery/light/small,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"cW" = (
+/obj/structure/catwalk,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"cY" = (
+/obj/structure/railing,
+/obj/structure/railing{
+	dir = 8;
+	tag = "icon-railing0 (WEST)"
+	},
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"cZ" = (
+/obj/structure/railing,
+/obj/structure/railing{
+	dir = 4;
+	tag = "icon-railing0 (EAST)"
+	},
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"db" = (
+/obj/structure/sign/vacuum,
+/turf/wall/reinforced,
+/area/asteroid/cave)
+"dc" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1379;
+	icon_state = "door_locked";
+	id_tag = "atmos_airlock_door_int";
+	locked = 1;
+	name = "Internal Atmospherics Airlock"
+	},
+/turf/floor/tiled/steel/cargo/airless,
+/area/asteroid/cave)
+"dd" = (
+/obj/structure/railing{
+	dir = 1;
+	tag = "icon-railing0 (NORTH)"
+	},
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"df" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/table/rack,
+/obj/spawner/pack/tech_loot,
+/obj/spawner/pack/tech_loot,
+/turf/floor/tiled/techmaint/airless,
+/area/asteroid/cave)
+"dh" = (
+/turf/wall,
+/area/asteroid/cave)
+"di" = (
+/obj/spawner/lowkeyrandom,
+/obj/spawner/lowkeyrandom,
+/obj/spawner/lowkeyrandom,
+/turf/floor/plating/airless,
+/area/asteroid/cave)
+"dj" = (
+/turf/wall/low/with_glass/smart,
+/area/asteroid/cave)
+"iy" = (
+/obj/effect/floor_decal/asteroid,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"lj" = (
+/obj/spawner/scrap/sparse,
+/turf/floor/tiled/dark/danger/airless,
+/area/asteroid/cave)
+"uE" = (
+/obj/structure/railing{
+	dir = 1;
+	tag = "icon-railing0 (NORTH)"
+	},
+/obj/spawner/junk,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"zf" = (
+/obj/spawner/scrap/dense,
+/turf/floor/asteroid/cave,
+/area/asteroid/cave)
+"EQ" = (
+/obj/spawner/scrap/dense,
+/turf/floor/tiled/dark/danger/airless,
+/area/asteroid/cave)
+"NP" = (
+/obj/spawner/scrap/dense,
+/turf/floor/tiled/steel/cargo/airless,
+/area/asteroid/cave)
+"Oa" = (
+/obj/structure/railing,
+/obj/spawner/junk,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"Tj" = (
+/obj/structure/railing{
+	dir = 8;
+	tag = "icon-railing0 (WEST)"
+	},
+/obj/spawner/junk,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+"Yu" = (
+/mob/living/simple_animal/hostile/carp,
+/turf/floor/plating/under/airless,
+/area/asteroid/cave)
+
+(1,1,1) = {"
+bn
+bx
+ae
+aa
+aa
+aa
+bn
+bn
+bn
+ae
+iy
+bC
+bC
+bC
+iy
+aa
+aa
+aa
+bn
+iy
+bC
+aa
+bx
+ae
+bn
+"}
+(2,1,1) = {"
+bn
+NP
+bn
+aa
+aa
+aA
+aA
+bs
+aA
+aA
+bn
+iy
+bC
+bn
+bn
+aA
+aA
+aA
+aA
+aa
+aa
+bn
+bn
+bx
+bx
+"}
+(3,1,1) = {"
+bx
+bt
+ae
+bx
+aa
+aA
+Oa
+bt
+aP
+aA
+aA
+aA
+bn
+aA
+aA
+aA
+ar
+aq
+aA
+aA
+bn
+bn
+aa
+aa
+iy
+"}
+(4,1,1) = {"
+bn
+bx
+aJ
+ae
+bn
+aA
+bl
+aA
+Tj
+aA
+at
+aA
+ae
+aA
+cn
+bt
+dd
+cT
+bt
+dj
+aa
+aR
+aa
+bC
+bC
+"}
+(5,1,1) = {"
+aa
+bn
+bx
+bd
+aa
+bd
+an
+bx
+bx
+aA
+af
+bW
+bf
+aA
+cn
+bt
+cE
+cT
+bt
+dj
+aa
+aa
+iy
+bC
+bC
+"}
+(6,1,1) = {"
+bn
+bx
+bx
+aA
+bn
+aA
+aA
+aA
+bx
+aA
+aA
+aA
+bt
+aA
+aA
+cv
+cF
+cZ
+ca
+aA
+aa
+aa
+bC
+bC
+bC
+"}
+(7,1,1) = {"
+bn
+Yu
+bo
+aA
+aa
+bn
+bn
+aA
+aq
+aA
+bS
+aA
+cW
+bh
+aA
+cW
+cW
+cW
+bt
+aA
+aa
+bC
+bC
+bC
+bC
+"}
+(8,1,1) = {"
+bn
+bx
+bx
+bd
+aa
+bn
+bn
+aA
+ar
+as
+bx
+cT
+cW
+aA
+aA
+bt
+cW
+cW
+ag
+aA
+aa
+bC
+bC
+bC
+bC
+"}
+(9,1,1) = {"
+ae
+bx
+bx
+aA
+aA
+aA
+aA
+aA
+aA
+aA
+ae
+aA
+cW
+aA
+cn
+ca
+cW
+cW
+bt
+dj
+aa
+iy
+bC
+bC
+bC
+"}
+(10,1,1) = {"
+aa
+bx
+bx
+aZ
+lj
+bd
+bn
+bw
+aQ
+bn
+bn
+aA
+bK
+aA
+cn
+aP
+cW
+cW
+ca
+dj
+bn
+aa
+bC
+bC
+bC
+"}
+(11,1,1) = {"
+aa
+bx
+bx
+ad
+aE
+bd
+bn
+bw
+bn
+aa
+aa
+ae
+bn
+aA
+aA
+cz
+cW
+cW
+bt
+aA
+aA
+aa
+aa
+bC
+bC
+"}
+(12,1,1) = {"
+bn
+bx
+bx
+aZ
+lj
+bd
+bn
+bw
+bn
+bn
+aR
+aa
+aa
+ar
+aA
+cA
+cW
+cW
+bt
+df
+aA
+bn
+bn
+aa
+bC
+"}
+(13,1,1) = {"
+aa
+bx
+bx
+lj
+dj
+aA
+aA
+aA
+ae
+bx
+aa
+aa
+aa
+ae
+aA
+aA
+cI
+cW
+db
+aA
+aA
+ae
+bn
+aa
+iy
+"}
+(14,1,1) = {"
+bn
+bx
+bx
+EQ
+dj
+aq
+bx
+bn
+ae
+bx
+aa
+aa
+bn
+bo
+bx
+bW
+cW
+cW
+dc
+bx
+bx
+bx
+bn
+aR
+aa
+"}
+(15,1,1) = {"
+aa
+bn
+bx
+ah
+dj
+bn
+bx
+aq
+aA
+cW
+aA
+aA
+aA
+aA
+aA
+aA
+cJ
+cV
+aA
+dh
+aA
+ae
+bn
+aa
+iy
+"}
+(16,1,1) = {"
+aa
+bn
+bx
+az
+aA
+ae
+ar
+bx
+dj
+cW
+cW
+bX
+cW
+dj
+zf
+ae
+cT
+cW
+dj
+di
+aA
+bn
+bn
+iy
+bC
+"}
+(17,1,1) = {"
+aa
+bn
+bx
+aC
+dj
+bn
+bx
+bo
+dj
+bA
+aA
+bt
+ca
+aA
+aA
+aA
+cT
+cW
+aA
+aA
+aA
+aa
+aa
+bC
+bC
+"}
+(18,1,1) = {"
+aa
+bx
+aJ
+EQ
+dj
+bn
+bo
+bo
+aA
+bo
+aA
+bf
+bt
+bi
+cp
+aA
+cT
+cW
+uE
+dj
+bn
+aa
+bC
+bC
+bC
+"}
+(19,1,1) = {"
+aa
+Yu
+bx
+lj
+dj
+aA
+aA
+aA
+aA
+aA
+aA
+aA
+aA
+ci
+aA
+aA
+Oa
+cW
+dd
+dj
+bn
+aa
+aa
+bC
+bC
+"}
+(20,1,1) = {"
+aa
+bx
+bx
+aZ
+aZ
+bd
+aJ
+bx
+bn
+bn
+bn
+aA
+ck
+ck
+bp
+aA
+cT
+cW
+aA
+aA
+aA
+aA
+ae
+aa
+bC
+"}
+(21,1,1) = {"
+bn
+bx
+bx
+ad
+aZ
+bd
+bn
+aa
+aR
+aa
+bn
+aA
+ck
+ck
+bq
+aA
+cT
+cW
+bi
+bW
+at
+aA
+bn
+aa
+iy
+"}
+(22,1,1) = {"
+bn
+bx
+bx
+aZ
+EQ
+bd
+bn
+aa
+aa
+bn
+bn
+aA
+cc
+ck
+br
+aA
+bx
+cY
+bt
+aA
+aA
+aA
+bn
+aa
+aa
+"}
+(23,1,1) = {"
+aa
+bn
+bx
+aJ
+aA
+aA
+aa
+aa
+aa
+ae
+aA
+aA
+bg
+bx
+by
+aA
+cP
+cZ
+aP
+aA
+bn
+bn
+bn
+ae
+bn
+"}
+(24,1,1) = {"
+aa
+bn
+bx
+bx
+dh
+aI
+iy
+bC
+aa
+bb
+ae
+bn
+bn
+bn
+bx
+ci
+cW
+cW
+bt
+aA
+aa
+aa
+bx
+ae
+bn
+"}
+(25,1,1) = {"
+aa
+aa
+aa
+bn
+bn
+iy
+bC
+bC
+bC
+iy
+aa
+aa
+aa
+aa
+ae
+aA
+aA
+dj
+dj
+aA
+aa
+aa
+bx
+ar
+bn
+"}

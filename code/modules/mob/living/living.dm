@@ -951,3 +951,7 @@ default behaviour is:
 		exp_list[mind.assigned_role] = minutes
 
 	return exp_list
+
+///Negative effect that may be triggered by butchering the mob, especially with low stats
+/mob/living/proc/butchery_fail(mob/butcher)
+	return

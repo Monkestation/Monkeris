@@ -7,6 +7,7 @@ GLOBAL_LIST_INIT(duplicate_forbidden_vars, list(
 	"loc",
 	"locs",
 	"vars",
+	"pixloc",
 	"parent",
 	"parent_type",
 	"verbs",
