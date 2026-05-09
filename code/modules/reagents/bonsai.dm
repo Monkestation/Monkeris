@@ -41,12 +41,15 @@
 /obj/item/reagent_containers/bonsai/Process()
 	if(++ticks % 10 == 0 && reagents.total_volume)
 		var/reagent_count = 0
-		for(var/datum/reagent/R in reagents.reagent_list)
-			if(istype(R, /datum/reagent/alcohol))
-				reagent_count += R.volume
-				R.remove_self(R.volume)
+		var/potency = 0
+		for(var/datum/reagent/alcohol/our_reagent as anything in reagents.reagent_list)
+			if(istype(our_reagent, /datum/reagent/alcohol))
+				potency = potency + (8  / our_reagent.strength) * (our_reagent.volume / 10)
+				reagent_count += our_reagent.volume
+				our_reagent.remove_self(our_reagent.volume)
 		if(reagent_count > 10)
-			var/amount_to_spawn = round(reagent_count/10)
+			var/amount_to_spawn = max(round(reagent_count/20), 1)
+			var/our_quality = clamp(-5 + potency, -5, 10)
 			for(var/i = 0 to amount_to_spawn)
 				var/datum/seed/S = SSplants.seeds[pick(
 					"tomato",
@@ -58,6 +61,6 @@
 					"wheat",
 					"potato",
 					"rice")]
-				S.harvest(get_turf(src),0,0,1)
+				S.harvest(get_turf(src),0,0,1, our_quality)
 				flick(icon_state+"_animation", src)
 				playsound(loc, 'sound/effects/ding2.ogg', 50, 1, -1)
