@@ -339,6 +339,27 @@
 
 /datum/config_entry/flag/log_world_topic
 
+
+/*****************/
+/*ERROR REPORTING*/
+/*****************/
+
+/datum/config_entry/string/glitchtip_dsn
+	config_entry_value = ""
+
+/datum/config_entry/string/glitchtip_dsn/ValidateAndSet(str_val)
+	var/dsn_clean = replacetext(replacetext(str_val, "http://", ""), "https://", "")
+	var/at_pos = findtext(dsn_clean, "@")
+	var/slash_pos = findtext(dsn_clean, "/", at_pos)
+
+	if(!at_pos || !slash_pos)
+		return FALSE
+	return ..()
+
+/datum/config_entry/string/glitchtip_environment
+	config_entry_value = "production"
+
+
 /*****************/
 /*     VOTES     */
 /*****************/

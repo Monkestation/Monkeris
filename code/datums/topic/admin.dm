@@ -914,14 +914,14 @@
 	require_perms = list(R_DEBUG)
 
 /datum/admin_topic/viewruntime/Run(list/input)
-	var/datum/ErrorViewer/error_viewer = locate(input["viewruntime"])
+	var/datum/error_viewer/error_viewer = locate(input["viewruntime"])
 	if(!istype(error_viewer))
-		to_chat(usr, span_warning("That runtime viewer no longer exists."))
+		to_chat(usr.client, span_warning("That runtime viewer no longer exists."))
 		return
 	if(input["viewruntime_backto"])
-		error_viewer.showTo(usr, locate(input["viewruntime_backto"]), input["viewruntime_linear"])
+		error_viewer.show_to(usr.client, locate(input["viewruntime_backto"]), input["viewruntime_linear"])
 	else
-		error_viewer.showTo(usr, null, input["viewruntime_linear"])
+		error_viewer.show_to(usr.client, null, input["viewruntime_linear"])
 
 
 /datum/admin_topic/admincaster
