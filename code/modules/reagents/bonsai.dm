@@ -49,7 +49,7 @@
 				our_reagent.remove_self(our_reagent.volume)
 		if(reagent_count > 10)
 			var/amount_to_spawn = max(round(reagent_count/20), 1)
-			var/our_quality = clamp(-5 + potency, -5, 10)
+			var/our_quality = clamp(-5 + potency, -5, 15)
 			for(var/i = 0 to amount_to_spawn)
 				var/datum/seed/S = SSplants.seeds[pick(
 					"tomato",
