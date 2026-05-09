@@ -162,10 +162,12 @@ GLOBAL_DATUM_INIT(maps_data, /datum/maps_data, new)
 	S.cd = original_cd // Attempting to make this call as side-effect free as possible
 
 /datum/maps_data/proc/private_use_legacy_saves(savefile/S, slot)
-	if(!S.dir.Find(path)) // If we cannot find the map path folder, load the legacy save
-		return TRUE
-	S.cd = "/[path]" // Finally, if we cannot find the character slot in the map path folder, load the legacy save
-	return !S.dir.Find("character[slot]")
+	// Directly read the version key at the path
+	// If no version is found, the slot has no version data, fall back to legacy
+	S.cd = "/[path]/character[slot]"
+	var/new_version
+	S["version"] >> new_version
+	return !new_version
 
 
 /datum/maps_data/proc/registrate(obj/map_data/MD)

@@ -58,7 +58,7 @@
 	name = "Vintorez frame"
 	desc = "A Vintorez rifle frame. Accurate and damaging."
 	icon_state = "frame_vintorez"
-	resultvars = list(/obj/item/gun/projectile/automatic/modular/batrifle/vintorez)
+	resultvars = list(/obj/item/gun/projectile/modular/batrifle/vintorez)
 	gripvars = list(/obj/item/part/gun/modular/grip/excel)
 	mechanismvar = /obj/item/part/gun/modular/mechanism/autorifle/tactical/marksman
 	barrelvars = list(/obj/item/part/gun/modular/barrel/srifle)

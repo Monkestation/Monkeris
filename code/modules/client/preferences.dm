@@ -70,7 +70,9 @@
 
 /datum/preferences/proc/load_and_update_character(slot)
 	load_character(slot)
-	if(update_setup(loaded_preferences, loaded_character))
+	var/migrated = update_setup(savefile_version, loaded_character)
+	if(loaded_character)	del(loaded_character)
+	if(migrated)
 		save_preferences()
 		save_character()
 
@@ -235,7 +237,6 @@
 		character.update_implants(0)
 		preview_should_rebuild_organs = FALSE
 
-
 	character.update_body(0)
 	character.update_underwear(0)
 
@@ -269,6 +270,8 @@
 	dat += "<body>"
 	dat += "<tt><center>"
 
+	if(loaded_preferences)	del(loaded_preferences)
+	if(loaded_character)	del(loaded_character)
 	var/savefile/S = new /savefile(path)
 	if(S)
 		dat += "<b>Select a character slot to load</b><hr>"

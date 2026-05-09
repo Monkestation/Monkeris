@@ -15,12 +15,17 @@
 	to_file(S["default_slot"], pref.default_slot)
 	to_file(S["preference_values"], pref.preference_values)
 
-/datum/category_item/player_setup_item/player_global/settings/update_setup(savefile/preferences, savefile/character)
-	if(preferences["version"] < 16)
+/datum/category_item/player_setup_item/player_global/settings/update_setup(pref_version, savefile/character)
+	if(pref_version < 16)
 		var/list/preferences_enabled
 		var/list/preferences_disabled
-		from_file(preferences["preferences"], preferences_enabled)
-		from_file(preferences["preferences_disabled"], preferences_disabled)
+		// The old preferences/preferences_disabled keys live at cd="/" of the
+		// same file. Temporarily navigate there, read, then restore cd.
+		var/old_cd = character.cd
+		character.cd = "/"
+		from_file(character["preferences"], preferences_enabled)
+		from_file(character["preferences_disabled"], preferences_disabled)
+		character.cd = old_cd
 
 		if(!istype(preferences_enabled))
 			preferences_enabled = list()
@@ -36,6 +41,7 @@
 			else
 				pref.preference_values[cp.key] = cp.default_value
 		return 1
+	return 0
 
 /datum/category_item/player_setup_item/player_global/settings/sanitize_preferences()
 	// Ensure our preferences are lists.

@@ -17,9 +17,7 @@
 	extra_burrow_chance = 100
 	blattedin_revives_left = 0 //He only lives once, cuz he's huge
 
-	meat_type = /obj/item/reagent_containers/food/snacks/meat/roachmeat/fuhrer
-	meat_amount = 6
-
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/roachmeat/fuhrer = list(6, BUTCHER_DIFFICULT))
 	sanity_damage = 1
 	rarity_value = 90
 

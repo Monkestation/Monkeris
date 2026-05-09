@@ -156,6 +156,14 @@
 		/obj/item/reagent_containers/food/snacks/egg,
 		/obj/item/reagent_containers/food/snacks/meat)
 
+// Override grouping key to group grown items by plantname instead of just type
+/obj/item/storage/bag/produce/get_item_grouping_key(obj/item/I)
+	if(istype(I, /obj/item/reagent_containers/food/snacks/grown))
+		var/obj/item/reagent_containers/food/snacks/grown/G = I
+		if(G.plantname)
+			return "[I.type]|[G.plantname]" // Use combination of type and plantname
+	return I.type
+
 
 // -----------------------------
 //        Sheet Snatcher

@@ -132,11 +132,12 @@
 	icon_state = "guild"
 	spawn_tags = SPAWN_TAG_DESIGN_ADVANCED_COMMON
 	rarity_value = 20
-	license = 10
+	license = 15
 	designs = list(
 		/datum/design/autolathe/circuit/stove = 2,
 		/datum/design/autolathe/circuit/oven = 2,
 		/datum/design/autolathe/circuit/grill = 2,
+		/datum/design/autolathe/circuit/biogenerator = 2,
 		/datum/design/autolathe/tool/spatula = 1,
 		/datum/design/autolathe/container/cooking_with_jane/board = 1,
 		/datum/design/autolathe/container/cooking_with_jane/oven = 1,

@@ -1,7 +1,5 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/obj/spawner/material/resources,
-/obj/spawner/material/resources,
 /turf/floor/asteroid,
 /area/asteroid/cave)
 "b" = (
@@ -15,6 +13,14 @@
 /obj/structure/closet/crate/freezer,
 /obj/spawner/junkfood,
 /obj/spawner/junkfood,
+/obj/spawner/junkfood,
+/obj/spawner/junkfood/low_chance,
+/obj/spawner/junkfood/low_chance,
+/turf/floor/tiled/dark,
+/area/asteroid/cave)
+"e" = (
+/obj/spawner/junk,
+/obj/spawner/traps/low_chance,
 /turf/floor/tiled/dark,
 /area/asteroid/cave)
 "f" = (
@@ -31,12 +37,15 @@
 /obj/item/stack/material/glass/reinforced{
 	amount = 10
 	},
+/obj/spawner/material/resources,
+/obj/spawner/material/resources,
 /turf/floor/tiled/dark,
 /area/asteroid/cave)
 "h" = (
 /obj/structure/bed,
 /obj/item/bedsheet/rainbow,
 /obj/effect/decal/cleanable/cobweb2,
+/obj/spawner/oddities/low_chance,
 /turf/floor/carpet,
 /area/asteroid/cave)
 "i" = (
@@ -68,8 +77,11 @@
 "C" = (
 /obj/structure/table/rack,
 /obj/spawner/voidsuit,
-/obj/spawner/gun/energy_cheap/low_chance,
 /obj/spawner/gun/energy_cheap,
+/obj/spawner/powercell/low_chance,
+/obj/spawner/powercell/low_chance,
+/obj/spawner/powercell/low_chance,
+/obj/spawner/gun_parts/low_chance,
 /turf/floor/tiled/dark,
 /area/asteroid/cave)
 "G" = (
@@ -86,6 +98,11 @@
 /area/asteroid/cave)
 "U" = (
 /turf/wall/low/with_glass/reinforced,
+/area/asteroid/cave)
+"X" = (
+/mob/living/simple_animal/hostile/hivebot/range,
+/obj/spawner/junk,
+/turf/floor/tiled/dark,
 /area/asteroid/cave)
 "Z" = (
 /obj/structure/bed/chair/comfy/brown{
@@ -107,7 +124,7 @@ b
 (2,1,1) = {"
 b
 i
-p
+I
 c
 p
 f
@@ -115,8 +132,8 @@ b
 "}
 (3,1,1) = {"
 c
-p
-G
+e
+X
 b
 I
 d

@@ -1,7 +1,7 @@
 //This is being used as a tutorial piece for how to convert guns to modguns, hence the extremely gratutious comments
 //comments can be removed later/when it's merged
 
-/obj/item/gun/projectile/automatic/modular/drozd // Frame
+/obj/item/gun/projectile/modular/drozd // Frame
 	//only put the base name of the gun here. Other info will be filled in by parts.
 	name = "\"Drozd\""
 	//remove any information about the specific caliber of the gun. Stat qualities (like dmg, recoil mod) are fine.
@@ -13,10 +13,8 @@
 
 	//copy these stats from base gun
 	w_class = ITEM_SIZE_NORMAL
-	force = WEAPON_FORCE_PAINFUL
 
 	slot_flags = SLOT_BELT
-	load_method = MAGAZINE
 
 	magazine_type = /obj/item/ammo_magazine/msmg
 	gun_tags = list(GUN_SILENCABLE)
@@ -71,7 +69,7 @@
 
 //for each new name, try to follow the theme of the existing gun name.
 //the Drozd is named after a russian songbird. (and an anti-missile armor system, but let's not mix metaphors)
-/obj/item/gun/projectile/automatic/modular/drozd/get_initial_name()
+/obj/item/gun/projectile/modular/drozd/get_initial_name()
 	if(grip_type)
 		switch(grip_type)
 			if("wood")
@@ -96,7 +94,7 @@
 //the number beside each gun part is that part's default quality.
 //This can be used as an additional layer of gun balancing
 //(though I wouldn't reccomend messing with it too much for 1-1 conversions)
-/obj/item/gun/projectile/automatic/modular/drozd/finished
+/obj/item/gun/projectile/modular/drozd/finished
 	gun_parts = list(/obj/item/part/gun/modular/mechanism/smg/highcaliber = 0, /obj/item/part/gun/modular/barrel/magnum = 0, /obj/item/part/gun/modular/grip/excel = 0)
 	magazine_type = /obj/item/ammo_magazine/msmg // For the rare case the blacklist is ignored
 	spawn_tags = SPAWN_TAG_GUN_PROJECTILE //remember to change from frame

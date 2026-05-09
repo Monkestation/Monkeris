@@ -6,6 +6,19 @@
 	matter = list(MATERIAL_WOOD = 10)
 	density = TRUE
 
+/obj/structure/largecrate/Initialize(mapload)
+	..()
+	return mapload ? INITIALIZE_HINT_LATELOAD : INITIALIZE_HINT_NORMAL
+
+/obj/structure/largecrate/LateInitialize()
+	. = ..()
+
+	//stuff any items on tile into contents when initialized
+	var/obj/item/I
+	for(I in src.loc)
+		if(I.density || I.anchored || I == src) continue
+		I.forceMove(src)
+
 /obj/structure/largecrate/attack_hand(mob/user)
 	to_chat(user, span_notice("You need a crowbar to pry this open!"))
 	return

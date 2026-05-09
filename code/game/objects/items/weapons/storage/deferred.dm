@@ -174,14 +174,14 @@
 	name = "rifleman crate"
 	desc = "A crate containing six SA AK-47 rifles, and plenty of magazines."
 	icon_state = "serbcrate_deferred_green"
-	initial_contents = list(/obj/item/gun/projectile/automatic/modular/ak/serbian_arms  = 6,
+	initial_contents = list(/obj/item/gun/projectile/modular/ak/serbian_arms  = 6,
 	/obj/item/ammo_magazine/lrifle = 12, /obj/item/ammo_magazine/lrifle/drum = 6)
 
 /obj/item/storage/deferred/crate/kovacs
 	name = "designated marksman crate"
 	desc = "A crate containing six \"Kovacs\" battle rifles, and plenty of mags."
 	icon_state = "serbcrate_deferred_green"
-	initial_contents = list(/obj/item/gun/projectile/automatic/modular/batrifle/serbian = 6,
+	initial_contents = list(/obj/item/gun/projectile/modular/batrifle/serbian = 6,
 	/obj/item/ammo_magazine/lrifle = 18)
 
 /obj/item/storage/deferred/crate/grenadier
@@ -219,7 +219,7 @@
 	name = "marksman crate"
 	desc = "A crate containing one \"Penetrator\" rifle, and ten 14.5mm AP shells."
 	icon_state = "serbcrate_deferred_black"
-	initial_contents = list(/obj/item/gun/projectile/automatic/modular/bolt/sniper/finished = 1,
+	initial_contents = list(/obj/item/gun/projectile/modular/bolt/sniper/finished = 1,
 	/obj/item/storage/box/sniperammo = 2)
 
 /obj/item/storage/deferred/crate/sidearm
@@ -355,7 +355,7 @@
 	/obj/item/clothing/head/armor/excel_sfera = 1,
 	/obj/item/clothing/mask/gas = 1,
 	/obj/item/clothing/suit/armor/gzhel = 1,
-	/obj/item/gun/projectile/automatic/modular/bolt/excel = 1,
+	/obj/item/gun/projectile/modular/bolt/excel = 1,
 	/obj/item/ammo_magazine/ammobox/lrifle_small = 1,
 	/obj/item/ammo_magazine/sllrifle = 7,
 	/obj/item/clothing/shoes/workboots/proletariat = 1
@@ -372,7 +372,7 @@
 	/obj/item/ammo_magazine/msmg = 4,
 	/obj/item/ammo_magazine/ammobox/magnum = 1,
 	/obj/item/clothing/mask/gas = 1,
-	/obj/item/gun/projectile/automatic/modular/drozd/finished = 1,
+	/obj/item/gun/projectile/modular/drozd/finished = 1,
 	/obj/item/clothing/suit/armor/gzhel = 1,
 	/obj/item/clothing/shoes/workboots/proletariat = 1
 	)
@@ -383,7 +383,7 @@
 	desc = "The start of a revolutionary career in Haven's space corps."
 	icon_state = "Excel_crate"
 	initial_contents = list(
-	/obj/item/gun/projectile/automatic/modular/ak/excelsior = 1,
+	/obj/item/gun/projectile/modular/ak/excelsior = 1,
 	/obj/item/clothing/under/excelsior = 1,
 	/obj/item/clothing/gloves/thick = 1,
 	/obj/item/ammo_magazine/lrifle = 4,
@@ -401,7 +401,7 @@
 	initial_contents = list(
 	/obj/item/clothing/gloves/thick = 1,
 	/obj/item/clothing/under/excelsior = 1,
-	/obj/item/gun/projectile/automatic/modular/batrifle/vintorez = 1,
+	/obj/item/gun/projectile/modular/batrifle/vintorez = 1,
 	/obj/item/ammo_magazine/srifle = 5,
 	/obj/item/clothing/suit/armor/gzhel = 1,
 	/obj/item/clothing/mask/gas = 1,

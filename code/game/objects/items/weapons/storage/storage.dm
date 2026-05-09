@@ -94,6 +94,11 @@
 	if (itemCount)
 		item.maptext = "<font color='white'>[itemCount]</font>"
 
+// Helper proc to get grouping key for items in display_contents_with_number mode
+// Can be overridden by subtypes to customize grouping behavior
+/obj/item/storage/proc/get_item_grouping_key(obj/item/I)
+	return I.type
+
 /obj/item/storage/proc/generateHUD(datum/hud/data)
 	RETURN_TYPE(/atom/movable/hud_element)
 	var/atom/movable/hud_element/main = new("storage")
@@ -165,7 +170,7 @@
 			filtered_contents_last = new //last of x item type in storage
 			filtered_contents_count = new //total number of x item type in storage
 			for(var/obj/item/I in contents) //count items and remember last item for each type
-				var/item_type = I.type
+				var/item_type = get_item_grouping_key(I)
 				if (filtered_contents_count[item_type])
 					filtered_contents_count[item_type]++
 				else

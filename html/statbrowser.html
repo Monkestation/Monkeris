@@ -794,25 +794,70 @@ function update_listedturf(TC) {
 
 function draw_listedturf() {
 	const statcontentdiv = document.getElementById("statcontent");
-	statcontentdiv.textContent = "";
+	const existingContainer = document.getElementById("turf-container");
 
+	// If the same items are present (by name), only refresh image srcs and refs.
+	// Screen objects from ma2html expire after 5s so refs must be updated each tick,
+	// but clearing the DOM on every tick causes visible flickering.
+	if (existingContainer) {
+		const existingItems = existingContainer.querySelectorAll('.turf-item');
+		if (existingItems.length === turfcontents.length) {
+			let sameStructure = true;
+			for (let i = 0; i < turfcontents.length; i++) {
+				if (existingItems[i].getAttribute('data-turf-name') !== turfcontents[i][0]) {
+					sameStructure = false;
+					break;
+				}
+			}
+			if (sameStructure) {
+				for (let i = 0; i < turfcontents.length; i++) {
+					const ref = turfcontents[i][1];
+					const html = turfcontents[i][2];
+					const item = existingItems[i];
+					item.setAttribute('data-turf-ref', ref);
+					const iconSpan = item.querySelector('.turf-icon');
+					if (iconSpan) {
+						const tmpDiv = document.createElement('div');
+						tmpDiv.innerHTML = html;
+						const newImg = tmpDiv.querySelector('img');
+						const existingImg = iconSpan.querySelector('img');
+						if (newImg && existingImg) {
+							existingImg.src = newImg.src;
+						} else {
+							iconSpan.innerHTML = html;
+						}
+					}
+				}
+				return;
+			}
+		}
+	}
+
+	// Full redraw: item list changed or first render
+	statcontentdiv.textContent = "";
 	const container = document.createElement("div");
+	container.id = "turf-container";
 
 	for (let i = 0; i < turfcontents.length; i++) {
 		const part = turfcontents[i];
-		const [label, html] = part;
+		const label = part[0];
+		const ref = part[1];
+		const html = part[2];
 
 		const b = document.createElement("div");
-		b.className = "link";
-		b.innerHTML = `<div class="turf-entry-label">${label}</div>${html}`;
-		b.onmousedown = (e => {
+		b.className = "link turf-item";
+		b.setAttribute('data-turf-name', label);
+		b.setAttribute('data-turf-ref', ref);
+		b.innerHTML = `<div class="turf-entry-label">${label}</div><span class="turf-icon">${html}</span>`;
+		b.onmousedown = (e) => {
 			e.preventDefault();
-			let clickcatcher = "?src=" + part[1] + ";statpanel_item_click=1";
+			const currentRef = b.getAttribute('data-turf-ref');
+			let clickcatcher = "?src=" + currentRef + ";statpanel_item_click=1";
 			if (e.shiftKey) clickcatcher += ";statpanel_item_shiftclick=1";
 			if (e.ctrlKey) clickcatcher += ";statpanel_item_ctrlclick=1";
 			if (e.altKey) clickcatcher += ";statpanel_item_altclick=1";
 			window.location.href = clickcatcher;
-		});
+		};
 
 		container.appendChild(b);
 	}

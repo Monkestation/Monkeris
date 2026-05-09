@@ -421,7 +421,7 @@
 				break
 			QDEL_NULL(trash_mod)
 
-/obj/item/gun/projectile/automatic/modular/make_old(low_quality_oldification)
+/obj/item/gun/projectile/modular/make_old(low_quality_oldification)
 	.=..()
 	for(var/part_path in required_parts)
 		var/downgrade

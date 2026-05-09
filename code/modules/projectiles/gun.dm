@@ -684,7 +684,7 @@
 /obj/item/gun/proc/toggle_scope(mob/living/user, switchzoom = FALSE)
 	//looking through a scope limits your periphereal vision
 	//still, increase the view size by a tiny amount so that sniping isn't too restricted to NSEW
-	if(length(zoom_factors) <= 1)
+	if(length(zoom_factors) < 1)
 		zoom = FALSE
 		return
 	var/tozoom = zoom_factors[active_zoom_factor]
