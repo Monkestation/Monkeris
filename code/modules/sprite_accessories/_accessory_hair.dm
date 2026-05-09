@@ -767,24 +767,24 @@
 	icon_state = "long_undercut"
 
 /datum/sprite_accessory/hair/beachwave
-	name = "Beach Wave"
-	icon_state = "beachwave"
+	name = "Beach Wave 2"
+	icon_state = "beachwave2"
 
 /datum/sprite_accessory/hair/fortuneteller
 	name = "Fortune Teller"
-	icon_state = "hair_fortuneteller"
+	icon_state = "fortuneteller"
 
 /datum/sprite_accessory/hair/halfshaven
 	name = "Half Shave"
-	icon_state = "hair_halfshave"
+	icon_state = "halfshave"
 
 /datum/sprite_accessory/hair/manbun
-	name = "Man Bun"
-	icon_state = "hair_manbun"
+	name = "Man Bun 2"
+	icon_state = "manbun2"
 
 /datum/sprite_accessory/hair/mermaid
 	name = "Mermaid"
-	icon_state = "hair_mermaid"
+	icon_state = "mermaid"
 
 /datum/sprite_accessory/hair/shrinepriestess
 	name = "Shrine Priestess"
@@ -792,7 +792,7 @@
 
 /datum/sprite_accessory/hair/unkemptedcurls
 	name = "Unkempted Curls"
-	icon_state = "unkempt_curls"
+	icon_state = "unkempted_curls"
 
 /datum/sprite_accessory/hair/alpaca
 	name = "Alpaca"
