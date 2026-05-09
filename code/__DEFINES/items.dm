@@ -174,7 +174,7 @@
 					/obj/spawner/pouch = 2,\
 					/obj/spawner/tool_upgrade/rare = 4,\
 					/obj/spawner/rig_module/rare = 4,\
-					/obj/spawner/credits/c1000 = 3,\
+					/obj/spawner/credits/c500 = 2,\
 					/obj/spawner/exosuit_equipment = 3,\
 					/obj/spawner/cloth/holster = 4,\
 					/obj/item/stash_spawner = 4,\
