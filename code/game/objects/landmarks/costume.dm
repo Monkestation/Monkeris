@@ -63,6 +63,9 @@
 /obj/landmark/costume/fuhrer/New()
 	new /obj/item/clothing/suit/storage/toggle/robe/fuhrer(src.loc)
 
+/obj/landmark/costume/seuche/New()
+	new /obj/item/clothing/suit/storage/toggle/robe/seuche(src.loc)
+
 /obj/landmark/costume/pirate/New()
 	new /obj/item/clothing/under/pirate(src.loc)
 	new /obj/item/clothing/suit/pirate(src.loc)
