@@ -749,7 +749,8 @@
 				product = new has_mob_product(get_turf(user),name)
 			else
 				var/quality
-				if(user.stats.getStat(STAT_BIO))
+				if(isliving(user))
+					user.stats.getStat(STAT_BIO)
 					quality = clamp(1 * ((user.stats.getStat(STAT_BIO) + 15) / 15), 0, 10)
 				else//nuclear farmbot nerf
 					quality = -5
