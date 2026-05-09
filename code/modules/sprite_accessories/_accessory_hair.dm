@@ -792,7 +792,7 @@
 
 /datum/sprite_accessory/hair/unkemptedcurls
 	name = "Unkempted Curls"
-	icon_state = "unkempted_curls"
+	icon_state = "unkempt_curls"
 
 /datum/sprite_accessory/hair/alpaca
 	name = "Alpaca"
