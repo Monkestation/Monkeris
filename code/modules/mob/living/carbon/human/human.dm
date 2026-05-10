@@ -25,7 +25,8 @@
 			mind.name = real_name
 	. = ..()
 
-
+	social = new /datum/social_data
+	social.holder = src
 
 	sync_organ_dna()
 	make_blood()
@@ -43,7 +44,7 @@
 	for(var/organ in organs)
 		qdel(organ)
 	organs.Cut()
-
+	QDEL_NULL(social)
 	QDEL_NULL(sanity)
 
 	return ..()

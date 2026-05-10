@@ -150,3 +150,5 @@
 	var/obj/item/rig/wearing_rig
 	/// This is not very good either, because I've copied it. Sorry.
 	var/using_scope
+
+	var/datum/social_data/social = /datum/social_data
