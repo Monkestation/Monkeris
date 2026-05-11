@@ -20,7 +20,7 @@
 	//Whenever we ask a player to become this antag but they decline, they will be recorded here.
 	//They will not be asked again until a certain time has passed
 	var/list/request_log = list()
-	var/request_timeout = 60 MINUTES
+	var/request_timeout = 15 MINUTES
 	var/list/opt_out_log = list()		// For players who opted out of role when prompted
 
 	//Transient vars, these are specific to one triggering of the event

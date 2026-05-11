@@ -16,6 +16,8 @@
 
 /datum/storyevent/roleset/faction/excelsior/can_trigger(severity, report)
 	if(excelsior_centor)
+		if (report)
+			to_chat(report, span_notice("Failure: Centor already exists"))
 		return FALSE
 	if(!..(severity, report))
 		return FALSE

@@ -38,7 +38,7 @@
 /datum/antagonist/excelsior/create_antagonist(datum/mind/target, datum/faction/new_faction, doequip = TRUE, announce = TRUE, update = TRUE, check = TRUE)
 	. = ..()
 	BITSET(owner.current?.hud_updateflag, EXCELSIOR_HUD)
-	was_centor_spawned = FALSE		//[excel_faction.dm]
+	was_centor_spawned = FALSE		//When new pack of excels spawn - they must be able to create their own centor
 
 /datum/antagonist/excelsior/remove_antagonist()
 	BITSET(owner.current?.hud_updateflag, EXCELSIOR_HUD)
