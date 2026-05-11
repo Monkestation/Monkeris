@@ -1,4 +1,0 @@
-author: datlo
-delete-after: true
-changes:
-  - rscdel: Removed wallrot event and mechanics.

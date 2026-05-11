@@ -1,0 +1,22 @@
+author: Cat&Deal
+delete-after: true
+changes:
+  - bugfix: Dist3D proc Z calculations work correctly(e.g. excel turret or roach
+      burrowing)
+  - code_imp: 'excelsior teleporter no longer: produces energy, controls turrets'
+  - rscadd: added Centor - Excelsior AI core. Powers up chains, consisting of 
+      Nodes.
+  - rscadd: added Excelsior Node - Centor's order transmitter. Produces energy, 
+      reports intruders, controls turrets.
+  - rscadd: added KOMPAK - an Excelsior PDA. Capable of creating holographic 
+      lines and pathfinding
+  - balance: very carefully changed Excelsior's order list prices (inside the 
+      teleporter)
+  - tweak: Changed Excelsior's intro text.
+  - code_imp: added new css file to nano ui to be used with new Excelsior GUI
+  - code_imp: new komulink() function in nano helpers js file to create 
+      excelsior styled links
+  - rscadd: added new faction proc to communicate faction messages from 
+      inanimate objects (e.g. node reporting intruder to excelsior chat)
+  - refactor: changed Excelsior file structure
+  - balance: lowered minimal amount of excelsior roleset to 2 from 3

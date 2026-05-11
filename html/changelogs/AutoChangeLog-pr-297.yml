@@ -1,0 +1,6 @@
+author: Sun-Soaked
+delete-after: true
+changes:
+  - rscadd: The laurelin bonsai's harvest now has quality based on the amount of
+      alchohol used, and it's potency. The bonsai now gives less fruit.
+  - bugfix: The laurelin bonsai works again.

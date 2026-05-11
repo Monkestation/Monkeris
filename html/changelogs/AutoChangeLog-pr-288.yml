@@ -1,0 +1,7 @@
+author: thedarkcrusader
+delete-after: true
+changes:
+  - rscadd: Added claymore style directional mines
+  - rscadd: Added Frozen Star claymore to Ironhammer MISC disc
+  - imageadd: Added claymore sprites and HUD tripwire indicators
+  - code_imp: Included standard claymore variant (currently unobtainable)
