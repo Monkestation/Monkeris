@@ -413,3 +413,95 @@ var/const/NO_EMAG_ACT = -50
 	fingerprint_hash = md5("A"+registered_name)
 	blood_type = pick(GLOB.blood_types)
 	update_name()
+
+/*******
+* Rental *
+*******/
+
+/obj/item/card/id/smallrental
+	name = "Rental ID S1"
+	desc = "Keycard for S-Unit 1."
+	icon_state = "guest"
+	spawn_tags = null
+	bad_type = /obj/item/card/id/smallrental
+
+/obj/item/card/id/smallrental/New()
+	access = access_small_rental
+	..()
+
+/obj/item/card/id/smallrental2
+	name = "Rental ID S2"
+	desc = "Keycard for S-Unit 2."
+	icon_state = "guest"
+	spawn_tags = null
+	bad_type = /obj/item/card/id/smallrental2
+
+/obj/item/card/id/smallrental2/New()
+	access = access_small_rental2
+	..()
+
+/obj/item/card/id/smallrental3
+	name = "Rental ID S3"
+	desc = "Keycard for S-Unit 3."
+	icon_state = "guest"
+	spawn_tags = null
+	bad_type = /obj/item/card/id/smallrental3
+
+/obj/item/card/id/smallrental3/New()
+	access = access_small_rental3
+	..()
+
+/obj/item/card/id/smallrental4
+	name = "Rental ID S4"
+	desc = "Keycard for S-Unit 4."
+	icon_state = "guest"
+	spawn_tags = null
+	bad_type = /obj/item/card/id/smallrental4
+
+/obj/item/card/id/smallrental4/New()
+	access = access_small_rental4
+	..()
+
+/obj/item/card/id/mediumrental
+	name = "Rental ID M1"
+	desc = "Keycard for M-Unit 1."
+	icon_state = "guest"
+	spawn_tags = null
+	bad_type = /obj/item/card/id/mediumrental
+
+/obj/item/card/id/mediumrental/New()
+	access = access_medium_rental
+	..()
+
+/obj/item/card/id/mediumrental2
+	name = "Rental ID M2"
+	desc = "Keycard for M-Unit 2."
+	icon_state = "guest"
+	spawn_tags = null
+	bad_type = /obj/item/card/id/mediumrental2
+
+/obj/item/card/id/mediumrental2/New()
+	access = access_medium_rental2
+	..()
+
+/obj/item/card/id/mediumrental3
+	name = "Rental ID M3"
+	desc = "Keycard for M-Unit 3."
+	icon_state = "guest"
+	spawn_tags = null
+	bad_type = /obj/item/card/id/mediumrental3
+
+/obj/item/card/id/mediumrental3/New()
+	access = access_medium_rental3
+	..()
+
+/obj/item/card/id/largerental
+	name = "Rental ID L1"
+	desc = "Keycard for L-Unit 1."
+	icon_state = "guest"
+	spawn_tags = null
+	bad_type = /obj/item/card/id/largerental
+
+/obj/item/card/id/largerental/New()
+	access = access_large_rental
+	..()

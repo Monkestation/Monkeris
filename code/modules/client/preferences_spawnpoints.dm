@@ -207,6 +207,8 @@
 //Starboard Cryogenics
 /datum/spawnpoint/cryo/starboard
 
+//Foward Cryogenics
+/datum/spawnpoint/cryo/foward
 
 /**********************
 	DORMITORY SPAWNING
