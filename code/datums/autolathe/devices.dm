@@ -62,6 +62,10 @@
 	name = "landmine"
 	build_path = /obj/item/mine
 
+/datum/design/autolathe/device/claymore/ironhammer
+	name = "FS DM \"Moneta\""
+	build_path = /obj/item/mine/claymore/ironhammer
+
 /datum/design/autolathe/device/excelsiormine
 	name = "excelsior mine"
 	build_path = /obj/item/mine/excelsior

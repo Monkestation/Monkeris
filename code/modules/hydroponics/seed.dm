@@ -700,19 +700,22 @@
 	return P
 
 //Place the plant products at the feet of the user.
-/datum/seed/proc/harvest(mob/living/user,yield_mod,harvest_sample,force_amount)
-
-	if(!user)
+/datum/seed/proc/harvest(source,yield_mod,harvest_sample,force_amount, force_quality)
+	//this proc suuucks and I don't wanna fully refactor it rn
+	var/mob/living/livesource
+	if(!source)
 		return
+	if(ismob(source))
+		livesource = source
 
 	if(!force_amount && get_trait(TRAIT_YIELD) == 0 && !harvest_sample)
-		if(istype(user)) to_chat(user, span_danger("You fail to harvest anything useful."))
+		if(livesource) to_chat(livesource, span_danger("You fail to harvest anything useful."))
 	else
-		if(istype(user)) to_chat(user, "You [harvest_sample ? "take a sample" : "harvest"] from the [display_name].")
+		if(livesource) to_chat(livesource, "You [harvest_sample ? "take a sample" : "harvest"] from the [display_name].")
 
 		// Users with green thumb perk gain sanity when harvesting plants
-		if(ishuman(user) && user.stats && user.stats.getPerk(/datum/perk/greenthumb) && !harvest_sample)
-			var/mob/living/carbon/human/H = user
+		if(ishuman(livesource) && livesource.stats && livesource.stats.getPerk(/datum/perk/greenthumb) && !harvest_sample)
+			var/mob/living/carbon/human/H = livesource
 			if(H.sanity)
 				H.sanity.changeLevel(2.5)
 
@@ -723,7 +726,7 @@
 			SSplants.seeds[name] = src
 
 		if(harvest_sample)
-			var/obj/item/seeds/seeds = new(get_turf(user))
+			var/obj/item/seeds/seeds = new(get_turf(source))
 			seeds.seed_type = name
 			seeds.update_seed()
 			return
@@ -738,22 +741,25 @@
 					total_yield = get_trait(TRAIT_YIELD)
 				else
 					total_yield = get_trait(TRAIT_YIELD) + rand(yield_mod)
-				if(prob(user.stats.getStat(STAT_BIO)))
+				if(livesource && prob(livesource.stats.getStat(STAT_BIO)))
 					total_yield += 1
-					to_chat(user, span_notice("You have managed to harvest more!"))
+					to_chat(livesource, span_notice("You have managed to harvest more!"))
 				total_yield = max(1,total_yield)
 
 		for(var/i = 0;i<total_yield;i++)
 			var/obj/item/product
 			if(has_mob_product)
-				product = new has_mob_product(get_turf(user),name)
+				product = new has_mob_product(get_turf(source),name)
 			else
 				var/quality
-				if(user.stats.getStat(STAT_BIO))
-					quality = clamp(1 * ((user.stats.getStat(STAT_BIO) + 15) / 15), 0, 10)
-				else//nuclear farmbot nerf
-					quality = -5
-				product = new /obj/item/reagent_containers/food/snacks/grown(get_turf(user), name, quality)
+				if(force_quality)
+					quality = force_quality
+				else
+					if(livesource && livesource.stats.getStat(STAT_BIO))
+						quality = clamp(1 * ((livesource.stats.getStat(STAT_BIO) + 15) / 15), 0, 10)
+					else//nuclear farmbot nerf
+						quality = -5
+				product = new /obj/item/reagent_containers/food/snacks/grown(get_turf(source), name, quality)
 			if(get_trait(TRAIT_PRODUCT_COLOUR))
 				if(!ismob(product))
 					product.color = get_trait(TRAIT_PRODUCT_COLOUR)

@@ -14,13 +14,14 @@
 	if(!owner || !owner.current)
 		return
 
-	if(objectives.len)
-		to_chat(owner.current, span_danger("<font size=3>Your objectives were updated.</font>"))
+	var/list/old_objectives = objectives
 
 	objectives.Cut()
 	objectives.Add(new_objectives)
 
-	show_objectives()
+	if(old_objectives.len)
+		to_chat(owner.current, span_danger("<font size=3>Your objectives were updated.</font>"))
+		show_objectives()
 
 /datum/antagonist/proc/create_survive_objective()
 	if(ispath(survive_objective))

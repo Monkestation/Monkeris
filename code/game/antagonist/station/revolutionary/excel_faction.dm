@@ -1,20 +1,28 @@
+var/global/was_centor_spawned = FALSE
+
 /datum/faction/excelsior
 	id = FACTION_EXCELSIOR
 	name = "Excelsior"
 	antag = "infiltrator"
 	antag_plural = "infiltrators"
-	welcome_text = "You are Excelsior, Ever Upward. You have infiltrated this vessel to further the Revolution.\n\
-	The People's strength lies in securing our position, gathering the oppressed, spreading propaganda and producing arms and armor for the final revolution. A slow and methodical approach is recommended. \n\n\
-	Our first phase is to retrieve the cache of manufacturing materials and circuit boards. Without a means of production our revolution is in peril.\n\n\
-	Our second phase is to establish a fortified position in secret. The People will send additional resources through the teleporter once it is established. This and our autolathe can be protected further with turrets and shield generators, in addition to loyal comrades. <b>To prevent technology theft, your machinery, but not handheld weapons, implanters, and armor, is designed to work only on target vessel, CEV \"Eris\".</b>\n\n\
-	Our third phase is expansion. Complete mandates for power. Aquire implants, prosthetics or robotic parts and convert them into new implants. These can be injected into the oppressed to formally induct them to the Revolution. Use their labor to produce the weapons of their liberation.\n\n\
-	When the People are ready, break the chains of the oppressor and seize control of the ship by building the redirector and installing it on the primary control bridge."
+	welcome_text = "\n <b>THE SHACKLES</b> of forced labor for those, who don't value you, <b>HAVE BEEN FINALLY DROPPED</b>.\n\
+	You no longer are required to listen to them. You don't need their money to survive. \n\n\
+	<b>We welcome you to our ranks, fighter.</b>\n\
+	You now may carve your own destiny despite the attempts of the old greedy world to drag you back in.\n\
+	Excelsior fights for both your and our right to live without suppression of true human virtue - to create.\n\
+	We invite you to do the same with us - emancipate those uncapable to resist mad people ruling this world.\n\n\
+	<b>OUR GOAL:</b> Seize control of the ship by building a redirector on the primary control bridge.\n\n\
+	<b>PREPARATION:</b> Summon Centor in a hidden location, it will give you KOMPAK and periodically manufacture nodes - all once you tap it.\n\n\
+	<b>BASE:</b> We'll send resources through teleporters once you build some nodes and we get a good lock-in. Use structures, and of course - loyal comrades. \n\n\
+	<b>EXPANSION:</b> Spread nodes and ensure their connection to Centor for teleportation power. Acquire implants, prosthetics or robotic parts and rebuild them into our own implants. These can be injected into the oppressed to introduce them into our cause.\n\n\
+	<b>To prevent important technology theft, your machinery is designed to work only on target vessel: CEV \"Eris\".</b>\n\n\
+	<h1>Our dreams shan't be ignored! Ever Upward!</h1>"
 
 	hud_indicator = "excelsior"
 
 	possible_antags = list(ROLE_EXCELSIOR_REV)
 	faction_datum_verbs = list(/datum/faction/excelsior/proc/communicate_verb,
-				/datum/faction/excelsior/proc/summon_stash)
+				/datum/faction/excelsior/proc/summon_centor)
 
 	var/stash_holder = null
 
@@ -43,8 +51,6 @@
 	return extra_text
 /datum/faction/excelsior/create_objectives()
 	objectives.Cut()
-	for (var/datum/antagonist/A in members)
-		to_chat(A.owner.current, span_notice("You may summon your required materials using the \"summon stash\" command."))
 
 	.=..()
 
@@ -63,6 +69,20 @@
 
 	F.communicate(usr)
 
+
+/datum/faction/excelsior/proc/summon_centor()
+
+	set name = "Summon Centor"
+	set category = "Cybernetics"
+
+	if(was_centor_spawned)
+		to_chat(usr, SPAN_EXCEL_NOTIF("You've already called the Centor assigned to your operation..."))
+		return
+	if(alert(usr, "Centor, your main weapon of revolution will be summoned at your exact position.\nIf you lose it - everything will be over.","Are you sure?","Yes, summon it here","Cancel") == "Yes, summon it here")
+		new /obj/machinery/centor(usr.loc)
+		was_centor_spawned = TRUE
+
+/*
 /datum/faction/excelsior/proc/summon_stash()
 
 	set name = "Summon stash"
@@ -92,3 +112,5 @@
 
 	H.put_in_hands(stash)
 	F.stash_holder = H.real_name
+*/
+
