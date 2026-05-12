@@ -41,7 +41,7 @@
 	if(nutriment_amt)
 		reagents.add_reagent("nutriment", nutriment_amt, nutriment_desc)
 
-/obj/item/reagent_containers/food/snacks/New(loc, var/quality)
+/obj/item/reagent_containers/food/snacks/New(loc, name, quality)
 	..()
 	if(quality)
 		food_quality = quality
@@ -71,7 +71,7 @@
 	if(food_tier > CWJ_QUALITY_MEH)
 		message = "This food helps you relax."
 	else if(food_tier > CWJ_QUALITY_GROSS)
-		message = "This food isn't very good, but at least it's edible."
+		message = "This food barely seems worth eating."
 	else
 		message = "You're regretting putting this in your mouth."
 	if(cooked)

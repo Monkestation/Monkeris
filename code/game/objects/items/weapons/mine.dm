@@ -242,3 +242,229 @@
 
 	return ..()
 */
+
+// --------------------------------
+// Claymore Mines
+// --------------------------------
+
+/obj/item/mine/claymore
+	name = "Claymore mine"
+	icon_state = "claymore"
+	desc = "A directional anti-personnel mine fitted with an optical sensor trigger. A danger to anyone foolish or unaware enough to step in front of it. Disarmable with a Pulsing tool if you're skilled enough."
+	description_info = "A directional anti-personnel landmine with an optical sensor that projects forward in a cone pattern. The sensor range can be adjusted between 2 and 4 tiles using a Pulsing tool before deployment. The reinforced back casing means fragmentation only fires forward, making it significantly harder to disarm than a standard pressure mine."
+	description_antag = "Harder to disarm than its pressure equivalent on account of the reinforced casing. Come prepared or don't bother."
+	explosion_power = 250
+	explosion_falloff = 100
+	spawn_blacklisted = TRUE
+	var/list/tripwires = list()
+	fragment_type = /obj/item/projectile/bullet/pellet/fragment
+	var/facing_dir = null
+	var/tripwire_range = 2
+	matter = list(MATERIAL_STEEL = 35, MATERIAL_PLASTEEL = 5)
+	w_class = ITEM_SIZE_NORMAL
+	pulse_difficulty = FAILCHANCE_HARD
+
+
+/obj/item/mine/claymore/update_icon()
+	cut_overlays()
+	if(deployed)
+		icon_state = "claymore_dir"
+		dir = facing_dir
+	else
+		icon_state = "claymore"
+
+/obj/item/mine/claymore/attack_self(mob/user)
+	var/turf/center = get_turf(src)
+
+	for(var/i = 1 to tripwire_range)
+		var/turf/next = get_step(center, user.dir)
+
+		if(locate(/obj/structure/multiz/ladder) in next || locate(/obj/structure/multiz/stairs) in next)
+			to_chat(user, span_warning("There is no suitable surface ahead to extend the sensor."))
+			return
+
+		if(next.density)
+			to_chat(user, span_warning("Something is blocking the sensor path."))
+			return
+
+		for(var/atom/movable/A in next)
+			if(A.density)
+				to_chat(user, span_warning("Something is blocking the sensor path."))
+				return
+
+		center = next
+
+	facing_dir = user.dir
+	..()
+
+	if(!armed)
+		return
+
+	visible_message(span_danger("\The [src] emits a sharp click as its arming sequence initiates."))
+
+	var/turf/wire_center = center
+
+	spawn(50)
+		if(!src || !armed)
+			return
+
+		// Cross at wire_center — center, left, right
+		for(var/side_dir in list(0, turn(facing_dir, 90), turn(facing_dir, -90)))
+			var/turf/T_turf = side_dir ? get_step(wire_center, side_dir) : wire_center
+			if(!T_turf || T_turf.density)
+				continue
+			var/blocked = FALSE
+			for(var/atom/movable/A in T_turf)
+				if(A.density)
+					blocked = TRUE
+					break
+			if(blocked)
+				continue
+			var/obj/effect/mine_tripwire/T = new /obj/effect/mine_tripwire(T_turf)
+			T.linked_mine = src
+			tripwires += T
+
+		// Stem — from wire_center back towards mine, tripwire_range-1 times
+		var/turf/stem = wire_center
+		var/back_dir = turn(facing_dir, 180)
+		for(var/i = 1 to tripwire_range - 1)
+			stem = get_step(stem, back_dir)
+			if(!stem || stem == get_turf(src)) // don't place on mine tile
+				break
+			var/blocked = FALSE
+			for(var/atom/movable/A in stem)
+				if(A.density)
+					blocked = TRUE
+					break
+			if(blocked)
+				break
+			var/obj/effect/mine_tripwire/S = new /obj/effect/mine_tripwire(stem)
+			S.linked_mine = src
+			tripwires += S
+
+		visible_message(span_danger("\The [src]'s indicator light blinks red the sensor is now active."))
+
+/obj/item/mine/claymore/explode()
+	explosion(get_turf(src), explosion_power, explosion_falloff)
+
+	if(facing_dir)
+		var/turf/origin = get_step(src, turn(facing_dir, 180))
+		fragment_explosion_angled(get_turf(src), origin, fragment_type, num_fragments)
+	else
+		fragment_explosion(get_turf(src), spread_radius, fragment_type, num_fragments, null, damage_step)
+
+	if(src)
+		qdel(src)
+
+/obj/item/mine/claymore/Crossed(mob/AM)
+	if(armed)
+		if(isliving(AM))
+			var/true_prob_explode = prob_explode - AM.skill_to_evade_traps()
+
+			if(prob(true_prob_explode))
+				explode()
+
+			return
+
+	.= ..()
+
+/obj/item/mine/claymore/attackby(obj/item/I, mob/user)
+	if(QUALITY_PULSING in I.tool_qualities)
+		if(!deployed && !armed)
+			if(loc == user)
+				var/new_range = input(user, "Set tripwire range (2-4)", "Tripwire Range", tripwire_range) as num|null
+				if(new_range && new_range >= 2 && new_range <= 4)
+					tripwire_range = new_range
+					to_chat(user, span_notice("You set the tripwire range to [tripwire_range]."))
+					return
+				else if(new_range)
+					to_chat(user, span_warning("Range must be between 2 and 4."))
+					return
+			else
+				to_chat(user, span_warning("You must be holding the mine to adjust its range."))
+				return
+
+	..()
+
+	if(!armed && tripwires.len)
+		for(var/obj/effect/mine_tripwire/TW in tripwires)
+			qdel(TW)
+
+		tripwires.Cut()
+
+/obj/item/mine/claymore/attack_hand(mob/user)
+	..()
+
+	if(!armed && tripwires.len)
+		for(var/obj/effect/mine_tripwire/TW in tripwires)
+			qdel(TW)
+
+		tripwires.Cut()
+
+/obj/item/mine/claymore/Destroy()
+	for(var/obj/effect/mine_tripwire/TW in tripwires)
+		qdel(TW)
+
+	tripwires.Cut()
+	return ..()
+
+// --------------------------------
+// Tripwire Effect
+// --------------------------------
+
+/obj/effect/mine_tripwire
+	name = "tripwire"
+	anchored = TRUE
+	icon = 'icons/effects/alerts.dmi'
+	icon_state = "danger"
+	invisibility = INVISIBILITY_MAXIMUM
+	var/obj/item/mine/claymore/linked_mine
+
+/obj/effect/mine_tripwire/Initialize()
+	. = ..()
+	update_icon()
+
+/obj/effect/mine_tripwire/update_icon()
+	cut_overlays()
+
+
+/obj/effect/mine_tripwire/Destroy()
+	linked_mine = null
+	return ..()
+
+/obj/effect/mine_tripwire/Crossed(mob/AM)
+	if(!linked_mine || !linked_mine.armed)
+		qdel(src)
+		return
+
+	if(locate(/obj/structure/multiz/ladder) in get_turf(loc))
+		visible_message(span_danger("\The [linked_mine]'s triggering mechanism is disrupted by the ladder and does not go off."))
+		return
+
+	if(locate(/obj/structure/multiz/stairs) in get_turf(loc))
+		visible_message(span_danger("\The [linked_mine]'s triggering mechanism is disrupted by the slope and does not go off."))
+		return
+
+	if(!isliving(AM))
+		return
+
+	var/obj/item/mine/claymore/mine = linked_mine
+	qdel(src)
+	mine.explode()
+
+
+/obj/item/mine/claymore/ironhammer
+	name = "FS DM \"Moneta\""
+	desc = "A compact Frozen Star manufactured directional anti-personnel mine. The casing bears a Neohongo inscription 読め: FRONT TOWARDS BELLIGERENTS."
+	description_info = "The FS DM 'Moneta' is an aged design, first produced by Frozen Star in the closing years of the Corporate Wars and adopted by Ironhammer as a standard anti-infiltration measure. A reliable if unglamorous fixture of Ironhammer kit the reinforced back casing and hardened sensor housing make it notably more resistant to disarming than the pressure mine. Disarmable and configurable with a Pulsing tool."
+	description_antag = "Harder to disarm than its pressure equivalent on account of the reinforced casing. Come prepared or don't bother."
+	icon_state = "claymore_frozenstar"
+	matter_reagents = list("fuel" = 40)
+
+/obj/item/mine/claymore/ironhammer/update_icon()
+	cut_overlays()
+	if(deployed)
+		icon_state = "frozen_dir"
+		dir = facing_dir
+	else
+		icon_state = "claymore_frozenstar"
