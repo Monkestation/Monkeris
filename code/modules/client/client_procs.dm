@@ -1196,7 +1196,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 /client/proc/acquire_dpi()
 	window_scaling = text2num(winget(src, null, "dpi"))
 
-	debug_admins("scalies: [window_scaling]")
+	//debug_admins("scalies: [window_scaling]")
 
 /client/proc/add_verbs_from_config()
 	if(CONFIG_GET(flag/see_own_notes))
