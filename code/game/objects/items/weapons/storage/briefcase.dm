@@ -17,3 +17,18 @@
 	max_storage_space = 16
 	matter = list(MATERIAL_BIOMATTER = 8, MATERIAL_PLASTIC = 4)
 	price_tag = 90
+
+/obj/item/storage/briefcase/club
+
+/obj/item/storage/briefcase/club/populate_contents()
+	var/list/things2spawn = list(
+		/obj/item/card/id/smallrental,
+		/obj/item/card/id/smallrental2,
+		/obj/item/card/id/smallrental3,
+		/obj/item/card/id/smallrental4,
+		/obj/item/card/id/mediumrental,
+		/obj/item/card/id/mediumrental2,
+		/obj/item/card/id/mediumrental3,
+		/obj/item/card/id/largerental)
+	for(var/path in things2spawn)
+		new path(src)

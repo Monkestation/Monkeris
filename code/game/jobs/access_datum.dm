@@ -581,3 +581,47 @@ var/const/access_crate_cash = 200
 /datum/access/crate_cash
 	id = access_crate_cash
 	access_type = ACCESS_TYPE_NONE
+
+/*******
+* Rental *
+*******/
+
+var/const/access_small_rental = 301
+/datum/access/small_rental
+	id = access_small_rental
+	access_type = ACCESS_TYPE_NONE
+
+var/const/access_small_rental2 = 302
+/datum/access/small_rental2
+	id = access_small_rental2
+	access_type = ACCESS_TYPE_NONE
+
+var/const/access_small_rental3= 303
+/datum/access/small_rental3
+	id = access_small_rental3
+	access_type = ACCESS_TYPE_NONE
+
+var/const/access_small_rental4 = 304
+/datum/access/small_rental4
+	id = access_small_rental4
+	access_type = ACCESS_TYPE_NONE
+
+var/const/access_medium_rental = 305
+/datum/access/medium_rental
+	id = access_medium_rental
+	access_type = ACCESS_TYPE_NONE
+
+var/const/access_medium_rental2 = 306
+/datum/access/medium_rental2
+	id = access_medium_rental2
+	access_type = ACCESS_TYPE_NONE
+
+var/const/access_medium_rental3 = 307
+/datum/access/medium_rental3
+	id = access_medium_rental3
+	access_type = ACCESS_TYPE_NONE
+
+var/const/access_large_rental = 308
+/datum/access/large_rental
+	id = access_large_rental
+	access_type = ACCESS_TYPE_NONE

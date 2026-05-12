@@ -61059,7 +61059,8 @@
 "cWz" = (
 /obj/machinery/door/airlock{
 	name = "S-Unit 4";
-	id_tag = "small_rental_4"
+	id_tag = "small_rental_4";
+	req_access = list(304)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -97876,7 +97877,8 @@
 "haX" = (
 /obj/machinery/door/airlock{
 	name = "S-Unit 3";
-	id_tag = "small_rental_3"
+	id_tag = "small_rental_3";
+	req_access = list(303)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -98595,7 +98597,8 @@
 "ikz" = (
 /obj/machinery/door/airlock{
 	name = "S-Unit 2";
-	id_tag = "small_rental_2"
+	id_tag = "small_rental_2";
+	req_access = list(302)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -98804,7 +98807,8 @@
 "iEY" = (
 /obj/machinery/door/airlock{
 	name = "M-Unit 3";
-	id_tag = "medium_rental_3"
+	id_tag = "medium_rental_3";
+	req_access = list(307)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -101308,7 +101312,8 @@
 "mXS" = (
 /obj/machinery/door/airlock{
 	name = "L-Unit 1";
-	id_tag = "large_rental_1"
+	id_tag = "large_rental_1";
+	req_access = list(308)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -102567,7 +102572,8 @@
 "prG" = (
 /obj/machinery/door/airlock{
 	name = "M-Unit 1";
-	id_tag = "medium_rental_1"
+	id_tag = "medium_rental_1";
+	req_access = list(305)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -102915,7 +102921,8 @@
 "pVz" = (
 /obj/machinery/door/airlock{
 	name = "S-Unit 1";
-	id_tag = "small_rental_1"
+	id_tag = "small_rental_1";
+	req_access = list(301)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -104799,12 +104806,13 @@
 /area/eris/crew_quarters/kitchen)
 "sVZ" = (
 /obj/structure/table/woodentable,
-/obj/item/device/lighting/toggleable/lamp/green{
-	pixel_y = 4
-	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
+/obj/item/device/lighting/toggleable/lamp/green{
+	pixel_y = 4
+	},
+/obj/item/storage/briefcase/club,
 /turf/floor/carpet/sblucarpet,
 /area/eris/crew_quarters/clubmanager)
 "sXq" = (
@@ -106971,7 +106979,8 @@
 "wpY" = (
 /obj/machinery/door/airlock{
 	name = "M-Unit 2";
-	id_tag = "medium_rental_2"
+	id_tag = "medium_rental_2";
+	req_access = list(306)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -291467,8 +291476,8 @@ bmj
 esh
 boN
 cLa
-edz
-edz
+cLa
+cLa
 eEu
 eEu
 eEu
