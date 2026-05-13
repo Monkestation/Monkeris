@@ -59924,11 +59924,15 @@
 	},
 /area/shuttle/mining/station)
 "cSI" = (
+/obj/structure/table/rack,
+/obj/item/folded_portaturret/mining,
+/obj/item/folded_portaturret/mining,
 /turf/shuttle/floor/mining{
 	icon_state = "11,17"
 	},
 /area/shuttle/mining/station)
 "cSJ" = (
+/obj/item/tool/wrench,
 /turf/shuttle/floor/mining{
 	icon_state = "12,17"
 	},
@@ -60132,7 +60136,6 @@
 	},
 /area/shuttle/mining/station)
 "cTn" = (
-/obj/machinery/porta_turret/mining,
 /turf/shuttle/floor/mining{
 	icon_state = "14,16"
 	},

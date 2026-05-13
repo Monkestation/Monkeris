@@ -161,6 +161,12 @@
 	anchored = TRUE
 	foldable = FALSE
 
+/obj/item/folded_portaturret/mining
+	name = "folded mining turret"
+	icon = 'icons/obj/machines/mining_turret.dmi'
+	icon_state = "turret_legs_folded"
+	var/origin_type = /obj/machinery/porta_turret/mining
+
 #undef TURRET_PRIORITY_TARGET
 #undef TURRET_SECONDARY_TARGET
 #undef TURRET_NOT_TARGET
