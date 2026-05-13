@@ -8,6 +8,8 @@
 	active_power_usage = 2500
 	density = TRUE
 	anchored = TRUE
+	health = 360
+	maxHealth = 360
 
 	// Targeting
 	var/should_target_players = TRUE			// TRUE targets players, FALSE targets superior animals (roaches, golems, and spiders)
@@ -39,8 +41,7 @@
 	number_of_shots = 3
 	time_between_shots = 0.3 SECONDS
 	cooldown_time = 2 SECONDS
-	health = 360
-	maxHealth = 360
+
 
 /obj/machinery/power/os_turret/Initialize()
 	. = ..()
@@ -55,8 +56,8 @@
 			do_sparks(1, TRUE, src)
 		return
 
-	if(health <= 0)
-		stat |= BROKEN
+	if(health <= 0 && !(stat & BROKEN))
+		smash()
 		return
 
 	if(!on_cooldown)
@@ -156,15 +157,25 @@
 		try_shoot(proj_start_turf)
 
 /obj/machinery/power/os_turret/attackby(obj/item/I, mob/user)
-	var/mec_or_cog = max(user.stats.getStat(STAT_MEC), user.stats.getStat(STAT_COG))
+	if(user.a_intent == I_HURT)
+		if(!(I.flags & NOBLUDGEON) && I.force && !(stat & BROKEN))
+			// If the turret was attacked with the intention of harming it:
+			user.do_attack_animation(src)
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
-	if(mec_or_cog < STAT_LEVEL_EXPERT)
-		to_chat(user, span_warning("You lack the knowledge or skill to perform work on \the [src]."))
+		if(take_damage(I.force * I.structure_damage_factor))
+			playsound(src, 'sound/weapons/smash.ogg', 70, 1)
+		else
+			playsound(src, 'sound/weapons/Genhit.ogg', 25, 1)
 	else
-		if(default_deconstruction(I, user))
-			return
-		if(default_part_replacement(I, user))
-			return
+		var/mec_or_cog = max(user.stats.getStat(STAT_MEC), user.stats.getStat(STAT_COG))
+		if(mec_or_cog < STAT_LEVEL_EXPERT)
+			to_chat(user, span_warning("You lack the knowledge or skill to perform work on \the [src]."))
+		else
+			if(default_deconstruction(I, user))
+				return
+			if(default_part_replacement(I, user))
+				return
 
 	// If the turret is friendly, you can unanchor it. If not, you bash it.
 	if(should_target_players)
@@ -207,9 +218,9 @@
 
 /obj/machinery/power/os_turret/take_damage(amount)
 	health = max(health - amount, 0)
-	if(!health)
-		stat |= BROKEN
-	else if(prob(50))
+	if(!health && !(stat & BROKEN))
+		smash()
+	else
 		do_sparks(1, 0, loc)
 	return amount
 
@@ -265,6 +276,14 @@
 /obj/machinery/power/os_turret/proc/emp_off()
 	stat &= ~EMPED
 	emp_timer_id = null
+
+/obj/machinery/power/os_turret/proc/smash()
+	if((stat & BROKEN))
+		return
+	do_sparks(5, TRUE, src)
+	icon_state = "null"
+	update_icon()
+	stat |= BROKEN
 
 /obj/item/electronics/circuitboard/os_turret
 	name = T_BOARD("One Star gauss turret")

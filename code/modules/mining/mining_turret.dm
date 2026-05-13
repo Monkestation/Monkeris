@@ -21,22 +21,37 @@
 	raised = TRUE
 	circuit = /obj/item/electronics/circuitboard/miningturret
 	installation = null
-	health = 60
+	health = 100
 	shot_delay = 0
 	use_power = NO_POWER_USE
 	anchored = FALSE
 	locked = FALSE
 	enabled = FALSE
 
+	foldable = TRUE
+	wrench_lock = FALSE
+
+	///is the turret currently setting up?
+	var/setting_up = FALSE
+
+
 /obj/machinery/porta_turret/mining/allowed(mob/M)  // No access lock on turret
 	return TRUE
 
 /obj/machinery/porta_turret/mining/Initialize()
 	. = ..()
-	update_icon()
+	update_icon("turret_folded")
 
 /obj/machinery/porta_turret/mining/setup()
-	return
+	disabled = TRUE
+	setting_up = TRUE
+	update_icon("turret_unfold")
+	addtimer(CALLBACK(src, PROC_REF(complete_setup)), 0.5 SECONDS)
+
+/obj/machinery/porta_turret/mining/proc/complete_setup()
+	disabled = FALSE
+	setting_up = FALSE
+	update_icon()
 
 /obj/machinery/porta_turret/mining/nano_ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = NANOUI_FOCUS)
 	var/data[0]
@@ -55,7 +70,7 @@
 	return FALSE
 
 /obj/machinery/porta_turret/mining/Process()
-	if(anchored)
+	if(anchored && !setting_up)
 		disabled = FALSE
 	..()
 
@@ -79,7 +94,7 @@
 	if(emagged)
 		return L.stat ? TURRET_SECONDARY_TARGET : TURRET_PRIORITY_TARGET
 
-	if(!isgolem(L))  // Only target golems
+	if(!isgolem(L) && !isroach(L) && !isspider(L) && !istype(L, /mob/living/simple_animal/hostile)) // Only target vermin and hostile fauna
 		return TURRET_NOT_TARGET
 
 	if(L.lying)
@@ -95,10 +110,14 @@
 	last_target = null
 	raised = TRUE
 
-/obj/machinery/porta_turret/mining/update_icon()
+/obj/machinery/porta_turret/mining/update_icon(custom_state)
 	overlays.Cut()
+
 	if(!(stat & BROKEN))
-		overlays += image("turret_gun")
+		if(custom_state)
+			overlays += image(custom_state)
+		else
+			overlays += image("turret_gun")
 
 /obj/machinery/porta_turret/mining/target(mob/living/target)
 	if(disabled)
@@ -135,11 +154,12 @@
 	desc = "A fully automated anti golem platform ...wait, why is it pointing at-"
 	//rusty
 	color = "#a48e70"
-	health = 45
 	shot_delay = 10
 
+	enabled = TRUE
 	emagged = TRUE
 	anchored = TRUE
+	foldable = FALSE
 
 #undef TURRET_PRIORITY_TARGET
 #undef TURRET_SECONDARY_TARGET
