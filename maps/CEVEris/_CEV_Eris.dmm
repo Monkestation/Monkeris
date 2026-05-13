@@ -9383,14 +9383,14 @@
 /turf/floor/plating/under,
 /area/eris/maintenance/section3deck2starboard)
 "awL" = (
-/turf/floor/reinforced/airless,
+/turf/floor/reinforced/almost_airless,
 /area/eris/maintenance/disposal)
 "awM" = (
 /obj/machinery/disposal/deliveryChute,
 /obj/structure/disposalpipe/trunk{
 	dir = 1
 	},
-/turf/floor/reinforced/airless,
+/turf/floor/reinforced/almost_airless,
 /area/eris/maintenance/disposal)
 "awN" = (
 /obj/machinery/alarm{
@@ -9807,7 +9807,7 @@
 /obj/machinery/conveyor/north{
 	id = "disposal3"
 	},
-/turf/floor/reinforced/airless,
+/turf/floor/reinforced/almost_airless,
 /area/eris/maintenance/disposal)
 "axV" = (
 /obj/structure/cable/green{
@@ -10072,7 +10072,7 @@
 	id = "incernator_in";
 	use_power = 1
 	},
-/turf/floor/reinforced/airless,
+/turf/floor/reinforced/almost_airless,
 /area/eris/maintenance/disposal)
 "ayG" = (
 /obj/machinery/atmospherics/portables_connector,
@@ -10300,7 +10300,7 @@
 	id = "Incinerator";
 	pixel_x = 22
 	},
-/turf/floor/reinforced/airless,
+/turf/floor/reinforced/almost_airless,
 /area/eris/maintenance/disposal)
 "azn" = (
 /turf/floor/tiled/dark/golden,
@@ -10390,14 +10390,14 @@
 	frequency = 1441;
 	id_tag = "incernator_sensor"
 	},
-/turf/floor/reinforced/airless,
+/turf/floor/reinforced/almost_airless,
 /area/eris/maintenance/disposal)
 "azy" = (
 /obj/structure/disposaloutlet{
 	dir = 1
 	},
 /obj/structure/disposalpipe/trunk,
-/turf/floor/reinforced/airless,
+/turf/floor/reinforced/almost_airless,
 /area/eris/maintenance/disposal)
 "azz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -10434,7 +10434,7 @@
 	id_tag = "incernator_out";
 	pump_direction = 0
 	},
-/turf/floor/reinforced/airless,
+/turf/floor/reinforced/almost_airless,
 /area/eris/maintenance/disposal)
 "azD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -15133,7 +15133,7 @@
 /area/eris/maintenance/section3deck1central)
 "aNf" = (
 /obj/spawner/scrap/low_chance,
-/turf/floor/reinforced/airless,
+/turf/floor/reinforced/almost_airless,
 /area/eris/maintenance/disposal)
 "aNg" = (
 /obj/structure/cable/green{
@@ -46198,7 +46198,7 @@
 /area/eris/crew_quarters/bar)
 "cim" = (
 /obj/machinery/shield_diffuser,
-/turf/floor/reinforced/airless,
+/turf/floor/reinforced/almost_airless,
 /area/eris/maintenance/disposal)
 "cin" = (
 /obj/structure/bed/chair/custom/bar_special{
