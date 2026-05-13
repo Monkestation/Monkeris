@@ -751,12 +751,14 @@
 			if(has_mob_product)
 				product = new has_mob_product(get_turf(source),name)
 			else
-				var/quality
+				var/quality //product quality
+				var/plantpowr //inherent potency quality before harvest
 				if(force_quality)
 					quality = force_quality
 				else
 					if(livesource && livesource.stats.getStat(STAT_BIO))
-						quality = clamp(1 * ((livesource.stats.getStat(STAT_BIO) + 15) / 15), 0, 10)
+						plantpowr = round(get_trait(TRAIT_POTENCY) / 10)
+						quality = ((livesource.stats.getStat(STAT_BIO) + 15) / 20) * clamp(plantpowr, 0.25, 4)
 					else//nuclear farmbot nerf
 						quality = -5
 				product = new /obj/item/reagent_containers/food/snacks/grown(get_turf(source), name, quality)
