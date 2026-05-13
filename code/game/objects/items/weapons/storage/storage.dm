@@ -19,6 +19,8 @@
 	var/display_contents_with_number //Set this to make the storage item group contents of the same type and display them as a number.
 	var/allow_quick_empty //Set this variable to allow the object to have the 'empty' verb, which dumps all the contents on the floor.
 	var/allow_quick_gather //Set this variable to allow the object to have the 'toggle mode' verb, which quickly collects all items from a tile.
+	///If set, quick gather collects all items from the target tile, and adjacent ones. requires allow_quick_gather
+	var/adjacent_quick_gather
 	var/collection_mode = TRUE //0 = pick one at a time, 1 = pick all on tile
 	var/use_sound = "rustle" //sound played when used. null for no sound.
 	var/is_tray_hidden = FALSE //hides from even t-rays
@@ -482,7 +484,16 @@
 	ASSERT(istype(target))
 	. = FALSE
 
-	for(var/obj/item/I in target)
+	var/list/target_list = list()
+
+	if(adjacent_quick_gather)
+		for(var/turf/adjacent in range(1, target))
+			for(var/obj/item/ouritem in adjacent)
+				target_list += ouritem
+	else
+		target_list = target.contents.Copy()
+
+	for(var/obj/item/I in target_list)
 		if(can_be_inserted(I, TRUE))
 			. |= TRUE
 			handle_item_insertion(I, TRUE)
