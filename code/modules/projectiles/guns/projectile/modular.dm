@@ -107,7 +107,7 @@
 	var/dashTag = ""
 	if((PARTMOD_FOLDING_STOCK & spriteTags) && (PARTMOD_FOLDING_STOCK & statusTags))
 		dashTag += "-st"
-	if((PARTMOD_SLIDE & spriteTags) && !ammo_magazine)
+	if((PARTMOD_SLIDE & spriteTags) && (!ammo_magazine || !ammo_magazine.stored_ammo.len))
 		dashTag += "-e"
 
 	// Add dashTag to iconstring

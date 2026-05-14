@@ -22,31 +22,45 @@
 		extra_description += span_danger("Do not build any walls around this as it will interfere with the mechanism and cause it to instantly fail.")
 	..(user, extra_description)
 
+#warn Test excelsior_redirector anchoring and unanchoring, in the right and wrong place.
 /obj/machinery/excelsior_redirector/attackby(obj/item/I, mob/living/user)
-	if(istool(I))
-		if(redirectTimer)
-			to_chat(user, span_notice("You can't unanchor \the [src] whilst it's running!"))
+	if(!istool(I))
+		return ..()
+	if(redirectTimer)
+		to_chat(user, span_notice("You can't unanchor \the [src] whilst it's running!"))
+		return
+	if(!I.get_tool_quality(QUALITY_BOLT_TURNING))
+		return
+	if(!anchored)
+		if(!can_anchor_here(user))
 			return
-		if(I.get_tool_quality(QUALITY_BOLT_TURNING))
-			if(!anchored)
-				var/area/ar = get_area(src)
-				if(!(ar.type == /area/eris/command/bridge))
-					to_chat(user, span_danger("\The [src] can only be anchored on the Bridge of the CEV Eris near the helm console."))
-					return
-				var/obj/machinery/computer/helm/consol = null
-				for(var/turf/thing in RANGE_TURFS(1, src))
-					if(!consol)
-						consol = locate() in thing
-					if(iswall(thing))
-						to_chat(user, span_danger("\The [src] needs to be kept away from walls in order to work properly!"))
-						return
-				if(!consol)
-					to_chat(user, span_notice("\The [src] must be installed near a helm navigation console."))
-					return
-			to_chat(user, span_notice("You [anchored ? "unanchor" : "anchor"] \the [src] to the floor."))
-			anchored = !anchored
-			icon_state = "[anchored ? "redirector_anchored" : "redirector_unanchored"]"
-	else ..()
+	anchored = !anchored
+	to_chat(user, span_notice("You [anchored ? "anchor" : "unanchor"] \the [src] to the floor."))
+
+	icon_state = anchored ? "redirector_anchored" : "redirector_unanchored"
+
+
+/obj/machinery/excelsior_redirector/proc/can_anchor_here(mob/living/user)
+	var/area/current_area = get_area(src)
+
+	if(!istype(current_area, /area/eris/command/bridge))
+		to_chat(user, span_danger("\The [src] can only be anchored on the Bridge of the CEV Eris near the helm console."))
+		return FALSE
+
+	var/obj/machinery/computer/helm/console
+
+	for(var/turf/T in RANGE_TURFS(1, src))
+		console ||= locate(/obj/machinery/computer/helm) in T
+
+		if(iswall(T))
+			to_chat(user, span_danger("\The [src] needs to be kept away from walls in order to work properly!"))
+			return FALSE
+
+	if(!console)
+		to_chat(user, span_notice("\The [src] must be installed near a helm navigation console."))
+		return FALSE
+
+	return TRUE
 
 /obj/machinery/excelsior_redirector/attack_hand(mob/user)
 	if(is_excelsior(user))

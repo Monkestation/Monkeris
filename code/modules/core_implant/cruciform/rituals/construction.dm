@@ -112,7 +112,7 @@ GLOBAL_LIST_INIT(nt_constructs, init_nt_constructs())
 	if(isnull(loot))
 		fail("There is no mistake to remove here.",user,C,targets)
 		return
-	if(reclaimed.type == /obj/machinery/power/eotp && !(is_preacher(user) || is_inquisidor(user)))
+	if(istype(reclaimed, /obj/machinery/power/eotp) && !(is_preacher(user) || is_inquisidor(user)))
 		fail("The power of moving such holy buildings is only placed in the power of the upmost faithful!")
 		return
 	user.visible_message(span_notice("[user] places one hand on their chest, and the other stretched forward."),span_notice("You take back what is, returning it to what was."))

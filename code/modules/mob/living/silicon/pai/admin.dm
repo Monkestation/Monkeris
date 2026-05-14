@@ -14,7 +14,7 @@
 	log_and_message_admins("made a pAI with key=[pai_key] at ([t.x],[t.y],[t.z])")
 	var/obj/item/device/paicard/card = new(t)
 	var/mob/living/silicon/pai/pai = new(card)
-	pai.key = pai_key
+	pai.PossessByPlayer(pai_key)
 	card.setPersonality(pai)
 
 	if(name)

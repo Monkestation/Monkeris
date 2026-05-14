@@ -59,9 +59,9 @@
 	VV_DROPDOWN_OPTION(VV_HK_TRIGGER_EMP, "EMP Pulse")
 	VV_DROPDOWN_OPTION(VV_HK_TRIGGER_EXPLOSION, "Explosion")
 	VV_DROPDOWN_OPTION(VV_HK_EDIT_COLOR_MATRIX, "Edit Color as Matrix")
+	VV_DROPDOWN_OPTION(VV_HK_EDIT_FILTERS, "Edit Filters")
 	VV_DROPDOWN_OPTION(VV_HK_TEST_MATRIXES, "Test Matrices")
 	VV_DROPDOWN_OPTION(VV_HK_ADJUST_ANIMATIONS, "Adjust Animations")
-
 
 /atom/vv_do_topic(list/href_list)
 	. = ..()
@@ -206,6 +206,9 @@
 
 	if(href_list[VV_HK_TEST_MATRIXES] && check_rights(R_VAREDIT))
 		usr.client?.open_matrix_tester(src)
+
+	if(href_list[VV_HK_EDIT_FILTERS] && check_rights(R_VAREDIT))
+		usr.client?.open_filter_editor(src)
 
 
 /atom/vv_get_header()

@@ -37,3 +37,37 @@
   datlo:
   - rscdel: Removed the space vines event. ('Strange plants' spread)
   - rscdel: Removed wallrot event and mechanics.
+2026-05-12:
+  Cat&Deal:
+  - bugfix: Dist3D proc Z calculations work correctly(e.g. excel turret or roach burrowing)
+  - code_imp: 'excelsior teleporter no longer: produces energy, controls turrets'
+  - rscadd: added Centor - Excelsior AI core. Powers up chains, consisting of Nodes.
+  - rscadd: added Excelsior Node - Centor's order transmitter. Produces energy, reports
+      intruders, controls turrets.
+  - rscadd: added KOMPAK - an Excelsior PDA. Capable of creating holographic lines
+      and pathfinding
+  - balance: very carefully changed Excelsior's order list prices (inside the teleporter)
+  - tweak: Changed Excelsior's intro text.
+  - code_imp: added new css file to nano ui to be used with new Excelsior GUI
+  - code_imp: new komulink() function in nano helpers js file to create excelsior
+      styled links
+  - rscadd: added new faction proc to communicate faction messages from inanimate
+      objects (e.g. node reporting intruder to excelsior chat)
+  - refactor: changed Excelsior file structure
+  - balance: lowered minimal amount of excelsior roleset to 2 from 3
+  Sun-Soaked:
+  - rscadd: The laurelin bonsai's harvest now has quality based on the amount of alchohol
+      used, and it's potency. The bonsai now gives less fruit.
+  - bugfix: The laurelin bonsai works again.
+  thedarkcrusader:
+  - rscadd: Added claymore style directional mines
+  - rscadd: Added Frozen Star claymore to Ironhammer MISC disc
+  - imageadd: Added claymore sprites and HUD tripwire indicators
+  - code_imp: Included standard claymore variant (currently unobtainable)
+2026-05-13:
+  Sun-Soaked:
+  - bugfix: toilets are now visible
+  - bugfix: modular guns now correctly show an empty slide when their magazine has
+      no bullets left
+  blackwolf602:
+  - rscadd: Added seuche costume

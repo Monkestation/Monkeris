@@ -401,7 +401,7 @@ This proc will attempt to create a burrow against a wall, within view of the tar
 			continue
 
 		//We don't want maintshrooms to spread into places that are too bright
-		if (B.plant.type == /datum/seed/mushroom/maintshroom && T.get_lumcount() > 0.5)
+		if (istype(B, /datum/seed/mushroom/maintshroom) && T.get_lumcount() > 0.5)
 			continue
 
 		//Chance to reject it anyways to make plant spreading less predictable

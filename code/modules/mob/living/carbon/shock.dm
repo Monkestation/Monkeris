@@ -123,6 +123,11 @@
 			to_chat(src, span_danger("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!"))
 			Weaken(10)
 
+	//haze warning for imminent paincrit
+	if(shock_stage >= hard_crit_threshold * 0.90)
+		if(prob(10))
+			eye_hazy += 5
+
 	if(shock_stage >= hard_crit_threshold)
 		enter_hard_crit()
 

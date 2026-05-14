@@ -60,16 +60,16 @@
 	..()
 
 /obj/item/device/von_krabin/nt_sword_handle()
-	if(eotp)
-		// no more NT link obstructions
-		eotp.max_power -= 20 // reduces how much is needed for things to happen
-		eotp.armaments_rate += 10
-		eotp.max_armaments_points += 50
+	if(!eotp)
+		return
+	// no more NT link obstructions
+	eotp.max_power -= 20 // reduces how much is needed for things to happen
+	eotp.armaments_rate += 10
+	eotp.max_armaments_points += 50
 	for(var/mob/living/carbon/human/hive_minded in the_hiveminded)
-		if(eotp)
-			eotp.power += 10
-			eotp.armaments_rate += 5
-			eotp.max_armaments_points += 5
+		eotp.power += 10
+		eotp.armaments_rate += 5
+		eotp.max_armaments_points += 5
 
 /obj/item/device/von_krabin/attackby(obj/item/I, mob/user, params)
 	if(nt_sword_attack(I, user))

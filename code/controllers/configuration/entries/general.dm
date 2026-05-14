@@ -527,6 +527,11 @@
 
 /datum/config_entry/flag/use_overmap
 
+/datum/config_entry/number/pr_announcements_per_round
+	default = 5
+	min_val = 0
+	integer = TRUE
+
 /**
  * motd.txt
  * Sets an MOTD of the server.

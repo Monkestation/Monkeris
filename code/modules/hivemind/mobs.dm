@@ -976,7 +976,7 @@
 
 /mob/living/simple_animal/hostile/hivemind/phaser/New()
 	..()
-	filters += filter(type="blur", size = 0)
+	add_filter("phaser_blur", 1, gauss_blur_filter(size = 0))
 
 
 /mob/living/simple_animal/hostile/hivemind/phaser/Life()

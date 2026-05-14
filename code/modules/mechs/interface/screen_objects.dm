@@ -321,8 +321,7 @@
 			playsound(owner.loc,'sound/effects/scanbeep.ogg',30,0)
 			to_chat(usr, span_notice("The diagnostics panel blinks several times as it updates:"))
 			for(var/obj/item/mech_component/MC in list(owner.arms, owner.legs, owner.body, owner.head))
-				if(MC)
-					MC.return_diagnostics(usr)
+				MC.return_diagnostics(usr)
 
 /atom/movable/screen/movable/exosuit/health/on_handle_hud(mob/living/exosuit/E)
 	. = ..()

@@ -88,8 +88,7 @@ var/global/const/base_law_type = /datum/ai_laws/eris
 	for (var/datum/ai_law/law in inherent_laws)
 		S.laws.add_inherent_law(law.law)
 	for (var/datum/ai_law/law in supplied_laws)
-		if(law)
-			S.laws.add_supplied_law(law.index, law.law)
+		S.laws.add_supplied_law(law.index, law.law)
 
 /**
  * Generates a list of all laws on this datum, including rendered HTML tags if required

@@ -31,10 +31,8 @@ SUBSYSTEM_DEF(plexora)
 #endif
 
 	var/plexora_is_alive = null // this gets set to TRUE or FALSE during is_plexora_alive, it's just initially null to so logging works properly without spamming
-	var/vanderlin_available = FALSE
 	var/base_url = ""
 	var/enabled = TRUE
-	var/tripped_bad_version = FALSE
 	var/list/default_headers
 
 	var/restart_type = PLEXORA_SHUTDOWN_NORMAL
@@ -80,7 +78,6 @@ SUBSYSTEM_DEF(plexora)
 	plexora_is_alive = SSplexora.plexora_is_alive
 	base_url = SSplexora.base_url
 	enabled = SSplexora.enabled
-	tripped_bad_version = SSplexora.tripped_bad_version
 	default_headers = SSplexora.default_headers
 	if(initialized && !enabled)
 		flags |= SS_NO_FIRE
@@ -98,7 +95,8 @@ SUBSYSTEM_DEF(plexora)
 
 /datum/controller/subsystem/plexora/proc/is_plexora_alive()
 	. = FALSE
-	if(!enabled) return
+	if(!enabled)
+		return
 
 	var/datum/http_request/request = new(RUSTG_HTTP_METHOD_GET, "[base_url]/alive")
 	request.begin_async()
@@ -115,9 +113,11 @@ SUBSYSTEM_DEF(plexora)
 		return TRUE
 
 /datum/controller/subsystem/plexora/fire()
-	if(!is_plexora_alive()) return
+	if(!is_plexora_alive())
+		return
 	// Send current status to Plexora
 	var/datum/world_topic/status/status_handler = new()
+	status_handler.key_valid = TRUE
 	var/list/status = status_handler.Run()
 
 	var/datum/http_request/status_request = http_request(
@@ -127,7 +127,6 @@ SUBSYSTEM_DEF(plexora)
 		default_headers
 	)
 	status_request.fire_and_forget()
-
 
 #undef OLD_PLEXORA_CONFIG
 #undef AUTH_HEADER

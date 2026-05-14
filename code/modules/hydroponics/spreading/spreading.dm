@@ -55,7 +55,7 @@
 		SSplants.remove_plant(src)
 	for(var/obj/effect/plant/neighbor in range(1,src))
 		SSplants.add_plant(neighbor)
-	if(seed.type == /datum/seed/mushroom/maintshroom)
+	if(istype(seed, /datum/seed/mushroom/maintshroom))
 		GLOB.all_maintshrooms -= src
 	. = ..()
 
@@ -93,7 +93,7 @@
 		growth_threshold = max_health/VINE_GROWTH_STAGES
 		icon = 'icons/obj/hydroponics_vines.dmi'
 		growth_type = 2 // Vines by default.
-		if(seed.type == /datum/seed/mushroom/maintshroom)
+		if(istype(seed, /datum/seed/mushroom/maintshroom))
 			growth_type = 0 // this is maintshroom
 			density = FALSE
 			GLOB.all_maintshrooms += src

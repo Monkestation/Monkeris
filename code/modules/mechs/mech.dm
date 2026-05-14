@@ -212,8 +212,6 @@
 		extra_description += "\nIt has no visible hardpoints."
 
 	for(var/obj/item/mech_component/thing in list(arms, legs, head, body))
-		if(!thing)
-			continue
 		var/damage_string = thing.get_damage_string()
 		extra_description += "\nIts [thing.name] [thing.gender == PLURAL ? "are" : "is"] [damage_string]."
 	extra_description += "\nIt menaces with reinforcements of [material]."

@@ -70,6 +70,9 @@
 	/// Our light source. Don't fuck with this directly unless you have a good reason!
 	var/tmp/datum/light_source/light
 
+	///Lazy assoc list for managing filters attached to us
+	var/list/filter_data
+
 /atom/proc/update_icon()
 	return
 

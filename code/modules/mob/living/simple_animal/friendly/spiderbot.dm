@@ -140,11 +140,10 @@
 		spawn(200)	to_chat(src, span_danger("Internal heat sensors are spiking! Something is badly wrong with your cell!"))
 		spawn(300)	src.explode()
 
+#warn test transfer_personality on spiderbot with mmi
 /mob/living/simple_animal/spiderbot/proc/transfer_personality(obj/item/device/mmi/M as obj)
-
-		src.mind = M.brainmob.mind
-		src.mind.key = M.brainmob.key
-		src.ckey = M.brainmob.ckey
+		M.brainmob.mind?.transfer_to(src)
+		src.PossessByPlayer(M.brainmob.key)
 		src.name = "spider-bot ([M.brainmob.name])"
 
 /mob/living/simple_animal/spiderbot/proc/explode() //When emagged.

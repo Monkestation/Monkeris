@@ -130,7 +130,8 @@
 	"internal"           = list("type" = /atom/movable/screen/internal,          "loc" = "EAST+1,BOTTOM+8:-2",     "minloc" = "RIGHT,10:-5",   "background" = "back15"),
 //corner buttons
 	//"jump"               = list("type" = /atom/movable/screen/jump,              "loc" = "EAST+1,BOTTOM+1:-6", "minloc" = "RIGHT,3:-6",   "hideflag" = TOGGLE_BOTTOM_FLAG, "background" = "back17-1"),
-	"look up"            = list("type" = /atom/movable/screen/look_up,           "loc" = "EAST,BOTTOM+1:13",   "minloc" = "RIGHT-1,2:13", "hideflag" = TOGGLE_BOTTOM_FLAG, "background" = "back17-1"),
+	"look up"            = list("type" = /atom/movable/screen/look_up,           "loc" = "EAST,BOTTOM+1:26",   "minloc" = "RIGHT-1,2:13", "hideflag" = TOGGLE_BOTTOM_FLAG, "background" = "back17-1"),
+	"look down"          = list("type" = /atom/movable/screen/look_down,         "loc" = "EAST,BOTTOM+1:13",   "minloc" = "RIGHT-1,2:16", "hideflag" = TOGGLE_BOTTOM_FLAG, "background" = "back17-1"),
 	"throw"              = list("type" = /atom/movable/screen/HUDthrow,          "loc" = "EAST+1,BOTTOM+1:13", "minloc" = "RIGHT,2:13",   "hideflag" = TOGGLE_BOTTOM_FLAG, "background" = "back17-1"),
 	"pull"               = list("type" = /atom/movable/screen/pull,              "loc" = "EAST-1,BOTTOM+1:13", "minloc" = "RIGHT-2,2:13", "hideflag" = TOGGLE_BOTTOM_FLAG, "background" = "back17-1"),
 	"drop"               = list("type" = /atom/movable/screen/drop,              "loc" = "EAST+1,BOTTOM+1",    "minloc" = "RIGHT,2",      "hideflag" = TOGGLE_BOTTOM_FLAG, "background" = "back17-1"),

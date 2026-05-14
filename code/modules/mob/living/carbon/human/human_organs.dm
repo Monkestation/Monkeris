@@ -41,8 +41,6 @@
 			bad_external_organs |= E
 
 	for(var/obj/item/organ/external/E in bad_external_organs)
-		if(!E)
-			continue
 		if(!E.need_process())
 			bad_external_organs -= E
 			continue

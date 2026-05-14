@@ -606,6 +606,9 @@
 /obj/item/clothing/suit/storage/toggle/robe/fuhrer
 	rarity_value = 18.3333
 
+/obj/item/clothing/suit/storage/toggle/robe/seuche
+	rarity_value = 18.3333
+
 /obj/item/clothing/mask/chameleon
 	rarity_value = 50
 

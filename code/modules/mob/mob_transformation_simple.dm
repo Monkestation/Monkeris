@@ -43,7 +43,7 @@
 	if(mind)
 		mind.transfer_to(M)
 	else
-		M.key = key
+		M.PossessByPlayer(key)
 
 	if(subspecies && ishuman(M))
 		var/mob/living/carbon/human/H = M

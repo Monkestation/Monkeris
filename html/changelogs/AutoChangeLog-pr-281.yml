@@ -1,0 +1,5 @@
+author: BartDrown
+delete-after: true
+changes:
+  - bugfix: Clicking "View" on AI law change notification now teleports the 
+      ghost to the AI and shows its current laws

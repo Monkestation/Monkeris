@@ -33,7 +33,6 @@ var/list/bitflags = list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096
 #define FIRE_PRIORITY_EVENT				20	// Event processing.
 #define FIRE_PRIORITY_SHUTTLE			20	// Shuttle movement.
 #define FIRE_PRIORITY_AIRFLOW			15	// Object movement from ZAS airflow.
-#define FIRE_PRIORITY_INACTIVITY_AND_JOB_TRACKING		10	// Idle kicking.
 #define FIRE_PRIORITY_SUPPLY			10	// Supply point accumulation.
 #define FIRE_PRIORITY_PING				10	// Client ping.
 #define FIRE_PRIORITY_TICKETS			10

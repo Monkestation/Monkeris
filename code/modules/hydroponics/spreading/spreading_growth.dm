@@ -154,7 +154,7 @@
 		health -= seed.handle_environment(T,T.return_air(),null,1)
 
 	// Maintshrooms will not grow in the light
-	if(seed.type == /datum/seed/mushroom/maintshroom && T.get_lumcount() > MIN_LIGHT_LIMIT)
+	if(istype(seed, /datum/seed/mushroom/maintshroom) && T.get_lumcount() > MIN_LIGHT_LIMIT)
 		return
 
 	if(health < max_health)
@@ -167,7 +167,7 @@
 		refresh_icon()
 		if(health > max_health)
 			health = max_health
-	else if(health == max_health && !plant && (seed.type != /datum/seed/mushroom/maintshroom))
+	else if(health == max_health && !plant && !(istype(seed, /datum/seed/mushroom/maintshroom)))
 		plant = new(T,seed)
 		plant.dir = src.dir
 		plant.transform = src.transform

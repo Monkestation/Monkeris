@@ -44,13 +44,12 @@
 		spawn(10)
 			// Nom.
 			for(var/atom/movable/A in T)
-				if(A)
-					if(isliving(A))
-						qdel(A)
-					else if(ismob(A)) // Observers, AI cameras.
-						continue
-					else
-						qdel(A)
+				if(isliving(A))
+					qdel(A)
+				else if(ismob(A)) // Observers, AI cameras.
+					continue
+				else
+					qdel(A)
 			T.ChangeTurf(type)
 
 /turf/wall/dummy/supermatter/attack_generic(mob/user)

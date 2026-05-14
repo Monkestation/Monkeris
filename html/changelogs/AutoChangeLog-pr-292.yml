@@ -1,0 +1,13 @@
+author: flleeppyy
+delete-after: true
+changes:
+  - rscadd: In-game Github PR announcer
+  - config: New config option for PR announcer, "pr_announcements_per_round" 
+      (number)
+  - refactor: Refactor world topic status
+  - bugfix: server status message announcement not working (Discord -> Game 
+      server announcement)
+  - code_imp: Add JSON support for world topics (neccessary for Plexora)
+  - rscdel: Remove inactivity and jobs tracker, it serves no purpose at this 
+      time; Use server maint for AFK kicking
+  - rscdel: Remove unused new_player motd

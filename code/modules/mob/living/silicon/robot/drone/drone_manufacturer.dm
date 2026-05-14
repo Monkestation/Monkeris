@@ -88,7 +88,7 @@
 		new_drone.laws = M.laws
 		M.mind.active = 0 // We want to transfer the key manually
 		M.mind.transfer_to(new_drone) // Transfer mind to drone
-		new_drone.key = player.key // Manually transfer the key to log them in
+		new_drone.PossessByPlayer(player.key) // Manually transfer the key to log them in
 		new_drone.master_fabricator = src
 
 	drone_progress = 0

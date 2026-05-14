@@ -163,6 +163,7 @@
 	organ_efficiency_multiplier = -0.10 // not in top condition, not dying yet though
 	next_wound = /datum/internal_wound/organic/fibrosis
 	progression_threshold = IWOUND_HALF_MINUTE
+	severity_max = 5
 
 /datum/internal_wound/organic/fibrosis
 	characteristic_flag = IWOUND_CAN_DAMAGE|IWOUND_AGGRAVATION
@@ -310,10 +311,10 @@
 /datum/internal_wound/organic/parenchyma/Destroy()
 	. = ..()
 	var/obj/item/organ/O = parent
-	
+
 	if(O.owner)
 		O.owner.mutation_index--
-	
+
 /datum/internal_wound/organic/parenchyma/heart
 	name = "heart parenchyma"
 	organ_efficiency_mod = list(OP_HEART = 10)

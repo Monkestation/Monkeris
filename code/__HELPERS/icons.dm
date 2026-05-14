@@ -1412,3 +1412,4 @@ non_blocking var, if true, will allow sleeping to prevent server freeze, at the 
 // 	if(MA.plane == EMISSIVE_PLANE)
 // 		return TRUE
 // 	return FALSE
+

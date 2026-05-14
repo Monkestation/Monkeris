@@ -1,0 +1,8 @@
+author: Sun-Soaked
+delete-after: true
+changes:
+  - rscadd: the disgorger now hints icly at the need for a heart and blood 
+      vessels, with the hint changing based on what specifically is needed
+  - bugfix: the disgorger now properly displays it's extended description
+  - balance: the disgorger's final kidney eff threshold for adding new reagents 
+      is now slightly more reasonable

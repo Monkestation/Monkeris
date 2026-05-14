@@ -178,21 +178,20 @@
 	// Returns a list of mobs who can hear any of the radios given in @radios
 	var/list/speaker_coverage = list()
 	for(var/obj/item/device/radio/R in radios)
-		if(R)
-			//Cyborg checks. Receiving message uses a bit of cyborg's charge.
-			var/obj/item/device/radio/borg/BR = R
-			if(istype(BR) && BR.myborg)
-				var/mob/living/silicon/robot/borg = BR.myborg
-				var/datum/robot_component/CO = borg.get_component("radio")
-				if(!CO)
-					continue //No radio component (Shouldn't happen)
-				if(!borg.is_component_functioning("radio") || !borg.cell_use_power(CO.active_usage))
-					continue //No power.
+		//Cyborg checks. Receiving message uses a bit of cyborg's charge.
+		var/obj/item/device/radio/borg/BR = R
+		if(istype(BR) && BR.myborg)
+			var/mob/living/silicon/robot/borg = BR.myborg
+			var/datum/robot_component/CO = borg.get_component("radio")
+			if(!CO)
+				continue //No radio component (Shouldn't happen)
+			if(!borg.is_component_functioning("radio") || !borg.cell_use_power(CO.active_usage))
+				continue //No power.
 
-			var/turf/speaker = get_turf(R)
-			if(speaker)
-				for(var/turf/T in hear(R.canhear_range, speaker))
-					speaker_coverage[T] = T
+		var/turf/speaker = get_turf(R)
+		if(speaker)
+			for(var/turf/T in hear(R.canhear_range, speaker))
+				speaker_coverage[T] = T
 
 
 	// Try to find all the players who can hear the message
@@ -288,6 +287,27 @@
 					candidates += G.key
 		i++
 	return candidates
+
+///Get active players who are playing in the round
+/proc/get_active_player_count(alive_check = FALSE, afk_check = FALSE, human_check = FALSE)
+	var/active_players = 0
+	for(var/mob/player_mob as anything in GLOB.player_list)
+		if(!player_mob?.client)
+			continue
+		if(alive_check && player_mob.stat == DEAD)
+			continue
+		if(afk_check && player_mob.client.is_afk())
+			continue
+		if(human_check && !ishuman(player_mob))
+			continue
+		if(isnewplayer(player_mob)) // exclude people in the lobby
+			continue
+		if(isobserver(player_mob)) // Ghosts are fine if they were playing once (didn't start as observers)
+			var/mob/observer/ghost/ghost_player = player_mob
+			if(ghost_player.started_as_observer) // Exclude people who started as observers
+				continue
+		active_players++
+	return active_players
 
 /proc/ScreenText(obj/O, maptext="", screen_loc="CENTER-7,CENTER-7", maptext_height=480, maptext_width=480)
 	if(!isobj(O))	O = new /atom/movable/screen/text()
