@@ -6,33 +6,33 @@
 	layer = 2
 	health = 		80
 	max_health = 	80 		//we are a little bit durable
-	spread_chance = 95
+	spread_chance = 100
 	var/list/killer_reagents = list("pacid", "sacid", "hclacid", "chlorine")
 	//internals
 	var/obj/machinery/hivemind_machine/node/master_node
 	var/list/wires_connections = list("0", "0", "0", "0")
-	var/my_area
+	var/areaName
 
 /obj/effect/plant/hivemind/New()
 	..()
 	icon = 'icons/obj/hivemind.dmi'
 	spawn(2)
 		update_neighbors()
-	var/area/A = get_area(src)
-	if(!A)
+	var/area/area = get_area(src)
+	if(!area)
 		QDEL_IN(src, 1)
 		return
-	my_area = A.name
-	if(!(my_area in GLOB.hivemind_areas))
-		GLOB.hivemind_areas.Add(my_area)
-	GLOB.hivemind_areas[my_area]++
+	areaName = area.name
+	if(!(areaName in GLOB.hivemind_areas))
+		GLOB.hivemind_areas.Add(areaName)
+	GLOB.hivemind_areas[areaName]++
 
 /obj/effect/plant/hivemind/Destroy()
 	if(master_node)
 		master_node.my_wireweeds.Remove(src)
-	GLOB.hivemind_areas[my_area]--
-	if(!GLOB.hivemind_areas[my_area]) // Last wire in that area
-		GLOB.hivemind_areas.Remove(my_area)
+	GLOB.hivemind_areas[areaName]--
+	if(!GLOB.hivemind_areas[areaName]) // Last wire in that area
+		GLOB.hivemind_areas.Remove(areaName)
 	return ..()
 
 
@@ -47,7 +47,7 @@
 			neighbor.update_neighbors()
 
 
-/obj/effect/plant/hivemind/proc/try_to_assimilate()
+/obj/effect/plant/hivemind/proc/try_assimilate_machinery()
 	for(var/obj/machinery/machine_on_my_tile in loc)
 		var/can_assimilate = TRUE
 		if(machine_on_my_tile.alpha == 0) //which mean that machine is already assimilated
@@ -125,11 +125,11 @@
 
 /obj/effect/plant/hivemind/life()
 	if(hive_mind_ai && master_node)
-		try_to_assimilate()
-		chem_handler()
+		try_assimilate_machinery()
+		die_from_deadly_smoke_in_air()
 		var/obj/machinery/door/door_on_my_tile = locate(/obj/machinery/door) in loc
 		if(door_on_my_tile && door_on_my_tile.density)
-			door_interaction(door_on_my_tile)
+			plant_interact_with_airlock(door_on_my_tile)
 	else
 		//slow vanishing after node death
 		health -= 10
@@ -192,7 +192,7 @@
 	wires_connections = dirs_to_corner_states(dirs)
 
 
-/obj/effect/plant/hivemind/door_interaction(obj/machinery/door/door)
+/obj/effect/plant/hivemind/plant_interact_with_airlock(obj/machinery/door/door)
 	if(!istype(door) || !hive_mind_ai || !master_node)
 		return FALSE
 
@@ -214,8 +214,7 @@
 			if(istype(door, /obj/machinery/door/airlock))
 				var/obj/machinery/door/airlock/A = door
 				if(A.locked)
-					if(prob(75))
-						A.unlock()
+					A.unlock()
 					return FALSE
 			//and then, if airlock is closed, we begin destroy it electronics
 			if(door.density)
@@ -391,7 +390,7 @@
 
 
 //Some acid and there's no problem
-/obj/effect/plant/hivemind/proc/chem_handler()
+/obj/effect/plant/hivemind/proc/die_from_deadly_smoke_in_air()
 	for(var/obj/effect/effect/smoke/chem/smoke in loc)
 		for(var/lethal in killer_reagents)
 			if(smoke.reagents.has_reagent(lethal))

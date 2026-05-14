@@ -7,6 +7,7 @@
 //So combine all of that to defeat them
 
 
+// Abstract parent mob ---------------------------
 /mob/living/simple_animal/hostile/hivemind
 	name = "creature"
 	icon = 'icons/mob/hivemind.dmi'
@@ -24,6 +25,7 @@
 	spawn_tags = SPAWN_TAG_MOB_HIVEMIND
 	rarity_value = 20
 	mob_classification = CLASSIFICATION_SYNTHETIC
+
 
 	var/malfunction_chance = 5
 	var/ability_cooldown = 30 SECONDS

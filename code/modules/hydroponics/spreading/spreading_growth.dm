@@ -55,7 +55,7 @@
 				if (!found_door)
 					continue
 
-				var/can_pass = door_interaction(found_door, floor)
+				var/can_pass = plant_interact_with_airlock(found_door, floor)
 				if(!can_pass)
 					continue
 
@@ -67,7 +67,7 @@
 		neighbor.neighbors -= T
 
 
-/obj/effect/plant/proc/door_interaction(obj/machinery/door/door, turf/floor)
+/obj/effect/plant/proc/plant_interact_with_airlock(obj/machinery/door/door, turf/floor)
 	//We have to make sure that nothing ELSE aside from the door is blocking us
 	var/blocked = FALSE
 	for (var/obj/O in floor)
