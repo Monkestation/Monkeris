@@ -38,3 +38,15 @@
 /obj/effect/temp_visual/long //temp visual with longer duration
 	randomdir = FALSE
 	duration = 25
+
+/obj/effect/temp_visual/wraith_warp
+	icon = 'icons/effects/light_overlays/light_128.dmi'
+	icon_state = "light"
+	plane = GRAVITY_PULSE_PLANE
+	pixel_x = -48
+	pixel_y = -48
+	duration = 8
+
+/obj/effect/temp_visual/wraith_warp/Initialize()
+	. = ..()
+	animate(src, time=duration, transform=matrix().Scale(0.1,0.1))

@@ -59,17 +59,16 @@
 	if(!LD)
 		return;
 
-
 	var/local_z = z-(LD.original_level-1)
 	for(var/zi in 1 to local_z)
-		for(var/mytype in subtypesof(/atom/movable/screen/plane_master))
-			var/atom/movable/screen/plane_master/instance = new mytype()
+		for(var/mytype in subtypesof(/atom/movable/screen/plane_master) - /atom/movable/screen/plane_master/rendering_plate)
+			var/atom/movable/screen/plane_master/instance = new mytype(null, mymob)
 
 			instance.plane = calculate_plane(zi,instance.plane)
 
 			plane_masters["[zi]-[mytype]"] = instance
 			mymob.client.screen += instance
-			instance.backdrop(mymob)
+			instance.backdrop(mymob, zi)
 
 		for(var/pl in list(GAME_PLANE,FLOOR_PLANE))
 			if(zi < local_z)
@@ -230,6 +229,7 @@
 	for (var/p in IconUnderlays)
 		var/image/I = IconUnderlays[p]
 		I.alpha = 200
+		I.plane = BELOW_HUD_PLANE
 
 
 /datum/hud/human/liberty
