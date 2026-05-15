@@ -6,8 +6,6 @@
 //But if players get some of these 'big guys', only teamwork, fast legs and trickery will works fine
 //So combine all of that to defeat them
 
-
-// Abstract parent mob ---------------------------
 /mob/living/simple_animal/hostile/hivemind
 	name = "creature"
 	icon = 'icons/mob/hivemind.dmi'
@@ -129,7 +127,7 @@
 		if(B)
 			B.unbuckle_mob()
 
-	if(!hive_mind_ai)
+	if(!hivemind_ai)
 		if(prob(5))
 			death()
 			return FALSE

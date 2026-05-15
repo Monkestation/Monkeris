@@ -1887,7 +1887,7 @@
 #include "code\modules\hivemind\core.dm"
 #include "code\modules\hivemind\machines.dm"
 #include "code\modules\hivemind\mobs.dm"
-#include "code\modules\hivemind\objects.dm"
+#include "code\modules\hivemind\projectiles.dm"
 #include "code\modules\hivemind\self_defense.dm"
 #include "code\modules\hivemind\wires.dm"
 #include "code\modules\holodeck\HolodeckControl.dm"

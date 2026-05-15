@@ -9,7 +9,7 @@
 	spread_chance = 100
 	var/list/killer_reagents = list("pacid", "sacid", "hclacid", "chlorine")
 	//internals
-	var/obj/machinery/hivemind_machine/node/master_node
+	var/obj/machinery/hivemind_machine/node/node_weed_owner
 	var/list/wires_connections = list("0", "0", "0", "0")
 	var/areaName
 
@@ -18,27 +18,16 @@
 	icon = 'icons/obj/hivemind.dmi'
 	spawn(2)
 		update_neighbors()
-	var/area/area = get_area(src)
-	if(!area)
-		QDEL_IN(src, 1)
-		return
-	areaName = area.name
-	if(!(areaName in GLOB.hivemind_areas))
-		GLOB.hivemind_areas.Add(areaName)
-	GLOB.hivemind_areas[areaName]++
 
 /obj/effect/plant/hivemind/Destroy()
-	if(master_node)
-		master_node.my_wireweeds.Remove(src)
-	GLOB.hivemind_areas[areaName]--
-	if(!GLOB.hivemind_areas[areaName]) // Last wire in that area
-		GLOB.hivemind_areas.Remove(areaName)
+	if(node_weed_owner)
+		node_weed_owner.my_wireweeds.Remove(src)
 	return ..()
 
 
 /obj/effect/plant/hivemind/after_spread(obj/effect/plant/child, turf/target_turf)
-	if(master_node)
-		master_node.add_wireweed(child)
+	if(node_weed_owner)
+		node_weed_owner.add_wireweed(child)
 	spawn(1)
 		child.dir = get_dir(loc, target_turf) //actually this means nothing for wires, but need for animation
 		flick("spread_anim", child)
@@ -54,15 +43,14 @@
 			continue
 
 		//whitelist check
-		if(is_type_in_list(machine_on_my_tile, hive_mind_ai.restricted_machineries))
+		if(is_type_in_list(machine_on_my_tile, hivemind_ai.list_of_dont_assimilate))
 			can_assimilate = FALSE
 
-		//assimilation is slow process, so it's take some time
-		//there we use our failure chance. Then it lower, then faster hivemind learn how to properly assimilate it
-		if(can_assimilate && prob(hive_mind_ai.failure_chance))
-			can_assimilate = FALSE
-			anim_shake(machine_on_my_tile)
-			return
+		//failure chance to convert machine. Then it lower, then faster hivemind learn how to properly assimilate it
+		// if(can_assimilate)
+		// 	can_assimilate = FALSE
+		// 	anim_shake(machine_on_my_tile)
+		// 	return
 
 		 //only one machine per turf
 		if(can_assimilate && !locate(/obj/machinery/hivemind_machine) in loc)
@@ -70,14 +58,84 @@
 			return
 
 	//modular computers handling
-	var/obj/item/modular_computer/console/mod_comp = locate() in loc
-	if(mod_comp && mod_comp.alpha != 0)
-		assimilate(mod_comp)
+	var/obj/item/modular_computer/console/console = locate() in loc
+	if(console && console.alpha != 0)
+		assimilate(console)
 
 	//dead bodies handling
 	for(var/mob/living/dead_body in loc)
 		if(dead_body.stat == DEAD)
 			assimilate(dead_body)
+
+
+
+
+
+
+/obj/effect/plant/hivemind/proc/assimilate(atom/subject)
+	// Machhinery or console? Hide them and  spawn hivemind_machine on top
+	if(istype(subject, /obj/machinery) || istype(subject, /obj/item/modular_computer/console))
+		var/obj/machinery/hivemind_machine/created_machine
+		var/amount_of_hivenodes = LAZYLEN(hivemind_ai.list_of_hive_nodes)
+		//New node creation
+		if(amount_of_hivenodes < MAX_NODES_AMOUNT)
+			var/evopoints_range = amount_of_hivenodes * (hivemind_ai.evo_points_max / MAX_NODES_AMOUNT)	// amount_of_hivenodes * (1000 / 10)
+			if(hivemind_ai.evo_points > evopoints_range) 												//one hive per: max_evopoints / max_nodes_amount
+				var/can_spawn_new_node = TRUE
+				for(var/obj/machinery/hivemind_machine/node/other_node in hivemind_ai.list_of_hive_nodes)
+					if(get_dist(other_node, subject) < MIN_NODES_RANGE)
+						can_spawn_new_node = FALSE
+						break
+				if(can_spawn_new_node)
+					created_machine = new /obj/machinery/hivemind_machine/node(get_turf(subject))
+
+		//Here we have a little chance to spawn our machinery horror
+		if(istype(subject, /obj/machinery))
+			var/obj/machinery/victim = subject
+			if(prob(15) && victim.circuit)
+				new /mob/living/simple_animal/hostile/hivemind/mechiver(get_turf(subject))
+				new victim.circuit.type(get_turf(subject))
+				qdel(subject)
+				return
+
+		//New hivemind machine creation
+		if(!created_machine)
+			var/list/possible_machines = list()
+			//here we compare hivemind's evopoints level with machine's required value
+			for(var/hivemachine_path in hivemind_ai.evopoints_price_list)
+				var/list/machine_list = hivemind_ai.evopoints_price_list[hivemachine_path]
+				if(hivemind_ai.evo_level >= machine_list["level"])
+					possible_machines.Add(hivemachine_path)
+					//setting of weight of machine
+					possible_machines[hivemachine_path] = machine_list["weight"]
+
+			var/picked_machine = pickweight(possible_machines)
+			created_machine = new picked_machine(get_turf(subject))
+
+		if(created_machine)
+			created_machine.corrupt_machinery(subject)
+
+	//Corpse reanimation
+	if(isliving(subject) && !ishivemindmob(subject))
+		//human bodies
+		if(ishuman(subject))
+			var/mob/living/L = subject
+			//if our target has cruciform, let's just leave it
+			if(is_neotheology_disciple(L))
+				return
+			for(var/obj/item/W in L)
+				L.drop_from_inventory(W)
+			var/M = pick(/mob/living/simple_animal/hostile/hivemind/himan, /mob/living/simple_animal/hostile/hivemind/phaser)
+			new M(loc)
+		//robot corpses
+		else if(issilicon(subject))
+			new /mob/living/simple_animal/hostile/hivemind/hiborg(loc)
+		//other dead bodies
+		else
+			var/mob/living/simple_animal/hostile/hivemind/resurrected/transformed_mob =  new(loc)
+			transformed_mob.take_appearance(subject)
+
+		qdel(subject)
 
 
 /obj/effect/plant/hivemind/update_neighbors()
@@ -88,7 +146,7 @@
 
 
 /obj/effect/plant/hivemind/spread()
-	if(!hive_mind_ai || !master_node || !neighbors.len)
+	if(!hivemind_ai || !node_weed_owner || !neighbors.len)
 		return
 
 	var/turf/target_turf = pick(neighbors)
@@ -124,7 +182,7 @@
 
 
 /obj/effect/plant/hivemind/life()
-	if(hive_mind_ai && master_node)
+	if(hivemind_ai && node_weed_owner)
 		try_assimilate_machinery()
 		die_from_deadly_smoke_in_air()
 		var/obj/machinery/door/door_on_my_tile = locate(/obj/machinery/door) in loc
@@ -193,7 +251,7 @@
 
 
 /obj/effect/plant/hivemind/plant_interact_with_airlock(obj/machinery/door/door)
-	if(!istype(door) || !hive_mind_ai || !master_node)
+	if(!istype(door) || !hivemind_ai || !node_weed_owner)
 		return FALSE
 
 	//if our door isn't broken, we will try to break open. We can do only one action per call
@@ -263,85 +321,6 @@
 	animate(transform=null, pixel_x=init_px, time=6, easing=ELASTIC_EASING)
 
 
-//assimilation process
-/obj/effect/plant/hivemind/proc/assimilate(atom/subject)
-	//Machinery infestation
-	if(istype(subject, /obj/machinery) || istype(subject, /obj/item/modular_computer/console))
-		var/obj/machinery/hivemind_machine/created_machine
-
-		//New node creation
-		if(hive_mind_ai.hives.len < MAX_NODES_AMOUNT)
-			var/EP_range = hive_mind_ai.hives.len * (hive_mind_ai.evo_points_max / MAX_NODES_AMOUNT)
-			if(hive_mind_ai.evo_points > EP_range) //one hive per: max_EP / max_nodes_amount
-				var/can_spawn_new_node = TRUE
-				for(var/obj/machinery/hivemind_machine/node/other_node in hive_mind_ai.hives)
-					if(get_dist(other_node, subject) < MIN_NODES_RANGE)
-						can_spawn_new_node = FALSE
-						break
-				if(can_spawn_new_node)
-					created_machine = new /obj/machinery/hivemind_machine/node(get_turf(subject))
-
-
-		//Critical failure chance! This machine would be a dummy, which means - without any ability
-		if(!created_machine && prob(hive_mind_ai.failure_chance))
-			//let's make an infested sprite
-			created_machine = new (get_turf(subject))
-			var/icon/infected_icon = new('icons/obj/hivemind_machines.dmi', icon_state = "wires-[rand(1, 3)]")
-			var/icon/new_icon = new(subject.icon, icon_state = subject.icon_state, dir = subject.dir)
-			new_icon.Blend(infected_icon, ICON_OVERLAY)
-			created_machine.icon = new_icon
-			var/prefix = pick("Warped", "Altered", "Modified", "Upgraded", "Abnormal")
-			created_machine.name = "[prefix] [subject.name]"
-			created_machine.pixel_x = subject.pixel_x
-			created_machine.pixel_y = subject.pixel_y
-
-		//Here we have a little chance to spawn our machinery horror
-		if(istype(subject, /obj/machinery))
-			var/obj/machinery/victim = subject
-			if(prob(15) && victim.circuit)
-				new /mob/living/simple_animal/hostile/hivemind/mechiver(get_turf(subject))
-				new victim.circuit.type(get_turf(subject))
-				qdel(subject)
-				return
-
-		//New hivemind machine creation
-		if(!created_machine)
-			var/list/possible_machines = list()
-			//here we compare hivemind's EP level with machine's required value
-			for(var/machine_path in hive_mind_ai.EP_price_list)
-				var/list/machine_list = hive_mind_ai.EP_price_list[machine_path]
-				if(hive_mind_ai.evo_level >= machine_list["level"])
-					possible_machines.Add(machine_path)
-					//setting of weight of machine
-					possible_machines[machine_path] = machine_list["weight"]
-
-			var/picked_machine = pickweight(possible_machines)
-			created_machine = new picked_machine(get_turf(subject))
-
-		if(created_machine)
-			created_machine.consume(subject)
-
-	//Corpse reanimation
-	if(isliving(subject) && !ishivemindmob(subject))
-		//human bodies
-		if(ishuman(subject))
-			var/mob/living/L = subject
-			//if our target has cruciform, let's just leave it
-			if(is_neotheology_disciple(L))
-				return
-			for(var/obj/item/W in L)
-				L.drop_from_inventory(W)
-			var/M = pick(/mob/living/simple_animal/hostile/hivemind/himan, /mob/living/simple_animal/hostile/hivemind/phaser)
-			new M(loc)
-		//robot corpses
-		else if(issilicon(subject))
-			new /mob/living/simple_animal/hostile/hivemind/hiborg(loc)
-		//other dead bodies
-		else
-			var/mob/living/simple_animal/hostile/hivemind/resurrected/transformed_mob =  new(loc)
-			transformed_mob.take_appearance(subject)
-
-		qdel(subject)
 
 
 //////////////////////////////////////////////////////////////////
@@ -349,31 +328,33 @@
 //////////////////////////////////////////////////////////////////
 
 
-//in fact, this is some kind of reinforced wires, so we can't take samples from it and inject something too
+//reinforced wires, so we can't take samples from it and inject something
 //but we still can slice it with something sharp
 /obj/effect/plant/hivemind/attackby(obj/item/W, mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	#warn test: punch the living shit out of wires
+	if(!(QUALITY_CUTTING in W.tool_qualities || QUALITY_WELDING in W.tool_qualities))	// we gonna cut hivewires with our tools, some dont cut
+		return
+	else
+		var/chosen_tool_quality
 
-	var/weapon_type
+	// if(user.a_intent == I_HURT)
+	// 	if (W.has_quality(QUALITY_CUTTING))
+	// 		tool_quality = QUALITY_CUTTING
+	// 	else if (W.has_quality(QUALITY_WELDING))
+	// 		tool_quality = QUALITY_WELDING
+
 	if(user.a_intent == I_HURT)
-		if (W.has_quality(QUALITY_CUTTING))
-			weapon_type = QUALITY_CUTTING
-		else if (W.has_quality(QUALITY_WELDING))
-			weapon_type = QUALITY_WELDING
-
-		if(weapon_type)
-			if(W.use_tool(user, src, WORKTIME_FAST, weapon_type, FAILCHANCE_EASY, required_stat = STAT_MEC))
-				user.visible_message(span_danger("[user] cuts down [src]."), span_danger("You cut down [src]."))
-				die_off()
-				return
+		if(W.use_tool(user, src, WORKTIME_FAST, W.tool_qualities, FAILCHANCE_EASY, required_stat = STAT_MEC))
+			user.visible_message(span_danger("[user] cuts down [src]."), span_danger("You cut down [src]."))
+			die_off()
 			return
+		if(W.sharp && W.force >= 10)
+			health -= (W.force)
+			user.visible_message(span_danger("[user] slices [src]."), span_danger("You slice [src]."))
 		else
-			if(W.sharp && W.force >= 10)
-				health -= rand(W.force/2, W.force) //hm, maybe make damage based on player's robust stat?
-				user.visible_message(span_danger("[user] slices [src]."), span_danger("You slice [src]."))
-			else
-				to_chat(user, span_danger("You try to slice [src], but it's useless!"))
-		check_health()
+			to_chat(user, span_danger("You try to slice [src], but this weapon isn't enough!"))
+	check_health()
 
 
 //fire is effective, but there need some time to melt the covering

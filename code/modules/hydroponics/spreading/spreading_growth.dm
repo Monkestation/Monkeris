@@ -205,6 +205,7 @@
 //after creation act
 //by default, there goes an animation code
 /obj/effect/plant/proc/after_spread(obj/effect/plant/child, turf/target_turf)
+#warn consider noting here should be animation for yourself
 	spawn(1) // This should do a little bit of animation.
 		child.forceMove(target_turf)
 		child.update_icon()

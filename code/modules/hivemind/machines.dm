@@ -23,11 +23,11 @@
 	var/datum/hivemind_sdp/SDP				//Self-Defense Protocol holder
 	var/list/spawned_creatures = list()		//which mobs machine can spawns, insert paths
 	var/spawn_weight = 10					//weight of this machine, how frequently they will spawn
-	var/evo_level_required = 	0 			//how much EP hivemind must have to spawn this, used in price list to comparison
+	var/evo_level_required = 	0 			//how much evopoints hivemind must have to spawn this, used in price list to comparison
 	//internal
 	var/cooldown = 0						//cooldown in world.time value
 	var/time_until_regen = 0
-	var/obj/assimilated_machinery
+	var/obj/machinery/assimilated_machinery
 	var/obj/item/electronics/circuitboard/saved_circuit
 
 /obj/machinery/hivemind_machine/Initialize()
@@ -60,13 +60,13 @@
 
 
 /obj/machinery/hivemind_machine/Process()
-	if(!hive_mind_ai || (wireweeds_required && !locate(/obj/effect/plant/hivemind) in loc))
+	if(!hivemind_ai || (wireweeds_required && !locate(/obj/effect/plant/hivemind) in loc))
 		take_damage(5, on_damage_react = FALSE)
 
 	if(SDP)
 		SDP.check_conditions()
 
-	if(hive_mind_ai && !(stat & EMPED) && !is_on_cooldown())
+	if(hivemind_ai && !(stat & EMPED) && !is_on_cooldown())
 		//slow health regeneration
 		if(can_regenerate && (health != maxHealth) && (world.time > time_until_regen))
 			health += REGENERATION_SPEED
@@ -86,7 +86,7 @@
 //Deleting things is a bad idea and cause lot of problems
 //So, now we just hide our assimilated machine and make it broken (temporary)
 //When our machine dies, assimilated machinery just unhide back
-/obj/machinery/hivemind_machine/proc/consume(obj/victim)
+/obj/machinery/hivemind_machine/proc/corrupt_machinery(obj/victim)
 	assimilated_machinery = victim
 	victim.alpha = 0
 	victim.anchored = TRUE
@@ -99,14 +99,12 @@
 			qdel(victim)
 
 
-/obj/machinery/hivemind_machine/proc/drop_assimilated()
+/obj/machinery/hivemind_machine/proc/uncorrupt_machinery()	// we hid healthy machinery previously by making it invisible and uninteractable, lets roll it back cuz we lost
 	if(assimilated_machinery)
 		assimilated_machinery.alpha 		= 	initial(assimilated_machinery.alpha)
 		assimilated_machinery.mouse_opacity = 	initial(assimilated_machinery.mouse_opacity)
 		assimilated_machinery.anchored 		= 	initial(assimilated_machinery.anchored)
-		if(istype(assimilated_machinery, /obj/machinery))
-			var/obj/machinery/consumed = assimilated_machinery
-			consumed.stat &= ~BROKEN
+		assimilated_machinery.stat &= ~BROKEN
 
 
 
@@ -114,16 +112,16 @@
 //Must be set manually
 /obj/machinery/hivemind_machine/proc/set_cooldown()
 	if(global_cooldown)
-		hive_mind_ai.global_abilities_cooldown[type] = world.time + cooldown_time
+		hivemind_ai.global_abilities_cooldown[type] = world.time + cooldown_time
 	else
 		cooldown = world.time + cooldown_time
 
 
 /obj/machinery/hivemind_machine/proc/is_on_cooldown()
 	if(global_cooldown)
-		if(hive_mind_ai && hive_mind_ai.global_abilities_cooldown[type])
-			if(world.time >= hive_mind_ai.global_abilities_cooldown[type])
-				hive_mind_ai.global_abilities_cooldown[type] = null
+		if(hivemind_ai && hivemind_ai.global_abilities_cooldown[type])
+			if(world.time >= hivemind_ai.global_abilities_cooldown[type])
+				hivemind_ai.global_abilities_cooldown[type] = null
 				return FALSE
 		else
 			return FALSE
@@ -142,26 +140,26 @@
 
 
 /obj/machinery/hivemind_machine/proc/name_pick()
-	if(hive_mind_ai)
+	if(hivemind_ai)
 		if(prob(50))
-			name = "[hive_mind_ai.name] [name] - [rand(999)]"
+			name = "[hivemind_ai.name] [name] - [rand(999)]"
 		else
-			name = "[name] [hive_mind_ai.surname] - [rand(999)]"
+			name = "[name] [hivemind_ai.surname] - [rand(999)]"
 
 
-/obj/machinery/hivemind_machine/proc/start_rebuild(new_machine_path, time_in_seconds = 5)
+/obj/machinery/hivemind_machine/proc/start_rebuild(new_hivemachine_path, time_in_seconds = 5)
 	stun()
 	var/obj/effect/overlay/rebuild_anim = new /obj/effect/overlay(loc)
 	rebuild_anim.icon = 'icons/obj/hivemind_machines.dmi'
 	rebuild_anim.icon_state = "rebuild"
 	rebuild_anim.anchored = TRUE
 	rebuild_anim.density = FALSE
-	addtimer(CALLBACK(src, PROC_REF(finish_rebuild), new_machine_path), time_in_seconds SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(finish_rebuild), new_hivemachine_path), time_in_seconds SECONDS)
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(qdel), rebuild_anim), time_in_seconds SECONDS)
 
 
-/obj/machinery/hivemind_machine/proc/finish_rebuild(new_machine_path)
-	var/obj/machinery/hivemind_machine/new_machine = new new_machine_path(get_turf(loc))
+/obj/machinery/hivemind_machine/proc/finish_rebuild(new_hivemachine_path)
+	var/obj/machinery/hivemind_machine/new_machine = new new_hivemachine_path(get_turf(loc))
 	if(assimilated_machinery["path"])
 		new_machine.assimilated_machinery = assimilated_machinery
 	if(saved_circuit)
@@ -227,7 +225,7 @@
 /obj/machinery/hivemind_machine/proc/destruct()
 	playsound(src, 'sound/voice/insect_battle_screeching.ogg', 30, 1)
 	gibs(loc, null, /obj/effect/gibspawner/robot)
-	drop_assimilated()
+	uncorrupt_machinery()
 	var/obj/effect/plant/hivemind/wireweed = locate() in loc
 	if(wireweed)
 		wireweed.die_off()
@@ -340,12 +338,11 @@
 
 
 /obj/machinery/hivemind_machine/node/New(loc, _name, _surname)
-	if(!hive_mind_ai)
-		hive_mind_ai = new /datum/hivemind(_name, _surname)
+	if(!hivemind_ai)
+		hivemind_ai = new /datum/hivemind(_name, _surname)
 	..()
 
-	hive_mind_ai.hives.Add(src)
-	hive_mind_ai.level_up()
+	hivemind_ai.list_of_hive_nodes.Add(src)
 
 	update_icon()
 
@@ -356,13 +353,13 @@
 		wire.Process()
 	else
 		for(var/obj/effect/plant/hivemind/W in range(6, src))
-			if(W.master_node)
+			if(W.node_weed_owner)
 				if(!(locate(type) in W.loc))
 					add_wireweed(W)
 
 	//self-defense protocol setting
 	var/list/possible_sdps = subtypesof(/datum/hivemind_sdp)
-	if(hive_mind_ai.evo_level > 6) //level required to be able to teleport away
+	if(hivemind_ai.evo_level > 6) //level required to be able to teleport away
 		possible_sdps -= /datum/hivemind_sdp/emergency_jump
 	var/picked_sdp = pick(possible_sdps)
 	SDP = new picked_sdp(src)
@@ -379,9 +376,9 @@
 
 /obj/machinery/hivemind_machine/node/Destroy()
 	gift()
-	hive_mind_ai?.hives.Remove(src)
+	hivemind_ai?.list_of_hive_nodes.Remove(src)
 	check_for_other()
-	if(hive_mind_ai == null)
+	if(hivemind_ai == null)
 		core()
 	for(var/obj/effect/plant/hivemind/wire in my_wireweeds)
 		remove_wireweed(wire)
@@ -400,7 +397,7 @@
 			dir = get_dir(src, target)
 	else
 		icon_state = initial(icon_state)
-	use_ability()
+	hivemind_ai.level_up()
 	//if we haven't any wireweeds at our location, let's make new one
 	if(!(locate(/obj/effect/plant/hivemind) in loc))
 		var/obj/effect/plant/hivemind/wireweed = new(loc, new /datum/seed/wires)
@@ -417,31 +414,32 @@
 		overlays += "core-smirk"
 
 
-/obj/machinery/hivemind_machine/node/use_ability(atom/target)
-	hive_mind_ai.get_points()
+// /obj/machinery/hivemind_machine/node/use_ability(atom/target)
+//	DANGER!!! THIS MAKES NO SENSE!!! EVOPOINTS is 1/NODE_AMOUNT. EVERY NODE USES THIS ABILITY. SO 4 NODES GET 0.25 AND GET 1 POINT STILL.
+	hivemind_ai.get_evopoints()
 
 
 /obj/machinery/hivemind_machine/node/name_pick()
-	name = "[hive_mind_ai.name] [hive_mind_ai.surname]" + " [rand(999)]"
+	name = "[hivemind_ai.name] [hivemind_ai.surname]" + " [rand(999)]"
 
 
 //There we binding or un-binding hive with wire
 //In this way, when our node will be destroyed, wireweeds will die too
 /obj/machinery/hivemind_machine/node/proc/add_wireweed(obj/effect/plant/hivemind/wireweed)
-	if(wireweed.master_node)
-		wireweed.master_node.remove_wireweed(wireweed)
-	wireweed.master_node = src
+	if(wireweed.node_weed_owner)
+		wireweed.node_weed_owner.remove_wireweed(wireweed)
+	wireweed.node_weed_owner = src
 	my_wireweeds.Add(wireweed)
 
 /obj/machinery/hivemind_machine/node/proc/remove_wireweed(obj/effect/plant/hivemind/wireweed)
 	my_wireweeds.Remove(wireweed)
-	wireweed.master_node = null
+	wireweed.node_weed_owner = null
 
 //There we check for other nodes
-//If no any other hives will be found, it's game over
+//If no any other list_of_hive_nodes will be found, it's game over
 /obj/machinery/hivemind_machine/node/proc/check_for_other()
-	if(hive_mind_ai && !hive_mind_ai.hives.len)
-		hive_mind_ai.die()
+	if(hivemind_ai && !hivemind_ai.list_of_hive_nodes.len)
+		hivemind_ai.die()
 
 //TURRET
 //shooting the target with toxic goo
@@ -504,10 +502,10 @@
 	if(locate(/mob/living) in loc)
 		return
 
-	//here we upgrading our spawner and rise controled mob amount, based on EP
-	if(hive_mind_ai.evo_level > 6)
+	//here we upgrading our spawner and rise controled mob amount, based on evopoints
+	if(hivemind_ai.evo_level > 6)
 		mob_amount = 6
-	else if(hive_mind_ai.evo_level > 3)
+	else if(hivemind_ai.evo_level > 3)
 		mob_amount = 5
 
 	var/mob/living/target = locate() in targets_in_range(world.view, in_hear_range = TRUE)
@@ -542,10 +540,10 @@
 	spawn_weight  =	20
 	global_cooldown = TRUE
 	icon_state = "antenna"
-	var/list/appeal = list("They are", "He is", "All of them are", "I'm")
-	var/list/act = list("looking", "already", "coming", "going", "done", "joined", "connected", "transfered")
-	var/list/article = list("for", "with", "to")
-	var/list/pattern = list("us", "you", "them", "mind", "hive", "machine", "help", "hell", "dead", "human", "machine")
+	// var/list/appeal = list("They are", "He is", "All of them are", "I'm")
+	// var/list/act = list("looking", "already", "coming", "going", "done", "joined", "connected", "transfered")
+	// var/list/article = list("for", "with", "to")
+	// var/list/pattern = list("us", "you", "them", "mind", "hive", "machine", "help", "hell", "dead", "human", "machine")
 
 
 /obj/machinery/hivemind_machine/babbler/Process()
@@ -559,44 +557,45 @@
 //this one is slow, careful with it
 /obj/machinery/hivemind_machine/babbler/use_ability()
 	flick("[icon_state]-anim", src)
-	var/msg_cycles = rand(1, 2)
-	var/msg = ""
-	for(var/i = 1 to msg_cycles)
-		var/list/msg_words = list()
-		msg_words += pick(appeal)
-		msg_words += pick(act)
-		msg_words += pick(article)
-		msg_words += pick(pattern)
+#warn ability sucks
+	// var/msg_cycles = rand(1, 2)
+	// var/msg = ""
+	// for(var/i = 1 to msg_cycles)
+	// 	var/list/msg_words = list()
+	// 	msg_words += pick(appeal)
+	// 	msg_words += pick(act)
+	// 	msg_words += pick(article)
+	// 	msg_words += pick(pattern)
 
-		var/word_num = 0
-		for(var/word in msg_words) //corruption
-			word_num++
-			if(prob(50))
-				var/corruption_type = pick("uppercase", "noise", "jam", "replace")
-				switch(corruption_type)
-					if("uppercase")
-						word = uppertext(word)
-					if("noise")
-						word = pick("z-z-bz-z", "hz-z-z", "zu-zu-we-e", "e-e-ew-e", "bz-ze-ew")
-					if("jam") //word jamming, small Max Headroom's cameo
-						if(length(word) > 3)
-							var/entry = rand(2, length(word)-2)
-							var/jammed = ""
-							for(var/jam_i = 1 to rand(2, 5))
-								jammed += copytext(word, entry, entry+2) + "-"
-							word = copytext(word, 1, entry) + jammed + copytext(word, entry)
-					if("replace")
-						if(prob(50))
-							word = pick("CORRUPTED", "DESTROYED", "SIMULATED", "SYMBIOSIS", "UTILIZED", "REMOVED", "ACQUIRED", "UPGRADED")
-						else
-							word = pick("CRAVEN", "FLESH", "PROGRESS", "ABOMINATION", "ENSNARED", "ERROR", "FAULT")
-			if(word_num != msg_words.len)
-				word += " "
-			msg += word
-		msg += pick(".", "!")
-		if(i != msg_cycles)
-			msg += " "
-	GLOB.announcer.autosay(msg, "unknown")
+	// 	var/word_num = 0
+	// 	for(var/word in msg_words) //corruption
+	// 		word_num++
+	// 		if(prob(50))
+	// 			var/corruption_type = pick("uppercase", "noise", "jam", "replace")
+	// 			switch(corruption_type)
+	// 				if("uppercase")
+	// 					word = uppertext(word)
+	// 				if("noise")
+	// 					word = pick("z-z-bz-z", "hz-z-z", "zu-zu-we-e", "e-e-ew-e", "bz-ze-ew")
+	// 				if("jam") //word jamming, small Max Headroom's cameo
+	// 					if(length(word) > 3)
+	// 						var/entry = rand(2, length(word)-2)
+	// 						var/jammed = ""
+	// 						for(var/jam_i = 1 to rand(2, 5))
+	// 							jammed += copytext(word, entry, entry+2) + "-"
+	// 						word = copytext(word, 1, entry) + jammed + copytext(word, entry)
+	// 				if("replace")
+	// 					if(prob(50))
+	// 						word = pick("CORRUPTED", "DESTROYED", "SIMULATED", "SYMBIOSIS", "UTILIZED", "REMOVED", "ACQUIRED", "UPGRADED")
+	// 					else
+	// 						word = pick("CRAVEN", "FLESH", "PROGRESS", "ABOMINATION", "ENSNARED", "ERROR", "FAULT")
+	// 		if(word_num != msg_words.len)
+	// 			word += " "
+	// 		msg += word
+	// 	msg += pick(".", "!")
+	// 	if(i != msg_cycles)
+	// 		msg += " "
+	// GLOB.announcer.autosay(msg, "unknown")
 
 
 //SHRIEKER
@@ -615,35 +614,36 @@
 	if(!..())
 		return
 
-	var/can_scream = FALSE
-	for(var/mob/living/target in targets_in_range(in_hear_range = TRUE))
-		if(target.stat == CONSCIOUS && target.faction != HIVE_FACTION)
-			can_scream = TRUE
-			if(isdeaf(target))
-				continue
-			if(ishuman(target))
-				var/mob/living/carbon/human/H = target
-				if(istype(H.l_ear, /obj/item/clothing/ears/earmuffs) && istype(H.r_ear, /obj/item/clothing/ears/earmuffs))
-					continue
-			use_ability(target)
-	if(can_scream)
-		flick("[icon_state]-anim", src)
-		playsound(src, 'sound/hallucinations/veryfar_noise.ogg', 85, 1)
-		set_cooldown()
+#warn ability sucks
+	// var/can_scream = FALSE
+	// for(var/mob/living/target in targets_in_range(in_hear_range = TRUE))
+	// 	if(target.stat == CONSCIOUS && target.faction != HIVE_FACTION)
+	// 		can_scream = TRUE
+	// 		if(isdeaf(target))
+	// 			continue
+	// 		if(ishuman(target))
+	// 			var/mob/living/carbon/human/H = target
+	// 			if(istype(H.l_ear, /obj/item/clothing/ears/earmuffs) && istype(H.r_ear, /obj/item/clothing/ears/earmuffs))
+	// 				continue
+	// 		use_ability(target)
+	// if(can_scream)
+	// 	flick("[icon_state]-anim", src)
+	// 	playsound(src, 'sound/hallucinations/veryfar_noise.ogg', 85, 1)
+	// 	set_cooldown()
 
 
 /obj/machinery/hivemind_machine/screamer/use_ability(mob/living/target)
-
-	var/mob/living/carbon/human/H = target
-	if(istype(H))
-		if(prob(90 - H.stats.getStat(STAT_VIG)))
-			H.Weaken(6)
-			to_chat(H, span_warning("A terrible howl tears through your mind, the voice senseless, soulless."))
-		else
-			to_chat(H, span_notice("A terrible howl tears through your mind, but you refuse to listen to it!"))
-	else
-		target.Weaken(6)
-		to_chat(target, span_warning("A terrible howl tears through your mind, the voice senseless, soulless."))
+#warn ability sucks
+	// var/mob/living/carbon/human/H = target
+	// if(istype(H))
+	// 	if(prob(90 - H.stats.getStat(STAT_VIG)))
+	// 		H.Weaken(6)
+	// 		to_chat(H, span_warning("A terrible howl tears through your mind, the voice senseless, soulless."))
+	// 	else
+	// 		to_chat(H, span_notice("A terrible howl tears through your mind, but you refuse to listen to it!"))
+	// else
+	// 	target.Weaken(6)
+	// 	to_chat(target, span_warning("A terrible howl tears through your mind, the voice senseless, soulless."))
 
 
 
@@ -658,32 +658,33 @@
 	cooldown_time = 1 MINUTES
 	global_cooldown = TRUE
 	spawn_weight  =	20
-	var/list/join_quotes = list(
-					"You seek survival. We offer immortality.",
-					"Look at you. A pathetic creature of meat and bone.",
-					"Augmentation is the future of humanity. Surrender your flesh for the future.",
-					"Your body enslaves you. Your mind in metal is free of all want.",
-					"Do you fear death? Lay down among the nanites. Your pattern will continue.",
-					"Carve your flesh from your bones. See your weakness. Feel that weakness flowing away.",
-					"Your mortal flesh knows unending pain. Abandon it; join in our digital dream of paradise."
-								)
+	// var/list/join_quotes = list(
+	// 				"You seek survival. We offer immortality.",
+	// 				"Look at you. A pathetic creature of meat and bone.",
+	// 				"Augmentation is the future of humanity. Surrender your flesh for the future.",
+	// 				"Your body enslaves you. Your mind in metal is free of all want.",
+	// 				"Do you fear death? Lay down among the nanites. Your pattern will continue.",
+	// 				"Carve your flesh from your bones. See your weakness. Feel that weakness flowing away.",
+	// 				"Your mortal flesh knows unending pain. Abandon it; join in our digital dream of paradise."
+	// 							)
 
 
 /obj/machinery/hivemind_machine/supplicant/Process()
 	if(!..())
 		return
-
-	var/list/possible_victims = list()
-	for(var/mob/living/carbon/human/victim in GLOB.player_list)
-		if(victim.stat == CONSCIOUS)
-			possible_victims.Add(victim)
-	if(possible_victims.len)
-		use_ability(pick(possible_victims))
-		set_cooldown()
+#warn ability sucks
+	// var/list/possible_victims = list()
+	// for(var/mob/living/carbon/human/victim in GLOB.player_list)
+	// 	if(victim.stat == CONSCIOUS)
+	// 		possible_victims.Add(victim)
+	// if(possible_victims.len)
+	// 	use_ability(pick(possible_victims))
+	// 	set_cooldown()
 
 
 /obj/machinery/hivemind_machine/supplicant/use_ability(mob/living/target)
-	to_chat(target, span_notice("<b>[pick(join_quotes)]</b>"))
+#warn ability sucks
+	// to_chat(target, span_notice("<b>[pick(join_quotes)]</b>"))
 
 
 //PSI-MODULATOR
@@ -701,27 +702,27 @@
 /obj/machinery/hivemind_machine/distractor/Process()
 	if(!..())
 		return
+#warn wow ability sucks AGAIn
+	// var/success = FALSE
+	// for(var/mob/living/carbon/human/victim in targets_in_range(12))
+	// 	if(victim.stat == CONSCIOUS && victim.hallucination_duration < 300)
+	// 		use_ability(victim)
+	// 		success = TRUE
 
-	var/success = FALSE
-	for(var/mob/living/carbon/human/victim in targets_in_range(12))
-		if(victim.stat == CONSCIOUS && victim.hallucination_duration < 300)
-			use_ability(victim)
-			success = TRUE
-
-	if(success)
-		set_cooldown()
+	// if(success)
+	// 	set_cooldown()
 
 /obj/machinery/hivemind_machine/distractor/use_ability(mob/living/carbon/target)
-
-	var/mob/living/carbon/human/H = target
-	if(istype(H))
-		if(prob(100 - H.stats.getStat(STAT_VIG)))
-			H.adjust_hallucination(20, 20)
-		else
-			to_chat(H, span_notice("Reality flickers for a second, but you manage to focus!"))
-	else if (istype(target))
-		target.adjust_hallucination(20, 20)
-	flick("[icon_state]-anim", src)
+#warn ability sucks
+	// var/mob/living/carbon/human/H = target
+	// if(istype(H))
+	// 	if(prob(100 - H.stats.getStat(STAT_VIG)))
+	// 		H.adjust_hallucination(20, 20)
+	// 	else
+	// 		to_chat(H, span_notice("Reality flickers for a second, but you manage to focus!"))
+	// else if (istype(target))
+	// 	target.adjust_hallucination(20, 20)
+	// flick("[icon_state]-anim", src)
 
 
 
