@@ -98,7 +98,7 @@
 
 		for(var/master as anything in plane_masters)
 			var/atom/movable/screen/plane_master/thamaster = plane_masters[master]
-			if(thamaster.relay)
+			if(thamaster.relay && !our_relays.Find(thamaster.relay))
 				our_relays += thamaster.relay
 
 /mob/update_plane()
