@@ -18,6 +18,7 @@
 	var/list/atom/movable/screen/openspace_overlay/openspace_overlays = list()
 
 	var/atom/movable/screen/vis_holder/vis_holder
+	var/list/our_relays = list()
 
 /datum/hud/proc/updatePlaneMasters(mob/mymob)
 	if(!mymob || !mymob.client)
@@ -54,17 +55,32 @@
 		mymob.client.screen -= instance
 		qdel(instance)
 
+	for(var/relay in our_relays)
+		var/atom/movable/render_plane_relay/instance = relay
+		mymob.client.screen -= instance
+		qdel(instance)
+
 	openspace_overlays.Cut()
+	our_relays.Cut()
 
 	if(!LD)
 		return;
 
 	var/local_z = z-(LD.original_level-1)
-	for(var/zi in 1 to local_z)
-		for(var/mytype in subtypesof(/atom/movable/screen/plane_master) - /atom/movable/screen/plane_master/rendering_plate)
-			var/atom/movable/screen/plane_master/instance = new mytype(null, mymob)
+	//we stow it here so we can adjust it later
+	var/list/ourtypes = subtypesof(/atom/movable/screen/plane_master) - /atom/movable/screen/plane_master/rendering_plate
 
-			instance.plane = calculate_plane(zi,instance.plane)
+	for(var/zi in 1 to local_z)
+		for(var/mytype in ourtypes)
+			var/atom/movable/screen/plane_master/instance = new mytype(null, mymob)
+			if(instance.offsetting_flags & BLOCKS_PLANE_OFFSETTING)
+				ourtypes.Remove(mytype)//only do one iteration of this type
+
+			//if match highest is on, always map to highest(local) z
+			//if block plane offsetting is on -without- match highest, always map to base z.
+			//otherwise, continue with current z.
+			var/plane_z = ((instance.offsetting_flags & OFFSET_RELAYS_MATCH_HIGHEST) ? local_z : (instance.offsetting_flags & OFFSET_RELAYS_MATCH_HIGHEST) ? 1 : zi)
+			instance.plane = calculate_plane(plane_z,instance.plane)
 
 			plane_masters["[zi]-[mytype]"] = instance
 			mymob.client.screen += instance
@@ -80,6 +96,10 @@
 				openspace_overlays["[zi]-[oover.plane]"] = oover
 				mymob.client.screen += oover
 
+		for(var/master as anything in plane_masters)
+			var/atom/movable/screen/plane_master/thamaster = plane_masters[master]
+			if(thamaster.relay)
+				our_relays += thamaster.relay
 
 /mob/update_plane()
 	..()

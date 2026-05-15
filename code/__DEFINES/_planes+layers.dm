@@ -201,14 +201,14 @@ What is the naming convention for planes or layers?
 #define ABOVE_PLATING_LEVEL 2
 
 
-// //---------- Plane Master multi_z_flags -------------
-// // Describes how different plane masters behave regarding being offset by z-levels
-// /// This plane master will not offset, existing only once at the 'base' z-level
-// /// Mostly used for planes that really don't need to be duplicated
-// #define BLOCKS_PLANE_OFFSETTING (1<<0)
-// /// This plane master will offset relays to match the highest possible rendering Z
-// /// Mainly used for effects that need to render above all z's
-// #define OFFSET_RELAYS_MATCH_HIGHEST (1<<1)
+//---------- Plane Master multi_z_flags -------------
+// Describes how different plane masters behave regarding being offset by z-levels
+/// This plane master will not be duped, existing only once at the 'base' z-level
+/// Mostly used for planes that really don't need to be duplicated
+#define BLOCKS_PLANE_OFFSETTING (1<<0)
+/// This plane master will offset relays to match the highest possible rendering Z
+/// Mainly used for effects that need to render above all z's
+#define OFFSET_RELAYS_MATCH_HIGHEST (1<<1)
 
 
 /atom/proc/reset_plane_and_layer()
