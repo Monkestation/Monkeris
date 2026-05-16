@@ -51,6 +51,11 @@ What is the naming convention for planes or layers?
 //Defines for atom layers and planes
 //KEEP THESE IN A NICE ACSCENDING ORDER, PLEASE //lol
 
+//DISCLAIMER: ALL PLANES WHICH WILL BE RENDERED INGAME -MUST- HAVE AN ASSOCIATED PLANE MASTER.
+//This is because plane masters collect plane content, send it to render plates
+//which then relay it to a master render plate which renders 'above' everything
+//unclaimed planes are left behind outside that master plate and WILL NOT be visible ingame
+
 //NEVER HAVE ANYTHING BELOW THIS PLANE ADJUST IF YOU NEED MORE SPACE
 #define LOWEST_EVER_PLANE -200
 

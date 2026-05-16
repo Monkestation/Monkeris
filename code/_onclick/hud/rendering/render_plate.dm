@@ -26,7 +26,7 @@
  */
 /atom/movable/screen/plane_master/rendering_plate
 	name = "default rendering plate"
-	//multi_z_flags = BLOCKS_PLANE_OFFSETTING|OFFSET_RELAYS_MATCH_HIGHEST
+	//offsetting_flags = BLOCKS_PLANE_OFFSETTING|OFFSET_RELAYS_MATCH_HIGHEST
 
 ///this plate renders the final screen to show to the player
 /atom/movable/screen/plane_master/rendering_plate/master
@@ -86,7 +86,7 @@
 	relay = new()
 	relay.screen_loc = "1,1"
 	relay.render_source = render_target
-	relay.plane = relay_plane
+	relay.plane = calculate_plane(ourz, relay_plane)
 	relay.layer = (original_plane + abs(LOWEST_EVER_PLANE))*0.5 //layer must be positive but can be a decimal
 	if(blend_mode_override)
 		relay.blend_mode = blend_mode_override
