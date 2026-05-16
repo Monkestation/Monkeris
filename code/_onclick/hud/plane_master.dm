@@ -83,13 +83,14 @@
 	name = "parallax plane master"
 	plane = PLANE_SPACE_PARALLAX
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	render_relay_plane = RENDER_PLANE_NON_GAME
+	render_relay_plane = RENDER_PLANE_GAME
+
 
 /atom/movable/screen/plane_master/parallax_white
 	name = "parallax whitifier plane master"
 	plane = PLANE_SPACE
 	blend_mode = BLEND_MULTIPLY
-	render_relay_plane = RENDER_PLANE_NON_GAME
+	render_relay_plane = RENDER_PLANE_GAME
 
 /atom/movable/screen/plane_master/open_space_plane
 	name = "open space shadow plane"

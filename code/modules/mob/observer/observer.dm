@@ -28,6 +28,7 @@ var/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 	if(ghost_image_flag & GHOST_IMAGE_SIGHTLESS)
 		ghost_sightless_images |= ghost_image //so ghosts can see the eye when they disable ghost sight
 	updateallghostimages()
+	plane = calculate_plane(z, LYING_MOB_PLANE)//snowflake for render code to not have an aneurysm
 
 /mob/observer/Destroy()
 	if (ghost_image)
