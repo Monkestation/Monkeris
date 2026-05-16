@@ -14,11 +14,11 @@
 	req_crew = 6
 	leaders = -1 //Every excelsior spawned directly is a leader. Non leaders are those recruited during gameplay
 
-/datum/storyevent/roleset/faction/excelsior/can_trigger(severity, report)
+/datum/storyevent/roleset/faction/excelsior/can_trigger(severity, report, manual)
 	if(excelsior_centor)
 		if (report)
 			to_chat(report, span_notice("Failure: Centor already exists"))
 		return FALSE
-	if(!..(severity, report))
+	if(!..(severity, report, manual))
 		return FALSE
 	return TRUE
