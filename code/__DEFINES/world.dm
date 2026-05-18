@@ -1,1 +1,0 @@
-#define DEFAULT_STATION_NAME "CEV Eris"
