@@ -13,8 +13,8 @@
 	use_power = NO_POWER_USE
 	var/illumination_color = 	COLOR_LIGHTING_CYAN_MACHINERY
 	var/wireweeds_required =	TRUE		//machine got damage if there's no any wireweed on it's turf
-	health = 				60
-	maxHealth = 			60
+	health = 	60
+	maxHealth = 60
 	var/can_regenerate =		TRUE
 	var/regen_cooldown_time = 	30 SECONDS	//min time to regeneration activation since last damage taken
 	var/resistance = RESISTANCE_FRAGILE		//reduction on incoming damage
@@ -27,7 +27,8 @@
 	//internal
 	var/cooldown = 0						//cooldown in world.time value
 	var/time_until_regen = 0
-	var/obj/machinery/assimilated_machinery
+
+	var/obj/machinery/assimilated_machinery // store here the stuff we corrupted to return it unharmed later
 	var/obj/item/electronics/circuitboard/saved_circuit
 
 /obj/machinery/hivemind_machine/Initialize()
@@ -46,14 +47,12 @@
 
 
 /obj/machinery/hivemind_machine/examine(mob/user, extra_description = "")
-	if(health < maxHealth * 0.1)
+	if(health < maxHealth * 0.25)
 		extra_description += span_danger("It's almost nothing but scrap!")
-	else if(health < maxHealth * 0.25)
-		extra_description += span_danger("It's seriously fucked up!")
 	else if(health < maxHealth * 0.50)
-		extra_description += span_danger("It's very damaged; you can almost see the components inside!")
+		extra_description += span_danger("It's seriously fucked up!")
 	else if(health < maxHealth * 0.75)
-		extra_description += span_warning("It has numerous dents and deep scratches.")
+		extra_description += span_danger("It's very damaged; you can almost see the components inside!")
 	else if(health < maxHealth)
 		extra_description += span_warning("It's a bit scratched and dented.")
 	..(user, extra_description)
@@ -95,6 +94,7 @@
 		var/obj/machinery/target = victim
 		target.stat |= BROKEN
 		if(istype(victim, /obj/machinery/power/apc)) //APCs would be deleted
+#warn don't delete the APCs
 			assimilated_machinery = null
 			qdel(victim)
 
@@ -111,25 +111,12 @@
 //Sets ability cooldown
 //Must be set manually
 /obj/machinery/hivemind_machine/proc/set_cooldown()
-	if(global_cooldown)
-		hivemind_ai.global_abilities_cooldown[type] = world.time + cooldown_time
-	else
-		cooldown = world.time + cooldown_time
+	cooldown = world.time + cooldown_time
 
 
 /obj/machinery/hivemind_machine/proc/is_on_cooldown()
-	if(global_cooldown)
-		if(hivemind_ai && hivemind_ai.global_abilities_cooldown[type])
-			if(world.time >= hivemind_ai.global_abilities_cooldown[type])
-				hivemind_ai.global_abilities_cooldown[type] = null
-				return FALSE
-		else
-			return FALSE
-
-	else
-		if(world.time >= cooldown)
-			return FALSE
-
+	if(!(world.time >= cooldown))
+		return FALSE
 	return TRUE
 
 

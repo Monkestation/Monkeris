@@ -52,12 +52,10 @@
 
 					found_door = D
 
-				if (!found_door)
-					continue
-
-				var/can_pass = plant_interact_with_airlock(found_door, floor)
-				if(!can_pass)
-					continue
+				if (found_door)
+					var/can_pass = plant_interact_with_airlock(found_door, floor)
+					if(!can_pass)
+						continue
 
 
 		neighbors |= floor

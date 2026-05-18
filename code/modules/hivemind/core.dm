@@ -42,7 +42,6 @@ var/datum/hivemind/hivemind_ai	// global.
 		/obj/machinery/portable_atmospherics/canister
 		)
 
-	var/list/global_abilities_cooldown = list()
 	var/list/evopoints_price_list = list()
 
 

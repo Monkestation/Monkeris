@@ -17,8 +17,6 @@
 
 	melee_damage_lower = 30
 	melee_damage_upper = 35 //similar damage to the mechiver
-	megafauna_min_cooldown = 50
-	megafauna_max_cooldown = 80
 
 	mob_classification = CLASSIFICATION_SYNTHETIC
 
@@ -31,8 +29,8 @@
 
 /mob/living/simple_animal/hostile/megafauna/hivemind_tyrant/proc/delhivetech()
 	var/othertyrant = 0
-	for(var/mob/living/simple_animal/hostile/megafauna/hivemind_tyrant/HT in world)
-		if(HT != src)
+	for(var/mob/living/simple_animal/hostile/megafauna/hivemind_tyrant/tyrant_anywhereElse in world)
+		if(tyrant_anywhereElse != src)
 			othertyrant = 1
 	if(othertyrant == 0)
 		for(var/obj/machinery/hivemind_machine/NODE in world)
@@ -48,6 +46,13 @@
 		return 0
 
 /mob/living/simple_animal/hostile/megafauna/hivemind_tyrant/OpenFire()
+/*procs used here:
+* walk(src, 0)
+* telegraph()
+* random_shots()
+* MoveToTarget()
+*
+*/
 //	anger_modifier = CLAMP(((maxHealth - health)/50),0,20)
 	ranged_cooldown = world.time + 120
 	walk(src, 0)
