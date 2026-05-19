@@ -1,7 +1,7 @@
 // /obj/item/proc/resolve_attackby(atom/A, mob/src, params)
 
 
-/mob/living/simple_animal/hostile/megafauna/hivemind_tyrant/proc/swing_attack(atom/A)
+/mob/living/simple_animal/hostile/megafauna/hivemind_tyrant/proc/swing_attack(mob/A)
 
 	var/turf/L
 	var/turf/C = get_turf(A)
@@ -33,52 +33,62 @@
 		if(SOUTHWEST)
 			R = get_step(C, NORTH)
 			L = get_step(C, EAST)
-	var/obj/effect/effect/melee/swing/S = new(get_turf(src))
-	S.dir = strike_dir
+
+
+
+	var/obj/effect/effect/melee/swing/swing = new(get_turf(src))
+	swing.dir = get_dir(src, C)
 	src.visible_message(span_danger("[src] swings \his [src]"))
 	playsound(loc, 'sound/effects/swoosh.ogg', 50, 1, -1)
-	var/dmg_modifier = 1
+
+//	So why the ifs? This is for the CLANK effect, Tyrant gets stunned by hitting cover to stall him and escape, but he gets mad afterwards...
+
+	QDEL_IN(swing, 2 SECONDS)
 	if(prob(50))
-		flick("left_swing", S)
-		tileattack(src, L)
-		tileattack(src, C, original_target = A)
-		tileattack(src, R)
-		QDEL_IN(S, 2 SECONDS)
+		flick("left_swing", swing)
+		if(!tileattack(src, L))
+			stun_the_tyrant()
+			return
+		if(!tileattack(src, C))
+			stun_the_tyrant()
+			return
+		if(!tileattack(src, R))
+			stun_the_tyrant()
+			return
+
 	else
-		flick("right_swing", S)
-		tileattack(src, R,)
-		tileattack(src, C, original_target = A)
-		tileattack(src, L)
-		QDEL_IN(S, 2 SECONDS)
+		flick("right_swing", swing)
+		if(!tileattack(src, R))
+			stun_the_tyrant()
+			return
+		if(!tileattack(src, C))
+			stun_the_tyrant()
+			return
+		if(!tileattack(src, L))
+			stun_the_tyrant()
+			return
+
+//	So why the ifs? This is for the CLANK effect, Tyrant gets stunned by hitting cover to stall him and escape, but he gets mad afterwards...
+
+
+
 	src.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
-/mob/living/simple_animal/hostile/megafauna/hivemind_tyrant/proc/tileattack(mob/living/user, turf/targetarea, original_target)
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/mob/living/simple_animal/hostile/megafauna/hivemind_tyrant/proc/tileattack(mob/living/user, turf/targetarea)
 	if(istype(targetarea, /turf/wall))
-		var/turf/W = targetarea
+		return FALSE	// WALL CLANK!
+
 	for(var/obj/S in targetarea)
-		if ((S.density || istype(S, /obj/effect/plant)) && !istype(S, /obj/structure/table) && !istype(S, /obj/machinery/disposal) && !istype(S, /obj/structure/closet))
+		if (S.density || istype(S, /obj/effect/plant) || !istype(S, /obj/machinery/disposal))
 			UnarmedAttack(S)
-	var/list/living_mobs = new/list()
-	var/list/dead_mobs = new/list()
+
+	var/list/mobs = new/list()
 	for(var/mob/living/M in targetarea)
 		if(M != user)
-			if(M.stat == DEAD)
-				dead_mobs.Add(M)
-			else
-				living_mobs.Add(M)
-	var/mob/living/target
-	if(original_target && istype(original_target, /mob/living)) // Check if original target is a mob
-		if(LAZYFIND(living_mobs, original_target) || LAZYFIND(dead_mobs, original_target)) // Check if original target is a mob on this tile
-			target = original_target
-				UnarmedAttack(user, target)
-
-			if(target.density) // If the original target was dense, the rest of the mobs are shielded
-				#warn clank here
-				return modifier
-
-#warn wait for FUCKERY HERE
-	while(living_mobs.len)
-		target = pick_n_take(living_mobs)
-		UnarmedAttack(user, target)
-		if(target.density) // If we hit a dense target, the rest of the mobs are shielded
+			mobs.Add(M)
+	while(mobs.len)
+		UnarmedAttack(pick_n_take(mobs))
+	return TRUE // NO WALL CLANKING :[
 
