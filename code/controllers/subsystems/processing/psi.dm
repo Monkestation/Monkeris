@@ -30,7 +30,7 @@ PROCESSING_SUBSYSTEM_DEF(psi)
 /datum/controller/subsystem/processing/psi/proc/get_faculty(faculty)
 	return faculties_by_name[faculty] || faculties_by_id[faculty]
 
-/datum/controller/subsystem/processing/psi/Initialize(start_uptime)
+/datum/controller/subsystem/processing/psi/Initialize(timeofday)
 	var/list/faculties = decls_repository.get_decls_of_subtype(/decl/psionic_faculty)
 	for(var/ftype in faculties)
 		var/decl/psionic_faculty/faculty = faculties[ftype]
@@ -45,3 +45,5 @@ PROCESSING_SUBSYSTEM_DEF(psi)
 			var/decl/psionic_faculty/faculty = get_faculty(power.faculty)
 			if(faculty)
 				faculty.powers |= power
+	..()
+
