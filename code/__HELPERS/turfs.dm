@@ -46,7 +46,7 @@
 			return FALSE
 	return TRUE
 
-/proc/clear_interior(turf/T)
+/proc/clear_interior(var/turf/T)
 	if (turf_clear(T))
 		if (!turf_is_external(T))
 			return TRUE

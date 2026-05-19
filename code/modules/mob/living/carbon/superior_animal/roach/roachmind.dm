@@ -15,7 +15,7 @@
 	. = ..()
 	if(length(members))
 		CRASH("Overmind type /ref[src] destroyed with members still in existence!")
-		
+
 /datum/overmind/roachmind/Destroy()
 	for(var/mob/living/carbon/superior_animal/roach/tonotify in members)
 		tonotify.leaveOvermind()
@@ -146,7 +146,7 @@
 				else if((!QDELETED(potentialsuperior.overseer)) && length(potentialsuperior.overseer.members) < ROACHMINDCAP) // skip over any full or dead overminds
 					joinOvermind(potentialsuperior.overseer)
 					return TRUE // job done, we got one
-			
+
 	if((type == /mob/living/carbon/superior_animal/roach/fuhrer) || (type == /mob/living/carbon/superior_animal/roach/kaiser)) // we can start our own
 		var/datum/overmind/roachmind/newoverseer = new()
 		newoverseer.leader = src
@@ -195,7 +195,7 @@
 				if(ready in viewers(casualty)) // can ready see the roach?
 					supportMove(ready, casualty)
 					break // we got a healer on the way
-			
+
 
 	else
 		return FALSE
