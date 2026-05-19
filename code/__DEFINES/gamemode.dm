@@ -65,6 +65,8 @@
 // #define ROLE_DEATHSQUAD "Death Squad"
 // #define ROLE_ARTIST "Artist"
 #define ROLE_MERCENARY "Serbian Mercenary"
+#define ROLE_PARAMOUNT "Paramount"
+#define ROLE_THRALL "Thrall"
 #define ROLE_PIRATE "Pirate"
 #define ROLE_CARRION "Carrion"
 #define ROLE_MONKEY "Monkey"
