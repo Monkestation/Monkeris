@@ -1,3 +1,15 @@
+//Oh boy their brains ASSPLODE
+
+/datum/storyevent/psi
+	id = "psi"
+	name = "Psionic Disruption"
+
+	event_type =/datum/event/psi
+	event_pools = list(EVENT_LEVEL_MODERATE = POOL_THRESHOLD_MODERATE)
+	tags = list(TAG_DESTRUCTIVE, TAG_NEGATIVE)
+
+/////////////////////////////////////////////////////////
+
 /datum/event/psi
 	startWhen = 30
 	endWhen = 120

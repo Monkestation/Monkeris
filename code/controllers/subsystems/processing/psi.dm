@@ -16,6 +16,7 @@ PROCESSING_SUBSYSTEM_DEF(psi)
 	name = "Psychics"
 	priority = FIRE_PRIORITY_PSYCHICS
 	flags = SS_POST_FIRE_TIMING | SS_BACKGROUND
+	init_order = INIT_ORDER_PSYCHICS
 
 	var/list/faculties_by_id =        list()
 	var/list/faculties_by_name =      list()
