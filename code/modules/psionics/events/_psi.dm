@@ -3,17 +3,19 @@
 	endWhen = 120
 
 /datum/event/psi/announce()
-	priority_announcement.Announce( \
+	minor_announce( \
 		"A localized disruption within the neighboring psionic continua has been detected. All psi-operant crewmembers \
 		are advised to cease any sensitive activities and report to medical personnel in case of damage.", \
-		"Cuchulain Sensor Array Automated Message" \
+		"Cuchulain Sensor Array Automated Message", \
+		'sound/misc/notice1.ogg'
 		)
 
 /datum/event/psi/end()
-	priority_announcement.Announce( \
+	minor_announce( \
 		"The psi-disturbance has ended and baseline normality has been re-asserted. \
 		Anything you still can't cope with is therefore your own problem.", \
-		"Cuchulain Sensor Array Automated Message" \
+		"Cuchulain Sensor Array Automated Message", \
+		'sound/misc/notice2.ogg'
 	)
 
 /datum/event/psi/tick()

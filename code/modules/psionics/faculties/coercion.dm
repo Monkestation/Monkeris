@@ -6,7 +6,7 @@
 
 /decl/psionic_power/coercion
 	faculty = PSI_COERCION
-	abstract_type = /decl/psionic_power/coercion
+	abstract_check = /decl/psionic_power/coercion
 
 /decl/psionic_power/coercion/invoke(mob/living/user, mob/living/target)
 	if (!istype(target))
@@ -175,7 +175,7 @@
 		if(prob(75))
 			target.emote("scream")
 
-		for(var/obj/item/I in list(target.get_active_hand(), target.get_inactive_hand()))
+		for(var/obj/item/I in list(target.get_active_held_item(), target.get_inactive_held_item()))
 			if(istype(I, /obj/item/grab)) //did they grab someone?
 				target.break_all_grabs(user) //See about breaking grips or pulls
 			else

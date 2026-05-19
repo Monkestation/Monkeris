@@ -217,7 +217,7 @@
 						continue
 
 					if(I && istype(I))
-						var/list/current_wounds = I.GetComponents(/datum/component/internal_wound)
+						var/list/current_wounds = I.wounddatums
 						if(LAZYLEN(current_wounds) && prob(heal_rate * 10) && spend_power(heal_rate))
 							SEND_SIGNAL_OLD(I, COMSIG_IORGAN_REMOVE_WOUND, pick(current_wounds))
 							to_chat(H, SPAN_NOTICE("Your innards itch as your autoredactive faculty mends your [I.name]."))

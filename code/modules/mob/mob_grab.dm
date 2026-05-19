@@ -38,17 +38,17 @@
 /obj/proc/affect_grab(mob/user, mob/target, state)
 	return FALSE
 
-/obj/item/grab/resolve_attackby(atom/A, mob/user, var/click_params)
+/obj/item/grab/resolve_attackby(obj/A, mob/user, var/click_params)
 	if(ishuman(user) && affecting == A)
 		var/mob/living/carbon/human/H = user
 		if (H.check_psi_grab(src))
 			return TRUE
 	if(ismob(A))
 		return ..()
-	if(get_dist(O, affecting) > 1)
+	if(get_dist(A, affecting) > 1)
 		return TRUE
-	if(istype(O, /obj) || istype(O, /turf/wall/low))
-		if(O.affect_grab(assailant, affecting, state))
+	if(istype(A, /obj) || istype(A, /turf/wall/low))
+		if(A.affect_grab(assailant, affecting, state))
 			qdel(src)
 	return TRUE
 

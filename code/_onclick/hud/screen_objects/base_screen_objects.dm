@@ -304,7 +304,7 @@
 	parentmob = _parentmob
 
 // BIG RISK CHANGE in PSIONICS - could potentially break fullauto like any change to clicks, as usual
-/obj/screen/inventory/Click()
+/atom/movable/screen/inventory/Click()
 	// At this point in client Click() code we have passed the 1/10 sec check and little else
 	// We don't even know if it's a middle click
 	if(!usr.can_click())

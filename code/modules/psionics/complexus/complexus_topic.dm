@@ -1,4 +1,4 @@
-/datum/psi_complexus/CanUseTopic(mob/user, datum/topic_state/state = GLOB.default_state)
+/datum/psi_complexus/CanUseTopic(mob/user, datum/nano_topic_state/state = GLOB.default_state)
 	return (user.client && check_rights(R_ADMIN, FALSE, user.client))
 
 /datum/psi_complexus/Topic(href, list/href_list)
@@ -15,6 +15,6 @@
 			check_latency_trigger(100, "outside intervention", redactive = TRUE)
 			. = TRUE
 		if(.)
-			var/datum/admins/admin_datum = admin_datums[usr.ckey]
+			var/datum/admins/admin_datum = GLOB.admin_datums[usr.ckey]
 			if(istype(admin_datum))
 				admin_datum.show_player_panel(owner)

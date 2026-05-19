@@ -396,7 +396,7 @@
 		var/mob/living/carbon/human/H = target_mob
 		if(psy.psionic_user && result && (H.sanity.level <= 0))
 			psy.psionic_user.reg_break(H)
-		else if(psy.contractor && result && (H.sanity.level <= 0) && holder)
+		else if(psy.contractor && result && (H.sanity.level <= 0) && psy.holder) //Previously just holder, 'missing var'
 			psy.holder.reg_break(H)
 
 	if(result == PROJECTILE_STOP)

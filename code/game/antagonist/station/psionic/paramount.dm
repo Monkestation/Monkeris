@@ -88,7 +88,7 @@
 	return TRUE
 
 
-/datum/antagonist/paramount/create_objectives()
+/datum/antagonist/paramount/create_objectives(survive = TRUE)
 
 	if(!..())
 		return
@@ -123,7 +123,3 @@
 				else
 					i++
 					objective_list -= 4
-
-	var/datum/objective/survive/objective = new
-	objective.owner = owner
-	owner.individual_objectives += objective
