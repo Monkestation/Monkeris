@@ -17,7 +17,7 @@
 	obey.explanation_text = "Obey your master, [controller.real_name], in all things."
 	owner.individual_objectives |= obey
 
-/datum/antagonist/thrall/create_antagonist(datum/mind/owner, ignore_role, do_not_equip, move_to_spawn, do_not_announce, preserve_appearance, mob/new_controller)
+/datum/antagonist/thrall/create_antagonist(datum/mind/owner, datum/faction/new_faction, doequip = TRUE, announce = TRUE, update = TRUE, check = TRUE, mob/new_controller)
 	if(!new_controller)
 		return 0
 	. = ..()

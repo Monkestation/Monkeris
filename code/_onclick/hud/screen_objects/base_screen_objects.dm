@@ -330,7 +330,8 @@
 			usr:swap_hand()
 		if("hand")
 			usr:swap_hand()
-		else usr.attack_ui(slot_id)
+		else
+			usr.attack_ui(slot_id)
 	return TRUE
 
 /atom/movable/screen/inventory/hand

@@ -1,20 +1,20 @@
 GLOBAL_LIST_INIT(psychic_ranks_to_strings, list("Latent", "Operant", "Masterclass", "Grandmasterclass", "Paramount"))
 
 //This right here is why porting is hard
-/datum/var/abstract_type
+/datum/var/abstract_check
 /datum/proc/IsAbstract()
 	SHOULD_NOT_OVERRIDE(TRUE)
-	return type == abstract_type
+	return type == abstract_check
 /proc/is_abstract(datum/thing)
 	if (ispath(thing))
-		return thing == initial(thing.abstract_type)
+		return thing == initial(thing.abstract_check)
 	if (istype(thing))
 		return thing.IsAbstract()
 //This is a TODO to kill, literally only used once
 
 PROCESSING_SUBSYSTEM_DEF(psi)
 	name = "Psychics"
-	priority = SS_PRIORITY_PSYCHICS
+	priority = FIRE_PRIORITY_PSYCHICS
 	flags = SS_POST_FIRE_TIMING | SS_BACKGROUND
 
 	var/list/faculties_by_id =        list()
