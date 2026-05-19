@@ -214,7 +214,15 @@
 		list("loc" = "EAST+1,BOTTOM+2:25", "icon_state" = "frame3-3"),
 		list("loc" = "EAST+1,BOTTOM+2:25", "icon_state" = "frame0-4"),
 		list("loc" = "EAST+1,BOTTOM+8:14", "icon_state" = "frame0-1"),
-		list("loc" = "EAST+1,BOTTOM+8:14", "icon_state" = "frame3-1")
+		list("loc" = "EAST+1,BOTTOM+8:14", "icon_state" = "frame3-1"),
+		//screen border elements
+		list("loc" = "EAST+1,BOTTOM+15 to EAST+1, BOTTOM+2", "icon_state" = "veneer_vertical", "plane" = BELOW_HUD_PLANE, "layer" = BELOW_HUD_LAYER),
+		list("loc" = "EAST+1,BOTTOM+16", "icon_state" = "veneer_vertical_top", "plane" = BELOW_HUD_PLANE, "layer" = BELOW_HUD_LAYER),
+		list("loc" = "EAST+1,BOTTOM+1", "icon_state" = "veneer_vertical_bottom", "plane" = BELOW_HUD_PLANE, "layer" = BELOW_HUD_LAYER),
+		list("loc" = "EAST+1,BOTTOM", "icon_state" = "veneer_corner", "plane" = BELOW_HUD_PLANE, "layer" = BELOW_HUD_LAYER),
+		list("loc" = "EAST,BOTTOM", "icon_state" = "veneer_horizontal_right", "plane" = BELOW_HUD_PLANE, "layer" = BELOW_HUD_LAYER),
+		list("loc" = "EAST-13,BOTTOM to EAST-2, BOTTOM", "icon_state" = "veneer_horizontal", "plane" = BELOW_HUD_PLANE, "layer" = BELOW_HUD_LAYER),
+		list("loc" = "EAST-14, BOTTOM", "icon_state" = "veneer_horizontal_left", "plane" = BELOW_HUD_PLANE, "layer" = BELOW_HUD_LAYER)
 		)
 		//list("loc" = "2,3", "icon_state" = "block",  "hideflag" = TOGGLE_INVENTORY_FLAG),
 

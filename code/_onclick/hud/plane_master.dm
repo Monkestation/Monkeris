@@ -58,7 +58,6 @@
 	if(mymob.client && mymob.client.get_preference_value(/datum/client_preference/ambient_occlusion) == GLOB.PREF_YES)
 		add_filter("ambient_occlusion", 2, drop_shadow_filter(x=0, y=-2, size=4, color="#04080FAA"))
 
-
 /atom/movable/screen/plane_master/above_lighting
 	name = "above lighting plane master"
 	plane = ABOVE_LIGHTING_PLANE
@@ -80,31 +79,31 @@
 	mymob.overlay_fullscreen("lighting_backdrop_unlit", /atom/movable/screen/fullscreen/lighting_backdrop/unlit)
 */
 
-/atom/movable/screen/plane_master/parallax
-	name = "parallax plane master"
-	plane = PLANE_SPACE_PARALLAX
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	render_relay_plane = RENDER_PLANE_GAME
+// /atom/movable/screen/plane_master/parallax
+// 	name = "parallax plane master"
+// 	plane = PLANE_SPACE_PARALLAX
+// 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+// 	render_relay_plane = RENDER_PLANE_GAME
+// 	offsetting_flags = BLOCKS_PLANE_OFFSETTING
 
-
-/atom/movable/screen/plane_master/parallax_white
-	name = "parallax whitifier plane master"
-	plane = PLANE_SPACE
-	blend_mode = BLEND_MULTIPLY
-	render_relay_plane = RENDER_PLANE_GAME
+// /atom/movable/screen/plane_master/parallax_white
+// 	name = "parallax whitifier plane master"
+// 	plane = PLANE_SPACE
+// 	blend_mode = BLEND_MULTIPLY
+// 	render_relay_plane = RENDER_PLANE_GAME
+// 	offsetting_flags = BLOCKS_PLANE_OFFSETTING
 
 /atom/movable/screen/plane_master/open_space_plane
 	name = "open space shadow plane"
 	plane = OPENSPACE_PLANE
 	appearance_flags = PLANE_MASTER
-	render_relay_plane = RENDER_PLANE_NON_GAME
+	render_relay_plane = RENDER_PLANE_GAME
 
-///Things rendered on "openspace"; holes in multi-z
 /atom/movable/screen/plane_master/openspace_backdrop
 	name = "open space backdrop plane master"
 	plane = OVER_OPENSPACE_PLANE
 	appearance_flags = PLANE_MASTER
-	blend_mode = BLEND_MULTIPLY
+	//blend_mode = BLEND_MULTIPLY
 	render_relay_plane = RENDER_PLANE_GAME
 
 /**
@@ -133,15 +132,6 @@
 /atom/movable/screen/plane_master/gravpulse/backdrop(mob/mymob, ourz)
 	render_target = "[render_target] #[ourz]"
 	..()
-
-
-///baycode sucks. end of statement
-/atom/movable/screen/plane_master/mob_plane
-	name = "mob plane"
-	plane = HIDING_MOB_PLANE
-	appearance_flags = PLANE_MASTER
-	blend_mode = BLEND_OVERLAY
-	render_relay_plane = RENDER_PLANE_GAME
 
 /atom/movable/screen/plane_master/weather
 	name = "weather plane"

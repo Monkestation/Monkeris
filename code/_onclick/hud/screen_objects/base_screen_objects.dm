@@ -1525,10 +1525,14 @@
 	name = ""
 	layer = HUD_LAYER
 
-/atom/movable/screen/frippery/New(_icon_state,_screen_loc = "7,7", mob/living/_parentmob)
+/atom/movable/screen/frippery/New(_icon_state,_screen_loc = "7,7", mob/living/_parentmob, _plane, _layer)
 	src.parentmob = _parentmob
 	src.screen_loc = _screen_loc
 	src.icon_state = _icon_state
+	if(_plane)
+		set_plane(_plane)
+	if(_layer)
+		layer = _layer
 
 /atom/movable/screen/glasses_overlay
 	icon = null

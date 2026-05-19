@@ -74,17 +74,19 @@ What is the naming convention for planes or layers?
 #define GAME_PLANE -4
 
 
+//whoever did this should be drawn and quartered
 //Partial porting of bay defines, with our own values reinserted as placeholder
 //The full list of planes and layers needs ported
-#define HIDING_MOB_PLANE              -1//-16 on bay.
+
+//#define HIDING_MOB_PLANE              -1//-16 on bay.
 
 #define HIDING_MOB_LAYER    2.54	//-0 on bay
 
-#define LYING_MOB_PLANE               -1 //-14 on bay// other mobs that are lying down.
+#define LYING_MOB_PLANE               -4 //-14 on bay// other mobs that are lying down.
 
 #define LYING_MOB_LAYER 3.8 //0 on bay
 
-#define LYING_HUMAN_PLANE             -1 //-13 on bay// humans that are lying down
+//#define LYING_HUMAN_PLANE             -1 //-13 on bay// humans that are lying down
 
 #define LYING_HUMAN_LAYER 3.8 //0 on bay
 
@@ -192,17 +194,18 @@ What is the naming convention for planes or layers?
 #define UI_DAMAGE_LAYER 18.2
 
 #define BELOW_HUD_PLANE 2900
+#define BELOW_HUD_LAYER 19
 #define HUD_PLANE 3000
-#define HUD_LAYER 19
+#define HUD_LAYER 20
 #define ABOVE_HUD_PLANE 4000
-#define ABOVE_HUD_LAYER 20
+#define ABOVE_HUD_LAYER 21
 
 #define RUNECHAT_PLANE 5000
 
 #define BALLOON_CHAT_PLANE 6000
 
 #define CINEMATIC_PLANE 8000
-#define CINEMATIC_LAYER 22
+#define CINEMATIC_LAYER 24
 
 #define BELOW_PLATING_LEVEL 1
 #define ABOVE_PLATING_LEVEL 2
