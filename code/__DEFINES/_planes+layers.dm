@@ -64,10 +64,10 @@ What is the naming convention for planes or layers?
 #define PLANE_SPACE -95
 #define PLANE_SPACE_PARALLAX -80
 
-#define GRAVITY_PULSE_PLANE -11
+#define GRAVITY_PULSE_PLANE -12
 #define GRAVITY_PULSE_RENDER_TARGET "*GRAVPULSE_RENDER_TARGET"
 
-#define OPENSPACE_PLANE -9
+#define OPENSPACE_PLANE -10
 #define OVER_OPENSPACE_PLANE -8
 
 #define FLOOR_PLANE -5
@@ -175,6 +175,8 @@ What is the naming convention for planes or layers?
 
 #define BYOND_LIGHTING_PLANE 120
 #define BYOND_LIGHTING_LAYER 17
+
+#define WEATHER_PLANE 150
 
 //HUD layer defines
 

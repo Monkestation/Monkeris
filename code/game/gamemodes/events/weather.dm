@@ -115,7 +115,7 @@
 	for(var/V in affectareas)
 		var/area/N = V
 		N.layer = overlay_layer
-		N.plane = 150
+		N.plane = WEATHER_PLANE
 		N.icon = 'icons/effects/weather_effects.dmi'
 		N.color = weather_color
 		N.alpha = 128

@@ -6,6 +6,7 @@
 	blend_mode = BLEND_OVERLAY
 	var/show_alpha = 255
 	var/hide_alpha = 0
+
 	plane = LOWEST_EVER_PLANE
 
 	//--rendering relay vars--
@@ -120,11 +121,6 @@
 	//byond internal code end
 	render_relay_plane = RENDER_PLANE_GAME
 
-/atom/movable/screen/plane_master/fullscreen
-	name = "fullscreen alert plane"
-	plane = FULLSCREEN_PLANE
-	render_relay_plane = RENDER_PLANE_NON_GAME
-
 
 /atom/movable/screen/plane_master/gravpulse
 	name = "gravpulse plane"
@@ -146,6 +142,12 @@
 	appearance_flags = PLANE_MASTER
 	blend_mode = BLEND_OVERLAY
 	render_relay_plane = RENDER_PLANE_GAME
+
+/atom/movable/screen/plane_master/weather
+	name = "weather plane"
+	plane = WEATHER_PLANE
+	render_relay_plane = RENDER_PLANE_GAME
+	offsetting_flags = BLOCKS_PLANE_OFFSETTING|OFFSET_RELAYS_MATCH_HIGHEST
 
 /atom/movable/screen/plane_master/balloon
 	name = "balloon chat plane"
@@ -185,6 +187,12 @@
 	name = "absolute cinema"
 	plane = CINEMATIC_PLANE
 	appearance_flags = PLANE_MASTER|NO_CLIENT_COLOR
+	render_relay_plane = RENDER_PLANE_NON_GAME
+	offsetting_flags = BLOCKS_PLANE_OFFSETTING|OFFSET_RELAYS_MATCH_HIGHEST
+
+/atom/movable/screen/plane_master/fullscreen
+	name = "fullscreen alert plane"
+	plane = FULLSCREEN_PLANE
 	render_relay_plane = RENDER_PLANE_NON_GAME
 	offsetting_flags = BLOCKS_PLANE_OFFSETTING|OFFSET_RELAYS_MATCH_HIGHEST
 
