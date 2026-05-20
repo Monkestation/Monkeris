@@ -17,6 +17,7 @@
 		/datum/design/autolathe/device/propaganda_chip,
 		/datum/design/autolathe/device/implanter,
 		/datum/design/autolathe/gun/reclaimer,
+
 		/datum/design/research/item/part/basic_capacitor,
 		/datum/design/research/item/part/micro_mani,
 		/datum/design/research/item/part/basic_matter_bin,
@@ -27,16 +28,17 @@
 		/datum/design/research/item/part/subspace_crystal,
 		/datum/design/research/item/part/subspace_transmitter,
 
-		/datum/design/autolathe/part/igniter,						//regular parts
+		/datum/design/autolathe/part/igniter,
 		/datum/design/autolathe/part/signaler,
 		/datum/design/autolathe/part/door_signaler,
 
 		/datum/design/autolathe/part/sensor_prox,
 		/datum/design/autolathe/part/consolescreen,
-		/datum/design/autolathe/cell/large/excelsior,				//power cells
+		//power cells
+		/datum/design/autolathe/cell/large/excelsior,
 		/datum/design/autolathe/cell/medium/excelsior,
 		/datum/design/autolathe/cell/small/excelsior,
-//prostheses
+		//prostheses
 		/datum/design/autolathe/prosthesis/excelsior/l_arm,
 		/datum/design/autolathe/prosthesis/excelsior/r_arm,
 		/datum/design/autolathe/prosthesis/excelsior/l_leg,
@@ -44,8 +46,6 @@
 		/datum/design/autolathe/prosthesis/excelsior/groin,
 		/datum/design/autolathe/prosthesis/excelsior/chest,
 		/datum/design/autolathe/prosthesis/excelsior/head,
-
-		/datum/design/autolathe/container/ammocan_excel
 		// CIRCUITS (commented out)
 		// /datum/design/autolathe/circuit/autolathe_excelsior,
 		// /datum/design/autolathe/circuit/shieldgen_excelsior,
