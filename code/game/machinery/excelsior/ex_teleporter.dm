@@ -90,15 +90,17 @@
 		/obj/item/stack/cable_coil/orange = list("amount" = 30, "price" = 30),
 		)
 	var/list/circuits = list(
+		/obj/item/electronics/circuitboard/excelsior_navigation_cracker = 2000,	//
+		/obj/item/electronics/circuitboard/excelsior_turret = 50,				//
+		/obj/item/electronics/circuitboard/autolathe_disk_cloner = 50,			//
+		/obj/item/electronics/circuitboard/excelsiorreconstructor = 25,			//
+		/obj/item/electronics/circuitboard/excelsior_autodoc = 25,				//
 		/obj/item/electronics/circuitboard/excelsior_teleporter = 10,			//
 		/obj/item/electronics/circuitboard/excelsiorautolathe = 10,				//
-		/obj/item/electronics/circuitboard/excelsior_boombox = 10,				//
 		/obj/item/electronics/circuitboard/diesel = 10,							//
-		/obj/item/electronics/circuitboard/excelsiorreconstructor = 25,			//
 		/obj/item/electronics/circuitboard/excelsiorshieldwallgen = 25,			//
-		/obj/item/electronics/circuitboard/excelsior_autodoc = 25,				//
-		/obj/item/electronics/circuitboard/excelsior_turret = 50,				//
-		/obj/item/electronics/circuitboard/excelsior_navigation_cracker = 2000,	//
+		/obj/item/electronics/circuitboard/excelsior_boombox = 10,				//
+
 		)
 	var/list/excelsior_kits = list(
 		/*		[?]"Factual" means how many energy we woulda spent for 1 material instead of 30. 1:1 cost in other words. [line 48]
