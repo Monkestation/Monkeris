@@ -27,6 +27,7 @@
 	health = 600
 	maxHealth = 600
 
+	appearance_flags = TILE_BOUND|PIXEL_SCALE|LONG_GLIDE|KEEP_TOGETHER
 	var/tool_in_use = FALSE
 
 	var/force_upgrade_mults = 1

@@ -32,6 +32,7 @@
 	health = 600
 	maxHealth = 600
 
+	appearance_flags = TILE_BOUND|PIXEL_SCALE|LONG_GLIDE|KEEP_TOGETHER
 	var/list/custom_default = list() // used to preserve changes to stats past refresh_upgrades proccing
 	var/damage_multiplier = 1 //Multiplies damage of projectiles fired from this gun
 	var/halloss_multiplier = 1 //Multiplies agony damage of projectiles fired from this gun

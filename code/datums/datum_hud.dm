@@ -216,13 +216,13 @@
 		list("loc" = "EAST+1,BOTTOM+8:14", "icon_state" = "frame0-1"),
 		list("loc" = "EAST+1,BOTTOM+8:14", "icon_state" = "frame3-1"),
 		//screen border elements
-		list("loc" = "EAST+1,BOTTOM+14 to EAST+1, BOTTOM+2", "icon_state" = "veneer_vertical", "plane" = HUD_PLANE, "layer" = 2),
-		list("loc" = "EAST+1,BOTTOM+15", "icon_state" = "veneer_vertical_top", "plane" = BELOW_HUD_PLANE, "layer" = 2),
-		list("loc" = "EAST+1,BOTTOM+1", "icon_state" = "veneer_vertical_bottom", "plane" = BELOW_HUD_PLANE, "layer" = 2),
-		list("loc" = "EAST+1,BOTTOM", "icon_state" = "veneer_corner", "plane" = BELOW_HUD_PLANE, "layer" = 2),
-		list("loc" = "EAST,BOTTOM", "icon_state" = "veneer_horizontal_right", "plane" = BELOW_HUD_PLANE, "layer" = 2),
-		list("loc" = "EAST-13,BOTTOM to EAST-2, BOTTOM", "icon_state" = "veneer_horizontal", "plane" = BELOW_HUD_PLANE, "layer" = 2),
-		list("loc" = "EAST-14, BOTTOM", "icon_state" = "veneer_horizontal_left", "plane" = BELOW_HUD_PLANE, "layer" = 2)
+		list("loc" = "EAST+1,BOTTOM+14 to EAST+1, BOTTOM+2", "icon_state" = "veneer_vertical", "plane" = HUD_PLANE, "layer" = BELOW_HUD_LAYER),
+		list("loc" = "EAST+1,BOTTOM+15", "icon_state" = "veneer_vertical_top", "plane" = HUD_PLANE, "layer" = BELOW_HUD_LAYER),
+		list("loc" = "EAST+1,BOTTOM+1", "icon_state" = "veneer_vertical_bottom", "plane" = HUD_PLANE, "layer" = BELOW_HUD_LAYER),
+		list("loc" = "EAST+1,BOTTOM", "icon_state" = "veneer_corner", "plane" = HUD_PLANE, "layer" = BELOW_HUD_LAYER),
+		list("loc" = "EAST,BOTTOM", "icon_state" = "veneer_horizontal_right", "plane" = BELOW_HUD_PLANE, "layer" = BELOW_HUD_LAYER),
+		list("loc" = "EAST-13,BOTTOM to EAST-2, BOTTOM", "icon_state" = "veneer_horizontal", "plane" = HUD_PLANE, "layer" = BELOW_HUD_LAYER),
+		list("loc" = "EAST-14, BOTTOM", "icon_state" = "veneer_horizontal_left", "plane" = HUD_PLANE, "layer" = BELOW_HUD_LAYER)
 		)
 		//list("loc" = "2,3", "icon_state" = "block",  "hideflag" = TOGGLE_INVENTORY_FLAG),
 
@@ -257,8 +257,6 @@
 	for (var/p in IconUnderlays)
 		var/image/I = IconUnderlays[p]
 		I.alpha = 200
-		I.plane = BELOW_HUD_PLANE
-
 
 /datum/hud/human/liberty
 	name = "LibertyStyle"
