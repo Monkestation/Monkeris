@@ -137,7 +137,6 @@
 	name = "weather plane"
 	plane = WEATHER_PLANE
 	render_relay_plane = RENDER_PLANE_GAME
-	offsetting_flags = BLOCKS_PLANE_OFFSETTING|OFFSET_RELAYS_MATCH_HIGHEST
 
 /atom/movable/screen/plane_master/balloon
 	name = "balloon chat plane"
