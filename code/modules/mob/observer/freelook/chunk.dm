@@ -104,7 +104,6 @@
 			if(!t.obfuscations[obfuscation.type])
 				var/image/I = image(obfuscation.icon, t, obfuscation.icon_state, BYOND_LIGHTING_LAYER)
 				I.plane = t.get_relative_plane(ABOVE_LIGHTING_PLANE)
-				to_chat(world, "I.plane is [I.plane]")
 				t.obfuscations[obfuscation.type] = I
 
 			obscured += t.obfuscations[obfuscation.type]
