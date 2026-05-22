@@ -59,7 +59,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	R.hidden_uplink = T
 	T.trigger_code = freq
 	to_chat(M, span_notice("A portable object teleportation relay has been installed in your [R.name]. Simply dial the frequency [format_frequency(freq)] to unlock its hidden features."))
-	M.mind.store_memory("<B>Radio Freq:</B> [format_frequency(freq)] ([R.name]).")
+	M.mind.store_memory("<B>Radio Freq:</B> [format_frequency(freq)] ([R.name]).<BR>")
 
 /decl/uplink_source/implant
 	name = "Implant"

@@ -115,6 +115,10 @@
 	var/purchase_message = ""
 	var/purchase_error = FALSE
 
+	var/needs_pin = FALSE
+	var/obj/item/card/id/pending_pin_card
+	var/pending_pin_mode = "" // "purchase" or "manage"
+
 	/*
 		Variables used to initialize the product list
 		These are used for initialization only, and so are optional if
@@ -411,11 +415,11 @@
 
 			// Enter PIN, so you can't loot a vending machine with only the owner's ID card (as long as they increased the sec level)
 			if(user_account.security_level != 0)
-				var/attempt_pin = input("Enter pin code", "Vendor transaction") as num | null
-				user_account = attempt_account_access(ID.associated_account_number, attempt_pin, 2)
-				if(!user_account)
-					to_chat(user, span_warning("Unable to access account! Credentials are incorrect."))
-					return
+				pending_pin_card = ID
+				pending_pin_mode = "manage"
+				needs_pin = TRUE
+				ui_interact(user)
+				return
 
 			if(!machine_vendor_account)
 				machine_vendor_account = user_account
@@ -528,13 +532,11 @@
 	// Have the customer punch in the PIN before checking if there's enough money. Prevents people from figuring out acct is
 	// empty at high security levels
 	if(customer_account.security_level != 0) //If card requires pin authentication (ie seclevel 1 or 2)
-		var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
-		customer_account = attempt_account_access(I.associated_account_number, attempt_pin, 2)
-
-		if(!customer_account)
-			purchase_message = "Unable to access account: incorrect credentials."
-			purchase_error = TRUE
-			return FALSE
+		pending_pin_card = I
+		pending_pin_mode = "purchase"
+		needs_pin = TRUE
+		ui_interact(usr)
+		return FALSE
 
 	if(currently_vending.price > customer_account.money)
 		purchase_message = "Insufficient funds in account."
@@ -646,6 +648,8 @@
 		"message" = purchase_message,
 		"isError" = purchase_error
 	)
+	data["needsPin"] = needs_pin ? TRUE : FALSE
+	data["pinMode"] = pending_pin_mode
 
 	var/list/listed_products = list()
 	for(var/key = 1 to length(product_records))
@@ -767,6 +771,45 @@
 
 		if("cancelpurchase")
 			currently_vending = null
+			needs_pin = FALSE
+			pending_pin_card = null
+			return TRUE
+
+		if("submit_pin")
+			if(!needs_pin || !pending_pin_card)
+				return TRUE
+			var/datum/money_account/verified = attempt_account_access(pending_pin_card.associated_account_number, text2num(params["pin"]), 2)
+			if(!verified)
+				purchase_message = "Unable to access account: incorrect PIN."
+				purchase_error = TRUE
+				needs_pin = FALSE
+				pending_pin_card = null
+				return TRUE
+			if(pending_pin_mode == "purchase")
+				if(!currently_vending)
+					needs_pin = FALSE
+					return TRUE
+				if(currently_vending.price > verified.money)
+					purchase_message = "Insufficient funds in account."
+					purchase_error = TRUE
+				else
+					var/datum/transaction/T = new(-currently_vending.price, earnings_account.get_name(), "Purchase of [currently_vending.product_name]", src)
+					T.apply_to(verified)
+					credit_purchase(verified.owner_name)
+					needs_pin = FALSE
+					pending_pin_card = null
+					vend(currently_vending, usr)
+					return TRUE
+			else if(pending_pin_mode == "manage")
+				if(!machine_vendor_account)
+					machine_vendor_account = verified
+					earnings_account = verified
+				locked = !locked
+				playsound(usr.loc, 'sound/machines/id_swipe.ogg', 60, 1)
+				to_chat(usr, span_notice("You [locked ? "" : "un"]lock \the [src]."))
+				log_econ("[src] was [locked ? "" : "un"]locked by [usr].")
+			needs_pin = FALSE
+			pending_pin_card = null
 			return TRUE
 
 		if("togglevoice")
