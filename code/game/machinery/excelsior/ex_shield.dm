@@ -68,20 +68,14 @@
 /obj/machinery/excelsior_shieldwallgen/emag_act() // TODO? Do we want emag do stuff with this? If no then kinda boring :[
 	return
 
-#warn
 /obj/effect/excelsior_shield/CanPass(atom/movable/UFO, turf/target, height=0, air_group=0)
 	if(is_excelsior(UFO))
 		return TRUE
-	if(istype(UFO, /obj/item/projectile))
-		var/me_to_bullet_dir = get_dir(UFO, src)
-		var/me_to_myowner_dir = get_dir(my_owner, src)
+	var/me_to_object_dir = get_dir(src, UFO)
+	var/me_to_myowner_dir = get_dir(src, my_owner)
 
-		#warn DEAL!!! DEBUG HERE
-		log_admin("SHIELD DEBUG: SHIELD to [UFO] got direction: [me_to_bullet_dir]")
-		log_admin("SHIELD DEBUG: SHIELD to [my_owner] got direction: [me_to_myowner_dir]")
-
-		if(me_to_bullet_dir == me_to_myowner_dir)
-			return TRUE
+	if(me_to_object_dir == me_to_myowner_dir || (me_to_object_dir in get_adjacent_dirs(me_to_myowner_dir)))	//Let everything moving OUT pass, check if excelsior if trying to enter
+		return TRUE
 	return ..()
 
 
