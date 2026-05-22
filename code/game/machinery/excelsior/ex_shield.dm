@@ -140,26 +140,13 @@
 
 
 /obj/machinery/excelsior_shieldwallgen/proc/bubble_mode_on()
-	// all the circle
-	var/list/circle = list()
-	for(var/turf/turfie in orange(bubble_radius, src))
-		circle.Add(turfie)
+	var/big_circle = circlerangeturfs(src, bubble_radius)
+	var/small_circle = circlerangeturfs(src, bubble_radius-1)
+	var/outline = big_circle - small_circle
+	for(var/tile in outline)
+		create_shield_at(tile)
 
-
-	// now lets carve our outline
-	var/list/outline = list()
-	var/list/inside = list()
-	for(var/turf/turfie in circle)
-		if(get_dist(turfie, src) >= bubble_radius-1) // smooth out the outline! otherwise its gonna be pixel-y
-			outline.Add(turfie)
-		else
-			inside.Add(turfie)
-	// time to finish what we started
-	for(var/turf/turfie_is_real in outline)
-		create_shield_at(turfie_is_real)
-	#warn bad
-	log_admin("Done!")
-	#warn TODO: Add ceiling protection
+	//TODO: Add ceiling protection
 
 
 
