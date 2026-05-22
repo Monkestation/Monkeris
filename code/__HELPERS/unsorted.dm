@@ -1084,7 +1084,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 			return EAST
 		if(NORTHWEST)
 			return SOUTHEAST
-
+// Used in Excelsior [ex_shield.dm]
 /proc/get_adjacent_dirs(dir)
 	switch(dir)
 		if(NORTH)
