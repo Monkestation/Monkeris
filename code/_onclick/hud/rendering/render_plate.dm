@@ -48,9 +48,9 @@
 	plane = RENDER_PLANE_GAME
 	render_relay_plane = RENDER_PLANE_MASTER
 
-/atom/movable/screen/plane_master/rendering_plate/game_world/New(_name, _parentmob)
-	. = ..()
-	var/gravpulse_target = "[GRAVITY_PULSE_RENDER_TARGET] #[(get_z(_parentmob))]"
+/atom/movable/screen/plane_master/rendering_plate/game_world/backdrop(mob/mymob, ourz)
+	..()
+	var/gravpulse_target = "[GRAVITY_PULSE_RENDER_TARGET] #[ourz]"
 	add_filter("displacer", 1, displacement_map_filter(render_source = gravpulse_target, size = 10))
 
 ///render plate for OOC stuff like ghosts, hud-screen effects, etc

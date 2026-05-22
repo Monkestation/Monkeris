@@ -332,9 +332,9 @@ GLOBAL_LIST_INIT(master_filter_info, list(
 	icon_state = "normalmap_bumpy"
 	appearance_flags = RESET_COLOR|RESET_TRANSFORM|NO_CLIENT_COLOR|RESET_ALPHA|PIXEL_SCALE
 	plane = GRAVITY_PULSE_PLANE
-	//vis_flags = VIS_INHERIT_PLANE | VIS_INHERIT_LAYER
 
-///Proc which replaces an atom's visual appearance with a wobbly distortion mask, using a
+
+///Proc which replaces an atom's visual appearance with a wobbly distortion mask, using render target
 /atom/movable/proc/apply_wibble_invisible(strength=50)
 	var/obj/effect/abstract/normalmap_bumpy/normal_bumpy = new(src)
 	var/render_tgt = "*warped_invis_[REF(normal_bumpy)]"
@@ -362,6 +362,19 @@ GLOBAL_LIST_INIT(master_filter_info, list(
 	vis_contents -= normal_bumpy
 	qdel(normal_bumpy)
 
+/atom/movable/proc/wibble2(strength=50)
+	var/obj/effect/abstract/normalmap_bumpy/normal_bumpy = new(src)
+	// var/render_tgt = "*warped_invis_[REF(normal_bumpy)]"
+	// if(render_target)
+	// 	render_tgt += "_oldtgt_" + render_target
+	normal_bumpy.alpha = (255/100) * strength
+	// render_target = render_tgt
+	normal_bumpy.apply_wibbly_filters()
+	normal_bumpy.add_filter("wibble_mask", 1, alpha_mask_filter(-48, -48))
+	vis_contents += normal_bumpy
+	update_overlays()
+	update_filters()
+	update_icon()
 
 //notes on looping an animate() sequence:
 //the inherent 'loop' function on animate() will not directly 'reset' the conditions it created

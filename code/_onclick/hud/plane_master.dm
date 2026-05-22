@@ -144,26 +144,26 @@
 	appearance_flags = PLANE_MASTER|NO_CLIENT_COLOR
 	render_relay_plane = RENDER_PLANE_NON_GAME
 
-/atom/movable/screen/plane_master/below_hud
-	name = "below hud plane"
-	plane = BELOW_HUD_PLANE
-	appearance_flags = PLANE_MASTER|NO_CLIENT_COLOR
-	render_relay_plane = RENDER_PLANE_NON_GAME
-	offsetting_flags = BLOCKS_PLANE_OFFSETTING|OFFSET_RELAYS_MATCH_HIGHEST
+// /atom/movable/screen/plane_master/below_hud
+// 	name = "below hud plane"
+// 	plane = BELOW_HUD_PLANE
+// 	appearance_flags = PLANE_MASTER|NO_CLIENT_COLOR
+// 	render_relay_plane = RENDER_PLANE_NON_GAME
+// 	offsetting_flags = BLOCKS_PLANE_OFFSETTING|OFFSET_RELAYS_MATCH_HIGHEST
 
-/atom/movable/screen/plane_master/hud
-	name = "hud plane"
-	plane = HUD_PLANE
-	appearance_flags = PLANE_MASTER|NO_CLIENT_COLOR
-	render_relay_plane = RENDER_PLANE_NON_GAME
-	offsetting_flags = BLOCKS_PLANE_OFFSETTING|OFFSET_RELAYS_MATCH_HIGHEST
+// /atom/movable/screen/plane_master/hud
+// 	name = "hud plane"
+// 	plane = HUD_PLANE
+// 	appearance_flags = PLANE_MASTER|NO_CLIENT_COLOR
+// 	render_relay_plane = RENDER_PLANE_NON_GAME
+// 	offsetting_flags = BLOCKS_PLANE_OFFSETTING|OFFSET_RELAYS_MATCH_HIGHEST
 
-/atom/movable/screen/plane_master/above_hud
-	name = "above hud plane"
-	plane = ABOVE_HUD_PLANE
-	appearance_flags = PLANE_MASTER|NO_CLIENT_COLOR
-	render_relay_plane = RENDER_PLANE_NON_GAME
-	offsetting_flags = BLOCKS_PLANE_OFFSETTING|OFFSET_RELAYS_MATCH_HIGHEST
+// /atom/movable/screen/plane_master/above_hud
+// 	name = "above hud plane"
+// 	plane = ABOVE_HUD_PLANE
+// 	appearance_flags = PLANE_MASTER|NO_CLIENT_COLOR
+// 	render_relay_plane = RENDER_PLANE_NON_GAME
+// 	offsetting_flags = BLOCKS_PLANE_OFFSETTING|OFFSET_RELAYS_MATCH_HIGHEST
 
 /atom/movable/screen/plane_master/runechat
 	name = "runechat plane"
