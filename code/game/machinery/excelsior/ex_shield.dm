@@ -15,9 +15,12 @@
 // Excelsior Shield Generator --- The Machine
 
 /obj/machinery/excelsior_shieldwallgen
-	name = "excelsior shield generator"
-	desc = "A shield generator."
+	name = "Excelsior shield generator"
+	desc = "A cheap, old, communistic shield generator."
+		description_info = "Allows defenders to fire back."
 	icon = 'icons/obj/machines/excelsior/field.dmi'
+	anchored = TRUE
+	density = TRUE
 	icon_state = "Shield_Gen_active"
 	circuit = /obj/item/electronics/circuitboard/excelsiorshieldwallgen
 	shipside_only = TRUE
@@ -65,6 +68,7 @@
 /obj/machinery/excelsior_shieldwallgen/emag_act() // TODO? Do we want emag do stuff with this? If no then kinda boring :[
 	return
 
+#warn
 /obj/effect/excelsior_shield/CanPass(atom/movable/UFO, turf/target, height=0, air_group=0)
 	if(is_excelsior(UFO))
 		return TRUE
