@@ -17,7 +17,7 @@
 /obj/machinery/excelsior_shieldwallgen
 	name = "Excelsior shield generator"
 	desc = "A cheap, old, communistic shield generator."
-		description_info = "Allows defenders to fire back."
+	description_info = "Allows defenders to fire back."
 	icon = 'icons/obj/machines/excelsior/field.dmi'
 	anchored = TRUE
 	density = TRUE
@@ -30,10 +30,10 @@
 	var/internal_battery = 1
 	var/max_internal_battery = 0 // replace with a cell
 
-	var/shield_path = /obj/effect/excelsior_shield	// not taking [/obj/effect/shield], simplify stuff!
+	var/shield_path = /obj/effect/excelsior_shield	// not taking [/obj/effect/shield] as example, simplify stuff!
 	var/shields_active = FALSE
 	var/current_mode = BUBBLE
-	var/bubble_radius = 4
+	var/bubble_radius = 5		// never divide it by 2, !!!ODD NUMBERS ONLY!!! or circle is gonna be fucking UGLY!!!!
 
 	var/list/shields_we_spawned = list()
 
@@ -127,7 +127,7 @@
 /obj/machinery/excelsior_shieldwallgen/proc/turn_off_shields()
 	if(!src)
 		return
-		// turn off bubbles tesla and other stuff here :)
+	QDEL_LAZYLIST(shields_we_spawned)
 	shields_active = FALSE
 
 
