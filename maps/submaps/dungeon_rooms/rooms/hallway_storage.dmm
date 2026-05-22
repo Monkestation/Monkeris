@@ -87,7 +87,7 @@
 /turf/wall/untinted/onestar_reinforced,
 /area/crawler)
 "u" = (
-/obj/machinery/shieldwallgen/excelsior,
+/obj/machinery/excelsior_shieldwallgen,
 /turf/floor/bluegrid,
 /area/crawler)
 "v" = (

@@ -1,7 +1,7 @@
 /obj/item/electronics/circuitboard/excelsiorshieldwallgen
 	name = T_BOARD("excelsior shield wall generator")
 	board_type = "machine"
-	build_path = /obj/machinery/shieldwallgen/excelsior
+	build_path = /obj/machinery/excelsior_shieldwallgen
 	origin_tech = list(TECH_BLUESPACE = 3, TECH_MAGNET = 3, TECH_COVERT = 2)
 	req_components = list(
 		/obj/item/stock_parts/subspace/transmitter = 1,
