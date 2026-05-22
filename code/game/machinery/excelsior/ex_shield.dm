@@ -68,9 +68,9 @@
 /obj/effect/excelsior_shield/CanPass(atom/movable/UFO, turf/target, height=0, air_group=0)
 	if(is_excelsior(UFO))
 		return TRUE
-	if(istype(UFO, /obj/item/projectile/))
-		var/me_to_bullet_dir = get_dir(src, UFO)
-		var/me_to_myowner_dir = get_dir(src, my_owner)
+	if(istype(UFO, /obj/item/projectile))
+		var/me_to_bullet_dir = get_dir(UFO, src)
+		var/me_to_myowner_dir = get_dir(my_owner, src)
 
 		#warn DEAL!!! DEBUG HERE
 		log_admin("SHIELD DEBUG: SHIELD to [UFO] got direction: [me_to_bullet_dir]")
@@ -136,11 +136,8 @@
 
 // Background code --- Shield Modes Creation
 /obj/machinery/excelsior_shieldwallgen/proc/create_shield_at(var/here)
-	var/obj/effect/excelsior_shield/created_shield = new /obj/effect/excelsior_shield/(here)
-	// if(!istype(here, /turf/))
-	// 	new created_shield(get_turf(here))
-	// else
-	// 	new created_shield(here)
+	var/obj/effect/excelsior_shield/created_shield = new(here)
+	created_shield.my_owner = src
 	shields_we_spawned.Add(created_shield)
 
 
