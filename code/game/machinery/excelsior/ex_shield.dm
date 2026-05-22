@@ -56,6 +56,7 @@
 	density = TRUE
 	invisibility = 0
 	atmos_canpass = CANPASS_PROC
+	throwpass = TRUE
 	alpha = 128
 
 	var/obj/machinery/excelsior_shieldwallgen/my_owner
