@@ -17,7 +17,7 @@
 /obj/machinery/excelsior_shieldwallgen
 	name = "Excelsior shield generator"
 	desc = "A cheap, old, communistic shield generator."
-		description_info = "Allows defenders to fire back."
+	description_info = "Allows defenders to fire back."
 	icon = 'icons/obj/machines/excelsior/field.dmi'
 	anchored = TRUE
 	density = TRUE
