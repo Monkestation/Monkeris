@@ -22,6 +22,7 @@
 #define span_announce(str) ("<span class='announce'>" + str + "</span>")
 #define span_announcement_header(str) ("<span class='announcement_header'>" + str + "</span>")
 #define span_average(str) ("<span class='average'>" + str + "</span>")
+#define span_antaginfo(str) ( "[FONT_COLORED("#8a0808", span_bold(str))]" )
 #define span_bad(str) ("<span class='bad'>" + str + "</span>")
 #define span_big(str) ("<span class='big'>" + str + "</span>")
 #define span_bigicon(str) ("<span class='bigicon'>" + str + "</span>")

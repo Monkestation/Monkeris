@@ -432,7 +432,7 @@
 
 	var/desc_antag = (isghost(user) || player_is_antag(user.mind)) ? get_description_antag() : null
 	if(desc_antag)
-		output += "\n[FONT_COLORED("#8a0808", span_bold(desc_antag))]"
+		output += "\n[span_antaginfo(desc_antag)]"
 
 	var/statverbs = show_stat_verbs() //rewrite to show_stat_verbs(user)?
 	if (statverbs)

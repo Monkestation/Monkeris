@@ -161,9 +161,13 @@
 		handle_rejection()
 
 /obj/item/organ/examine(mob/user, extra_description = "")
+	..(user, extra_description)
 	if(status & ORGAN_DEAD)
 		extra_description += span_notice("The decay has set in.")
-	..(user, extra_description)
+	if(user.check_special_role(ROLE_CARRION))
+		extra_description += span_antaginfo("You can use the 'Consume the flesh' verb while holding this in your hand to gain mutation points.\n")
+		if(species != GLOB.all_species[SPECIES_HUMAN])
+			extra_description += span_antaginfo("This limb will not provide mutation points, it comes from a weak geneline.\n")
 
 /obj/item/organ/proc/handle_rejection()
 	// Process unsuitable transplants. TODO: consider some kind of

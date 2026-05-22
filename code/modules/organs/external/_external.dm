@@ -16,6 +16,7 @@
 	organ_tag = "limb"
 	bad_type = /obj/item/organ/external
 	spawn_tags = SPAWN_TAG_ORGAN_EXTERNAL
+	description_info = "Can be reattached to the limb it was detached from by trying to insert in the surgery UI."
 	var/tally = 0
 
 	// Strings
@@ -320,13 +321,16 @@
 	return ..()
 
 /obj/item/organ/external/examine(mob/user, extra_description = "")
+	..(user, extra_description)
 	if(in_range(user, src) || isghost(user))
 		for(var/obj/item/I in contents)
 			if(istype(I, /obj/item/organ))
 				continue
 			extra_description += span_danger("\nThere is \a [I] sticking out of it.")
-	..(user, extra_description)
-
+		if(disfigured)
+			extra_description += "\nIt looks like it has been disfigured."
+	if(user.check_special_role(ROLE_CARRION))
+		extra_description += span_antaginfo("You can devour this limb whole with your maw , but its better to eat the internal organs individually \n")
 #define MAX_MUSCLE_SPEED -0.5
 
 /obj/item/organ/external/proc/get_tally()

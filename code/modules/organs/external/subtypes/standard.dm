@@ -9,6 +9,7 @@
 	default_description = /datum/organ_description/groin
 
 /obj/item/organ/external/head
+	description_antag = "if this head belongs to a target of a murder contract,  you can place it in the BDMS to fulfill it, as long as the brain is contained inside"
 	default_description = /datum/organ_description/head
 
 /obj/item/organ/external/head/removed_mob()
@@ -17,6 +18,12 @@
 		if(owner) // In case owner was destroyed already - gibbed, for example
 			owner.update_hair()
 	..()
+
+/obj/item/organ/external/head/examine(mob/user, extra_description)
+	. = ..()
+	if(disfigured)
+		extra_description += "It looks like it has been disfigured."
+
 
 /obj/item/organ/external/head/take_damage(amount, damage_type, armor_divisor = 1, wounding_multiplier = 1, sharp, edge, used_weapon = null, list/forbidden_limbs = list(), silent)
 	. = ..()
