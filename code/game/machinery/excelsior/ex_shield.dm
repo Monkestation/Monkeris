@@ -15,8 +15,9 @@
 // Excelsior Shield Generator --- The Machine
 
 /obj/machinery/excelsior_shieldwallgen
-	name = "excelsior shield generator"
-	desc = "A shield generator."
+	name = "Excelsior shield generator"
+	desc = "A cheap, old, communistic shield generator."
+		description_info = "Allows defenders to fire back."
 	icon = 'icons/obj/machines/excelsior/field.dmi'
 	anchored = TRUE
 	density = TRUE
