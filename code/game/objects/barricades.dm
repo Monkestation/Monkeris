@@ -253,7 +253,7 @@
 	description_info = "Repaired with pliers and dismantled with a wire cutting tool."
 	icon_state = "barbed_wire"
 	block_vehicles = FALSE
-	matter = list(MATERIAL_STEEL = 10)
+	matter = list(MATERIAL_STEEL = 5)
 	var/tresspass_damage = 20 // How much brute is dealt when someone tries to cross or attack the wire
 
 

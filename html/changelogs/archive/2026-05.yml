@@ -109,3 +109,6 @@
   - rscdel: Remove inactivity and jobs tracker, it serves no purpose at this time;
       Use server maint for AFK kicking
   - rscdel: Remove unused new_player motd
+2026-05-23:
+  blackwolf602:
+  - tweak: made barbed wire drop 5 instead of 10 steel
