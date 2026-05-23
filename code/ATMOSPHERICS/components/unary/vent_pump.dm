@@ -72,6 +72,10 @@
 	pressure_checks = 2
 	pressure_checks_default = 2
 
+/obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos/thruster
+	pressure_checks = 1
+	pressure_checks_default = 1
+
 /obj/machinery/atmospherics/unary/vent_pump/New()
 	..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP * 2
