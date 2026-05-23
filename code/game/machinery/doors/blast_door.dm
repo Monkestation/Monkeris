@@ -10,7 +10,6 @@
 /obj/machinery/door/blast
 	name = "Blast Door"
 	desc = "That looks like it doesn't open easily."
-	description_info = "You can use multitool on shutters and blast doors to change codes. If unaccessable, unseal the bolts with welding. \"Remote door signaling device\" can be used to control these."
 	icon = 'icons/obj/doors/rapid_pdoor.dmi'
 
 	var/id = 1
