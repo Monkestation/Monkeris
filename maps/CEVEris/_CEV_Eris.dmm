@@ -102677,9 +102677,6 @@
 	},
 /turf/floor/tiled/white/cargo,
 /area/eris/medical/psych)
-"puY" = (
-/turf/space,
-/area/eris/maintenance/section4deck5port)
 "pvC" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
@@ -102992,7 +102989,7 @@
 	pump_direction = 0;
 	use_power = 1
 	},
-/turf/wall/reinforced,
+/turf/floor/tiled/techmaint,
 /area/eris/maintenance/section4deck5port)
 "qdC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -121386,7 +121383,7 @@ mHR
 aai
 mvD
 avu
-puY
+avu
 aai
 jcl
 jcl
