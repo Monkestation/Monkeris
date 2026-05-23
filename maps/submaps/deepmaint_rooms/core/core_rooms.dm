@@ -15,11 +15,11 @@
 	desc = "isafigjoa sghjsbzuy Page: 152"
 	mappath = 'maps/submaps/deepmaint_rooms/core/archive.dmm'
 
-
-/datum/map_template/deepmaint_template/big/maint_asteroid
-	name = "maintenance asteroid"
-	desc = "How did this thing even get here?"
-	mappath = 'maps/submaps/deepmaint_rooms/core/maint_asteroid.dmm'
+//Possible culprit to Deep Maint NAN Atmos issues
+// /datum/map_template/deepmaint_template/big/maint_asteroid
+// 	name = "maintenance asteroid"
+// 	desc = "How did this thing even get here?"
+// 	mappath = 'maps/submaps/deepmaint_rooms/core/maint_asteroid.dmm'
 
 
 /datum/map_template/deepmaint_template/big/ai_core
