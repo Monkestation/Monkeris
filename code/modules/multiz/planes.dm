@@ -26,12 +26,5 @@
 	else//otherwise, just give up
 		plane = ABOVE_HUD_PLANE
 
-//IMPORTANT TODO: potential performace liability but inevitable consequence of awful mapping decisions clashing with our
-//terrible offset code. Spend 4 hours re-mapping every area in the game to be 1 z only and we can remove this.
-/area/update_plane()
-	..()
-	for(var/turf/ourt in src)
-		ourt.plane = set_plane(original_plane)
-
 /atom/proc/get_relative_plane(plane)
 	return calculate_plane(z,plane)
