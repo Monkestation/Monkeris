@@ -48,6 +48,10 @@
 	plane = RENDER_PLANE_GAME
 	render_relay_plane = RENDER_PLANE_MASTER
 
+//applies the contents of the grav pulse plane to this plate, via. their "displaced" outline created by the displacement filter
+//atoms with their plane set to GRAV_PULSE_PLANE(and offsets thereof) won't directly render an icon
+//but will instead act as a target for this displacement filter to act on, with it instead distorting the plate's contents
+//this can be combined with special icons like normal maps to create more subtle distortions
 /atom/movable/screen/plane_master/rendering_plate/game_world/backdrop(mob/mymob, ourz)
 	..()
 	var/gravpulse_target = "[GRAVITY_PULSE_RENDER_TARGET] #[ourz]"

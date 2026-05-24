@@ -296,7 +296,7 @@ GLOBAL_LIST_INIT(master_filter_info, list(
 
 
 
-//filter procs & elements, including distortion mask elements
+//filter procs & elements, including distortion elements(using the distortion filter on the game plate. See render_plate.dm)
 
 
 ///produces a heavy warping effect that displaces an object across multiple axes simutaneously.
@@ -346,8 +346,8 @@ GLOBAL_LIST_INIT(master_filter_info, list(
 	normal_bumpy.add_filter("wibble_mask", 1, alpha_mask_filter(-48, -48, render_source = render_target))
 	vis_contents += normal_bumpy
 	update_overlays()
-	update_filters()
 	update_icon()
+	update_filters()
 
 /atom/movable/proc/remove_wibble_invisible()
 	var/list/split_result = splittext(render_target, "_oldtgt_")
@@ -362,7 +362,8 @@ GLOBAL_LIST_INIT(master_filter_info, list(
 	vis_contents -= normal_bumpy
 	qdel(normal_bumpy)
 
-/atom/movable/proc/wibble2(strength=50)
+///Applies a subtle, vapour-like distortion effect to an atom, but keeps it visible.
+/atom/movable/proc/add_mirage_mask(strength=50)
 	var/obj/effect/abstract/normalmap_bumpy/normal_bumpy = new(src)
 	// var/render_tgt = "*warped_invis_[REF(normal_bumpy)]"
 	// if(render_target)
@@ -370,11 +371,14 @@ GLOBAL_LIST_INIT(master_filter_info, list(
 	normal_bumpy.alpha = (255/100) * strength
 	// render_target = render_tgt
 	normal_bumpy.apply_wibbly_filters()
-	normal_bumpy.add_filter("wibble_mask", 1, alpha_mask_filter(-48, -48))
+	normal_bumpy.add_filter("wibble_mask", 1, alpha_mask_filter(-48, -48, render_source="*[REF(src)]"))
+	var/mutable_appearance/mask = mutable_appearance()
+	mask.appearance = src.appearance
+	mask.render_target = "*[REF(src)]"
+	//mask.alpha = 125
+	normal_bumpy.overlays += mask
+	//note: because this doesn't currently produce a searchable ref, it'll need to be manually tracked and removed.
 	vis_contents += normal_bumpy
-	update_overlays()
-	update_filters()
-	update_icon()
 
 //notes on looping an animate() sequence:
 //the inherent 'loop' function on animate() will not directly 'reset' the conditions it created
@@ -422,20 +426,24 @@ GLOBAL_LIST_INIT(master_filter_info, list(
 	plane = GRAVITY_PULSE_PLANE
 	duration = 8
 	appearance_flags = PIXEL_SCALE|LONG_GLIDE
+	alpha = 0
 
 /obj/effect/temp_visual/blink_drive/Initialize(mapload)
 	. = ..()
+	src.transform *= 0
 	var/image/I = image(icon, src, icon_state, 10, pixel_x = -48, pixel_y = -48)
 	overlays += I //we use an overlay so the icon and light source are both in the correct location
 	icon_state = null
-	animate(src, time=duration, transform=matrix().Scale(0.1,0.1))
-	set_light(2, 2, COLOR_LIGHTING_BLUE_DARK)
+	animate(src, time=(duration), transform=matrix().Scale(1,1))
+	// animate(src, time=(duration / 2), alpha = 255)
+	// animate(time=(duration / 2), alpha = 0)
 
 /obj/effect/temp_visual/bluespace_pulse
-	icon = 'icons/effects/light_overlays/light_320.dmi'
-	icon_state = "light"
+	icon = 'icons/effects/light_overlays/normalmap_bumpy.dmi'
+	icon_state = "normalmap_bumpy_circle"
 	plane = GRAVITY_PULSE_PLANE
 	duration = 4
+	alpha = 125
 
 /obj/effect/temp_visual/bluespace_pulse/Initialize(mapload)
 	. = ..()
