@@ -112,3 +112,7 @@
 2026-05-23:
   blackwolf602:
   - tweak: made barbed wire drop 5 instead of 10 steel
+2026-05-25:
+  blackwolf602:
+  - rscadd: unique in_hand sprites to freezer
+  - rscadd: unique in_hand sprites to freezer_red
