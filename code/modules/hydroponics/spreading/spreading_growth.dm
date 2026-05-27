@@ -52,12 +52,10 @@
 
 					found_door = D
 
-				if (!found_door)
-					continue
-
-				var/can_pass = door_interaction(found_door, floor)
-				if(!can_pass)
-					continue
+				if (found_door)
+					var/can_pass = plant_interact_with_airlock(found_door, floor)
+					if(!can_pass)
+						continue
 
 
 		neighbors |= floor
@@ -67,7 +65,7 @@
 		neighbor.neighbors -= T
 
 
-/obj/effect/plant/proc/door_interaction(obj/machinery/door/door, turf/floor)
+/obj/effect/plant/proc/plant_interact_with_airlock(obj/machinery/door/door, turf/floor)
 	//We have to make sure that nothing ELSE aside from the door is blocking us
 	var/blocked = FALSE
 	for (var/obj/O in floor)
@@ -205,6 +203,7 @@
 //after creation act
 //by default, there goes an animation code
 /obj/effect/plant/proc/after_spread(obj/effect/plant/child, turf/target_turf)
+#warn consider noting here should be animation for yourself
 	spawn(1) // This should do a little bit of animation.
 		child.forceMove(target_turf)
 		child.update_icon()

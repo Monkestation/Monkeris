@@ -42,24 +42,15 @@ GLOBAL_VAR_INIT(hivemind_panel, new /datum/hivemind_panel)
 	data += "</td></tr></table>"
 	usr << browse(HTML_SKELETON(data), "window=hive_mob;size=600x600")
 
-
-/datum/hivemind_panel/proc/area_list_interact()
-	var/data = "<table><tr><td>"
-	for(var/i in GLOB.hivemind_areas)
-		data += "<br>[i] - [GLOB.hivemind_areas[i]] wireweed."
-	data += "</td></tr></table>"
-	usr << browse(HTML_SKELETON(data), "window=hive_area;size=600x600")
-
-
 /datum/hivemind_panel/proc/main_interact()
 	var/data = "<center><font size='3'><b>HIVEMIND PANEL v0.2</b></font></center>"
 	data += "<table><tr><td><a href='byond://?src=\ref[src];refresh=1'>\[REFRESH\]</a>"
 
-	if(hive_mind_ai)
-		data += "<br>Hivemind [hive_mind_ai.name] [hive_mind_ai.surname] is active."
-		data += "<br>Evolution points: [hive_mind_ai.evo_points]"
-		data += "<br>Evolution level: [hive_mind_ai.evo_level]"
-		data += "<br>Nodes count: [hive_mind_ai.hives.len]"
+	if(hivemind_ai)
+		data += "<br>Hivemind [hivemind_ai.name] [hivemind_ai.surname] is active."
+		data += "<br>Evolution points: [hivemind_ai.evo_points]"
+		data += "<br>Evolution level: [hivemind_ai.evo_level]"
+		data += "<br>Nodes count: [hivemind_ai.list_of_hive_nodes.len]"
 		data += "<br>Areas count: [GLOB.hivemind_areas.len] \
 		<a href='byond://?src=\ref[src];area_list_interact=1'>\[DETAILS\]</a>"
 		data += "<br>Mobs count: [GLOB.hivemind_mobs.len] \
@@ -114,9 +105,6 @@ GLOBAL_VAR_INIT(hivemind_panel, new /datum/hivemind_panel)
 	if(href_list["mob_list_interact"])
 		mob_list_interact()
 
-	if(href_list["area_list_interact"])
-		area_list_interact()
-
 	if(href_list["toggle_mob_limit"])
 		GLOB.hive_data_bool["maximum_existing_mobs"] = !GLOB.hive_data_bool["maximum_existing_mobs"]
 
@@ -158,8 +146,8 @@ GLOBAL_VAR_INIT(hivemind_panel, new /datum/hivemind_panel)
 			new /obj/machinery/hivemind_machine/node(wrong_place_to_be_in, _name, _surname)
 
 	if(href_list["kill_hive"])
-		if(hive_mind_ai)
-			hive_mind_ai.die()
+		if(hivemind_ai)
+			hivemind_ai.die()
 			message_admins("Hivemind purge initiated by [usr.ckey], hive mobs and structures will die out shortly.")
 
 	if(href_list["really_kill_hive"])

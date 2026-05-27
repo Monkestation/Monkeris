@@ -6,7 +6,6 @@
 //But if players get some of these 'big guys', only teamwork, fast legs and trickery will works fine
 //So combine all of that to defeat them
 
-
 /mob/living/simple_animal/hostile/hivemind
 	name = "creature"
 	icon = 'icons/mob/hivemind.dmi'
@@ -24,6 +23,7 @@
 	spawn_tags = SPAWN_TAG_MOB_HIVEMIND
 	rarity_value = 20
 	mob_classification = CLASSIFICATION_SYNTHETIC
+
 
 	var/malfunction_chance = 5
 	var/ability_cooldown = 30 SECONDS
@@ -127,7 +127,7 @@
 		if(B)
 			B.unbuckle_mob()
 
-	if(!hive_mind_ai)
+	if(!hivemind_ai)
 		if(prob(5))
 			death()
 			return FALSE

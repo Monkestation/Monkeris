@@ -10,19 +10,20 @@
 	icon_dead = "hivemind_tyrant"
 	pixel_x = -16
 	ranged = TRUE
-
 	health = 1850
 	maxHealth = 1850 //Only way for it to show up right now is via adminbus OR Champion call (which gives it 150hp). For comparison Kaiser has 2000hp
 	break_stuff_probability = 95
-
 	melee_damage_lower = 30
 	melee_damage_upper = 35 //similar damage to the mechiver
-	megafauna_min_cooldown = 50
-	megafauna_max_cooldown = 80
 
 	mob_classification = CLASSIFICATION_SYNTHETIC
 
-	projectiletype = /obj/item/projectile/goo
+	#warn projectile
+	// projectiletype = /obj/item/projectile/goo
+
+	stunned = FALSE
+
+/////////////////////////////////////////////////////////////////////////////////
 
 /mob/living/simple_animal/hostile/megafauna/hivemind_tyrant/death()
 	..()
@@ -31,27 +32,46 @@
 
 /mob/living/simple_animal/hostile/megafauna/hivemind_tyrant/proc/delhivetech()
 	var/othertyrant = 0
-	for(var/mob/living/simple_animal/hostile/megafauna/hivemind_tyrant/HT in world)
-		if(HT != src)
+	for(var/mob/living/simple_animal/hostile/megafauna/hivemind_tyrant/tyrant_anywhereElse in world)
+		if(tyrant_anywhereElse != src)
 			othertyrant = 1
 	if(othertyrant == 0)
 		for(var/obj/machinery/hivemind_machine/NODE in world)
 			NODE.destruct()
 
-/mob/living/simple_animal/hostile/megafauna/hivemind_tyrant/Life()
+/////////////////////////////////////////////////////////////////////////////////
 
+/mob/living/simple_animal/hostile/megafauna/hivemind_tyrant/Life()
 	. = ..()
-	if(!.)
-		walk(src, 0)
-		return 0
-	if(client)
-		return 0
+	if(!stunned)
+		if(!.)
+			walk(src, 0)
+			return 0
+		if(client)
+			return 0
+	enrage()
+/mob/living/simple_animal/hostile/megafauna/hivemind_tyrant/proc/stun_the_tyrant()
+	if(!stunned)
+		stunned = TRUE
+		stunned_in_seconds
+
+/mob/living/simple_animal/hostile/megafauna/hivemind_tyrant/proc/enrage()
+
+
+/mob/living/simple_animal/hostile/megafauna/hivemind_tyrant/AttackingTarget()
+	swing_attack(target_mob)
 
 /mob/living/simple_animal/hostile/megafauna/hivemind_tyrant/OpenFire()
+/*procs used here:
+* walk(src, 0)
+* telegraph()
+* random_shots()
+* MoveToTarget()
+*
+*/
 //	anger_modifier = CLAMP(((maxHealth - health)/50),0,20)
 	ranged_cooldown = world.time + 120
 	walk(src, 0)
-	telegraph()
 	spawn(rand(megafauna_min_cooldown, megafauna_max_cooldown))
 		if(prob(50))
 			random_shots()
