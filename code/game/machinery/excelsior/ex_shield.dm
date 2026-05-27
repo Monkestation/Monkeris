@@ -2,6 +2,7 @@
 * 1. Shield diffusers (I think only serbs have them?)
 * 2. Sound files in var section
 * 3. add parts
+* 4. Make it so Non-Excelsior cannot fall through the BUBBLE mode ceiling (watertank example)
 */
 
 // Shield Modes
@@ -9,15 +10,13 @@
 #define LINE 2
 #define TESLA 3
 
-//
 
 
-// Excelsior Shield Generator --- The Machine
 
 /obj/machinery/excelsior_shieldwallgen
 	name = "Excelsior shield generator"
-	desc = "A cheap, old, communistic shield generator."
-	description_info = "Allows defenders to fire back."
+	desc = "A cheap, old, communistic shield generator. Allows defenders to fire back."
+	description_info = "Everyone may go out, but only communistic enough can go in."
 	icon = 'icons/obj/machines/excelsior/field.dmi'
 	anchored = TRUE
 	density = TRUE
@@ -27,22 +26,26 @@
 
 	//battery
 	#warn debug number 1
-	var/internal_battery = 1
+	var/internal_battery = 1000
 	var/max_internal_battery = 0 // replace with a cell
-
-	var/shield_path = /obj/effect/excelsior_shield	// not taking [/obj/effect/shield] as example, simplify stuff!
+	// shields
+	var/shield_path = /obj/effect/excelsior_shield	// not equal to [/obj/effect/shield], which belongs to ship's shield gen.
 	var/shields_active = FALSE
 	var/current_mode = BUBBLE
-	var/bubble_radius = 5		// never divide it by 2, !!!ODD NUMBERS ONLY!!! or circle is gonna be fucking UGLY!!!!
+	// shields modes
+	var/bubble_radius = 5
 
 	var/list/shields_we_spawned = list()
 
 
 	//sound
-	var/sound_power_off = 'sound/machines/button.ogg'	// CHANGE
-	var/sound_button_pressed = 'sound/machines/button.ogg'
+	var/sound_power_off = 			'sound/machines/button.ogg'	// TODO: CHANGE!!!
+	var/sound_button_pressed =		'sound/machines/button.ogg'
+	var/sound_blocked_projectile = 	'sound/machines/button.ogg'	// TODO: CHANGE!!!
 
-// Excelsior Shield Generator --- Shield
+
+
+
 
 /obj/effect/excelsior_shield
 	name = "Excelsior energy shield"
@@ -66,8 +69,13 @@
 
 // Helpers or Checks
 
+
+
 /obj/machinery/excelsior_shieldwallgen/emag_act() // TODO? Do we want emag do stuff with this? If no then kinda boring :[
 	return
+
+
+
 
 /obj/effect/excelsior_shield/CanPass(atom/movable/UFO, turf/target, height=0, air_group=0)
 	if(is_excelsior(UFO))
@@ -80,7 +88,19 @@
 	return ..()
 
 
-// Interactive code
+
+
+/obj/effect/excelsior_shield/bullet_act(obj/item/projectile/P, def_zone)
+	if(!P.get_structure_damage())
+		return
+	my_owner.internal_battery -= P.get_structure_damage()
+
+
+
+
+
+
+// Interactive code (e.g. stupid meatbag pressed button)
 
 /obj/machinery/excelsior_shieldwallgen/attack_hand(mob/user)
 	..()
@@ -88,6 +108,10 @@
 	turn_off_shields()
 	switch_shield_mode_forward()
 	turn_on_shields_with_delay(5 SECONDS)
+
+
+
+
 
 
 
@@ -100,7 +124,6 @@
 /obj/machinery/excelsior_shieldwallgen/proc/turn_on_shields_with_delay(insert_delay)
 	spawn(5 SECONDS)
 		if(internal_battery > 0)
-			shields_active = TRUE
 			turn_on_shields()
 
 
@@ -108,33 +131,51 @@
 /obj/machinery/excelsior_shieldwallgen/proc/turn_on_shields()
 	if(!src)	// we delayed previously, lets make sure we live
 		return
+	if(shields_active)
+		return
 
 	switch(current_mode)
 		if(BUBBLE)
 			bubble_mode_on()
 		if(LINE)
-			line_mode_on()
+			line_mode_on(get_dir(usr, src))
 		if(TESLA)
 			tesla_mode_on()
-
 	shields_active = TRUE
+
 
 /obj/machinery/excelsior_shieldwallgen/proc/turn_off_shields()
 	if(!src)
+		error("Excelsior Shieldgen fucked up.")
 		return
-	QDEL_LAZYLIST(shields_we_spawned)
+	if(shields_we_spawned.len > 0)
+		QDEL_LAZYLIST(shields_we_spawned)
+		shields_we_spawned = list()
 	shields_active = FALSE
 
 
 
 /obj/machinery/excelsior_shieldwallgen/proc/switch_shield_mode_forward()
-	if(!current_mode == TESLA)
+	if(current_mode == TESLA)
+		current_mode = BUBBLE
+	else
 		current_mode++
-	current_mode = BUBBLE
+
 
 
 // Background code --- Shield Modes Creation
-/obj/machinery/excelsior_shieldwallgen/proc/create_shield_at(var/here)
+/obj/machinery/excelsior_shieldwallgen/proc/create_shield_at(var/turf/here, above = FALSE)
+	if(above)
+
+		if(here.z >= 5)
+			return
+
+		var/turf/almost_here = locate(here.x, here.y, here.z+1) // +1 floor above. What happens when we're at max floor? Let's not...
+		var/obj/effect/excelsior_shield/created_shield = new(almost_here)
+		shields_we_spawned.Add(created_shield)
+		return
+
+
 	var/obj/effect/excelsior_shield/created_shield = new(here)
 	created_shield.my_owner = src
 	shields_we_spawned.Add(created_shield)
@@ -147,12 +188,26 @@
 	for(var/tile in outline)
 		create_shield_at(tile)
 
-	//TODO: Add ceiling protection
+	//TODO: Add ceiling protection like so:
+	var/turf/tile
+	for(tile in small_circle)
+		create_shield_at(tile, above = TRUE)
 
 
 
-/obj/machinery/excelsior_shieldwallgen/proc/line_mode_on()
+/obj/machinery/excelsior_shieldwallgen/proc/line_mode_on(var/set_direction)
+	var/obj/machinery/excelsior_shieldwallgen/shield_locate = get_step(src, set_direction)
+	switch(set_direction)
+#warn these are NOT cardinal dirs. fuck around and find out
+#warn be watchful here now, check what happens when we're at map border
+		// if(NORTH)
+		// if(WEST)
+		// if(EAST)
+		// if(SOUTH)
+	create_shield_at(get_turf(shield_locate))
+
 /obj/machinery/excelsior_shieldwallgen/proc/tesla_mode_on()
+
 
 
 

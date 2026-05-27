@@ -125,7 +125,7 @@
 	)
 	spawn_blacklisted = TRUE
 
-/obj/item/electronics/circuitboard/centor
+/obj/item/electronics/circuitboard/centor	// uncraftable
 	name = T_BOARD("excelsior centor")
 	build_path = /obj/machinery/centor
 	board_type = "machine"
