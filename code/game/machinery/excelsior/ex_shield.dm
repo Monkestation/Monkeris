@@ -107,7 +107,7 @@
 	playsound(src, sound_button_pressed, 50, 1)
 	turn_off_shields()
 	switch_shield_mode_forward()
-	turn_on_shields_with_delay(5 SECONDS)
+	turn_on_shields_with_delay(1 SECONDS)
 
 
 
@@ -119,7 +119,7 @@
 
 /obj/machinery/excelsior_shieldwallgen/Initialize()
 	..()
-	turn_on_shields_with_delay(5 SECONDS)
+	turn_on_shields_with_delay(1 SECONDS)
 
 /obj/machinery/excelsior_shieldwallgen/proc/turn_on_shields_with_delay(insert_delay)
 	spawn(5 SECONDS)
