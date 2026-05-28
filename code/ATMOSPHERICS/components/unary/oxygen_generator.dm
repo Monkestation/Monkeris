@@ -23,8 +23,8 @@
 
 	return
 
-/obj/machinery/atmospherics/unary/oxygen_generator/New()
-	..()
+/obj/machinery/atmospherics/unary/oxygen_generator/Initialize(mapload, ...)
+	. = ..()
 
 	air_contents.volume = 50
 

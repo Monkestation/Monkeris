@@ -20,9 +20,9 @@
 	layer = GAS_FILTER_LAYER
 
 
-/obj/machinery/atmospherics/portables_connector/New()
+/obj/machinery/atmospherics/portables_connector/Initialize(mapload, ...)
 	initialize_directions = dir
-	..()
+	. = ..()
 
 /obj/machinery/atmospherics/portables_connector/update_icon()
 	icon_state = "connector"

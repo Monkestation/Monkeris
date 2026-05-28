@@ -46,9 +46,9 @@
 /obj/machinery/atmospherics/tvalve/hide(i)
 	update_underlays()
 
-/obj/machinery/atmospherics/tvalve/New()
+/obj/machinery/atmospherics/tvalve/Initialize(mapload, ...)
 	initialize_directions()
-	..()
+	. = ..()
 
 /obj/machinery/atmospherics/tvalve/proc/initialize_directions()
 	switch(dir)

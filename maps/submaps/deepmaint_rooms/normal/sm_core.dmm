@@ -46,14 +46,10 @@
 /area/deepmaint)
 "n" = (
 /obj/spawner/pack/rare,
-/turf/floor/reinforced{
-	name = "engine floor"
-	},
+/turf/floor/reinforced/almost_airless,
 /area/deepmaint)
 "o" = (
-/turf/floor/reinforced{
-	name = "engine floor"
-	},
+/turf/floor/reinforced/almost_airless,
 /area/deepmaint)
 "p" = (
 /obj/spawner/junk,
@@ -61,9 +57,7 @@
 /area/deepmaint)
 "q" = (
 /obj/machinery/power/supermatter/shard,
-/turf/floor/reinforced{
-	name = "engine floor"
-	},
+/turf/floor/reinforced/almost_airless,
 /area/deepmaint)
 "r" = (
 /obj/machinery/door/blast/regular{

@@ -14,8 +14,8 @@
 	var/datum/pipe_network/network2
 	var/datum/pipe_network/network3
 
-/obj/machinery/atmospherics/trinary/New()
-	..()
+/obj/machinery/atmospherics/trinary/Initialize(mapload, ...)
+	. = ..()
 	switch(dir)
 		if(NORTH)
 			initialize_directions = EAST|NORTH|SOUTH
