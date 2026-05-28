@@ -73,7 +73,6 @@
 	desc = "cryo"
 	mappath = 'maps/submaps/deepmaint_rooms/normal/cryo.dmm'
 
-Possible culprit to Deep Maint NAN Atmos issues
 /datum/map_template/deepmaint_template/room/sm_core
 	name = "sm_core"
 	desc = "sm_core"
