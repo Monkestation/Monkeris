@@ -1,0 +1,7 @@
+author: Mycah142
+delete-after: true
+changes:
+  - rscadd: First Aid external bandaging now stops internal wound worsening
+  - rscadd: Grabbing one's opposite limb reduces bleedout
+  - tweak: Holobar to function slightly different, NUFC
+  - bugfix: Check Piping Debug Verb
