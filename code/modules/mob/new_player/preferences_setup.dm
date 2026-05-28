@@ -202,7 +202,17 @@
 		previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title])
 		update_icon = TRUE
 
-	if((equip_preview_mob & EQUIP_PREVIEW_LOADOUT) && !(previewJob && (equip_preview_mob & EQUIP_PREVIEW_JOB) && (previewJob.type == /datum/job/ai || previewJob.type == /datum/job/cyborg)))
+	if( \
+		(equip_preview_mob & EQUIP_PREVIEW_LOADOUT) \
+		&& !( \
+			previewJob \
+			&& (equip_preview_mob & EQUIP_PREVIEW_JOB) \
+			&& ( \
+				istype(previewJob, /datum/job/ai) \
+				|| istype(previewJob, /datum/job/cyborg) \
+			) \
+		) \
+	)
 		// Equip custom gear loadout, replacing any job items
 		var/list/loadout_taken_slots = list()
 		for(var/thing in Gear())
@@ -211,7 +221,7 @@
 				continue
 
 			var/permitted = 0
-			if(G.allowed_roles && G.allowed_roles.len)
+			if(G.allowed_roles && length(G.allowed_roles))
 				if(previewJob)
 					for(var/job_title in G.allowed_roles)
 						if(previewJob.title == job_title)

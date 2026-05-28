@@ -153,14 +153,29 @@
 		eye_blind = max(eye_blind, 1)
 	else if(eye_blind)			//blindness, heals slowly over time
 		eye_blind = max(eye_blind-1,0)
-	else if(eye_blurry)			//blurry eyes heal slowly
+	if(eye_blurry)			//blurry eyes heal slowly
 		eye_blurry = max(eye_blurry-1, 0)
+	if(eye_hazy)			//processes like blurry
+		eye_hazy = max(eye_hazy-1, 0)
+	update_status_filters()
 
 	//Ears
 	if(sdisabilities & DEAF) // Disabled-deaf, doesn't get better on its own
 		setEarDamage(-1, max(ear_deaf, 1))
 	else if(ear_damage < 100) // Deafness heals slowly over time, unless ear_damage is over 100
 		adjustEarDamage(-0.05,-1)
+
+///updates visual filters assigned by debuffs. bit snowflaked rn, will expand with more filters later(hopefully)
+/mob/living/proc/update_status_filters()
+	if(!hud_used)
+		return
+	//wow we really need render plates huh. this'll be kinda expensive until we have them
+	for(var/thing in hud_used.plane_masters)
+		var/atom/movable/screen/plane_master/ourplanemaster = hud_used.plane_masters[thing]
+		if(!eye_blurry)
+			ourplanemaster.remove_filter("eye_blur")
+		else
+			ourplanemaster.add_filter("eye_blur", 1, gauss_blur_filter(clamp(eye_blurry * 0.2, 0.5, 10)))
 
 //this handles hud updates. Calls update_vision() and handle_hud_icons()
 /mob/living/proc/handle_regular_hud_updates()

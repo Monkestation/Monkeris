@@ -80,7 +80,7 @@
 			if(block_events) //This will disable the event and stop the radstorm
 				break
 
-			if(O.type == /obj/effect/pulsar_beam)
+			if(istype(O, /obj/effect/pulsar_beam))
 				beam_collision = TRUE
 				if(!crash_timer_id)
 					radio.autosay("WARNING: collision with radiation beams imminent! ETA: 3 minutes!", "Pulsar Monitor", "Engineering", TRUE)
@@ -99,7 +99,7 @@
 
 /obj/effect/pulsar_ship/proc/crash_into_beam()
 	for(var/obj/O in get_turf(src))
-		if(O.type == /obj/effect/pulsar_beam)
+		if(istype(O, /obj/effect/pulsar_beam))
 			storm = new()
 			storm.Initialize()
 

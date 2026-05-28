@@ -356,7 +356,7 @@ Contractors and the like can also be revived with the previous role mostly intac
 	if(!new_character.mind.assigned_role)
 		new_character.mind.assigned_role = ASSISTANT_TITLE
 
-	new_character.key = G_found.key
+	new_character.PossessByPlayer(G_found.key)
 
 	/*
 	The code below functions with the assumption that the mob is already a contractor if they have a special role.

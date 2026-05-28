@@ -84,8 +84,6 @@ var/image/contamination_overlay = image('icons/effects/contamination.dmi')
 	//Checks if the suit is adequately sealed.
 	var/coverage = 0
 	for(var/obj/item/protection in list(wear_suit, gloves, shoes))
-		if(!protection)
-			continue
 		coverage |= protection.body_parts_covered
 
 	if(vsc.plc.PLASMAGUARD_ONLY)

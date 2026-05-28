@@ -682,18 +682,16 @@
 	. = 0
 	//Handle normal clothing
 	for(var/obj/item/clothing/C in list(head,wear_suit,w_uniform,shoes,gloves,wear_mask))
-		if(C)
-			if(C.max_heat_protection_temperature && C.max_heat_protection_temperature >= temperature)
-				. |= C.heat_protection
+		if(C.max_heat_protection_temperature && C.max_heat_protection_temperature >= temperature)
+			. |= C.heat_protection
 
 //See proc/get_heat_protection_flags(temperature) for the description of this proc.
 /mob/living/carbon/human/proc/get_cold_protection_flags(temperature)
 	. = 0
 	//Handle normal clothing
 	for(var/obj/item/clothing/C in list(head,wear_suit,w_uniform,shoes,gloves,wear_mask))
-		if(C)
-			if(C.min_cold_protection_temperature && C.min_cold_protection_temperature <= temperature)
-				. |= C.cold_protection
+		if(C.min_cold_protection_temperature && C.min_cold_protection_temperature <= temperature)
+			. |= C.cold_protection
 
 /mob/living/carbon/human/get_heat_protection(temperature) //Temperature is the temperature you're being exposed to.
 	var/thermal_protection_flags = get_heat_protection_flags(temperature)

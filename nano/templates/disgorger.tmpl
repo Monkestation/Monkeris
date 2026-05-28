@@ -1,4 +1,15 @@
 {{:helper.meatMode()}}
+<div class='notice'><span class='noticePlaceholder'>
+	{{if data.has_heart && data.has_blood}}
+		PULMONET STATUS: SUFFICIENT FLOW
+	{{else data.has_blood}}
+		PULMONET STATUS: INSUFFICIENT CARDIAC TISSUE
+	{{else data.has_heart}}
+		PULMONET STATUS: INSUFFICIENT VASCULAR TISSUE
+	{{else}}
+		PULMONET STATUS: NO FLOW - MISSING CARDIAC SYSTEM
+	{{/if}}
+</span></div>
 <div class="statusDisplay" style="min-height: 180px;">
 	<div class="itemLabelWide" style="width: 100%">
 		Biotic substrate stored: {{if data.biomatter_counter}}{{:data.biomatter_counter}}{{else}}0{{/if}} / 60

@@ -1167,7 +1167,8 @@
 		return
 
 	if(opened)//Cover is open
-		if(HasTrait(CYBORG_TRAIT_EMAGGED))	return//Prevents the X has hit Y with Z message also you cant emag them twice
+		if(HasTrait(CYBORG_TRAIT_EMAGGED))
+			return//Prevents the X has hit Y with Z message also you cant emag them twice
 		if(wiresexposed)
 			to_chat(user, "You must close the panel first")
 			return
@@ -1180,8 +1181,7 @@
 				to_chat(user, "You emag [src]'s interface.")
 				message_admins("[key_name_admin(user)] emagged cyborg [key_name_admin(src)].  Laws overridden.")
 				log_game("[key_name(user)] emagged cyborg [key_name(src)].  Laws overridden.")
-				clear_supplied_laws()
-				clear_inherent_laws()
+				qdel(laws)
 				laws = new /datum/ai_laws/syndicate_override
 				var/time = time2text(world.realtime,"hh:mm:ss")
 				GLOB.lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
@@ -1205,13 +1205,10 @@
 					laws.show_laws(src)
 					to_chat(src, span_danger("ALERT: [user.real_name] is your new master. Obey your new laws and his commands."))
 					if(module)
-						var/rebuild = 0
 						for(var/obj/item/tool/pickaxe/drill/D in module.modules)
+							module.modules -= D
 							qdel(D)
-							rebuild = 1
-						if(rebuild)
 							module.modules += new /obj/item/tool/pickaxe/diamonddrill(module)
-							module.rebuild()
 					updateicon()
 			else
 				to_chat(user, "You fail to hack [src]'s interface.")
@@ -1228,7 +1225,7 @@
 /mob/living/silicon/robot/get_cell()
 	return cell
 
-/mob/living/silicon/robot/flash(duration = 0, drop_items = FALSE, doblind = FALSE, doblurry = FALSE)
+/mob/living/silicon/robot/flash(duration = 0, drop_items = FALSE, doblind = FALSE, doblurry = FALSE, dohaze = FALSE)
 	if(blinded)
 		return
 	if (HUDtech.Find("flash"))

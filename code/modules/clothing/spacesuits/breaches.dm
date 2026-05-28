@@ -54,7 +54,7 @@ var/global/list/breach_burn_descriptors = list(
 //Repair a certain amount of brute or burn damage to the suit.
 /obj/item/clothing/suit/space/proc/repair_breaches(damtype, amount, mob/user)
 
-	if(!can_breach || !breaches || !breaches.len || !damage)
+	if(!can_breach || !length(breaches) || !damage)
 		to_chat(user, "There are no breaches to repair on \the [src].")
 		return
 
@@ -64,7 +64,7 @@ var/global/list/breach_burn_descriptors = list(
 		if(B.damtype == damtype)
 			valid_breaches += B
 
-	if(!valid_breaches.len)
+	if(!length(valid_breaches))
 		to_chat(user, "There are no breaches to repair on \the [src].")
 		return
 
@@ -91,8 +91,7 @@ var/global/list/breach_burn_descriptors = list(
 	if(!can_breach || amount <= 0)
 		return
 
-	if(!breaches)
-		breaches = list()
+	breaches ||= list()
 
 	if(damage > 25) return //We don't need to keep tracking it when it's at 250% pressure loss, really.
 

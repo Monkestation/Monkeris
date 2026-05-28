@@ -28,8 +28,6 @@
 	if(!. || !client)
 		return FALSE
 
-	if(join_motd)
-		to_chat(src, "<div class='motd'>[join_motd]</div>")
 	to_chat(src, "<div class='info'>Round ID: <div class='danger'>[GLOB.round_id]</div></div>")
 
 	var/spc = CONFIG_GET(number/soft_popcap)

@@ -23,6 +23,9 @@ GLOBAL_PROTECT(href_token)
 
 	var/deadmined
 
+	///ref to the filter editor datum
+	var/datum/filter_editor/filteriffic
+
 	var/admincaster_screen = 0	//See newscaster.dm under machinery for a full description
 	var/datum/feed_message/admincaster_feed_message = new /datum/feed_message   //These two will act as holders.
 	var/datum/feed_channel/admincaster_feed_channel = new /datum/feed_channel

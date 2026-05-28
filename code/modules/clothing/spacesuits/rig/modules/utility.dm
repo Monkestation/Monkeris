@@ -552,7 +552,7 @@
 	jets.trail.set_up(jets)
 
 /obj/item/rig_module/autodoc
-	name = "autodoc module"
+	name = "trial autodoc module"
 	desc = "A complex surgery system for almost all your needs."
 	use_power_cost = 10
 	active = 1
@@ -607,6 +607,7 @@
 	return
 
 /obj/item/rig_module/autodoc/commercial
+	name = "commercial autodoc module"
 	autodoc_type = /datum/autodoc/capitalist_autodoc
 
 /obj/item/rig_module/cape

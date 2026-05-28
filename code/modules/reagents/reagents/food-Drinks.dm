@@ -332,13 +332,12 @@
 		protection = list(M.wear_mask)
 
 	for(var/obj/item/I in protection)
-		if(I)
-			if(I.body_parts_covered & EYES)
-				eyes_covered = 1
-				eye_protection = I.name
-			if((I.body_parts_covered & FACE) && !(I.item_flags & FLEXIBLEMATERIAL))
-				mouth_covered = 1
-				face_protection = I.name
+		if(I.body_parts_covered & EYES)
+			eyes_covered = 1
+			eye_protection = I.name
+		if((I.body_parts_covered & FACE) && !(I.item_flags & FLEXIBLEMATERIAL))
+			mouth_covered = 1
+			face_protection = I.name
 
 	var/message
 	if(eyes_covered)

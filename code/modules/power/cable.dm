@@ -295,10 +295,6 @@ var/list/possible_cable_coil_colours = list(
 	var/turf/T  = get_step(src, direction&3)//go north/south
 
 	for(var/obj/structure/cable/C in T)
-
-		if(!C)
-			continue
-
 		if(src == C)
 			continue
 
@@ -316,10 +312,6 @@ var/list/possible_cable_coil_colours = list(
 	T  = get_step(src, direction&12)//go east/west
 
 	for(var/obj/structure/cable/C in T)
-
-		if(!C)
-			continue
-
 		if(src == C)
 			continue
 		if(C.d1 == (direction^12) || C.d2 == (direction^12)) //we've got a diagonally matching cable
@@ -343,10 +335,6 @@ var/list/possible_cable_coil_colours = list(
 	var/turf/TB  = get_step(src, direction)
 
 	for(var/obj/structure/cable/C in TB)
-
-		if(!C)
-			continue
-
 		if(src == C)
 			continue
 

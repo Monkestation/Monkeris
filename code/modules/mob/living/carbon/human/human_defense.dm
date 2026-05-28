@@ -186,7 +186,6 @@ meteor_act
 
 /mob/living/carbon/human/proc/check_shields(damage = 0, atom/damage_source = null, mob/attacker = null, def_zone = null, attack_text = "the attack")
 	for(var/obj/item/shield in list(l_hand, r_hand, wear_suit))
-		if(!shield) continue
 		. = shield.handle_shield(src, damage, damage_source, attacker, def_zone, attack_text)
 		if(.) return
 

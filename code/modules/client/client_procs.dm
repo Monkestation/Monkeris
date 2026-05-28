@@ -1065,6 +1065,10 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 /client/proc/colour_transition(list/colour_to = null, time = 10) //Call this with no parameters to reset to default.
 	animate(src, color = colour_to, time = time, easing = SINE_EASING)
 
+/client/proc/AnnouncePR(announcement)
+	if(get_preference_value(/datum/client_preference/show_pullrequests))
+		to_chat(src, announcement, type = MESSAGE_TYPE_OOC)
+
 /// Compiles a full list of verbs and sends it to the browser
 /client/proc/init_verbs()
 	var/list/verblist = list()
@@ -1196,7 +1200,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 /client/proc/acquire_dpi()
 	window_scaling = text2num(winget(src, null, "dpi"))
 
-	debug_admins("scalies: [window_scaling]")
+	//debug_admins("scalies: [window_scaling]")
 
 /client/proc/add_verbs_from_config()
 	if(CONFIG_GET(flag/see_own_notes))
@@ -1233,3 +1237,8 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 			return
 	qdel(query_get_notes)
 	create_message("note", key, system_ckey, message, null, null, 0, 0, null, 0, 0)
+
+/client/proc/open_filter_editor(atom/in_atom)
+	if(holder)
+		holder.filteriffic = new /datum/filter_editor(in_atom)
+		holder.filteriffic.ui_interact(mob)

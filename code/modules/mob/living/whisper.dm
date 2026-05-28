@@ -55,7 +55,7 @@
 
 		speech_problem_flag = handle_r[SPEECHPROBLEM_R_FLAG]
 
-	if(!message || message=="")
+	if(!length(message))
 		return
 
 	//looks like this only appears in whisper. Should it be elsewhere as well? Maybe handle_speech_problems?
@@ -68,8 +68,6 @@
 	else if(ishuman(src))
 		var/mob/living/carbon/human/our_human = src
 		for(var/obj/item/gear in list(our_human.wear_mask, our_human.wear_suit, our_human.head))
-			if(!gear)
-				continue
 			var/obj/item/voice_changer/changer = locate() in gear
 			if(changer && changer.active && changer.voice_name)
 				voice_sub = changer.voice_name

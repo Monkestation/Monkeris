@@ -4,6 +4,7 @@
 #define COLOR_BEASTY_BROWN     "#663300"
 #define COLOR_BEIGE            "#ceb689"
 #define COLOR_BLACK            "#000000"
+#define COLOR_HALF_TRANSPARENT_BLACK    "#0000007A"
 #define COLOR_BLUE             "#0000ff"
 #define COLOR_BLUE_GRAY        "#6a97b0"
 #define COLOR_BLUE_LIGHT       "#33ccff"

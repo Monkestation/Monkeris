@@ -337,7 +337,11 @@
 	name = "portable freezer"
 	desc = "This nifty shock-resistant device will keep your 'groceries' nice and non-spoiled."
 	icon_state = "freezer"
-	item_state = "medicalpack"
+	item_state = "freezer"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/equipment/briefcase_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/equipment/briefcase_righthand.dmi',
+		)
 	max_w_class = ITEM_SIZE_NORMAL
 	matter = list(MATERIAL_STEEL = 1, MATERIAL_PLASTIC = 2)
 	can_hold = list(/obj/item/organ, /obj/item/modification/organ, /obj/item/reagent_containers/food, /obj/item/reagent_containers/glass)
@@ -359,6 +363,6 @@
 /obj/item/storage/freezer/medical
 	name = "organ freezer"
 	icon_state = "freezer_red"
-	item_state = "medicalpack"
+	item_state = "freezer_red"
 	matter = list(MATERIAL_PLASTEEL = 1, MATERIAL_PLASTIC = 2)
 	max_storage_space = DEFAULT_NORMAL_STORAGE * 1.25

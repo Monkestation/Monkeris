@@ -156,7 +156,7 @@
 		if(brainmob.mind)
 			brainmob.mind.transfer_to(owner)
 		else
-			owner.key = brainmob.key
+			owner.PossessByPlayer(brainmob.key)
 
 /obj/item/organ/internal/vital/brain/slime
 	name = "slime core"

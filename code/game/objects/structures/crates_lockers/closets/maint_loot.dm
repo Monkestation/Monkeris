@@ -30,7 +30,7 @@
 	new /obj/spawner/pack/gun_adjacent_loot/low_chance(src)
 	new /obj/spawner/pack/gun_adjacent_loot/low_chance(src)
 	new /obj/spawner/pack/gun_adjacent_loot/low_chance(src)
-
+	new /obj/spawner/pack/randcredits/low_chance (src)
 
 /obj/structure/closet/random/tech
 	name = "\improper technical closet"
@@ -113,7 +113,8 @@
 	new /obj/spawner/medical/low_chance(src)
 	new /obj/spawner/medical/low_chance(src)
 	new /obj/spawner/medical/low_chance(src)
-
+	new /obj/spawner/pack/randcredits/low_chance (src)
+	new /obj/spawner/pack/randcredits/low_chance (src)
 
 
 
@@ -161,7 +162,7 @@
 	new /obj/spawner/pack/gun_loot(src)
 	new /obj/spawner/pack/gun_loot(src)
 	new /obj/spawner/pack/gun_loot(src)
-
+	new /obj/spawner/pack/randcredits/many/low_chance (src)
 
 
 //Closet with unfair bullshit inside
@@ -183,6 +184,7 @@
 	new /obj/spawner/rations(src)
 	new /obj/spawner/rations(src)
 	new /obj/spawner/rations(src)
+	new /obj/spawner/pack/randcredits/low_chance (src)
 	new /obj/spawner/mob/roaches/cluster(src)
 
 // Used for scrap beacon

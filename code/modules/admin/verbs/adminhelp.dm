@@ -298,3 +298,18 @@
 	if (!server_url)
 		CRASH("Invalid cross comms config: [server_name]")
 	world.Export("[server_url]?[list2params(message)]")
+
+/proc/tgsadminwho()
+	var/list/message = list("Admins: ")
+	var/list/admin_keys = list()
+	for(var/adm in GLOB.admins)
+		var/client/C = adm
+		admin_keys += "[C][C.holder.fakekey ? "(Stealth)" : ""][C.is_afk() ? "(AFK)" : ""]"
+
+	for(var/admin in admin_keys)
+		if(LAZYLEN(message) > 1)
+			message += ", [admin]"
+		else
+			message += "[admin]"
+
+	return jointext(message, "")

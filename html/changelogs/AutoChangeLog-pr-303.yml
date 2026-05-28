@@ -1,6 +1,0 @@
-author: Sun-Soaked
-delete-after: true
-changes:
-  - bugfix: toilets are now visible
-  - bugfix: modular guns now correctly show an empty slide when their magazine 
-      has no bullets left

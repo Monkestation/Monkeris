@@ -598,7 +598,7 @@
 			if(M.mind)
 				M.mind.transfer_to(new_mob)
 			else
-				new_mob.key = M.key
+				new_mob.PossessByPlayer(M.key)
 			qdel(M)
 		else //if victim was cruciformed, gib the body instead of creating a slime. Deus saves
 			M.gib()

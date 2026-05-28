@@ -176,7 +176,8 @@ Class Procs:
 	var/space_edges = 0
 	var/space_coefficient = 0
 	for(var/datum/connection_edge/E in edges)
-		if(E.type == /datum/connection_edge/zone) zone_edges++
+		if(istype(E, /datum/connection_edge/zone))
+			zone_edges++
 		else
 			space_edges++
 			space_coefficient += E.coefficient

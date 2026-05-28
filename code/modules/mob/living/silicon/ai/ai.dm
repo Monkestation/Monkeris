@@ -411,6 +411,13 @@ var/list/ai_verbs_default = list(
 	..()
 
 /mob/living/silicon/ai/Topic(href, href_list)
+	if(href_list["view_laws"] && isobserver(usr))
+		var/mob/observer/ghost/G = usr
+		var/turf/T = get_turf(src)
+		if(T)
+			G.forceMove(T)
+		laws.show_laws(G)
+		return
 	if(usr != src)
 		return
 	if(..())
@@ -784,7 +791,7 @@ var/list/ai_verbs_default = list(
 		mind.active = 0 // We want to transfer the key manually
 		mind.transfer_to(bound_drone) // Transfer mind to drone
 		bound_drone.laws = laws // Resync laws in case they have been changed
-		bound_drone.key = key // Manually transfer the key to log them in
+		bound_drone.PossessByPlayer(key)
 
 /mob/living/silicon/ai/proc/destroy_drone()
 	if(bound_drone)

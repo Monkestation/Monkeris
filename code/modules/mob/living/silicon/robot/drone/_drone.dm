@@ -377,7 +377,7 @@ var/list/mob_hat_cache = list()
 	if(bound_ai && mind)
 		mind.active = 0 // We want to transfer the key manually
 		mind.transfer_to(bound_ai) // Transfer mind to AI core
-		bound_ai.key = key // Manually transfer the key to log them in
+		bound_ai.PossessByPlayer(key) // Manually transfer the key to log them in
 	else
 		to_chat(src, span_warning("No AI core detected."))
 

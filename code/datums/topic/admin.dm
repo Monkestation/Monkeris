@@ -862,7 +862,6 @@
 								if(R.module)
 									R.module.modules += I
 									I.loc = R.module
-									R.module.rebuild()
 									R.activate_module(I)
 
 	log_and_message_admins("created [number] [english_list(paths)]")

@@ -847,8 +847,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		qdel(M)
 		return
 
-	M.key = key
-	if(M.client)
-		M.client.create_UI(M.type)
-		M.client.init_verbs()
+	M.PossessByPlayer(key)
+	M?.client.create_UI(M.type)
+	M?.client.init_verbs()
 	return

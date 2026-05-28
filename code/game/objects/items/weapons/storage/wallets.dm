@@ -80,13 +80,17 @@
 	else
 		return ..()
 
+/obj/item/storage/wallet/random
+	name = "lost wallet"
+	desc = "Across the seas of time, someone, somewhere, is having an awful day."
+	spawn_tags = SPAWN_TAG_MONEY
+
 /obj/item/storage/wallet/random/populate_contents()
-	var/to_add = pick(/obj/item/spacecash/bundle/c10,/obj/item/spacecash/bundle/c100,/obj/item/spacecash/bundle/c1000,/obj/item/spacecash/bundle/c20,/obj/item/spacecash/bundle/c200,/obj/item/spacecash/bundle/c50,/obj/item/spacecash/bundle/c500)
-	new to_add(src)
-	if(prob(50))
-		to_add = pick(/obj/item/spacecash/bundle/c10,/obj/item/spacecash/bundle/c100,/obj/item/spacecash/bundle/c1000,/obj/item/spacecash/bundle/c20,/obj/item/spacecash/bundle/c200,/obj/item/spacecash/bundle/c50,/obj/item/spacecash/bundle/c500)
+	var/count = rand(3, 6)
+	var/to_add = pickweight(/obj/item/spacecash/bundle/c10 = 50, /obj/item/spacecash/bundle/c20 = 35, /obj/item/spacecash/bundle/c50 = 30, /obj/item/spacecash/bundle/c100 = 25, /obj/item/spacecash/bundle/c200 = 15, /obj/item/coin/silver = 15, /obj/item/coin/plasteel = 10, /obj/item/spacecash/bundle/c500 = 10, /obj/item/oddity/common/old_money = 5)
+	for(var/item in count)
 		new to_add(src)
-	to_add = pick(/obj/item/coin/silver, /obj/item/coin/silver, /obj/item/coin/gold, /obj/item/coin/plasteel, /obj/item/coin/plasteel, /obj/item/coin/plasteel)
-	new to_add(src)
-	if(prob(20))
+	if(prob(15))
+		new /obj/item/oddity/common/old_id
+	else
 		new /obj/item/card/id/randomassistant(src)

@@ -108,8 +108,7 @@
 		power_environ = FALSE
 
 	for(var/turf/T in src)
-		if(turf_initializer)
-			turf_initializer.Initialize(T)
+		turf_initializer?.Initialize(T)
 
 	..()
 	return INITIALIZE_HINT_LATELOAD

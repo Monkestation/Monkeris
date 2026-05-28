@@ -30,19 +30,28 @@
 
 
 /obj/structure/cryopod_spawner/attack_hand(mob/living/user as mob)
-	if(!spawnmob)
-		for(var/mob/observer/O in world)
-			if(!spawnmob)
-				var/response = alert(O, "Are you -sure- you want to become a [spawn_faction] [spawn_role]?","Are you sure?","Yes","Cancel",)
-				if(response == "Cancel") continue  //Hit the wrong key...again.
+	if(spawnmob)
+		return
 
-				if(!spawnmob)
-					spawnmob = new /mob/living/carbon/human(src.loc)
-					spawnmob.ckey = O.ckey
-					justequip(spawnmob, spawn_faction, spawn_role, outfit_type)
-					add_stats(spawnmob)
-		if(!spawnmob)
-			spawnmob = new /mob/living/carbon/superior_animal/roach(src.loc)
+	for(var/mob/observer/O in world)
+		if(spawnmob)
+			break
+		var/response = alert(O, "Are you -sure- you want to become a [spawn_faction] [spawn_role]?", "Are you sure?","Yes","Cancel")
+		if(response == "Cancel") //Hit the wrong key...again.
+			continue
+		spawnmob = create_spawnmob(O)
+
+	if(!spawnmob)
+		spawnmob = new /mob/living/carbon/superior_animal/roach(loc)
+
+
+/obj/structure/cryopod_spawner/proc/create_spawnmob(mob/observer/O)
+	var/mob/living/carbon/human/H = new(loc)
+	H.PossessByPlayer(O.key)
+	justequip(H, spawn_faction, spawn_role, outfit_type)
+	add_stats(H)
+
+	return H
 
 /obj/structure/cryopod_spawner/ironhammer
 	outfit_type = /decl/hierarchy/outfit/job/security/ihoper

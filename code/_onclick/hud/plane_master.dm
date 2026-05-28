@@ -29,9 +29,9 @@
 	blend_mode = BLEND_OVERLAY
 
 /atom/movable/screen/plane_master/game_world/backdrop(mob/mymob)
-	filters = list()
+	clear_filters()
 	if(mymob.client && mymob.client.get_preference_value(/datum/client_preference/ambient_occlusion) == GLOB.PREF_YES)
-		filters += AMBIENT_OCCLUSION
+		add_filter("ambient_occlusion", 2, drop_shadow_filter(x=0, y=-2, size=4, color="#04080FAA"))
 
 /atom/movable/screen/plane_master/lighting
 	name = "lighting plane master"

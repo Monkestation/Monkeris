@@ -246,7 +246,6 @@
 	canremove = 1
 	active = FALSE
 	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
-		if(!piece) continue
 		piece.icon_state = "[initial(icon_state)]"
 		if(airtight)
 			piece.item_flags &= ~(STOPPRESSUREDAMAGE|AIRTIGHT)
@@ -348,7 +347,6 @@
 
 	if(failed_to_seal)
 		for(var/obj/item/piece in list(helmet,boots,gloves,chest))
-			if(!piece) continue
 			piece.icon_state = "[initial(icon_state)][seal_target ? "" : "_sealed"]"
 		canremove = !active
 

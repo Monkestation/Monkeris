@@ -248,7 +248,7 @@
 /mob/living/carbon/proc/earcheck()
 	return 0
 
-/mob/living/carbon/flash(duration = 0, drop_items = FALSE, doblind = FALSE, doblurry = FALSE)
+/mob/living/carbon/flash(duration = 0, drop_items = FALSE, doblind = FALSE, doblurry = FALSE, dohaze = FALSE)
 	if(blinded)
 		return
 	if(species)
@@ -263,11 +263,13 @@
 	src.throw_mode_off()
 	if(usr.stat || !target)
 		return
-	if(target.type == /atom/movable/screen) return
+	if(istype(target, /atom/movable/screen))
+		return
 
 	var/atom/movable/item = src.get_active_held_item()
 
-	if(!item) return
+	if(!item)
+		return
 
 	if(istype(item, /obj/item/stack/thrown))
 		var/obj/item/stack/thrown/V = item
@@ -277,7 +279,8 @@
 	if (istype(item, /obj/item/grab))
 		var/obj/item/grab/G = item
 		item = G.throw_held() //throw the person instead of the grab
-		if(!item) return
+		if(!item)
+			return
 		unEquip(G, loc)
 		if(ismob(item))
 			var/turf/start_T = get_turf(loc) //Get the start and target tile for the descriptors
