@@ -412,6 +412,18 @@
 	if(istype(target))
 		target.apply_effect(rand(60, 65), IRRADIATE)
 
+/obj/item/tool/spear/jager
+	name = "jager spear"
+	desc = "A jager claw spearhead tied to a crude metal shaft, made from two welded rods. It'll serve well enough."
+	icon_state = "spear_jager"
+	item_state = "spear_jager"
+	wielded_icon = "spear_jager_wielded"
+	force = WEAPON_FORCE_DANGEROUS
+	throwforce = WEAPON_FORCE_ROBUST
+	armor_divisor = ARMOR_PEN_DEEP
+	tool_qualities = list(QUALITY_CUTTING = 10,  QUALITY_WIRE_CUTTING = 5, QUALITY_SCREW_DRIVING = 5)
+	materials = list(MATERIAL_BIOMATTER = 10)
+
 /obj/item/tool/spear/makeshift_halberd
 	name = "makeshift halberd"
 	desc = "Slap a heavy blade on some rods duct-taped together and call it a day."
