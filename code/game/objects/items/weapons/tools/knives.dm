@@ -63,7 +63,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "knife_jager"
 	force = WEAPON_FORCE_PAINFUL
-	materials = list(MATERIAL_BIOMATTER = 10)
+	matter = list(MATERIAL_BIOMATTER = 5)
 
 /obj/item/tool/knife/hook
 	name = "meat hook"
@@ -430,7 +430,7 @@
 	throwforce = WEAPON_FORCE_ROBUST
 	armor_divisor = ARMOR_PEN_DEEP
 	tool_qualities = list(QUALITY_CUTTING = 10,  QUALITY_WIRE_CUTTING = 5, QUALITY_SCREW_DRIVING = 5)
-	materials = list(MATERIAL_BIOMATTER = 10)
+	matter = list(MATERIAL_BIOMATTER = 10)
 
 /obj/item/tool/spear/makeshift_halberd
 	name = "makeshift halberd"
