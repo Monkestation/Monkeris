@@ -57,6 +57,14 @@
 	tool_qualities = list(QUALITY_CUTTING = 20,  QUALITY_WIRE_CUTTING = 10, QUALITY_SCREW_DRIVING = 15)
 	rarity_value = 20
 
+/obj/item/tool/knife/jager
+	name = "jager knife"
+	desc = "A jager claw, wrapped to a metal rod."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "knife_jager"
+	force = WEAPON_FORCE_PAINFUL
+	materials = list(MATERIAL_BIOMATTER = 10)
+
 /obj/item/tool/knife/hook
 	name = "meat hook"
 	desc = "A sharp, metal hook what sticks into things."
@@ -414,7 +422,7 @@
 
 /obj/item/tool/spear/jager
 	name = "jager spear"
-	desc = "A jager claw spearhead tied to a crude metal shaft, made from two welded rods. It'll serve well enough."
+	desc = "A jager claw tied to a crude metal shaft. It'll serve well enough."
 	icon_state = "spear_jager"
 	item_state = "spear_jager"
 	wielded_icon = "spear_jager_wielded"
