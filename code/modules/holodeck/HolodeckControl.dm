@@ -235,11 +235,8 @@
 
 /obj/machinery/computer/HolodeckControl/proc/derez(obj/gone , silent = TRUE, buffer = FALSE)
 	if(gone == null)
-		to_chat(world, "nullobj")
 		return
-
 	holographic_objs.Remove(gone)
-	to_chat(world, "gone")
 	if(isobj(gone))
 		if(buffer)
 			var/datum/holoposition/holofile = new()
