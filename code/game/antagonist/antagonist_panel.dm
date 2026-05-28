@@ -79,7 +79,11 @@
 					create_from_ghost(M)
 
 	else if(href_list["remove_antagonist"])
+		var/datum/mind/prev_owner = owner
 		remove_antagonist()
+		if(prev_owner)
+			prev_owner.edit_memory()
+		return
 
 	else if(href_list["equip_antagonist"])
 		equip()

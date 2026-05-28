@@ -106,7 +106,7 @@
 			ourdrop.name = "[meat.name] [ourdrop.name]"
 			if(istype(ourdrop, /obj/item/reagent_containers/food/snacks))
 				var/obj/item/reagent_containers/food/snacks/ourmeat = ourdrop
-				ourmeat.food_quality = (ourmeat.food_quality * ((bio + 15) / 15) * clamp((toolpowr / 15), 0.25, 4))
+				ourmeat.food_quality = (ourmeat.food_quality * (bio + 15) * clamp(toolpowr, 0.25, 4))
 
 
 	//try to invoke a hazard effect on the butcher

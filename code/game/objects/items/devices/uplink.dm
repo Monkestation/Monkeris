@@ -18,6 +18,8 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 
 	var/list/purchase_log = new
 	var/datum/mind/uplink_owner
+	var/datum/antagonist/source_antag = null // Specific antag datum instance that spawned this uplink
+	var/memory_entry = null // Exact memory string added when this uplink was set up, used for cleanup on removal
 	var/used_TC = 0
 
 	var/list/owner_roles = new
@@ -97,6 +99,13 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	..()
 	nanoui_data = list()
 	update_nano_data()
+
+/obj/item/device/uplink/hidden/Destroy()
+	if(istype(loc, /obj/item))
+		var/obj/item/parent = loc
+		if(parent.hidden_uplink == src)
+			parent.hidden_uplink = null
+	return ..()
 
 // Toggles the uplink on and off. Normally this will bypass the item's normal functions and go to the uplink menu, if activated.
 /obj/item/device/uplink/hidden/proc/toggle()

@@ -16,10 +16,12 @@
 	var/crusade_force = WEAPON_FORCE_NORMAL * 0.8
 	var/flash_cooldown = 1 MINUTES
 	var/last_use = 0
+	var/crusade_effect = FALSE
 
-/obj/item/tool/sword/nt_sword/crusade_activated()
-	. = ..()
-	if(!.) return
+/obj/item/tool/sword/nt_sword/proc/crusade_activated()
+	if(crusade_effect)
+		return FALSE
+	crusade_effect = TRUE
 	force += crusade_force
 
 /obj/item/tool/sword/nt_sword/New()

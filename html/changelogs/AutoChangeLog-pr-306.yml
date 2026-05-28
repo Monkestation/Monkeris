@@ -1,0 +1,5 @@
+author: Mycah142
+delete-after: true
+changes:
+  - tweak: plant and meat quality inheritance
+  - bugfix: fixed oven cooking data to clear properly
