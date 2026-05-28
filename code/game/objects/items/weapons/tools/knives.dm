@@ -62,6 +62,7 @@
 	desc = "A jager claw, wrapped to a metal rod."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "knife_jager"
+	item_state = "knife_jager"
 	force = WEAPON_FORCE_PAINFUL
 	matter = list(MATERIAL_BIOMATTER = 5)
 
