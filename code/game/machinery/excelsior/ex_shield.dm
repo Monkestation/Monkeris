@@ -119,17 +119,17 @@
 
 /obj/machinery/excelsior_shieldwallgen/Initialize()
 	..()
-	turn_on_shields_with_delay(1 SECONDS)
+	turn_on_shields_with_delay(1 SECONDS)	// quirky delay
 
 /obj/machinery/excelsior_shieldwallgen/proc/turn_on_shields_with_delay(insert_delay)
-	spawn(5 SECONDS)
+	spawn(1 SECONDS)						// same quirky delay
 		if(internal_battery > 0)
 			turn_on_shields()
 
 
 
 /obj/machinery/excelsior_shieldwallgen/proc/turn_on_shields()
-	if(!src)	// we delayed previously, lets make sure we live
+	if(!src)	// we delayed action previously, lets make sure we live
 		return
 	if(shields_active)
 		return
