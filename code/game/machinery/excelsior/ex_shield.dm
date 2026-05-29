@@ -25,9 +25,8 @@
 	shipside_only = TRUE
 
 	//battery
-	#warn debug number 1
-	var/internal_battery = 1000
-	var/max_internal_battery = 0 // replace with a cell
+	var/obj/item/cell/internal_battery
+	var/suitable_cell = /obj/item/cell/large
 	// shields
 	var/shield_path = /obj/effect/excelsior_shield	// not equal to [/obj/effect/shield], which belongs to ship's shield gen.
 	var/shields_active = FALSE
@@ -93,7 +92,8 @@
 /obj/effect/excelsior_shield/bullet_act(obj/item/projectile/P, def_zone)
 	if(!P.get_structure_damage())
 		return
-	my_owner.internal_battery -= P.get_structure_damage()
+	if(!my_owner.internal_battery.checked_use(P.get_structure_damage()))
+		my_owner.turn_off_shields()
 
 
 
@@ -109,7 +109,25 @@
 	switch_shield_mode_forward()
 	turn_on_shields_with_delay(1 SECONDS)
 
+/obj/machinery/excelsior_shieldwallgen/attackby(obj/item/I, mob/user)
+	if(user.a_intent == I_HELP)
+		if((QUALITY_PRYING in I.tool_qualities) && internal_battery)
+			if(I.use_tool(user, src, WORKTIME_NORMAL, QUALITY_PRYING, FAILCHANCE_EASY,  required_stat = STAT_MEC))
+				eject_item(remove_battery(), user)
+			return TRUE
+		if(istype(I, suitable_cell))
+			if(internal_battery)
+				to_chat(user, "There is a [internal_battery] already installed here.")
+			else if(insert_item(I, user))
+				internal_battery = I
+			return TRUE
 
+/obj/machinery/excelsior_shieldwallgen/examine(mob/user, extra_description)
+	. = ..()
+	if(internal_battery)
+		extra_description += span_notice("\The [src]'s cell reads \"[round(internal_battery.percent(),0.1)]%\"")
+	else
+		extra_description += span_warning("\The [src] has no cell installed.")
 
 
 
@@ -117,13 +135,25 @@
 
 // Background code --- ON/OFF
 
+/obj/machinery/excelsior_shieldwallgen/New(loc, old_internal_battery)
+	..(loc)
+	if(old_internal_battery)
+		internal_battery = old_internal_battery
+
 /obj/machinery/excelsior_shieldwallgen/Initialize()
 	..()
 	turn_on_shields_with_delay(1 SECONDS)	// quirky delay
 
+/obj/machinery/excelsior_shieldwallgen/proc/remove_battery()
+	if(internal_battery)
+		. = internal_battery
+		internal_battery = null
+		#warn TODO: Turn off shields if battery removed and no external power
+
+
 /obj/machinery/excelsior_shieldwallgen/proc/turn_on_shields_with_delay(insert_delay)
-	spawn(1 SECONDS)						// same quirky delay
-		if(internal_battery > 0)
+	spawn(5 SECONDS)
+		if(internal_battery && internal_battery.check_charge(250))
 			turn_on_shields()
 
 
