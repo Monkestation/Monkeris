@@ -4,10 +4,9 @@
 	build_path = /obj/machinery/excelsior_shieldwallgen
 	origin_tech = list(TECH_BLUESPACE = 3, TECH_MAGNET = 3, TECH_COVERT = 2)
 	req_components = list(
-		/obj/item/stock_parts/subspace/transmitter = 1,
 		/obj/item/stock_parts/subspace/crystal = 1,
-		/obj/item/stock_parts/subspace/amplifier = 1,
-		/obj/item/stock_parts/capacitor = 2,
+		/obj/item/stock_parts/micro_laser = 1,
+		/obj/item/stock_parts/capacitor = 1,
 		/obj/item/stack/cable_coil = 30
 	)
 	spawn_blacklisted = TRUE
