@@ -102900,7 +102900,7 @@
 "pRQ" = (
 /obj/spawner/scrap/low_chance,
 /turf/floor/tiled/techmaint,
-/area/space)
+/area/eris/maintenance/section1deck4central)
 "pSP" = (
 /obj/structure/catwalk,
 /obj/structure/disposalpipe/segment{
