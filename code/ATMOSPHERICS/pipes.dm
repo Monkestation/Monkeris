@@ -17,7 +17,7 @@
 /obj/machinery/atmospherics/pipe/drain_power()
 	return -1
 
-/obj/machinery/atmospherics/pipe/Initialize(mapload, ...)
+/obj/machinery/atmospherics/pipe/LateInitialize()
 	if(istype(get_turf(src), /turf/wall) || istype(get_turf(src), /turf/shuttle/wall) || istype(get_turf(src), /turf/wall))
 		level = BELOW_PLATING_LEVEL
 	. = ..()
