@@ -95719,18 +95719,18 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
-/turf/wall/low/with_glass/smart_plasma,
+/turf/wall/low/with_glass/plasma_reinforced,
 /area/eris/engineering/propulsion/left)
 "eDW" = (
 /obj/machinery/door/firedoor,
-/turf/wall/low/with_glass/smart_plasma,
+/turf/wall/low/with_glass/plasma_reinforced,
 /area/eris/engineering/propulsion/left)
 "eDX" = (
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
-/turf/wall/low/with_glass/smart_plasma,
+/turf/wall/low/with_glass/plasma_reinforced,
 /area/eris/engineering/propulsion/right)
 "eDZ" = (
 /obj/machinery/light/small{
@@ -95746,17 +95746,17 @@
 /area/eris/maintenance/section2deck1port)
 "eEa" = (
 /obj/machinery/door/firedoor,
-/turf/wall/low/with_glass/smart_plasma,
+/turf/wall/low/with_glass/plasma_reinforced,
 /area/eris/engineering/propulsion/right)
 "eEc" = (
 /obj/machinery/atmospherics/pipe/simple/visible/yellow,
 /obj/machinery/door/firedoor,
-/turf/wall/low/with_glass/smart_plasma,
+/turf/wall/low/with_glass/plasma_reinforced,
 /area/eris/engineering/propulsion/left)
 "eEd" = (
 /obj/machinery/atmospherics/pipe/simple/visible/yellow,
 /obj/machinery/door/firedoor,
-/turf/wall/low/with_glass/smart_plasma,
+/turf/wall/low/with_glass/plasma_reinforced,
 /area/eris/engineering/propulsion/right)
 "eEe" = (
 /obj/spawner/junkfood/rotten/low_chance,
@@ -99447,10 +99447,6 @@
 /obj/spawner/powercell,
 /turf/floor/tiled/steel/techfloor_grid,
 /area/eris/engineering/breakroom)
-"jgO" = (
-/obj/machinery/door/firedoor,
-/turf/wall/low/with_glass/smart_plasma,
-/area/eris/engineering/wastingroom)
 "jgX" = (
 /obj/structure/multiz/stairs/enter{
 	dir = 8
@@ -101093,7 +101089,7 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
-/turf/wall/low/with_glass/smart_plasma,
+/turf/wall/low/with_glass/plasma_reinforced,
 /area/eris/engineering/wastingroom)
 "mwt" = (
 /obj/effect/decal/cleanable/graffiti/graffiti_skull{
@@ -101889,7 +101885,8 @@
 /turf/floor/tiled/steel/monofloor,
 /area/eris/quartermaster/hangarsupply)
 "oco" = (
-/turf/wall/low/with_glass/smart_plasma,
+/obj/machinery/door/firedoor,
+/turf/wall/low/with_glass/plasma_reinforced,
 /area/eris/engineering/wastingroom)
 "ocw" = (
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
@@ -107153,7 +107150,7 @@
 "xws" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/visible/yellow,
-/turf/wall/low/with_glass/smart_plasma,
+/turf/wall/low/with_glass/plasma_reinforced,
 /area/eris/engineering/wastingroom)
 "xxi" = (
 /obj/machinery/door/firedoor,
@@ -120173,12 +120170,12 @@ tqr
 aMJ
 msk
 aMJ
-jgO
-mvL
-jgO
 oco
-jgO
-jgO
+mvL
+oco
+oco
+oco
+oco
 aaa
 aaa
 aaA
@@ -120375,12 +120372,12 @@ ojj
 pEF
 qPP
 vPX
-jgO
+oco
 ftl
 idG
 idG
 iNl
-jgO
+oco
 aaa
 aaa
 aaA
@@ -120577,7 +120574,7 @@ fJq
 jhO
 aOJ
 wLb
-jgO
+oco
 idG
 idG
 idG
@@ -120779,7 +120776,7 @@ ghs
 aOI
 nKn
 ism
-jgO
+oco
 idG
 idG
 idG
@@ -120986,7 +120983,7 @@ koK
 idG
 idG
 tKZ
-jgO
+oco
 aaa
 aaa
 aad
@@ -121183,12 +121180,12 @@ ocw
 sGI
 aMJ
 aMJ
-jgO
-jgO
-jgO
-jgO
-jgO
-jgO
+oco
+oco
+oco
+oco
+oco
+oco
 aai
 aai
 aai
