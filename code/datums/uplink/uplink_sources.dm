@@ -35,6 +35,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	P.hard_drive.store_file(program)
 	to_chat(M, span_notice("A portable object teleportation relay has been installed in your [P.name]. Simply enter the code \"[pda_pass]\" in your new program to unlock its hidden features."))
 	M.mind.store_memory("<B>Uplink passcode:</B> [pda_pass] ([P.name]).")
+	T.memory_entry = "<B>Uplink passcode:</B> [pda_pass] ([P.name]).<BR>"
 
 /decl/uplink_source/radio
 	name = "Radio"
@@ -60,6 +61,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	T.trigger_code = freq
 	to_chat(M, span_notice("A portable object teleportation relay has been installed in your [R.name]. Simply dial the frequency [format_frequency(freq)] to unlock its hidden features."))
 	M.mind.store_memory("<B>Radio Freq:</B> [format_frequency(freq)] ([R.name]).")
+	T.memory_entry = "<B>Radio Freq:</B> [format_frequency(freq)] ([R.name]).<BR>"
 
 /decl/uplink_source/implant
 	name = "Implant"

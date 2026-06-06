@@ -1,7 +1,0 @@
-author: Sun-Soaked
-delete-after: true
-changes:
-  - rscadd: many spawn points for pocket-change level money
-  - rscadd: lost wallets, which carry varing amounts of pocket change and may 
-      rarely carry greater treasures
-  - balance: removed all normal money spawns above 500 credits.

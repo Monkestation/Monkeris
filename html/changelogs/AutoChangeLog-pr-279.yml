@@ -1,8 +1,0 @@
-author: Sun-Soaked
-delete-after: true
-changes:
-  - balance: the liver disease starting wound now has 2 additional stages, 
-      increasing the time it takes for inflammation(curable) to become 
-      scarring(incurable)
-  - bugfix: chemsmoke no longer dupes chemicals across multiple metabolism 
-      channels

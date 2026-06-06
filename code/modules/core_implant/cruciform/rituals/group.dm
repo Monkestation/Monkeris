@@ -219,17 +219,10 @@
 	)
 	effect_type = /datum/group_ritual_effect/cruciform/crusade
 
-/atom/movable/var/crusade_effect = FALSE
-
-/atom/movable/proc/crusade_activated()
-	if(crusade_effect)
-		return FALSE
-	crusade_effect = TRUE
-	return TRUE
 
 /datum/group_ritual_effect/cruciform/crusade/trigger_success(mob/starter, list/participants)
 	..()
-	for(var/atom/movable/A in GLOB.all_faction_items)
+	for(var/obj/item/tool/sword/nt_sword/A in GLOB.all_faction_items)
 		A.crusade_activated()
 
 /datum/group_ritual_effect/cruciform/crusade/success(mob/living/M, cnt)

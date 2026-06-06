@@ -75,5 +75,9 @@
 	return R
 
 /datum/antagonist/proc/spawn_uplink(mob/living/carbon/human/contractor_mob, amount = DEFAULT_TELECRYSTAL_AMOUNT)
+	var/list/before = GLOB.world_uplinks.Copy()
 	setup_uplink_source(contractor_mob, amount)
+	for(var/obj/item/device/uplink/U in GLOB.world_uplinks)
+		if(!(U in before))
+			U.source_antag = src
 

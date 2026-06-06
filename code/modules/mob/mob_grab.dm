@@ -244,7 +244,7 @@
 	var/original_time = world.time
 	for(var/counter in 1 to 8)
 		sleep(delay_time)
-		if(QDELING(src) || !hud)
+		if(QDELETED(src) || QDELETED(hud))
 			break // hud is null after dropped and sleep does not care so we check manually
 		if(last_action > original_time || !confirm() || get_turf(assailant) != original_loc) // cannot do a grab attack while upgrading a grab
 			hud.icon_state = original_icon //  or move and upgrade a grab or keep upgrading it when the grab is escaped.

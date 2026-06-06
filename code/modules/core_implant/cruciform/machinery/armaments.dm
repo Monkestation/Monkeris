@@ -231,7 +231,7 @@
 	name = "gun"
 	discount_increase = 100
 
-/datum/armament/item/gun/largecrossobw
+/datum/armament/item/gun/largecrossbow
 	name = "Large crossbow"
 	path = /obj/item/gun/energy/crossbow/largecrossbow
 	cost = 125
