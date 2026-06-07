@@ -15592,7 +15592,6 @@
 /turf/floor/tiled/techmaint,
 /area/eris/maintenance/section4deck5port)
 "aOI" = (
-/obj/machinery/atmospherics/pipe/simple/visible/yellow,
 /turf/floor/tiled/dark/techfloor,
 /area/eris/engineering/wastingroom)
 "aOJ" = (
@@ -101291,14 +101290,12 @@
 /area/eris/crew_quarters/fitness)
 "mGg" = (
 /obj/structure/cable/green,
-/obj/machinery/atmospherics/binary/passive_gate{
-	name = "Oxygen to Propulsion"
-	},
 /obj/machinery/power/apc{
 	dir = 4;
 	name = "East APC";
 	pixel_x = 28
 	},
+/obj/machinery/atmospherics/omni/mixer/thrusterfuel,
 /turf/floor/tiled/dark/techfloor,
 /area/eris/engineering/wastingroom)
 "mHR" = (
@@ -101713,7 +101710,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/visible/yellow,
+/obj/machinery/atmospherics/binary/passive_gate{
+	name = "Oxygen to Propulsion"
+	},
 /turf/floor/tiled/dark/techfloor,
 /area/eris/engineering/wastingroom)
 "nHG" = (
@@ -103521,7 +103520,9 @@
 	dir = 8;
 	pixel_x = 26
 	},
-/obj/machinery/atmospherics/omni/mixer/thrusterfuel,
+/obj/machinery/atmospherics/binary/passive_gate{
+	name = "Mix to Propulsion"
+	},
 /turf/floor/tiled/dark/techfloor,
 /area/eris/engineering/wastingroom)
 "reO" = (
@@ -120773,9 +120774,9 @@ hDr
 aCV
 xRh
 ghs
-aOI
 nKn
 ism
+aOI
 oco
 idG
 idG
