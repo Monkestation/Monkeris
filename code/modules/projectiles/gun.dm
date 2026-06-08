@@ -716,9 +716,9 @@
 	else
 		extra_description += span_notice("\nThe safety is off.")
 
-	if(recoil.getRating(RECOIL_TWOHAND) > 0.4)
+	if(recoil?.getRating(RECOIL_TWOHAND) > 0.4)
 		extra_description += span_warning("\nThis gun needs to be braced against something to be used effectively.")
-	else if(recoil.getRating(RECOIL_ONEHAND) > 0.6)
+	else if(recoil?.getRating(RECOIL_ONEHAND) > 0.6)
 		extra_description += span_warning("\nThis gun needs to be wielded in both hands to be used most effectively.")
 
 	if(in_range(user, src) || isghost(user))
@@ -781,21 +781,14 @@
 		sel_mode = 1
 	return set_firemode(sel_mode)
 
-/obj/item/gun/proc/set_firemode(index)
-	refresh_upgrades()
+/obj/item/gun/proc/set_firemode(index, unsafe = FALSE)
+	if (!unsafe)
+		refresh_upgrades()
 	if(index > LAZYLEN(firemodes))
 		index = 1
 	var/datum/firemode/new_mode = firemodes[sel_mode]
-	new_mode.update()
-	update_hud_actions()
-	return new_mode
-
-/// Set firemode , but without a refresh_upgrades at the start
-/obj/item/gun/proc/very_unsafe_set_firemode(index)
-	if(index > LAZYLEN(firemodes))
-		index = 1
-	var/datum/firemode/new_mode = firemodes[sel_mode]
-	new_mode.apply_to(src)
+	if(unsafe)
+		new_mode.apply_to(src)
 	new_mode.update()
 	update_hud_actions()
 	return new_mode
@@ -1033,7 +1026,7 @@
 	initialize_firemode_actions()
 
 	if(LAZYLEN(firemodes))
-		very_unsafe_set_firemode(sel_mode) // Reset the firemode so it gets the new changes
+		set_firemode(sel_mode, unsafe = TRUE) // Reset the firemode so it gets the new changes
 
 	update_icon()
 	//then update any UIs with the new stats

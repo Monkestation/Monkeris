@@ -334,6 +334,8 @@
 /obj/machinery/sorter/biomatter/Initialize()
 	. = ..()
 	sort_settings += new /datum/sort_rule(SORT_INCLUDE, SORT_TYPE_MATERIAL, MATERIAL_BIOMATTER, 1)
+	sort_settings += new /datum/sort_rule(SORT_INCLUDE, SORT_TYPE_NAME, "roach")
+	sort_settings += new /datum/sort_rule(SORT_INCLUDE, SORT_TYPE_NAME, "spider")
 
 
 #undef SORT_EXCLUDE

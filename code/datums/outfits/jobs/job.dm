@@ -20,3 +20,11 @@
 		if(H.mind.initial_email_login)
 			C.associated_email_login = H.mind.initial_email_login.Copy()
 	return C
+
+/decl/hierarchy/outfit/job/wizard
+	name = "Wizard"
+	hierarchy_type = /decl/hierarchy/outfit/job/wizard
+
+	uniform = /obj/item/clothing/head/collectable/gnome
+	shoes = /obj/item/clothing/shoes/sandal
+	suit = /obj/item/clothing/suit/storage/toggle/robe/ritual_robe

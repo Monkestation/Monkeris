@@ -97225,11 +97225,10 @@
 /turf/floor/tiled/steel/bar_dance,
 /area/holodeck/alphadeck)
 "ftl" = (
-/obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos{
-	dir = 8;
-	name = "Thruster Fuel Tank";
+/obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos/thruster{
 	id_tag = "propulsion_out";
-	frequency = 1441
+	dir = 8;
+	name = "Thruster Fuel Tank"
 	},
 /turf/floor/reinforced/engine,
 /area/eris/engineering/wastingroom)
@@ -102902,7 +102901,9 @@
 /turf/floor/tiled/white,
 /area/eris/medical/medbay/organs)
 "pRQ" = (
-)
+/obj/spawner/scrap/low_chance,
+/turf/floor/tiled/techmaint,
+/area/space)
 "pSP" = (
 /obj/structure/catwalk,
 /obj/structure/disposalpipe/segment{
@@ -102988,7 +102989,7 @@
 	pump_direction = 0;
 	use_power = 1
 	},
-/turf/wall/reinforced,
+/turf/floor/tiled/techmaint,
 /area/eris/maintenance/section4deck5port)
 "qdC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{

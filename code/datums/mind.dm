@@ -106,6 +106,11 @@
 /datum/mind/proc/store_memory(new_text)
 	memory += "[new_text]<BR>"
 
+/datum/mind/proc/remove_memory(text)
+	var/pos = findtext(memory, text)
+	if(pos)
+		memory = copytext(memory, 1, pos) + copytext(memory, pos + length(text))
+
 /datum/mind/proc/print_individualobjectives()
 	var/output
 	if(LAZYLEN(individual_objectives))
@@ -158,8 +163,10 @@
 		out += "<a href='byond://?src=\ref[src];add_antagonist=[antag.bantype]'>[antag_name]</a><br>"
 	out += "<br>"
 
+	var/antag_index = 1
 	for(var/datum/antagonist/antag in antagonist)
-		out += "<br><b>[antag.role_text]</b> <a href='byond://?src=\ref[antag]'>\[EDIT\]</a> <a href='byond://?src=\ref[antag];remove_antagonist=1'>\[DEL\]</a>"
+		out += "<br><b>[antag.role_text] #[antag_index]</b> <a href='byond://?src=\ref[antag]'>\[EDIT\]</a> <a href='byond://?src=\ref[antag];remove_antagonist=1'>\[DEL\]</a>"
+		antag_index++
 	out += "</table><hr>"
 	out += "<br>[memory]"
 
@@ -175,6 +182,12 @@
 	if(href_list["add_antagonist"])
 		var/datum/antagonist/antag = GLOB.all_antag_types[href_list["add_antagonist"]]
 		if(antag)
+			for(var/datum/antagonist/existing in antagonist)
+				if(istype(existing, antag.type))
+					var/dup_answer = alert("[name] already has the [antag.role_text] role. Add another one anyway?", "Duplicate Role Warning", "No", "Yes")
+					if(dup_answer != "Yes")
+						return
+					break
 			var/ok = FALSE
 			if(antag.outer && active)
 				var/answer = alert("[antag.role_text] is an outer antagonist. [name] will be taken from the current mob and spawned as antagonist. Continue?","Confirmation", "No","Yes")
@@ -186,18 +199,20 @@
 			if(!ok)
 				return
 
+			var/datum/antagonist/new_antag = new antag.type
 			if(antag.outer)
 				//Outer antags are created from ghosts, we must make a ghost first
 				var/mob/observer/ghost/ghost = current.ghostize(FALSE)
-				antag.create_from_ghost(ghost, announce = FALSE)
+				new_antag.create_from_ghost(ghost, announce = FALSE)
 				qdel(current) //Delete our old body
-				antag.greet()
+				new_antag.greet()
 
 			else
-				if(antag.create_antagonist(src))
-					log_admin("[key_name_admin(usr)] made [key_name(src)] into a [antag.role_text].")
+				if(new_antag.create_antagonist(src))
+					log_admin("[key_name_admin(usr)] made [key_name(src)] into a [new_antag.role_text].")
 				else
-					to_chat(usr, span_warning("[src] could not be made into a [antag.role_text]!"))
+					to_chat(usr, span_warning("[src] could not be made into a [new_antag.role_text]!"))
+					qdel(new_antag)
 
 	else if(href_list["role_edit"])
 		var/new_role = input("Select new role", "Assigned role", assigned_role) as null|anything in GLOB.joblist
