@@ -1,6 +1,0 @@
-author: Mycah142
-delete-after: true
-changes:
-  - tweak: preset disposal sorter to add 'roach' and 'spider'
-  - bugfix: fixed Thruster Fuel Chamber siphon to accurately pull
-  - bugfix: replaced SPACE tile in IH maint to proper floor

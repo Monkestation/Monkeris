@@ -119,3 +119,28 @@
 2026-05-26:
   blackwolf602:
   - bugfix: bedsheets offset
+2026-05-29:
+  BartDrown:
+  - bugfix: Traitor Panel now properly refreshes after removing an antagonist role
+  - bugfix: Removing an antagonist role now reverses its stat bonuses
+  - bugfix: Removing contractor status now deletes the contractor's uplink
+  - bugfix: Removing contractor status now clears related entries from the player's
+      memory
+  - bugfix: Removing one contractor role no longer removes uplinks belonging to other
+      contractor roles on the same player
+  - bugfix: Deleting a headset uplink no longer breaks the headset's frequency selection
+  - admin: Adding a duplicate antagonist role now shows a warning prompt
+  - admin: Multiple antagonist roles of the same type are now numbered in the Traitor
+      Panel
+  Mycah142:
+  - tweak: preset disposal sorter to add 'roach' and 'spider'
+  - bugfix: fixed Thruster Fuel Chamber siphon to accurately pull
+  - bugfix: replaced SPACE tile in IH maint to proper floor
+  - tweak: plant and meat quality inheritance
+  - bugfix: fixed oven cooking data to clear properly
+  - rscadd: First Aid external bandaging now stops internal wound worsening
+  - rscadd: Grabbing one's opposite limb reduces bleedout
+  - tweak: Holobar to function slightly different, NUFC
+  - bugfix: Check Piping Debug Verb
+  flleeppyy:
+  - code_imp: fixies a bunch of runtimes

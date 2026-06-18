@@ -1,0 +1,5 @@
+2026-06-17:
+  Sun-Soaked:
+  - code_imp: makes a bad stat check in playsound make sure stats actually exist first
+  flleeppyy:
+  - bugfix: Help dropdown in the menu bar will now always be at the end
