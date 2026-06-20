@@ -1087,6 +1087,33 @@ Turf and target are seperate in case you want to teleport some distance from a t
 			return EAST
 		if(NORTHWEST)
 			return SOUTHEAST
+// Used in Excelsior [ex_shield.dm]
+/proc/get_adjacent_dirs(dir)
+	switch(dir)
+		if(NORTH)
+			return list(NORTHEAST, NORTHWEST)
+		if(NORTHEAST)
+			return list(NORTH, EAST)
+		if(NORTHWEST)
+			return list(NORTH, WEST)
+		if(SOUTH)
+			return list(SOUTHEAST, SOUTHWEST)
+		if(SOUTHEAST)
+			return list(SOUTH, EAST)
+		if(SOUTHWEST)
+			return list(SOUTH, WEST)
+		if(EAST)
+			return list(NORTHEAST, SOUTHEAST)
+		if(NORTHEAST)
+			return list(NORTH, EAST)
+		if(SOUTHEAST)
+			return list(SOUTH, EAST)
+		if(WEST)
+			return list(NORTHWEST, SOUTHWEST)
+		if(NORTHWEST)
+			return list(NORTH, WEST)
+		if(SOUTHWEST)
+			return list(SOUTH, WEST)
 
 /*
 Checks if that loc and dir has a item on the wall

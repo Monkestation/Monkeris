@@ -94,7 +94,7 @@
 	anim = "ESH_animation"
 	machine_name = "Excelsior shield generator"
 	animation_duration = 39
-	constructing_machine = /obj/machinery/shieldwallgen/excelsior
+	constructing_machine = /obj/machinery/excelsior_shieldwallgen
 
 /obj/item/machinery_crate/autolathe
 	name = "autolathe IKEA"
