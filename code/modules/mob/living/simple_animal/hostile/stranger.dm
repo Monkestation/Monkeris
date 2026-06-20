@@ -33,6 +33,7 @@
 	projectiletype = /obj/item/projectile/plasma/heavy
 	projectilesound = 'sound/weapons/laser.ogg'
 	faction = "bluespace"
+	no_stasis = TRUE
 	var/empy_cell = FALSE
 	var/prob_tele = 20
 

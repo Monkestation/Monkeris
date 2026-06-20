@@ -683,6 +683,7 @@
 /mob/living/simple_animal/parrot/Poly
 	name = "Poly"
 	desc = "Poly the Parrot. An expert on quantum cracker theory."
+	no_stasis = TRUE
 	speak = list(
 		"Poly wanna cracker!",
 		":e Check the singlo, you chucklefucks!",

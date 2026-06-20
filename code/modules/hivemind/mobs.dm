@@ -24,6 +24,8 @@
 	spawn_tags = SPAWN_TAG_MOB_HIVEMIND
 	rarity_value = 20
 	mob_classification = CLASSIFICATION_SYNTHETIC
+	//for now.
+	no_stasis = TRUE
 
 	var/malfunction_chance = 5
 	var/ability_cooldown = 30 SECONDS
