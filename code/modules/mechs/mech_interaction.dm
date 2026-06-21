@@ -454,8 +454,7 @@
 	else if(istype(I, /obj/item/device/robotanalyzer))
 		to_chat(user, span_notice("Diagnostic Report for \the [src]:"))
 		for(var/obj/item/mech_component/MC in list(arms, legs, body, head))
-			if(MC)
-				MC.return_diagnostics(user)
+			MC.return_diagnostics(user)
 		return
 
 	else if(istype(I, /obj/item/stack/nanopaste))

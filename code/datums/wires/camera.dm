@@ -1,5 +1,11 @@
-// Wires for cameras.
+#define CAMERA_WIRE_FOCUS    (1 << 0)
+#define CAMERA_WIRE_POWER    (1 << 1)
+#define CAMERA_WIRE_LIGHT    (1 << 2)
+#define CAMERA_WIRE_ALARM    (1 << 3)
+#define CAMERA_WIRE_NOTHING1 (1 << 4)
+#define CAMERA_WIRE_NOTHING2 (1 << 5)
 
+// Wires for cameras.
 /datum/wires/camera
 	holder_type = /obj/machinery/camera
 	wire_count = 6
@@ -24,12 +30,6 @@
 	var/obj/machinery/camera/C = holder
 	return C.panel_open
 
-var/const/CAMERA_WIRE_FOCUS = 1
-var/const/CAMERA_WIRE_POWER = 2
-var/const/CAMERA_WIRE_LIGHT = 4
-var/const/CAMERA_WIRE_ALARM = 8
-var/const/CAMERA_WIRE_NOTHING1 = 16
-var/const/CAMERA_WIRE_NOTHING2 = 32
 
 /datum/wires/camera/UpdateCut(index, mended)
 	var/obj/machinery/camera/C = holder
@@ -74,3 +74,8 @@ var/const/CAMERA_WIRE_NOTHING2 = 32
 		return 1
 	else
 		return 0
+
+#undef CAMERA_WIRE_FOCUS
+#undef CAMERA_WIRE_LIGHT
+#undef CAMERA_WIRE_NOTHING1
+#undef CAMERA_WIRE_NOTHING2

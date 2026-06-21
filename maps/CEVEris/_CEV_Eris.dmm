@@ -43558,7 +43558,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/landmark/join/start/AI,
+/obj/landmark/join/start/ai,
 /turf/floor/bluegrid,
 /area/turret_protected/ai)
 "ccp" = (

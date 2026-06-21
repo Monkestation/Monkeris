@@ -40,7 +40,7 @@
 	dat += "span.color_holder_box{display: inline-block; width: 20px; height: 8px; border:1px solid #000; padding: 0px;}<"
 	dat += "a.Organs_active {background: #cc5555;}</style>"
 
-	dat +=  "<script language='javascript'> [js_byjax] function set(param, value) {window.location='?src=\ref[src];'+param+'='+value;}</script>"
+	dat +=  "<script language='javascript'> function set(param, value) {window.location='?src=\ref[src];'+param+'='+value;}</script>"
 	dat += "<table style='max-height:400px;height:410px; margin-left:250px; margin-right:250px'>"
 	dat += "<tr style='vertical-align:top'>"
 	if(pref.modifications_allowed())

@@ -29,7 +29,7 @@ Possible to do for anyone motivated enough:
 #define RANGE_BASED 4
 #define AREA_BASED 6
 
-var/const/HOLOPAD_MODE = RANGE_BASED
+#define HOLOPAD_MODE RANGE_BASED
 
 /obj/machinery/hologram/holopad
 	name = "\improper AI holopad"
@@ -85,9 +85,9 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 				last_request = world.time
 				to_chat(user, span_notice("You request an AI's presence."))
 				var/area/area = get_area(src)
-				for(var/mob/living/silicon/ai/AI in GLOB.living_mob_list)
-					if(!AI.client)	continue
-					to_chat(AI, span_info("Your presence is requested at <a href='byond://?src=\ref[AI];jumptoholopad=\ref[src]'>\the [area]</a>."))
+				for(var/mob/living/silicon/ai/ai in GLOB.living_mob_list)
+					if(!ai.client)	continue
+					to_chat(ai, span_info("Your presence is requested at <a href='byond://?src=\ref[ai];jumptoholopad=\ref[src]'>\the [area]</a>."))
 			else
 				to_chat(user, span_notice("A request for AI presence was already sent recently."))
 		if("Holocomms")
@@ -241,7 +241,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	var/obj/effect/overlay/hologram = new(T)//Spawn a blank effect at the location.
 	if(caller_id)
 		var/icon/tempicon = new
-		for(var/datum/data/record/t in data_core.locked)
+		for(var/datum/data/record/t in GLOB.data_core.locked)
 			if(t.fields["name"]==caller_id.name)
 				tempicon = t.fields["image"]
 		hologram.overlays += getHologramIcon(icon(tempicon)) // Add the callers image as an overlay to keep coloration!

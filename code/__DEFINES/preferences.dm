@@ -13,3 +13,5 @@
 #define JOB_LEVEL_LOW    3
 #define JOB_LEVEL_MEDIUM 2
 #define JOB_LEVEL_HIGH   1
+
+#define CHARACTER_PREFERENCE_INPUT_TITLE "Character Preference"

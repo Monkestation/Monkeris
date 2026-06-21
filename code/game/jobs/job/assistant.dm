@@ -1,5 +1,5 @@
 /datum/job/assistant
-	title = ASSISTANT_TITLE
+	title = JOB_ASSISTANT
 	flag = ASSISTANT
 	department = DEPARTMENT_CIVILIAN
 	department_flag = CIVILIAN
@@ -40,7 +40,7 @@ As an vagabond, you should strive to help out anyone you can. Or at least, anyon
 	loyalties = "Your loyalty is yours to decide"
 
 /obj/landmark/join/start/assistant
-	name = ASSISTANT_TITLE
+	name = JOB_ASSISTANT
 	icon_state = "player-grey"
 	join_tag = /datum/job/assistant
 

@@ -21,7 +21,7 @@
 /datum/job/ai/is_position_available()
 	return (empty_playable_ai_cores.len != 0)
 
-/obj/landmark/join/start/AI
+/obj/landmark/join/start/ai
 	icon_state = "player-grey"
 	name = "AI"
 	join_tag = /datum/job/ai

@@ -130,9 +130,9 @@
 
 /area/proc/atmosalert(danger_level, alarm_source)
 	if (danger_level == 0)
-		atmosphere_alarm.clearAlarm(src, alarm_source)
+		GLOB.atmosphere_alarm.clearAlarm(src, alarm_source)
 	else
-		atmosphere_alarm.triggerAlarm(src, alarm_source, severity = danger_level)
+		GLOB.atmosphere_alarm.triggerAlarm(src, alarm_source, severity = danger_level)
 
 	//Check all the alarms before lowering atmosalm. Raising is perfectly fine.
 	for (var/obj/machinery/alarm/AA in src)
@@ -387,7 +387,7 @@ var/list/mob/living/forced_ambiance_list = new
 			gravity_blocker = null
 
 	if (GLOB.active_gravity_generator)
-		has_gravity = gravity_is_on
+		has_gravity = GLOB.gravity_is_on
 
 	if (grav_before != has_gravity)
 		gravity_changed()

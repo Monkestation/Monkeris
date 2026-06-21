@@ -1,3 +1,7 @@
+#define SUIT_STORAGE_WIRE_ELECTRIFY	(1 << 0)
+#define SUIT_STORAGE_WIRE_SAFETY	(1 << 1)
+#define SUIT_STORAGE_WIRE_LOCKED	(1 << 3)
+
 /datum/wires/suit_storage_unit
 	holder_type = /obj/machinery/suit_storage_unit
 	wire_count = 3
@@ -6,10 +10,6 @@
 		new /datum/wire_description(SUIT_STORAGE_WIRE_SAFETY, "Failsafe"),
 		new /datum/wire_description(SUIT_STORAGE_WIRE_LOCKED, "ID scanner")
 	)
-
-var/const/SUIT_STORAGE_WIRE_ELECTRIFY	= 1
-var/const/SUIT_STORAGE_WIRE_SAFETY		= 2
-var/const/SUIT_STORAGE_WIRE_LOCKED		= 4
 
 /datum/wires/suit_storage_unit/CanUse(mob/living/L)
 	var/obj/machinery/suit_storage_unit/S = holder

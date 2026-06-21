@@ -48,7 +48,7 @@
 	if(!status || (stat & NOPOWER))
 		return
 	if(detect_time == -1)
-		motion_alarm.clearAlarm(loc, src)
+		GLOB.motion_alarm.clearAlarm(loc, src)
 	detect_time = 0
 	return TRUE
 
@@ -57,7 +57,7 @@
 		return
 	if(!detect_time)
 		return
-	motion_alarm.triggerAlarm(loc, src)
+	GLOB.motion_alarm.triggerAlarm(loc, src)
 	detect_time = -1
 	return TRUE
 

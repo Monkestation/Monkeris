@@ -179,8 +179,8 @@
 	if (!SSjob)
 		return
 	// Determine what job is marked as 'High' priority, and dress them up as such.
-	if(ASSISTANT_TITLE in job_low)
-		return SSjob.GetJob(ASSISTANT_TITLE)
+	if(JOB_ASSISTANT in job_low)
+		return SSjob.GetJob(JOB_ASSISTANT)
 	else
 		for(var/datum/job/job in SSjob.occupations)
 			if(job.title == job_high)

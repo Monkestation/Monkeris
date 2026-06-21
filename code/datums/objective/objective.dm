@@ -1,12 +1,12 @@
-var/global/list/all_objectives = list()
-var/global/list/all_objectives_types = null
+GLOBAL_LIST_EMPTY(all_objectives)
+GLOBAL_LIST_INIT(all_objectives_types, null)
 
 /hook/startup/proc/init_objectives()
-	all_objectives_types = list()
+	GLOB.all_objectives_types = list()
 	var/indent = length("[/datum/objective]/")
 	for(var/path in subtypesof(/datum/objective))
 		var/id = copytext("[path]", indent+1)
-		all_objectives_types[id] = path
+		GLOB.all_objectives_types[id] = path
 	return TRUE
 
 /datum/objective
@@ -35,7 +35,7 @@ var/global/list/all_objectives_types = null
 	else if (_target != ANTAG_SKIP_TARGET)
 		target = _target
 	update_explanation()
-	all_objectives.Add(src)
+	GLOB.all_objectives.Add(src)
 	..()
 
 /datum/objective/Destroy()
@@ -49,7 +49,7 @@ var/global/list/all_objectives_types = null
 		owner = null
 	if(target)
 		target = null
-	all_objectives.Remove(src)
+	GLOB.all_objectives.Remove(src)
 	. = ..()
 
 /datum/objective/proc/update_completion()	//This is for objectives requiring mid-round check, like harm or baptize

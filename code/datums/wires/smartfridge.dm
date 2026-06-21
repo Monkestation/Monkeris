@@ -1,3 +1,7 @@
+#define SMARTFRIDGE_WIRE_ELECTRIFY	(1 << 0)
+#define SMARTFRIDGE_WIRE_THROW		(1 << 1)
+#define SMARTFRIDGE_WIRE_IDSCAN		(1 << 3)
+
 /datum/wires/smartfridge
 	holder_type = /obj/machinery/smartfridge
 	wire_count = 3
@@ -9,10 +13,6 @@
 
 /datum/wires/smartfridge/secure
 	wire_count = 4
-
-var/const/SMARTFRIDGE_WIRE_ELECTRIFY	= 1
-var/const/SMARTFRIDGE_WIRE_THROW		= 2
-var/const/SMARTFRIDGE_WIRE_IDSCAN		= 4
 
 /datum/wires/smartfridge/CanUse(mob/living/L)
 	var/obj/machinery/smartfridge/S = holder

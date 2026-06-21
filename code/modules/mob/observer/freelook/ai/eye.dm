@@ -67,9 +67,9 @@
 
 /atom/proc/move_camera_by_click()
 	if(isAI(usr))
-		var/mob/living/silicon/ai/AI = usr
-		if(AI.eyeobj && AI.client.eye == AI.eyeobj)
-			AI.eyeobj.setLoc(src)
+		var/mob/living/silicon/ai/ai = usr
+		if(ai.eyeobj && ai.client.eye == ai.eyeobj)
+			ai.eyeobj.setLoc(src)
 
 // Return to the Core.
 /mob/living/silicon/ai/proc/core()

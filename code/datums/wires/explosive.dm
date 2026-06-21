@@ -1,22 +1,22 @@
-var/const/WIRE_EXPLODE = 1
+#define EXPLOSIVE_WIRE_EXPLODE (1 << 0)
+
 /datum/wires/explosive
 	wire_count = 1
 	descriptions = list(
-		new /datum/wire_description(WIRE_EXPLODE, "Detonation"),
+		new /datum/wire_description(EXPLOSIVE_WIRE_EXPLODE, "Detonation"),
 	)
-
 
 /datum/wires/explosive/proc/explode()
 	return
 
 /datum/wires/explosive/UpdatePulsed(index)
 	switch(index)
-		if(WIRE_EXPLODE)
+		if(EXPLOSIVE_WIRE_EXPLODE)
 			explode()
 
 /datum/wires/explosive/UpdateCut(index, mended)
 	switch(index)
-		if(WIRE_EXPLODE)
+		if(EXPLOSIVE_WIRE_EXPLODE)
 			if(!mended)
 				explode()
 
@@ -32,3 +32,5 @@ var/const/WIRE_EXPLODE = 1
 /datum/wires/explosive/c4/explode()
 	var/obj/item/plastique/P = holder
 	P.explode(get_turf(P))
+
+#undef EXPLOSIVE_WIRE_EXPLODE

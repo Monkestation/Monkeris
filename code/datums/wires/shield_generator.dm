@@ -1,3 +1,8 @@
+#define SHIELDGEN_WIRE_POWER 	 (1 << 0)	// Cut to disable power input into the generator. Pulse does nothing. Mend to restore.
+#define SHIELDGEN_WIRE_CONTROL 	 (1 << 1)	// Cut to lock most shield controls. Mend to unlock them. Pulse does nothing.
+#define SHIELDGEN_WIRE_AICONTROL (1 << 3)	// Cut to disable AI control. Mend to restore.
+#define SHIELDGEN_WIRE_NOTHING 	 (1 << 4)	// A blank wire that doesn't have any specific function
+
 /datum/wires/shield_generator
 	holder_type = /obj/machinery/power/shipside/shield_generator/
 	wire_count = 5
@@ -7,10 +12,6 @@
 		new /datum/wire_description(SHIELDGEN_WIRE_AICONTROL, "Remote access")
 	)
 
-var/const/SHIELDGEN_WIRE_POWER = 1			// Cut to disable power input into the generator. Pulse does nothing. Mend to restore.
-var/const/SHIELDGEN_WIRE_CONTROL = 4		// Cut to lock most shield controls. Mend to unlock them. Pulse does nothing.
-var/const/SHIELDGEN_WIRE_AICONTROL = 8		// Cut to disable AI control. Mend to restore.
-var/const/SHIELDGEN_WIRE_NOTHING = 16		// A blank wire that doesn't have any specific function
 
 /datum/wires/shield_generator/CanUse()
 	var/obj/machinery/power/shipside/shield_generator/S = holder

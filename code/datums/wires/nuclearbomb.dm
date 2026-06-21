@@ -1,3 +1,7 @@
+#define NUCLEARBOMB_WIRE_LIGHT  (1 << 0)
+#define NUCLEARBOMB_WIRE_TIMING (1 << 1)
+#define NUCLEARBOMB_WIRE_SAFETY (1 << 2)
+
 /datum/wires/nuclearbomb
 	holder_type = /obj/machinery/nuclearbomb
 	wire_count = 7
@@ -6,10 +10,6 @@
 		new /datum/wire_description(NUCLEARBOMB_WIRE_TIMING, "Timer"),
 		new /datum/wire_description(NUCLEARBOMB_WIRE_SAFETY, "Safety")
 	)
-
-var/const/NUCLEARBOMB_WIRE_LIGHT		= 1
-var/const/NUCLEARBOMB_WIRE_TIMING		= 2
-var/const/NUCLEARBOMB_WIRE_SAFETY		= 4
 
 /datum/wires/nuclearbomb/CanUse(mob/living/L)
 	var/obj/machinery/nuclearbomb/N = holder

@@ -1,3 +1,8 @@
+GLOBAL_VAR_INIT(chicken_count, 0)
+
+#define MAX_CHICKENS 50
+#define MEDIUM_CHICKENS 10
+
 //goat
 /mob/living/simple_animal/hostile/retaliate/goat
 	name = "goat"
@@ -177,10 +182,6 @@
 			new /mob/living/simple_animal/chicken(src.loc)
 			qdel(src)
 
-var/const/MAX_CHICKENS = 50
-#define MEDIUM_CHICKENS 10
-var/global/chicken_count = 0
-
 /mob/living/simple_animal/chicken
 	name = "\improper chicken"
 	desc = "Hopefully the eggs are good this season."
@@ -212,11 +213,11 @@ var/global/chicken_count = 0
 	icon_dead = "chicken_[body_color]_dead"
 	pixel_x = rand(-6, 6)
 	pixel_y = rand(0, 10)
-	chicken_count += 1
+	GLOB.chicken_count += 1
 
 /mob/living/simple_animal/chicken/death()
 	..()
-	chicken_count -= 1
+	GLOB.chicken_count -= 1
 
 /mob/living/simple_animal/chicken/attackby(obj/item/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/reagent_containers/food/snacks/grown)) //feedin' dem chickens
@@ -244,7 +245,7 @@ var/global/chicken_count = 0
 		var/obj/item/reagent_containers/food/snacks/egg/E = new(get_turf(src))
 		E.pixel_x = rand(-6,6)
 		E.pixel_y = rand(-6,6)
-		if(chicken_count < MEDIUM_CHICKENS || prob(clamp((100/MAX_CHICKENS)*(MAX_CHICKENS-chicken_count), 0, 100)))
+		if(GLOB.chicken_count < MEDIUM_CHICKENS || prob(clamp((100/MAX_CHICKENS)*(MAX_CHICKENS-GLOB.chicken_count), 0, 100)))
 			START_PROCESSING(SSobj, E) // chicken threshold, then chicken ratio, then number of chickens to create
 
 
@@ -259,3 +260,6 @@ var/global/chicken_count = 0
 			qdel(src)
 	else
 		STOP_PROCESSING(SSobj, src)
+
+#undef MAX_CHICKENS
+#undef MEDIUM_CHICKENS

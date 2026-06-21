@@ -22,7 +22,7 @@ SUBSYSTEM_DEF(statpanels)
 		var/list/private_ready_data = list()
 		var/list/global_ready_data = list()
 		var/list/global_data = list(
-			list("Storyteller: [master_storyteller ? master_storyteller : "Being democratically elected"]"),
+			list("Storyteller: [GLOB.master_storyteller ? GLOB.master_storyteller : "Being democratically elected"]"),
 			list("Round ID: [GLOB.round_id ? GLOB.round_id : "NULL"]"),
 			list("Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")]"),
 			list("[SSticker.HasRoundStarted() ? "Round" : "Lobby"] Time: [gameTimestamp()]"),
@@ -60,8 +60,8 @@ SUBSYSTEM_DEF(statpanels)
 					var/job_of_choice = "Unknown"
 					// Player chose to be a vagabond, that takes priority over all other settings,
 					// and is in a low priority job list for some reason
-					if(ASSISTANT_TITLE in player.client.prefs.job_low)
-						job_of_choice = ASSISTANT_TITLE
+					if(JOB_ASSISTANT in player.client.prefs.job_low)
+						job_of_choice = JOB_ASSISTANT
 					// Only take top priority job into account, no use divining what lower priority job player could get
 					else if(player.client.prefs.job_high)
 						job_of_choice = player.client.prefs.job_high

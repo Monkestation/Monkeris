@@ -24,8 +24,8 @@
 		for(var/turf/t in c.can_see())
 			visible[t] = t
 
-	for(var/mob/living/silicon/ai/AI in GLOB.living_mob_list)
-		for(var/turf/t in AI.seen_camera_turfs())
+	for(var/mob/living/silicon/ai/ai in GLOB.living_mob_list)
+		for(var/turf/t in ai.seen_camera_turfs())
 			visible[t] = t
 
 // Create a new camera chunk, since the chunks are made as they are needed.

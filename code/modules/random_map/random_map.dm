@@ -52,7 +52,9 @@ var/global/list/map_count = list()
 	set_map_size()
 
 	var/start_time = world.timeofday
-	if(!do_not_announce) admin_notice(span_danger("Generating [name]."), R_DEBUG)
+	log_mapping("Generating [name].")
+	if(!do_not_announce)
+		message_admins(span_danger("Generating [name]."))
 	sleep(-1)
 
 	// Testing needed to see how reliable this is (asynchronous calls, called during worldgen), DM ref is not optimistic
@@ -61,9 +63,13 @@ var/global/list/map_count = list()
 
 	for(var/i = 0;i<max_attempts;i++)
 		if(generate())
-			if(!do_not_announce) admin_notice(span_danger("[capitalize(name)] generation completed in [round(0.1*(world.timeofday-start_time),0.1)] seconds."), R_DEBUG)
+			log_mapping("[capitalize(name)] generation completed in [round(0.1*(world.timeofday-start_time),0.1)] seconds.")
+			if(!do_not_announce)
+				message_admins(span_danger("[capitalize(name)] generation completed in [round(0.1*(world.timeofday-start_time),0.1)] seconds."))
 			return
-	if(!do_not_announce) admin_notice(span_danger("[capitalize(name)] failed to generate ([round(0.1*(world.timeofday-start_time),0.1)] seconds): could not produce sane map."), R_DEBUG)
+
+	log_mapping("[capitalize(name)] failed to generate ([round(0.1*(world.timeofday-start_time),0.1)] seconds): could not produce sane map.")
+	if(!do_not_announce) message_admins(span_danger("[capitalize(name)] failed to generate ([round(0.1*(world.timeofday-start_time),0.1)] seconds): could not produce sane map."))
 
 /datum/random_map/proc/get_map_cell(x,y)
 	if(!map)

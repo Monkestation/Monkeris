@@ -102,7 +102,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	priority_announce("An emergency evacuation sequence has been canceled. You have approximately [round(lockdown_time - world.time) / 600] minutes to leave escape pods before they will be locked down.", "Evacuation Procedures", 'sound/AI/shuttlerecalled.ogg')
 
 /datum/emergency_shuttle_controller/proc/can_call()
-	if (!universe.OnShuttleCall(null))
+	if (!GLOB.universe.OnShuttleCall(null))
 		return FALSE
 	if (deny_shuttle)
 		return FALSE

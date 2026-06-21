@@ -1,3 +1,9 @@
+#define BORG_WIRE_LAWCHECK 		(1 << 0)
+#define BORG_WIRE_MAIN_POWER 	(1 << 1) // The power wires do nothing whyyyyyyyyyyyyy
+#define BORG_WIRE_LOCKED_DOWN 	(1 << 3)
+#define BORG_WIRE_AI_CONTROL 	(1 << 4)
+#define BORG_WIRE_CAMERA 		(1 << 5)
+
 /datum/wires/robot
 	holder_type = /mob/living/silicon/robot
 	wire_count = 5
@@ -8,12 +14,6 @@
 		new /datum/wire_description(BORG_WIRE_AI_CONTROL, "Remote access"),
 		new /datum/wire_description(BORG_WIRE_CAMERA,  "Camera")
 	)
-
-var/const/BORG_WIRE_LAWCHECK = 1
-var/const/BORG_WIRE_MAIN_POWER = 2 // The power wires do nothing whyyyyyyyyyyyyy
-var/const/BORG_WIRE_LOCKED_DOWN = 4
-var/const/BORG_WIRE_AI_CONTROL = 8
-var/const/BORG_WIRE_CAMERA = 16
 
 /datum/wires/robot/GetInteractWindow(mob/living/user)
 

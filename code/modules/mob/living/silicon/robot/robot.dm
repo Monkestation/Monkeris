@@ -1144,10 +1144,10 @@
 		connected_ai.connected_robots -= src
 		connected_ai = null
 
-/mob/living/silicon/robot/proc/connect_to_ai(mob/living/silicon/ai/AI)
-	if(AI && AI != connected_ai)
+/mob/living/silicon/robot/proc/connect_to_ai(mob/living/silicon/ai/ai)
+	if(ai && ai != connected_ai)
 		disconnect_from_ai()
-		connected_ai = AI
+		connected_ai = ai
 		connected_ai.connected_robots |= src
 		notify_ai(ROBOT_NOTIFICATION_NEW_UNIT)
 		sync()

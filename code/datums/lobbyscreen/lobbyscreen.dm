@@ -49,7 +49,7 @@
 /datum/lobbyscreen/proc/play_music(client/C)
 	if(!musicTrack)
 		return
-	if(C.get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_YES)
+	if(C?.get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_YES)
 		sound_to(C, sound(musicTrack, repeat = 0, wait = 0, volume = 65, channel = GLOB.lobby_sound_channel))
 
 /datum/lobbyscreen/proc/stop_music(client/C)
@@ -59,7 +59,7 @@
 
 
 /datum/lobbyscreen/proc/show_titlescreen(client/C)
-	if(!C.mob)
+	if(!C?.mob)
 		return
 	winset(C, "mapwindow.lobbybrowser", "is-disabled=false;is-visible=true")
 	C << browse(image_file, "file=titlescreen.png;display=0")
@@ -69,7 +69,7 @@
 
 
 /datum/lobbyscreen/proc/hide_titlescreen(client/C)
-	if(!C.mob) // Check if the client is still connected to something
+	if(!C?.mob) // Check if the client is still connected to something
 		return
 	// Hide title screen, allowing player to see the map
 	winset(C, "mapwindow.lobbybrowser", "is-disabled=true;is-visible=false")

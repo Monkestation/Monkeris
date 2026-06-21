@@ -281,7 +281,7 @@
 	var/dat = {"<B>What storyteller do you wish to install?</B><HR>"}
 	for(var/mode in config.storytellers)
 		dat += {"<A href='byond://?src=\ref[source];c_mode2=[mode]'>[config.storyteller_names[mode]]</A><br>"}
-	dat += {"Now: [master_storyteller]"}
+	dat += {"Now: [GLOB.master_storyteller]"}
 	usr << browse(HTML_SKELETON(dat), "window=c_mode")
 
 
@@ -290,12 +290,12 @@
 	require_perms = list(R_ADMIN|R_SERVER)
 
 /datum/admin_topic/c_mode2/Run(list/input)
-	master_storyteller = input["c_mode2"]
-	set_storyteller(master_storyteller) //This does the actual work
-	log_admin("[key_name(usr)] set the storyteller to [master_storyteller].")
-	message_admins(span_blue("[key_name_admin(usr)] set the storyteller to [master_storyteller]."), 1)
+	GLOB.master_storyteller = input["c_mode2"]
+	set_storyteller(GLOB.master_storyteller) //This does the actual work
+	log_admin("[key_name(usr)] set the storyteller to [GLOB.master_storyteller].")
+	message_admins(span_blue("[key_name_admin(usr)] set the storyteller to [GLOB.master_storyteller]."), 1)
 	source.Game() // updates the main game menu
-	world.save_storyteller(master_storyteller)
+	world.save_storyteller(GLOB.master_storyteller)
 	source.Topic(source, list("c_mode"=1))
 
 /datum/admin_topic/forcespeech

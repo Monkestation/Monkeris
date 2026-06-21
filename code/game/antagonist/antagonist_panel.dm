@@ -99,10 +99,10 @@
 		show_objectives()
 
 	else if(href_list["obj_add"])
-		var/new_obj_type = input("Select objective type:", "Objective type") as null|anything in all_objectives_types
+		var/new_obj_type = input("Select objective type:", "Objective type") as null|anything in GLOB.all_objectives_types
 		if(!new_obj_type) return
 
-		var/new_type = all_objectives_types[new_obj_type]
+		var/new_type = GLOB.all_objectives_types[new_obj_type]
 		new new_type(src)
 
 	else if(href_list["obj_delete"])
