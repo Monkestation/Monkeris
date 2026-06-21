@@ -321,7 +321,6 @@
 		return
 	if(damage < 1)
 		return
-
 	. = min(health, damage)
 	health -= damage
 	if(health <= 0)

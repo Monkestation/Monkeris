@@ -20,7 +20,7 @@
 	//Whenever we ask a player to become this antag but they decline, they will be recorded here.
 	//They will not be asked again until a certain time has passed
 	var/list/request_log = list()
-	var/request_timeout = 60 MINUTES
+	var/request_timeout = 15 MINUTES
 	var/list/opt_out_log = list()		// For players who opted out of role when prompted
 
 	//Transient vars, these are specific to one triggering of the event
@@ -241,7 +241,7 @@
 
 		//We will now refund part of the cost
 		var/success_percent = 0
-		if (success_quantity > 1)
+		if (success_quantity >= 1)
 			success_percent = success_quantity / target_quantity
 		cancel(severity, success_percent)
 
@@ -252,7 +252,7 @@
 			return FALSE
 
 //Tests if its possible for us to trigger, by compiling candidate lists but doing nothing with them
-/datum/storyevent/roleset/can_trigger(severity = EVENT_LEVEL_ROLESET, report)
+/datum/storyevent/roleset/can_trigger(severity = EVENT_LEVEL_ROLESET, report, manual)
 	var/list/possible_candidates = list()
 	if(GLOB.outer_antag_types[role_id])
 		possible_candidates = ghost_candidates_list(role_id, FALSE, report) //We set act check to false so it doesn't ask ghosts

@@ -53,6 +53,7 @@
 	//EVENT_LEVEL_MUNDANE
 	//EVENT_LEVEL_MODERATE
 	//EVENT_LEVEL_MAJOR
+	//EVENT_LEVEL_WEATHER
 	//EVENT_LEVEL_ROLESET
 	//EVENT_LEVEL_ECONOMY  (not implemented)
 
@@ -62,10 +63,12 @@
 	//Tags that describe what the event does. See __defines/storyteller.dm for a list
 	var/list/tags = list()
 
+	//var/cost what exactly that does?
+
 
 
 //Check if we can trigger
-/datum/storyevent/proc/can_trigger(severity, mob/report, manual)
+/datum/storyevent/proc/can_trigger(severity, report, manual)	//Put report on "world" to see full listing of storyteller actions
 	.=TRUE
 	if (!enabled)
 		if (report) to_chat(report, span_notice("Failure: The event is disabled"))
@@ -80,6 +83,7 @@
 		return FALSE
 
 	if(!manual && GLOB.storyteller.calculate_event_cost(src, severity) > GLOB.storyteller.points[severity])
+		if (report) to_chat(report, span_notice("Failure: Not enough points. [GLOB.storyteller.points[severity]]/[GLOB.storyteller.calculate_event_cost(src, severity)] (Event was: [src.name])"))
 		return FALSE
 
 	//IF this is a wrapper for a random event, we'll check if that event can trigger
@@ -110,7 +114,10 @@
 /datum/storyevent/proc/cancel(type, completion = 0)
 	//This proc refunds the cost of this event
 	if (GLOB.storyteller)
-		GLOB.storyteller.modify_points(get_cost(type)*(1 - completion), type)
+		var/refund_value = get_cost(type)*(1 - completion)
+		if(GLOB.storyteller.debug_mode)
+			message_admins("Refunding [refund_value] points to [type]")
+		GLOB.storyteller.modify_points(refund_value, type)
 
 /datum/storyevent/proc/trigger_event(severity = EVENT_LEVEL_MUNDANE)
 	if (event_type)
@@ -159,4 +166,4 @@
 	return max(mod-(abs(val-req)**2),0)/mod
 
 /datum/storyevent/proc/get_cost(event_type)
-	return max(event_pools[event_type] * GLOB.storyteller.repetition_multiplier ** occurrences, 1)
+	return event_pools[event_type]

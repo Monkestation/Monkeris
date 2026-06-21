@@ -338,7 +338,7 @@ GLOBAL_LIST_INIT(scary_sounds, list(
 		GLOB.mannequins_[ckey] = new/mob/living/carbon/human/dummy/mannequin()
 	. = GLOB.mannequins_[ckey]
 
-var/global/list/severity_to_string = list("[EVENT_LEVEL_MUNDANE]" = "Mundane", "[EVENT_LEVEL_MODERATE]" = "Moderate", "[EVENT_LEVEL_MAJOR]" = "Major", "[EVENT_LEVEL_ROLESET]" = "Roleset","[EVENT_LEVEL_ECONOMY]" = "Economy")
+var/global/list/severity_to_string = list("[EVENT_LEVEL_MUNDANE]" = "Mundane", "[EVENT_LEVEL_MODERATE]" = "Moderate", "[EVENT_LEVEL_MAJOR]" = "Major", "[EVENT_LEVEL_ROLESET]" = "Roleset", "[EVENT_LEVEL_WEATHER]" = "Weather", "[EVENT_LEVEL_ECONOMY]" = "Economy")
 
 
 

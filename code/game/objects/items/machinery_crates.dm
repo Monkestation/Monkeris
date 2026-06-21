@@ -79,23 +79,6 @@
 	if(animation_sound)
 		playsound(src, animation_sound, 100, 1, ignore_walls = !stealth)
 
-/obj/item/machinery_crate/excelsior
-	icon_state = "excelsior"
-	bad_type = /obj/item/machinery_crate/excelsior
-
-/obj/item/machinery_crate/excelsior/excelsior_teleporter
-	name = "Packaged Excelsior Teleporter"
-	machine_name = "Excelsior Teleporter"
-	constructing_machine = /obj/machinery/complant_teleporter
-
-/obj/item/machinery_crate/excelsior/shield
-	name = "shield generator IKEA"
-	icon_state = "shield_gen"
-	anim = "ESH_animation"
-	machine_name = "Excelsior shield generator"
-	animation_duration = 39
-	constructing_machine = /obj/machinery/shieldwallgen/excelsior
-
 /obj/item/machinery_crate/autolathe
 	name = "autolathe IKEA"
 	machine_name = "autolathe"
@@ -105,38 +88,6 @@
 	name = "crafting station IKEA"
 	machine_name = "crafting station"
 	constructing_machine = /obj/machinery/autolathe/crafting_station
-
-/obj/item/machinery_crate/excelsior/autolathe
-	name = "Excelsior autolathe IKEA"
-	machine_name = "Excelsior autolate"
-	constructing_machine = /obj/machinery/autolathe/excelsior
-
-/obj/item/machinery_crate/excelsior/boombox
-	name = "Excelsior boombox IKEA"
-	icon_state = "exboombox"
-	constructing_duration = 80
-	machine_name = "Excelsior boombox"
-	constructing_machine = /obj/machinery/excelsior_boombox
-
-/obj/item/machinery_crate/excelsior/diesel_generator
-	name = "diesel generator IKEA"
-	machine_name = "diesel generator"
-	constructing_machine = /obj/machinery/power/port_gen/pacman/diesel
-
-/obj/item/machinery_crate/excelsior/diesel_generator/finish_construction(atom/movable/overlay/animation)
-	var/obj/machinery/power/port_gen/pacman/diesel = new constructing_machine(get_turf(src))
-	diesel.anchored = TRUE
-	diesel.connect_to_network()
-	if(!QDELETED(animation))
-		qdel(animation)
-	if(!QDELETED(src))
-		qdel(src)
-
-/obj/item/machinery_crate/excelsior/turret
-	name = "turret IKEA"
-	constructing_duration = 130
-	machine_name = "Excelsior turret"
-	constructing_machine = /obj/machinery/porta_turret/excelsior
 
 /obj/item/machinery_crate/pacman
 	name = "P.A.C.M.A.N. IKEA"
@@ -177,8 +128,57 @@
 	machine_name = "oven"
 	constructing_machine = /obj/machinery/cooking_with_jane/oven
 
+/obj/item/machinery_crate/excelsior
+	icon_state = "excelsior"
+	bad_type = /obj/item/machinery_crate/excelsior
+
+/obj/item/machinery_crate/excelsior/excelsior_teleporter
+	name = "Packaged Excelsior Teleporter"
+	machine_name = "Excelsior Teleporter"
+	constructing_machine = /obj/machinery/complant_teleporter
+
+/obj/item/machinery_crate/excelsior/shield
+	name = "Packaged Excelsior shield generator"
+	icon_state = "shield_gen"
+	anim = "ESH_animation"
+	machine_name = "Excelsior shield generator"
+	animation_duration = 39
+	constructing_machine = /obj/machinery/shieldwallgen/excelsior
+
+/obj/item/machinery_crate/excelsior/autolathe
+	name = "Packaged Excelsior autoforge"
+	machine_name = "Excelsior autolate"
+	constructing_machine = /obj/machinery/autolathe/excelsior
+
+/obj/item/machinery_crate/excelsior/boombox
+	name = "Packaged Excelsior boombox"
+	icon_state = "exboombox"
+	constructing_duration = 80
+	machine_name = "Excelsior boombox"
+	constructing_machine = /obj/machinery/excelsior_boombox
+
+/obj/item/machinery_crate/excelsior/diesel_generator
+	name = "Packaged Excelsior diesel generator"
+	machine_name = "diesel generator"
+	constructing_machine = /obj/machinery/power/port_gen/pacman/diesel
+
+/obj/item/machinery_crate/excelsior/diesel_generator/finish_construction(atom/movable/overlay/animation)
+	var/obj/machinery/power/port_gen/pacman/diesel = new constructing_machine(get_turf(src))
+	diesel.anchored = TRUE
+	diesel.connect_to_network()
+	if(!QDELETED(animation))
+		qdel(animation)
+	if(!QDELETED(src))
+		qdel(src)
+
+/obj/item/machinery_crate/excelsior/turret
+	name = "Packaged Excelsior turret"
+	constructing_duration = 130
+	machine_name = "Excelsior turret"
+	constructing_machine = /obj/machinery/porta_turret/excelsior
+
 /obj/item/machinery_crate/excelsior/node
-	name = "Excelsior Node Package"
+	name = "Packaged Excelsior Node"
 	machine_name = "Excelsior Node"
 	animation_sound = 'sound/machines/excelsior/node_deploy.ogg'
 	icon = 'icons/obj/machines/excelsior/corenode/node.dmi'

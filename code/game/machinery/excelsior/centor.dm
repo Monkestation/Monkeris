@@ -136,7 +136,7 @@ var/global/excelsior_centor
 	new /obj/item/machinery_crate/excelsior/excelsior_teleporter(stash)
 	new /obj/item/storage/toolbox/mechanical(stash)
 
-	contents.Add(stash)
+	new /obj/item/machinery_crate/excelsior/node(src)
 
 	deploy_animation()
 	excelsior_centor = src
