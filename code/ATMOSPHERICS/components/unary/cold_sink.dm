@@ -20,9 +20,9 @@
 	var/set_temperature = T20C		// Thermostat
 	var/cooling = 0
 
-/obj/machinery/atmospherics/unary/freezer/New()
+/obj/machinery/atmospherics/unary/freezer/Initialize(mapload, ...)
 	initialize_directions = dir
-	..()
+	. = ..()
 
 /obj/machinery/atmospherics/unary/freezer/atmos_init()
 	if(node1)

@@ -8,24 +8,24 @@
 /area/deepmaint)
 "ac" = (
 /obj/spawner/junk,
-/turf/floor/asteroid,
+/turf/floor/asteroid/cave/air,
 /area/deepmaint)
 "ad" = (
 /obj/spawner/material/ore,
-/turf/floor/asteroid,
+/turf/floor/asteroid/cave/air,
 /area/deepmaint)
 "ae" = (
 /obj/spawner/junk,
 /obj/spawner/junk,
-/turf/floor/asteroid,
+/turf/floor/asteroid/cave/air,
 /area/deepmaint)
 "af" = (
-/turf/floor/asteroid,
+/turf/floor/asteroid/cave/air,
 /area/deepmaint)
 "ag" = (
 /obj/spawner/junk,
 /obj/spawner/material/ore,
-/turf/floor/asteroid,
+/turf/floor/asteroid/cave/air,
 /area/deepmaint)
 "ah" = (
 /turf/mineral,
@@ -63,11 +63,11 @@
 "ap" = (
 /obj/spawner/pack/gun_loot,
 /obj/landmark/corpse/skeleton/maint,
-/turf/floor/asteroid,
+/turf/floor/asteroid/cave/air,
 /area/deepmaint)
 "aq" = (
 /obj/structure/ore_box,
-/turf/floor/asteroid,
+/turf/floor/asteroid/cave/air,
 /area/deepmaint)
 "ar" = (
 /obj/machinery/door/blast/shutters{
@@ -81,7 +81,7 @@
 "at" = (
 /obj/spawner/material/ore,
 /obj/spawner/material/ore,
-/turf/floor/asteroid,
+/turf/floor/asteroid/cave/air,
 /area/deepmaint)
 "av" = (
 /turf/floor/tiled/steel/brown_platform,
@@ -102,11 +102,11 @@
 /area/deepmaint)
 "ay" = (
 /obj/machinery/floodlight,
-/turf/floor/asteroid,
+/turf/floor/asteroid/cave/air,
 /area/deepmaint)
 "az" = (
 /obj/spawner/mob/biome_spawner_mob/low_chance,
-/turf/floor/asteroid,
+/turf/floor/asteroid/cave/air,
 /area/deepmaint)
 "aA" = (
 /turf/floor/tiled/steel/brown_perforated,
@@ -173,7 +173,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/floor/asteroid,
+/turf/floor/asteroid/cave/air,
 /area/deepmaint)
 "aM" = (
 /obj/structure/table/standard,
@@ -196,14 +196,14 @@
 /area/deepmaint)
 "aP" = (
 /obj/structure/reagent_dispensers/watertank/huge,
-/turf/floor/asteroid,
+/turf/floor/asteroid/cave/air,
 /area/deepmaint)
 "aQ" = (
 /obj/structure/table/woodentable,
 /obj/item/seeds/ambrosiavulgarisseed,
 /obj/item/seeds/ambrosiavulgarisseed,
 /obj/item/seeds/ambrosiavulgarisseed,
-/turf/floor/asteroid,
+/turf/floor/asteroid/cave/air,
 /area/deepmaint)
 "aR" = (
 /obj/spawner/material/ore,
@@ -215,7 +215,7 @@
 /area/deepmaint)
 "aT" = (
 /obj/machinery/portable_atmospherics/hydroponics,
-/turf/floor/asteroid,
+/turf/floor/asteroid/cave/air,
 /area/deepmaint)
 "aU" = (
 /obj/spawner/junk,
@@ -293,7 +293,7 @@
 /area/deepmaint)
 "dq" = (
 /obj/item/tool/pickaxe,
-/turf/floor/asteroid,
+/turf/floor/asteroid/cave/air,
 /area/deepmaint)
 "ni" = (
 /obj/structure/bed/padded,
@@ -309,7 +309,7 @@
 /area/deepmaint)
 "Yi" = (
 /obj/machinery/vending/plant_gene,
-/turf/floor/asteroid,
+/turf/floor/asteroid/cave/air,
 /area/deepmaint)
 
 (1,1,1) = {"

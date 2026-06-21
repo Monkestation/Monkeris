@@ -5,8 +5,11 @@
 /area/deepmaint)
 "b" = (
 /obj/structure/catwalk,
-/obj/machinery/atmospherics/pipe/simple/visible/yellow{
-	dir = 4
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 5;
+	icon_state = "intact";
+	tag = "icon-intact (NORTHEAST)";
+	color = "#deb63d"
 	},
 /turf/floor/plating/under,
 /area/deepmaint)
@@ -314,17 +317,52 @@
 	},
 /turf/floor/plating/under,
 /area/deepmaint)
+"K" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/visible{
+	icon_state = "intact";
+	tag = "icon-intact (NORTHWEST)";
+	color = "#deb63d";
+	dir = 10
+	},
+/turf/floor/plating/under,
+/area/deepmaint)
+"N" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 9;
+	icon_state = "intact";
+	tag = "icon-intact (NORTHWEST)";
+	color = "#deb63d"
+	},
+/turf/floor/plating/under,
+/area/deepmaint)
+"S" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/visible{
+	icon_state = "intact";
+	tag = "icon-intact (NORTHEAST)";
+	color = "#deb63d";
+	dir = 6
+	},
+/turf/floor/plating/under,
+/area/deepmaint)
+"Y" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/visible/yellow,
+/turf/floor/plating/under,
+/area/deepmaint)
 
 (1,1,1) = {"
 a
-b
-a
-a
-a
-a
-a
-a
-a
+S
+Y
+Y
+Y
+Y
+Y
+Y
+Y
 b
 a
 "}
@@ -447,14 +485,14 @@ a
 "}
 (11,1,1) = {"
 a
-b
-a
-a
-a
-a
-a
-a
-a
-b
+K
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+N
 a
 "}

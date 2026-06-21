@@ -36,8 +36,8 @@
 	if(frequency)
 		radio_connection = SSradio.add_object(src, frequency, RADIO_ATMOSIA)
 
-/obj/machinery/atmospherics/trinary/filter/New()
-	..()
+/obj/machinery/atmospherics/trinary/filter/Initialize(mapload, ...)
+	. = ..()
 	switch(filter_type)
 		if(0) //removing hydrocarbons
 			filtered_out = list("plasma")
@@ -236,8 +236,8 @@
 	dir = SOUTH
 	initialize_directions = SOUTH|NORTH|EAST
 
-/obj/machinery/atmospherics/trinary/filter/m_filter/New()
-	..()
+/obj/machinery/atmospherics/trinary/filter/m_filter/Initialize(mapload, ...)
+	. = ..()
 	switch(dir)
 		if(NORTH)
 			initialize_directions = WEST|NORTH|SOUTH

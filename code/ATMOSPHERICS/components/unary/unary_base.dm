@@ -6,8 +6,8 @@
 
 	var/datum/pipe_network/network
 
-/obj/machinery/atmospherics/unary/New()
-	..()
+/obj/machinery/atmospherics/unary/Initialize(mapload, ...)
+	. = ..()
 	initialize_directions = dir
 	air_contents = new
 

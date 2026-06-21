@@ -447,6 +447,9 @@
 	nitrogen = 0
 	temperature = TCMB
 
+/turf/floor/asteroid/cave/air //POIs using cave tiles in otherwise aired areas caused issues
+	oxygen = MOLES_O2STANDARD
+	nitrogen = MOLES_N2STANDARD
 
 /turf/floor/tiled/derelict
 	name = "floor"
