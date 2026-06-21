@@ -1,6 +1,7 @@
 // Excelsior
 /obj/item/computer_hardware/hard_drive/portable/design/excelsior
 	bad_type = /obj/item/computer_hardware/hard_drive/portable/design/excelsior
+	matter = list() // Excelsior can easily softlock themselves to the point the joke stops being funny.
 	origin_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 1)
 	spawn_tags = SPAWN_TAG_DESIGN_EXCELSIOR
 	icon_state = "excelsior"
@@ -13,37 +14,47 @@
 	spawn_blacklisted = TRUE
 	license = -1
 	designs = list(
+		/datum/design/autolathe/device/propaganda_chip,
+		/datum/design/autolathe/device/implanter,
 		/datum/design/autolathe/gun/reclaimer,
-		/datum/design/autolathe/circuit/autolathe_excelsior,		//circuits
-		/datum/design/autolathe/circuit/shieldgen_excelsior,
-		/datum/design/autolathe/circuit/reconstructor_excelsior,
-		/datum/design/autolathe/circuit/diesel_excelsior,
-		/datum/design/autolathe/circuit/excelsior_boombox,
-		/datum/design/autolathe/circuit/turret_excelsior,
-		/datum/design/autolathe/circuit/autolathe_disk_cloner,
+
 		/datum/design/research/item/part/basic_capacitor,
-		/datum/design/research/item/part/micro_mani,				//machine parts
+		/datum/design/research/item/part/micro_mani,
+		/datum/design/research/item/part/basic_matter_bin,
+		/datum/design/research/item/part/basic_micro_laser,
+		/datum/design/research/item/part/basic_sensor,
+
 		/datum/design/research/item/part/subspace_amplifier,
 		/datum/design/research/item/part/subspace_crystal,
 		/datum/design/research/item/part/subspace_transmitter,
-		/datum/design/autolathe/part/igniter,						//regular parts
+
+		/datum/design/autolathe/part/igniter,
 		/datum/design/autolathe/part/signaler,
 		/datum/design/autolathe/part/door_signaler,
+
 		/datum/design/autolathe/part/sensor_prox,
 		/datum/design/autolathe/part/consolescreen,
-		/datum/design/autolathe/cell/large/excelsior,				//power cells
+		//power cells
+		/datum/design/autolathe/cell/large/excelsior,
 		/datum/design/autolathe/cell/medium/excelsior,
 		/datum/design/autolathe/cell/small/excelsior,
-		/datum/design/autolathe/prosthesis/excelsior/l_arm,         //prostheses
+		//prostheses
+		/datum/design/autolathe/prosthesis/excelsior/l_arm,
 		/datum/design/autolathe/prosthesis/excelsior/r_arm,
 		/datum/design/autolathe/prosthesis/excelsior/l_leg,
 		/datum/design/autolathe/prosthesis/excelsior/r_leg,
 		/datum/design/autolathe/prosthesis/excelsior/groin,
 		/datum/design/autolathe/prosthesis/excelsior/chest,
 		/datum/design/autolathe/prosthesis/excelsior/head,
-		/datum/design/autolathe/device/implanter,					//misc
-		/datum/design/autolathe/device/propaganda_chip,
-		/datum/design/autolathe/container/ammocan_excel
+		// CIRCUITS (commented out)
+		// /datum/design/autolathe/circuit/autolathe_excelsior,
+		// /datum/design/autolathe/circuit/shieldgen_excelsior,
+		// /datum/design/autolathe/circuit/reconstructor_excelsior,
+		// /datum/design/autolathe/circuit/diesel_excelsior,
+		// /datum/design/autolathe/circuit/excelsior_boombox,
+		// /datum/design/autolathe/circuit/turret_excelsior,
+		// /datum/design/autolathe/circuit/autolathe_disk_cloner,
+		// MISC
 	)
 
 /obj/item/computer_hardware/hard_drive/portable/design/excelsior/weapons

@@ -4,6 +4,7 @@
 /obj/item/device/assembly/signaler
 	name = "remote signaling device"
 	desc = "Used to remotely activate devices."
+
 	icon_state = "signaller"
 	item_state = "signaler"
 	item_icons = list(
@@ -192,6 +193,8 @@
 /obj/item/device/assembly/signaler/door_controller
 	name = "remote door signaling device"
 	desc = "Used to remotely activate doors. 2 Beeps for opened, 1 for closed, 0 for no answer. Alt-Click to change Mode, Ctrl-Click to change code."
+	description_info = "You can use multitool on shutters and blast doors to change their codes, and you can assemble them yourself too!"
+	description_antag = "For a hack, unseal the doors by welding, then change their codes with multitool."
 	icon_state = "signaller"
 	item_state = "signaler"
 	origin_tech = list(TECH_MAGNET = 1)

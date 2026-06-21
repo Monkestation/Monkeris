@@ -19,7 +19,7 @@
 	var/mode = MODE_NONE
 	var/code_crutch = TRUE	// TODO: DELETE IF STAGE 2 (drone update).
 								//	- This is here cuz no drones yet, but I've decided it might be good to still include it.
-	matter = list(MATERIAL_PLASTIC = 5, MATERIAL_GLASS = 1, MATERIAL_PLASMA = 2)
+	matter = list()	// lets not scrap this by accident
 
 	var/list/active_scanned = list()
 	var/datum/event_source
