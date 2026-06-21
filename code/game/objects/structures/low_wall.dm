@@ -126,13 +126,13 @@
 			window_type = MATERIAL_PLASMAGLASS
 			window_health = 200
 			window_max_health = 200
-			window_heat_resistance = T0C + 5227 // 5500 kelvin
+			window_heat_resistance = T0C + 9726.85 // 10,000 kelvin
 			window_damage_resistance = RESISTANCE_AVERAGE
 		if(MATERIAL_RPLASMAGLASS)
 			window_type = MATERIAL_RPLASMAGLASS
 			window_health = 250
 			window_max_health = 250
-			window_heat_resistance = T0C + 5453 // 6000 kelvin
+			window_heat_resistance = T0C + 14726.85 // 15,000 kelvin
 			window_damage_resistance = RESISTANCE_IMPROVED
 	blocks_air = TRUE
 	update_icon()
