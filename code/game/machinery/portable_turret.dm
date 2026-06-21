@@ -66,25 +66,41 @@
 	var/list/access_occupy = list()
 	var/overridden = 0				//if the security override is 0, security protocols are on. if 1, protocols are broken.
 
-/obj/machinery/porta_turret/One_star
-	name = "one star turret"
+	///Is this turret collapsable into an item?
+	var/foldable = FALSE
 
-/obj/machinery/porta_turret/crescent
-	enabled = 0
-	ailock = 1
-	check_synth	 = 0
-	check_access = 1
-	check_arrest = 1
-	check_records = 1
-	check_weapons = 1
-	check_anomalies = 1
+	///whether this turret prevents being unwrenched while active. Without it, turrets will automatically shut down when unwrenched
+	///generally needed for turrets with access protection(to keep it from being bypassed by wrenching)
+	var/wrench_lock = TRUE
 
+/obj/machinery/porta_turret/examine(mob/user, extra_description = "")
+	if(foldable)
+		extra_description += span_notice("You can click-drag this turret to yourself to fold it into a more portable shape.")
+	..(user, extra_description)
 
+/obj/machinery/porta_turret/MouseDrop(over, over_object, src_location, over_location)
+	. = ..()
+	if(foldable && over == usr)
+		if(emagged || health <= 0 || (stat & BROKEN))
+			to_chat(usr, span_danger("This turret is far too damaged to be folded up."))
+			return
+		if(anchored)
+			to_chat(usr, span_danger("The turret is locked down in place! Try unanchoring it first."))
+			return
+		to_chat(usr, span_notice("You begin folding the turret down into a more portable form..."))
+		if(do_after(usr, 6 SECONDS, src, unique = TRUE))
+			fold_turret(usr)
+		else
+			to_chat(usr, span_danger("You were unable to fold the turret down. Try standing still?"))
 
-/obj/machinery/porta_turret/stationary
-	ailock = 1
-	lethal = 1
-	installation = /obj/item/gun/energy/laser
+///converts this turret into a folded object, then destroys the original unfolded turret
+/obj/machinery/porta_turret/proc/fold_turret(mob/user)
+	if(!foldable)
+		return
+	var/foldedturret = new /obj/item/folded_portaturret (null, src)
+	user.put_in_hands(foldedturret)
+	to_chat(user, "You finish folding up [src] and pick it up.")
+	QDEL_NULL(src)
 
 /obj/machinery/porta_turret/New()
 	..()
@@ -308,8 +324,8 @@ var/list/turret_icons
 			return 1 //No whacking the turret with tools on help intent
 
 		else if(QUALITY_BOLT_TURNING in I.tool_qualities)
-			if(enabled)
-				to_chat(user, span_warning("You cannot unsecure an active turret!"))
+			if(enabled && wrench_lock)
+				to_chat(user, span_warning("You can't unwrench this turret while it's active!"))
 				return
 			if(wrenching)
 				to_chat(user, span_warning("Someone is already [anchored ? "un" : ""]securing the turret!"))
@@ -327,13 +343,13 @@ var/list/turret_icons
 				)
 
 			wrenching = 1
-			if(do_after(user, 50, src))
+			if(do_after(user, 1 SECONDS, src))
 				//This code handles moving the turret around. After all, it's a portable turret!
 				if(!anchored)
 					playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
 					anchored = TRUE
 					update_icon()
-					to_chat(user, span_notice("You secure the exterior bolts on the turret."))
+					to_chat(user, span_notice("You secure the turret in place."))
 					if(disabled)
 						spawn(200)
 							disabled = FALSE
@@ -344,7 +360,8 @@ var/list/turret_icons
 					playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
 					anchored = FALSE
 					disabled = TRUE
-					to_chat(user, span_notice("You unsecure the exterior bolts on the turret."))
+					to_chat(user, span_notice("You unsecure[enabled ? " and deactivate" : ""] the turret."))
+					enabled = FALSE
 					update_icon()
 			wrenching = 0
 			return 1 //No whacking the turret with tools on help intent
@@ -960,6 +977,79 @@ var/list/turret_icons
 /atom/movable/porta_turret_cover
 	icon = 'icons/obj/turrets.dmi'
 
+
+/obj/machinery/porta_turret/One_star
+	name = "one star turret"
+
+/obj/machinery/porta_turret/crescent
+	enabled = 0
+	ailock = 1
+	check_synth	 = 0
+	check_access = 1
+	check_arrest = 1
+	check_records = 1
+	check_weapons = 1
+	check_anomalies = 1
+
+
+
+/obj/machinery/porta_turret/stationary
+	ailock = 1
+	lethal = 1
+	installation = /obj/item/gun/energy/laser
+
+
+///stores the turret inside an item while not in use
+/obj/item/folded_portaturret
+	name = "folded turret"
+	desc = "Shh, it's sleeping..."
+	icon = 'icons/obj/turrets.dmi'
+	icon_state = "maxim_base"
+	item_state = "electropack"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/inhands/misc/devices_lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/inhands/misc/devices_righthand.dmi',
+		)
+	w_class = ITEM_SIZE_HUGE
+	force = WEAPON_FORCE_NORMAL
+	throwforce = WEAPON_FORCE_WEAK
+	throw_range = 2
+	no_double_tact = TRUE
+	var/origin_type
+
+/obj/item/folded_portaturret/Initialize(mapload, our_origin)
+	. = ..()
+	if(!istype(our_origin, /obj/machinery/porta_turret))//how?
+		return
+	var/obj/machinery/porta_turret/original = our_origin
+
+	health = original.health
+	icon = original.icon
+	icon_state = "[original.icon_state]_folded"
+	name = "folded [original.name]"
+	origin_type = original.type
+
+/obj/item/folded_portaturret/examine(mob/user, extra_description = "")
+	extra_description += span_notice("Unfold it by clicking a target tile.")
+	..(user, extra_description)
+
+/obj/item/folded_portaturret/afterattack(target, mob/user, proximity)
+	if(!proximity)
+		return ..()
+	if(health <= 0)//how did you do this
+		to_chat(user, span_danger("The [src] is too damaged to unfold..."))
+	if(isturf(target))
+		to_chat(user, span_notice("You begin unfolding and placing the [src]..."))
+		if(!do_after(user, 4 SECONDS, target, unique = TRUE))
+			to_chat(user, span_danger("You need to stand still to place the [src]!"))
+			return FALSE
+		else
+			to_chat(user, span_notice("You unfold [src] and secure it in place."))
+			var/obj/machinery/porta_turret/ourporta = new origin_type(target)
+			ourporta.health = health
+			ourporta.anchored = TRUE
+			ourporta.enabled = TRUE
+			QDEL_NULL(src)
 
 #undef TURRET_PRIORITY_TARGET
 #undef TURRET_SECONDARY_TARGET

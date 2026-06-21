@@ -119,6 +119,7 @@
 	max_storage_space = 400 //stores 200 ore, not 400.
 	max_w_class = ITEM_SIZE_NORMAL
 	can_hold = list(/obj/item/ore)
+	adjacent_quick_gather = TRUE
 
 /obj/item/storage/bag/ore/holding
 	name = "satchel of holding"
