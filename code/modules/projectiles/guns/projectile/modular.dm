@@ -251,17 +251,18 @@
 	if(PARTMOD_FOLDING_STOCK & spriteTags)
 		fold()
 
-/obj/item/gun/projectile/modular/proc/quick_fold(mob/user)
-	set name = "Fold or Unfold Stock"
+/obj/item/gun/projectile/modular/proc/quick_fold()
+	set name = "Unique Action"
 	set category = "Object"
 	set src in view(1)
 
-	if(can_interact(user) == 1)
-		return
+	if(usr.incapacitated() || !Adjacent(usr))
+		to_chat(usr, span_warning("You can't do that."))
+		return FALSE
 
-	fold(user)
+	fold(usr)
 
-/obj/item/gun/projectile/modular/proc/fold(user)
+/obj/item/gun/projectile/modular/proc/fold(mob/user)
 
 	if(PARTMOD_FOLDING_STOCK & spriteTags)
 		for(var/obj/item/part/gun/modular/stock/toedit in gun_parts) // only gonna edit one, doing this to find it
