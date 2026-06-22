@@ -26,6 +26,8 @@
 	var/load_immediately = FALSE
 	// Kept in state so that the result is the same, even when the files are created, for this run
 	VAR_PRIVATE/should_refresh = null
+	/// If this asset should CRASH or ignore when duplicate sprite keys are added
+	var/duplicates_allowed = FALSE
 
 /datum/asset/spritesheet/proc/should_load_immediately()
 #ifdef DO_NOT_DEFER_ASSETS

@@ -627,6 +627,10 @@ var/icon/text_tag_icons = new('./icons/chattags.dmi')
 	if(rest)
 		. += .(rest)
 
+/// Removes all non-alphanumerics from the text, keep in mind this can lead to id conflicts
+/proc/sanitize_css_class_name(name)
+	var/static/regex/regex = new(@"[^a-zA-Z0-9]","g")
+	return replacetext(name, regex, "")
 
 /proc/repeat_string(times, string="")
 	. = ""
@@ -677,3 +681,4 @@ var/icon/text_tag_icons = new('./icons/chattags.dmi')
 /proc/startsWith(input_text, beginning)
 	var/input_length = LAZYLEN(beginning)
 	return !!findtext(input_text, beginning, 1, input_length + 1)
+
