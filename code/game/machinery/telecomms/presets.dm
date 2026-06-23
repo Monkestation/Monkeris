@@ -64,11 +64,11 @@
 	id = "Receiver A"
 	network = "eris"
 	autolinkers = list("receiverA") // link to relay
-	freq_listening = list(AI_FREQ, SCI_FREQ, MED_FREQ, NT_FREQ, SUP_FREQ, SRV_FREQ, COMM_FREQ, ENG_FREQ, SEC_FREQ)
+	freq_listening = list(FREQ_AI, FREQ_SCI, FREQ_MED, FREQ_NT, FREQ_SUP, FREQ_SRV, FREQ_COMM, FREQ_ENG, FREQ_SEC)
 
 //Common and other radio frequencies for people to freely use
 /obj/machinery/telecomms/receiver/preset_right/New()
-	for(var/i = PUBLIC_LOW_FREQ; i < PUBLIC_HIGH_FREQ; i += 2)
+	for(var/i = MIN_FREQ; i < MAX_FREQ; i += 2)
 		freq_listening |= i
 	..()
 
@@ -77,7 +77,7 @@
 	network = "eris"
 	produces_heat = 0
 	autolinkers = list("receiverCent")
-	freq_listening = list(DTH_FREQ)
+	freq_listening = list(FREQ_DTH)
 
 
 //Buses
@@ -85,18 +85,18 @@
 /obj/machinery/telecomms/bus/preset_one
 	id = "Bus 1"
 	network = "eris"
-	freq_listening = list(SCI_FREQ, MED_FREQ)
+	freq_listening = list(FREQ_SCI, FREQ_MED)
 	autolinkers = list("processor1", "science", "medical")
 
 /obj/machinery/telecomms/bus/preset_two
 	id = "Bus 2"
 	network = "eris"
-	freq_listening = list(SUP_FREQ, SRV_FREQ, NT_FREQ)
+	freq_listening = list(FREQ_SUP, FREQ_SRV, FREQ_NT)
 	autolinkers = list("processor2", "supply", "service", "nt", "unused")
 
 /obj/machinery/telecomms/bus/preset_two/New()
-	for(var/i = PUBLIC_LOW_FREQ; i < PUBLIC_HIGH_FREQ; i += 2)
-		if(i == PUB_FREQ)
+	for(var/i = MIN_FREQ; i < MAX_FREQ; i += 2)
+		if(i == FREQ_COMMON)
 			continue
 		freq_listening |= i
 	..()
@@ -104,19 +104,19 @@
 /obj/machinery/telecomms/bus/preset_three
 	id = "Bus 3"
 	network = "eris"
-	freq_listening = list(SEC_FREQ, COMM_FREQ)
+	freq_listening = list(FREQ_SEC, FREQ_COMM)
 	autolinkers = list("processor3", "security", "command")
 
 /obj/machinery/telecomms/bus/preset_four
 	id = "Bus 4"
 	network = "eris"
-	freq_listening = list(ENG_FREQ, AI_FREQ, PUB_FREQ)
+	freq_listening = list(FREQ_ENG, FREQ_AI, FREQ_COMMON)
 	autolinkers = list("processor4", "engineering", "common")
 
 /obj/machinery/telecomms/bus/preset_cent
 	id = "CentCom Bus"
 	network = "eris"
-	freq_listening = list(DTH_FREQ)
+	freq_listening = list(FREQ_DTH)
 	produces_heat = 0
 	autolinkers = list("processorCent", "centcom")
 
@@ -156,27 +156,27 @@
 
 /obj/machinery/telecomms/server/presets/science
 	id = "Science Server"
-	freq_listening = list(SCI_FREQ)
+	freq_listening = list(FREQ_SCI)
 	autolinkers = list("science")
 
 /obj/machinery/telecomms/server/presets/medical
 	id = "Medical Server"
-	freq_listening = list(MED_FREQ)
+	freq_listening = list(FREQ_MED)
 	autolinkers = list("medical")
 
 /obj/machinery/telecomms/server/presets/supply
 	id = "Supply Server"
-	freq_listening = list(SUP_FREQ)
+	freq_listening = list(FREQ_SUP)
 	autolinkers = list("supply")
 
 /obj/machinery/telecomms/server/presets/service
 	id = "Service Server"
-	freq_listening = list(SRV_FREQ)
+	freq_listening = list(FREQ_SRV)
 	autolinkers = list("service")
 
 /obj/machinery/telecomms/server/presets/common
 	id = "Common Server"
-	freq_listening = list(PUB_FREQ, AI_FREQ) // AI Private and Common
+	freq_listening = list(FREQ_COMMON, FREQ_AI) // AI Private and Common
 	autolinkers = list("common")
 
 // "Unused" channels, AKA all others.
@@ -186,36 +186,36 @@
 	autolinkers = list("unused")
 
 /obj/machinery/telecomms/server/presets/unused/New()
-	for(var/i = PUBLIC_LOW_FREQ; i < PUBLIC_HIGH_FREQ; i += 2)
-		if(i == AI_FREQ || i == PUB_FREQ)
+	for(var/i = MIN_FREQ; i < MAX_FREQ; i += 2)
+		if(i == FREQ_AI || i == FREQ_COMMON)
 			continue
 		freq_listening |= i
 	..()
 
 /obj/machinery/telecomms/server/presets/command
 	id = "Command Server"
-	freq_listening = list(COMM_FREQ)
+	freq_listening = list(FREQ_COMM)
 	autolinkers = list("command")
 
 /obj/machinery/telecomms/server/presets/engineering
 	id = "Engineering Server"
-	freq_listening = list(ENG_FREQ)
+	freq_listening = list(FREQ_ENG)
 	autolinkers = list("engineering")
 
 /obj/machinery/telecomms/server/presets/security
 	id = "Security Server"
-	freq_listening = list(SEC_FREQ)
+	freq_listening = list(FREQ_SEC)
 	autolinkers = list("security")
 
 /obj/machinery/telecomms/server/presets/centcom
 	id = "CentCom Server"
-	freq_listening = list(DTH_FREQ)
+	freq_listening = list(FREQ_DTH)
 	produces_heat = 0
 	autolinkers = list("centcom")
 
 /obj/machinery/telecomms/server/presets/nt
 	id = "NT Voice Server"
-	freq_listening = list(NT_FREQ)
+	freq_listening = list(FREQ_NT)
 	autolinkers = list("nt")
 
 

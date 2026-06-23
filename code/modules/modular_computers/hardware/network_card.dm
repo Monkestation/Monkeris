@@ -46,7 +46,7 @@ var/global/ntnet_card_uid = 1
 		return
 
 	SSradio.remove_object(src, frequency)
-	frequency = sanitize_frequency(new_frequency, RADIO_LOW_FREQ, RADIO_HIGH_FREQ)
+	frequency = sanitize_frequency(new_frequency, FREQ_RADIO_LOW, FREQ_RADIO_HIGH)
 	radio_connection = SSradio.add_object(src, frequency, RADIO_CHAT)
 
 /obj/item/computer_hardware/network_card/proc/signal(new_frequency, code)

@@ -50,7 +50,7 @@
 
 /obj/machinery/door/blast/Initialize()
 	. = ..()
-	radio_connection = SSradio.add_object(src , BLAST_DOOR_FREQ, RADIO_BLASTDOORS)
+	radio_connection = SSradio.add_object(src , FREQ_BLAST_DOOR, RADIO_BLASTDOORS)
 	if(!electronics)
 		electronics = new(src)
 		if(_wifi_id)
@@ -66,13 +66,13 @@
 	*/
 
 /obj/machinery/door/blast/Destroy()
-	SSradio.remove_object(src, BLAST_DOOR_FREQ)
+	SSradio.remove_object(src, FREQ_BLAST_DOOR)
 	radio_connection = null
 	return ..()
 
 /obj/machinery/door/blast/proc/broadcast_status()
 	var/datum/signal/data_packet = new()
-	data_packet.frequency = BLAST_DOOR_FREQ
+	data_packet.frequency = FREQ_BLAST_DOOR
 	data_packet.encryption = electronics.wifi_id
 	data_packet.data = list()
 	data_packet.data["message"] = density ? "DATA_DOOR_CLOSED" : "DATA_DOOR_OPENED"

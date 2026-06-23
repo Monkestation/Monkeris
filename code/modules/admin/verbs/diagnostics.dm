@@ -41,18 +41,24 @@
 			output += "&nbsp;&nbsp;<b>ERROR</b><br>"
 			continue
 		for (var/filter in fqs.devices)
-			var/list/f = fqs.devices[filter]
-			if (!f)
+			var/list/filtered = fqs.devices[filter]
+			if (!filtered)
 				output += "&nbsp;&nbsp;[filter]: ERROR<br>"
 				continue
-			output += "&nbsp;&nbsp;[filter]: [f.len]<br>"
-			for (var/device in f)
-				if (isobj(device))
-					output += "&nbsp;&nbsp;&nbsp;&nbsp;[device] ([device:x],[device:y],[device:z] in area [get_area(device:loc)])<br>"
+			output += "&nbsp;&nbsp;[filter]: [filtered.len]<br>"
+			for(var/datum/weakref/device_ref as anything in filtered)
+				var/atom/device = device_ref.resolve()
+				if(!device)
+					filtered -= device_ref
+					continue
+				if (istype(device, /atom))
+					var/atom/A = device
+					output += "&nbsp;&nbsp;&nbsp;&nbsp;[device] ([AREACOORD(A)])<br>"
 				else
 					output += "&nbsp;&nbsp;&nbsp;&nbsp;[device]<br>"
 
 	usr << browse(HTML_SKELETON_TITLE("Radio Report", output),"window=radioreport")
+	BLACKBOX_LOG_ADMIN_VERB("Show Radio Report")
 
 /client/proc/reload_admins()
 	set name = "Reload Admins"

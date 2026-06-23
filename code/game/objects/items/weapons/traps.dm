@@ -236,22 +236,20 @@ Freeing yourself is much harder than freeing someone else. Calling for help is a
 
 //If an attempt to release the mob fails, it digs in and deals more damage
 /obj/item/beartrap/proc/fail_attempt(user, difficulty)
-	if (!buckled_mob)
+	if (QDELETED(buckled_mob))
 		return
 
-	var/mob/living/L = buckled_mob
 	//armour
-
-	if( L.damage_through_armor(fail_damage, BRUTE, target_zone, ARMOR_MELEE, used_weapon = src) )
+	if( buckled_mob.damage_through_armor(fail_damage, BRUTE, target_zone, ARMOR_MELEE, used_weapon = src) )
 	//No damage - no stun
-		L.Stun(4) //A short stun prevents spamming failure attempts
+		buckled_mob.Stun(4) //A short stun prevents spamming failure attempts
 		shake_camera(user, 2, 1)
 
-	if (ishuman(L))
-		var/mob/living/carbon/human/H = L
-		visible_message(span_danger("\The [src] snaps back, digging deeper into [buckled_mob.name]'s [H.get_organ(target_zone).name]"))
+	if (ishuman(buckled_mob))
+		var/mob/living/carbon/human/H = buckled_mob
+		visible_message(span_danger("\The [src] snaps back, digging deeper into [buckled_mob]'s [H.get_organ(target_zone)]"))
 	else
-		visible_message(span_danger("\The [src] snaps back, digging deeper into [buckled_mob.name]"))
+		visible_message(span_danger("\The [src] snaps back, digging deeper into [buckled_mob]"))
 
 	playsound(src, 'sound/effects/impacts/beartrap_shut.ogg', 10, 1,-2,-2)//Fairly quiet snapping sound
 

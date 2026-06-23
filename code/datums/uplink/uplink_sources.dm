@@ -46,10 +46,10 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	if(!R)
 		return SETUP_FAILED
 
-	var/freq = PUBLIC_LOW_FREQ
+	var/freq = MIN_FREQ
 	var/list/freqlist = list()
-	while (freq <= PUBLIC_HIGH_FREQ)
-		if (freq < 1451 || freq > PUB_FREQ)
+	while (freq <= MAX_FREQ)
+		if (freq < 1451 || freq > FREQ_COMMON)
 			freqlist += freq
 		freq += 2
 		if ((freq % 2) == 0)

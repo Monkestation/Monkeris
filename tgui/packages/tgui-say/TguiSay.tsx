@@ -21,6 +21,8 @@ type ByondProps = {
   scale: BooleanLike;
 };
 
+const cssSafeRegex = /[!"#$%&'()*+,./:;<=>?@[\\\]^`{|}~]/g;
+
 export function TguiSay() {
   const innerRef = useRef<HTMLTextAreaElement>(null);
   const channelIterator = useRef(new ChannelIterator());
@@ -268,7 +270,8 @@ export function TguiSay() {
 
   const theme =
     (lightMode && 'lightMode') ||
-    (currentPrefix && RADIO_PREFIXES[currentPrefix]) ||
+    (currentPrefix &&
+      RADIO_PREFIXES[currentPrefix].replaceAll(cssSafeRegex, '')) ||
     channelIterator.current.current();
 
   return (

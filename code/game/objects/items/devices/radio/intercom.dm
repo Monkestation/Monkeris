@@ -22,7 +22,7 @@
 
 /obj/item/device/radio/intercom/private
 	name = "ship intercom (Private)"
-	frequency = AI_FREQ
+	frequency = FREQ_AI
 
 /obj/item/device/radio/intercom/department
 	canhear_range = 5
@@ -31,11 +31,11 @@
 
 /obj/item/device/radio/intercom/department/medbay
 	name = "ship intercom (Medbay)"
-	frequency = MED_I_FREQ
+	frequency = FREQ_MED_I
 
 /obj/item/device/radio/intercom/department/security
 	name = "ship intercom (Security)"
-	frequency = SEC_I_FREQ
+	frequency = FREQ_SEC_I
 
 /obj/item/device/radio/intercom/New()
 	..()
@@ -48,21 +48,21 @@
 /obj/item/device/radio/intercom/department/security/New()
 	..()
 	internal_channels = list(
-		num2text(PUB_FREQ) = list(),
-		num2text(SEC_I_FREQ) = list(access_security)
+		num2text(FREQ_COMMON) = list(),
+		num2text(FREQ_SEC_I) = list(access_security)
 	)
 
 
 /obj/item/device/radio/intercom/syndicate
 	name = "illicit intercom"
 	desc = "Talk through this. Evilly"
-	frequency = SYND_FREQ
+	frequency = FREQ_SYND
 	subspace_transmission = 1
 	syndie = 1
 
 /obj/item/device/radio/intercom/syndicate/New()
 	..()
-	internal_channels[num2text(SYND_FREQ)] = list(access_syndicate)
+	internal_channels[num2text(FREQ_SYND)] = list(access_syndicate)
 
 /obj/item/device/radio/intercom/attack_ai(mob/user as mob)
 	src.add_fingerprint(user)
@@ -127,7 +127,7 @@
 
 /obj/item/device/radio/intercom/locked/ai_private
 	name = "\improper AI intercom"
-	frequency = AI_FREQ
+	frequency = FREQ_AI
 	broadcasting = 1
 	listening = 1
 
