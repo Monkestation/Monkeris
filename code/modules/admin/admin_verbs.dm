@@ -246,7 +246,7 @@ GLOBAL_LIST_INIT(admin_verbs_admin, list(
 	/client/proc/getcurrentlogs,
 	/client/proc/discord_msg))
 
-GLOBAL_LIST_INIT(admin_verbs_possess, list(/proc/possess, /proc/release))
+GLOBAL_LIST_INIT(admin_verbs_possess, list(GLOBAL_PROC_REF(possess), GLOBAL_PROC_REF(release)))
 GLOBAL_PROTECT(admin_verbs_possess)
 
 /datum/verbs/menu/Admin/Generate_list(client/C)

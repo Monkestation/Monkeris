@@ -183,7 +183,7 @@ SUBSYSTEM_DEF(ticker)
 			if(!process_empty_server())
 				return
 
-			var/game_finished = (evacuation_controller.round_over() || ship_was_nuked || universe_has_ended || excelsior_hijacking == 2 || force_ending)
+			var/game_finished = (evacuation_controller.round_over() || ship_was_nuked || GLOB.universe_has_ended || excelsior_hijacking == 2 || force_ending)
 
 			if(!nuke_in_progress && game_finished)
 				current_state = GAME_STATE_FINISHED
@@ -791,7 +791,7 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker/proc/standard_reboot()
 	if(ready_for_reboot)
-		if(universe_has_ended)
+		if(GLOB.universe_has_ended)
 			Reboot("Station destroyed", "nuke")
 		else
 			Reboot("Round ended.", "proper completion")

@@ -1,4 +1,4 @@
-var/global/universe_has_ended = 0
+GLOBAL_VAR_INIT(universe_has_ended, FALSE)
 
 
 /datum/universal_state/supermatter_cascade
@@ -72,7 +72,7 @@ AUTOMATED ALERT: Link to [command_name()] lost.
 
 		spawn(5 MINUTES)
 			SSticker.station_explosion_cinematic(0,null) // TODO: Custom cinematic
-			universe_has_ended = 1
+			GLOB.universe_has_ended = 1
 		return
 
 /datum/universal_state/supermatter_cascade/proc/AreaSet()

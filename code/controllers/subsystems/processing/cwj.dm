@@ -53,16 +53,16 @@ PROCESSING_SUBSYSTEM_DEF(cwj)
 
 	var/datum/catalog/C = GLOB.catalogs[CATALOG_REAGENTS]
 	C.associated_template = "catalog_list_reagents.tmpl"
-	sortTim(C.entry_list, /proc/cmp_catalog_entry_asc)
+	sortTim(C.entry_list, GLOBAL_PROC_REF(cmp_catalog_entry_asc))
 	C = GLOB.catalogs[CATALOG_CHEMISTRY]
 	C.associated_template = "catalog_list_reagents.tmpl"
-	sortTim(C.entry_list, /proc/cmp_catalog_entry_chem)
+	sortTim(C.entry_list, GLOBAL_PROC_REF(cmp_catalog_entry_chem))
 	C = GLOB.catalogs[CATALOG_DRINKS]
 	C.associated_template = "catalog_list_drinks.tmpl"
-	sortTim(C.entry_list, /proc/cmp_catalog_entry_asc)
+	sortTim(C.entry_list, GLOBAL_PROC_REF(cmp_catalog_entry_asc))
 	C = GLOB.catalogs[CATALOG_ALL]
 	C.associated_template = "catalog_list_general.tmpl"
-	sortTim(C.entry_list, /proc/cmp_catalog_entry_asc)
+	sortTim(C.entry_list, GLOBAL_PROC_REF(cmp_catalog_entry_asc))
 	createCookingCatalogs()
 	return TRUE
 

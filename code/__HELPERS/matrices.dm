@@ -178,11 +178,6 @@ var/list/delta_index = list(
 	else if (target.y > y)
 		pixel_y += offset
 
-//Does nothing
-/proc/color_matrix_identity()
-	return list(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1, 0,0,0,0)
-
-
 #undef LUMR
 #undef LUMG
 #undef LUMB

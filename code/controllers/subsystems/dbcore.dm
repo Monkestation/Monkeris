@@ -349,7 +349,7 @@ SUBSYSTEM_DEF(dbcore)
 
 	if (SSticker.ship_was_nuked)
 		mode_result = "Nuked"
-	else if (universe_has_ended)
+	else if (GLOB.universe_has_ended)
 		mode_result = "Universe Ended"
 	else
 		mode_result = "Unknown"

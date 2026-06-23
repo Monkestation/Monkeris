@@ -270,6 +270,10 @@
 	air.group_multiplier = 1
 	air.volume = CELL_VOLUME
 
+/turf/proc/copy_air(datum/gas_mixture/copy)
+	if(copy)
+		air.copy_from(copy)
+
 /turf/proc/c_copy_air()
 	if(!air) air = new/datum/gas_mixture
 	air.copy_from(zone.air)

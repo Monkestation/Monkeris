@@ -15,6 +15,14 @@
 
 
 
+///Returns all turfs in a zlevel
+#define Z_TURFS(ZLEVEL) block(1, 1, ZLEVEL, world.maxx, world.maxy, ZLEVEL)
+
+///Returns all currently loaded turfs
+#define ALL_TURFS(...) block(1, 1, 1, world.maxx, world.maxy, world.maxz)
+
+#define TURF_FROM_COORDS_LIST(List) (locate(List[1], List[2], List[3]))
+
 //Used for floor/wall smoothing
 #define SMOOTH_NONE 0	//Smooth only with itself
 #define SMOOTH_ALL 1	//Smooth with all of type
