@@ -22,21 +22,30 @@
 	var/art_artist_name
 	// A link to the artists social media
 	var/art_artist_link
-	// insert songs in this list, not into var/musicTrack
-	var/list/possibleMusic = list()
+	// insert track datums into this list, not into var/music_track
+	var/list/datum/lobbyscreen_music/possible_music = list()
 	// this var exist so all players will hear one song
-	var/musicTrack
+	var/datum/lobbyscreen_music/music_track
 
 /datum/lobbyscreen/New()
-
 	if (!art_artist_name)
 		log_runtime("Lobbyscreen [src.type] is missing an art artist name")
 	if (!art_artist_link)
 		log_runtime("Lobbyscreen [src.type] is missing an art artist link")
-	if (!length(possibleMusic))
+	if (!length(possible_music))
 		log_runtime("Lobbyscreen [src.type] has no music tracks")
 	else
-		musicTrack = pick(possibleMusic)
+		for(var/datum/lobbyscreen_music/track as anything in possible_music)
+			if(!ispath(track, /datum/lobbyscreen_music))
+				log_runtime("Lobbyscreen [src.type] contains an invalid lobbyscreen path (got [track])! Please make sure the entry is like so: /datum/lobbyscreen_music/artist/track_name")
+				possible_music -= track
+			else if(!initial(track.file))
+				log_runtime("Lobbyscreen [src.type] lacks a sound file path!")
+				possible_music -= track
+
+		var/datum/lobbyscreen_music/track = pick(possible_music)
+		if(track)
+			music_track = new track()
 
 	return ..()
 
@@ -47,13 +56,14 @@
 	)
 
 /datum/lobbyscreen/proc/play_music(client/C)
-	if(!musicTrack)
+	if(!music_track)
 		return
 	if(C.get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_YES)
-		sound_to(C, sound(musicTrack, repeat = 0, wait = 0, volume = 65, channel = GLOB.lobby_sound_channel))
+		to_chat(C, span_boldnotice("Now playing: [music_track.get_formatted_title(include_href = TRUE)]"))
+		sound_to(C, sound(music_track.file, repeat = 0, wait = 0, volume = 65, channel = GLOB.lobby_sound_channel))
 
 /datum/lobbyscreen/proc/stop_music(client/C)
-	if(!musicTrack)
+	if(!music_track)
 		return
 	sound_to(C, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))
 

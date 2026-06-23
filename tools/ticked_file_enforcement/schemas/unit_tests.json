@@ -8,6 +8,7 @@
 		"find_reference_sanity.dm",
 		"glasses_vision.dm",
 		"loadout_tests.dm",
+		"lobby_music.dm",
 		"map_tests.dm",
 		"mob_tests.dm",
 		"movement_tests.dm",

@@ -89,6 +89,7 @@
 // #include "initialize_sanity.dm"
 // #include "keybinding_init.dm"
 #include "loadout_tests.dm"
+#include "lobby_music.dm"
 // #include "machine_disassembly.dm"
 #include "map_tests.dm"
 // #include "medical_wounds.dm"

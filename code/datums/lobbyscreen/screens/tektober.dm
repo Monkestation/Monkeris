@@ -5,26 +5,33 @@
 /datum/lobbyscreen/tektober/ship
 	image_file = 'icons/title_screens/tektober/ship.png'
 
-	possibleMusic = list(
-		'sound/music/lobby/Duke_Gneiss-Bluespace.ogg',
-		'sound/music/lobby/Duke_Gneiss-Exploring.ogg'
-		)
+	possible_music = list(
+		/datum/lobbyscreen_music/duke_gneiss/bluespace,
+		/datum/lobbyscreen_music/duke_gneiss/exploring,
+		/datum/lobbyscreen_music/duke_gneiss/phoron_industry,
+		/datum/lobbyscreen_music/davz/light_pollution,
+	)
 
 /datum/lobbyscreen/tektober/ironhammer
 	image_file = 'icons/title_screens/tektober/ironhammer.png'
-	possibleMusic = list(
-		'sound/music/lobby/Duke_Gneiss-The_Runner_in_motion.ogg',
-		'sound/music/lobby/Duke_Gneiss-Metropolis.ogg'
-		)
+	possible_music = list(
+		/datum/lobbyscreen_music/duke_gneiss/quantums_escape_plan,
+		/datum/lobbyscreen_music/duke_gneiss/metropolis,
+		/datum/lobbyscreen_music/duke_gneiss/night_at_the_citadel,
+	)
 
 /datum/lobbyscreen/tektober/onestar
 	image_file = 'icons/title_screens/tektober/onestar.png'
-	possibleMusic = list(
-		'sound/music/lobby/Duke_Gneiss-Downtown_2.ogg',
-		'sound/music/lobby/Flleeppyy-Chokehold_draft1.ogg'
-		)
+	possible_music = list(
+		/datum/lobbyscreen_music/duke_gneiss/downtown_2,
+		/datum/lobbyscreen_music/duke_gneiss/codebrain,
+		/datum/lobbyscreen_music/flleeppyy/chokehold,
+		/datum/lobbyscreen_music/stellardrone/comet_haley
+	)
 
 /datum/lobbyscreen/tektober/neotheology
 	image_file = 'icons/title_screens/tektober/neotheology.png'
-	possibleMusic = list(
-		'sound/music/lobby/Duke_Gneiss-Neotheology.ogg')
+	possible_music = list(
+		/datum/lobbyscreen_music/duke_gneiss/neotheology,
+		/datum/lobbyscreen_music/duke_gneiss/get_set,
+	)

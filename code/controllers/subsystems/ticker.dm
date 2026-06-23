@@ -110,17 +110,16 @@ SUBSYSTEM_DEF(ticker)
 			if(Master.initializations_finished_with_no_players_logged_in || first_start_trying)
 				start_at = world.time + (5 MINUTES)
 			pregame_timeleft = initial(pregame_timeleft)
-			for(var/client/C in GLOB.clients)
-				window_flash(C) //let them know lobby has opened up.
-				GLOB.lobbyScreen.play_music(C)
-
 			if(!start_immediately)
 				to_chat(world, span_boldnotice("Please, setup your character and select ready. Game will start in [DisplayTimeText(SSticker.GetTimeLeft())]."))
+
+			for(var/client/C in GLOB.clients)
+				window_flash(C) //let them know lobby has opened up.
+				// Start playing music for clients
+				GLOB.lobbyScreen.play_music(C)
+
 			to_chat(world, span_notice("<b>Welcome to [station_name()]!</b>"))
 			current_state = GAME_STATE_PREGAME
-			// Start playing music for clients
-			for(var/client/C in GLOB.clients)
-				GLOB.lobbyScreen.play_music(C)
 			SEND_SIGNAL(src, COMSIG_TICKER_ENTER_PREGAME)
 			fire()
 		if(GAME_STATE_PREGAME)
