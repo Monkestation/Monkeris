@@ -55,7 +55,7 @@ export const Processor = (props: any, context: any) => {
                 fillValue={sheet_rate}
                 step={1}
                 stepPixelSize={5}
-                onDrag={(e, value) =>
+                onChange={(value) =>
                   act('set_rate', {
                     sheets: value,
                   })

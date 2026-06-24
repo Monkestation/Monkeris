@@ -46,7 +46,7 @@ export const NowPlayingWidget = (props) => {
               <Section>
                 {URL !== 'Song Link Hidden' && (
                   <Flex.Item grow={1} color="label">
-                    URL: {URL}
+                    URL: <a href={URL}>{URL}</a>
                   </Flex.Item>
                 )}
                 <Flex.Item grow={1} color="label">
@@ -99,7 +99,8 @@ export const NowPlayingWidget = (props) => {
           step={0.0025}
           stepPixelSize={1}
           format={(value) => toFixed(value * 100) + '%'}
-          onDrag={(e, value) =>
+          tickWhileDragging
+          onChange={(value) =>
             settings.update({
               adminMusicVolume: value,
             })

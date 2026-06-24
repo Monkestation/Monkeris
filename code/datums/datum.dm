@@ -17,7 +17,7 @@
 	  */
 	var/gc_destroyed
 
-	/// Open tguis owned by this datum
+	/// Open uis owned by this datum
 	/// Lazy, since this case is semi rare
 	var/list/open_uis
 
@@ -29,16 +29,16 @@
 	/**
 	  * Components attached to this datum
 	  *
-	  * Lazy associated list in the structure of `type:component/list of components`
+	  * Lazy associated list in the structure of `type -> component/list of components`
 	  */
 	var/list/_datum_components
 	/**
 	  * Any datum registered to receive signals from this datum is in this list
 	  *
-	  * Lazy associated list in the structure of `[signal] = list(registered_objects)`
+	  * Lazy associated list in the structure of `signal -> registree/list of registrees`
 	  */
 	var/list/_listen_lookup
-	/// Lazy associated list in the structure of `[target][signal] = proc)` that are run when the datum receives that signal
+	/// Lazy associated list in the structure of `target -> list(signal -> proctype)` that are run when the datum receives that signal
 	var/list/list/datum/callback/_signal_procs
 
 	var/signal_enabled = FALSE
@@ -58,14 +58,43 @@
 	var/list/cooldowns
 
 
+	/// List for handling persistent filters.
+	var/list/filter_data
+	/// An accursed beast of a list that contains our filters. Why? Because var/list/filters on atoms/images isn't actually a list
+	/// but a snowflaked skinwalker pretending to be one, which doesn't support half the list procs/operations and the other half behaves weirdly
+	/// so we cut down on filter creation and appearance update costs by editing *this* list, and then assigning ours to it
+	var/list/filter_cache
+
 #ifdef REFERENCE_TRACKING
 	var/running_find_references
+	/// When was this datum last touched by a reftracker?
+	/// If this value doesn't match with the start of the search
+	/// We know this datum has never been seen before, and we should check it
 	var/last_find_references = 0
+	/// How many references we're trying to find when searching
+	var/references_to_clear = 0
 	#ifdef REFERENCE_TRACKING_DEBUG
 	///Stores info about where refs are found, used for sanity checks and testing
 	var/list/found_refs
 	#endif
 #endif
+
+	// If we have called dump_harddel_info already. Used to avoid duped calls (since we call it immediately in some cases on failure to process)
+	// Create and destroy is weird and I wanna cover my bases
+	var/harddel_deets_dumped = FALSE
+
+#ifdef DATUMVAR_DEBUGGING_MODE
+	var/list/cached_vars
+#endif
+
+/**
+ * Called when a href for this datum is clicked
+ *
+ * Sends a [COMSIG_TOPIC] signal
+ */
+/datum/Topic(href, href_list[])
+	..()
+	SEND_SIGNAL(src, COMSIG_TOPIC, usr, href_list)
 
 /**
  * Default implementation of clean-up code.
@@ -143,6 +172,33 @@
 	for(var/target in _signal_procs)
 		UnregisterSignal(target, _signal_procs[target])
 
+#ifdef DATUMVAR_DEBUGGING_MODE
+/datum/proc/save_vars()
+	cached_vars = list()
+	for(var/i in vars)
+		if(i == "cached_vars")
+			continue
+		cached_vars[i] = vars[i]
+
+/datum/proc/check_changed_vars()
+	. = list()
+	for(var/i in vars)
+		if(i == "cached_vars")
+			continue
+		if(cached_vars[i] != vars[i])
+			.[i] = list(cached_vars[i], vars[i])
+
+/datum/proc/txt_changed_vars()
+	var/list/l = check_changed_vars()
+	var/t = "[src]([REF(src)]) changed vars:"
+	for(var/i in l)
+		t += "\"[i]\" \[[l[i][1]]\] --> \[[l[i][2]]\] "
+	t += "."
+
+/datum/proc/to_chat_check_changed_vars(target = world)
+	to_chat(target, txt_changed_vars())
+#endif
+
 /// Return a list of data which can be used to investigate the datum, also ensure that you set the semver in the options list
 /datum/proc/serialize_list(list/options, list/semvers)
 	SHOULD_CALL_PARENT(TRUE)
@@ -182,6 +238,37 @@
 		jsonlist["DATUM_TYPE"] = D.type
 	return json_encode(jsonlist)
 
+/// Convert a list of json to datum
+/proc/json_deserialize_datum(list/jsonlist, list/options, target_type, strict_target_type = FALSE)
+	if(!islist(jsonlist))
+		if(!istext(jsonlist))
+			CRASH("Invalid JSON")
+		jsonlist = json_decode(jsonlist)
+		if(!islist(jsonlist))
+			CRASH("Invalid JSON")
+	if(!jsonlist["DATUM_TYPE"])
+		return
+	if(!ispath(jsonlist["DATUM_TYPE"]))
+		if(!istext(jsonlist["DATUM_TYPE"]))
+			return
+		jsonlist["DATUM_TYPE"] = text2path(jsonlist["DATUM_TYPE"])
+		if(!ispath(jsonlist["DATUM_TYPE"]))
+			return
+	if(target_type)
+		if(!ispath(target_type))
+			return
+		if(strict_target_type)
+			if(target_type != jsonlist["DATUM_TYPE"])
+				return
+		else if(!ispath(jsonlist["DATUM_TYPE"], target_type))
+			return
+	var/typeofdatum = jsonlist["DATUM_TYPE"] //BYOND won't directly read if this is just put in the line below, and will instead runtime because it thinks you're trying to make a new list?
+	var/datum/D = new typeofdatum
+	if(!D.deserialize_list(jsonlist, options))
+		qdel(D)
+	else
+		return D
+
 /**
  * Callback called by a timer to end an associative-list-indexed cooldown.
  *
@@ -213,65 +300,22 @@
 	SEND_SIGNAL(source, COMSIG_CD_RESET(index), S_TIMER_COOLDOWN_TIMELEFT(source, index))
 	TIMER_COOLDOWN_END(source, index)
 
-/datum/proc/CanProcCall(procname)
-	return TRUE
+///Generate a tag for this /datum, if it implements one
+///Should be called as early as possible, best would be in New, to avoid weakref mistargets
+///Really just don't use this, you don't need it, global lists will do just fine MOST of the time
+///We really only use it for mobs to make id'ing people easier
+/datum/proc/GenerateTag()
+	datum_flags |= DF_USE_TAG
 
-/datum/proc/can_vv_get(var_name)
-	if(var_name == NAMEOF(src, vars))
-		return FALSE
-	return TRUE
+/// Return text from this proc to provide extra context to hard deletes that happen to it
+/// Optional, you should use this for cases where replication is difficult and extra context is required
+/// Can be called more then once per object, use harddel_deets_dumped to avoid duplicate calls (I am so sorry)
+/datum/proc/dump_harddel_info()
+	return
 
-/// Called when a var is edited with the new value to change to
-/datum/proc/vv_edit_var(var_name, var_value)
-	if(var_name == NAMEOF(src, vars))
-		return FALSE
-	vars[var_name] = var_value
-	datum_flags |= DF_VAR_EDITED
-	return TRUE
-
-/datum/proc/vv_get_var(var_name)
-	switch(var_name)
-		if (NAMEOF(src, vars))
-			return debug_variable(var_name, list(), 0, src)
-	return debug_variable(var_name, vars[var_name], 0, src)
-
-/datum/proc/can_vv_mark()
-	return TRUE
-
-/**
- * Gets all the dropdown options in the vv menu.
- * When overriding, make sure to call . = ..() first and appent to the result, that way parent items are always at the top and child items are further down.
- * Add seperators by doing VV_DROPDOWN_OPTION("", "---")
- */
-/datum/proc/vv_get_dropdown()
-	SHOULD_CALL_PARENT(TRUE)
-
-	. = list()
-	VV_DROPDOWN_OPTION("", "---")
-	VV_DROPDOWN_OPTION(VV_HK_CALLPROC, "Call Proc")
-	VV_DROPDOWN_OPTION(VV_HK_MARK, "Mark Object")
-	VV_DROPDOWN_OPTION(VV_HK_TAG, "Tag Datum")
-	VV_DROPDOWN_OPTION(VV_HK_DELETE, "Delete")
-	VV_DROPDOWN_OPTION(VV_HK_EXPOSE, "Show VV To Player")
-	VV_DROPDOWN_OPTION(VV_HK_ADDCOMPONENT, "Add Component/Element")
-	VV_DROPDOWN_OPTION(VV_HK_REMOVECOMPONENT, "Remove Component/Element")
-	VV_DROPDOWN_OPTION(VV_HK_MASS_REMOVECOMPONENT, "Mass Remove Component/Element")
-
-/**
- * This proc is only called if everything topic-wise is verified. The only verifications that should happen here is things like permission checks!
- * href_list is a reference, modifying it in these procs WILL change the rest of the proc in topic.dm of admin/view_variables!
- * This proc is for "high level" actions like admin heal/set species/etc/etc. The low level debugging things should go in admin/view_variables/topic_basic.dm incase this runtimes.
- */
-/datum/proc/vv_do_topic(list/href_list)
-	if(!usr || !usr.client || !usr.client.holder || !check_rights(NONE))
-		return FALSE //This is VV, not to be called by anything else.
-	if(SEND_SIGNAL(src, COMSIG_VV_TOPIC, usr, href_list) & COMPONENT_VV_HANDLED)
-		return FALSE
-	// if(href_list[VV_HK_MODIFY_TRAITS])
-	// 	usr.client.holder.modify_traits(src)
-	return TRUE
-
-/datum/proc/vv_get_header()
-	. = list()
-	if(("name" in vars) && !isatom(src))
-		. += "<b>[vars["name"]]</b><br>"
+///images are pretty generic, this should help a bit with tracking harddels related to them
+/image/dump_harddel_info()
+	if(harddel_deets_dumped)
+		return
+	harddel_deets_dumped = TRUE
+	return "Image icon: [icon] - icon_state: [icon_state] [loc ? "loc: [loc] ([loc.x],[loc.y],[loc.z])" : ""]"
