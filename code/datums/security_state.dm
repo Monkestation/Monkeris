@@ -150,6 +150,7 @@
 	var/down_description
 	var/up_color
 	var/down_color
+	var/psionic_control_level = PSI_IMPLANT_WARN
 
 // Called when we're switching from a lower security level to this one.
 /decl/security_level/proc/switching_up_to()
@@ -219,6 +220,8 @@
 	light_color_alarm = COLOR_LIGHTING_BLUE_MACHINERY
 	light_color_status_display = COLOR_LIGHTING_BLUE_MACHINERY
 
+	psionic_control_level = PSI_IMPLANT_LOG
+
 	overlay_alarm = "alarm_blue"
 	overlay_firealarm = "overlay_blue"
 
@@ -238,6 +241,8 @@
 	light_color_alarm = COLOR_LIGHTING_RED_MACHINERY
 	light_color_status_display = COLOR_LIGHTING_RED_MACHINERY
 
+	psionic_control_level = PSI_IMPLANT_DISABLED
+
 	overlay_alarm = "alarm_red"
 	overlay_firealarm = "overlay_red"
 
@@ -256,6 +261,8 @@
 	light_outer_range = 3
 	light_color_alarm = COLOR_LIGHTING_RED_MACHINERY
 	light_color_status_display = COLOR_LIGHTING_BLUE_MACHINERY
+
+	psionic_control_level = PSI_IMPLANT_DISABLED
 
 	overlay_alarm = "alarm_delta"
 	overlay_firealarm = "overlay_delta"

@@ -137,3 +137,4 @@
 	name = "order setup disk"
 	desc = "A removable disk used to store large amounts of data.\nThis one contains all the files necessary to set up an order console."
 	default_files = list(/datum/computer_file/program/trade/order)
+

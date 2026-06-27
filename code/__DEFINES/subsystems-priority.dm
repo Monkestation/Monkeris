@@ -44,6 +44,7 @@ var/list/bitflags = list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096
 #define FIRE_PRIORITY_PROCESSING    30	// Generic datum processor. Replaces objects processor.
 #define FIRE_PRIORITY_GARBAGE       25	// Garbage collection.
 #define FIRE_PRIORITY_VINES         25	// Spreading vine effects.
+#define FIRE_PRIORITY_PSYCHICS      25	// Psychic complexus processing.
 #define FIRE_PRIORITY_TURF          20	// Radioactive walls/blob.
 #define FIRE_PRIORITY_NANO          20	// Updates to nanoui uis.
 #define FIRE_PRIORITY_EVAC          20	// Processes the evac controller.
