@@ -1,0 +1,11 @@
+2026-06-17:
+  Sun-Soaked:
+  - code_imp: makes a bad stat check in playsound make sure stats actually exist first
+  flleeppyy:
+  - bugfix: Help dropdown in the menu bar will now always be at the end
+2026-06-20:
+  Sun-Soaked:
+  - bugfix: swarms of malfunctioning combat drones no longer immediately kill each
+      other after spawning
+  - admin: Running Tracy Immediately now has a warning prompt and can be cancelled
+      out

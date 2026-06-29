@@ -317,6 +317,10 @@ div.notice {
 	width: 69%;
 }
 
+.itemContent img {
+	image-rendering: pixelated;
+}
+
 .itemLabelNarrow, .itemLabel, .itemLabelWide, .itemLabelWider, .itemLabelWidest {
 	float: left;
 	color: #e9c183;

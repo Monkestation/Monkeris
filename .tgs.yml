@@ -16,8 +16,8 @@ static_files:
 # This one is for Linux hosted servers
 linux_scripts:
   PreCompile.sh: tools/tgs4_scripts/PreCompile.sh
-  WatchdogLaunch.sh: tools/tgs4_scripts/WatchdogLaunch.sh
-  InstallDeps.sh: tools/tgs4_scripts/InstallDeps.sh
+  # WatchdogLaunch.sh: tools/tgs4_scripts/WatchdogLaunch.sh
+  # InstallDeps.sh: tools/tgs4_scripts/InstallDeps.sh
 # Same as above for Windows hosted servers
 windows_scripts:
   PreCompile.bat: tools/tgs4_scripts/PreCompile.bat

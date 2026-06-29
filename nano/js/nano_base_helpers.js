@@ -157,12 +157,12 @@ NanoBaseHelpers = function ()
 					return 'COULD NOT FIND ENTRY(' + type + ')';
 				var text = entry['entry_name']
 				var parameters = {"set_active_entry" : entry['entry_type']};
-				
+
 				var iconHtml = '';
 				var iconClass = 'noIcon';
 				if(entry['entry_img_path'])
 				{
-					iconHtml = '<img style= "margin-bottom:-8px" src=' + entry['entry_img_path'] + ' height=24 width=24>';
+					iconHtml = '<img style= "margin-bottom:-8px" src="' + entry['entry_img_path'] + '" height=24 width=24>';
 					iconClass = 'hasIcon';
 				}
 				if (typeof elementClass == 'undefined' || !elementClass)
@@ -225,12 +225,12 @@ NanoBaseHelpers = function ()
 				{
 					showText = '';
 				}
-				
+
 				if (typeof difClass == 'undefined' || !difClass)
 				{
 					difClass = ''
 				}
-				
+
 				if(typeof direction == 'undefined' || !direction)
 				{
 					direction = 'width'
@@ -239,9 +239,9 @@ NanoBaseHelpers = function ()
 				{
 					direction = 'height'
 				}
-				
+
 				var percentage = Math.round((value - rangeMin) / (rangeMax - rangeMin) * 100);
-				
+
 				return '<div class="displayBar' + difClass + ' ' + styleClass + '"><div class="displayBar' + difClass + 'Fill ' + styleClass + '" style="' + direction + ': ' + percentage + '%;"></div><div class="displayBar' + difClass + 'Text ' + styleClass + '">' + showText + '</div></div>';
 			},
 			// Display DNA Blocks (for the DNA Modifier UI)
@@ -299,12 +299,12 @@ NanoBaseHelpers = function ()
 				return html;
 			}
 		};
-		
+
 	return {
-		init: function () 
+		init: function ()
 		{
-			_data = $('body').data('initialData');	
-			
+			_data = $('body').data('initialData');
+
         },
         addHelpers: function ()
 		{
@@ -318,11 +318,11 @@ NanoBaseHelpers = function ()
 				{
 					NanoTemplate.removeHelper(helperKey);
 				}
-			}            
+			}
         }
 	};
 } ();
- 
+
 
 
 

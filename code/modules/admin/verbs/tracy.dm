@@ -28,6 +28,9 @@
 	if(!check_rights(R_DEBUG))
 		return
 #ifndef OPENDREAM_REAL
+	if(alert(src, "Are you sure you want to start tracy immediately? Launching tracy mid-round may cause server issues.",  "Confirm Tracy Launch" , "Yes" , "No") != "Yes")
+		return
+
 	if(Tracy.enabled)
 		to_chat(src, span_warning("byond-tracy is already running!"), avoid_highlighting = TRUE, type = MESSAGE_TYPE_DEBUG, confidential = TRUE)
 		return
