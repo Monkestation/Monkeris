@@ -53,6 +53,8 @@
 	return default_type
 
 /obj/item/stack/material/proc/update_strings()
+	if(QDELETED(material))
+		return
 	// Update from material datum.
 	singular_name = material.sheet_singular_name
 
@@ -68,7 +70,6 @@
 /obj/item/stack/material/use(used)
 	. = ..()
 	update_strings()
-	return
 
 /obj/item/stack/material/transfer_to(obj/item/stack/S, tamount=null, type_verified)
 	var/obj/item/stack/material/M = S

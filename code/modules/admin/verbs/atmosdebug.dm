@@ -30,14 +30,13 @@
 	next_turf:
 		for(var/turf/T in world)
 			for(var/dir in GLOB.cardinal)
-				var/list/connect_types = list(0,0,0)
+				var/typebuild = null
 				for(var/obj/machinery/atmospherics/pipe in T)
 					if(dir & pipe.initialize_directions)
-						for(var/connect_type in pipe.connect_types)
-							connect_types[connect_type] += 1
-						if(connect_types[1] > 1 || connect_types[2] > 1 || connect_types[3] > 1)
+						if(pipe.connect_types & typebuild)
 							to_chat(usr, "Overlapping pipe ([pipe.name]) located at [T.x],[T.y],[T.z] ([get_area(T)])")
 							continue next_turf
+						typebuild |= pipe.connect_types
 	to_chat(usr, "Done")
 
 /client/proc/powerdebug()

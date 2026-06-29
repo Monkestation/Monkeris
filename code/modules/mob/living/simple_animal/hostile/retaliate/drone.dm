@@ -64,7 +64,11 @@
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/ListTargets()
 	if(hostile_drone)
-		return view(src, 10)
+		var/list/possibletargets = view(src, 10)//hacky solution for a problem that wouldn't exist if this mob wasn't snowflake
+		for(var/mob/thing in possibletargets)//manually remove any mobs which match our faction
+			if(thing?.faction == src.faction)
+				possibletargets -= thing
+		return possibletargets
 	else
 		return ..()
 

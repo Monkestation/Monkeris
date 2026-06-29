@@ -1002,4 +1002,4 @@ GLOBAL_PROTECT(admin_verbs_possess)
 	if(!holder.library_manager)
 		holder.library_manager = new()
 	holder.library_manager.ui_interact(usr)
-	// SSblackbox.record_feedback("tally", "admin_verb", 1, "Library Management") // If you are copy-pasting this, ensure the 4th parameter is unique to the new proc!
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Library Management") // If you are copy-pasting this, ensure the 4th parameter is unique to the new proc!

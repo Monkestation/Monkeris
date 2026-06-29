@@ -250,16 +250,16 @@
 
 /obj/item/organ/proc/removed_mob(mob/living/user)
 	var/datum/reagent/organic/blood/organ_blood = locate(/datum/reagent/organic/blood) in reagents?.reagent_list
-	if(!organ_blood || !organ_blood.data["blood_DNA"])
-		owner.vessel.trans_to(src, 5, 1, 1)
+	if(owner && !organ_blood || !organ_blood.data["blood_DNA"])
+		owner.vessel.trans_to(src, amount = 5, multiplier = 1, copy = 1)
 
-	if(vital && !(owner.status_flags & REBUILDING_ORGANS) && owner.stat != DEAD)
+	if(owner && vital && !(owner.status_flags & REBUILDING_ORGANS) && owner.stat != DEAD)
 		if(user)
 			admin_attack_log(user, owner, "Removed a vital organ ([src])", "Had a vital organ ([src]) removed.", "removed a vital organ ([src]) from")
 		owner.death()
 
 	if(LAZYLEN(item_upgrades))
-		owner.mutation_index--
+		owner?.mutation_index--
 
 	owner = null
 	rejecting = null

@@ -1,10 +1,12 @@
 // TODO: Port modern armor from Monke/tg
-
 #define ARMORID "armor-[melee]-[bullet]-[energy]-[bomb]-[bio]-[rad]"
 
+GLOBAL_ALIST_EMPTY(armorsById)
+
+#warn Double check armor global (armorsById)
 /proc/getArmor(melee = 0, bullet = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
-	. = locate(ARMORID)
-	if(!.)
+	. = GLOB.armorsById[ARMORID]
+	if(!. || QDELETED(astype(., /datum)))
 		. = new /datum/armor(melee, bullet, energy, bomb, bio, rad)
 
 /datum/armor
@@ -22,7 +24,7 @@
 	src.bomb = bomb
 	src.bio = bio
 	src.rad = rad
-	tag = ARMORID
+	GLOB.armorsById[ARMORID] = src
 
 /datum/armor/proc/modifyRating(melee = 0, bullet = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
 	return getArmor(src.melee+melee, src.bullet+bullet, src.energy+energy, src.bomb+bomb, src.bio+bio, src.rad+rad)

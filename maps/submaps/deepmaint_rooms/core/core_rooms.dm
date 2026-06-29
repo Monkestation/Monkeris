@@ -15,7 +15,6 @@
 	desc = "isafigjoa sghjsbzuy Page: 152"
 	mappath = 'maps/submaps/deepmaint_rooms/core/archive.dmm'
 
-
 /datum/map_template/deepmaint_template/big/maint_asteroid
 	name = "maintenance asteroid"
 	desc = "How did this thing even get here?"
