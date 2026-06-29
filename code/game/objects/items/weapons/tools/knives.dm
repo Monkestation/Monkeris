@@ -57,6 +57,15 @@
 	tool_qualities = list(QUALITY_CUTTING = 20,  QUALITY_WIRE_CUTTING = 10, QUALITY_SCREW_DRIVING = 15)
 	rarity_value = 20
 
+/obj/item/tool/knife/jager
+	name = "jager knife"
+	desc = "A jager claw, wrapped to a metal rod."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "knife_jager"
+	item_state = "knife_jager"
+	force = WEAPON_FORCE_PAINFUL
+	matter = list(MATERIAL_BIOMATTER = 5)
+
 /obj/item/tool/knife/hook
 	name = "meat hook"
 	desc = "A sharp, metal hook what sticks into things."
@@ -411,6 +420,18 @@
 	..()
 	if(istype(target))
 		target.apply_effect(rand(60, 65), IRRADIATE)
+
+/obj/item/tool/spear/jager
+	name = "jager spear"
+	desc = "A jager claw tied to a crude metal shaft. It'll serve well enough."
+	icon_state = "spear_jager"
+	item_state = "spear_jager"
+	wielded_icon = "spear_jager_wielded"
+	force = WEAPON_FORCE_DANGEROUS
+	throwforce = WEAPON_FORCE_ROBUST
+	armor_divisor = ARMOR_PEN_DEEP
+	tool_qualities = list(QUALITY_CUTTING = 10,  QUALITY_WIRE_CUTTING = 5, QUALITY_SCREW_DRIVING = 5)
+	matter = list(MATERIAL_BIOMATTER = 10)
 
 /obj/item/tool/spear/makeshift_halberd
 	name = "makeshift halberd"
