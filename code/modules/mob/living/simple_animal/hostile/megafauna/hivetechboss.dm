@@ -23,6 +23,7 @@
 	mob_classification = CLASSIFICATION_SYNTHETIC
 
 	projectiletype = /obj/item/projectile/goo
+	no_stasis = TRUE
 
 /mob/living/simple_animal/hostile/megafauna/hivemind_tyrant/death()
 	..()

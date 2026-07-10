@@ -13,7 +13,8 @@
 
 	var/stasis = FALSE
 	var/AI_inactive = FALSE
-
+	/// if true, ai will not be put to sleep by ai inactivity or stasis
+	var/no_stasis = FALSE
 	var/inventory_shown = 1
 
 	// Damage related vars, NOTE: THESE SHOULD ONLY BE MODIFIED BY PROCS
