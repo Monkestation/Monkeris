@@ -163,7 +163,8 @@ export function SettingsGeneral(props) {
             maxValue={5}
             value={lineHeight}
             format={(value) => toFixed(value, 2)}
-            onDrag={(e, value) =>
+            tickWhileDragging
+            onChange={(value) =>
               dispatch(
                 updateSettings({
                   lineHeight: value,

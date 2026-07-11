@@ -21,6 +21,10 @@
 ///Used for doing dry runs of the reference finder, to test for feature completeness
 //#define REFERENCE_TRACKING_DEBUG
 
+/// If this is uncommented, additional logging (such as more in-depth tgui logging) will be enabled.alist
+/// These logs prolly don't matter during production.
+// #define EXTENDED_DEBUG_LOGGING
+
 ///Run a lookup on things hard deleting by default.
 //#define GC_FAILURE_HARD_LOOKUP
 #ifdef GC_FAILURE_HARD_LOOKUP
