@@ -1,5 +1,3 @@
-var/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
-
 /datum/category_group/player_setup_category/physical_preferences
 	name = "General"
 	sort_order = 1

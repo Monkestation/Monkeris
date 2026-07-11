@@ -39,7 +39,7 @@
 	set category = "Admin"
 	set name = "Search Panel"
 	set desc = "Search players in the DB"
-	db_search.DB_players_search()
+	GLOB.db_search.DB_players_search()
 
 /datum/DB_search/proc/DB_players_search()
 	if(!SSdbcore.Connect())

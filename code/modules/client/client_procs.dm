@@ -51,8 +51,8 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	// if(href_list["reload_statbrowser"])
 	// 	src << browse(file('html/statbrowser.html'), "window=statbrowser")
 	// Log all hrefs
-	if(config && CONFIG_GET(flag/log_hrefs) && href_logfile)
-		DIRECT_OUTPUT(href_logfile, "<small>[time2text(world.timeofday,"hh:mm")]</small>[src] (usr:[usr]\[[COORD(usr)]\]) : [hsrc ? "[hsrc] " : ""][href]")
+	if(config && CONFIG_GET(flag/log_hrefs) && GLOB.href_logfile)
+		DIRECT_OUTPUT(GLOB.href_logfile, "<small>[time2text(world.timeofday,"hh:mm")]</small>[src] (usr:[usr]\[[COORD(usr)]\]) : [hsrc ? "[hsrc] " : ""][href]")
 
 	//byond bug ID:2256651
 	if (asset_cache_job && (asset_cache_job in completed_asset_jobs))
@@ -396,8 +396,8 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	// 		qdel(src)
 	// 		return
 
-	if( (world.address == address || !address) && !host )
-		host = key
+	if( (world.address == address || !address) && !GLOB.host )
+		GLOB.host = key
 		world.update_status()
 
 	CAN_MOVE_DIAGONALLY = GLOB.diagonal_movement
@@ -413,10 +413,10 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		if (!stealth_admin)
 			deadchat_broadcast(" has reconnected.", "<b>[mob][mob.get_realname_string()]</b>", follow_target = mob, turf_target = get_turf(mob), message_type = DEADCHAT_LOGIN_LOGOUT/*, admin_only=!announce_leave*/)
 
-	if(custom_event_msg && custom_event_msg != "")
+	if(GLOB.custom_event_msg && GLOB.custom_event_msg != "")
 		to_chat(src, "<h1 class='alert'>Custom Event</h1>")
 		to_chat(src, "<h2 class='alert'>A custom event is taking place. OOC Info:</h2>")
-		to_chat(src, span_alert("[custom_event_msg]"))
+		to_chat(src, span_alert("[GLOB.custom_event_msg]"))
 		to_chat(src, "<br>")
 
 	if(holder)

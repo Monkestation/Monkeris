@@ -57,7 +57,7 @@
 
 //We will sort the storyteller choices carefully. Guide is always first, all the rest are in a random order
 /datum/poll/storyteller/init_choices()
-	master_storyteller = null
+	GLOB.master_storyteller = null
 	var/datum/vote_choice/storyteller/base = null
 	for(var/ch in storyteller_cache)
 		var/datum/vote_choice/storyteller/CS = new
@@ -95,18 +95,18 @@
 // 		round_progressing = FALSE
 // 		to_chat(world, "<b>Game start has been delayed due to voting.</b>")
 
-//If one wins, on_end is called after on_win, so the new storyteller will be set in master_storyteller
+//If one wins, on_end is called after on_win, so the new storyteller will be set in GLOB.master_storyteller
 /datum/poll/storyteller/on_end()
 	..()
 	//This happens if the vote was skipped with force start
-	if (!master_storyteller)
-		master_storyteller = STORYTELLER_BASE
-		world.save_storyteller(master_storyteller)
+	if (!GLOB.master_storyteller)
+		GLOB.master_storyteller = STORYTELLER_BASE
+		world.save_storyteller(GLOB.master_storyteller)
 
 	SSticker.story_vote_ended = TRUE
 
 
-	set_storyteller(config.pick_storyteller(master_storyteller), announce = !(pregame)) //This does the actual work //Even if master storyteller is null, this will pick the default
+	set_storyteller(config.pick_storyteller(GLOB.master_storyteller), announce = !(pregame)) //This does the actual work //Even if master storyteller is null, this will pick the default
 	if (pregame)
 		to_chat(world, "<b>The game will start in [DisplayTimeText(SSticker.GetTimeLeft())].</b>")
 		spawn(10 SECONDS)
@@ -140,10 +140,10 @@
 
 //on_end will be called after this, so that's where we actually call set_storyteller
 /datum/vote_choice/storyteller/on_win()
-	if (master_storyteller == new_storyteller)
+	if (GLOB.master_storyteller == new_storyteller)
 		poll.next_vote = world.time + (poll.cooldown * 0.5) //If the storyteller didn't actually change, the cooldown is half as long
-	master_storyteller = new_storyteller
-	world.save_storyteller(master_storyteller)
+	GLOB.master_storyteller = new_storyteller
+	world.save_storyteller(GLOB.master_storyteller)
 
 
 

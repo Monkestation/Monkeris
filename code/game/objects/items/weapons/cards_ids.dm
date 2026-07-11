@@ -75,7 +75,6 @@
 	origin_tech = list(TECH_MAGNET = 2, TECH_COVERT = 2)
 	var/uses = 10
 
-var/const/NO_EMAG_ACT = -50
 /obj/item/card/emag/resolve_attackby(atom/A, mob/user)
 	var/used_uses = A.emag_act(uses, user, src)
 	if(used_uses == NO_EMAG_ACT)

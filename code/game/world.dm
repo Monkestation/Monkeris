@@ -99,7 +99,7 @@ GLOBAL_VAR(restart_counter)
  */
 /world/New()
 	//logs
-	href_logfile = file("[GLOB.log_directory]/hrefs.htm")
+	GLOB.href_logfile = file("[GLOB.log_directory]/hrefs.htm")
 
 	// DO NOT MOVE config.Load() HERE BY ANY MEANS! Turfs require on configurations which is loaded in the Master controller that loads global_vars
 	InitTgs()
@@ -391,8 +391,8 @@ var/world_topic_spam_protect_time = world.timeofday
 	var/list/Lines = file2list("data/mode.txt")
 	if(Lines.len)
 		if(Lines[1])
-			master_storyteller = Lines[1]
-			log_game("Saved storyteller is '[master_storyteller]'")
+			GLOB.master_storyteller = Lines[1]
+			log_game("Saved storyteller is '[GLOB.master_storyteller]'")
 
 /world/proc/save_storyteller(the_mode)
 	var/F = file("data/mode.txt")
@@ -436,8 +436,8 @@ var/world_topic_spam_protect_time = world.timeofday
 	var/list/features = list()
 
 	if(SSticker)
-		if(master_storyteller)
-			features += master_storyteller
+		if(GLOB.master_storyteller)
+			features += GLOB.master_storyteller
 	else
 		features += "<b>STARTING</b>"
 

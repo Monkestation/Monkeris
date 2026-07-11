@@ -353,7 +353,7 @@
 //HUMAN
 /mob/living/carbon/human/mind_initialize()
 	..()
-	if(!mind.assigned_role)	mind.assigned_role = ASSISTANT_TITLE	//defualt
+	if(!mind.assigned_role)	mind.assigned_role = JOB_ASSISTANT	//defualt
 
 //slime
 /mob/living/carbon/slime/mind_initialize()

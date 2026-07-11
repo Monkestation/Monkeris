@@ -166,15 +166,10 @@ meteor_act
 	return protection
 
 /mob/living/carbon/human/proc/check_head_coverage()
-
 	var/list/body_parts = list(head, wear_mask, wear_suit, w_uniform)
-	for(var/bp in body_parts)
-		if(!bp)	continue
-		if(bp && istype(bp ,/obj/item/clothing))
-			var/obj/item/clothing/C = bp
-			if(C.body_parts_covered & HEAD)
-				return 1
-	return 0
+	for(var/obj/item/clothing/bp in body_parts)
+		return (bp.body_parts_covered & HEAD)
+	return FALSE
 
 //Used to check if they can be fed food/drinks/pills
 /mob/living/carbon/human/proc/check_mouth_coverage()
@@ -196,10 +191,7 @@ meteor_act
 	return 0
 
 /mob/living/carbon/human/proc/has_shield()
-	for(var/obj/item/shield/shield in list(l_hand, r_hand))
-		if(!shield) continue
-		return shield
-	return FALSE
+	return (locate(/obj/item/shield) in list(l_hand, r_hand))
 
 /mob/living/carbon/human/proc/handle_blocking(damage)
 	var/stat_affect = 0.3 //lowered to 0.2 if we are blocking with an item

@@ -1,3 +1,9 @@
+#define AALARM_WIRE_IDSCAN     (1 << 0)
+#define AALARM_WIRE_POWER      (1 << 1)
+#define AALARM_WIRE_SYPHON     (1 << 2)
+#define AALARM_WIRE_AI_CONTROL (1 << 3)
+#define AALARM_WIRE_AALARM     (1 << 4)
+
 /datum/wires/alarm
 	holder_type = /obj/machinery/alarm
 	wire_count = 5
@@ -8,13 +14,6 @@
 		new /datum/wire_description(AALARM_WIRE_AI_CONTROL, "Remote access"),
 		new /datum/wire_description(AALARM_WIRE_AALARM, "Alarm trigger")
 	)
-
-var/const/AALARM_WIRE_IDSCAN = 1
-var/const/AALARM_WIRE_POWER = 2
-var/const/AALARM_WIRE_SYPHON = 4
-var/const/AALARM_WIRE_AI_CONTROL = 8
-var/const/AALARM_WIRE_AALARM = 16
-
 
 /datum/wires/alarm/CanUse(mob/living/L)
 	var/obj/machinery/alarm/A = holder

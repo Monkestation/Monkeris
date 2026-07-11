@@ -285,3 +285,9 @@ GLOBAL_LIST_INIT(voice_type2sound_ref, voice_type2sound)
  * increased by 10 each time you fail to extract an item
  */
 #define BUTCHERING_HAZARD_CHANCE 5
+
+// Observer/Ghost stuff
+#define GHOST_IMAGE_NONE 0
+#define GHOST_IMAGE_DARKNESS 1
+#define GHOST_IMAGE_SIGHTLESS 2
+#define GHOST_IMAGE_ALL ~GHOST_IMAGE_NONE

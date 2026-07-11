@@ -1,3 +1,5 @@
+// var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called manually after an event.
+
 //TODO: Flash range does nothing currently
 
 /proc/explosion(turf/epicenter, power, falloff, explosion_flags, adminlog = TRUE)

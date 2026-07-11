@@ -227,4 +227,4 @@
 /datum/gear/uniform/ntsec
 	display_name = "old security uniform"
 	path = /obj/item/clothing/under/oldsec
-	allowed_roles = list(ASSISTANT_TITLE)
+	allowed_roles = list(JOB_ASSISTANT)

@@ -137,8 +137,8 @@
 		to_chat(owner, span_danger("Law Notice"))
 		owner.laws.show_laws(owner)
 		if(isAI(owner))
-			var/mob/living/silicon/ai/AI = owner
-			for(var/mob/living/silicon/robot/R in AI.connected_robots)
+			var/mob/living/silicon/ai/ai = owner
+			for(var/mob/living/silicon/robot/R in ai.connected_robots)
 				to_chat(R, span_danger("Law Notice"))
 				R.laws.show_laws(R)
 		if(usr != owner)
@@ -211,9 +211,9 @@
 /mob/living/silicon/robot/is_slaved()
 	return lawupdate && connected_ai ? sanitize(connected_ai.name) : null
 
-/datum/nano_module/law_manager/proc/sync_laws(mob/living/silicon/ai/AI)
-	if(!AI)
+/datum/nano_module/law_manager/proc/sync_laws(mob/living/silicon/ai/ai)
+	if(!ai)
 		return
-	for(var/mob/living/silicon/robot/R in AI.connected_robots)
+	for(var/mob/living/silicon/robot/R in ai.connected_robots)
 		R.sync()
-	log_and_message_admins("has syncronized [AI]'s laws with its borgs.")
+	log_and_message_admins("has syncronized [ai]'s laws with its borgs.")

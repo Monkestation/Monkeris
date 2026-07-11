@@ -97,10 +97,10 @@
 	.["version"] = GLOB.game_version
 	.["respawn"] = CONFIG_GET(flag/abandon_allowed)
 	.["enter"] = GLOB.enter_allowed
-	.["storyteller"] = master_storyteller
+	.["storyteller"] = GLOB.master_storyteller
 	.["vote"] = CONFIG_GET(flag/allow_vote_mode)
 	.["ai"] = CONFIG_GET(flag/allow_ai)
-	.["host"] = host ? host : null
+	.["host"] = GLOB.host ? GLOB.host : null
 	.["round_id"] = GLOB.round_id
 	.["players"] = length(GLOB.clients)
 	.["shiptime"] = stationtime2text()
@@ -182,7 +182,7 @@
 			"bot" = nonhuman_positions
 		)
 
-	for(var/datum/data/record/t in data_core.general)
+	for(var/datum/data/record/t in GLOB.data_core.general)
 		var/name = t.fields["name"]
 		var/rank = t.fields["rank"]
 		var/real_rank = make_list_rank(t.fields["real_rank"])

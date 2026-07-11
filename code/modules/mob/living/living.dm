@@ -482,7 +482,7 @@ default behaviour is:
 // Not recommended to directly call this proc on a mob without a good reason. It kicks out the player from the game without turning him into a ghost.
 /mob/living/despawn()
 	//Update any existing objectives involving this mob.
-	for(var/datum/objective/O in all_objectives)
+	for(var/datum/objective/O in GLOB.all_objectives)
 		// We don't want revs to get objectives that aren't for heads of staff. Letting
 		// them win or lose based on cryo is silly so we remove the objective.
 		if(O.target == src.mind)
@@ -505,13 +505,13 @@ default behaviour is:
 
 	if(PDA_Manifest.len)
 		PDA_Manifest.Cut()
-	for(var/datum/data/record/R in data_core.medical)
+	for(var/datum/data/record/R in GLOB.data_core.medical)
 		if ((R.fields["name"] == src.real_name))
 			qdel(R)
-	for(var/datum/data/record/T in data_core.security)
+	for(var/datum/data/record/T in GLOB.data_core.security)
 		if ((T.fields["name"] == src.real_name))
 			qdel(T)
-	for(var/datum/data/record/G in data_core.general)
+	for(var/datum/data/record/G in GLOB.data_core.general)
 		if ((G.fields["name"] == src.real_name))
 			qdel(G)
 

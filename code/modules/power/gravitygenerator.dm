@@ -1,16 +1,17 @@
+#define POWER_IDLE 0
+#define POWER_UP 1
+#define POWER_DOWN 2
+#define PULSE_FREQ 9 SECONDS
+
+#define GRAV_NEEDS_SCREWDRIVER 0
+#define GRAV_NEEDS_WELDING 1
+#define GRAV_NEEDS_PLASTEEL 2
+#define GRAV_NEEDS_WRENCH 3
+
 //
 // Gravity Generator
 //
 GLOBAL_DATUM(active_gravity_generator, /obj/machinery/gravity_generator/main)
-var/const/POWER_IDLE = 0
-var/const/POWER_UP = 1
-var/const/POWER_DOWN = 2
-var/const/PULSE_FREQ = 9 SECONDS
-
-var/const/GRAV_NEEDS_SCREWDRIVER = 0
-var/const/GRAV_NEEDS_WELDING = 1
-var/const/GRAV_NEEDS_PLASTEEL = 2
-var/const/GRAV_NEEDS_WRENCH = 3
 
 //
 // Abstract Generator
@@ -262,11 +263,11 @@ var/const/GRAV_NEEDS_WRENCH = 3
 	charging_state = POWER_IDLE
 	on = new_state
 	if(new_state) // If we turned on
-		if(!gravity_is_on)
+		if(!GLOB.gravity_is_on)
 			grav_on()
 		set_power_use(ACTIVE_POWER_USE)
 	else
-		if(gravity_is_on)
+		if(GLOB.gravity_is_on)
 			grav_off()
 		set_light(0)
 		set_power_use(IDLE_POWER_USE)
@@ -278,8 +279,8 @@ var/const/GRAV_NEEDS_WRENCH = 3
 		message_admins("GLOB.maps_data.station_levels is blank. Gravgen isn't properly established.")
 		return
 
-	gravity_is_on = 1
-	update_gravity(gravity_is_on)
+	GLOB.gravity_is_on = 1
+	update_gravity(GLOB.gravity_is_on)
 	investigate_log("was brought full online and is now producing gravity.", "gravity")
 	message_admins("The gravity generator was brought fully online. [ADMIN_JMP(src)]")
 
@@ -288,8 +289,8 @@ var/const/GRAV_NEEDS_WRENCH = 3
 		message_admins("GLOB.maps_data.station_levels is blank. Gravgen isn't properly established.")
 		return
 
-	gravity_is_on = 0
-	update_gravity(gravity_is_on)
+	GLOB.gravity_is_on = 0
+	update_gravity(GLOB.gravity_is_on)
 	investigate_log("was brought offline and there is now no gravity.", "gravity")
 	message_admins("The gravity generator was brought offline with no backup generator. [ADMIN_JMP(src)]")
 	shake_everyone()
@@ -355,3 +356,13 @@ var/const/GRAV_NEEDS_WRENCH = 3
 	<li>Mend the damaged framework with a welding tool.</li>
 	<li>Add additional plasteel plating.</li>
 	<li>Secure the additional plating with a wrench.</li></ol>"}
+
+#undef POWER_IDLE
+#undef POWER_UP
+#undef POWER_DOWN
+#undef PULSE_FREQ
+
+#undef GRAV_NEEDS_SCREWDRIVER
+#undef GRAV_NEEDS_WELDING
+#undef GRAV_NEEDS_PLASTEEL
+#undef GRAV_NEEDS_WRENCH

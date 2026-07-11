@@ -1120,7 +1120,7 @@
 	. = ..()
 	pipe_dir = dir | turn(dir, 180)
 	if(sort_tag)
-		tagger_locations |= sort_tag
+		GLOB.tagger_locations |= sort_tag
 	updatename()
 	updatedesc()
 	update()
@@ -1186,7 +1186,8 @@
 
 /obj/structure/disposalpipe/sortjunction/New()
 	. = ..()
-	if(sortType) tagger_locations |= sortType
+	if(sortType)
+		GLOB.tagger_locations |= sortType
 
 	updatedir()
 	updatename()

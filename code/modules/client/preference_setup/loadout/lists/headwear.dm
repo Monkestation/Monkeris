@@ -81,7 +81,7 @@
 /datum/gear/head/cap/sec
 	display_name = "cap, old security"
 	path = /obj/item/clothing/head/soft/sec
-	allowed_roles = list(ASSISTANT_TITLE)
+	allowed_roles = list(JOB_ASSISTANT)
 
 /datum/gear/head/cap/synd
 	display_name = "cap, old syndicate"
@@ -191,7 +191,7 @@
 /datum/gear/head/tanker_helmet/color_presets
 	display_name = "tanker helmet, color presets"
 	path = /obj/item/clothing/head/armor/helmet/tanker
-	allowed_roles = list("Moebius Roboticist", "Guild Technician", "Technomancer", "Technomancer Exultant", ASSISTANT_TITLE)
+	allowed_roles = list("Moebius Roboticist", "Guild Technician", "Technomancer", "Technomancer Exultant", JOB_ASSISTANT)
 	cost = 2
 
 /datum/gear/head/tanker_helmet/color_presets/New()

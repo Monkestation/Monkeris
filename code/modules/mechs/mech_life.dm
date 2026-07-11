@@ -159,7 +159,7 @@
 	// Hurl our component pieces about.
 	var/list/stuff_to_throw = list()
 	for(var/obj/item/thing in list(arms, legs, head, body))
-		if(thing) stuff_to_throw += thing
+		stuff_to_throw += thing
 	for(var/hardpoint in hardpoints)
 		if(hardpoints[hardpoint])
 			var/obj/item/thing = hardpoints[hardpoint]

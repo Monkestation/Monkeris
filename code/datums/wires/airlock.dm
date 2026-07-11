@@ -1,5 +1,17 @@
-// Wires for airlocks
+#define AIRLOCK_WIRE_IDSCAN        (1 << 0)
+#define AIRLOCK_WIRE_MAIN_POWER1   (1 << 1)
+#define AIRLOCK_WIRE_MAIN_POWER2   (1 << 2)
+#define AIRLOCK_WIRE_DOOR_BOLTS    (1 << 3)
+#define AIRLOCK_WIRE_BACKUP_POWER1 (1 << 4)
+#define AIRLOCK_WIRE_BACKUP_POWER2 (1 << 5)
+#define AIRLOCK_WIRE_OPEN_DOOR     (1 << 6)
+#define AIRLOCK_WIRE_AI_CONTROL    (1 << 7)
+#define AIRLOCK_WIRE_ELECTRIFY     (1 << 8)
+#define AIRLOCK_WIRE_SAFETY        (1 << 9)
+#define AIRLOCK_WIRE_SPEED         (1 << 10)
+#define AIRLOCK_WIRE_LIGHT         (1 << 11)
 
+// Wires for airlocks
 /datum/wires/airlock/secure
 	wire_count = 14
 
@@ -22,18 +34,7 @@
 		new /datum/wire_description(AIRLOCK_WIRE_LIGHT, "Bolt lights")
 	)
 
-var/const/AIRLOCK_WIRE_IDSCAN = 1
-var/const/AIRLOCK_WIRE_MAIN_POWER1 = 2
-var/const/AIRLOCK_WIRE_MAIN_POWER2 = 4
-var/const/AIRLOCK_WIRE_DOOR_BOLTS = 8
-var/const/AIRLOCK_WIRE_BACKUP_POWER1 = 16
-var/const/AIRLOCK_WIRE_BACKUP_POWER2 = 32
-var/const/AIRLOCK_WIRE_OPEN_DOOR = 64
-var/const/AIRLOCK_WIRE_AI_CONTROL = 128
-var/const/AIRLOCK_WIRE_ELECTRIFY = 256
-var/const/AIRLOCK_WIRE_SAFETY = 512
-var/const/AIRLOCK_WIRE_SPEED = 1024
-var/const/AIRLOCK_WIRE_LIGHT = 2048
+
 
 /datum/wires/airlock/CanUse(mob/living/L)
 	var/obj/machinery/door/airlock/A = holder
@@ -186,3 +187,4 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 		if(AIRLOCK_WIRE_LIGHT)
 			A.lights = !A.lights
 			A.update_icon()
+

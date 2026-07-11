@@ -1,3 +1,7 @@
+#define AUTOLATHE_HACK_WIRE    (1 << 0)
+#define AUTOLATHE_SHOCK_WIRE   (1 << 1)
+#define AUTOLATHE_DISABLE_WIRE (1 << 2)
+
 /datum/wires/autolathe
 
 	holder_type = /obj/machinery/autolathe
@@ -7,10 +11,6 @@
 		new /datum/wire_description(AUTOLATHE_SHOCK_WIRE, "Shock"),
 		new /datum/wire_description(AUTOLATHE_DISABLE_WIRE, "Power")
 	)
-
-var/const/AUTOLATHE_HACK_WIRE = 1
-var/const/AUTOLATHE_SHOCK_WIRE = 2
-var/const/AUTOLATHE_DISABLE_WIRE = 4
 
 /datum/wires/autolathe/GetInteractWindow(mob/living/user)
 	var/obj/machinery/autolathe/A = holder
@@ -59,3 +59,7 @@ var/const/AUTOLATHE_DISABLE_WIRE = 4
 				if(A && !IsIndexCut(index))
 					A.disabled = 0
 					Interact(usr)
+
+#undef AUTOLATHE_HACK_WIRE
+#undef AUTOLATHE_SHOCK_WIRE
+#undef AUTOLATHE_DISABLE_WIRE

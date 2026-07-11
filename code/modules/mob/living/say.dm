@@ -345,10 +345,8 @@ var/list/channel_to_radio_key = new
 		else if(ishuman(src))
 			var/mob/living/carbon/human/H = src
 			for(var/obj/item/gear in list(H.wear_mask, H.wear_suit, H.head))
-				if(!gear)
-					continue
 				var/obj/item/voice_changer/changer = locate() in gear
-				if(changer && changer.active && changer.voice_tts)
+				if(changer?.active && changer?.voice_tts)
 					seed = changer.voice_tts
 		INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(tts_broadcast), src, message, seed, speaking)
 

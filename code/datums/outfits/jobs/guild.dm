@@ -3,7 +3,7 @@
 	hierarchy_type = /decl/hierarchy/outfit/job/cargo
 
 /decl/hierarchy/outfit/job/cargo/merchant
-	name = OUTFIT_JOB_NAME("Guild Merchant")
+	name = OUTFIT_JOB_NAME(JOB_GUILD_MERCHANT)
 	uniform = /obj/item/clothing/under/rank/cargotech
 	shoes = /obj/item/clothing/shoes/color/brown
 	glasses = /obj/item/clothing/glasses/sunglasses/big
@@ -15,14 +15,14 @@
 	backpack_contents = list(/obj/item/gun/projectile/olivaw = 1, /obj/item/ammo_magazine/pistol/rubber = 2)
 
 /decl/hierarchy/outfit/job/cargo/cargo_tech
-	name = OUTFIT_JOB_NAME("Guild Technician")
+	name = OUTFIT_JOB_NAME(JOB_GUILD_TECHNICIAN)
 	uniform = /obj/item/clothing/under/rank/cargotech
 	suit = /obj/item/clothing/suit/storage/cargo_jacket
 	belt = /obj/item/storage/belt/utility
 	pda_type = /obj/item/modular_computer/pda/cargo
 
 /decl/hierarchy/outfit/job/cargo/mining
-	name = OUTFIT_JOB_NAME("Guild Miner")
+	name = OUTFIT_JOB_NAME(JOB_GUILD_MINER)
 	uniform = /obj/item/clothing/under/rank/miner
 	pda_type = /obj/item/modular_computer/pda/moebius/science
 	belt = /obj/item/storage/belt/utility
@@ -34,7 +34,7 @@
 	BACKPACK_OVERRIDE_ENGINEERING
 
 /decl/hierarchy/outfit/job/cargo/mining/void
-	name = OUTFIT_JOB_NAME("Guild Miner - Voidsuit")
+	name = OUTFIT_JOB_NAME(JOB_GUILD_MINER) + " - Voidsuit"
 	mask = /obj/item/clothing/mask/breath
 	suit = /obj/item/clothing/suit/space/void/mining
 

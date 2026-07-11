@@ -14,10 +14,6 @@
 		new /datum/wire_description(VENDING_WIRE_IDSCAN, "ID scanner"),
 	)
 
-var/const/VENDING_WIRE_THROW = 1
-var/const/VENDING_WIRE_CONTRABAND = 2
-var/const/VENDING_WIRE_ELECTRIFY = 4
-var/const/VENDING_WIRE_IDSCAN = 8
 
 /datum/wires/vending/CanUse(mob/living/L)
 	var/obj/machinery/vending/V = holder
@@ -87,13 +83,7 @@ var/const/VENDING_WIRE_IDSCAN = 8
 		Mend signal
 */
 
-var/const/VENDING_INT_WIRE_THROW = 1
-var/const/VENDING_INT_WIRE_ELECTRIFY = 2
-var/const/VENDING_INT_WIRE_IDSCAN = 4
-var/const/VENDING_INT_WIRE_SIGNAL = 8
-var/const/VENDING_INT_WIRE_CONTRABAND = 16
-var/const/VENDING_INT_WIRE_GROUND = 32
-var/const/VENDING_INT_WIRE_POWER = 64
+
 
 /datum/wires/vending/intermediate
 	wire_count = 7

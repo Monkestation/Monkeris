@@ -270,7 +270,7 @@ SUBSYSTEM_DEF(job)
 		if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
 			continue
 
-		if(istype(job, GetJob(ASSISTANT_TITLE))) // We don't want to give him assistant, that's boring!
+		if(istype(job, GetJob(JOB_ASSISTANT))) // We don't want to give him assistant, that's boring!
 			continue
 
 		if(job in command_positions) //If you want a command position, select it!
@@ -398,7 +398,7 @@ SUBSYSTEM_DEF(job)
 	Debug("AC1, Candidates: [length(assistant_candidates)]")
 	for(var/mob/new_player/player in assistant_candidates)
 		Debug("AC1 pass, Player: [player]")
-		AssignRole(player, ASSISTANT_TITLE)
+		AssignRole(player, JOB_ASSISTANT)
 		assistant_candidates -= player
 	Debug("DO, AC1 end")
 
@@ -462,7 +462,7 @@ SUBSYSTEM_DEF(job)
 	for(var/mob/new_player/player in unassigned)
 		if(player.client.prefs.alternate_option == BE_ASSISTANT)
 			Debug("AC2 Assistant located, Player: [player]")
-			AssignRole(player, ASSISTANT_TITLE)
+			AssignRole(player, JOB_ASSISTANT)
 
 	//For ones returning to lobby
 	for(var/mob/new_player/player in unassigned)
@@ -756,7 +756,7 @@ SUBSYSTEM_DEF(job)
 /datum/controller/subsystem/job/proc/ShouldCreateRecords(title)
 	if(!title) return 0
 	var/datum/job/job = GetJob(title)
-	if(!job || job == ASSISTANT_TITLE)
+	if(!job || job == JOB_ASSISTANT)
 		return FALSE
 	return job.create_record
 

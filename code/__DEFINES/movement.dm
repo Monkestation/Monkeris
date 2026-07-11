@@ -2,6 +2,13 @@
 #define MOVE_DELAY_BASE 1.1
 #define MOVE_DELAY_VENTCRAWL MOVE_DELAY_BASE //Ventcrawling has a static speed for all mobs
 
+#define MOVEMENT_HANDLED 0x0001 // If no further movement handling should occur after this
+#define MOVEMENT_REMOVE  0x0002
+
+#define MOVEMENT_PROCEED 0x0004
+#define MOVEMENT_STOP    0x0008
+
+
 //Glidesize
 #define FRACTIONAL_GLIDESIZES 1
 #ifdef FRACTIONAL_GLIDESIZES

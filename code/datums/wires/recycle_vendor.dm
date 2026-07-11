@@ -1,11 +1,13 @@
 // TODO: Refactor wires, this is horrible -- KIROV
+// Oh kirov... 4 years later and it's still horrible. -- chen
 
-#define WIRE_THROW		0x1
-#define WIRE_SPEAKER	0x2
-#define WIRE_SHOCK		0x4
-#define WIRE_ID_SCAN	0x8
+#define WIRE_THROW		(1 << 0)
+#define WIRE_SPEAKER	(1 << 1)
+#define WIRE_SHOCK		(1 << 2)
+#define WIRE_ID_SCAN	(1 << 3)
 
-var/const/VENDING_WIRE_SPEAKER = 2
+// ?????
+#define VENDING_WIRE_SPEAKER 2
 
 /datum/wires/recycle_vendor
 	holder_type = /obj/machinery/amerecycler

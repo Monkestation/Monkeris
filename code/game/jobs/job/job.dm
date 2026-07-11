@@ -131,7 +131,7 @@
 		return
 
 	//give them an account in the station database
-	if(H.job == ASSISTANT_TITLE) // Vagabound do not get an account.
+	if(H.job == JOB_ASSISTANT) // Vagabound do not get an account.
 		H.mind.store_memory("As a freelancer you do not have a bank account.")
 		return
 	var/species_modifier = (H.species ? economic_species_modifier[H.species.type] : 2)

@@ -1,3 +1,8 @@
+#define TAPE_WIRE_STOP (1 << 0)
+#define TAPE_WIRE_PLAY (1 << 1)
+#define TAPE_WIRE_RECORD (1 << 3)
+#define TAPE_WIRE_WIPE (1 << 4)
+
 /datum/wires/taperecorder
 	holder_type = /obj/item/device/taperecorder
 	wire_count = 4
@@ -7,11 +12,6 @@
 		new /datum/wire_description(TAPE_WIRE_RECORD, "Record"),
 		new /datum/wire_description(TAPE_WIRE_WIPE, "Wipe"),
 	)
-
-var/const/TAPE_WIRE_STOP = 1
-var/const/TAPE_WIRE_PLAY = 2
-var/const/TAPE_WIRE_RECORD = 4
-var/const/TAPE_WIRE_WIPE = 8
 
 /datum/wires/taperecorder/UpdatePulsed(index)
 	var/obj/item/device/taperecorder/T = holder

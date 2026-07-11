@@ -10,7 +10,7 @@
 
 
 	update_explanation()
-	all_objectives.Add(src)
+	GLOB.all_objectives.Add(src)
 
 /datum/objective/faction/Destroy()
 	if(faction)

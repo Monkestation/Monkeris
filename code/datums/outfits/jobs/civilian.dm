@@ -1,5 +1,5 @@
 /decl/hierarchy/outfit/job/assistant
-	name = OUTFIT_JOB_NAME(ASSISTANT_TITLE)
+	name = OUTFIT_JOB_NAME(JOB_ASSISTANT)
 	suit = /obj/item/clothing/suit/storage/ass_jacket
 	uniform = /obj/item/clothing/under/rank/assistant
 	r_pocket = /obj/item/spacecash/bundle/vagabond
@@ -32,7 +32,7 @@
 	pda_type = /obj/item/modular_computer/pda
 
 /decl/hierarchy/outfit/job/service/artist
-	name = OUTFIT_JOB_NAME("Club Artist")
+	name = OUTFIT_JOB_NAME(JOB_CLUB_ARTIST)
 	uniform = /obj/item/clothing/under/rank/artist
 	//suit = /obj/item/clothing/suit/artist
 	shoes = /obj/item/clothing/shoes/artist_shoes

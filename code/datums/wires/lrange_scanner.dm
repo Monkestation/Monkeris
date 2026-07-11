@@ -1,3 +1,8 @@
+#define SCANNER_WIRE_POWER     (1 << 0)        // Cut to disable power input into the scanner. Pulse does nothing. Mend to restore.
+#define SCANNER_WIRE_CONTROL   (1 << 2)        // Cut to lock most scanner controls. Mend to unlock them. Pulse does nothing.
+#define SCANNER_WIRE_AICONTROL (1 << 3)        // Cut to disable AI control. Mend to restore.
+#define SCANNER_WIRE_NOTHING   (1 << 4)        // A blank wire that doesn't have any specific function
+
 /datum/wires/long_range_scanner
 	holder_type = /obj/machinery/power/shipside/long_range_scanner/
 	wire_count = 5
@@ -7,11 +12,6 @@
 		new /datum/wire_description(SCANNER_WIRE_AICONTROL, "Remote access"),
 		new /datum/wire_description(SCANNER_WIRE_NOTHING, "Failsafe")
 	)
-
-var/const/SCANNER_WIRE_POWER = 1			// Cut to disable power input into the scanner. Pulse does nothing. Mend to restore.
-var/const/SCANNER_WIRE_CONTROL = 4		// Cut to lock most scanner controls. Mend to unlock them. Pulse does nothing.
-var/const/SCANNER_WIRE_AICONTROL = 8		// Cut to disable AI control. Mend to restore.
-var/const/SCANNER_WIRE_NOTHING = 16		// A blank wire that doesn't have any specific function
 
 /datum/wires/long_range_scanner/CanUse()
 	var/obj/machinery/power/shipside/long_range_scanner/S = holder
@@ -31,3 +31,8 @@ var/const/SCANNER_WIRE_NOTHING = 16		// A blank wire that doesn't have any speci
 
 /datum/wires/long_range_scanner/UpdatePulsed(index)
 	return
+
+#undef SCANNER_WIRE_POWER
+#undef SCANNER_WIRE_CONTROL
+#undef SCANNER_WIRE_AICONTROL
+#undef SCANNER_WIRE_NOTHING

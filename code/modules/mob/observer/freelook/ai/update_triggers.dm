@@ -18,7 +18,7 @@
 						GLOB.cameranet.updatePortableCamera(src.camera)
 					updating = 0
 
-/mob/living/silicon/AI/Move(NewLoc, Dir = 0, step_x = 0, step_y = 0, glide_size_override = 0)
+/mob/living/silicon/ai/Move(NewLoc, Dir = 0, step_x = 0, step_y = 0, glide_size_override = 0)
 	var/oldLoc = src.loc
 	. = ..()
 	if(.)

@@ -1,13 +1,13 @@
 // Jukebox
-#define WIRE_MAIN_POWER1 1
-#define WIRE_POWER 2
-#define WIRE_SPEEDUP 8
-#define WIRE_SPEEDDOWN 16
-#define WIRE_REVERSE 32
-#define WIRE_START 64
-#define WIRE_STOP 128
-#define WIRE_PREV 256
-#define WIRE_NEXT 512
+#define WIRE_MAIN_POWER1 (1 << 0)
+#define WIRE_POWER       (1 << 1)
+#define WIRE_SPEEDUP     (1 << 3)
+#define WIRE_SPEEDDOWN   (1 << 4)
+#define WIRE_REVERSE     (1 << 5)
+#define WIRE_START       (1 << 6)
+#define WIRE_STOP        (1 << 7)
+#define WIRE_PREV        (1 << 8)
+#define WIRE_NEXT        (1 << 9)
 
 /datum/wires/jukebox
 	random = TRUE
