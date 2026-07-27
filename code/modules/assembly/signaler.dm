@@ -62,7 +62,7 @@
 
 
 /obj/item/device/assembly/signaler/proc/set_freq(new_freq)
-	set_frequency(sanitize_frequency(round(new_freq), RADIO_LOW_FREQ, RADIO_HIGH_FREQ))
+	set_frequency(sanitize_frequency(round(new_freq), FREQ_RADIO_LOW, FREQ_RADIO_HIGH))
 
 
 /obj/item/device/assembly/signaler/ui_status(mob/user)
@@ -81,8 +81,8 @@
 
 /obj/item/device/assembly/signaler/ui_data(mob/user)
 	var/list/data = list(
-		"maxFrequency" = RADIO_HIGH_FREQ,
-		"minFrequency" = RADIO_LOW_FREQ,
+		"maxFrequency" = FREQ_RADIO_HIGH,
+		"minFrequency" = FREQ_RADIO_LOW,
 		"frequency" = frequency,
 		"code" = code
 		)
@@ -201,16 +201,16 @@
 
 	secured = TRUE
 	code = 0
-	frequency = BLAST_DOOR_FREQ
+	frequency = FREQ_BLAST_DOOR
 	delay = 1
 
 	var/last_message = 0
 	var/command = "CMD_DOOR_TOGGLE"
 
 /obj/item/device/assembly/signaler/door_controller/set_frequency(new_frequency)
-	SSradio.remove_object(src, BLAST_DOOR_FREQ)
-	frequency = BLAST_DOOR_FREQ
-	radio_connection = SSradio.add_object(src, BLAST_DOOR_FREQ, RADIO_BLASTDOORS)
+	SSradio.remove_object(src, FREQ_BLAST_DOOR)
+	frequency = FREQ_BLAST_DOOR
+	radio_connection = SSradio.add_object(src, FREQ_BLAST_DOOR, RADIO_BLASTDOORS)
 
 // No nanoUI for u
 /obj/item/device/assembly/signaler/door_controller/nano_ui_interact(mob/user, ui_key, datum/nanoui/ui, force_open, datum/nano_topic_state/state)

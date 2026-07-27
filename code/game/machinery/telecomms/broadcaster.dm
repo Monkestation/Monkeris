@@ -231,7 +231,10 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 	if(data == 1)
 
-		for(var/obj/item/device/radio/intercom/R in connection.devices["[RADIO_CHAT]"])
+		for(var/datum/weakref/device_ref in connection.devices["[RADIO_CHAT]"])
+			var/obj/item/device/radio/intercom/R = device_ref.resolve()
+			if(!R)
+				continue
 			if(R.receive_range(display_freq, level) > -1)
 				radios += R
 
@@ -239,7 +242,10 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 	else if(data == 2)
 
-		for(var/obj/item/device/radio/R in connection.devices["[RADIO_CHAT]"])
+		for(var/datum/weakref/device_ref in connection.devices["[RADIO_CHAT]"])
+			var/obj/item/device/radio/R = device_ref.resolve()
+			if(!R)
+				continue
 
 			if(istype(R, /obj/item/device/radio/headset))
 				continue
@@ -252,7 +258,10 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	else if(data == 3)
 		for(var/antag_freq in ANTAG_FREQS)
 			var/datum/radio_frequency/antag_connection = SSradio.return_frequency(antag_freq)
-			for(var/obj/item/device/radio/R in antag_connection.devices["[RADIO_CHAT]"])
+			for(var/datum/weakref/device_ref in antag_connection.devices["[RADIO_CHAT]"])
+				var/obj/item/device/radio/R = device_ref.resolve()
+				if(!R)
+					continue
 				if(R.receive_range(antag_freq, level) > -1)
 					radios += R
 
@@ -260,7 +269,10 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 	else
 
-		for(var/obj/item/device/radio/R in connection.devices["[RADIO_CHAT]"])
+		for(var/datum/weakref/device_ref in connection.devices["[RADIO_CHAT]"])
+			var/obj/item/device/radio/R = device_ref.resolve()
+			if(!R)
+				continue
 			if(R.receive_range(display_freq, level) > -1)
 				radios += R
 
@@ -355,7 +367,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		var/part_b_extra = ""
 		if(data == 3) // intercepted radio message
 			part_b_extra = " <i>(Intercepted)</i>"
-		var/part_a = "<span class='[frequency_span_class(display_freq)]'><b>\[[freq_text]\][part_b_extra]</b> <span class='name'>" // goes in the actual output
+		var/part_a = "<span class='[get_radio_span(display_freq)]'><b>\[[freq_text]\][part_b_extra]</b> <span class='name'>" // goes in the actual output
 
 		// --- Some more pre-message formatting ---
 		var/part_b = "</span> <span class='message'>" // Tweaked for security headsets -- TLE
@@ -378,27 +390,27 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 		if(istype(blackbox))
 			switch(display_freq)
-				if(PUB_FREQ)
+				if(FREQ_COMMON)
 					blackbox.msg_common += blackbox_msg
-				if(SCI_FREQ)
+				if(FREQ_SCI)
 					blackbox.msg_science += blackbox_msg
-				if(COMM_FREQ)
+				if(FREQ_COMM)
 					blackbox.msg_command += blackbox_msg
-				if(MED_FREQ)
+				if(FREQ_MED)
 					blackbox.msg_medical += blackbox_msg
-				if(ENG_FREQ)
+				if(FREQ_ENG)
 					blackbox.msg_engineering += blackbox_msg
-				if(SEC_FREQ)
+				if(FREQ_SEC)
 					blackbox.msg_security += blackbox_msg
-				if(DTH_FREQ)
+				if(FREQ_DTH)
 					blackbox.msg_deathsquad += blackbox_msg
-				if(SYND_FREQ)
+				if(FREQ_SYND)
 					blackbox.msg_syndicate += blackbox_msg
-				if(SUP_FREQ)
+				if(FREQ_SUP)
 					blackbox.msg_cargo += blackbox_msg
-				if(SRV_FREQ)
+				if(FREQ_SRV)
 					blackbox.msg_service += blackbox_msg
-				if(NT_FREQ)
+				if(FREQ_NT)
 					blackbox.msg_nt += blackbox_msg
 				else
 					blackbox.messages += blackbox_msg
@@ -470,7 +482,10 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	// --- Broadcast only to intercom devices ---
 
 	if(data == 1)
-		for(var/obj/item/device/radio/intercom/R in connection.devices["[RADIO_CHAT]"])
+		for(var/datum/weakref/device_ref in connection.devices["[RADIO_CHAT]"])
+			var/obj/item/device/radio/intercom/R = device_ref.resolve()
+			if(!R)
+				continue
 			var/turf/position = get_turf(R)
 			if(position && (position.z in levels))
 				receive |= R.send_hear(display_freq, position.z)
@@ -479,7 +494,10 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	// --- Broadcast only to intercoms and station-bounced radios ---
 
 	else if(data == 2)
-		for(var/obj/item/device/radio/R in connection.devices["[RADIO_CHAT]"])
+		for(var/datum/weakref/device_ref in connection.devices["[RADIO_CHAT]"])
+			var/obj/item/device/radio/R = device_ref.resolve()
+			if(!R)
+				continue
 
 			if(istype(R, /obj/item/device/radio/headset))
 				continue
@@ -493,7 +511,10 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	else if(data == 3)
 		for(var/freq in ANTAG_FREQS)
 			var/datum/radio_frequency/antag_connection = SSradio.return_frequency(freq)
-			for(var/obj/item/device/radio/R in antag_connection.devices["[RADIO_CHAT]"])
+			for(var/datum/weakref/device_ref in antag_connection.devices["[RADIO_CHAT]"])
+				var/obj/item/device/radio/R = device_ref.resolve()
+				if(!R)
+					continue
 				var/turf/position = get_turf(R)
 				if(position && (position.z in levels))
 					receive |= R.send_hear(freq)
@@ -502,7 +523,10 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	// --- Broadcast to ALL radio devices ---
 
 	else
-		for(var/obj/item/device/radio/R in connection.devices["[RADIO_CHAT]"])
+		for(var/datum/weakref/device_ref in connection.devices["[RADIO_CHAT]"])
+			var/obj/item/device/radio/R = device_ref.resolve()
+			if(!R)
+				continue
 			var/turf/position = get_turf(R)
 			if(position && (position.z in levels))
 				receive |= R.send_hear(display_freq)
@@ -544,7 +568,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	if(length(heard_normal) || length(heard_garbled) || length(heard_gibberish))
 
 	  /* --- Some miscellaneous variables to format the string output --- */
-		var/part_a = "<span class='[frequency_span_class(display_freq)]'><span class='name'>" // goes in the actual output
+		var/part_a = "<span class='[get_radio_span(display_freq)]'><span class='name'>" // goes in the actual output
 		var/freq_text = get_frequency_name(display_freq)
 
 		// --- Some more pre-message formatting ---
@@ -562,29 +586,29 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 		if(istype(blackbox))
 			switch(display_freq)
-				if(PUB_FREQ)
+				if(FREQ_COMMON)
 					blackbox.msg_common += blackbox_msg
-				if(SCI_FREQ)
+				if(FREQ_SCI)
 					blackbox.msg_science += blackbox_msg
-				if(COMM_FREQ)
+				if(FREQ_COMM)
 					blackbox.msg_command += blackbox_msg
-				if(MED_FREQ)
+				if(FREQ_MED)
 					blackbox.msg_medical += blackbox_msg
-				if(ENG_FREQ)
+				if(FREQ_ENG)
 					blackbox.msg_engineering += blackbox_msg
-				if(SEC_FREQ)
+				if(FREQ_SEC)
 					blackbox.msg_security += blackbox_msg
-				if(DTH_FREQ)
+				if(FREQ_DTH)
 					blackbox.msg_deathsquad += blackbox_msg
-				if(SYND_FREQ)
+				if(FREQ_SYND)
 					blackbox.msg_syndicate += blackbox_msg
-				if(YARR_FREQ)
+				if(FREQ_YARR)
 					blackbox.msg_pirate += blackbox_msg
-				if(SUP_FREQ)
+				if(FREQ_SUP)
 					blackbox.msg_cargo += blackbox_msg
-				if(SRV_FREQ)
+				if(FREQ_SRV)
 					blackbox.msg_service += blackbox_msg
-				if(NT_FREQ)
+				if(FREQ_NT)
 					blackbox.msg_nt += blackbox_msg
 				else
 					blackbox.messages += blackbox_msg
@@ -646,7 +670,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		"done" = 0,
 		"level" = pos.z // The level it is being broadcasted at.
 	)
-	signal.frequency = PUB_FREQ// Common channel
+	signal.frequency = FREQ_COMMON// Common channel
 
   //#### Sending the signal to all subspace receivers ####//
 	for(var/obj/machinery/telecomms/receiver/R in telecomms_list)

@@ -1,27 +1,27 @@
 // Access check is of the type requires one. These have been carefully selected to avoid allowing the janitor to see channels he shouldn't
 var/global/list/default_internal_channels = list(
-	num2text(PUB_FREQ) = list(),
-	num2text(AI_FREQ)  = list(access_synth),
-	num2text(COMM_FREQ)= list(access_heads),
-	num2text(ENG_FREQ) = list(access_engine_equip, access_atmospherics),
-	num2text(MED_FREQ) = list(access_medical_equip),
-	num2text(NT_FREQ) = list(access_nt_disciple),
-	num2text(MED_I_FREQ)=list(access_medical_equip),
-	num2text(SEC_FREQ) = list(access_security),
-	num2text(SEC_I_FREQ)=list(access_security),
-	num2text(SCI_FREQ) = list(access_tox,access_robotics,access_xenobiology),
-	num2text(SUP_FREQ) = list(access_cargo),
-	num2text(SRV_FREQ) = list(access_janitor, access_hydroponics)
+	num2text(FREQ_COMMON) = list(),
+	num2text(FREQ_AI)  = list(access_synth),
+	num2text(FREQ_COMM)= list(access_heads),
+	num2text(FREQ_ENG) = list(access_engine_equip, access_atmospherics),
+	num2text(FREQ_MED) = list(access_medical_equip),
+	num2text(FREQ_NT) = list(access_nt_disciple),
+	num2text(FREQ_MED_I)=list(access_medical_equip),
+	num2text(FREQ_SEC) = list(access_security),
+	num2text(FREQ_SEC_I)=list(access_security),
+	num2text(FREQ_SCI) = list(access_tox,access_robotics,access_xenobiology),
+	num2text(FREQ_SUP) = list(access_cargo),
+	num2text(FREQ_SRV) = list(access_janitor, access_hydroponics)
 )
 
 var/global/list/unique_internal_channels = list(
-	num2text(DTH_FREQ) = list(access_cent_specops)
+	num2text(FREQ_DTH) = list(access_cent_specops)
 )
 
 var/global/list/default_medbay_channels = list(
-	num2text(PUB_FREQ) = list(),
-	num2text(MED_FREQ) = list(access_medical_equip),
-	num2text(MED_I_FREQ) = list(access_medical_equip)
+	num2text(FREQ_COMMON) = list(),
+	num2text(FREQ_MED) = list(access_medical_equip),
+	num2text(FREQ_MED_I) = list(access_medical_equip)
 )
 
 /obj/item/device/radio
@@ -44,7 +44,7 @@ var/global/list/default_medbay_channels = list(
 
 	var/on = TRUE // 0 for off
 	var/last_transmission
-	var/frequency = PUB_FREQ //common chat
+	var/frequency = FREQ_COMMON //common chat
 	var/contractor_frequency = 0 //tune to frequency to unlock contractor supplies
 	var/canhear_range = 3 // the range which mobs can hear this radio from
 	var/datum/wires/radio/wires
@@ -81,7 +81,7 @@ var/global/list/default_medbay_channels = list(
 	QDEL_NULL(wires)
 	SSradio.remove_object(src, frequency)
 	for (var/ch_name in channels)
-		SSradio.remove_object(src, radiochannels[ch_name])
+		SSradio.remove_object(src, GLOB.radiochannels[ch_name])
 
 	return ..()
 
@@ -91,12 +91,12 @@ var/global/list/default_medbay_channels = list(
 
 /obj/item/device/radio/Initialize()
 	. = ..()
-	if(frequency < RADIO_LOW_FREQ || frequency > RADIO_HIGH_FREQ)
-		frequency = sanitize_frequency(frequency, RADIO_LOW_FREQ, RADIO_HIGH_FREQ)
+	if(frequency < FREQ_RADIO_LOW || frequency > FREQ_RADIO_HIGH)
+		frequency = sanitize_frequency(frequency, FREQ_RADIO_LOW, FREQ_RADIO_HIGH)
 	set_frequency(frequency)
 
 	for (var/ch_name in channels)
-		secure_radio_connections[ch_name] = SSradio.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
+		secure_radio_connections[ch_name] = SSradio.add_object(src, GLOB.radiochannels[ch_name],  RADIO_CHAT)
 
 	return INITIALIZE_HINT_LATELOAD
 
@@ -149,7 +149,7 @@ var/global/list/default_medbay_channels = list(
 		var/chan_stat = channels[ch_name]
 		var/listening = !!(chan_stat & FREQ_LISTENING) != 0
 
-		dat.Add(list(list("chan" = ch_name, "display_name" = ch_name, "secure_channel" = 1, "sec_channel_listen" = !listening, "chan_span" = frequency_span_class(radiochannels[ch_name]))))
+		dat.Add(list(list("chan" = ch_name, "display_name" = ch_name, "secure_channel" = 1, "sec_channel_listen" = !listening, "chan_span" = get_radio_span(GLOB.radiochannels[ch_name]))))
 
 	return dat
 
@@ -157,7 +157,7 @@ var/global/list/default_medbay_channels = list(
 	var/dat[0]
 	for(var/internal_chan in internal_channels)
 		if(has_channel_access(user, internal_chan))
-			dat.Add(list(list("chan" = internal_chan, "display_name" = get_frequency_name(text2num(internal_chan)), "chan_span" = frequency_span_class(text2num(internal_chan)))))
+			dat.Add(list(list("chan" = internal_chan, "display_name" = get_frequency_name(text2num(internal_chan)), "chan_span" = get_radio_span(text2num(internal_chan)))))
 
 	return dat
 
@@ -215,7 +215,7 @@ var/global/list/default_medbay_channels = list(
 
 	else if (href_list["freq"])
 		var/new_frequency = (frequency + text2num(href_list["freq"]))
-		if ((new_frequency < PUBLIC_LOW_FREQ || new_frequency > PUBLIC_HIGH_FREQ))
+		if ((new_frequency < MIN_FREQ || new_frequency > MAX_FREQ))
 			new_frequency = sanitize_frequency(new_frequency)
 		set_frequency(new_frequency)
 		if(hidden_uplink)
@@ -614,7 +614,7 @@ var/global/list/default_medbay_channels = list(
 
 
 			for(var/ch_name in channels)
-				SSradio.remove_object(src, radiochannels[ch_name])
+				SSradio.remove_object(src, GLOB.radiochannels[ch_name])
 				secure_radio_connections[ch_name] = null
 
 
@@ -666,7 +666,7 @@ var/global/list/default_medbay_channels = list(
 			src.syndie = TRUE
 
 	for (var/ch_name in src.channels)
-		secure_radio_connections[ch_name] = SSradio.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
+		secure_radio_connections[ch_name] = SSradio.add_object(src, GLOB.radiochannels[ch_name],  RADIO_CHAT)
 
 	return
 
@@ -737,11 +737,11 @@ var/global/list/default_medbay_channels = list(
 
 /obj/item/device/radio/proc/config(op)
 	for (var/ch_name in channels)
-		SSradio.remove_object(src, radiochannels[ch_name])
+		SSradio.remove_object(src, GLOB.radiochannels[ch_name])
 	secure_radio_connections = new
 	channels = op
 	for (var/ch_name in op)
-		secure_radio_connections[ch_name] = SSradio.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
+		secure_radio_connections[ch_name] = SSradio.add_object(src, GLOB.radiochannels[ch_name],  RADIO_CHAT)
 	return
 
 /obj/item/device/radio/off
@@ -755,7 +755,7 @@ var/global/list/default_medbay_channels = list(
 	name = "phone"
 
 /obj/item/device/radio/phone/medbay
-	frequency = MED_I_FREQ
+	frequency = FREQ_MED_I
 
 /obj/item/device/radio/phone/medbay/New()
 	..()

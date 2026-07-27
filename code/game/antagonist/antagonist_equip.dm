@@ -63,9 +63,9 @@
 
 	var/obj/item/device/radio/R
 
-	if(freq == SYND_FREQ)
+	if(freq == FREQ_SYND)
 		R = new/obj/item/device/radio/headset/syndicate(H)
-	else if(freq == YARR_FREQ)
+	else if(freq == FREQ_YARR)
 		R = new/obj/item/device/radio/headset/pirates(H)
 	else
 		R = new/obj/item/device/radio/headset(H)

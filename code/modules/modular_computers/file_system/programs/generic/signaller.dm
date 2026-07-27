@@ -80,9 +80,9 @@
 		return 1
 
 	if(href_list["edit_freq"])
-		var/input_freq = input("Enter signal frequency ([RADIO_LOW_FREQ]-[RADIO_HIGH_FREQ]):", "Signal parameters", computer.network_card.frequency) as num|null
+		var/input_freq = input("Enter signal frequency ([FREQ_RADIO_LOW]-[FREQ_RADIO_HIGH]):", "Signal parameters", computer.network_card.frequency) as num|null
 		if(input_freq && CanUseTopic(usr) && computer && computer.network_card)
-			if(input_freq < RADIO_LOW_FREQ) // A decimal input maybe?
+			if(input_freq < FREQ_RADIO_LOW) // A decimal input maybe?
 				input_freq *= 10
 
 			computer.network_card.set_frequency(round(input_freq))

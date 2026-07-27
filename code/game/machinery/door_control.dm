@@ -136,7 +136,7 @@
 
 /obj/machinery/button/remote/blast_door/Initialize()
 	. = ..()
-	radio_conn = SSradio.add_object(src, BLAST_DOOR_FREQ, RADIO_BLASTDOORS)
+	radio_conn = SSradio.add_object(src, FREQ_BLAST_DOOR, RADIO_BLASTDOORS)
 	AddComponent(/datum/component/overlay_manager)
 
 /// Update status at initialization!
@@ -151,7 +151,7 @@
 
 
 /obj/machinery/button/remote/blast_door/Destroy()
-	SSradio.remove_object(src, BLAST_DOOR_FREQ)
+	SSradio.remove_object(src, FREQ_BLAST_DOOR)
 	radio_conn = null
 	. = ..()
 
