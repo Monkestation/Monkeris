@@ -141,7 +141,7 @@
 /turf/floor/tiled/white,
 /area/map_template/lodge)
 "wU" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/wood,
 /area/map_template/lodge)
 "xm" = (
@@ -218,7 +218,7 @@
 /turf/template_noop,
 /area/template_noop)
 "OA" = (
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/tiled/white,
 /area/map_template/lodge)
 "OH" = (
@@ -231,11 +231,11 @@
 /turf/floor/carpet/turcarpet,
 /area/map_template/lodge)
 "PB" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/wood,
 /area/map_template/lodge)
 "Qu" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/carpet/turcarpet,
 /area/map_template/lodge)
 "RF" = (

@@ -19,7 +19,7 @@
 /area/asteroid/cave)
 "af" = (
 /obj/spawner/junk,
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/white_small_edges/airless,
 /area/asteroid/cave)
 "ag" = (
@@ -44,7 +44,7 @@
 /turf/floor/tiled/derelict/airless,
 /area/asteroid/cave)
 "al" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/derelict/red_white_edges/airless,
 /area/asteroid/cave)
 "an" = (
@@ -339,7 +339,7 @@
 /turf/floor/plating/under/airless,
 /area/asteroid/cave)
 "cN" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/white_red_edges/airless,
 /area/asteroid/cave)
 "dd" = (
@@ -354,7 +354,7 @@
 /turf/floor/tiled/derelict/white_big_edges/airless,
 /area/asteroid/cave)
 "jf" = (
-/mob/living/carbon/superior_animal/stalker,
+/mob/living/carbon/superior_animal/onestar/stalker,
 /turf/floor/tiled/derelict/white_red_edges/airless,
 /area/asteroid/cave)
 "nf" = (
@@ -367,7 +367,7 @@
 /area/asteroid/cave)
 "qP" = (
 /obj/structure/catwalk,
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/asteroid/cave,
 /area/asteroid/cave)
 "rh" = (
@@ -386,11 +386,11 @@
 /turf/floor/tiled/derelict/red_white_edges/airless,
 /area/asteroid/cave)
 "xe" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/red_white_edges/airless,
 /area/asteroid/cave)
 "xf" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/plating/under/airless,
 /area/asteroid/cave)
 "xF" = (
@@ -420,7 +420,7 @@
 /turf/floor/tiled/derelict/red_white_edges/airless,
 /area/asteroid/cave)
 "Rx" = (
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/tiled/derelict/red_white_edges/airless,
 /area/asteroid/cave)
 "Tw" = (
@@ -428,7 +428,7 @@
 /turf/wall/low/with_glass/reinforced,
 /area/asteroid/cave)
 "Vr" = (
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/tiled/derelict/white_red_edges/airless,
 /area/asteroid/cave)
 "ZH" = (

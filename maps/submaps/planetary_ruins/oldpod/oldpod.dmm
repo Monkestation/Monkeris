@@ -433,7 +433,7 @@
 /turf/floor/tiled/white/techfloor,
 /area/map_template/oldpod)
 "jX" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/plating,
 /area/map_template/oldpod)
 

@@ -22,7 +22,7 @@
 "f" = (
 /obj/structure/bed,
 /obj/item/bedsheet,
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/carpet/turcarpet,
 /area/map_template/lodge)
 "g" = (
@@ -132,7 +132,7 @@
 /turf/floor/tiled/steel/techfloor,
 /area/map_template/lodge)
 "w" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/wood,
 /area/map_template/lodge)
 "x" = (

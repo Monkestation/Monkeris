@@ -912,7 +912,7 @@
 /turf/template_noop,
 /area/template_noop)
 "tF" = (
-/mob/living/carbon/superior_animal/stalker/dual,
+/mob/living/carbon/superior_animal/onestar/stalker/dual,
 /turf/floor/tiled/dark/brown_platform,
 /area/outpost/blacksite/medium)
 "tK" = (
@@ -1174,7 +1174,7 @@
 /turf/floor/tiled/dark/brown_perforated,
 /area/outpost/blacksite/medium)
 "Ei" = (
-/mob/living/carbon/superior_animal/stalker,
+/mob/living/carbon/superior_animal/onestar/stalker,
 /turf/floor/tiled/derelict/white_small_edges,
 /area/outpost/blacksite/medium)
 "Eo" = (
@@ -1524,7 +1524,7 @@
 /turf/floor/tiled/dark/brown_platform,
 /area/outpost/blacksite/medium)
 "Pp" = (
-/mob/living/simple_animal/hostile/roomba,
+/mob/living/simple_animal/hostile/onestar/roomba,
 /turf/floor/tiled/derelict/white_small_edges,
 /area/outpost/blacksite/medium)
 "PH" = (

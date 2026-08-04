@@ -226,7 +226,7 @@
 /turf/mineral,
 /area/asteroid/cave)
 "ic" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/derelict/white_big_edges/airless,
 /area/asteroid/cave)
 "if" = (
@@ -292,7 +292,7 @@
 /turf/floor/tiled/derelict/airless,
 /area/asteroid/cave)
 "pA" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/red_white_edges/airless,
 /area/asteroid/cave)
 "pI" = (
@@ -345,7 +345,7 @@
 /obj/structure/sign/derelict2{
 	pixel_y = -32
 	},
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/airless,
 /area/asteroid/cave)
 "uK" = (
@@ -369,7 +369,7 @@
 /turf/floor/tiled/dark/brown_platform/airless,
 /area/asteroid/cave)
 "vJ" = (
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/tiled/derelict/airless,
 /area/asteroid/cave)
 "vQ" = (
@@ -419,7 +419,7 @@
 /obj/machinery/light_construct{
 	dir = 1
 	},
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/airless,
 /area/asteroid/cave)
 "zo" = (
@@ -489,7 +489,7 @@
 /area/asteroid/cave)
 "Ex" = (
 /obj/item/remains/human,
-/mob/living/simple_animal/hostile/onestar_custodian/engineer,
+/mob/living/simple_animal/hostile/onestar/custodian/engineer,
 /turf/floor/tiled/derelict/airless,
 /area/asteroid/cave)
 "EL" = (
@@ -549,7 +549,7 @@
 /turf/floor/tiled/dark/brown_perforated/airless,
 /area/asteroid/cave)
 "Lk" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/derelict/airless,
 /area/asteroid/cave)
 "LL" = (
@@ -566,7 +566,7 @@
 /obj/machinery/light_construct{
 	dir = 8
 	},
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/derelict/white_big_edges/airless,
 /area/asteroid/cave)
 "Mq" = (
@@ -596,7 +596,7 @@
 /turf/floor/tiled/dark/brown_perforated/airless,
 /area/asteroid/cave)
 "PY" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/airless,
 /area/asteroid/cave)
 "Rv" = (

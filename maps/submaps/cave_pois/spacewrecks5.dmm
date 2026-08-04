@@ -34,7 +34,7 @@
 /turf/floor/tiled/dark/airless,
 /area/asteroid/cave)
 "bx" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/techmaint/airless,
 /area/asteroid/cave)
 "bI" = (
@@ -365,7 +365,7 @@
 /turf/floor/tiled/techmaint/airless,
 /area/asteroid/cave)
 "sS" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/plating/under/airless,
 /area/asteroid/cave)
 "tC" = (
@@ -549,7 +549,7 @@
 /turf/floor/plating/under/airless,
 /area/asteroid/cave)
 "GO" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /obj/effect/decal/cleanable/blood,
 /turf/floor/plating/under/airless,
 /area/asteroid/cave)
@@ -661,7 +661,7 @@
 /turf/floor/tiled/dark/airless,
 /area/asteroid/cave)
 "Mu" = (
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/plating/under/airless,
 /area/asteroid/cave)
 "Ng" = (

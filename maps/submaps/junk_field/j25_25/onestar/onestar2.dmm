@@ -160,7 +160,7 @@
 /turf/floor/tiled/dark/brown_perforated/airless,
 /area/template_noop)
 "cK" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/derelict/red_white_edges/airless,
 /area/template_noop)
 "dO" = (
@@ -176,7 +176,7 @@
 /turf/floor/tiled/derelict/red_white_edges/airless,
 /area/template_noop)
 "fa" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/white_small_edges/airless,
 /area/template_noop)
 "fy" = (
@@ -236,7 +236,7 @@
 /turf/floor/tiled/dark/brown_platform/airless,
 /area/template_noop)
 "lj" = (
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/tiled/derelict/white_red_edges/airless,
 /area/template_noop)
 "mJ" = (
@@ -423,7 +423,7 @@
 /turf/floor/dirt/airless,
 /area/template_noop)
 "Bj" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/cafe/airless,
 /area/template_noop)
 "BH" = (
@@ -432,7 +432,7 @@
 /area/template_noop)
 "BI" = (
 /obj/effect/floor_decal/industrial/warning,
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/tiled/derelict/airless,
 /area/template_noop)
 "Cs" = (
@@ -446,7 +446,7 @@
 /turf/floor/tiled/dark/brown_platform/airless,
 /area/template_noop)
 "Dc" = (
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/tiled/derelict/airless,
 /area/template_noop)
 "Ej" = (
@@ -580,7 +580,7 @@
 /obj/structure/sign/department/medbay{
 	pixel_x = 32
 	},
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/white_small_edges/airless,
 /area/template_noop)
 "NH" = (
@@ -654,7 +654,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/tiled/cafe/airless,
 /area/template_noop)
 "SV" = (

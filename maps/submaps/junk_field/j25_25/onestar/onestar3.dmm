@@ -19,7 +19,7 @@
 /area/template_noop)
 "af" = (
 /obj/spawner/junk,
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/white_small_edges/airless,
 /area/template_noop)
 "ag" = (
@@ -334,7 +334,7 @@
 /turf/floor/tiled/derelict/red_white_edges/airless,
 /area/template_noop)
 "jf" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/derelict/white_red_edges/airless,
 /area/template_noop)
 "nf" = (
@@ -343,19 +343,19 @@
 /area/template_noop)
 "qP" = (
 /obj/structure/catwalk,
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/template_noop,
 /area/template_noop)
 "sD" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/derelict/red_white_edges/airless,
 /area/template_noop)
 "xF" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/red_white_edges/airless,
 /area/template_noop)
 "Vr" = (
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/tiled/derelict/white_red_edges/airless,
 /area/template_noop)
 

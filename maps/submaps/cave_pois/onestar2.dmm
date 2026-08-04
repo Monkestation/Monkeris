@@ -160,7 +160,7 @@
 /turf/floor/tiled/dark/brown_perforated/airless,
 /area/asteroid/cave)
 "cK" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/derelict/red_white_edges/airless,
 /area/asteroid/cave)
 "dO" = (
@@ -175,7 +175,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/tiled/derelict/airless,
 /area/asteroid/cave)
 "eD" = (
@@ -183,7 +183,7 @@
 /turf/floor/tiled/derelict/red_white_edges/airless,
 /area/asteroid/cave)
 "fa" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/white_small_edges/airless,
 /area/asteroid/cave)
 "fy" = (
@@ -260,7 +260,7 @@
 /turf/floor/tiled/dark/brown_platform/airless,
 /area/asteroid/cave)
 "lj" = (
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/tiled/derelict/white_red_edges/airless,
 /area/asteroid/cave)
 "mJ" = (
@@ -411,7 +411,7 @@
 /turf/floor/dirt/airless,
 /area/asteroid/cave)
 "wI" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/derelict/white_small_edges/airless,
 /area/asteroid/cave)
 "xc" = (
@@ -471,7 +471,7 @@
 /turf/floor/tiled/derelict/white_small_edges/airless,
 /area/asteroid/cave)
 "Bj" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/cafe/airless,
 /area/asteroid/cave)
 "BH" = (
@@ -483,7 +483,7 @@
 /area/asteroid/cave)
 "BI" = (
 /obj/effect/floor_decal/industrial/warning,
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/tiled/derelict/airless,
 /area/asteroid/cave)
 "Cs" = (
@@ -497,7 +497,7 @@
 /turf/floor/tiled/dark/brown_platform/airless,
 /area/asteroid/cave)
 "Dc" = (
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/tiled/derelict/airless,
 /area/asteroid/cave)
 "Ej" = (
@@ -638,7 +638,7 @@
 /obj/structure/sign/department/medbay{
 	pixel_x = 32
 	},
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/white_small_edges/airless,
 /area/asteroid/cave)
 "NH" = (
@@ -705,7 +705,7 @@
 	dir = 1
 	},
 /obj/spawner/oddities/low_chance,
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/tiled/cafe/airless,
 /area/asteroid/cave)
 "Rn" = (
@@ -725,7 +725,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /obj/spawner/oddities/low_chance,
 /turf/floor/tiled/cafe/airless,
 /area/asteroid/cave)
@@ -760,7 +760,7 @@
 /turf/floor/tiled/dark/brown_perforated/airless,
 /area/asteroid/cave)
 "VQ" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/plating/under/airless,
 /area/asteroid/cave)
 "Xm" = (

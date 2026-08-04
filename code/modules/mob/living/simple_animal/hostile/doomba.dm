@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/roomba
+/mob/living/simple_animal/hostile/onestar/roomba
 	name = "One Star RMB-A unit"
 	desc = "A small round drone, usually tasked with carrying out menial tasks. This one seems pretty harmless"
 	icon = 'icons/mob/battle_roomba.dmi'
@@ -30,7 +30,7 @@
 	spawn_tags = SPAWN_TAG_MOB_ROOMBA
 
 
-/mob/living/simple_animal/hostile/roomba/death()
+/mob/living/simple_animal/hostile/onestar/roomba/death()
 	..()
 	visible_message("<b>[src]</b> blows apart!")
 	new /obj/effect/decal/cleanable/blood/gibs/robot(src.loc)
@@ -50,7 +50,7 @@
 	return
 
 
-/mob/living/simple_animal/hostile/roomba/slayer
+/mob/living/simple_animal/hostile/onestar/roomba/slayer
 	name = "One Star RMB-A unit"
 	desc = "A small round drone, usually tasked with carrying out menial tasks. This one seems to have a knife taped to it..?"
 	icon_state = "roomba_knife"
@@ -62,13 +62,13 @@
 	rarity_value = 39.66
 	attacktext = "stabbed"
 
-/mob/living/simple_animal/hostile/roomba/slayer/AttackTarget()
+/mob/living/simple_animal/hostile/onestar/roomba/slayer/AttackTarget()
 	. = ..()
 	if(.)
 		playsound(src, pick('sound/weapons/melee/heavystab.ogg', 'sound/weapons/melee/lightstab.ogg', 'sound/weapons/melee/sharphit.ogg'), 50, 1)
 		spawn(5) AttackTarget() // yes I am aware what that does with perfect clarity of mind dont fucking kill me
 
-/mob/living/simple_animal/hostile/roomba/boomba
+/mob/living/simple_animal/hostile/onestar/roomba/boomba
 	name = "One Star RMB-A unit"
 	desc = "A small round drone, usually tasked with carrying out menial tasks. Is that a fucking anti-personel mine?!"
 	icon_state = "boomba"
@@ -79,14 +79,14 @@
 	melee_damage_upper = 10
 	rarity_value = 85
 
-/mob/living/simple_animal/hostile/roomba/boomba/AttackTarget()
+/mob/living/simple_animal/hostile/onestar/roomba/boomba/AttackTarget()
 	. = ..()
 	if(.) // If we succeeded in hitting.
 		src.visible_message(span_danger("\The [src] makes an odd warbling noise, fizzles, and explodes!"))
 		explosion(get_turf(src), 250, 75)
 		death()
 
-/mob/living/simple_animal/hostile/roomba/gun_ba
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba
 	name = "One Star RMB-A unit"
 	desc = "A small round drone, usually tasked with carrying out menial tasks. And this one has a gun."
 	icon_state = "roomba_lmg"

@@ -17,7 +17,7 @@
 /turf/floor/tiled/derelict/white_small_edges/airless,
 /area/asteroid/cave)
 "af" = (
-/mob/living/simple_animal/hostile/onestar_custodian,
+/mob/living/simple_animal/hostile/onestar/custodian,
 /turf/floor/tiled/derelict/white_big_edges/airless,
 /area/asteroid/cave)
 "ag" = (
@@ -91,7 +91,7 @@
 /turf/floor/asteroid/cave,
 /area/asteroid/cave)
 "av" = (
-/mob/living/carbon/superior_animal/stalker,
+/mob/living/carbon/superior_animal/onestar/stalker,
 /turf/floor/tiled/derelict/airless,
 /area/asteroid/cave)
 "aw" = (
@@ -114,7 +114,7 @@
 /turf/floor/tiled/derelict/white_small_edges/airless,
 /area/asteroid/cave)
 "aA" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/white_big_edges/airless,
 /area/asteroid/cave)
 "aB" = (
@@ -143,7 +143,7 @@
 /turf/wall/untinted/onestar,
 /area/asteroid/cave)
 "aH" = (
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/tiled/derelict/white_big_edges/airless,
 /area/asteroid/cave)
 "aI" = (
@@ -360,15 +360,15 @@
 /turf/floor/plating/under/airless,
 /area/asteroid/cave)
 "cH" = (
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/tiled/derelict/white_small_edges/airless,
 /area/asteroid/cave)
 "dz" = (
-/mob/living/simple_animal/hostile/onestar_custodian/engineer,
+/mob/living/simple_animal/hostile/onestar/custodian/engineer,
 /turf/floor/tiled/derelict/white_big_edges/airless,
 /area/asteroid/cave)
 "fO" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/derelict/white_small_edges/airless,
 /area/asteroid/cave)
 "fU" = (
@@ -453,11 +453,11 @@
 /turf/floor/tiled/derelict/white_small_edges/airless,
 /area/asteroid/cave)
 "CH" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/plating/under/airless,
 /area/asteroid/cave)
 "EA" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/airless,
 /area/asteroid/cave)
 "Ff" = (
@@ -465,7 +465,7 @@
 /turf/floor/tiled/derelict/white_big_edges/airless,
 /area/asteroid/cave)
 "IF" = (
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/tiled/derelict/airless,
 /area/asteroid/cave)
 "Lk" = (

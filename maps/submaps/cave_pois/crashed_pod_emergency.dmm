@@ -206,7 +206,7 @@
 /obj/item/stack/material/sandstone{
 	amount = 50
 	},
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/steel/techfloor,
 /area/asteroid/cave)
 "aH" = (
@@ -784,7 +784,7 @@
 /turf/floor/tiled/steel/techfloor_grid,
 /area/asteroid/cave)
 "zb" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/steel/techfloor,
 /area/asteroid/cave)
 

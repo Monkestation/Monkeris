@@ -89,7 +89,7 @@
 /turf/floor/tiled/derelict/white_red_edges/airless,
 /area/outpost/blacksite/small)
 "ds" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/derelict/white_small_edges/airless,
 /area/outpost/blacksite/small)
 "dN" = (
@@ -189,7 +189,7 @@
 /turf/floor/tiled/derelict/red_white_edges/airless,
 /area/outpost/blacksite/small)
 "ke" = (
-/mob/living/carbon/superior_animal/stalker,
+/mob/living/carbon/superior_animal/onestar/stalker,
 /turf/floor/tiled/derelict/white_red_edges/airless,
 /area/outpost/blacksite/small)
 "kj" = (
@@ -282,7 +282,7 @@
 /turf/wall/low/with_glass/onestar/reinf,
 /area/outpost/blacksite/small)
 "pg" = (
-/mob/living/carbon/superior_animal/stalker/dual,
+/mob/living/carbon/superior_animal/onestar/stalker/dual,
 /turf/floor/tiled/dark/brown_platform/airless,
 /area/outpost/blacksite/small)
 "po" = (
@@ -344,7 +344,7 @@
 /turf/floor/tiled/dark/brown_platform/airless,
 /area/outpost/blacksite/small)
 "rM" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/derelict/red_white_edges/airless,
 /area/outpost/blacksite/small)
 "rZ" = (
@@ -356,7 +356,7 @@
 /turf/floor/tiled/derelict/white_big_edges/airless,
 /area/outpost/blacksite/small)
 "sj" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/dark/brown_platform/airless,
 /area/outpost/blacksite/small)
 "ss" = (
@@ -649,7 +649,7 @@
 /turf/floor/tiled/derelict/white_small_edges/airless,
 /area/outpost/blacksite/small)
 "GW" = (
-/mob/living/carbon/superior_animal/stalker,
+/mob/living/carbon/superior_animal/onestar/stalker,
 /turf/floor/plating/under/airless,
 /area/outpost/blacksite/small)
 "Hw" = (
@@ -755,7 +755,7 @@
 /turf/floor/plating/under/airless,
 /area/outpost/blacksite/small)
 "Ms" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/derelict/white_red_edges/airless,
 /area/outpost/blacksite/small)
 "Mx" = (
@@ -840,7 +840,7 @@
 /obj/machinery/light_construct{
 	dir = 8
 	},
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/derelict/white_big_edges/airless,
 /area/outpost/blacksite/small)
 "Qq" = (

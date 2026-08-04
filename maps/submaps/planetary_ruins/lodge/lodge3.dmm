@@ -59,7 +59,7 @@
 /turf/floor/wood,
 /area/map_template/lodge)
 "lg" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/wood,
 /area/map_template/lodge)
 "mc" = (
@@ -73,7 +73,7 @@
 /turf/floor/tiled/white,
 /area/map_template/lodge)
 "ny" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/carpet/turcarpet,
 /area/map_template/lodge)
 "qK" = (
@@ -148,7 +148,7 @@
 /turf/wall/low/with_glass/reinforced,
 /area/map_template/lodge)
 "NT" = (
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/wood,
 /area/map_template/lodge)
 "NU" = (
@@ -193,7 +193,7 @@
 /turf/floor/tiled/steel,
 /area/map_template/lodge)
 "RM" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/steel,
 /area/map_template/lodge)
 "Sf" = (

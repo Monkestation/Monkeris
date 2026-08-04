@@ -24,14 +24,14 @@
 	var/doing_something = FALSE // mech should not multitask like I do
 	var/hologram_exists = FALSE
 	var/mobstospawn = list(
-		/mob/living/simple_animal/hostile/onestar_custodian/engineer,
-		/mob/living/simple_animal/hostile/onestar_custodian,
-		/mob/living/simple_animal/hostile/roomba/gun_ba,
-		/mob/living/simple_animal/hostile/roomba,
-		/mob/living/simple_animal/hostile/roomba/slayer,
-		/mob/living/simple_animal/hostile/roomba/boomba,
-		/mob/living/carbon/superior_animal/stalker/dual,
-		/mob/living/carbon/superior_animal/stalker/,
+		/mob/living/simple_animal/hostile/onestar/custodian/engineer,
+		/mob/living/simple_animal/hostile/onestar/custodian,
+		/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
+		/mob/living/simple_animal/hostile/onestar/roomba,
+		/mob/living/simple_animal/hostile/onestar/roomba/slayer,
+		/mob/living/simple_animal/hostile/onestar/roomba/boomba,
+		/mob/living/carbon/superior_animal/onestar/stalker/dual,
+		/mob/living/carbon/superior_animal/onestar/stalker/,
 		)
 	var/static/list/move_list = list(OS_BOSS_SHOTGUN, OS_BOSS_SNIPER, OS_BOSS_ROCKET, OS_BOSS_MINIGUN, OS_BOSS_SPAWN_BOTS) // Shotgun, sniper, rockets, you get the drill
 	var/action = OS_BOSS_SHOTGUN

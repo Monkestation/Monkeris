@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/onestar_custodian
+/mob/living/simple_animal/hostile/onestar/custodian
 	name = "One Star Custodial Drone"
 	desc = "Old and weathered One Star drone. It seems to be malfunctioning and hostile."
 	icon = 'icons/mob/build_a_drone.dmi'
@@ -32,14 +32,14 @@
 	var/tooltype = "os"
 	attack_sound = 'sound/weapons/Egloves.ogg'
 
-/mob/living/simple_animal/hostile/onestar_custodian/New()
+/mob/living/simple_animal/hostile/onestar/custodian/New()
 	. = ..()
 	marks_type = pick("green", "blue", "pink", "orange", "cyan", "red", "os")
 	screen_type = pick("green", "os_red", "yellow", "cyan", "red", "os")
 	update_icon()
 	set_glide_size(DELAY2GLIDESIZE(move_to_delay))
 
-/mob/living/simple_animal/hostile/onestar_custodian/update_icon()
+/mob/living/simple_animal/hostile/onestar/custodian/update_icon()
 	. = ..()
 	overlays.Cut()
 	var/image/shell_I = image(icon, src, "shell_[shell_type]")
@@ -55,7 +55,7 @@
 
 
 
-/mob/living/simple_animal/hostile/onestar_custodian/death()
+/mob/living/simple_animal/hostile/onestar/custodian/death()
 	..()
 	visible_message("<b>[src]</b> blows apart!")
 	new /obj/effect/decal/cleanable/blood/gibs/robot(src.loc)
@@ -76,7 +76,7 @@
 
 
 
-/mob/living/simple_animal/hostile/onestar_custodian/chef
+/mob/living/simple_animal/hostile/onestar/custodian/chef
 	name = "One Star Service Drone"
 	desc = "Old and weathered One Star drone. This one looks like it used to cook. It seems to be malfunctioning and hostile."
 	tool = "flamer"
@@ -87,13 +87,13 @@
 	rarity_value = 59.5
 
 
-/mob/living/simple_animal/hostile/onestar_custodian/chef/adjustFireLoss(amount)
+/mob/living/simple_animal/hostile/onestar/custodian/chef/adjustFireLoss(amount)
 	if(status_flags & GODMODE)
 		return FALSE	//godmode
 	fireloss = min(max(fireloss + amount/2, 0),(maxHealth*2)) //Slightly resistant to fire, because it would blow apart otherwise
 
 
-/mob/living/simple_animal/hostile/onestar_custodian/engineer
+/mob/living/simple_animal/hostile/onestar/custodian/engineer
 	name = "One Star Engineering Drone"
 	desc = "Old and weathered One Star drone. This one has a laser welder. It seems to be malfunctioning and hostile."
 	tool = "laser"
@@ -106,13 +106,13 @@
 	rarity_value = 39.66
 	move_to_delay = 5
 
-/mob/living/simple_animal/hostile/onestar_custodian/engineer/MoveToTarget()
+/mob/living/simple_animal/hostile/onestar/custodian/engineer/MoveToTarget()
 	if(!target_mob || SA_attackable(target_mob))
 		stance = HOSTILE_STANCE_IDLE
 	if(target_mob in ListTargets(10))
 		OpenFire(target_mob)
 
-/mob/living/simple_animal/hostile/onestar_custodian/engineer/OpenFire()
+/mob/living/simple_animal/hostile/onestar/custodian/engineer/OpenFire()
 	var/distance = get_dist(src, target_mob)
 	switch(distance)
 		if(0 to 2)
@@ -128,7 +128,7 @@
 
 
 
-/mob/living/simple_animal/hostile/onestar_custodian/AttackTarget()
+/mob/living/simple_animal/hostile/onestar/custodian/AttackTarget()
 	. = ..()
 	if(.)
 		playsound(src, attack_sound, 50, 1)

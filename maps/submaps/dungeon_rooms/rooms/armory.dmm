@@ -153,7 +153,7 @@
 /turf/floor/tiled/dark/brown_perforated,
 /area/crawler)
 "U" = (
-/mob/living/carbon/superior_animal/stalker,
+/mob/living/carbon/superior_animal/onestar/stalker,
 /turf/floor/tiled/dark/brown_platform,
 /area/crawler)
 "X" = (

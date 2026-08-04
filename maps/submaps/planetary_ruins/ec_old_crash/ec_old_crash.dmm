@@ -928,7 +928,7 @@
 /turf/template_noop,
 /area/template_noop)
 "kP" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/white/lowpressure,
 /area/map_template/ecship/cryo)
 "mD" = (
@@ -942,7 +942,7 @@
 /turf/template_noop,
 /area/template_noop)
 "sf" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor,
 /area/map_template/ecship/engineering)
 "NM" = (

@@ -175,7 +175,7 @@
 /turf/floor/tiled/derelict/airless,
 /area/template_noop)
 "ic" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/derelict/white_big_edges/airless,
 /area/template_noop)
 "if" = (
@@ -204,7 +204,7 @@
 /turf/wall/low/onestar,
 /area/template_noop)
 "pA" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/red_white_edges/airless,
 /area/template_noop)
 "pI" = (
@@ -235,7 +235,7 @@
 /obj/structure/sign/derelict2{
 	pixel_y = -32
 	},
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/airless,
 /area/template_noop)
 "uK" = (
@@ -243,7 +243,7 @@
 /turf/floor/tiled/derelict/airless,
 /area/template_noop)
 "vJ" = (
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/tiled/derelict/airless,
 /area/template_noop)
 "wX" = (
@@ -268,7 +268,7 @@
 /obj/machinery/light_construct{
 	dir = 1
 	},
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/airless,
 /area/template_noop)
 "zo" = (
@@ -377,7 +377,7 @@
 /turf/floor/tiled/dark/brown_perforated/airless,
 /area/template_noop)
 "Lk" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/airless,
 /area/template_noop)
 "LL" = (
@@ -394,7 +394,7 @@
 /obj/machinery/light_construct{
 	dir = 8
 	},
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/derelict/white_big_edges/airless,
 /area/template_noop)
 "Mq" = (
@@ -406,7 +406,7 @@
 /turf/floor/tiled/derelict/red_white_edges/airless,
 /area/template_noop)
 "Ny" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/dark/brown_platform/airless,
 /area/template_noop)
 "NG" = (
@@ -470,7 +470,7 @@
 /turf/floor/tiled/dark/brown_perforated/airless,
 /area/template_noop)
 "Zh" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/plating/under/airless,
 /area/template_noop)
 "Zt" = (

@@ -214,7 +214,7 @@
 /turf/floor/tiled/steel/techfloor_grid,
 /area/map_template/marooned)
 "F" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/steel/techfloor_grid,
 /area/map_template/marooned)
 "G" = (

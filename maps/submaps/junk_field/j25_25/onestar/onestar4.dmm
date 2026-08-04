@@ -87,7 +87,7 @@
 /turf/template_noop,
 /area/template_noop)
 "av" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/derelict/airless,
 /area/template_noop)
 "aw" = (
@@ -110,7 +110,7 @@
 /turf/floor/tiled/derelict/white_small_edges/airless,
 /area/template_noop)
 "aA" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/white_big_edges/airless,
 /area/template_noop)
 "aB" = (
@@ -137,7 +137,7 @@
 /turf/wall/untinted/onestar,
 /area/template_noop)
 "aH" = (
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/tiled/derelict/white_big_edges/airless,
 /area/template_noop)
 "aI" = (
@@ -357,11 +357,11 @@
 /turf/floor/tiled/derelict/airless,
 /area/template_noop)
 "uc" = (
-/mob/living/simple_animal/hostile/roomba/gun_ba,
+/mob/living/simple_animal/hostile/onestar/roomba/gun_ba,
 /turf/floor/tiled/derelict/white_small_edges/airless,
 /area/template_noop)
 "EA" = (
-/mob/living/simple_animal/hostile/roomba/slayer,
+/mob/living/simple_animal/hostile/onestar/roomba/slayer,
 /turf/floor/tiled/derelict/airless,
 /area/template_noop)
 "Lk" = (

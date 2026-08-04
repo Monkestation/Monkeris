@@ -34,7 +34,7 @@
 /turf/floor/carpet,
 /area/template_noop)
 "E" = (
-/mob/living/simple_animal/hostile/roomba/boomba,
+/mob/living/simple_animal/hostile/onestar/roomba/boomba,
 /turf/floor/carpet,
 /area/template_noop)
 "I" = (

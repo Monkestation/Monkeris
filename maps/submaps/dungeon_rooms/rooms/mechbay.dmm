@@ -235,7 +235,7 @@
 /turf/floor/tiled/derelict,
 /area/crawler)
 "T" = (
-/mob/living/carbon/superior_animal/stalker/dual,
+/mob/living/carbon/superior_animal/onestar/stalker/dual,
 /turf/floor/tiled/derelict,
 /area/crawler)
 "U" = (

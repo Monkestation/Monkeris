@@ -121,7 +121,7 @@
 /turf/floor/tiled/derelict,
 /area/crawler)
 "C" = (
-/mob/living/carbon/superior_animal/stalker,
+/mob/living/carbon/superior_animal/onestar/stalker,
 /turf/floor/tiled/derelict/white_small_edges,
 /area/crawler)
 "G" = (
@@ -130,7 +130,7 @@
 /turf/floor/tiled/derelict/white_small_edges,
 /area/crawler)
 "M" = (
-/mob/living/carbon/superior_animal/stalker/dual,
+/mob/living/carbon/superior_animal/onestar/stalker/dual,
 /turf/floor/tiled/derelict/white_small_edges,
 /area/crawler)
 "Q" = (

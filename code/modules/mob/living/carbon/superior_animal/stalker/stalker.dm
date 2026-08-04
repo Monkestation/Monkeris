@@ -1,5 +1,5 @@
 // OneStar patrol borg that defends OneStar facilities
-/mob/living/carbon/superior_animal/stalker
+/mob/living/carbon/superior_animal/onestar/stalker
 	name = "OneStar Stalker Mk1"
 	desc = "A ruthless patrol borg that defends OneStar facilities. This one has a single minigun, still enough to kill pesky intruders."
 	icon_state = "stalker_mk1"
@@ -63,19 +63,19 @@
 
 	var/already_shooting = 0
 
-/mob/living/carbon/superior_animal/stalker/Move()
+/mob/living/carbon/superior_animal/onestar/stalker/Move()
 	..()
 	if(!isinspace())
 		playsound(src, 'sound/mechs/Mech_Step.ogg', 50, 1)
 
-/mob/living/carbon/superior_animal/stalker/death()
+/mob/living/carbon/superior_animal/onestar/stalker/death()
 	. = ..()
 	visible_message("Critical components of \the [src] blow apart!")
 	new /obj/effect/decal/cleanable/blood/gibs/robot(loc)
 	do_sparks(3, TRUE, src)
 	playsound(src, 'sound/machines/triple_beep.ogg', 50, 1)
 
-/mob/living/carbon/superior_animal/stalker/dual
+/mob/living/carbon/superior_animal/onestar/stalker/dual
 	name = "OneStar Stalker Mk2"
 	desc = "A ruthless patrol borg that defends OneStar facilities. This one is an upgraded version with a dual minigun, don\'t stand in front of it for too long."
 	icon_state = "stalker_mk2"
@@ -85,12 +85,12 @@
 	health = 400
 	rapid = 1
 
-/mob/living/carbon/superior_animal/stalker/New()
+/mob/living/carbon/superior_animal/onestar/stalker/New()
 	..()
 	pixel_x = 0
 	pixel_y = 0
 
-/mob/living/carbon/superior_animal/stalker/attackby(obj/item/O, mob/user)
+/mob/living/carbon/superior_animal/onestar/stalker/attackby(obj/item/O, mob/user)
 	if(istype(O, /obj/item/gripper))
 		return ..(O, user)
 
@@ -117,7 +117,7 @@
 		O.attack(src, user, user.targeted_organ)
 
 ///////////////////Shooting Sequence/////////////////////
-/mob/living/carbon/superior_animal/stalker/OpenFire(target_mob)
+/mob/living/carbon/superior_animal/onestar/stalker/OpenFire(target_mob)
 	if(already_shooting)
 		return
 	var/target = get_turf(target_mob)
@@ -139,7 +139,7 @@
 		evasive_maneuvers()
 	return
 
-/mob/living/carbon/superior_animal/stalker/proc/evasive_maneuvers()
+/mob/living/carbon/superior_animal/onestar/stalker/proc/evasive_maneuvers()
 	var/turf/destination = pick(RANGE_TURFS(6, src))
 	walk_to(src, destination, 1, move_to_delay)
 
