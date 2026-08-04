@@ -375,14 +375,7 @@ the value of stock parts increases with the rating.
 	if(cache_key in cached_valid_candidates)
 		return cached_valid_candidates[cache_key]
 
-	var/list/candidates = list()
-
-	// Get paths for all required tags at once
-	for(var/tag in tags)
-		if(!length(candidates))
-			candidates = astype(all_spawn_by_tag[tag], /list).Copy()
-		else
-			candidates &= all_spawn_by_tag[tag]  // Intersection
+	var/list/candidates = spawn_by_tag(tags)
 
 	// Remove bad tags
 	for(var/tag in bad_tags)
