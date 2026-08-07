@@ -53,6 +53,8 @@
 #define ROLE_BANTYPE_CARRION ROLE_CARRION
 #define ROLE_BANTYPE_CREW_SIDED ROLE_MARSHAL
 #define ROLE_BANTYPE_BLITZ ROLE_BLITZ
+#define ROLE_BANTYPE_PARAMOUNT ROLE_PARAMOUNT
+#define ROLE_BANTYPE_THRALL ROLE_THRALL
 
 // antag template macros. commented out ones are leftover from baycode
 #define ROLE_BORER "Cortical Borer"
@@ -63,6 +65,8 @@
 // #define ROLE_DEATHSQUAD "Death Squad"
 // #define ROLE_ARTIST "Artist"
 #define ROLE_MERCENARY "Serbian Mercenary"
+#define ROLE_PARAMOUNT "Paramount"
+#define ROLE_THRALL "Thrall"
 #define ROLE_PIRATE "Pirate"
 #define ROLE_CARRION "Carrion"
 #define ROLE_MONKEY "Monkey"
@@ -85,6 +89,7 @@
 #define FACTION_EXCELSIOR "excelsior"
 #define FACTION_BORERS "borers"
 #define FACTION_SERBS	"serbians"
+#define FACTION_FOUNDERS "founders"
 #define FACTION_PIRATES	"pirates"
 #define FACTION_NEOTHEOLOGY	"neotheologists"
 

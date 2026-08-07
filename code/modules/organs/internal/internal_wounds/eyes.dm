@@ -15,7 +15,7 @@
 	name = "corneal erosion"
 	hal_damage = IWOUND_HEAVY_DAMAGE
 
-/datum/internal_wound/organic/eyes_blunt/iris //iris hehehehe 
+/datum/internal_wound/organic/eyes_blunt/iris //iris hehehehe
 	name = "iris tears"
 
 // Sharp
