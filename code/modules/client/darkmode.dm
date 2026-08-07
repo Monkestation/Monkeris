@@ -23,7 +23,7 @@ Thanks to spacemaniac and mcdonald for help with the JS side of this.
 /client/proc/force_white_theme() //There's no way round it. We're essentially changing the skin by hand. It's painful but it works, and is the way Lummox suggested.
 	src << output("light", "statbrowser:set_theme")
 
-	winset(src, "mainwindow", "background-color = [COLOR_DARKMODE_DARKBACKGROUND];background-color = none")
+	winset(src, SKIN_MAINWINDOW, "background-color = [COLOR_DARKMODE_DARKBACKGROUND];background-color = none")
 	winset(src, "split", "background-color = [COLOR_DARKMODE_DARKBACKGROUND];background-color = none")
 	winset(src, "Welcome", "background-color = [COLOR_DARKMODE_DARKBACKGROUND];background-color = none")
 	winset(src, "statwindow", "background-color = [COLOR_DARKMODE_BACKGROUND];background-color = none")
@@ -35,12 +35,12 @@ Thanks to spacemaniac and mcdonald for help with the JS side of this.
 	winset(src, "infowindow", "background-color = [COLOR_DARKMODE_DARKBACKGROUND];background-color = none")
 	winset(src, "infowindow", "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
 
-	winset(src, "info", "background-color = [COLOR_DARKMODE_DARKBACKGROUND];background-color = #FFFFFF")
-	winset(src, "info", "tab-background-color = [COLOR_DARKMODE_BACKGROUND];tab-background-color = none")
-	winset(src, "info", "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
-	winset(src, "info", "tab-text-color = [COLOR_DARKMODE_TEXT];tab-text-color = #000000")
-	winset(src, "info", "prefix-color = [COLOR_DARKMODE_TEXT];prefix-color = #000000")
-	winset(src, "info", "suffix-color = [COLOR_DARKMODE_TEXT];suffix-color = #000000")
+	winset(src, SKIN_INFOWINDOW, "background-color = [COLOR_DARKMODE_DARKBACKGROUND];background-color = #FFFFFF")
+	winset(src, SKIN_INFOWINDOW, "tab-background-color = [COLOR_DARKMODE_BACKGROUND];tab-background-color = none")
+	winset(src, SKIN_INFOWINDOW, "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
+	winset(src, SKIN_INFOWINDOW, "tab-text-color = [COLOR_DARKMODE_TEXT];tab-text-color = #000000")
+	winset(src, SKIN_INFOWINDOW, "prefix-color = [COLOR_DARKMODE_TEXT];prefix-color = #000000")
+	winset(src, SKIN_INFOWINDOW, "suffix-color = [COLOR_DARKMODE_TEXT];suffix-color = #000000")
 	var/static/list/buttons
 	if(!buttons)
 		buttons = list(
@@ -61,7 +61,7 @@ Thanks to spacemaniac and mcdonald for help with the JS side of this.
 /client/proc/force_dark_theme() //Inversely, if theyre using white theme and want to swap to the superior dark theme, let's get WINSET() ing
 	src << output("dark", "statbrowser:set_theme")
 
-	winset(src, "mainwindow", "background-color = none;background-color = [COLOR_DARKMODE_DARKBACKGROUND]")
+	winset(src, SKIN_MAINWINDOW, "background-color = none;background-color = [COLOR_DARKMODE_DARKBACKGROUND]")
 	winset(src, "split", "background-color = none;background-color = [COLOR_DARKMODE_DARKBACKGROUND]")
 	winset(src, "Welcome", "background-color = none;background-color = [COLOR_DARKMODE_DARKBACKGROUND]")
 	winset(src, "statwindow", "background-color = none;background-color = [COLOR_DARKMODE_BACKGROUND]")

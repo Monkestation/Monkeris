@@ -222,7 +222,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	// Instantiate tgui panel
 	tgui_panel = new(src, "browseroutput")
 
-	tgui_say = new(src, "tgui_say")
+	tgui_say = new(src, SKIN_TGUISAY)
 
 	initialize_commandbar_spy()
 
@@ -1129,17 +1129,17 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 // /client/verb/enable_fullscreen()
 // 	set hidden = TRUE
-// 	winset(usr, "mainwindow", "titlebar=false")
-// 	winset(usr, "mainwindow", "menu=")
-// 	winset(usr, "mainwindow", "is-maximized=false")
-// 	winset(usr, "mainwindow", "is-maximized=true")
+// 	winset(usr, SKIN_MAINWINDOW, "titlebar=false")
+// 	winset(usr, SKIN_MAINWINDOW, "menu=")
+// 	winset(usr, SKIN_MAINWINDOW, "is-maximized=false")
+// 	winset(usr, SKIN_MAINWINDOW, "is-maximized=true")
 // 	fit_viewport()
 
 // /client/verb/disable_fullscreen()
 // 	set hidden = TRUE
-// 	winset(usr, "mainwindow", "titlebar=true")
-// 	winset(usr, "mainwindow", "menu=menu")
-// 	winset(usr, "mainwindow", "is-maximized=false")
+// 	winset(usr, SKIN_MAINWINDOW, "titlebar=true")
+// 	winset(usr, SKIN_MAINWINDOW, "menu=menu")
+// 	winset(usr, SKIN_MAINWINDOW, "is-maximized=false")
 // 	fit_viewport()
 
 /client/verb/stop_client_sounds()
@@ -1160,14 +1160,14 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	fullscreen = !fullscreen
 
 	if(fullscreen)
-		winset(usr, "mainwindow", "titlebar=false")
-		winset(usr, "mainwindow", "menu=")
-		winset(usr, "mainwindow", "is-maximized=false")
-		winset(usr, "mainwindow", "is-maximized=true")
+		winset(usr, SKIN_MAINWINDOW, "titlebar=false")
+		winset(usr, SKIN_MAINWINDOW, "menu=")
+		winset(usr, SKIN_MAINWINDOW, "is-maximized=false")
+		winset(usr, SKIN_MAINWINDOW, "is-maximized=true")
 	else
-		winset(usr, "mainwindow", "titlebar=true")
-		winset(usr, "mainwindow", "menu=menu")
-		winset(usr, "mainwindow", "is-maximized=false")
+		winset(usr, SKIN_MAINWINDOW, "titlebar=true")
+		winset(usr, SKIN_MAINWINDOW, "menu=menu")
+		winset(usr, SKIN_MAINWINDOW, "is-maximized=false")
 	attempt_auto_fit_viewport()
 
 /// Handles any "fluff" or supplementary procedures related to an admin logout event. Should not have anything critically related cleaning up an admin's logout.

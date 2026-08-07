@@ -46,7 +46,7 @@ SUBSYSTEM_DEF(mapping)
 	for(var/area/AR in world)
 		if(istype(AR, /area/shuttle) ||  istype(AR, /area/wizard_station)) continue
 		if(teleportlocs.Find(AR.name)) continue
-		var/turf/picked = pick_area_turf(AR.type, list(/proc/is_station_turf))
+		var/turf/picked = pick_area_turf(AR.type, list(GLOBAL_PROC_REF(is_station_turf)))
 		if (picked)
 			teleportlocs += AR.name
 			teleportlocs[AR.name] = AR
@@ -60,7 +60,7 @@ SUBSYSTEM_DEF(mapping)
 		if(istype(AR, /area/turret_protected/aisat) || istype(AR, /area/derelict) || istype(AR, /area/shuttle/specops/centcom))
 			ghostteleportlocs += AR.name
 			ghostteleportlocs[AR.name] = AR
-		var/turf/picked = pick_area_turf(AR.type, list(/proc/is_station_turf))
+		var/turf/picked = pick_area_turf(AR.type, list(GLOBAL_PROC_REF(is_station_turf)))
 		if (picked)
 			ghostteleportlocs += AR.name
 			ghostteleportlocs[AR.name] = AR
