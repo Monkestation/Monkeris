@@ -1,28 +1,5 @@
 //DEFINITIONS FOR ASSET DATUMS START HERE.
 
-/datum/asset/simple/tgui
-	keep_local_name = TRUE
-	assets = list(
-		"tgui.bundle.js" = file("tgui/public/tgui.bundle.js"),
-		"tgui.bundle.css" = file("tgui/public/tgui.bundle.css"),
-	)
-
-/datum/asset/simple/tgui_panel
-	keep_local_name = TRUE
-	assets = list(
-		"tgui-panel.bundle.js" = file("tgui/public/tgui-panel.bundle.js"),
-		"tgui-panel.bundle.css" = file("tgui/public/tgui-panel.bundle.css"),
-	)
-
-/datum/asset/simple/namespaced/tgfont
-	assets = list(
-		"tgfont.eot" = file("tgui/packages/tgfont/static/tgfont.eot"),
-		"tgfont.woff2" = file("tgui/packages/tgfont/static/tgfont.woff2"),
-	)
-	parents = list(
-		"tgfont.css" = file("tgui/packages/tgfont/static/tgfont.css"),
-	)
-
 // /datum/asset/simple/headers
 // 	assets = list(
 // 		"alarm_green.gif" = 'icons/program_icons/alarm_green.gif',
@@ -163,10 +140,6 @@
 // 	assets = list(
 // 		"playeroptions.css" = 'html/browser/playeroptions.css'
 // 	)
-
-/datum/asset/simple/namespaced/common
-	assets = list("padlock.png" = 'icons/ui_icons/common/padlock.png')
-	parents = list("common.css" = 'html/browser/common.css')
 
 // /datum/asset/simple/permissions
 // 	assets = list(
@@ -348,118 +321,11 @@
 // 		Insert(imgid, I)
 // 	return ..()
 
-// /datum/asset/simple/orbit
-// 	assets = list(
-// 		"ghost.png" = 'icons/ui_icons/orbit/ghost.png'
-// 	)
-
 // /datum/asset/simple/vv
 // 	assets = list(
 // 		"view_variables.css" = 'html/admin/view_variables.css'
 // 	)
 
-/* === ERIS STUFF === */
-/datum/asset/simple/design_icons/register()
-	for(var/D in SSresearch.all_designs)
-		var/datum/design/design = D
-
-		var/filename = SANITIZE_FILENAME("design_[design.build_path].png")
-		var/ui_icon_data = design.ui_icon()
-
-		#ifdef UNIT_TESTS
-		if(isnull(ui_icon_data))
-			stack_trace("design [design.type] does not return a valid UI icon for itself")
-			continue
-		#endif
-
-		assets[filename] = ui_icon_data
-	..()
-
-	for(var/D in SSresearch.all_designs)
-		var/datum/design/design = D
-		design.nano_ui_data["icon"] = SSassets.transport.get_asset_url(SANITIZE_FILENAME("design_[design.build_path].png"))
-
-/datum/asset/simple/materials/register()
-	for(var/obj/item/stack/material/type as anything in subtypesof(/obj/item/stack/material) - typesof(/obj/item/stack/material/cyborg))
-		var/filename = SANITIZE_FILENAME("[type].png")
-
-		var/atom/item = type
-		var/icon_file = initial(item.icon)
-		var/icon_state = initial(item.icon_state)
-		var/icon/I = icon(icon_file, icon_state, SOUTH)
-
-		assets[filename] = I
-	..()
-
-/datum/asset/simple/craft/register()
-	var/list/craftStep = list()
-	for(var/name in SScraft.categories)
-		for(var/datum/craft_recipe/CR in SScraft.categories[name])
-			if(CR.result)
-				var/filename = SANITIZE_FILENAME("[CR.result].png")
-
-				var/atom/item = initial(CR.result)
-				var/icon_file = initial(item.icon)
-				var/icon_state = initial(item.icon_state)
-
-				// eugh
-				if (!icon_file)
-					icon_file = ""
-
-				#ifdef UNIT_TESTS
-				if(!(icon_state in icon_states(icon_file)))
-					// stack_trace("crafting result [CR] with icon '[icon_file]' missing state '[icon_state]'")
-					continue
-				#endif
-				var/icon/I = icon(icon_file, icon_state, SOUTH)
-
-				assets[filename] = I
-
-			for(var/datum/craft_step/CS in CR.steps)
-				if(CS.reqed_type)
-					var/filename = SANITIZE_FILENAME("[CS.reqed_type].png")
-
-					var/atom/item = initial(CS.reqed_type)
-					var/icon_file = initial(item.icon)
-					var/icon_state = initial(item.icon_state)
-					#ifdef UNIT_TESTS
-					if(!(icon_state in icon_states(icon_file)))
-						// stack_trace("crafting step [CS] with icon '[icon_file]' missing state '[icon_state]'")
-						continue
-					#endif
-					var/icon/I = icon(icon_file, icon_state, SOUTH)
-
-					assets[filename] = I
-					craftStep |= CS
-	..()
-
-	// this is fucked but crafting has a circular dept unfortunantly. could unfuck with tgui port
-	for(var/datum/craft_step/CS as anything in craftStep)
-		if (!CS.reqed_material && !CS.reqed_type)
-			continue
-		CS.iconfile = SSassets.transport.get_asset_url(CS.reqed_material ? SANITIZE_FILENAME("[material_stack_type(CS.reqed_material)].png") : null, assets[SANITIZE_FILENAME("[CS.reqed_type].png")])
-		CS.make_desc() // redo it
-
-/datum/asset/simple/tool_upgrades/register()
-	for(var/obj/item/tool_upgrade/type as anything in subtypesof(/obj/item/tool_upgrade))
-		var/filename = SANITIZE_FILENAME("tool_upgrade_[type].png")
-
-		// no.
-		if (initial(type.bad_type) == type)
-			continue
-
-		var/icon_file = initial(type.icon)
-		var/icon_state = initial(type.icon_state)
-
-		#ifdef UNIT_TESTS
-		if(!(icon_state in icon_states(icon_file)))
-			// stack_trace("tool upgrade [type] with icon '[icon_file]' missing state '[icon_state]'")
-			continue
-		#endif
-
-		var/icon/I = icon(icon_file, icon_state, SOUTH)
-		assets[filename] = I
-	..()
 
 /datum/asset/simple/perks/register()
 	for(var/datum/perk/type as anything in subtypesof(/datum/perk))
@@ -477,31 +343,3 @@
 		assets[filename] = I
 	..()
 
-/datum/asset/simple/directories/nanoui
-	dirs = list(
-		"nano/js/",
-		"nano/css/",
-		"nano/templates/",
-		"nano/images/",
-		"nano/images/status_icons/",
-		"nano/images/modular_computers/",
-		"nano/images/eris/",
-	)
-
-/datum/asset/simple/directories/images_news
-	dirs = list("news_articles/images/")
-
-/datum/asset/simple/directories
-	keep_local_name = TRUE
-	var/list/dirs = list()
-
-/datum/asset/simple/directories/register()
-	// Crawl the directories to find files.
-	for (var/path in dirs)
-		var/list/filenames = flist(path)
-		for(var/filename in filenames)
-			if(copytext(filename, length(filename)) != "/") // Ignore directories.
-				var/realpath = "[path][filename]"
-				if(fexists(realpath))
-					assets[filename] = file(realpath)
-	..()

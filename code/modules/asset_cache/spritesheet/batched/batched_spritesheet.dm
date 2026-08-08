@@ -28,6 +28,8 @@
 	var/load_immediately = FALSE
 	/// If we should avoid propogating 'invalid dir' errors from rust-g. Because sometimes, you just don't know what dirs are valid.
 	var/ignore_dir_errors = FALSE
+	/// Avoid propogating 'Could not find associated icon state' errors because we know our input data fucking sucks
+	var/ignore_associated_icon_state_errors = FALSE
 
 	/// Forces use of the smart cache. This is for unit tests, please respect the config <3
 	var/force_cache = FALSE
@@ -228,8 +230,13 @@
 	fully_generated = TRUE
 	// If we were ever in there, remove ourselves
 	SSasset_loading.dequeue_asset(src)
-	if(data["error"] && !(ignore_dir_errors && findtext(data["error"], "is not in the set of valid dirs")))
-		CRASH("Error during spritesheet generation for [name]: [data["error"]]")
+	if(data["error"])
+		var/err = data["error"]
+		if(ignore_dir_errors && findtext(err, "is not in the set of valid dirs"))
+			return
+		if(ignore_associated_icon_state_errors && findtext(err, "Could not find associated icon state"))
+			return
+		CRASH("Error during spritesheet generation for [name]: [err]")
 
 /datum/asset/spritesheet_batched/queued_generation()
 	realize_spritesheets(yield = TRUE)

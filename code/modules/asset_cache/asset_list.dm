@@ -63,6 +63,7 @@ GLOBAL_LIST_EMPTY(asset_datums)
 
 /// Immediately regenerate the asset, overwriting any cache.
 /datum/asset/proc/regenerate()
+	SHOULD_CALL_PARENT(FALSE)
 	unregister()
 	cached_serialized_url_mappings = null
 	cached_serialized_url_mappings_transport_type = null
@@ -70,6 +71,7 @@ GLOBAL_LIST_EMPTY(asset_datums)
 
 /// Unregisters any assets from the transport.
 /datum/asset/proc/unregister()
+	SHOULD_CALL_PARENT(FALSE)
 	CRASH("unregister() not implemented for asset [type]!")
 
 /// Simply takes any generated file and saves it to the round-specific /logs folder. Useful for debugging potential issues with spritesheet generation/display.
@@ -95,12 +97,12 @@ GLOBAL_LIST_EMPTY(asset_datums)
 /datum/asset/simple/register()
 	for(var/asset_name in assets)
 		var/datum/asset_cache_item/ACI = SSassets.transport.register_asset(asset_name, assets[asset_name])
-		if (!ACI)
+		if(!istype(ACI))
 			log_asset("ERROR: Invalid asset: [type]:[asset_name]:[ACI]")
 			continue
-		if (legacy)
+		if(legacy)
 			ACI.legacy = legacy
-		if (keep_local_name)
+		if(keep_local_name)
 			ACI.keep_local_name = keep_local_name
 		assets[asset_name] = ACI
 
@@ -137,7 +139,7 @@ GLOBAL_LIST_EMPTY(asset_datums)
 		. += A.get_url_mappings()
 
 /datum/asset/group/unregister()
-	for (var/type in children)
+	for(var/type in children)
 		var/datum/asset/A = get_asset_datum(type)
 		A.unregister()
 
@@ -179,7 +181,7 @@ GLOBAL_LIST_EMPTY(asset_datums)
 	for(var/icon_state_name in icon_states(_icon))
 		for(var/direction in directions)
 			var/asset = icon(_icon, icon_state_name, direction, frame, movement_states)
-			if (!asset)
+			if(!asset)
 				continue
 			asset = fcopy_rsc(asset) //dedupe
 			var/prefix2 = (directions.len > 1) ? "[dir2text(direction)]." : ""
@@ -209,36 +211,37 @@ GLOBAL_LIST_EMPTY(asset_datums)
 	var/list/parents = list()
 
 /datum/asset/simple/namespaced/register()
-	if (legacy)
+	if(legacy)
 		assets |= parents
 	var/list/hashlist = list()
-	var/list/sorted_assets = sortList(assets)
+	var/list/created_items = list()
 
-	for (var/asset_name in sorted_assets)
+	var/list/sorted_assets = sortList(assets)
+	for(var/asset_name in sorted_assets)
 		var/datum/asset_cache_item/ACI = new(asset_name, sorted_assets[asset_name])
-		if (!ACI?.hash)
+		if (!istype(ACI) || !ACI.hash)
 			log_asset("ERROR: Invalid asset: [type]:[asset_name]:[ACI]")
 			continue
 		hashlist += ACI.hash
-		sorted_assets[asset_name] = ACI
+		created_items[asset_name] = ACI
 	var/namespace = md5(hashlist.Join())
 
-	for (var/asset_name in parents)
+	for(var/asset_name in parents)
 		var/datum/asset_cache_item/ACI = new(asset_name, parents[asset_name])
-		if (!ACI?.hash)
+		if (!istype(ACI) || !ACI.hash)
 			log_asset("ERROR: Invalid asset: [type]:[asset_name]:[ACI]")
 			continue
 		ACI.namespace_parent = TRUE
-		sorted_assets[asset_name] = ACI
+		created_items[asset_name] = ACI
 
-	for (var/asset_name in sorted_assets)
-		var/datum/asset_cache_item/ACI = sorted_assets[asset_name]
-		if (!ACI?.hash)
+	for(var/asset_name in created_items)
+		var/datum/asset_cache_item/ACI = created_items[asset_name]
+		if (!istype(ACI) || !ACI.hash)
 			log_asset("ERROR: Invalid asset: [type]:[asset_name]:[ACI]")
 			continue
 		ACI.namespace = namespace
 
-	assets = sorted_assets
+	assets = created_items
 	..()
 
 /// Get a html string that will load a html asset.
@@ -269,6 +272,7 @@ GLOBAL_LIST_EMPTY(asset_datums)
 
 /// Returns the data that will be JSON encoded
 /datum/asset/json/proc/generate()
+	SHOULD_CALL_PARENT(FALSE)
 	CRASH("generate() not implemented for [type]!")
 
 /datum/asset/json/unregister()
