@@ -7,7 +7,7 @@
 	exp_requirements = 1500
 	exp_required_type_department = DEPARTMENT_SECURITY
 	exp_granted_type = EXP_TYPE_CREW
-	faction = "CEV Eris"
+	faction = "CEV Theseus"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Captain"
@@ -40,7 +40,7 @@
 							 /datum/computer_file/program/camera_monitor,
 							 /datum/computer_file/program/reports)
 
-	description = "You are the commander of the local regiment of the Ironhammer Mercenary company, contracted to protect and serve aboard the CEV Eris. Ironhammer serves as both an internal security force, and as a guard for expeditions outwith the ship.<br>\
+	description = "You are the commander of the local regiment of the Ironhammer Mercenary company, contracted to protect and serve aboard the CEV Theseus. Ironhammer serves as both an internal security force, and as a guard for expeditions outwith the ship.<br>\
 	<br>\
 	Your goal is to keep everyone aboard the ship as safe as possible, and to eliminate any threats to safety.<br>\
 	The Gunnery Sergeant is your second in command, and any of your duties can be delegated to him at your discretion"
@@ -71,7 +71,7 @@
 	exp_requirements = 600
 	exp_required_type_department = DEPARTMENT_SECURITY
 	exp_granted_type = EXP_TYPE_CREW
-	faction = "CEV Eris"
+	faction = "CEV Theseus"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Ironhammer Commander"
@@ -128,7 +128,7 @@
 	exp_requirements = 300
 	exp_required_type = EXP_TYPE_CREW
 	exp_granted_type = EXP_TYPE_CREW
-	faction = "CEV Eris"
+	faction = "CEV Theseus"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Ironhammer Commander"
@@ -189,7 +189,7 @@
 	exp_requirements = 200
 	exp_required_type_department = DEPARTMENT_MEDICAL
 	exp_granted_type = EXP_TYPE_CREW
-	faction = "CEV Eris"
+	faction = "CEV Theseus"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Ironhammer Commander, Ironhammer Sergeant"
@@ -245,7 +245,7 @@
 	exp_requirements = 600
 	exp_required_type = EXP_TYPE_CREW
 	exp_granted_type = EXP_TYPE_CREW
-	faction = "CEV Eris"
+	faction = "CEV Theseus"
 	total_positions = 6
 	spawn_positions = 6
 	supervisors = "the Ironhammer Commander, Ironhammer Sergeant"

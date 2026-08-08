@@ -292,5 +292,5 @@
 		. |= (LRS.running)
 
 /obj/effect/overmap/ship/proc/scan_poi()
-	overmap_event_handler.scan_poi(src, loc) // Eris uses its sensors to scan a nearby point of interest
+	overmap_event_handler.scan_poi(src, loc) // Theseus uses its sensors to scan a nearby point of interest
 	return

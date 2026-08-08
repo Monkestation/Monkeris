@@ -71,7 +71,7 @@
 	var/area/A = get_area(src)
 
 	if(A)
-		if(src.shipside_only && !(A in GLOB.ship_areas))			// some machinery is only destined to work on Eris (excelsior)
+		if(src.shipside_only && !(A in GLOB.ship_areas))			// some machinery is only destined to work on Theseus (excelsior)
 			return FALSE
 		return A.powered(chan)			// return power status of the area
 	return FALSE

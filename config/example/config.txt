@@ -21,7 +21,7 @@ $include plexora.txt
 # It will still be parsed
 
 ## Server name: This appears at the top of the screen in-game. In this case it will read "tgstation: station_name" where station_name is the randomly generated name of the station for the round. Remove the # infront of SERVERNAME and replace 'spacestation13' with the name of your choice
-SERVERNAME CEV Eris: Endless Horizon
+SERVERNAME CEV Theseus: Endless Horizon
 
 ## set a hosted by name for unix platforms
 HOSTEDBY yournamehere

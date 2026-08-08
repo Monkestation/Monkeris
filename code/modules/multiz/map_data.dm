@@ -123,7 +123,7 @@ GLOBAL_DATUM_INIT(maps_data, /datum/maps_data, new)
 	var/shuttle_called_message = "Jump sequence initiated. Transit procedures are now in effect. Jump in %ETA%."
 	var/shuttle_recall_message = "Jump sequence aborted, return to normal operating conditions."
 
-	var/list/usable_email_tlds = list("cev_eris.org","eris.scg","eris.net")
+	var/list/usable_email_tlds = list("cev_theseus.org","theseus.scg","theseus.net")
 	var/path = "eris"
 
 	var/access_modify_region = list(
@@ -326,7 +326,7 @@ GLOBAL_DATUM_INIT(maps_data, /datum/maps_data, new)
 	return z_level
 
 /obj/map_data/eris
-	name = "Eris"
+	name = "Theseus"
 	is_station_level = TRUE
 	is_player_level = TRUE
 	is_contact_level = TRUE

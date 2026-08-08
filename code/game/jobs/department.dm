@@ -42,7 +42,7 @@
 	Command
 **************/
 /datum/department/command
-	name = "CEV Eris Command"
+	name = "CEV Theseus Command"
 	id = DEPARTMENT_COMMAND
 	department_experience_type = DEPARTMENT_COMMAND
 	/*
@@ -73,7 +73,7 @@
 	funding_source = DEPARTMENT_COMMAND
 
 /datum/department/civilian
-	name = "CEV Eris Civilian"
+	name = "CEV Theseus Civilian"
 	id = DEPARTMENT_CIVILIAN
 	department_experience_type = DEPARTMENT_CIVILIAN
 	funding_source = DEPARTMENT_COMMAND

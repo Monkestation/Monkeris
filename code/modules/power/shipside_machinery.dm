@@ -28,7 +28,7 @@
 	var/ai_control_disabled = 0			// Whether the AI control is disabled.
 	var/emergency_shutdown = FALSE		// Whether the machinery is currently recovering from an emergency shutdown
 
-	var/obj/effect/overmap/ship/linked_ship = null // To access position of Eris on the overmap
+	var/obj/effect/overmap/ship/linked_ship = null // To access position of Theseus on the overmap
 
 	var/list/tendrils = list()
 	var/list/tendril_dirs = list()

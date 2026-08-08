@@ -7,7 +7,7 @@
 	Below this comment is a pinnacle of sorcery unearthed from ancient era of byond.
 	Proceed with caution, for you may not comprehed whatever the fuck this is.
 	I sure don't. Original code by http://www.byond.com/members/Jp
-	Adapted for Eris and more modern byond versions by me.
+	Adapted for Theseus and more modern byond versions by me.
 	Quite a bit was modified/removed/re-done.
 	Pathing was made strict/all objects here are subtype of obj/procedural.
 

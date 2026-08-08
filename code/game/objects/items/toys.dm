@@ -410,7 +410,7 @@
 /obj/item/toy/figure/vagabond
 	name = "vagabond figurine"
 	desc = "An Aster's \"Space Life\" brand figurine showcasing the form of a random deplorable, wearing one of the ship's uniforms, and an orange bandana. \
-	Must of been custom-made to commemorate the Eris' doomed voyage."
+	Must of been custom-made to commemorate the Theseus' doomed voyage."
 	icon_state = "vagabond"
 
 /obj/item/toy/figure/rooster

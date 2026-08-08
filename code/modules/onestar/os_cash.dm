@@ -12,7 +12,7 @@
 	novariants = TRUE					// Skips base /obj/item/stack update_icon() checks
 	spawn_blacklisted = TRUE			// Off-ship item
 	bad_type = /obj/item/stack/os_cash	// Base type
-	price_tag = 10						// 10-to-1 exchange rate with Eris credits
+	price_tag = 10						// 10-to-1 exchange rate with Theseus credits
 
 /obj/item/stack/os_cash/update_icon()
 	switch(amount)

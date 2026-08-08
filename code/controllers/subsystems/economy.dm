@@ -49,7 +49,7 @@ SUBSYSTEM_DEF(economy)
 		else
 			var/datum/money_account/EA = get_account(ED.account_number)
 			if(amount_to_pay <= EA.money)
-				transfer_funds(EA, A, "Payroll Funding", "CEV Eris payroll system", amount_to_pay)
+				transfer_funds(EA, A, "Payroll Funding", "CEV Theseus payroll system", amount_to_pay)
 				paid_internal += amount_to_pay
 				ED.total_debt -= A.debt
 				A.debt = 0
@@ -71,7 +71,7 @@ SUBSYSTEM_DEF(economy)
 		var/datum/computer_file/report/crew_record/R = get_crewmember_record(A.owner_name)
 
 		if(amount_to_pay <= EA.money)
-			transfer_funds(EA, A, "Payroll Funding", "CEV Eris payroll system", amount_to_pay)
+			transfer_funds(EA, A, "Payroll Funding", "CEV Theseus payroll system", amount_to_pay)
 			paid_internal += amount_to_pay
 			ED.total_debt -= A.debt
 			A.debt = 0

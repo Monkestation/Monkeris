@@ -1,7 +1,7 @@
 /*
 Grid check disables all power on the station for a while, notably including lights
 It helps to create a feeeling of crisis and community, encouraging people to team up, gather flashlights
-and help others. On eris, it also creates a feeling of terror. With no idea how long it'll last, you
+and help others. On Theseus, it also creates a feeling of terror. With no idea how long it'll last, you
 become keenly aware of the limited battery supply in your flashlight
 
 All the doors being depowered means that people can crowbar their way into restricted places easily.

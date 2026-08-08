@@ -126,7 +126,7 @@ var/const/NO_EMAG_ACT = -50
 
 	var/formal_name_prefix
 	var/formal_name_suffix
-	/// The name of the job for interns. If unset it will default to "[assignment] (Intern)". (This should have gone in id_trim but eris doesnt have ID trims. STINKY!!!)
+	/// The name of the job for interns. If unset it will default to "[assignment] (Intern)". (This should have gone in id_trim but Theseus doesnt have ID trims. STINKY!!!)
 	var/intern_alt_name = null
 
 	/// Boolean value. If TRUE, the [Intern] tag gets prepended to this ID card when the label is updated.

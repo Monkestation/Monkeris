@@ -8,7 +8,7 @@
 	exp_requirements = 300
 	exp_required_type = /datum/job/hop::title
 	exp_granted_type = EXP_TYPE_CREW
-	faction = "CEV Eris"
+	faction = "CEV Theseus"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "your heart and wisdom"
@@ -25,7 +25,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/captain
 
 	description = "You are a privateeer. <br>\
-The owner of the vast rusting hulk that is the CEV Eris. At least, as long as you keep up repayments.<br>\
+The owner of the vast rusting hulk that is the CEV Theseus. At least, as long as you keep up repayments.<br>\
 This ship is your life's work, crewed by an alliance of corporations and factions that you've brokered uneasy treaties with.<br>\
 
 You are the supreme leader of this world, and your word is law. But only as long as you can enforce that law.<br>\
@@ -34,7 +34,7 @@ Treat your command officers with respect, and listen to their council. Try not t
 
 You are a free agent, able to go where you will, and loyal to no particular government or nation. You are however, in quite a lot of debt. So wherever you go, you should be sure a profitable venture awaits."
 
-	loyalties = "Your first loyalty is to Eris, your ship. It is the purpose of your life, and you are nothing without it. If it were to be destroyed, you and your descendants would be ruined for centuries. <br>\
+	loyalties = "Your first loyalty is to Theseus, your ship. It is the purpose of your life, and you are nothing without it. If it were to be destroyed, you and your descendants would be ruined for centuries. <br>\
 
 Your second loyalty is to your command officers. The heads of each faction. Listen to their counsel, ensure their interests are served, and keep them happy"
 
@@ -80,7 +80,7 @@ Your second loyalty is to your command officers. The heads of each faction. List
 	head_position = TRUE
 	aster_guild_member = TRUE
 	department_flag = COMMAND
-	faction = "CEV Eris"
+	faction = "CEV Theseus"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the captain"

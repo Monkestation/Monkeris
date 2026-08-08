@@ -119,7 +119,7 @@ GLOBAL_VAR_INIT(score_technomancer_faction_item_loss, 0)
 		if(!M.current)
 			continue
 		if(M.current.stat == DEAD)
-			if(M.assigned_job && M.assigned_job.faction == "CEV Eris")
+			if(M.assigned_job && M.assigned_job.faction == "CEV Theseus")
 				if(M.assigned_job.department == DEPARTMENT_SECURITY)
 					GLOB.ironhammer_operative_dead++
 				if(!M.antagonist.len)
@@ -144,7 +144,7 @@ GLOBAL_VAR_INIT(score_technomancer_faction_item_loss, 0)
 				L.client.escaped = TRUE
 		if(ishuman(L))
 			var/mob/living/carbon/human/H = L
-			if(H.mind && H.mind.assigned_job && H.mind.assigned_job.faction == "CEV Eris" && H.mind.assigned_job.department != DEPARTMENT_GUILD && !H.mind.antagonist.len)
+			if(H.mind && H.mind.assigned_job && H.mind.assigned_job.faction == "CEV Theseus" && H.mind.assigned_job.department != DEPARTMENT_GUILD && !H.mind.antagonist.len)
 				for(var/obj/item/I in H.GetAllContents())
 					var/full_print = H.get_full_print()
 					if(full_print in guild_fingerprints)

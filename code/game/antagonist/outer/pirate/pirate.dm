@@ -1,10 +1,10 @@
-#define WELCOME_PIRATES "You are a pirate, part of a ragged crew of space scavengers. You are currently aboard your base preparing for a raid to plunder the CEV Eris.<br>\
+#define WELCOME_PIRATES "You are a pirate, part of a ragged crew of space scavengers. You are currently aboard your base preparing for a raid to plunder the CEV Theseus.<br>\
 	<br>\
 	In your base you will find your armoury full of weapon crates, tools and utilities. It is advised that you take a pistol and a rifle as well as the energy cutlass and bulletproof vest that are in your personnal locker.<br>\
 	Once you have your basic gear, you may also wish to take along additional gear to support your team, like demolition tools, grenades or medkits.<br>\
 	<br>\
 	Discuss your role with other crew members and decide of an approach plan to accomplish your mission. Search the base and load up everything onto your ship which may be useful, you will not be able to easily return here once you depart.<br>\
-	When ready, use the console aboard your shuttle to depart for Eris. Travelling will take several minutes, and you will be detected before you even arrive, stealth is not an option. Once you arrive, you have a time limit to complete your mission.<br>\
+	When ready, use the console aboard your shuttle to depart for Theseus. Travelling will take several minutes, and you will be detected before you even arrive, stealth is not an option. Once you arrive, you have a time limit to complete your mission.<br>\
 	Your crew captain will not accept failure or desertion so you better bring back enough loot to satisfy his greed."
 
 /datum/antagonist/pirate
@@ -19,7 +19,7 @@
 
 	default_access = list(access_pirate, // This access governs their ship and base
 						access_external_airlocks,
-						access_maint_tunnels) // Pirates get maintenance access on eris, because being an antag without it is hell
+						access_maint_tunnels) // Pirates get maintenance access on Theseus, because being an antag without it is hell
 	id_type = /obj/item/card/id/pirate // They got forged vagabond IDs
 
 	appearance_editor = FALSE

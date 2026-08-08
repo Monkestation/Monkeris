@@ -188,7 +188,7 @@
 	desc = "A direction sign, pointing out which way the escape shuttle dock is."
 	icon_state = "direction_evac"
 
-//Eris signs
+//Theseus signs
 
 /obj/structure/sign/atmos_co2
 	name = "CO2 warning sign"
@@ -345,7 +345,7 @@
 	desc = "Warning: Memetic hazard, wear meson goggles!"
 	icon_state = "memetic"
 
-//Eris departments
+//Theseus departments
 
 /obj/structure/sign/department
 	name = "department sign"
@@ -503,7 +503,7 @@
 	name = "PRISON"
 	icon_state = "prison"
 
-//Eris factions
+//Theseus factions
 
 /obj/structure/sign/faction
 	name = "faction sign"

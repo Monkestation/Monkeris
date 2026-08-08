@@ -27,7 +27,7 @@
 	anchored = FALSE
 	base_state = "pflash"
 	density = TRUE
-	range = 3 //the eris' hallways are wider than other maps
+	range = 3 //the Theseus' hallways are wider than other maps
 
 /obj/machinery/flasher/Initialize()
 	. = ..()

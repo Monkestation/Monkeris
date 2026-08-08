@@ -61,7 +61,7 @@ var/list/ai_verbs_default = list(
 							NETWORK_COMMAND,
 							NETWORK_ENGINE,
 							NETWORK_ENGINEERING,
-							NETWORK_CEV_ERIS,
+							NETWORK_CEV_THESEUS,
 							NETWORK_MINE,
 							NETWORK_PRISON,
 							NETWORK_MEDICAL,
@@ -115,7 +115,7 @@ var/list/ai_verbs_default = list(
 	// Stored when on login and used for custom login out behaviur. Needed for proper removal of click handlers.
 	var/client/old_client
 
-	defaultHUD = "Eris"
+	defaultHUD = "Theseus"
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
 	add_verb(src, ai_verbs_default)

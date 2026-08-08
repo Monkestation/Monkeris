@@ -994,7 +994,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/device/flash(src)
 	src.modules += new /obj/item/borg/sight/thermal(src)
 	src.modules += new /obj/item/melee/energy/sword(src)
-	//Todo, replace these with suitable weapons from eris
+	//Todo, replace these with suitable weapons from Theseus
 	//src.modules += new /obj/item/gun/energy/mountedsmg(src)
 	//src.modules += new /obj/item/gun/energy/net/mounted(src)
 	//src.modules += new /obj/item/gun/projectile/shotgun/pump/grenade/cyborg(src)

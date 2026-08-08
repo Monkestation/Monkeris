@@ -1,5 +1,5 @@
 /**
- * A burrow is an entrance to an abstract network of tunnels inside the walls of eris. Animals and creatures of
+ * A burrow is an entrance to an abstract network of tunnels inside the walls of Theseus. Animals and creatures of
  * all types, but mostly roaches, can travel from one burrow to another, bypassing all obstacles inbetween
  */
 /obj/structure/burrow

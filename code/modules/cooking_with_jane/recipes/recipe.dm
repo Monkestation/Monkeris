@@ -28,7 +28,7 @@
 
 		//A steak is needed to start the meal.
 		//qmod- Half of the food quality of the parent will be considered.
-		//exclude_reagents- Blattedin and Carpotoxin will be filtered out of the steak. EXCEPT THIS IS ERIS, WE EMBRACE THE ROACH, and has thus been removed from every
+		//exclude_reagents- Blattedin and Carpotoxin will be filtered out of the steak. EXCEPT THIS IS THESEUS, WE EMBRACE THE ROACH, and has thus been removed from every
 		list(CWJ_ADD_ITEM, /obj/item/reagent_containers/food/snacks/meat, qmod=0.5),
 		list(CWJ_ADD_REAGENT, "sodiumchloride", 1),
 		list(CWJ_ADD_REAGENT, "blackpepper", 1),

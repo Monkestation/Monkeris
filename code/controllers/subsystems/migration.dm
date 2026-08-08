@@ -1,5 +1,5 @@
 /*
-	The migration subsystem handles burrows and the movement of various NPC mobs aboard Eris.
+	The migration subsystem handles burrows and the movement of various NPC mobs aboard Theseus.
 
 	It allows mobs to move between burrows, dispatches reinforcements to distress calls from mobs under attack,
 	and keeps track of all the burrows, negating any need for them to process individually most of the time

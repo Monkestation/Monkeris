@@ -7,7 +7,7 @@
 	exp_requirements = 600
 	exp_required_type_department = DEPARTMENT_SCIENCE
 	exp_granted_type = EXP_TYPE_CREW
-	faction = "CEV Eris"
+	faction = "CEV Theseus"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "Moebius Corporation"
@@ -67,7 +67,7 @@ Your second loyalty is to moebius corp. In order to ensure it can continue its m
 	flag = SCIENTIST
 	department = DEPARTMENT_SCIENCE
 	department_flag = SCIENCE
-	faction = "CEV Eris"
+	faction = "CEV Theseus"
 	total_positions = 5
 	spawn_positions = 5
 	supervisors = "the Moebius Expedition Overseer"
@@ -105,7 +105,7 @@ There are a few specialist branches within the research wing that you may delve 
 	<br>\
 	The Vasily Dokuchaev is the Expedition shuttle, and is intended for going on adventures down to strange sites, and recovering items of value. <br>\
 	<br>\
-	<br>\[Note: Research content on Eris is still in its infancy, and is mostly just baystation content at the moment. We have major plans for redesigning it in the future\]"
+	<br>\[Note: Research content on Theseus is still in its infancy, and is mostly just baystation content at the moment. We have major plans for redesigning it in the future\]"
 
 	duties = "	Create unusual things and experiment with them<br>\
 	Explore, learn and adventure, do anything to advance the cause of knowledge"
@@ -127,7 +127,7 @@ Your second loyalty is to moebius corp. In order to ensure it can continue its m
 	department = DEPARTMENT_SCIENCE
 	department_flag = SCIENCE
 	exp_granted_type = EXP_TYPE_CREW
-	faction = "CEV Eris"
+	faction = "CEV Theseus"
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the Moebius Expedition Overseer"
@@ -162,7 +162,7 @@ In addition, your department contains the manufacturing facilities for prostheti
 <br>\
 Lastly, though they're not commonly used, you have the facilities to construct massive and powerful mechanised vehicles. These have powerful capabilities in mining and rescue, as well as obvious military applications"
 
-	duties = "	Repair, maintain and upgrade robots aboard Eris<br>\
+	duties = "	Repair, maintain and upgrade robots aboard Theseus<br>\
 	Maintain and implant new bionics in crewmembers<br>\
 	Advertise bionics for sale and run a commercial cybernetic clinic<br>\
 	Construct large mechas for specialised use in departments"
@@ -178,7 +178,7 @@ Lastly, though they're not commonly used, you have the facilities to construct m
 	department = DEPARTMENT_SCIENCE
 	department_flag = SCIENCE
 	exp_granted_type = EXP_TYPE_CREW
-	faction = "CEV Eris"
+	faction = "CEV Theseus"
 	total_positions = 1
 	spawn_positions = 1
 	wage = WAGE_PROFESSIONAL

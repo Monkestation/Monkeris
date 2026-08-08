@@ -491,7 +491,7 @@
 	. = ..()
 	update_icon()
 	var/area/areatocheck = get_area(src)
-	if(areatocheck.vessel != "CEV Eris") // this machine pays taxes, and so should you.
+	if(areatocheck.vessel != "CEV Theseus") // this machine pays taxes, and so should you.
 		return FALSE
 	for(var/machinetocheck in GLOB.machines)
 		if(istype(machinetocheck, /obj/machinery/amesilo))
@@ -735,7 +735,7 @@
 
 /obj/machinery/amesilo/proc/resetprime() // this proc adds prime status when all other silos do not have prime
 	var/area/checkarea = get_area(src)
-	if(checkarea.vessel != "CEV Eris") // this machine pays taxes, and so should you.
+	if(checkarea.vessel != "CEV Theseus") // this machine pays taxes, and so should you.
 		return FALSE
 	for(var/machinetocheck in GLOB.machines)
 		if(istype(machinetocheck, /obj/machinery/amesilo))

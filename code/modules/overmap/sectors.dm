@@ -19,7 +19,7 @@
 	var/known = 1		//shows up on nav computers automatically
 	var/in_space = 1	//can be accessed via lucky EVA
 
-	var/global/eris_start_set = FALSE //Tells us if we need to modify a random location for Eris to start at
+	var/global/eris_start_set = FALSE //Tells us if we need to modify a random location for Theseus to start at
 
 	// Stage 0: close, well scanned by sensors
 	// Stage 1: medium, barely scanned by sensors
@@ -37,8 +37,8 @@
 	for(var/zlevel in map_z)
 		map_sectors["[zlevel]"] = src
 
-	// Spawning location of area is randomized or default values, but can be changed to the Eris Coordinates in the code below.
-	// This provides a random starting location for Eris.
+	// Spawning location of area is randomized or default values, but can be changed to the Theseus Coordinates in the code below.
+	// This provides a random starting location for Theseus.
 	start_x = start_x || rand(OVERMAP_EDGE, GLOB.maps_data.overmap_size - OVERMAP_EDGE)
 	start_y = start_y || rand(OVERMAP_EDGE, GLOB.maps_data.overmap_size - OVERMAP_EDGE)
 

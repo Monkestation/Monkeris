@@ -76,12 +76,12 @@
 	channels = list("Science" = 1, "Medical" = 1)
 
 /obj/item/device/encryptionkey/headset_com
-	name = "Eris command radio encryption key"
+	name = "Theseus command radio encryption key"
 	icon_state = "com_cypherkey"
 	channels = list("Command" = 1)
 
 /obj/item/device/encryptionkey/heads/captain
-	name = "Eris captain's encryption key"
+	name = "Theseus captain's encryption key"
 	icon_state = "cap_cypherkey"
 	channels = list("Command" = 1, "Security" = 1, "Engineering" = 1, "NT Voice" = 1, "Science" = 1, "Medical" = 1, "Supply" = 1, "Service" = 1)
 

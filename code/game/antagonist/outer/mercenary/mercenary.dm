@@ -10,7 +10,7 @@
 
 	default_access = list(access_mercenary,//This access governs their ship and base
 	access_external_airlocks,
-	access_maint_tunnels) //Mercs get maintenance access on eris, because being an antag without it is hell
+	access_maint_tunnels) //Mercs get maintenance access on Theseus, because being an antag without it is hell
 	//They got forged assistant IDs or somesuch
 	id_type = /obj/item/card/id/merc
 

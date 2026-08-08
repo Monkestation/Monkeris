@@ -358,7 +358,7 @@
 // 		"view_variables.css" = 'html/admin/view_variables.css'
 // 	)
 
-/* === ERIS STUFF === */
+/* === Theseus STUFF === */
 /datum/asset/simple/design_icons/register()
 	for(var/D in SSresearch.all_designs)
 		var/datum/design/design = D
