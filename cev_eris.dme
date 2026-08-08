@@ -232,6 +232,7 @@
 #include "code\_onclick\hud\HUD_element\types\custom_buttons.dm"
 #include "code\_onclick\hud\HUD_element\types\layout.dm"
 #include "code\_onclick\hud\HUD_element\types\threePartBox.dm"
+#include "code\_onclick\hud\rendering\render_plate.dm"
 #include "code\_onclick\hud\screen_objects\base_screen_objects.dm"
 #include "code\_onclick\hud\screen_objects\robot_screen_objects.dm"
 #include "code\ATMOSPHERICS\_atmos_setup.dm"
