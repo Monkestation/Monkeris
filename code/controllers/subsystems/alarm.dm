@@ -26,7 +26,7 @@ SUBSYSTEM_DEF(alarm)
 
 /datum/controller/subsystem/alarm/Initialize(start_timeofday)
 	all_handlers = list(atmosphere_alarm, camera_alarm, fire_alarm, motion_alarm, power_alarm)
-	return ..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/alarm/fire(resumed = FALSE)
 	if (!resumed)

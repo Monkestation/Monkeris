@@ -19,6 +19,7 @@ SUBSYSTEM_DEF(throwing)
 	name = "throwing"
 	wait = 1 // very small
 	priority = FIRE_PRIORITY_THROWING
+	flags = SS_NO_INIT
 	var/list/throwing_queue = list()
 	var/list/current_throwing_queue = list()
 

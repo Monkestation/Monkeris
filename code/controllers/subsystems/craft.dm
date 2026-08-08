@@ -11,19 +11,17 @@ SUBSYSTEM_DEF(craft)
 /datum/controller/subsystem/craft/Initialize(timeofday)
 	categories = list()
 	cat_names = list()
-	for(var/path in subtypesof(/datum/craft_recipe))
-		var/datum/craft_recipe/CR = path
-		if(!initial(CR.name))
+	for(var/datum/craft_recipe/CR as anything in subtypesof(/datum/craft_recipe))
+		if(!initial(CR?.name))
 			continue
 		CR = new CR
 		cat_names |= CR.category
-		if(!CR.steps.len)
+		if(!length(CR.steps))
 			if(CR.name)
-				world.log << "ERROR: empty steps for craft recipe [CR.type]"
+				log_world("ERROR: empty steps for craft recipe [CR.type]")
 			qdel(CR)
 		if(!(CR.category in categories))
 			categories[CR.category] = list()
 		categories[CR.category] += CR
-		CHECK_TICK
-	return ..()
+	return SS_INIT_SUCCESS
 

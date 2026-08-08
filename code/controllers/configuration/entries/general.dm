@@ -19,6 +19,12 @@
 // Time in minutes before empty server will restart
 /datum/config_entry/number/empty_server_restart_time
 
+/// Countdown between lobby and the round starting.
+/datum/config_entry/number/lobby_countdown
+	default = 120
+	integer = FALSE
+	min_val = 0
+
 /****************************/
 /*   Client Joining & IPs   */
 /****************************/
@@ -447,6 +453,32 @@
 	min_val = 0
 	integer = FALSE
 
+/********************************************/
+/*     MASTER CONTROLLER HIGH POP MODE      */
+/********************************************/
+
+/datum/config_entry/number/mc_tick_rate/base_mc_tick_rate
+	integer = FALSE
+	default = 1
+
+/datum/config_entry/number/mc_tick_rate/high_pop_mc_tick_rate
+	integer = FALSE
+	default = 1.1
+
+/datum/config_entry/number/mc_tick_rate/high_pop_mc_mode_amount
+	default = 65
+
+/datum/config_entry/number/mc_tick_rate/disable_high_pop_mc_mode_amount
+	default = 60
+
+/datum/config_entry/number/mc_tick_rate
+	abstract_type = /datum/config_entry/number/mc_tick_rate
+
+/datum/config_entry/number/mc_tick_rate/ValidateAndSet(str_val)
+	. = ..()
+	if (.)
+		Master.UpdateTickRate()
+
 /*****************/
 /*     GAME      */
 /*****************/
@@ -491,6 +523,25 @@
 /datum/config_entry/number/rounds_until_hard_restart
 	default = -1
 	min_val = 0
+
+/datum/config_entry/flag/resume_after_initializations
+
+/datum/config_entry/flag/resume_after_initializations/ValidateAndSet(str_val)
+	. = ..()
+	if(. && MC_RUNNING())
+		world.sleep_offline = !config_entry_value
+
+/*****************/
+/*   PROFILING   */
+/*****************/
+
+/datum/config_entry/flag/auto_profile
+
+/datum/config_entry/number/drift_dump_threshold
+	default = 4 SECONDS
+
+/datum/config_entry/number/drift_profile_delay
+	default = 15 SECONDS
 
 /*****************/
 /*   COOLDOWNS   */

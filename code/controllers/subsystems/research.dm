@@ -61,8 +61,7 @@ SUBSYSTEM_DEF(research)
 		initialize_design_file(file)
 	design_files_to_init = list()
 
-	return ..()
-
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/research/proc/initialize_design_file(datum/computer_file/binary/design/design_file)
 	// If designs are already generated, initialized right away.
