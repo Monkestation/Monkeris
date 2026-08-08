@@ -196,3 +196,10 @@
 	data["PC_hasheader"] = 1
 	data["PC_showexitprogram"] = active_program ? 1 : 0 // Hides "Exit Program" button on mainscreen
 	return data
+
+/obj/item/modular_computer/ui_assets(mob/user)
+	var/list/data = list()
+	data += get_asset_datum(/datum/asset/simple/headers)
+	if(active_program)
+		data += active_program.ui_assets(user)
+	return data

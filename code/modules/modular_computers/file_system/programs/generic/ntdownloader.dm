@@ -142,6 +142,7 @@
 		return 1
 	return 0
 
+
 /datum/nano_module/program/computer_ntnetdownload
 	name = "Software Download Tool"
 	var/obj/item/modular_computer/my_computer = null
@@ -238,3 +239,4 @@
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
+
