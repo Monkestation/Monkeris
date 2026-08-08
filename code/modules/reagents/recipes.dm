@@ -261,6 +261,24 @@
 	required_reagents = list("mercury" = 1, "sugar" = 1, "lithium" = 1)
 	result_amount = 3
 
+/datum/chemical_reaction/assaultandpepper
+	result = "assaultandpepper"
+	required_reagents = list("space_drugs" = 1, "sodium" = 1)
+	result_amount = 2
+	minimum_temperature = 375
+
+/datum/chemical_reaction/internetaccess
+	result = "internetaccess"
+	required_reagents = list("space_drugs" = 1, "silicon" = 1)
+	result_amount = 2
+	minimum_temperature = 375
+
+/datum/chemical_reaction/wesmokincrack
+	result = "wesmokincrack"
+	required_reagents = list("space_drugs" = 1, "tungsten" = 1)
+	result_amount = 2
+	minimum_temperature = 375
+
 /datum/chemical_reaction/nicotine
     result = "nicotine"
     required_reagents = list("toxin" = 1, "carbon" = 1, "capsaicin" = 1, "mercury" = 1)

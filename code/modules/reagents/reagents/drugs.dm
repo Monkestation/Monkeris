@@ -278,3 +278,47 @@
 	M.stats.addTempStat(STAT_TGH, -STAT_LEVEL_BASIC, STIM_TIME, "sanguinum_w")
 	M.stats.addTempStat(STAT_COG, -STAT_LEVEL_BASIC, STIM_TIME, "sanguinum_w")
 	M.stats.addTempStat(STAT_ROB, -STAT_LEVEL_BASIC, STIM_TIME, "sanguinum_w")
+
+// fun stuff
+
+// music uses procedural fade in fade out make sure it loops properly and has no fading in/out in the audio file
+// technically if you had like 50 players using all 21 tracks sound tokens could run out of channels.. :smug:
+
+/datum/reagent/drug/space_drugs/music
+	var/music_file
+	var/music_volume = 75
+	var/music_fade_time = 3 SECONDS
+	var/datum/sound_token/music_token
+	metabolism = REM * 0.05
+
+/datum/reagent/drug/space_drugs/music/assaultandpepper
+	name = "Assault and Pepper"
+	id = "assaultandpepper"
+	music_file = 'sound/music/drug/assaultandpepper.ogg'
+
+/datum/reagent/drug/space_drugs/music/internetaccess
+	name = "My Mom Gave Me Unsupervised Internet Access at Age 5"
+	id = "internetaccess"
+	music_file = 'sound/music/drug/mymomgavemeunsupervisedinternetaccessatage5.ogg'
+	music_volume = 65
+
+/datum/reagent/drug/space_drugs/music/wesmokincrack
+	name = "We Smokin Crack"
+	id = "wesmokincrack"
+	music_file = 'sound/music/drug/wesmokincrackogg.ogg'
+
+/datum/reagent/drug/space_drugs/music/on_mob_add(mob/living/L)
+	. = ..()
+	var/datum/reagents/metabolism/metabolism_holder = holder
+	if(!istype(metabolism_holder) || metabolism_holder.metabolism_class != CHEM_INGEST || !music_file)
+		return
+
+	music_token = GLOB.sound_player.play_looping(L, "[id]_[REF(L)]_[REF(src)]", music_file, 0, 0, exclusive_listener = L)
+	music_token.fade_to(music_volume, music_fade_time)
+
+/datum/reagent/drug/space_drugs/music/on_mob_delete(mob/living/L)
+	..()
+	if(music_token)
+		music_token.fade_to(0, music_fade_time)
+		music_token = null
+
