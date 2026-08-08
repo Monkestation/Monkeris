@@ -294,3 +294,15 @@
 
 	for(var/reagent in random_reagent)
 		reagents.add_reagent(reagent, random_reagent[reagent])
+
+/obj/item/reagent_containers/pill/assaultandpepper
+	name = "Assault and Pepper"
+	preloaded_reagents = list("assaultandpepper" = 5)
+
+/obj/item/reagent_containers/pill/internet
+	name = "My Mom Gave Me Unsupervised Internet Access at Age 5"
+	preloaded_reagents = list("internetaccess" = 5)
+
+/obj/item/reagent_containers/pill/wesmokincrack
+	name = "We Smokin Crack"
+	preloaded_reagents = list("wesmokincrack" = 5)

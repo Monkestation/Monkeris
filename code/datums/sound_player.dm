@@ -7,11 +7,11 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	..()
 	sound_tokens_by_sound_id = list()
 
-/decl/sound_player/proc/play_datum(atom/source, sound_id, sound/sound, range, prefer_mute)
+/decl/sound_player/proc/play_datum(atom/source, sound_id, sound/sound, range, prefer_mute, atom/exclusive_listener)
 	var/token_type = isnum(sound.environment) ? /datum/sound_token : /datum/sound_token/static_environment
-	return new token_type(source, sound_id, sound, range, prefer_mute)
+	return new token_type(source, sound_id, sound, range, prefer_mute, exclusive_listener)
 
-/decl/sound_player/proc/play_looping(atom/source, sound_id, sound, volume, range, falloff = 1, echo, frequency, prefer_mute)
+/decl/sound_player/proc/play_looping(atom/source, sound_id, sound, volume, range, falloff = 1, echo, frequency, prefer_mute, atom/exclusive_listener)
 	var/sound/s = istype(sound, /sound) ? sound : new(sound)
 	s.environment = 0
 	s.volume = volume
@@ -19,7 +19,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	s.echo = echo
 	s.frequency = frequency
 	s.repeat = TRUE
-	return play_datum(source, sound_id, s, range, prefer_mute)
+	return play_datum(source, sound_id, s, range, prefer_mute, exclusive_listener)
 
 /decl/sound_player/proc/stop_sound(datum/sound_token/sound_token)
 	var/channel = sound_token.sound.channel
@@ -55,6 +55,8 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	var/prefer_mute
 	var/sound/sound
 	var/sound_id
+	var/fade_generation = 0
+	var/atom/exclusive_listener
 	var/status = 0
 	var/listener_status
 	var/const/SOUND_STOPPED
@@ -62,7 +64,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	var/datum/proximity_trigger/square/proxy_listener
 	var/list/can_be_heard_from
 
-/datum/sound_token/New(atom/source, sound_id, sound/sound, range = 4, prefer_mute = FALSE)
+/datum/sound_token/New(atom/source, sound_id, sound/sound, range = 4, prefer_mute = FALSE, atom/exclusive_listener)
 	..()
 	if(!istype(source))
 		CRASH("Invalid sound source: [log_info_line(source)]")
@@ -81,6 +83,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	src.sound = sound
 	src.range = range
 	src.prefer_mute = prefer_mute
+	src.exclusive_listener = exclusive_listener
 
 	if(sound.repeat)
 		var/channel = GLOB.sound_player.get_channel(src)
@@ -92,7 +95,9 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 
 	GLOB.destroyed_event.register(source, src, /datum/proc/qdel_self)
 
-	if(ismovable(source))
+	if(exclusive_listener)
+		add_listener(exclusive_listener)
+	else if(ismovable(source))
 		proxy_listener = new(source, /datum/sound_token/proc/add_listener, /datum/sound_token/proc/locate_listeners, range, proc_owner = src)
 		proxy_listener.register_turfs()
 
@@ -105,6 +110,28 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	if(sound.volume != new_volume)
 		sound.volume = new_volume
 		update_listeners()
+
+/datum/sound_token/proc/fade_to(new_volume, duration)
+	new_volume = CLAMP(new_volume, 0, 100)
+	var/generation = ++fade_generation
+	if(duration <= 0 || sound.volume == new_volume)
+		set_volume(new_volume)
+		if(!new_volume)
+			qdel(src)
+		return
+	INVOKE_ASYNC(src, PROC_REF(fade_to_async), sound.volume, new_volume, duration, generation)
+
+/datum/sound_token/proc/fade_to_async(start_volume, target_volume, duration, generation)
+	for(var/step in 1 to duration)
+		sleep(1)
+		if(QDELETED(src) || (status & SOUND_STOPPED) || generation != fade_generation)
+			return
+		set_volume(round(start_volume + ((target_volume - start_volume) * step / duration)))
+	if(QDELETED(src) || (status & SOUND_STOPPED) || generation != fade_generation)
+		return
+	set_volume(target_volume)
+	if(!target_volume)
+		qdel(src)
 
 /datum/sound_token/proc/mute()
 	set_status(status | SOUND_MUTE)
@@ -188,7 +215,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	var/turf/listener_turf = get_turf(listener)
 
 	var/distance = get_dist(source_turf, listener_turf)
-	if(!listener_turf || (distance > range) || !(listener_turf in can_be_heard_from))
+	if(!listener_turf || (!exclusive_listener && ((distance > range) || !(listener_turf in can_be_heard_from))))
 		if(prefer_mute)
 			listener_status[listener] |= SOUND_MUTE
 		else
