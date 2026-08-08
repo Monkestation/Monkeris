@@ -264,7 +264,7 @@
 /datum/chemical_reaction/assaultandpepper
 	result = "assaultandpepper"
 	required_reagents = list("space_drugs" = 1, "sodium" = 1)
-	result_amount = 1
+	result_amount = 2
 	minimum_temperature = 375
 
 /datum/chemical_reaction/internetaccess
@@ -276,7 +276,7 @@
 /datum/chemical_reaction/wesmokincrack
 	result = "wesmokincrack"
 	required_reagents = list("space_drugs" = 1, "tungsten" = 1)
-	result_amount = 1
+	result_amount = 2
 	minimum_temperature = 375
 
 /datum/chemical_reaction/nicotine
