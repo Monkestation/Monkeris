@@ -173,7 +173,7 @@
 
 	if(target && get_turf(target) != loc && !path.len)
 		spawn(0)
-			path = AStar(loc, get_turf(target), /turf/proc/AdjacentTurfsSpace, /turf/proc/Distance, 0, 30, id = botcard)
+			path = AStar(loc, get_turf(target), /turf/proc/AdjacentTurfsSpace, /turf/proc/Distance, 0, 10, id = botcard)
 			if(!path)
 				path = list()
 				ignorelist += target

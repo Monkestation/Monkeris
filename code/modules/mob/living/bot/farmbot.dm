@@ -156,7 +156,7 @@
 					break
 		if(target)
 			var/t = get_dir(target, src) // Turf with the tray is impassable, so a* can't navigate directly to it
-			path = AStar(loc, get_step(target, t), /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 30, id = botcard)
+			path = AStar(loc, get_step(target, t), /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 10, id = botcard)
 			if(!path)
 				path = list()
 
