@@ -26,7 +26,8 @@ export function ExperimentalSettings(props) {
                 maxValue={64}
                 value={scrollTrackingTolerance}
                 format={(value) => toFixed(value)}
-                onDrag={(e, value) =>
+                tickWhileDragging
+                onChange={(value) =>
                   dispatch(
                     updateSettings({
                       scrollTrackingTolerance: value,
