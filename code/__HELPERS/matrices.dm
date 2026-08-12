@@ -43,11 +43,11 @@
 	animate(transform = transforms[3], time = 0.2)
 	animate(transform = transforms[4], time = 0.3)
 
-/atom/proc/shake_animation(intensity = 8)
+/atom/proc/shake_animation(intensity = 8, duration = 0.5 SECONDS)
 	var/init_px = pixel_x
 	var/shake_dir = pick(-1, 1)
 	animate(src, transform=turn(matrix(), intensity*shake_dir), pixel_x=init_px + 2*shake_dir, time=1)
-	animate(transform=null, pixel_x=init_px, time=6, easing=ELASTIC_EASING)
+	animate(transform=null, pixel_x=init_px, time=duration, easing=ELASTIC_EASING)
 
 /// Perform a shake on an atom, resets its position afterwards
 /atom/proc/Shake(pixelshiftx = 2, pixelshifty = 2, duration = 2.5 SECONDS, shake_interval = 0.02 SECONDS)
