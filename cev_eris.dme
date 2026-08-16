@@ -89,6 +89,7 @@
 #include "code\__DEFINES\projectile_defines.dm"
 #include "code\__DEFINES\protect.dm"
 #include "code\__DEFINES\qdel.dm"
+#include "code\__DEFINES\radio.dm"
 #include "code\__DEFINES\reagents.dm"
 #include "code\__DEFINES\research.dm"
 #include "code\__DEFINES\rust_g.dm"
