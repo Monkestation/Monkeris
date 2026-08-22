@@ -5,7 +5,7 @@
 	artist_url = "https://soundcloud.com/artist_url"
 
 // Tracks
-/datum/lobbyscreen_music/duke_gneiss/bluespace
-	file = 'sound/music/lobby/duke_gneiss/bluespace.ogg'
+/datum/lobbyscreen_music/artist_name/bluespace
+	file = 'sound/music/lobby/artist_name/bluespace.ogg'
 	title = "Bluespace"
 	track_url = "https://soundcloud.com/dukegneiss/bluespace?in=dukegneiss/sets/ascention"

@@ -10,6 +10,7 @@
 		/datum/lobbyscreen_music/duke_gneiss/exploring,
 		/datum/lobbyscreen_music/duke_gneiss/phoron_industry,
 		/datum/lobbyscreen_music/davz/light_pollution,
+		/datum/lobbyscreen_music/t87_sulfurhead/reach_out
 	)
 
 /datum/lobbyscreen/tektober/ironhammer
@@ -26,7 +27,8 @@
 		/datum/lobbyscreen_music/duke_gneiss/downtown_2,
 		/datum/lobbyscreen_music/duke_gneiss/codebrain,
 		/datum/lobbyscreen_music/flleeppyy/chokehold,
-		/datum/lobbyscreen_music/stellardrone/comet_haley
+		/datum/lobbyscreen_music/stellardrone/comet_haley,
+		/datum/lobbyscreen_music/t87_sulfurhead/reach_out
 	)
 
 /datum/lobbyscreen/tektober/neotheology

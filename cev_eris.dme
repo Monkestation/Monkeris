@@ -477,6 +477,7 @@
 #include "code\datums\lobbyscreen\music\duke_gneiss.dm"
 #include "code\datums\lobbyscreen\music\flleeppyy.dm"
 #include "code\datums\lobbyscreen\music\stellardrone.dm"
+#include "code\datums\lobbyscreen\music\t87sulfurhead.dm"
 #include "code\datums\lobbyscreen\screens\tektober.dm"
 #include "code\datums\mob_modifications\mob_modifications.dm"
 #include "code\datums\mob_modifications\modification_types.dm"
