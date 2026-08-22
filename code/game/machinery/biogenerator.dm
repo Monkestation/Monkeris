@@ -93,6 +93,8 @@
 			updateUsrDialog()
 	else if(processing)
 		to_chat(user, span_notice("\The [src] is currently processing."))
+	else if(istype(I, /obj/item/reagent_containers/food/snacks) && I:cooked)
+		duplicate_food(I, user)
 	else if(istype(I, /obj/item/storage/bag/produce))
 		var/i = 0
 		for(var/obj/item/reagent_containers/food/snacks/grown/G in contents)
@@ -184,9 +186,13 @@
 	var/S = 0
 	for(var/obj/item/reagent_containers/food/snacks/grown/I in contents)
 		S += 5
-		if(I.reagents.get_reagent_amount("nutriment") < 0.1)
+		var/nutriment_amount = I.reagents.get_reagent_amount("nutriment")
+		if(nutriment_amount < 0.1)
 			points += 1
-		else points += I.reagents.get_reagent_amount("nutriment") * 8 * eat_eff
+		else
+			points += nutriment_amount * 8 * eat_eff
+		if(beaker && nutriment_amount)
+			beaker.reagents.add_reagent("slop", nutriment_amount)
 		qdel(I)
 	if(S)
 		processing = 1
@@ -200,6 +206,67 @@
 	else
 		menustat = "void"
 	return
+
+/obj/machinery/biogenerator/proc/duplicate_food(obj/item/reagent_containers/food/snacks/source, mob/user)
+	processing = TRUE
+	update_icon()
+
+	var/copies = input(user, "How many copies do you want to make?", "NutriForge", 1) as num|null
+	if(isnull(copies))
+		processing = FALSE
+		update_icon()
+		return FALSE
+	copies = clamp(round(copies), 1, 10)
+	if(QDELETED(source) || !source.cooked || !in_range(src, user))
+		processing = FALSE
+		update_icon()
+		return FALSE
+
+	var/slop_needed = 0
+	for(var/datum/reagent/reagent in source.reagents.reagent_list)
+		if(istype(reagent, /datum/reagent/organic/nutriment))
+			slop_needed += reagent.volume
+
+	if(!beaker || beaker.reagents.get_reagent_amount("slop") < slop_needed)
+		to_chat(user, span_notice("You need more Slop to duplicate [source]."))
+		processing = FALSE
+		update_icon()
+		return FALSE
+
+	var/list/source_reagents = source.reagents.reagent_list.Copy()
+	var/source_name = source.name
+	var/new_quality = source.food_quality / copies
+	beaker.reagents.remove_reagent("slop", slop_needed)
+	user.remove_from_mob(source)
+	source.loc = src
+	for(var/i in 1 to copies)
+		playsound(src.loc, 'sound/machines/copier.ogg', 50, 1)
+		sleep(10)
+		var/obj/item/reagent_containers/food/snacks/duplicate = new source.type(loc)
+		duplicate.reagents.clear_reagents()
+		duplicate.name = source.name
+		duplicate.desc = source.desc
+		duplicate.bitesize = source.bitesize
+		duplicate.cooked = source.cooked
+		duplicate.food_quality = new_quality
+		duplicate.cooking_description_modifier = source.cooking_description_modifier
+		duplicate.sanity_gain = source.sanity_gain
+		duplicate.junk_food = source.junk_food
+		duplicate.taste_tag = source.taste_tag.Copy()
+		duplicate.get_food_tier()
+
+		for(var/datum/reagent/reagent in source_reagents)
+			var/reagent_amount = reagent.volume / copies
+			if(istype(reagent, /datum/reagent/organic/nutriment))
+				duplicate.reagents.add_reagent("slop", reagent_amount, safety = TRUE)
+			else
+				duplicate.reagents.add_reagent(reagent.id, reagent_amount, reagent.get_data(), safety = TRUE)
+
+	qdel(source)
+	processing = FALSE
+	update_icon()
+	to_chat(user, span_notice("The NutriForge produces [copies] lower-quality copies of [source_name]."))
+	return TRUE
 
 /obj/machinery/biogenerator/proc/create_product(item, amount)
 	var/list/recipe = null
