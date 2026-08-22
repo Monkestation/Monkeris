@@ -131,3 +131,11 @@
 
 	base_quantity = 2
 	scaling_threshold = 15
+
+/datum/storyevent/roleset/psionic
+	id = "paramount"
+	name = "paramount"
+	role_id = ROLE_PARAMOUNT
+
+	base_quantity = 2
+	scaling_threshold = 10

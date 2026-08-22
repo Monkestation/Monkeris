@@ -113,7 +113,7 @@
 						attack_self(user)
 				isPumping = FALSE
 			else
-				to_chat(user, span_notice("\The [src]'s cell is fully charged."))
+				to_chat(user, SPAN_NOTICE("\The [src]'s cell is fully charged."))
 		else
 			to_chat(user, span_notice("\The [src] is missing a cell to recharge."))
 		return
