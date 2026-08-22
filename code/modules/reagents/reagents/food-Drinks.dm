@@ -49,6 +49,18 @@
 
 	apply_sanity_effect(M, effect_multiplier)
 
+/datum/reagent/organic/nutriment/slop
+	name = "Slop"
+	id = "slop"
+	description = "What is this, some kind of filler?"
+	taste_description = "cheap filler"
+	color = "#f18b8b"
+	sanity_gain_ingest = -0.1
+	taste_tag = list(TASTE_SLIMEY)
+	addiction_chance = 20
+	addiction_threshold = 20
+	withdrawal_threshold = 5
+
 /datum/reagent/organic/nutriment/glucose
 	name = "Glucose"
 	id = "glucose"
