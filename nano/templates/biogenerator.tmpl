@@ -3,31 +3,30 @@ Title: Biogenerator
 Used In File(s): \code\game\machinery\biogenerator.dm
  -->
 <h2>Biogenerator</h2>
- <div class='itemLabel'>Useable Slop: </div> <div class='itemContent'>{{:data.points}}g</div>
+ <div class='itemLabel'>Useeable Slop: </div> <div class='itemContent'>{{:data.slop}}g</div>
 {{if data.menustat=="menu"}}
+    {{:helper.link('Activate Biogenerator', 'arrowreturnthick-1-s', { "action" : "activate" })}}
     {{if data.beaker!=null}}
-        {{:helper.link('Activate Biogenerator', 'arrowreturnthick-1-s', { "action" : "activate" })}}
         {{:helper.link('Detach Container', 'arrowreturnthick-1-s', { "action" : "detach" })}}
-        <div class='item'>
-            {{for data.recipes}}
-                {{if value.is_category}}
-                    <h3>{{:value.name}}</h3>
-                {{else}}
-                    <div class='itemLabel'>{{:value.name}}</div>
-                    <div class='itemContent'>{{:helper.link(value.cost, 'eject', {'action' : 'create', 'item' : value.name})}}
-                    {{if value.allow_multiple}}
-                        {{:helper.link('X5', 'eject', {'action' : 'create', 'item' : 'value.name'})}}
-                    {{/if}}
-                    </div>
+    {{/if}}
+    <div class='item'>
+        {{for data.recipes}}
+            {{if value.is_category}}
+                <h3>{{:value.name}}</h3>
+            {{else}}
+                <div class='itemLabel'>{{:value.name}}</div>
+                <div class='itemContent'>{{:helper.link(value.cost, 'eject', {'action' : 'create', 'item' : value.name})}}
+                {{if value.allow_multiple}}
+                    {{:helper.link('X5', 'eject', {'action' : 'create', 'item' : 'value.name'})}}
                 {{/if}}
-            {{empty}}
-                No items available!
-            {{/for}}
-        </div>
-    {{else}}
-        <div class='item'>
-            <div class="notice">No beaker inside. Please insert a beaker.</div>
-        </div>
+                </div>
+            {{/if}}
+        {{empty}}
+            No items available!
+        {{/for}}
+    </div>
+    {{if data.beaker==null}}
+        <div class="notice">A beaker is required for liquid products.</div>
     {{/if}}
 {{else data.menustat== "nopoints"}}
     <div class='item'>

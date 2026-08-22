@@ -1,7 +1,10 @@
 /obj/item/reagent_containers/food/snacks/examine(mob/user, extra_description = "")
+	var/show_quality = ishuman(user) && user.stats.getPerk(PERK_CLUB)
 	#ifdef CWJ_DEBUG
-	extra_description += span_notice("\nThe food's level of quality is [food_quality]") //Visual number should only be visible when debugging
+	show_quality = TRUE
 	#endif
+	if(show_quality)
+		extra_description += span_notice("\nThe food's level of quality is [food_quality]\n")
 	if(cooking_description_modifier)
 		extra_description += cooking_description_modifier
 	extra_description += food_descriptor

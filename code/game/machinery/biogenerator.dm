@@ -1,7 +1,7 @@
 /obj/machinery/biogenerator
 	name = "Tartarus NutriForge"
 	desc = "Foodmatter goes in, foodmatter comes out! Now with Real Food(tm) recipes!"
-	description_info = "Insert food scraps to generate points, which can be used to create various food items and reagents. Cooked meals can be inserted to duplicate it at cost to quality."
+	description_info = "Insert food scraps to generate Slop, which can be used to create various food items and reagents. Cooked meals can be inserted to duplicate it at cost to quality."
 	icon = 'icons/obj/biogenerator.dmi'
 	icon_state = "biogen-stand"
 	density = TRUE
@@ -10,7 +10,7 @@
 	idle_power_usage = 40
 	var/processing = 0
 	var/obj/item/reagent_containers/glass/beaker = null
-	var/points = 0
+	var/slop = 0
 	var/menustat = "menu"
 	var/build_eff = 1
 	var/eat_eff = 1
@@ -60,12 +60,7 @@
 
 /obj/machinery/biogenerator/New()
 	..()
-	create_reagents(1000)
 	beaker = new /obj/item/reagent_containers/glass/beaker/large(src)
-
-
-/obj/machinery/biogenerator/on_reagent_change()			//When the reagents change, change the icon as well.
-	update_icon()
 
 /obj/machinery/biogenerator/update_icon()
 	if(!beaker)
@@ -130,33 +125,30 @@
 /obj/machinery/biogenerator/nano_ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = NANOUI_FOCUS, datum/nano_topic_state/state =GLOB.outside_state)
 	user.set_machine(src)
 	var/list/data = list()
-	data["points"] = points
+	data["slop"] = slop
 	if(menustat == "menu")
 		data["beaker"] = beaker
-		if(beaker)
-
-			var/list/tmp_recipes = list()
-			for(var/smth in recipes)
-				if(istext(smth))
-					tmp_recipes += list(list(
-						"is_category" = 1,
-						"name" = smth,
-					))
-				else
-					var/list/L = smth
-					tmp_recipes += list(list(
-						"is_category" = 0,
-						"name" = L["name"],
-						"cost" = round(L["cost"]/build_eff),
-						"allow_multiple" = L["allow_multiple"],
-					))
-
-			data["recipes"] = tmp_recipes
+		var/list/tmp_recipes = list()
+		for(var/smth in recipes)
+			if(istext(smth))
+				tmp_recipes += list(list(
+					"is_category" = 1,
+					"name" = smth,
+				))
+			else
+				var/list/L = smth
+				if(L["reagent"] && !beaker)
+					continue
+				tmp_recipes += list(list(
+					"is_category" = 0,
+					"name" = L["name"],
+					"cost" = round(L["cost"]/build_eff),
+					"allow_multiple" = L["allow_multiple"],
+				))
+		data["recipes"] = tmp_recipes
 
 	data["processing"] = processing
 	data["menustat"] = menustat
-	if(menustat == "menu")
-		data["beaker"] = beaker
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -188,11 +180,9 @@
 		S += 5
 		var/nutriment_amount = I.reagents.get_reagent_amount("nutriment")
 		if(nutriment_amount < 0.1)
-			points += 1
+			slop += 1
 		else
-			points += nutriment_amount * 8 * eat_eff
-		if(beaker && nutriment_amount)
-			beaker.reagents.add_reagent("slop", nutriment_amount)
+			slop += nutriment_amount * 8 * eat_eff
 		qdel(I)
 	if(S)
 		processing = 1
@@ -221,13 +211,19 @@
 		processing = FALSE
 		update_icon()
 		return FALSE
+	var/new_quality = source.food_quality / copies
+	if(alert(user, "Create [copies] copies? The expected food quality is [round(new_quality, 0.1)].", "NutriForge", "Confirm", "Cancel") != "Confirm")
+		processing = FALSE
+		update_icon()
+		return FALSE
 
 	var/slop_needed = 0
 	for(var/datum/reagent/reagent in source.reagents.reagent_list)
 		if(istype(reagent, /datum/reagent/organic/nutriment))
 			slop_needed += reagent.volume
+	slop_needed *= 8 * eat_eff
 
-	if(!beaker || beaker.reagents.get_reagent_amount("slop") < slop_needed)
+	if(slop < slop_needed)
 		to_chat(user, span_notice("You need more Slop to duplicate [source]."))
 		processing = FALSE
 		update_icon()
@@ -235,8 +231,7 @@
 
 	var/list/source_reagents = source.reagents.reagent_list.Copy()
 	var/source_name = source.name
-	var/new_quality = source.food_quality / copies
-	beaker.reagents.remove_reagent("slop", slop_needed)
+	slop -= slop_needed
 	user.remove_from_mob(source)
 	source.loc = src
 	for(var/i in 1 to copies)
@@ -287,7 +282,7 @@
 
 	var/cost = recipe["cost"] * amount / build_eff
 
-	if(cost > points)
+	if(cost > slop)
 		menustat = "nopoints"
 		return FALSE
 
@@ -298,7 +293,7 @@
 	processing = 1
 	update_icon()
 	updateUsrDialog() //maybe we can remove it
-	points -= cost
+	slop -= cost
 	sleep(cost*0.5)
 
 	var/creating = recipe["path"]
