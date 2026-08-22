@@ -4,7 +4,7 @@
 	department = DEPARTMENT_CIVILIAN
 	department_flag = CIVILIAN
 	exp_granted_type = EXP_TYPE_CREW
-	faction = "CEV Eris"
+	faction = "CEV Theseus"
 	total_positions = -1
 	spawn_positions = -1
 	supervisors = "anyone who pays you"
@@ -28,10 +28,10 @@
 
 	perks = list(/datum/perk/vagabond)
 
-	description = "You are a vagabond, journeying through the vast expanses of space upon the CEV Eris. You will not be paid a wage.<br>\
-Though this does not mean you have no home, as the Eris is your home. Whatever planet you may have came from a now distant memory.<br>\
+	description = "You are a vagabond, journeying through the vast expanses of space upon the CEV Theseus. You will not be paid a wage.<br>\
+Though this does not mean you have no home, as the Theseus is your home. Whatever planet you may have came from a now distant memory.<br>\
 
-You remember boarding the Eris sometime in your past, when it had a different purpose and a different captain.<br>\
+You remember boarding the Theseus sometime in your past, when it had a different purpose and a different captain.<br>\
 Over time you've become accustomed to the dangers of this ship.<br>\
 The ID you wear likely not even your own. At least as far as you can remember.<br>\
 But this chunk of plastic still can be a rare oddity, that can change your character.<br>\

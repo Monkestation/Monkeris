@@ -50,7 +50,7 @@
 //If filter_players is true, it will only pick an area that has no human players in it
 	//This is useful for spawning, you dont want people to see things pop into existence
 //If filter_maintenance is true, maintenance areas won't be chosen
-	//Since eris maintenance is a labyrinth and people dont hang around there, this defaults true
+	//Since Theseus maintenance is a labyrinth and people dont hang around there, this defaults true
 /proc/random_ship_area(filter_players = FALSE, filter_maintenance = TRUE, filter_critical = FALSE, need_apc = FALSE)
 	var/list/possible = list()
 	for(var/Y in GLOB.ship_areas)

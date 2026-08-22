@@ -26,7 +26,7 @@ GLOBAL_DATUM_INIT(revdata,/datum/getrev, new)
 
 /datum/getrev/proc/get_log_message()
 	var/list/msg = list()
-	msg += "Running Eris revision: [date]"
+	msg += "Running Theseus revision: [date]"
 	if(originmastercommit)
 		msg += "origin/master: [originmastercommit]"
 

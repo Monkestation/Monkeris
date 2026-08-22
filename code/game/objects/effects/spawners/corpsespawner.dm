@@ -134,7 +134,7 @@
 		M.set_id_info(W)
 		M.equip_to_slot_or_del(W, slot_wear_id)
 
-// Eris corpses
+// Theseus corpses
 /obj/landmark/corpse/hobo
 	name = "Hobo"
 	corpseuniform = /obj/item/clothing/under/rank/assistant
@@ -161,7 +161,7 @@
 	max_age = 250
 
 /obj/landmark/corpse/skeleton/maint //They look like human remains. Some poor soul expired here, a million miles from home.
-	name = "Eris Crewmember"
+	name = "Theseus Crewmember"
 	corpseuniform = list(
 		/obj/item/clothing/under/oldsec,
 		/obj/item/clothing/under/rank/assistant,
@@ -257,7 +257,7 @@
 /obj/landmark/corpse/one_star
 	name = "twisted skeletal remains"
 	species = SPECIES_SKELETON
-	min_age = 359	// OS disappeared in 2291, CEV Eris launched 2642. This means the skeleton of a child of 8 years would be 359 years old.
+	min_age = 359	// OS disappeared in 2291, CEV Theseus launched 2642. This means the skeleton of a child of 8 years would be 359 years old.
 	max_age = 499	// Oldest skeleton is of a person of 140 years. Implies OS managed to extend life expectancy. Revise according to lore.
 	corpseuniform = /obj/item/clothing/under/onestar
 	corpsesuit = /obj/item/clothing/suit/storage/greatcoat/onestar
@@ -410,7 +410,7 @@
 	corpseglasses = /obj/item/clothing/glasses/sunglasses
 	corpseid = 1
 	corpseidjob = "Bridge Officer"
-	// corpseidaccess = "Captain"  // No reason for them to have all access on Eris
+	// corpseidaccess = "Captain"  // No reason for them to have all access on Theseus
 
 /obj/landmark/corpse/commander
 	name = "Commander"
@@ -425,7 +425,7 @@
 	corpsepocket1 = /obj/item/flame/lighter/zippo
 	corpseid = 1
 	corpseidjob = "Commander"
-	// corpseidaccess = "Captain"  // No reason for them to have all access on Eris
+	// corpseidaccess = "Captain"  // No reason for them to have all access on Theseus
 
 
 /////////////////Enemies//////////////////////

@@ -141,7 +141,7 @@ SUBSYSTEM_DEF(job)
 /datum/controller/subsystem/job/proc/JobDebug(message)
 	log_job_debug(message)
 
-/datum/controller/subsystem/job/proc/SetupOccupations(faction = "CEV Eris")
+/datum/controller/subsystem/job/proc/SetupOccupations(faction = "CEV Theseus")
 	occupations.Cut()
 	occupations_by_name.Cut()
 	occupations_by_type.Cut()
@@ -808,7 +808,7 @@ SUBSYSTEM_DEF(job)
 // 	htmlContent += {"
 // 		</ul>"}
 
-// 	usr << browse(HTML_SKELETON_TITLE("Registered playtimes onboard CEV ERIS", htmlContent), "window=playtimes;file=playtimes;display=1; size=300x300;border=0;can_close=1; can_resize=1;can_minimize=1;titlebar=1" )
+// 	usr << browse(HTML_SKELETON_TITLE("Registered playtimes onboard CEV Theseus", htmlContent), "window=playtimes;file=playtimes;display=1; size=300x300;border=0;can_close=1; can_resize=1;can_minimize=1;titlebar=1" )
 
 // #define OPTION_MYSELF "Myself"
 // #define OPTION_SOMEONEELSE "Another player"

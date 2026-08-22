@@ -1,18 +1,18 @@
-// General eris posters
+// General theseus posters
 
 /obj/item/poster/random_eris
-	name = "random eris poster"
+	name = "random theseus poster"
 	poster_type = /obj/structure/sign/poster/erisposters/random
 	icon_state = "rolled_poster"
 
 /obj/structure/sign/poster/erisposters
-	poster_item_name = "eris poster"
+	poster_item_name = "theseus poster"
 	poster_item_desc = "This poster comes with its own automatic adhesive mechanism, for easy pinning to any vertical surface."
 	poster_item_icon_state = "rolled_poster"
 	printable = TRUE
 
 /obj/structure/sign/poster/erisposters/random
-	name = "random eris poster"
+	name = "random theseus poster"
 	icon_state = "random_contraband"
 	never_random = TRUE
 	random_basetype = /obj/structure/sign/poster/erisposters

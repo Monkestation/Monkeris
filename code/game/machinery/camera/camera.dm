@@ -9,7 +9,7 @@
 	active_power_usage = 10
 	layer = WALL_OBJ_LAYER
 
-	var/list/network = list(NETWORK_CEV_ERIS)
+	var/list/network = list(NETWORK_CEV_THESEUS)
 	var/c_tag = null
 	var/c_tag_order = 999
 	var/status = 1

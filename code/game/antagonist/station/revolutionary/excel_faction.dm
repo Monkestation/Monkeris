@@ -15,7 +15,7 @@ var/global/was_centor_spawned = FALSE
 	<b>PREPARATION:</b> Summon Centor in a hidden location, it will give you KOMPAK and periodically manufacture nodes - all once you tap it.\n\n\
 	<b>BASE:</b> We'll send resources through teleporters once you build some nodes and we get a good lock-in. Use structures, and of course - loyal comrades. \n\n\
 	<b>EXPANSION:</b> Spread nodes and ensure their connection to Centor for teleportation power. Acquire implants, prosthetics or robotic parts and rebuild them into our own implants. These can be injected into the oppressed to introduce them into our cause.\n\n\
-	<b>To prevent important technology theft, your machinery is designed to work only on target vessel: CEV \"Eris\".</b>\n\n\
+	<b>To prevent important technology theft, your machinery is designed to work only on target vessel: CEV \"Theseus\".</b>\n\n\
 	<h1>Our dreams shan't be ignored! Ever Upward!</h1>"
 
 	hud_indicator = "excelsior"

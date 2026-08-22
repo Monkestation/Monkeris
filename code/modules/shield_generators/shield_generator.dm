@@ -52,7 +52,7 @@
 	var/list/default_modes = list()
 	var/generatingShield = FALSE //true when shield tiles are in process of being generated
 
-	obj/effect/overmap/ship/linked_ship = null // To access position of Eris on the overmap
+	obj/effect/overmap/ship/linked_ship = null // To access position of Theseus on the overmap
 
 	// The shield mode flags which should be enabled on this generator by default
 
@@ -125,7 +125,7 @@
 	for (var/DM in default_modes)
 		toggle_flag(DM)
 
-	// Link to Eris object on the overmap
+	// Link to Theseus object on the overmap
 	linked_ship = (locate(/obj/effect/overmap/ship/eris) in GLOB.ships)
 
 /obj/machinery/power/shipside/shield_generator/Destroy()

@@ -41,7 +41,7 @@
 //IHC Peaked Cap
 /obj/item/clothing/head/caphat/ihc
 	name = "lieutenant's hat"
-	desc = "A stylish peaked cap for the Lieutenant stationed onboard the Eris. Lucky bastard."
+	desc = "A stylish peaked cap for the Lieutenant stationed onboard the Theseus. Lucky bastard."
 	icon_state = "hoscap"
 	spawn_blacklisted = TRUE
 

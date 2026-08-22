@@ -175,7 +175,7 @@
 #define TOGGLE_BOTTOM_FLAG 4 //0100
 
 // Default name for announcement system
-#define ANNOUNCER_NAME "CEV Eris System Announcer"
+#define ANNOUNCER_NAME "CEV Theseus System Announcer"
 
 
 #define LIST_OF_CONSONANT list("b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z", "á", "â", "ã", "ä", "æ", "ç", "é", "ê", "ë", "ì", "í", "ï", "ð", "ñ", "ò", "ô", "õ", "ö", "÷", "ø", "ù")

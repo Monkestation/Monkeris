@@ -1,4 +1,4 @@
-Things to keep in mind when porting to eris:
+Things to keep in mind when porting to Theseus:
 
 - Cooking has to be initialized with initialize_cooking_recipes() in /datum/global_init/New().
 It has to be ran AFTER initialize_chemical_reagents() and initialize_chemical_reactions()!

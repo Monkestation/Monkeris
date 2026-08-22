@@ -7,7 +7,7 @@ in, for interesting and profitable rewards. A stash is essentially a scavenger h
 1. The Note
 Players will be able to find stash notes dotted around the ship mixed in with normal loot. They will
 generally be rare and prized. Each note contains a little story, a snippet of lore about the life of
-some past resident of eris, possibly decades or centuries ago. And most importantly, the note
+some past resident of Theseus, possibly decades or centuries ago. And most importantly, the note
 also includes a Direction to a stash. See Directions below
 
 2.The Stash

@@ -7,7 +7,7 @@
 	exp_requirements = 600
 	exp_required_type_department = DEPARTMENT_MEDICAL
 	exp_granted_type = EXP_TYPE_CREW
-	faction = "CEV Eris"
+	faction = "CEV Theseus"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Moebius Expedition Overseer"
@@ -69,7 +69,7 @@ Your second loyalty is to your career with Moebius corp, and to your coworkers i
 	department_flag = MEDICAL
 	exp_requirements = 600
 	exp_granted_type = EXP_TYPE_CREW
-	faction = "CEV Eris"
+	faction = "CEV Theseus"
 	total_positions = 5
 	spawn_positions = 5
 	supervisors = "the Moebius Biolab Officer"
@@ -96,7 +96,7 @@ Your second loyalty is to your career with Moebius corp, and to your coworkers i
 							/datum/computer_file/program/camera_monitor)
 
 
-	description = "You are a highly educated professional doctor, working a placement aboard Eris to treat the injured.<br>\
+	description = "You are a highly educated professional doctor, working a placement aboard Theseus to treat the injured.<br>\
 Your tasks will primarily keep you inside medbay, the place needs to have a doctor onsite at all times to treat incoming wounded. As a general rule, you should not leave medbay if you're the only one in it, make sure someone is covering for you if you go elsewhere.<br>\
 
 As a doctor, a broad range of medical procedures fall under your potential purview. You are not expected to be able to perform all of these yourself, being a specialist is fine. <br>\
@@ -131,7 +131,7 @@ Your second loyalty is to your career with Moebius corp, and to your coworkers i
 	department = DEPARTMENT_MEDICAL
 	department_flag = MEDICAL
 	exp_granted_type = EXP_TYPE_CREW
-	faction = "CEV Eris"
+	faction = "CEV Theseus"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Moebius Biolab Officer"
@@ -184,7 +184,7 @@ Your second loyalty is to your career with Moebius corp, and to your coworkers i
 	department = DEPARTMENT_MEDICAL
 	department_flag = MEDICAL
 	exp_granted_type = EXP_TYPE_CREW
-	faction = "CEV Eris"
+	faction = "CEV Theseus"
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the Moebius Biolab Officer"
@@ -256,7 +256,7 @@ Remember that you are a noncombatant. Any weapons you carry should be used for b
 	exp_requirements = 300
 	exp_required_type = EXP_TYPE_CREW
 	exp_granted_type = EXP_TYPE_CREW
-	faction = "CEV Eris"
+	faction = "CEV Theseus"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Moebius Biolab Officer"
@@ -300,7 +300,7 @@ Remember that you are a noncombatant. Any weapons you carry should be used for b
 					You may be a doctor, but your research comes first.<br>\
 					While you have priority in Visceral Research and Genetics, you are expected to provide doctors with organ replacements if necessary."
 
-	loyalties = "As a medical researcher, your first loyalty is to progress. Your placement on the crew of the CEV Eris is the result of Moebius' desire for knowledge and your own morbid curiosity.<br>\
+	loyalties = "As a medical researcher, your first loyalty is to progress. Your placement on the crew of the CEV Theseus is the result of Moebius' desire for knowledge and your own morbid curiosity.<br>\
 Your second loyalty is to your career with Moebius, and to your coworkers in both branches of the corporation. Help out your scientific colleagues, and aid in their pursuit of knowledge."
 
 /obj/landmark/join/start/bioengineer

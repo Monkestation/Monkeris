@@ -353,7 +353,7 @@
 	if(!(activeFor % 50))		// Every 50th tick
 		var/list/servers = list()
 		for(var/obj/machinery/telecomms/server/S in telecomms_list)
-			if(S.network == "eris" && LAZYLEN(S.log_entries)) //yep, only for eris so that non-eris servers don't get involved(duh!)
+			if(S.network == "theseus" && LAZYLEN(S.log_entries)) //yep, only for Theseus so that non-Theseus servers don't get involved(duh!)
 				servers += S								//also checks if there are any log entries (not an empty list)
 		if(LAZYLEN(servers))
 			var/obj/machinery/telecomms/server/chosen_server = pick(servers)

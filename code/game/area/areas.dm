@@ -29,7 +29,7 @@
 	var/air_doors_activated = 0
 	var/sound_env = STANDARD_STATION
 	var/holomap_color // Color of this area on station holomap
-	var/vessel = "CEV Eris" // Consoles can only control shields on the same vessel as them
+	var/vessel = "CEV Theseus" // Consoles can only control shields on the same vessel as them
 	var/ship_area = FALSE
 
 	var/requires_power = TRUE

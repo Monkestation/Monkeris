@@ -77,7 +77,7 @@
 	offer_types = list(
 		/obj/item/clothing/head/onestar = offer_data("One Star officer cap", 2000, 1),
 		/obj/item/clothing/suit/storage/greatcoat/onestar = offer_data("One Star officer coat", 4000, 1),
-		/obj/item/clothing/under/rank = offer_data("CEV Eris department jumpsuit", 100, 0),
+		/obj/item/clothing/under/rank = offer_data("CEV Theseus department jumpsuit", 100, 0),
 		/obj/item/clothing/suit/armor/paramedic = offer_data("Moebius paramedic armor", 1000, 1),
 		/obj/item/clothing/head/armor/faceshield/paramedic = offer_data("Moebius paramedic helmet", 1000, 1),
 		/datum/reagent/alcohol/hippies_delight = offer_data("Hippie\'s Delight bottle (60u)", 2500, 1),

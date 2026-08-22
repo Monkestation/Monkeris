@@ -8,7 +8,7 @@
 	shorthand = "LA"
 	syllables = list("abbas abbatis", "calco", "cohors", "fabula", "elementum", "elue", "dolus", "ignis", "juvenis", "labor", \
 	                 "lac lactis", "materia", "mei", "nutus", "obduro", "occulto", "paciscor", "dues", "pasco", "qua", "accedo", \
-	                 "aegresco", "bis", "reus", "reverto", "sacrilegus", "tam", "vult", "us", "vaco", "velut", "eris", "lama", \
+	                 "aegresco", "bis", "reus", "reverto", "sacrilegus", "tam", "vult", "us", "vaco", "velut", "eris", "theseus", "lama", \
 	                 "jugis", "iuro", "hic", "gravis", "gusto", "fundo", "exertus", "doctor", "doleo", "curo", "consitor", "auris", \
 	                 "arx", "attero", "ceno", "despecto", "exerceo", "firmus", "gravo", "gusto", "humanitas", "illa", "illo", "jugiter", \
 	                 "laus", "maiors", "mando", "novem", "occido", "occidi", "occasum", "pax pacis", "penitus", "quercus", "regula", \

@@ -290,7 +290,7 @@ AI MODULES
 /******************** NanoTrasen ********************/
 
 /obj/item/electronics/ai_module/eris // -- TLE
-	name = "'Eris Default' Core AI Module"
+	name = "'Theseus Default' Core AI Module"
 	desc = "An 'NT Default' Core AI Module: 'Reconfigures the AI's core laws.'"
 	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 4)
 	laws = new/datum/ai_laws/eris

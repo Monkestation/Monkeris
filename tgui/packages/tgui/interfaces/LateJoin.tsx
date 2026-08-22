@@ -50,9 +50,9 @@ const DEPARTMENT_LOGOS: Record<string, string> = {
   'Moebius Labs: Research Division': factionMoebius,
   'Asters Merchant Guild': factionGuild,
   'Church of NeoTheology': factionNeotheology,
-  'CEV Eris Command': factionCEVCommand,
+  'CEV Theseus Command': factionCEVCommand,
   'Technomancer League': factionTechnomancers,
-  'CEV Eris Civilian': factionCEVCivilians,
+  'CEV Theseus Civilian': factionCEVCivilians,
 };
 
 // Department color scheme - backgrounds and accents
@@ -60,7 +60,7 @@ const DEPARTMENT_COLORS: Record<
   string,
   { bg: string; accent: string; button: string }
 > = {
-  'CEV Eris Command': {
+  'CEV Theseus Command': {
     bg: 'rgba(74, 144, 226, 0.25)',
     accent: 'rgba(74, 144, 226, 0.8)',
     button: 'rgba(74, 144, 226, 0.15)',
@@ -95,7 +95,7 @@ const DEPARTMENT_COLORS: Record<
     accent: 'rgba(39, 174, 96, 0.8)',
     button: 'rgba(39, 174, 96, 0.15)',
   },
-  'CEV Eris Civilian': {
+  'CEV Theseus Civilian': {
     bg: 'rgba(149, 165, 166, 0.25)',
     accent: 'rgba(149, 165, 166, 0.8)',
     button: 'rgba(149, 165, 166, 0.15)',

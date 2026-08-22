@@ -41,8 +41,8 @@ MAPPING_DIRECTIONAL_HELPERS_LIBRARY(/obj/structure/sign/poster/asters/blurb, 32)
 MAPPING_DIRECTIONAL_HELPERS_LIBRARY(/obj/structure/sign/poster/asters/social_pyramid, 32)
 
 /obj/structure/sign/poster/asters/cev_eris
-	name = "CEV Eris"
-	desc = "A poster celebrating the maiden voyage of the Cosmic Exploration Vessel \"Eris\"."
+	name = "CEV Theseus"
+	desc = "A poster celebrating the maiden voyage of the Cosmic Exploration Vessel \"Theseus\"."
 	icon_state = "asters_cev_eris"
 MAPPING_DIRECTIONAL_HELPERS_LIBRARY(/obj/structure/sign/poster/asters/cev_eris, 32)
 

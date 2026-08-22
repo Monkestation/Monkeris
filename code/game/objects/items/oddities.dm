@@ -1,4 +1,4 @@
-//This is set of item created to work with Eris stat and perk systems
+//This is set of item created to work with Theseus stat and perk systems
 //The idea here is simple, you find oddities in random spawners, you use them, and they grant you stats, or even perks.
 //After use, the object is claimed, and cannot be used by someone else
 //If rebalancing is needed, keep in mind spawning rate of those items, it might be good idea to change that as well

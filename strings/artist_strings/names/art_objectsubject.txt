@@ -117,4 +117,5 @@ stele
 lamp
 moth
 CEV Eris
+CEV Theseus
 ship

@@ -9,7 +9,7 @@
 	exp_requirements = 600
 	exp_required_type_department = DEPARTMENT_GUILD
 	exp_granted_type = EXP_TYPE_CREW
-	faction = "CEV Eris"
+	faction = "CEV Theseus"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "your greed"
@@ -31,7 +31,7 @@
 
 	perks = list(/datum/perk/merchant, /datum/perk/deep_connection, /datum/perk/oddity/market_prof)
 
-	description = "You are the head of the local branch of Asters Merchant Guild, and eris' guild representative<br>\
+	description = "You are the head of the local branch of Asters Merchant Guild, and Theseus' guild representative<br>\
 A staunch entrepreneur, you are motivated by profit, for the guild and especially for yourself. You are here firstly to make as much money as you can, and secondly to keep the crew supplied. You can order things at cargo using the local guild funds, these will not magically replenish so you will run out of money quickly if you don't charge. Take payments by card or cash, and deposit them into the guild account to enable more purchases.<br>\
 <br>\
 The guild also operates all the vendors on the ship, every credit paid into them goes to your guild account. Naturally operating is a two way street, you are expected, when necessary, to refill those vendors. Or send a technician to do it<br>\
@@ -40,7 +40,7 @@ You do not recieve a salary, but the local guild funds are yours to use. You may
 <br>\
 Things to bear in mind:<br>\
 	-Nobody has a right to free stuff. You are well within your rights to charge for anything you distribute, and you won't make a penny if you don't.<br>\
-	-Eris has few laws on contraband. If someone wants something and they can afford it, you get it for them. Don't try to play moral guardian and don't ask questions. You are not responsible for whatever they do with your products.<br>\
+	-Theseus has few laws on contraband. If someone wants something and they can afford it, you get it for them. Don't try to play moral guardian and don't ask questions. You are not responsible for whatever they do with your products.<br>\
 	-Loyalty is a priceless resource, yet cheap to maintain. Don't screw over the miners and technicians working under you. <br>\
 	-Charity is a weapon. Used correctly, it can do wonders for your public image.  A few gifts spread around makes for good returning customers"
 
@@ -50,7 +50,7 @@ Deploy your mining staff to harvest matter and materials<br>\
 Counsel the captain on directing the ship towards profitable opportunities"
 
 	loyalties = "As a merchant, your first loyalty is to money. You should be unscrupulous, willing to sell anything to anyone if they can pay your prices. Direct the ship towards profitable endeavours, and press the captain to make choices that will be financially lucrative<br>\
-Your second loyalty is to the guild. Ensure it retains good relations with privateers like the captain of Eris, and don't embarass it. This means limiting your price gouging to only moderate levels. If you make an enemy of everyone, it may prove a costly mistake"
+Your second loyalty is to the guild. Ensure it retains good relations with privateers like the captain of Theseus, and don't embarass it. This means limiting your price gouging to only moderate levels. If you make an enemy of everyone, it may prove a costly mistake"
 
 	software_on_spawn = list(///datum/computer_file/program/supply,
 							 ///datum/computer_file/program/deck_management,
@@ -74,7 +74,7 @@ Your second loyalty is to the guild. Ensure it retains good relations with priva
 	department = DEPARTMENT_GUILD
 	department_flag = GUILD
 	exp_granted_type = EXP_TYPE_CREW
-	faction = "CEV Eris"
+	faction = "CEV Theseus"
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the Guild Merchant"
@@ -128,7 +128,7 @@ Your main duties are to keep the local guild branch operational and profitable. 
 	department = DEPARTMENT_GUILD
 	department_flag = GUILD
 	exp_granted_type = EXP_TYPE_CREW
-	faction = "CEV Eris"
+	faction = "CEV Theseus"
 	total_positions = 4
 	spawn_positions = 4
 	supervisors = "the Guild Merchant"

@@ -44,7 +44,7 @@
 	var/area/current_area = get_area(src)
 
 	if(!istype(current_area, /area/eris/command/bridge))
-		to_chat(user, span_danger("\The [src] can only be anchored on the Bridge of the CEV Eris near the helm console."))
+		to_chat(user, span_danger("\The [src] can only be anchored on the Bridge of the CEV Theseus near the helm console."))
 		return FALSE
 
 	var/obj/machinery/computer/helm/console

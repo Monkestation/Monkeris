@@ -40,7 +40,7 @@ var/list/ship_scanners = list()
 	ai_control_disabled = 0			// Whether the AI control is disabled.
 	emergency_shutdown = FALSE		// Whether the scanner is currently recovering from an emergency shutdown
 
-	obj/effect/overmap/ship/linked_ship = null // To access position of Eris on the overmap
+	obj/effect/overmap/ship/linked_ship = null // To access position of Theseus on the overmap
 
 	list/tendrils = list()
 	list/tendril_dirs = list()
@@ -84,7 +84,7 @@ var/list/ship_scanners = list()
 	if(istype(S))
 		S.scanners |= src
 
-	// Link to Eris object on the overmap
+	// Link to Theseus object on the overmap
 	linked_ship = (locate(/obj/effect/overmap/ship/eris) in GLOB.ships)
 
 /obj/machinery/power/shipside/long_range_scanner/Destroy()

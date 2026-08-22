@@ -3,7 +3,7 @@
 //
 /obj/machinery/holomap
 	name = "holomap"
-	desc = "A virtual map of the CEV \"Eris\"."
+	desc = "A virtual map of the CEV \"Theseus\"."
 	icon = 'icons/obj/machines/stationmap.dmi'
 	icon_state = "station_map"
 	anchored = TRUE
@@ -132,7 +132,7 @@
 			if(bogus)
 				to_chat(user, span_warning("The holomap has failed to initialize. This area of space cannot be mapped."))
 			else
-				to_chat(user, span_notice("A hologram of CEV \"Eris\" appears before your eyes."))
+				to_chat(user, span_notice("A hologram of CEV \"Theseus\" appears before your eyes."))
 				playsound(src, 'code/modules/holomap/sounds/holomap_open.ogg', 125)
 
 

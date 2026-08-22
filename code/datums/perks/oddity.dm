@@ -295,7 +295,7 @@
 		"hey is someone out there I need help please",
 		"AHEUHEUHEU",
 		"wetskrell.nt exonet archive",
-		"CEV Eris schematics",
+		"CEV Theseus schematics",
 		"borg keygen free download",
 		"special deal",
 		"HEAVEN",
