@@ -66,7 +66,7 @@ SUBSYSTEM_DEF(explosions)
 	available_hash_lists = new /list(SPARE_HASH_LISTS)
 	for(var/i = 1,i <= SPARE_HASH_LISTS,i++)
 		available_hash_lists[i] = new /list(HASH_MODULO)
-	return ..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/explosions/proc/retrieveHashList()
 	var/i = length(SSexplosions.available_hash_lists) + 1

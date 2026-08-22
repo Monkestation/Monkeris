@@ -18,9 +18,13 @@ SUBSYSTEM_DEF(chat)
 
 
 /datum/controller/subsystem/chat/Initialize()
-	. = ..()
-	initialize_text_to_speech()
-
+	var/load_result = initialize_text_to_speech()
+	if(isnull(load_result))
+		return SS_INIT_NO_NEED
+	if(!load_result)
+		log_world("TTS config has a config token but NO seeds!")
+		return SS_INIT_FAILURE
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/chat/proc/generate_payload(client/target, message_data)
 	var/sequence = client_to_sequence_number[target.ckey]

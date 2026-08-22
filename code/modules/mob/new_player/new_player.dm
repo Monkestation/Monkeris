@@ -487,6 +487,7 @@
 	return data
 
 /mob/new_player/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+	SHOULD_CALL_PARENT(FALSE)
 	// Don't call parent - we don't need the default checks for new_player
 	// Parent would check UI_INTERACTIVE status which may fail for new_player
 

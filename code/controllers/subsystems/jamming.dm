@@ -11,7 +11,7 @@ SUBSYSTEM_DEF(jamming)
 	active_jammers = new /list(world.maxz)
 	for(var/i = 1; i < world.maxz; i++)
 		active_jammers[i] = list()
-	. = ..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/jamming/proc/IsPositionJammed(turf/location, signalStrength)
 	for(var/thing in active_jammers[location.z])

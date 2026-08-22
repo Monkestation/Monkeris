@@ -57,6 +57,7 @@ GLOBAL_LIST_INIT(admin_verbs_debug, list(
 	/client/proc/debug_controller,
 	/client/proc/restart_controller,
 	/client/proc/debug_antagonist_template,
+	/client/proc/cmd_controller_view_ui,
 	/client/proc/cmd_display_init_log,
 	/client/proc/cmd_display_init_costs,
 	/client/proc/kill_air,

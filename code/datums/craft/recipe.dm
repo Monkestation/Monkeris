@@ -21,7 +21,7 @@
 		steps += new /datum/craft_step(i, src)
 
 /datum/craft_recipe/proc/is_compelete(step)
-	return steps.len < step
+	return length(steps) < step
 
 /datum/craft_recipe/proc/spawn_result(obj/item/craft/C, mob/living/user)
 	var/atom/movable/M = new result(get_turf(C))

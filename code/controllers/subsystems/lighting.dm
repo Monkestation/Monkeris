@@ -24,7 +24,8 @@ SUBSYSTEM_DEF(lighting)
 
 /datum/controller/subsystem/lighting/Initialize(timeofday)
 	create_all_lighting_overlays()
-	. = ..()
+	return SS_INIT_SUCCESS
+
 
 /datum/controller/subsystem/lighting/fire(resumed=FALSE)
 	if (resuming_stage == 0 || !resumed)

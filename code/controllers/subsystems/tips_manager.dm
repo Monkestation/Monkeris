@@ -77,7 +77,7 @@ SUBSYSTEM_DEF(tips)
 	for(var/path in subtypesof(/tipsAndTricks/gameplay))
 		var/tipsAndTricks/gameplay/T = new path()
 		GLOB.gameplayTips += T
-	return ..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/tips/proc/getRandomTip()
 	var/list/allTips = list()

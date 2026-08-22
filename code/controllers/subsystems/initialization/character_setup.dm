@@ -22,4 +22,4 @@ SUBSYSTEM_DEF(character_setup)
 			error("Prefs failed to setup (SS): [prefs.client_ckey]")
 			prefs.setup()
 
-	. = ..()
+	return SS_INIT_SUCCESS

@@ -9,7 +9,7 @@ type ViewerData = {
   view_raw: boolean;
 };
 
-export const AdminBookViewer = (_: any) => {
+export const AdminBookViewer = () => {
   const { data } = useBackend<ViewerData>();
   return (
     <Window title={`Reading: ${data.title}`} height={400} width={400}>
