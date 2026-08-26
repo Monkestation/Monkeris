@@ -1,11 +1,15 @@
-/proc/cmp_camera_ctag_asc(obj/machinery/camera/a, obj/machinery/camera/b)
-	return sorttext(b.c_tag, a.c_tag)
 
-/proc/cmp_camera_ctag_dsc(obj/machinery/camera/a, obj/machinery/camera/b)
-	return sorttext(a.c_tag, b.c_tag)
+/proc/cmp_numeric_dsc(a,b)
+	return b - a
 
-/proc/cmp_crew_sensor_modifier(datum/crew_sensor_modifier/a, datum/crew_sensor_modifier/b)
-	return b.priority - a.priority
+/proc/cmp_numeric_asc(a,b)
+	return a - b
+
+/proc/cmp_text_asc(a,b)
+	return sorttext(b, a)
+
+/proc/cmp_text_dsc(a,b)
+	return sorttext(a, b)
 
 /proc/cmp_name_or_type_asc(atom/a, atom/b)
 	return sorttext(istype(b) || ("name" in b.vars) ? b.name : b.type, istype(a) || ("name" in a.vars) ? a.name : a.type)
@@ -16,8 +20,20 @@
 /proc/cmp_name_dsc(atom/a, atom/b)
 	return sorttext(a.name, b.name)
 
-/proc/cmp_numeric_asc(a,b)
-	return a - b
+/proc/cmp_ckey_asc(client/a, client/b)
+	return sorttext(b.ckey, a.ckey)
+
+/proc/cmp_ckey_dsc(client/a, client/b)
+	return sorttext(a.ckey, b.ckey)
+
+/proc/cmp_smeslist_rcon_tag(list/A, list/B)
+	return sorttext(A["RCON_tag"], B["RCON_tag"])
+
+/proc/cmp_typepaths_asc(A, B)
+	return sorttext("[B]","[A]")
+
+/proc/cmp_filter_data_priority(list/A, list/B)
+	return A["priority"] - B["priority"]
 
 /proc/cmp_subsystem_display(datum/controller/subsystem/a, datum/controller/subsystem/b)
 	return sorttext(b.name, a.name)
@@ -30,12 +46,6 @@
 
 /proc/cmp_subsystem_priority(datum/controller/subsystem/a, datum/controller/subsystem/b)
 	return a.priority - b.priority
-
-/proc/cmp_text_asc(a,b)
-	return sorttext(b, a)
-
-/proc/cmp_text_dsc(a,b)
-	return sorttext(a, b)
 
 /// Passed a list of assoc lists, sorts them by the list's "name" keys.
 /proc/cmp_assoc_list_name(list/A, list/B)
@@ -64,25 +74,18 @@
 		return sorttext(b.reagent_type, a.reagent_type)
 	return cmp_catalog_entry_asc(a, b)
 
+/proc/cmp_camera_ctag_asc(obj/machinery/camera/a, obj/machinery/camera/b)
+	return sorttext(b.c_tag, a.c_tag)
+
+/proc/cmp_camera_ctag_dsc(obj/machinery/camera/a, obj/machinery/camera/b)
+	return sorttext(a.c_tag, b.c_tag)
+
+/proc/cmp_crew_sensor_modifier(datum/crew_sensor_modifier/a, datum/crew_sensor_modifier/b)
+	return b.priority - a.priority
+
 GLOBAL_VAR_INIT(cmp_field, "name")
 /proc/cmp_records_asc(datum/data/record/a, datum/data/record/b)
 	return sorttext(b.fields[GLOB.cmp_field], a.fields[GLOB.cmp_field])
 
 /proc/cmp_records_dsc(datum/data/record/a, datum/data/record/b)
 	return sorttext(a.fields[GLOB.cmp_field], b.fields[GLOB.cmp_field])
-
-/proc/cmp_ckey_asc(client/a, client/b)
-	return sorttext(b.ckey, a.ckey)
-
-/proc/cmp_ckey_dsc(client/a, client/b)
-	return sorttext(a.ckey, b.ckey)
-
-/proc/cmp_smeslist_rcon_tag(list/A, list/B)
-	return sorttext(A["RCON_tag"], B["RCON_tag"])
-
-/proc/cmp_typepaths_asc(A, B)
-	return sorttext("[B]","[A]")
-
-/proc/cmp_filter_data_priority(list/A, list/B)
-	return A["priority"] - B["priority"]
-

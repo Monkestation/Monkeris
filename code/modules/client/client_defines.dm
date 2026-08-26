@@ -64,6 +64,8 @@
 	/// Messages currently seen by this client
 	var/list/seen_messages
 
+	// TODO: port /datum/view_data from tg
+
 	var/fullscreen = FALSE
 
 	/// List of Stat Panel tabs

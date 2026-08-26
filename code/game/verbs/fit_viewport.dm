@@ -51,7 +51,6 @@
 /client/proc/attempt_auto_fit_viewport()
 	if (get_preference_value(/datum/client_preference/auto_fit_viewport) != GLOB.PREF_YES)
 		return
+	// No need to attempt to fit the viewport on non-initialized clients as they'll auto-fit viewport right before finishing init
 	if(fully_created)
-		fit_viewport()
-	else //Delayed to avoid wingets from Login calls.
-		addtimer(CALLBACK(src, VERB_REF(fit_viewport), 1 SECONDS))
+		INVOKE_ASYNC(src, VERB_REF(fit_viewport))
