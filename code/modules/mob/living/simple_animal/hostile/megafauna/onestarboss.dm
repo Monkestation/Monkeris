@@ -280,7 +280,7 @@
 	////////////////////////////////////////////////////////////////////////
 
 /mob/living/simple_animal/hostile/megafauna/one_star/Life()
-	if(!stasis && !AI_inactive)
+	if((!stasis && !AI_inactive) || no_stasis)
 		switch(stance)
 			if(HOSTILE_STANCE_IDLE)
 				target_mob = FindTarget()
@@ -309,7 +309,7 @@
 	stop_automated_movement = 1
 	walk(src, 0)
 	LoseTarget()
-	stance = initial(stance) 
+	stance = initial(stance)
 	icon_state = initial(icon_state)
 	make_jittery(500)
 	target_mob = null
@@ -317,7 +317,7 @@
 	spawn(60) dying()
 
 /mob/living/simple_animal/hostile/megafauna/one_star/proc/dying()
-	icon_state = icon_dead 
+	icon_state = icon_dead
 	var/obj/item/oddity/onestar/mechcore/F = new /obj/item/oddity/onestar/mechcore(loc)
 	spawn(5) // so it wont get deleted by explosion
 		F.throw_at(get_edge_target_turf(F, rand(1, 6)), 3, 1)
@@ -399,7 +399,7 @@
 					var/obj/effect/effect/crosshair/C = new /obj/effect/effect/crosshair(target_mob.loc)
 					C.StayOn(target_mob)
 					playsound(C.loc, 'sound/weapons/guns/interact/batrifle_cock.ogg', 100, 1)
-					spawn(20) 
+					spawn(20)
 						shoot_sniper(target_mob)
 						qdel(C)
 						doing_something = FALSE

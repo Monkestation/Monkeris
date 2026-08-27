@@ -46,7 +46,7 @@
 	if(!.)
 		return
 
-	if(stasis)
+	if((stasis || AI_inactive) && !no_stasis)
 		return
 
 	if(loc && istype(loc,/turf/space))
