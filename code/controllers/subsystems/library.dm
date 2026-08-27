@@ -22,7 +22,7 @@ SUBSYSTEM_DEF(library)
 	prepare_official_posters()
 	prepare_library_areas()
 	load_shelves()
-	return ..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/library/proc/load_shelves()
 	var/list/datum/callback/load_callbacks = list()

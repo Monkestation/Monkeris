@@ -8,7 +8,7 @@ SUBSYSTEM_DEF(evac)
 /datum/controller/subsystem/evac/Initialize(start_timeofday)
 	evacuation_controller = new /datum/evacuation_controller/starship()
 	evacuation_controller.set_up()
-	return ..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/evac/fire()
 	evacuation_controller.Process()

@@ -16,4 +16,5 @@ SUBSYSTEM_DEF(language)
 			GLOB.language_keys[lowertext(L.key)] = L
 			GLOB.language_types_by_name[initial(L.name)] = L.type
 
-	. = ..()
+	return SS_INIT_SUCCESS
+

@@ -70,7 +70,7 @@ SUBSYSTEM_DEF(job)
 	if(!length(occupations))
 		SetupOccupations()
 		LoadJobs("config/jobs.txt")
-	return ..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/job/fire(resumed)
 	for(var/key in queries_by_key)
