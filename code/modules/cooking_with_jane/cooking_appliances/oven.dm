@@ -403,3 +403,8 @@
 	if(!ishuman(usr) && !isrobot(usr))
 		return
 	handle_open(usr)
+
+/obj/machinery/cooking_with_jane/oven/makeshift
+	name = "Makeshift Oven"
+	desc = "A homemade oven for baking food."
+	icon = 'icons/obj/cwj_cooking/makeshift.dmi'
