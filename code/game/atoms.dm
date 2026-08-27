@@ -70,9 +70,6 @@
 	/// Our light source. Don't fuck with this directly unless you have a good reason!
 	var/tmp/datum/light_source/light
 
-	///Lazy assoc list for managing filters attached to us
-	var/list/filter_data
-
 /atom/proc/update_icon()
 	return
 
@@ -197,10 +194,6 @@
 
 	update_openspace()
 	return ..()
-
-/// Generate a tag for this atom
-/atom/proc/GenerateTag()
-	return
 
 /atom/proc/reveal_blood()
 	return
