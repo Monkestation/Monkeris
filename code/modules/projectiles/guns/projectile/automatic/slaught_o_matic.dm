@@ -23,7 +23,6 @@
 
 	safety = FALSE
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
-	var/list/possible_colors = list("purple", "magenta", "blue", "cyan", "aqua", "green", "yellow", "orange", "red" )
 	var/choosen_color = ""
 
 	damage_multiplier = 0.8
@@ -38,20 +37,16 @@
 		)
 	wield_delay = 0
 
-
 /obj/item/gun/projectile/automatic/slaught_o_matic/Initialize()
 	. = ..()
 	ammo_magazine = new magazine_type(src)
-
 	restrict_safety = TRUE // We need safty switch but we can not use him
-
-	choosen_color = pick(possible_colors)
+	choosen_color = pick(list("purple","magenta","blue","cyan","aqua","green","yellow","orange","red"))
 	update_icon()
 
 /obj/item/gun/projectile/automatic/slaught_o_matic/update_icon()
 	..()
-
-	var/iconstring = initial(icon_state)
+	var/iconstring = "slaught"
 	var/itemstring = "_" + choosen_color
 
 	wielded_item_state = "_doble_" + choosen_color
