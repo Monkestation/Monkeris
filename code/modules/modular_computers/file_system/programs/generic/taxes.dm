@@ -27,6 +27,22 @@
 	var/account_registration_fee = 500
 	var/department_registration_fee = 2000
 
+/datum/nano_module/program/tax/proc/email_employee(datum/money_account/employee, change)
+	var/datum/computer_file/report/crew_record/record = get_crewmember_record(employee.owner_name)
+	var/datum/computer_file/data/email_account/service/payroll/sender = ntnet_global.find_email_by_login(EMAIL_PAYROLL)
+	if(!record || !sender)
+		return
+
+	var/address = record.get_email()
+	if(!address || address == "none")
+		return
+
+	var/datum/computer_file/data/email_message/message = new()
+	message.title = "Payroll Settings Changed"
+	message.source = sender.login
+	message.stored_data = "Your payroll was altered through TaxQuickly.\n\n[change]\n\nCurrent wage: [employee.wage][CREDITS]\nEmployer: [employee.employer ? employee.employer : "None"]"
+	sender.send_mail(address, message)
+
 
 /datum/nano_module/program/tax/Topic(href, href_list)
 	if(..())
@@ -123,6 +139,7 @@
 		account.wage = null
 		account.debt = null
 		account.wage_manual = FALSE
+		email_employee(account, "Your account is no longer assigned to a department.")
 		return TOPIC_REFRESH
 
 	if(href_list["set_wage"])
@@ -133,6 +150,7 @@
 				amount = 0
 			A.wage = amount
 			A.wage_manual = TRUE // Handle wage manually from now on
+			email_employee(A, "Your wage was manually set to [amount][CREDITS].")
 		return TOPIC_REFRESH
 
 	if(href_list["reset_wage"])
@@ -144,6 +162,7 @@
 			else // If personal account, set starting wage
 				A.wage = A.wage_original
 			A.wage_manual = FALSE // Handle wage authomatically from now on
+			email_employee(A, "Your wage was reset to automatic calculation.")
 		return TOPIC_REFRESH
 
 	if(href_list["disavow"]) // Unlink that account and reset it's values
@@ -156,6 +175,7 @@
 			if(A.department_id) // If it was linked and unlinked to account mid-round some values could break, resetting
 				var/datum/department/D = GLOB.all_departments[A.department_id]
 				D.funding_source = initial(D.funding_source)
+			email_employee(A, "Your account is no longer assigned to a department.")
 		return TOPIC_REFRESH
 
 	if(href_list["link"])
@@ -179,6 +199,7 @@
 			else
 				A.employer = account.department_id
 				A.wage_manual = FALSE
+			email_employee(A, "Your account was assigned to [account.get_name()] for payroll.")
 		return TOPIC_REFRESH
 
 	if(href_list["create_account"])
