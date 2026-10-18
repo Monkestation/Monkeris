@@ -34,10 +34,10 @@
 	var/list/path = list()
 	var/frustration = 0
 	var/turf/patrol_target = null	// This is where we are headed
-	var/closest_dist				// Used to find the closest beakon
+	var/closest_dist				// Used to find the closest beacon
 	var/destination = "__nearest__"	// This is the current beacon's ID
 	var/next_destination = "__nearest__"	// This is the next beacon's ID
-	var/nearest_beacon				// Tag of the beakon that we assume to be the closest one
+	var/nearest_beacon				// Tag of the beacon that we assume to be the closest one
 
 	var/bot_version = 1.3
 	var/list/threat_found_sounds = new('sound/voice/bcriminal.ogg', 'sound/voice/bjustice.ogg', 'sound/voice/bfreeze.ogg')
@@ -337,7 +337,7 @@
 	return
 
 /mob/living/bot/secbot/proc/calc_path(turf/avoid = null)
-	path = AStar(loc, patrol_target, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 120, id=botcard, exclude=avoid)
+	path = AStar(loc, patrol_target, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 20, id=botcard, exclude=avoid)
 	if(!path)
 		path = list()
 

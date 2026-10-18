@@ -26,7 +26,7 @@
 	var/blood = 1
 	var/list/target_types = list()
 
-	var/maximum_search_range = 7
+	var/maximum_search_range = 5
 	var/give_up_cooldown = 0
 	var/list/possible_phrases = list(
 		"Foolish organic meatbags can only leak their liquids all over the place.",
@@ -56,7 +56,7 @@
 			return 1
 	if(!path.len)
 //		spawn(0)
-		path = AStar(loc, target.loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 30, id = botcard)
+		path = AStar(loc, target.loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 5, id = botcard)
 		if(!path)
 			target = null
 			path = list()
@@ -137,14 +137,14 @@
 				var/datum/signal/signal = new()
 				signal.source = src
 				signal.transmission_method = 1
-				signal.data = list("findbeakon" = "patrol")
+				signal.data = list("findbeacon" = "patrol")
 				frequency.post_signal(src, signal, filter = RADIO_NAVBEACONS)
 				signal_sent = world.time
 			else
 				if(next_dest)
 					next_dest_loc = listener.memorized[next_dest]
 					if(next_dest_loc)
-						patrol_path = AStar(loc, next_dest_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 120, id = botcard, exclude = null)
+						patrol_path = AStar(loc, next_dest_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 10, id = botcard, exclude = null)
 						signal_sent = 0
 		else
 			if(pulledby) // Don't wiggle if someone pulls you
@@ -299,7 +299,7 @@
 	var/dist = get_dist(cleanbot, signal.source.loc)
 	memorized[recv] = signal.source.loc
 
-	if(dist < cleanbot.closest_dist) // We check all signals, choosing the closest beakon; then we move to the NEXT one after the closest one
+	if(dist < cleanbot.closest_dist) // We check all signals, choosing the closest beacon; then we move to the NEXT one after the closest one
 		cleanbot.closest_dist = dist
 		cleanbot.next_dest = signal.data["next_patrol"]
 
