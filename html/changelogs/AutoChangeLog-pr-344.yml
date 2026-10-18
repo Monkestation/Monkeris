@@ -1,0 +1,6 @@
+author: The-Hotline-System
+delete-after: true
+changes:
+  - rscadd: Reagent, Slop
+  - rscadd: Duplication functionality to obj/machinery/biogenerator
+  - tweak: PERK_CLUB ability to see food quality value
