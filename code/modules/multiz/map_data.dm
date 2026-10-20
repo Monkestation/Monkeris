@@ -93,7 +93,7 @@ GLOBAL_DATUM_INIT(maps_data, /datum/maps_data, new)
 
 	var/default_spawn = "Aft Cryogenic Storage"
 
-	var/allowed_jobs = list(/datum/job/captain, /datum/job/rd, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/ihc,
+	var/list/allowed_jobs = list(/datum/job/captain, /datum/job/rd, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/ihc,
 						/datum/job/gunserg, /datum/job/inspector, /datum/job/medspec, /datum/job/ihoper,
 						/datum/job/doctor, /datum/job/chemist, /datum/job/paramedic, /datum/job/bioengineer,
 						/datum/job/technomancer,
@@ -102,9 +102,7 @@ GLOBAL_DATUM_INIT(maps_data, /datum/maps_data, new)
 						/datum/job/chaplain, /datum/job/acolyte, /datum/job/janitor, /datum/job/hydro,
 						/datum/job/scientist, /datum/job/roboticist, /datum/job/psychiatrist,
 						/datum/job/ai, /datum/job/cyborg,
-						/datum/job/assistant
-
-						)
+						/datum/job/assistant)
 	var/pulsar_z
 	var/pulsar_size = 20  //Should be an even number, to place the pulsar in the middle
 	var/obj/effect/pulsar/pulsar_star

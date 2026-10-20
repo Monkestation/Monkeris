@@ -23,6 +23,8 @@ GLOBAL_VAR_INIT(refid_filter, TYPEID(filter(type="angular_blur")))
 
 #define isgenerator(A) (istype(A, /generator))
 
+#define isalist(A) (istype(A, /alist))
+
 #define islist(A) istype(A, /list)
 
 #define ismob(A) istype(A, /mob)
@@ -138,6 +140,8 @@ GLOBAL_VAR_INIT(refid_filter, TYPEID(filter(type="angular_blur")))
 
 // Turfs
 #define isclosedturf(A) (A.layer == CLOSED_TURF_LAYER)
+
+#define isfloorturf(A) (istype(A, /turf/floor))
 
 // Book things
 GLOBAL_LIST_INIT(book_types, typecacheof(list(

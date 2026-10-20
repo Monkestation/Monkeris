@@ -38,6 +38,9 @@
 // If uncommented, will display info about byond-tracy's status in the MC tab.
 // #define MC_TAB_TRACY_INFO
 
+/// If defined, we boot up, run world.run_performance_tests() and then shut down the server
+// #define PERFORMANCE_TESTS
+
 /*
 * Enables debug messages for every single reaction step. This is 1 message per 0.5s for a SINGLE reaction. Useful for tracking down bugs/asking me for help in the main reaction handiler (equilibrium.dm).
 *

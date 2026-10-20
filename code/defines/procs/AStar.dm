@@ -36,11 +36,11 @@ length to avoid portals or something i guess?? Not that they're counted right no
 
 // Also added 'exclude' turf to avoid travelling over; defaults to null
 
-/proc/PathWeightCompare(PathNode/a, PathNode/b)
+/proc/cmp_path_weight(PathNode/a, PathNode/b)
 	return a.estimated_cost - b.estimated_cost
 
 /proc/AStar(start, end, adjacent, dist, max_nodes, max_node_depth = 30, min_target_dist = 0, min_node_dist, id, datum/exclude)
-	var/PriorityQueue/open = new /PriorityQueue(/proc/PathWeightCompare)
+	var/datum/priority_queue/open = new /datum/priority_queue(GLOBAL_PROC_REF(cmp_path_weight))
 	var/list/closed = list()
 	var/list/path
 	var/list/path_node_by_position = list()

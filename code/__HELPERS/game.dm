@@ -617,4 +617,4 @@
 		var/mob/player_mob = flashed_client
 		if(player_mob.client)
 			flashed_client = player_mob.client
-	winset(flashed_client, "mainwindow", "flash=5")
+	winset(flashed_client, SKIN_MAINWINDOW, "flash=5")
