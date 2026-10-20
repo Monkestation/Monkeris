@@ -9,7 +9,6 @@
 
 // See initialization order in /code/game/world.dm
 GLOBAL_REAL(Master, /datum/controller/master)
-
 /datum/controller/master
 	name = "Master"
 
@@ -33,6 +32,8 @@ GLOBAL_REAL(Master, /datum/controller/master)
 	var/init_timeofday
 	var/init_time
 	var/tickdrift = 0
+	/// Tickdrift as of last tick, w no averaging going on
+	var/olddrift = 0
 
 	/// How long is the MC sleeping between runs, read only (set by Loop() based off of anti-tick-contention heuristics)
 	var/sleep_delta = 1
@@ -61,6 +62,10 @@ GLOBAL_REAL(Master, /datum/controller/master)
 	/// Outside of initialization, returns null.
 	var/current_initializing_subsystem = null
 
+	/// The last decisecond we force dumped profiling information
+	/// Used to avoid spamming profile reads since they can be expensive (string memes)
+	var/last_profiled = 0
+
 	var/static/restart_clear = 0
 	var/static/restart_timeout = 0
 	var/static/restart_count = 0
@@ -73,14 +78,24 @@ GLOBAL_REAL(Master, /datum/controller/master)
 
 	var/list/list/stage_sorted_subsystems
 
+	/// Whether the Overview UI will update as fast as possible for viewers.
+	var/overview_fast_update = FALSE
+	/// Enables rolling usage averaging
+	var/use_rolling_usage = FALSE
+	/// How long to run our rolling usage averaging
+	var/rolling_usage_length = 5 SECONDS
+
 /datum/controller/master/New()
+	// Ensure usr is null, to prevent any potential weirdness resulting from the MC having a usr if it's manually restarted.
+	usr = null
+
 	if(!config)
 		config = new
 	// Highlander-style: there can only be one! Kill off the old and replace it with the new.
 
 	if(!random_seed)
 		#ifdef UNIT_TESTS
-		random_seed = 29051994
+		random_seed = 29051994 // How about 22475?
 		#else
 		random_seed = rand(1, 1e9)
 		#endif
@@ -97,7 +112,7 @@ GLOBAL_REAL(Master, /datum/controller/master)
 			//Code used for first master on game boot or if existing master got deleted
 			Master = src
 			var/list/subsystem_types = subtypesof(/datum/controller/subsystem)
-			sortTim(subsystem_types, /proc/cmp_subsystem_init)
+			sortTim(subsystem_types, GLOBAL_PROC_REF(cmp_subsystem_init))
 
 			//Find any abandoned subsystem from the previous master (if there was any)
 			var/list/existing_subsystems = list()
@@ -123,12 +138,120 @@ GLOBAL_REAL(Master, /datum/controller/master)
 
 /datum/controller/master/Shutdown()
 	processing = FALSE
-	sortTim(subsystems, /proc/cmp_subsystem_init)
+	sortTim(subsystems, GLOBAL_PROC_REF(cmp_subsystem_init))
 	reverseRange(subsystems)
 	for(var/datum/controller/subsystem/ss in subsystems)
 		log_world("Shutting down [ss.name] subsystem...")
+		if (ss.slept_count > 0)
+			log_world("Warning: Subsystem `[ss.name]` slept [ss.slept_count] times.")
 		ss.Shutdown()
 	log_world("Shutdown complete")
+
+/client/proc/cmd_controller_view_ui()
+	set category = "Debug"
+	set name = "Controller Overview"
+	set desc = "View the current states of the Subsystem Controllers."
+	if(!holder?.check_for_rights(R_SERVER|R_DEBUG))
+		return
+	Master.ui_interact(mob)
+
+/datum/controller/master/ui_status(mob/user, datum/ui_state/state)
+	if(!user.client?.holder?.check_for_rights(R_SERVER|R_DEBUG))
+		return UI_CLOSE
+	return UI_INTERACTIVE
+
+/datum/controller/master/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(isnull(ui))
+		ui = new /datum/tgui(user, src, "ControllerOverview")
+		ui.open()
+		use_rolling_usage = TRUE
+
+/datum/controller/master/ui_close(mob/user)
+	var/valid_found = FALSE
+	for(var/datum/tgui/open_ui as anything in open_uis)
+		if(open_ui.user == user)
+			continue
+		valid_found = TRUE
+	if(!valid_found)
+		use_rolling_usage = FALSE
+	return ..()
+
+/datum/controller/master/ui_data(mob/user)
+	var/list/data = list()
+
+	var/list/subsystem_data = list()
+	for(var/datum/controller/subsystem/subsystem as anything in subsystems)
+		var/list/rolling_usage = subsystem.rolling_usage
+		subsystem.prune_rolling_usage()
+
+		// Then we sum
+		var/sum = 0
+		for(var/i in 2 to length(rolling_usage) step 2)
+			sum += rolling_usage[i]
+		var/average = sum / DS2TICKS(rolling_usage_length)
+
+		subsystem_data += list(list(
+			"name" = subsystem.name,
+			"ref" = REF(subsystem),
+			"init_order" = subsystem.init_order,
+			"last_fire" = subsystem.last_fire,
+			"next_fire" = subsystem.next_fire,
+			"can_fire" = subsystem.can_fire,
+			"doesnt_fire" = !!(subsystem.flags & SS_NO_FIRE),
+			"cost_ms" = subsystem.cost,
+			"tick_usage" = subsystem.tick_usage,
+			"usage_per_tick" = average,
+			"overtime" = subsystem.tick_overrun,
+			"initialized" = subsystem.initialized,
+			"initialization_failure_message" = subsystem.initialization_failure_message,
+		))
+	data["subsystems"] = subsystem_data
+	data["world_time"] = world.time
+	data["map_cpu"] = world.map_cpu
+	data["fast_update"] = overview_fast_update
+	data["rolling_length"] = rolling_usage_length
+
+	return data
+
+/datum/controller/master/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+	if(..())
+		return TRUE
+
+	switch(action)
+		if("toggle_fast_update")
+			overview_fast_update = !overview_fast_update
+			return TRUE
+
+		if("set_rolling_length")
+			var/length = text2num(params["rolling_length"])
+			if(!length || length < 0)
+				return
+			rolling_usage_length = length SECONDS
+			return TRUE
+
+		if("view_variables")
+			var/datum/controller/subsystem/subsystem = locate(params["ref"]) in subsystems
+			if(isnull(subsystem))
+				to_chat(ui.user, span_warning("Failed to locate subsystem."))
+				return
+			ui.user.client.debug_variables(subsystem)
+			return TRUE
+
+/datum/controller/master/proc/check_and_perform_fast_update()
+	PRIVATE_PROC(TRUE)
+	set waitfor = FALSE
+
+
+	if(!overview_fast_update)
+		return
+
+	var/static/already_updating = FALSE
+	if(already_updating)
+		return
+	already_updating = TRUE
+	SStgui.update_uis(src)
+	already_updating = FALSE
 
 // Returns 1 if we created a new mc, 0 if we couldn't due to a recent restart,
 // -1 if we encountered a runtime trying to recreate it
@@ -150,48 +273,50 @@ GLOBAL_REAL(Master, /datum/controller/master)
 		return -1
 	return 1
 
-
 /datum/controller/master/Recover()
 	var/msg = "## DEBUG: [time2text(world.timeofday)] MC restarted. Reports:\n"
-	for (var/varname in Master.vars)
-		switch (varname)
-			if("name", "tag", "bestF", "type", "parent_type", "vars", "statclick") // Built-in junk.
-				continue
-			else
-				var/varval = Master.vars[varname]
-				if (isdatum(varval)) // Check if it has a type var.
-					var/datum/D = varval
-					msg += "\t [varname] = [D]([D.type])\n"
-				else
-					msg += "\t [varname] = [varval]\n"
+	var/list/master_attributes = Master.vars
+	var/list/filtered_variables = list(
+		NAMEOF(src, name),
+		NAMEOF(src, parent_type),
+		NAMEOF(src, tag),
+		NAMEOF(src, type),
+		NAMEOF(src, vars),
+	)
+	for (var/varname in master_attributes - filtered_variables)
+		var/varval = master_attributes[varname]
+		if (isdatum(varval)) // Check if it has a type var.
+			var/datum/D = varval
+			msg += "\t [varname] = [D]([D.type])\n"
+		else
+			msg += "\t [varname] = [varval]\n"
 	log_world(msg)
 
-	var/datum/controller/subsystem/lastSS = Master.last_type_processed
+	var/datum/controller/subsystem/BadBoy = Master.last_type_processed
 	var/FireHim = FALSE
-	if(istype(lastSS))
+	if(istype(BadBoy))
 		msg = null
-		LAZYINITLIST(lastSS.failure_strikes)
-		switch(++lastSS.failure_strikes[lastSS.type])
+		LAZYINITLIST(BadBoy.failure_strikes)
+		switch(++BadBoy.failure_strikes[BadBoy.type])
 			if(2)
-				msg = "The [lastSS.name] subsystem was the last to fire for 2 controller restarts. It will be recovered now and disabled if it happens again."
+				msg = "The [BadBoy.name] subsystem was the last to fire for 2 controller restarts. It will be recovered now and disabled if it happens again."
 				FireHim = TRUE
 			if(3)
-				msg = "The [lastSS.name] subsystem seems to be destabilizing the MC and will be offlined."
-				lastSS.flags |= SS_NO_FIRE
+				msg = "The [BadBoy.name] subsystem seems to be destabilizing the MC and will be put offline."
+				BadBoy.flags |= SS_NO_FIRE
 		if(msg)
 			to_chat(GLOB.admins, span_boldannounce("[msg]"))
 			log_world(msg)
 
 	if (istype(Master.subsystems))
 		if(FireHim)
-			Master.subsystems += new lastSS.type //NEW_SS_GLOBAL will remove the old one
+			Master.subsystems += new BadBoy.type //NEW_SS_GLOBAL will remove the old one
 		subsystems = Master.subsystems
 		current_runlevel = Master.current_runlevel
 		StartProcessing(10)
 	else
 		to_chat(world, span_boldannounce("The Master Controller is having some issues, we will need to re-initialize EVERYTHING"))
-		Initialize(20, TRUE)
-
+		Initialize(20, TRUE, FALSE)
 
 // Please don't stuff random bullshit here,
 // Make a subsystem, give it the SS_NO_FIRE flag, and do your work in it's Initialize()
@@ -216,7 +341,7 @@ GLOBAL_REAL(Master, /datum/controller/master)
 		stage_sorted_subsystems[i] = list()
 
 	// Sort subsystems by init_order, so they initialize in the correct order.
-	sortTim(subsystems, /proc/cmp_subsystem_init)
+	sortTim(subsystems, GLOBAL_PROC_REF(cmp_subsystem_init))
 
 	for (var/datum/controller/subsystem/subsystem as anything in subsystems)
 		var/subsystem_init_stage = subsystem.init_stage
@@ -226,23 +351,15 @@ GLOBAL_REAL(Master, /datum/controller/master)
 		stage_sorted_subsystems[subsystem_init_stage] += subsystem
 
 	// Sort subsystems by display setting for easy access.
-	sortTim(subsystems, /proc/cmp_subsystem_display)
+	sortTim(subsystems, GLOBAL_PROC_REF(cmp_subsystem_display))
 	var/start_timeofday = REALTIMEOFDAY
+
 	log_world("Initializing subsystems...")
 	for (var/current_init_stage in 1 to INITSTAGE_MAX)
-
 		// Initialize subsystems.
-		for (var/datum/controller/subsystem/subsystem in stage_sorted_subsystems[current_init_stage])
-			if (subsystem.flags & SS_NO_INIT || subsystem.initialized) //Don't init SSs with the corresponding flag or if they are already initialzized
-				continue
-			current_initializing_subsystem = subsystem
+		for(var/datum/controller/subsystem/subsystem in stage_sorted_subsystems[current_init_stage])
 			subsystem.order_in_stage = stage_sorted_subsystems[current_init_stage].Find(subsystem)
-
-			rustg_time_reset(SS_INIT_TIMER_KEY)
-			log_game("Initializing [subsystem.name] subsystem...")
-			world.name = "[get_default_world_name(FALSE)] - [subsystem.order_string()] Initializing [subsystem.name] subsystem..."
-			subsystem.Initialize()
-
+			init_subsystem(subsystem)
 			CHECK_TICK
 		current_initializing_subsystem = null
 		init_stage_completed = current_init_stage
@@ -253,9 +370,7 @@ GLOBAL_REAL(Master, /datum/controller/master)
 			// Loop.
 			Master.StartProcessing(0)
 
-	var/time = (REALTIMEOFDAY - start_timeofday) / 10
-
-
+	var/time = (REALTIMEOFDAY - start_timeofday) / (1 SECONDS)
 	var/msg_fancy = "Initializations complete within [get_colored_thresh_text("[time] second[time == 1 ? "" : "s"]!", time, 200 SECONDS / 10)]!"
 	msg = "Initializations complete within [time] second[time == 1 ? "" : "s"]!"
 
@@ -264,23 +379,113 @@ GLOBAL_REAL(Master, /datum/controller/master)
 	to_chat(world, span_boldannounce(msg_fancy))
 	log_world(msg)
 
-	SSplexora.serverinitdone(time)
+	clear_profiler()
 
-	if (tgs_prime)
-		world.TgsInitializationComplete()
+	// basically, most songs end around the 5 minute mark,
+	// so lets give them time to actually play. we're resetting the countdown back to default
+	// because who knows how long we took for initializations, and whatever.
+	SSticker.SetTimeLeft(CONFIG_GET(number/lobby_countdown) * 10)
+
+	SSplexora.serverinitdone(time)
 
 	// Set world options.
 	world.change_fps(CONFIG_GET(number/fps))
 	var/initialized_tod = REALTIMEOFDAY
 
-	// if(sleep_offline_after_initializations)
-	// 	world.sleep_offline = TRUE
-	sleep(1)
+	if(tgs_prime)
+		world.TgsInitializationComplete()
 
-	// if(sleep_offline_after_initializations && CONFIG_GET(flag/resume_after_initializations))
-	// 	world.sleep_offline = FALSE
+	if(sleep_offline_after_initializations)
+		world.sleep_offline = TRUE
+	sleep(1 TICKS)
+
+	if(sleep_offline_after_initializations && CONFIG_GET(flag/resume_after_initializations))
+		world.sleep_offline = FALSE
 	initializations_finished_with_no_players_logged_in = initialized_tod < REALTIMEOFDAY - 10
 
+/**
+ * Initialize a given subsystem and handle the results.
+ *
+ * Arguments:
+ * * subsystem - the subsystem to initialize.
+ */
+/datum/controller/master/proc/init_subsystem(datum/controller/subsystem/subsystem)
+	var/static/list/valid_results = list(
+		SS_INIT_FAILURE,
+		SS_INIT_NONE,
+		SS_INIT_SUCCESS,
+		SS_INIT_NO_NEED,
+	)
+
+	if ((subsystem.flags & SS_NO_INIT) || subsystem.initialized) //Don't init SSs with the corresponding flag or if they already are initialized
+		subsystem.ready = TRUE // set ready to TRUE, because the value of ready may still be checked on SS_NO_INIT subsystems as an "is this ready" check
+		return
+
+	current_initializing_subsystem = subsystem
+	rustg_time_reset(SS_INIT_TIMER_KEY)
+	if(!(subsystem.flags & SS_NO_INIT_MESSAGE))
+		log_game("Initializing [subsystem.name] subsystem...")
+		world.name = "[get_default_world_name(FALSE)] - [subsystem.order_string()] Initializing [subsystem.name] subsystem..."
+
+	var/result = subsystem.Initialize()
+
+	// Capture end time
+	var/time = rustg_time_milliseconds(SS_INIT_TIMER_KEY)
+	var/seconds = round(time / 1000, 0.01)
+
+	// Always update the blackbox tally regardless.
+	SSblackbox.record_feedback("tally", "subsystem_initialize", time, subsystem.name)
+
+	// Gave invalid return value.
+	if(result && !(result in valid_results))
+		warning("[subsystem.name] subsystem initialized, returning invalid result [result]. This is a bug.")
+
+	// just returned ..() or didn't implement Initialize() at all
+	if(result == SS_INIT_NONE || !result)
+		warning("[subsystem.name] subsystem does not implement Initialize() or it returns ..(). If the former is true, the SS_NO_INIT flag should be set for this subsystem.")
+
+	if(result != SS_INIT_FAILURE)
+		// Some form of success, implicit failure, or the SS in unused.
+		subsystem.initialized = TRUE
+
+		SEND_SIGNAL(subsystem, COMSIG_SUBSYSTEM_POST_INITIALIZE)
+	else
+		// The subsystem officially reports that it failed to init and wishes to be treated as such.
+		subsystem.initialized = FALSE
+		subsystem.can_fire = FALSE
+
+	if((subsystem.flags & SS_NO_INIT_MESSAGE))
+		return
+
+	var/order_string = subsystem.order_string()
+	// The rest of this proc is printing the world log and updating the splash screen.
+	var/message
+	var/message_fancy
+	var/always_show = FALSE
+
+	switch(result)
+		if(SS_INIT_FAILURE)
+			message = "\[[order_string]\] Failed to initialize [subsystem.name] subsystem after"
+			message_fancy = "<code>\[[order_string]\]</code> [span_bold("Failed")] to initialize [subsystem.name] subsystem after"
+			always_show = TRUE
+		if(SS_INIT_SUCCESS)
+			message = "\[[order_string]\] Initialized [subsystem.name] subsystem within"
+			message_fancy = "<code>\[[order_string]\]</code> Initialized [span_adminsay(subsystem.name)] subsystem within"
+		if(SS_INIT_NO_NEED)
+			// This SS is disabled or is otherwise shy.
+			pass()
+		else
+			// SS_INIT_NONE or an invalid value.
+			message = "\[[order_string]\] Initialized [subsystem.name] subsystem with errors within"
+			message_fancy = "<code>\[[order_string]\]</code> Initialized [span_adminsay(subsystem.name)] subsystem [span_bold("with errors")]  within"
+			always_show = TRUE
+
+	if((message && !(subsystem.flags & SS_NO_INIT_MESSAGE)) || always_show)
+		message_fancy += " [get_colored_thresh_text("[seconds] second[seconds == 1 ? "" : "s"]!", seconds, subsystem.init_time_threshold / 10)]"
+		message += " [seconds] second[seconds == 1 ? "" : "s"]!"
+		to_chat(world, span_boldannounce(message_fancy))
+	if(message)
+		log_world(message)
 
 /datum/controller/master/proc/SetRunLevel(new_runlevel)
 	var/old_runlevel = current_runlevel
@@ -328,8 +533,7 @@ GLOBAL_REAL(Master, /datum/controller/master)
 	var/list/tickersubsystems = list()
 	var/list/runlevel_sorted_subsystems = list(list()) //ensure we always have at least one runlevel
 	var/timer = world.time
-	for (var/thing in subsystems)
-		var/datum/controller/subsystem/SS = thing
+	for (var/datum/controller/subsystem/SS as anything in subsystems)
 		if (SS.flags & SS_NO_FIRE)
 			continue
 		if (SS.init_stage > init_stage)
@@ -340,15 +544,25 @@ GLOBAL_REAL(Master, /datum/controller/master)
 		SS.state = SS_IDLE
 		if ((SS.flags & (SS_TICKER|SS_BACKGROUND)) == SS_TICKER)
 			tickersubsystems += SS
-			timer += world.tick_lag * rand(1, 5)
+			// Timer subsystems aren't allowed to bunch up, so we offset them a bit
+			timer += TICKS2DS(rand(0, 1))
 			SS.next_fire = timer
 			continue
 
+		// Now, we have to set starting next_fires for all our new non ticker kids
+		if(SS.init_stage == init_stage - 1 && (SS.runlevels & current_runlevel))
+			// Give em a random offset so things don't clump up too bad
+			var/delay = SS.wait
+			if(SS.flags & SS_TICKER)
+				delay = TICKS2DS(delay)
+			// Gotta convert to ticks cause rand needs integers
+			SS.next_fire = world.time + TICKS2DS(rand(0, DS2TICKS(min(delay, 2 SECONDS))))
+
 		var/ss_runlevels = SS.runlevels
 		var/added_to_any = FALSE
-		for(var/I in 1 to bitflags.len)
-			if(ss_runlevels & bitflags[I])
-				while(runlevel_sorted_subsystems.len < I)
+		for(var/I in 1 to length(GLOB.bitflags))
+			if(ss_runlevels & GLOB.bitflags[I])
+				while(length(runlevel_sorted_subsystems) < I)
 					runlevel_sorted_subsystems += list(list())
 				runlevel_sorted_subsystems[I] += SS
 				added_to_any = TRUE
@@ -359,9 +573,9 @@ GLOBAL_REAL(Master, /datum/controller/master)
 	queue_tail = null
 	//these sort by lower priorities first to reduce the number of loops needed to add subsequent SS's to the queue
 	//(higher subsystems will be sooner in the queue, adding them later in the loop means we don't have to loop thru them next queue add)
-	sortTim(tickersubsystems, /proc/cmp_subsystem_priority)
+	sortTim(tickersubsystems, GLOBAL_PROC_REF(cmp_subsystem_priority))
 	for(var/I in runlevel_sorted_subsystems)
-		sortTim(I, /proc/cmp_subsystem_priority)
+		sortTim(I, GLOBAL_PROC_REF(cmp_subsystem_priority))
 		I += tickersubsystems
 
 	var/cached_runlevel = current_runlevel
@@ -380,15 +594,20 @@ GLOBAL_REAL(Master, /datum/controller/master)
 	var/datum/stack_canary/canary = stack_end_detector.prime_canary()
 	canary.use_variable()
 	//the actual loop.
-	while (1)
-		tickdrift = max(0, MC_AVERAGE_FAST(tickdrift, (((REALTIMEOFDAY - init_timeofday) - (world.time - init_time)) / world.tick_lag)))
+	while (TRUE)
+		var/newdrift = ((REALTIMEOFDAY - init_timeofday) - (world.time - init_time)) / world.tick_lag
+		tickdrift = max(0, MC_AVERAGE_FAST(tickdrift, newdrift))
 		var/starting_tick_usage = TICK_USAGE
+
+		if(newdrift - olddrift >= CONFIG_GET(number/drift_dump_threshold))
+			AttemptProfileDump(CONFIG_GET(number/drift_profile_delay))
+		olddrift = newdrift
 
 		if (init_stage != init_stage_completed)
 			return MC_LOOP_RTN_NEWSTAGES
 		if (processing <= 0)
 			current_ticklimit = TICK_LIMIT_RUNNING
-			sleep(10)
+			sleep(1 SECONDS)
 			continue
 
 		//Anti-tick-contention heuristics:
@@ -425,14 +644,20 @@ GLOBAL_REAL(Master, /datum/controller/master)
 			var/checking_runlevel = current_runlevel
 			if(cached_runlevel != checking_runlevel)
 				//resechedule subsystems
+				var/list/old_subsystems = current_runlevel_subsystems
 				cached_runlevel = checking_runlevel
 				current_runlevel_subsystems = runlevel_sorted_subsystems[cached_runlevel]
-				var/stagger = world.time
-				for(var/I in current_runlevel_subsystems)
-					var/datum/controller/subsystem/SS = I
-					if(SS.next_fire <= world.time)
-						stagger += world.tick_lag * rand(1, 5)
-						SS.next_fire = stagger
+
+				//now we'll go through all the subsystems we want to offset and give them a next_fire
+				for(var/datum/controller/subsystem/SS as anything in current_runlevel_subsystems)
+					//we only want to offset it if it's new and also behind
+					if(SS.next_fire > world.time || (SS in old_subsystems))
+						continue
+					// If they're new, give em a random offset so things don't clump up too bad
+					var/delay = SS.wait
+					if(SS.flags & SS_TICKER)
+						delay = TICKS2DS(delay)
+					SS.next_fire = world.time + TICKS2DS(rand(0, DS2TICKS(min(delay, 2 SECONDS))))
 
 			subsystems_to_check = current_runlevel_subsystems
 		else
@@ -502,10 +727,8 @@ GLOBAL_REAL(Master, /datum/controller/master)
 			if (processing * sleep_delta <= world.tick_lag)
 				current_ticklimit -= (TICK_LIMIT_RUNNING * 0.25) //reserve the tail 1/4 of the next tick for the mc if we plan on running next tick
 
+		check_and_perform_fast_update()
 		sleep(world.tick_lag * (processing * sleep_delta))
-
-
-
 
 // This is what decides if something should run.
 /datum/controller/master/proc/CheckQueue(list/subsystemstocheck)
@@ -529,12 +752,25 @@ GLOBAL_REAL(Master, /datum/controller/master)
 		if (SS_flags & SS_NO_FIRE)
 			subsystemstocheck -= SS
 			continue
+		// If we're keeping timing and running behind,
+		// fire at most 25% faster then normal to try and make up the gap without spamming
 		if ((SS_flags & (SS_TICKER|SS_KEEP_TIMING)) == SS_KEEP_TIMING && SS.last_fire + (SS.wait * 0.75) > world.time)
 			continue
 		if (SS.postponed_fires >= 1)
 			SS.postponed_fires--
 			SS.update_nextfire()
 			continue
+		if(SS_flags & SS_HIBERNATE)
+			var/list/check_vars = SS.hibernate_checks
+			var/enter_queue
+			for(var/i in 1 to length(check_vars))
+				if(LAZYLEN(SS.vars[check_vars[i]]))
+					enter_queue = TRUE
+					break
+			if(!enter_queue)
+				SS.hibernation_state = SS_IS_HIBERNATING
+				SS.update_nextfire()
+				continue
 		SS.enqueue()
 	. = 1
 
@@ -608,9 +844,21 @@ GLOBAL_REAL(Master, /datum/controller/master)
 
 			queue_node.state = SS_RUNNING
 
+			if(queue_node.profiler_focused)
+				world.Profile(PROFILE_START)
+
 			tick_usage = TICK_USAGE
 			var/state = queue_node.ignite(queue_node_paused)
 			tick_usage = TICK_USAGE - tick_usage
+
+			if(use_rolling_usage)
+				queue_node.prune_rolling_usage()
+				// Rolling usage is an unrolled list that we know the order off
+				// OPTIMIZATION POSTING
+				queue_node.rolling_usage += list(DS2TICKS(world.time), tick_usage)
+
+			if(queue_node.profiler_focused)
+				world.Profile(PROFILE_STOP)
 
 			if (state == SS_RUNNING)
 				state = SS_IDLE
@@ -700,10 +948,17 @@ GLOBAL_REAL(Master, /datum/controller/master)
 	log_world("MC: SoftReset: Finished.")
 	. = 1
 
+/*
 /// Warns us that the end of tick byond map_update will be laggier then normal, so that we can just skip running subsystems this tick.
 /datum/controller/master/proc/laggy_byond_map_update_incoming()
 	if (!skip_ticks)
 		skip_ticks = 1
+*/
+
+/datum/controller/master/stat_entry(msg)
+	msg = "(TickRate:[Master.processing]) (Iteration:[Master.iteration]) (TickLimit: [round(Master.current_ticklimit, 0.1)])"
+	return msg
+
 
 /datum/controller/master/StartLoadingMap()
 	//disallow more than one map to load at once, multithreading it will just cause race conditions
@@ -724,13 +979,26 @@ GLOBAL_REAL(Master, /datum/controller/master)
 /datum/controller/master/proc/UpdateTickRate()
 	if (!processing)
 		return
-	// var/client_count = length(GLOB.clients)
-	// if (client_count < CONFIG_GET(number/mc_tick_rate/disable_high_pop_mc_mode_amount))
-	// 	processing = CONFIG_GET(number/mc_tick_rate/base_mc_tick_rate)
-	// else if (client_count > CONFIG_GET(number/mc_tick_rate/high_pop_mc_mode_amount))
-	// 	processing = CONFIG_GET(number/mc_tick_rate/high_pop_mc_tick_rate)
+	var/client_count = length(GLOB.clients)
+	if (client_count < CONFIG_GET(number/mc_tick_rate/disable_high_pop_mc_mode_amount))
+		processing = CONFIG_GET(number/mc_tick_rate/base_mc_tick_rate)
+	else if (client_count > CONFIG_GET(number/mc_tick_rate/high_pop_mc_mode_amount))
+		processing = CONFIG_GET(number/mc_tick_rate/high_pop_mc_tick_rate)
 
 /datum/controller/master/proc/OnConfigLoad()
 	for (var/thing in subsystems)
 		var/datum/controller/subsystem/SS = thing
 		SS.OnConfigLoad()
+
+/// Attempts to dump our current profile info into a file, triggered if the MC thinks shit is going down
+/// Accepts a delay in deciseconds of how long ago our last dump can be, this saves causing performance problems ourselves
+/datum/controller/master/proc/AttemptProfileDump(delay)
+	if(REALTIMEOFDAY - last_profiled <= delay)
+		return FALSE
+	last_profiled = REALTIMEOFDAY
+	SSprofiler.DumpFile(allow_yield = FALSE)
+
+/// Clears the profiler.
+/datum/controller/master/proc/clear_profiler()
+	world.Profile(PROFILE_CLEAR)
+	world.Profile(PROFILE_CLEAR, type = "sendmaps")

@@ -82,10 +82,9 @@ SUBSYSTEM_DEF(ticker)
 	setup_objects()
 	setup_huds()
 
-	// TODO: make this a config option
-	start_at = world.time + (5 MINUTES)
+	start_at = world.time + (CONFIG_GET(number/lobby_countdown) * 10)
 
-	return ..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/ticker/proc/setup_objects()
 	populate_antag_type_list() // Set up antagonists. Do these first since character setup will rely on them

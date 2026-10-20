@@ -75,7 +75,7 @@ SUBSYSTEM_DEF(time_track)
 			"queries_standby"
 		) + sendmaps_headers
 	)
-	return ..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/time_track/fire()
 

@@ -27,7 +27,6 @@
 #define INVISIBILITY_ABSTRACT 101 //only used for abstract objects (e.g. spacevine_controller), things that are not really there.
 
 // Some arbitrary defines to be used by self-pruning global lists.
-#define PROCESS_KILL 26 // Used to trigger removal from a processing list.
 #define MAX_GEAR_COST 5 // Used in chargen for accessory loadout limit.
 
 // For secHUDs and medHUDs and variants. The number is the location of the image on the list hud_list of humans.
@@ -374,6 +373,5 @@
 #define TRACY_DLL_PATH		(world.system_type == MS_WINDOWS ? "prof.dll" : "./libprof.so")
 
 /// Path for the byond-memorystats dll
-
 #define MEMORYSTATS_DLL_PATH (world.system_type == MS_WINDOWS ? "memorystats.dll" : "./libmemorystats.so")
 

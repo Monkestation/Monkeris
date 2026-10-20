@@ -30,7 +30,7 @@ SUBSYSTEM_DEF(assets)
 
 	transport.Initialize(cache)
 
-	..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/assets/Recover()
 	cache = SSassets.cache

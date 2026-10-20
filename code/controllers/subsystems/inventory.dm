@@ -11,13 +11,13 @@ SUBSYSTEM_DEF(inventory)
 		if(!initial(S.id))
 			continue
 		S = new S()
-		if(S.id > slots.len)
+		if(S.id > length(slots))
 			slots.len = S.id
 		slots[S.id] = S
-	. = ..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/inventory/proc/get_slot_datum(slot)
-	return slots.len >= slot ? slots[slot] : null
+	return length(slots) >= slot ? slots[slot] : null
 
 /datum/controller/subsystem/inventory/proc/update_mob(mob/living/target, slot, redraw)
 	var/datum/inventory_slot/IS = get_slot_datum(slot)

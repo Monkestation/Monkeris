@@ -11,7 +11,8 @@ SUBSYSTEM_DEF(machines)
 /datum/controller/subsystem/machines/Initialize()
 	makepowernets()
 	fire()
-	return ..()
+	return SS_INIT_SUCCESS
+
 
 /datum/temp_counter_debug
 	var/associated_typepath = null

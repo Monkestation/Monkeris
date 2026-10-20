@@ -34,7 +34,7 @@ SUBSYSTEM_DEF(server_maint)
 		"dead_mob_list" = GLOB.dead_mob_list,
 		// "keyloop_list" = GLOB.keyloop_list, //A null here will cause new clients to be unable to move. totally unacceptable
 	)
-	return ..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/server_maint/fire(resumed = FALSE)
 	if(!resumed)

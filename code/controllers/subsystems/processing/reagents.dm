@@ -6,7 +6,7 @@ PROCESSING_SUBSYSTEM_DEF(reagents)
 
 /datum/controller/subsystem/processing/reagents/Initialize(timeofday)
 	initialize_chemical_reactions()
-	..()
+	return SS_INIT_SUCCESS
 
 //Chemical Reactions - Initialises all /datum/chemical_reaction into a list
 // It is filtered into multiple lists within a list.

@@ -67,7 +67,7 @@ SUBSYSTEM_DEF(mapping)
 
 	sortAssoc(ghostteleportlocs)
 
-	return ..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/mapping/proc/build_pulsar()
 	world.incrementMaxZ()

@@ -169,7 +169,7 @@ SUBSYSTEM_DEF(weather)
 			for(var/z in levels_by_trait)
 				LAZYINITLIST(eligible_zlevels["[z]"])
 				eligible_zlevels["[z]"][W] = probability
-	return ..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/weather/proc/run_weather(datum/weather/weather_datum_type)
 	if (istext(weather_datum_type))
