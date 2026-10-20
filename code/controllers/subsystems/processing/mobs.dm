@@ -9,9 +9,12 @@ PROCESSING_SUBSYSTEM_DEF(mobs)
 
 	var/list/mob_list
 	var/list/mob_living_by_zlevel[][]
+	///used by ambushcode to keep track of which mobs are currently involved in ambushes
+	var/list/ambushed_mobs
 
 /datum/controller/subsystem/processing/mobs/PreInit()
 	mob_list = processing // Simply setups a more recognizable var name than "processing"
+	ambushed_mobs = new()
 	MaxZChanged()
 
 /datum/controller/subsystem/processing/mobs/proc/MaxZChanged()
