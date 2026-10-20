@@ -212,7 +212,7 @@
 	desc = "A graffiti."
 	density = FALSE
 	anchored = TRUE
-	plane = -1
+	plane = FLOOR_PLANE
 	icon = 'icons/effects/wall_graffiti.dmi'
 	icon_state = "kot"
 	random_rotation = 0

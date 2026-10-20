@@ -165,17 +165,17 @@
 		status_flags &= ~BLEEDOUT
 
 	if(blood_volume < 1)
-		eye_hazy = max(eye_hazy,6)
+		eye_hazy = max(eye_hazy,10)
 		adjustOxyLoss(20)
 		if(prob(15))
 			to_chat(src, span_warning("You feel extremely [pick("dizzy","woosey","faint")]."))
 	else if(blood_volume < total_blood_req)
-		eye_blurry = max(eye_hazy,4)
+		eye_blurry = max(eye_hazy,6)
 		adjustOxyLoss(4.5) // this damage threshold kills people with good airflow
 		if(prob(15))
 			to_chat(src, span_warning("You feel highly [pick("dizzy","woosey","faint")]."))
 	else if(blood_volume < blood_bad)
-		eye_blurry = max(eye_blurry,6)
+		eye_blurry = max(eye_blurry,8)
 		adjustOxyLoss(2)
 		if(prob(15))
 			to_chat(src, span_warning("You feel very [pick("dizzy","woosey","faint")]."))

@@ -765,7 +765,7 @@ default behaviour is:
 
 /mob/living/reset_layer()
 	if(hiding)
-		set_plane(HIDING_MOB_PLANE)
+		set_plane(LYING_MOB_PLANE)
 		layer = HIDING_MOB_LAYER
 	else
 		..()

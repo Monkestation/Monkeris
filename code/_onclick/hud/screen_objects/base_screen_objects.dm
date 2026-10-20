@@ -22,9 +22,10 @@
 	var/hideflag = 0
 	var/list/image/ovrls = list()
 
-/atom/movable/screen/New(_name = "unnamed", mob/living/_parentmob, _icon, _icon_state)//(_name = "unnamed", _screen_loc = "7,7", mob/living/_parentmob, _icon, _icon_state)
+/atom/movable/screen/New(_name, mob/living/_parentmob, _icon, _icon_state)//(_name = "unnamed", _screen_loc = "7,7", mob/living/_parentmob, _icon, _icon_state)
 	src.parentmob = _parentmob
-	src.name = _name
+	if(_name)
+		src.name = _name
 //	src.screen_loc = _screen_loc
 	if (_icon)
 		src.icon = _icon
@@ -1524,10 +1525,14 @@
 	name = ""
 	layer = HUD_LAYER
 
-/atom/movable/screen/frippery/New(_icon_state,_screen_loc = "7,7", mob/living/_parentmob)
+/atom/movable/screen/frippery/New(_icon_state,_screen_loc = "7,7", mob/living/_parentmob, _plane, _layer)
 	src.parentmob = _parentmob
 	src.screen_loc = _screen_loc
 	src.icon_state = _icon_state
+	if(_plane)
+		set_plane(_plane)
+	if(_layer)
+		layer = _layer
 
 /atom/movable/screen/glasses_overlay
 	icon = null
