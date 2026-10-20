@@ -122,6 +122,21 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/add_common_assets()
+	var/datum/asset/asset
+	var/flush_queue = FALSE
+
+	// asset = get_asset_datum(/datum/asset/simple/namespaced/fontawesome)
+	// asset.send(user.client)
+
+	// asset = get_asset_datum(/datum/asset/simple/namespaced/tgfont)
+	// asset.send(user.client)
+
+	// asset = get_asset_datum(/datum/asset/json/icon_ref_map)
+	// asset.send(user.client)
+
+	for(var/datum/asset/asset_item in src_object.ui_assets(user))
+		asset_item.send(user.client)
+
 	add_script("libraries.min.js") // A JS file comprising of jQuery, doT.js and jQuery Timer libraries (compressed together)
 	add_script("nano_utility.js") // The NanoUtility JS, this is used to store utility functions.
 	add_script("nano_template.js") // The NanoTemplate JS, this is used to render templates.
