@@ -18,6 +18,7 @@
 	var/list/atom/movable/screen/openspace_overlay/openspace_overlays = list()
 
 	var/atom/movable/screen/vis_holder/vis_holder
+	var/list/our_relays = list()
 
 /datum/hud/proc/updatePlaneMasters(mob/mymob)
 	if(!mymob || !mymob.client)
@@ -54,22 +55,36 @@
 		mymob.client.screen -= instance
 		qdel(instance)
 
+	for(var/relay in our_relays)
+		var/atom/movable/render_plane_relay/instance = relay
+		mymob.client.screen -= instance
+		qdel(instance)
+
 	openspace_overlays.Cut()
+	our_relays.Cut()
 
 	if(!LD)
 		return;
 
-
 	var/local_z = z-(LD.original_level-1)
-	for(var/zi in 1 to local_z)
-		for(var/mytype in subtypesof(/atom/movable/screen/plane_master))
-			var/atom/movable/screen/plane_master/instance = new mytype()
+	//we stow it here so we can adjust it later
+	var/list/ourtypes = subtypesof(/atom/movable/screen/plane_master) - /atom/movable/screen/plane_master/rendering_plate
 
-			instance.plane = calculate_plane(zi,instance.plane)
+	for(var/zi in 1 to local_z)
+		for(var/mytype in ourtypes)
+			var/atom/movable/screen/plane_master/instance = new mytype(null, mymob)
+			if(instance.offsetting_flags & BLOCKS_PLANE_OFFSETTING)
+				ourtypes.Remove(mytype)//only do one iteration of this type
+
+			//if match highest is on, always map to highest(local) z
+			//if block plane offsetting is on -without- match highest, always map to base z.
+			//otherwise, continue with current z.
+			var/plane_z = ((instance.offsetting_flags & OFFSET_RELAYS_MATCH_HIGHEST) ? local_z : (instance.offsetting_flags & OFFSET_RELAYS_MATCH_HIGHEST) ? 1 : zi)
+			instance.plane = calculate_plane(plane_z,instance.plane)
 
 			plane_masters["[zi]-[mytype]"] = instance
 			mymob.client.screen += instance
-			instance.backdrop(mymob)
+			instance.backdrop(mymob, zi)
 
 		for(var/pl in list(GAME_PLANE,FLOOR_PLANE))
 			if(zi < local_z)
@@ -81,6 +96,10 @@
 				openspace_overlays["[zi]-[oover.plane]"] = oover
 				mymob.client.screen += oover
 
+		for(var/master as anything in plane_masters)
+			var/atom/movable/screen/plane_master/thamaster = plane_masters[master]
+			if(thamaster.relay && !our_relays.Find(thamaster.relay))
+				our_relays += thamaster.relay
 
 /mob/update_plane()
 	..()
@@ -195,7 +214,15 @@
 		list("loc" = "EAST+1,BOTTOM+2:25", "icon_state" = "frame3-3"),
 		list("loc" = "EAST+1,BOTTOM+2:25", "icon_state" = "frame0-4"),
 		list("loc" = "EAST+1,BOTTOM+8:14", "icon_state" = "frame0-1"),
-		list("loc" = "EAST+1,BOTTOM+8:14", "icon_state" = "frame3-1")
+		list("loc" = "EAST+1,BOTTOM+8:14", "icon_state" = "frame3-1"),
+		//screen border elements
+		list("loc" = "EAST+1,BOTTOM+14 to EAST+1, BOTTOM+2", "icon_state" = "veneer_vertical", "plane" = HUD_PLANE, "layer" = BELOW_HUD_LAYER),
+		list("loc" = "EAST+1,BOTTOM+15", "icon_state" = "veneer_vertical_top", "plane" = HUD_PLANE, "layer" = BELOW_HUD_LAYER),
+		list("loc" = "EAST+1,BOTTOM+1", "icon_state" = "veneer_vertical_bottom", "plane" = HUD_PLANE, "layer" = BELOW_HUD_LAYER),
+		list("loc" = "EAST+1,BOTTOM", "icon_state" = "veneer_corner", "plane" = HUD_PLANE, "layer" = BELOW_HUD_LAYER),
+		list("loc" = "EAST,BOTTOM", "icon_state" = "veneer_horizontal_right", "plane" = BELOW_HUD_PLANE, "layer" = BELOW_HUD_LAYER),
+		list("loc" = "EAST-13,BOTTOM to EAST-2, BOTTOM", "icon_state" = "veneer_horizontal", "plane" = HUD_PLANE, "layer" = BELOW_HUD_LAYER),
+		list("loc" = "EAST-14, BOTTOM", "icon_state" = "veneer_horizontal_left", "plane" = HUD_PLANE, "layer" = BELOW_HUD_LAYER)
 		)
 		//list("loc" = "2,3", "icon_state" = "block",  "hideflag" = TOGGLE_INVENTORY_FLAG),
 
@@ -230,7 +257,6 @@
 	for (var/p in IconUnderlays)
 		var/image/I = IconUnderlays[p]
 		I.alpha = 200
-
 
 /datum/hud/human/liberty
 	name = "LibertyStyle"

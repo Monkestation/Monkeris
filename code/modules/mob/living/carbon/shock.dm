@@ -126,7 +126,7 @@
 	//haze warning for imminent paincrit
 	if(shock_stage >= hard_crit_threshold * 0.90)
 		if(prob(10))
-			eye_hazy += 5
+			eye_hazy += 6
 
 	if(shock_stage >= hard_crit_threshold)
 		enter_hard_crit()

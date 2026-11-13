@@ -950,3 +950,4 @@
 /// Called after we wrench/unwrench this object
 /obj/proc/wrenched_change()
 	return
+

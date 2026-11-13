@@ -70,7 +70,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 		var/turf/T = pick_spawn_location("Observer")
 		if(istype(T))
 			src.forceMove(T)
-
+	plane = ABOVE_LIGHTING_PLANE //ghosts aren't real dummy
 	if(!name)							//To prevent nameless ghosts
 		name = capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 	real_name = name
