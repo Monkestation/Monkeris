@@ -1,0 +1,13 @@
+author: flleeppyy
+delete-after: true
+changes:
+  - code_imp: The master controller has been updated to Monkestation's MC. There
+      will be no changes listed here other than "we hope to god it works"
+  - config: There are new config entries. BASE_MC_TICK_RATE, 
+      HIGH_POP_MC_TICK_RATE, HIGH_POP_MC_MODE_AMOUNT, 
+      DISABLE_HIGH_POP_MC_MODE_AMOUNT, RESUME_AFTER_INITIALIZATIONS, 
+      AUTO_PROFILE, DRIFT_DUMP_THRESHOLD, and DRIFT_PROFILE_DELAY. Server has 
+      already been updated with these new values.
+  - rscadd: New debug verb "Controller Overview" for viewing statistics of all 
+      subsystems.
+  - tweak: Subsystems will now require returning `SS_INIT*` on initialize.
