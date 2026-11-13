@@ -1,14 +1,3 @@
-#define SSAIR_PIPENETS         1
-#define SSAIR_ATMOSMACHINERY   2
-#define SSAIR_TILES_CUR        3
-#define SSAIR_TILES_DEF        4
-#define SSAIR_EDGES            5
-#define SSAIR_FIRE_ZONES       6
-#define SSAIR_HOTSPOTS         7
-#define SSAIR_ZONES            8
-
-#define SSAIR_TICK_MULTIPLIER 2
-
 SUBSYSTEM_DEF(air)
 	name = "Air"
 
@@ -80,7 +69,7 @@ SUBSYSTEM_DEF(air)
 	setup_allturfs()
 	setup_atmos_machinery()
 	setup_pipenets()
-	..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/air/fire(resumed = 0)
 	var/timer = world.tick_usage
@@ -521,11 +510,3 @@ SUBSYSTEM_DEF(air)
 
 	return TRUE
 
-#undef SSAIR_PIPENETS
-#undef SSAIR_ATMOSMACHINERY
-#undef SSAIR_TILES_CUR
-#undef SSAIR_TILES_DEF
-#undef SSAIR_EDGES
-#undef SSAIR_FIRE_ZONES
-#undef SSAIR_HOTSPOTS
-#undef SSAIR_ZONES

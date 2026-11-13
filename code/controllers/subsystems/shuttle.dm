@@ -14,7 +14,7 @@ SUBSYSTEM_DEF(shuttle)
 /datum/controller/subsystem/shuttle/Initialize()
 	last_landmark_registration_time = world.time
 	initialize_shuttles()
-	. = ..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/shuttle/fire(resumed = FALSE)
 	if (!resumed)

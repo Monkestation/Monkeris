@@ -12,7 +12,7 @@ SUBSYSTEM_DEF(misc)
 	initialize_cursors()
 	// build_exoplanets()  // 18/09/2022 Commented till lag gets better overhaul
 	build_junk_field()
-	return ..()
+	return SS_INIT_SUCCESS
 
 GLOBAL_LIST_INIT(cursor_icons, list()) //list of icon files, which point to lists of offsets, which point to icons
 

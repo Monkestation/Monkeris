@@ -97,7 +97,7 @@ SUBSYSTEM_DEF(plants)
 		used_masks += gene_mask
 		plant_traits -= gene_tag
 		gene_tag_masks[gene_tag] = gene_mask
-	..()
+	return SS_INIT_SUCCESS
 
 // Proc for creating a random seed type.
 /datum/controller/subsystem/plants/proc/create_random_seed(survive_on_station)

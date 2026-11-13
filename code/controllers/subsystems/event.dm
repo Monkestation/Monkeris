@@ -27,7 +27,7 @@ SUBSYSTEM_DEF(event)
 	if(!all_events)
 		all_events = subtypesof(/datum/event)
 
-	return ..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/event/Recover()
 	active_events = SSevent.active_events

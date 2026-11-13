@@ -50,7 +50,7 @@ SUBSYSTEM_DEF(trade)
 
 /datum/controller/subsystem/trade/Initialize()
 	InitStations()
-	. = ..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/trade/proc/ReInitStations()
 	DeInitStations()

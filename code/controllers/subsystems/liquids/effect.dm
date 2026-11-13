@@ -68,7 +68,6 @@
 		//. += mutable_appearance(icon, icon_state, plane = EMISSIVE_PLANE)
 
 /obj/effect/abstract/liquid_turf/Initialize(mapload, datum/liquid_group/group_to_add)
-	. = ..()
 	if(!small_fire)
 		small_fire = new
 	if(!medium_fire)
@@ -107,6 +106,7 @@
 			if(!turf.liquids)
 				continue
 			turf.liquids.update_icon()
+	return SS_INIT_SUCCESS
 
 /obj/effect/abstract/liquid_turf/Destroy(force)
 	GLOB.entered_event.unregister(my_turf, src, /obj/effect/abstract/liquid_turf/proc/movable_entered)

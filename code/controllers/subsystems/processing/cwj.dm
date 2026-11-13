@@ -6,7 +6,7 @@ PROCESSING_SUBSYSTEM_DEF(cwj)
 /datum/controller/subsystem/processing/cwj/Initialize(timeofday)
 	initialize_cooking_recipes()
 	create_catalogs()
-	..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/processing/cwj/proc/initialize_cooking_recipes()
 	INIT_EMPTY_GLOBLIST(cwj_recipe_dictionary)

@@ -28,8 +28,11 @@
 	/// Which stage does this subsystem init at. Earlier stages can fire while later stages init.
 	var/init_stage = INITSTAGE_MAIN
 
-	/// This var is set to TRUE after the subsystem has been initialized.
+	/// This var is set to `INITIALIZATION_INNEW_REGULAR` after the subsystem has been initialized.
 	var/initialized = FALSE
+
+	/// Similar to above however this will be set even if an SS has SS_NO_INIT set.
+	var/ready = FALSE
 
 	/// Set to 0 to prevent fire() calls, mostly for admin use or subsystems that may be resumed later
 	/// use the [SS_NO_FIRE] flag instead for systems that never fire to keep it from even being added to list that is checked every tick
@@ -37,6 +40,18 @@
 
 	///Bitmap of what game states can this subsystem fire at. See [RUNLEVELS_DEFAULT] for more details.
 	var/runlevels = RUNLEVELS_DEFAULT //points of the game at which the SS can fire
+
+	///A list of var names present on this subsystem to be checked during CheckQueue. See [SS_HIBERNATE] for usage.
+	var/list/hibernate_checks
+
+	///Subsystem ID. Used for when we need a technical name for the SS used by SSmetrics
+	var/ss_id = "generic_ss_id"
+
+	/**
+	 * boolean set by admins. if TRUE then this subsystem will stop the world profiler after ignite() returns and start it again when called.
+	 * used so that you can audit a specific subsystem or group of subsystems' synchronous call chain.
+	 */
+	var/profiler_focused = FALSE
 
 	/*
 	 * The following variables are managed by the MC and should not be modified directly.
@@ -48,6 +63,9 @@
 	/// Scheduled world.time for next fire()
 	var/next_fire = 0
 
+	/// The subsystem had no work during CheckQueue and was not queued.
+	var/hibernation_state
+
 	/// Running average of the amount of milliseconds it takes the subsystem to complete a run (including all resumes but not the time spent paused)
 	var/cost = 0
 
@@ -57,6 +75,9 @@
 	/// Running average of the amount of tick usage (in percents of a game tick) the subsystem has spent past its allocated time without pausing
 	var/tick_overrun = 0
 
+	/// Flat list of usage and time, every odd index is a log time, every even index is a usage
+	var/list/rolling_usage = list()
+
 	/// How much of a tick (in percents of a tick) were we allocated last fire.
 	var/tick_allocation_last = 0
 
@@ -65,6 +86,9 @@
 
 	/// Tracks the current execution state of the subsystem. Used to handle subsystems that sleep in fire so the mc doesn't run them again while they are sleeping
 	var/state = SS_IDLE
+
+	/// Tracks how many times a subsystem has ever slept in fire().
+	var/slept_count = 0
 
 	/// Tracks how many fires the subsystem has consecutively paused on in the current run
 	var/paused_ticks = 0
@@ -101,6 +125,9 @@
 	/// Index of this SS in the stages, Set by master.
 	var/order_in_stage
 
+	/// String to store an applicable error message for a subsystem crashing, used to help debug crashes in contexts such as Continuous Integration/Unit Tests
+	var/initialization_failure_message = null
+
 	//Do not blindly add vars here to the bottom, put it where it goes above
 	//If your var only has two values, put it in as a flag.
 
@@ -127,8 +154,10 @@
 	fire(resumed)
 	. = state
 	if (state == SS_SLEEPING)
+		slept_count++
 		state = SS_IDLE
 	if (state == SS_PAUSING)
+		slept_count++
 		var/QT = queued_time
 		enqueue()
 		state = SS_PAUSED
@@ -178,6 +207,8 @@
 /// (we loop thru a linked list until we get to the end or find the right point)
 /// (this lets us sort our run order correctly without having to re-sort the entire already sorted list)
 /datum/controller/subsystem/proc/enqueue()
+	hibernation_state = hibernation_state == SS_IS_HIBERNATING ? SS_WAKING_UP : SS_NOT_HIBERNATING
+
 	var/SS_priority = priority
 	var/SS_flags = flags
 	var/datum/controller/subsystem/queue_node
@@ -260,49 +291,26 @@
 /// Called after the config has been loaded or reloaded.
 /datum/controller/subsystem/proc/OnConfigLoad()
 
-//used to initialize the subsystem AFTER the map has loaded
+/**
+ * Used to initialize the subsystem. This is expected to be overriden by subtypes.
+ */
 /datum/controller/subsystem/Initialize()
-	initialized = TRUE
-
-	// SEND_SIGNAL_OLD(src, COMSIG_SUBSYSTEM_POST_INITIALIZE)
-
-	#ifndef OPENDREAM
-	var/static/no_memstat = FALSE
-	if(!no_memstat)
-		try
-			if(!rustg_file_exists(MEMORYSTATS_DLL_PATH))
-				no_memstat = TRUE
-			else
-				var/memory_summary = trimtext(replacetext(call_ext(MEMORYSTATS_DLL_PATH, "memory_stats")(), "Server mem usage:", ""))
-				if(memory_summary)
-					rustg_file_append("=== [src.name] ===\n[memory_summary]\n", "[GLOB.log_directory]/profiler/memstat-init.txt")
-				else
-					no_memstat = TRUE
-		catch
-			no_memstat = TRUE
-	#endif
-
-	var/time = rustg_time_milliseconds(SS_INIT_TIMER_KEY)
-	var/seconds = round(time / 1000, 0.01)
-	var/order_string = order_string()
-	var/msg_fancy = "<code>\[[order_string]\]</code> Initialized [span_adminsay(name)] subsystem within [get_colored_thresh_text("[seconds] second[seconds == 1 ? "" : "s"]!", seconds, init_time_threshold / 10)]"
-	var/msg = "\[[order_string]\] Initialized [name] subsystem within [seconds] second[seconds == 1 ? "" : "s"]!"
-	to_chat(world, span_boldannounce(msg_fancy))
-	log_world(msg)
-	return seconds
+	return SS_INIT_NONE
 
 /datum/controller/subsystem/proc/order_string(include_stage = TRUE)
-	return "[include_stage ? "S[init_stage]-" : ""][order_in_stage <= 9 ? "0" : ""][order_in_stage]/[Master.stage_sorted_subsystems[init_stage].len]"
+	return "[include_stage ? "S[init_stage]-" : ""][order_in_stage <= 9 ? "0" : ""][order_in_stage]/[length(Master.stage_sorted_subsystems[init_stage])]"
 
 /datum/controller/subsystem/stat_entry(msg)
 	if(can_fire && !(SS_NO_FIRE & flags) && init_stage <= Master.init_stage_completed)
 		msg = "[round(cost,1)]ms|[round(tick_usage,1)]%([round(tick_overrun,1)]%)|[round(ticks,0.1)]\t[msg]"
 	else
 		msg = "OFFLINE\t[msg]"
-
 	return msg
 
 /datum/controller/subsystem/proc/state_letter()
+	if(hibernation_state)
+		return hibernation_state == SS_WAKING_UP ? "W" : "H"
+
 	switch (state)
 		if (SS_RUNNING)
 			. = "R"
@@ -320,6 +328,15 @@
 	if (can_fire && cycles >= 1)
 		postponed_fires += cycles
 
+/// Prunes out of date entries in our rolling usage list
+/datum/controller/subsystem/proc/prune_rolling_usage()
+	var/list/rolling_usage = src.rolling_usage
+	var/cut_to = 0
+	while(cut_to + 2 <= length(rolling_usage) && rolling_usage[cut_to + 1] < DS2TICKS(world.time - Master.rolling_usage_length))
+		cut_to += 2
+	if(cut_to)
+		rolling_usage.Cut(1, cut_to + 1)
+
 //usually called via datum/controller/subsystem/New() when replacing a subsystem (i.e. due to a recurring crash)
 //should attempt to salvage what it can from the old instance of subsystem
 /datum/controller/subsystem/Recover()
@@ -333,3 +350,54 @@
 		if (NAMEOF(src, queued_priority)) //editing this breaks things.
 			return FALSE
 	. = ..()
+	if(!.)
+		return
+	switch(var_name)
+		if (NAMEOF(src, wait), NAMEOF(src, flags))
+			update_nextfire(reset_time = TRUE)
+
+/**
+ * This allows subsystems to change their execution priority at runtime without
+ * affecting the existing queue logic or requiring a full MC restart.
+ *
+ * enable_background (bool) - TRUE to enable SS_BACKGROUND mode, FALSE to disable it
+ *
+ * Returns TRUE if the mode was successfully changed, FALSE otherwise
+ *
+ * NOTE: Only works on subsystems with SS_DYNAMIC for sanity reasons, unless `force` is set.
+ */
+/datum/controller/subsystem/proc/set_background_mode(enable_background = TRUE, force = FALSE)
+	if (!(flags & SS_DYNAMIC) && !force)
+		return FALSE
+
+	// Check if we're actually changing the state
+	var/currently_background = !!(flags & SS_BACKGROUND)
+	var/target_background = enable_background
+
+	if (currently_background == target_background)
+		return FALSE
+
+	// Store the old flag state for priority count adjustments
+	var/was_queued = (state == SS_QUEUED)
+	var/old_flags = flags
+
+	if (enable_background)
+		flags |= SS_BACKGROUND
+	else
+		flags &= ~SS_BACKGROUND
+
+	// If the subsystem is currently queued, we need to:
+	// 1. Update the priority counts
+	// 2. Requeue to maintain proper sort order
+	if (was_queued)
+		// Adjust the master controller's priority counts
+		if (old_flags & SS_BACKGROUND)
+			Master.queue_priority_count_bg -= queued_priority
+		else
+			Master.queue_priority_count -= queued_priority
+
+		// Remove then re-add
+		dequeue()
+		enqueue()
+
+	return TRUE

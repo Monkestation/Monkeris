@@ -13,8 +13,8 @@ SUBSYSTEM_DEF(statpanels)
 	var/list/cached_images = list()
 
 /datum/controller/subsystem/statpanels/Initialize()
-	. = ..()
 	fire()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/statpanels/fire(resumed = FALSE)
 	if(!resumed)

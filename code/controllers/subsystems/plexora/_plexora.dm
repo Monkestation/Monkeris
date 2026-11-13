@@ -46,14 +46,14 @@ SUBSYSTEM_DEF(plexora)
 	if(!CONFIG_GET(string/plexora_url) && !load_old_plexora_config())
 		enabled = FALSE
 		flags |= SS_NO_FIRE
-		return ..()
+		return SS_INIT_NO_NEED
 
 	var/comms_key = CONFIG_GET(string/comms_key)
 	if (!comms_key)
 		stack_trace("SSplexora is enabled BUT there is no configured comms key! Please make sure to set one and update Plexora's server config.")
 		enabled = FALSE
 		flags |= SS_NO_FIRE
-		return FALSE
+		return SS_INIT_FAILURE
 
 	base_url = CONFIG_GET(string/plexora_url)
 
@@ -70,7 +70,7 @@ SUBSYSTEM_DEF(plexora)
 
 	RegisterSignal(SSticker, COMSIG_TICKER_ROUND_STARTING, PROC_REF(roundstarted))
 
-	return ..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/plexora/Recover()
 	flags |= SS_NO_INIT // Make extra sure we don't initialize twice.

@@ -21,7 +21,7 @@ var/list/tts_seeds = list()
 	GLOB.tts_bearer = "Bearer [CONFIG_GET(string/tts_key)]"
 
 	if(!fexists("config/tts_seeds.txt"))
-		return
+		return FALSE
 
 	for(var/i in file2list("config/tts_seeds.txt"))
 		if(!LAZYLEN(i) || (copytext(i, 1, 2) == "#"))
@@ -39,8 +39,9 @@ var/list/tts_seeds = list()
 		tts_seeds += seed_name
 		tts_seeds[seed_name] = list("value" = seed_value, "category" = seed_category, "gender" = seed_gender_restriction)
 
-		LIBCALL(RUST_G, "file_write")("[seed_value]", "sound/tts_cache/[seed_name]/seed.txt")
-		LIBCALL(RUST_G, "file_write")("[seed_value]", "sound/tts_scrambled/[seed_name]/seed.txt")
+		rustg_file_write("[seed_value]", "sound/tts_cache/[seed_name]/seed.txt")
+		rustg_file_write("[seed_value]", "sound/tts_scrambled/[seed_name]/seed.txt")
+	return TRUE
 
 
 /proc/get_tts(message, seed = TTS_SEED_DEFAULT_MALE)

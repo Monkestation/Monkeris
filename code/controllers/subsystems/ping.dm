@@ -11,7 +11,6 @@ SUBSYSTEM_DEF(ping)
 	msg += "P:[LAZYLEN(GLOB.clients)]"
 	return ..()
 
-
 /datum/controller/subsystem/ping/fire(resumed = FALSE)
 	// Prepare the new batch of clients
 	if (!resumed)

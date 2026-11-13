@@ -30,7 +30,7 @@ SUBSYSTEM_DEF(atoms)
 	initialized = INITIALIZATION_INNEW_MAPLOAD
 	InitializeAtoms()
 	initialized = INITIALIZATION_INNEW_REGULAR
-	return ..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/atoms/proc/InitializeAtoms(list/atoms, list/atoms_to_return = null)
 	if(initialized == INITIALIZATION_INSSATOMS)

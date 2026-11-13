@@ -5,14 +5,11 @@
 */
 SUBSYSTEM_DEF(economy)
 	name = "Economy"
-	init_order = INIT_ORDER_LATELOAD
+	flags = SS_NO_INIT
 
 	wait = 300 //Ticks once per 30 seconds
 	var/payday_interval = 30 MINUTES
 	var/next_payday = 30 MINUTES
-
-/datum/controller/subsystem/economy/Initialize()
-	.=..()
 
 /datum/controller/subsystem/economy/fire()
 	if (world.time >= next_payday)

@@ -1,3 +1,8 @@
+//! Defines for subsystems and overlays
+//!
+//! Lots of important stuff in here, make sure you have your brain switched on
+//! when editing this file
+// "My brain was never on to begin with. what makes you think I'll turn it on now?"
 
 //! ## DB defines
 /**
@@ -63,6 +68,9 @@
 #define FLIGHTSUIT_PROCESSING_NONE 0
 #define FLIGHTSUIT_PROCESSING_FULL 1
 
+/// Used to trigger object removal from a processing list
+#define PROCESS_KILL 26
+
 //! ## Initialization subsystem
 
 ///New should not call Initialize
@@ -91,6 +99,7 @@
 ///Call qdel with a force of TRUE after initialization
 #define INITIALIZE_HINT_QDEL_FORCE 3
 
+//TODO: initialized and other stuff needs to be changed to `flags_1`
 ///type and all subtypes should always immediately call Initialize in New()
 #define INITIALIZE_IMMEDIATE(X) ##X/New(loc, ...){\
 	..();\
@@ -103,10 +112,30 @@
 	}\
 }
 
+//! ### SS initialization hints
+/**
+ * Negative values incidate a failure or warning of some kind, positive are good.
+ * 0 and 1 are unused so that TRUE and FALSE are guarenteed to be invalid values.
+ */
+
+/// Subsystem failed to initialize entirely. Print a warning, log, and disable firing.
+#define SS_INIT_FAILURE -2
+
+/// The default return value which must be overriden. Will succeed with a warning.
+#define SS_INIT_NONE -1
+
+/// Subsystem initialized sucessfully.
+#define SS_INIT_SUCCESS 2
+
+/// Successful, but don't print anything. Useful if subsystem was disabled.
+#define SS_INIT_NO_NEED 3
+
+//! ### SS initialization load orders
 // Subsystem init_order, from highest priority to lowest priority
 // Subsystems shutdown in the reverse of the order they initialize in
 // The numbers just define the ordering, they are meaningless otherwise.
 
+#define INIT_ORDER_PROFILER 101
 #define INIT_ORDER_GARBAGE 99
 #define INIT_ORDER_CHUNKS 95
 #define INIT_ORDER_DBCORE 85
@@ -189,10 +218,32 @@ if(Datum.is_processing) {\
 #define START_PROCESSING_POWER_OBJECT(Datum) START_PROCESSING_IN_LIST(Datum, power_objects)
 #define STOP_PROCESSING_POWER_OBJECT(Datum) STOP_PROCESSING_IN_LIST(Datum, power_objects)
 
-/// The timer key used to know how long subsystem initialization takes
-#define SS_INIT_TIMER_KEY "ss_init"
-
 #define SS_HOLOMAPS_TIMER_KEY "ss_holomaps"
+
+//Hibernation states
+#define SS_NOT_HIBERNATING 0
+#define SS_WAKING_UP 1
+#define SS_IS_HIBERNATING 2
+
+//SSticker.current_state values
+/// Game is loading
+#define GAME_STATE_STARTUP 0
+/// Game is loaded and in pregame lobby
+#define GAME_STATE_PREGAME 1
+/// Game is attempting to start the round
+#define GAME_STATE_SETTING_UP 2
+/// Game has round in progress
+#define GAME_STATE_PLAYING 3
+/// Game has round finished
+#define GAME_STATE_FINISHED 4
+
+// Used for SSticker.force_ending
+/// Default, round is not being forced to end.
+#define END_ROUND_AS_NORMAL 0
+/// End the round now as normal
+#define FORCE_END_ROUND 1
+/// For admin forcing roundend, can be used to distinguish the two
+#define ADMIN_FORCE_END_ROUND 2
 
 /**
 	Create a new timer and add it to the queue.
@@ -203,3 +254,32 @@ if(Datum.is_processing) {\
 	* * timer_subsystem the subsystem to insert this timer into
 */
 #define addtimer(args...) _addtimer(args, file = __FILE__, line = __LINE__)
+
+// Air subsystem subtasks
+#define SSAIR_PIPENETS         1
+#define SSAIR_ATMOSMACHINERY   2
+#define SSAIR_TILES_CUR        3
+#define SSAIR_TILES_DEF        4
+#define SSAIR_EDGES            5
+#define SSAIR_FIRE_ZONES       6
+#define SSAIR_HOTSPOTS         7
+#define SSAIR_ZONES            8
+
+#define SSAIR_TICK_MULTIPLIER 2
+
+
+// Subsystem delta times or tickrates, in seconds. I.e, how many seconds in between each process() call for objects being processed by that subsystem.
+// Only use these defines if you want to access some other objects processing seconds_per_tick, otherwise use the seconds_per_tick that is sent as a parameter to process()
+// #define SSFLUIDS_DT (SSplumbing.wait/10)
+#define SSMACHINES_DT (SSmachines.wait/10)
+#define SSMOBS_DT (SSmobs.wait/10)
+#define SSOBJ_DT (SSobj.wait/10)
+
+/// The change in the world's time from the subsystem's last fire in seconds.
+#define DELTA_WORLD_TIME(ss) ((world.time - ss.last_fire) * 0.1)
+
+/// Same as DELTA_WORLD_TIME but we ignore time spent hibernating
+#define DELTA_WORLD_TIME_WITHOUT_HIBERNATION(ss) ss.hibernation_state ? ss.wait : DELTA_WORLD_TIME(ss)
+
+/// The timer key used to know how long subsystem initialization takes
+#define SS_INIT_TIMER_KEY "ss_init"

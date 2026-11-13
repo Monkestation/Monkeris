@@ -27,7 +27,7 @@ SUBSYSTEM_DEF(chunks)
 			chunk_list_by_zlevel[i][j] = new /datum/chunk(src)
 	RegisterSignal(SSdcs, COMSIG_MOB_INITIALIZED, PROC_REF(onMobNew))
 	RegisterSignal(SSdcs, COMSIG_WORLD_MAXZ_INCREMENTING, PROC_REF(beforeLevelIncrement))
-	return ..()
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/chunks/proc/beforeLevelIncrement(datum/source)
 	SIGNAL_HANDLER
