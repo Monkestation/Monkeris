@@ -194,7 +194,7 @@
 
 
 	for (var/list/whistle in HUDdatum.HUDfrippery)
-		var/atom/movable/screen/frippery/F = new (whistle["icon_state"],whistle["loc"],H)
+		var/atom/movable/screen/frippery/F = new (whistle["icon_state"],whistle["loc"],H, whistle["plane"], whistle["layer"])
 		F.icon = HUDdatum.icon
 		if(whistle["hideflag"])
 			F.hideflag = whistle["hideflag"]

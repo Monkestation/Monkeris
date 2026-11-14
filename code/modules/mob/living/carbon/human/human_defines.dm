@@ -1,4 +1,5 @@
 /mob/living/carbon/human
+	appearance_flags = TILE_BOUND|PIXEL_SCALE|LONG_GLIDE|KEEP_TOGETHER
 	name = "unknown"
 	real_name = "unknown"
 	voice_name = "unknown"
