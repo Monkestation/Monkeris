@@ -1,0 +1,13 @@
+author: Sun-Soaked
+delete-after: true
+changes:
+  - rscadd: ports some visual effect procs on atom, related to filters & 
+      distortion mask
+  - rscadd: The ui expanded sections of the screen now have a custom veneer 
+      instead of just darkness
+  - code_imp: adds a text file, ported from tg, explaining byond's render 
+      pipeline and the premise of render plates
+  - code_imp: ports the distortion plane
+  - code_imp: humans, guns, and tools now have KEEP_TOGETHER, meaning they their
+      end-point render will be one image (used for making filters, etc. respect 
+      overlays). This should not break anything, but keep an eye out
